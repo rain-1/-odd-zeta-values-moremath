@@ -380,6 +380,10 @@ priced the *old* `T3` route at **≈ 13 h ± 4 h**, of which pieces 2+3+5 (Kumme
 | S5 axioms + status | — | **0.2 h** | |
 | **total** | **≈ 3 h for S1 alone** | **≈ 3.25 h for S1–S5** | |
 
+*(Caveat on measurement: code-line counts and build-iteration counts are exact — every failed
+`lake build` in the session is accounted for.  The wall-clock column is an estimate reconstructed
+from the work order, not a stopwatch reading; treat the totals as ±25%.)*
+
 **Throughput: ≈ 3.9 code-lines/min** — between the P5 S2 rate (2.2, unfamiliar API) and the P5 S3
 rate (7.5, full toolkit reuse), which is what one would predict for "half new API, half reuse".
 
