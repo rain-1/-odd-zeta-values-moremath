@@ -8,6 +8,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\lean}[1]{\hfill\texttt{\footnotesize #1}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -16,213 +18,201 @@
 \newcommand{\vp}{v_p}
 \DeclareMathOperator{\lcm}{lcm}
 
-\title{Lucas congruences for Ap\'ery-like sequences and their second solutions}
+\title{A closed form and a Lucas congruence for Ap\'ery's companion sequence}
 \author{[Author]}
 \date{}
 
 \begin{document}
 \begin{abstract}
-Every statement below is proved in Lean~4 and checked by its kernel. Each is
-followed by the name of the declaration that proves it.
+We give a two-term closed form for the numerators $b_n$ of Ap\'ery's approximations
+to $\zeta(3)$, a Lucas-type congruence $p^3b_{ap+r}\equiv b_a\,a_r\pmod p$
+for them, and a correction to a published integrality claim. Every statement is proved
+in Lean~4 and checked by its kernel; each is followed by the name of the declaration
+that proves it.
 \end{abstract}
 \maketitle
 
-Throughout, $p$ is prime. For $q\in\QQ$ write $\vp$ for the $p$-adic valuation,
-and $x\equiv y \pmod p$ for $x,y\in\QQ$ to mean $\vp(x-y)\ge 1$.
+\section{Introduction}
+
+Ap\'ery's proof that $\zeta(3)\notin\QQ$ rests on the pair of sequences
+$a_n=\sum_k\binom nk^2\binom{n+k}k^2$ and a companion $b_n$ with $b_n/a_n\to\zeta(3)$.
+The first sequence is arithmetically well understood: it satisfies a Lucas congruence
+$a_{ap+r}\equiv a_aa_r\pmod p$ (Gessel \cite{Gessel1982}), so it respects base-$p$ digits.
+The companion $b_n$ has attracted no such statement, and it is usually written with a
+nested alternating inner sum, which makes it awkward to handle modulo $p$.
+
+We report three things.
+
+First, a closed form (Theorem \ref{thm:closed}): $b_n$ is the same binomial sum as $a_n$
+weighted by a \emph{two-term} harmonic expression,
+\[
+  b_n=\sum_{k=0}^n\binom nk^2\binom{n+k}k^2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr),
+  \qquad H^{(r)}_m=\sum_{j=1}^m j^{-r}.
+\]
+The nested sum disappears.
+
+Second, a Lucas-type congruence for the companion itself (Theorem \ref{thm:bA}):
+\[
+  p^3\,b_{ap+r}\equiv b_a\,a_r \pmod p \qquad (a,r<p).
+\]
+The factor $p^3$ is the weight of $\zeta(3)$. The same argument gives the analogous
+congruence for Franel's companion at weight $2$ (Theorem \ref{thm:franel}), and for the
+first solution of the Brown--Zudilin family (Theorem \ref{thm:row1}).
+
+Third, a correction. Brown and Zudilin \cite{BZ} record $d_n^{\,5}P_n\in\ZZ$ for the
+numerators of their cellular approximations to $\zeta(5)$, where $d_n=\lcm(1,\dots,n)$.
+Their own printed value $P_2=1190161/384$ does not satisfy this: the defect is a factor
+$12=2^2\cdot3$, and $12$ is minimal (Theorem \ref{thm:twelve}).
+
+A second, benign slip in the same author's earlier work is worth recording, though we do
+not formalise it: equation~(8.7) of \cite{Zu04}, defining the rational function $R(t)$,
+omits the factor $(h_0+2t)$ present in (8.2). That factor is the only one antisymmetric
+under $t\mapsto -t-h_0$, and it is what forces the coefficients of the even zeta values
+to vanish; without it the parity structure of the linear forms is reversed.
+
+Throughout, $p$ is prime, and for $x,y\in\QQ$ we write $x\equiv y\pmod p$ to mean
+$\vp(x-y)\ge1$.
 \lean{PInt, PDvd, PCong}
 
 \section{First solutions}
 
 \begin{definition}
-$A(n,k)=\binom nk^2\binom{n+k}k^2$ and $a_n=\sum_{k=0}^n A(n,k)$.
-\lean{A, apery}
-\end{definition}
-
-\begin{definition}
-$T(n,k,l)=\binom{n+k}n\binom nk^2\binom{n+l}n\binom nl^2\binom{n+k+l}n$ and
-$Q_n=\sum_{k=0}^n\sum_{l=0}^n T(n,k,l)$.
-\lean{T, Q}
+\[
+  A(n,k)=\binom nk^2\binom{n+k}k^2,\qquad a_n=\sum_{k=0}^n A(n,k),
+\]
+\[
+  T(n,k,l)=\binom{n+k}n\binom nk^2\binom{n+l}n\binom nl^2\binom{n+k+l}n,
+  \qquad Q_n=\sum_{k=0}^n\sum_{l=0}^n T(n,k,l).
+\]
+\lean{A, apery, T, Q}
 \end{definition}
 
 \begin{lemma}\label{lem:digits}
-For $r,s<p$,
-\[
-  \binom{ap+r}{bp+s}\equiv\binom ab\binom rs \pmod p,
-  \qquad
-  \binom{r+s}{s}\equiv 0 \pmod p \text{ if } r+s\ge p,\ s\le r .
-\]
-\lean{choose\_digits, choose\_digits\_zero, choose\_carry\_zero}
+For $r,s<p$ one has $\binom{ap+r}{bp+s}\equiv\binom ab\binom rs\pmod p$; and
+$\binom{r+s}s\equiv0\pmod p$ when $s\le r$ and $r+s\ge p$.
+\lean{choose\_digits, choose\_carry\_zero}
 \end{lemma}
 
 \begin{lemma}\label{lem:Adigits}
-For $r,s<p$,
-$A(ap+r,\,bp+s)\equiv \binom ab^2\binom{a+b}b^2\, A(r,s)\pmod p$, and
-$T(ap+r,\,bp+s,\,cp+t)\equiv T(a,b,c)\,T(r,s,t)\pmod p$ for $r,s,t<p$.
+For $r,s<p$, \ $A(ap+r,\,bp+s)\equiv\binom ab^2\binom{a+b}b^2A(r,s)\pmod p$; and for
+$r,s,t<p$, \ $T(ap+r,\,bp+s,\,cp+t)\equiv T(a,b,c)\,T(r,s,t)\pmod p$.
 \lean{A\_digits, T\_digits}
 \end{lemma}
 
+Summing Lemma \ref{lem:Adigits} over a full base-$p$ block, the double sum factors:
+
 \begin{theorem}\label{thm:row1}
-For $r<p$ and all $a\ge 0$,
+For $r<p$ and every $a\ge0$,
 \[
-  a_{ap+r}\equiv a_a\,a_r \pmod p,
-  \qquad
-  Q_{ap+r}\equiv Q_a\,Q_r \pmod p .
+  a_{ap+r}\equiv a_a\,a_r\pmod p,\qquad Q_{ap+r}\equiv Q_a\,Q_r\pmod p,
 \]
-Consequently $a_n\equiv\prod_i a_{n_i}$ and $Q_n\equiv\prod_i Q_{n_i}\pmod p$,
-where $n=\sum_i n_ip^i$ is the base-$p$ expansion.
+and hence $a_n\equiv\prod_i a_{n_i}$, $Q_n\equiv\prod_i Q_{n_i}\pmod p$ for the base-$p$
+expansion $n=\sum_in_ip^i$.
 \lean{apery\_lucas, Q\_lucas, apery\_lucas\_digits, Q\_lucas\_digits}
 \end{theorem}
 
-\section{Descent for truncated twisted zeta values}
-
-\begin{definition}
-For $\chi:\NN\to\ZZ$ and $r,y\in\NN$,
-$\displaystyle K^{(r)}_\chi(y)=\sum_{m=0}^{y}\frac{\chi(m)}{m^r}$, with the term $m=0$ read as $0$.
-\lean{K}
-\end{definition}
-
-\begin{lemma}\label{lem:K}
-Let $\chi$ be completely multiplicative and $r\ge1$. Then for all $y$,
-\[
-  p^{\,r}K^{(r)}_\chi(y)\;\equiv\;\chi(p)\,K^{(r)}_\chi(\lfloor y/p\rfloor) \pmod p .
-\]
-\lean{K\_descent}
-\end{lemma}
-
-\begin{lemma}\label{lem:mon}
-Let $\ell_1,\dots,\ell_t$ be letters of weights $r_1,\dots,r_t$ and characters
-$\chi_1,\dots,\chi_t$. Then
-$p^{\,r_1+\cdots+r_t}\prod_i K^{(r_i)}_{\chi_i}(y_i)\equiv
-\bigl(\prod_i\chi_i(p)\bigr)\prod_i K^{(r_i)}_{\chi_i}(\lfloor y_i/p\rfloor)\pmod p$.
-\lean{mon\_descent}
-\end{lemma}
-
-\section{Second solutions}
-
-\begin{definition}
-A \emph{letter} is a triple $\ell=(r,\chi,x)$ with $r\ge1$, $\chi:\NN\to\ZZ$ completely
-multiplicative, and $x:\NN^2\to\NN$; its value is $\ell(n,k)=K^{(r)}_\chi\bigl(x(n,k)\bigr)$.
-A \emph{monomial} is a finite list of letters, evaluated by multiplication; its degree is
-$\sum r_i$ and its character value at $p$ is $\prod\chi_i(p)$.
-\lean{Letter, monVal, monDeg, monChi}
-\end{definition}
-
-\begin{definition}
-Given $S:\NN^2\to\ZZ$, a finite index set $J$, coefficients $c:J\to\QQ$ and monomials
-$\mathrm{mon}:J\to\mathrm{List}\,\mathrm{Letter}$, put
-$w(n,k)=\sum_{j\in J}c_j\,\mathrm{mon}_j(n,k)$ and
-\[
-  A(n)=\sum_{k=0}^n S(n,k),
-  \qquad
-  B(n)=\sum_{k=0}^n S(n,k)\,w(n,k).
-\]
-\lean{W, Arow, Brow}
-\end{definition}
-
-\begin{theorem}\label{thm:LB}
-Fix $w\in\NN$ and $\chi_p\in\ZZ$. Assume
-\begin{enumerate}
-\item[\textup{(H1)}] $S(ap+r,\,bp+s)\equiv S(a,b)S(r,s)\pmod p$ for $r,s<p$;
-\item[\textup{(H2)}] $S(n,k)=0$ for $k>n$;
-\item[\textup{(H3)}] for $r,s<p$, $b\le a$ and $S(r,s)\not\equiv0\pmod p$:
-      $\lfloor x(ap+r,\,bp+s)/p\rfloor=x(a,b)$ for every letter argument $x$ occurring in
-      $\mathrm{mon}$;
-\item[\textup{(H4)}] $x(n,k)\le n$ for every such $x$ and all $k\le n$;
-\item[\textup{(H4c)}] every $c_j$ is $p$-integral;
-\item[\textup{(Hw)}] every $\mathrm{mon}_j$ has degree $w$;
-\item[\textup{(H5)}] every $\mathrm{mon}_j$ has character value $\chi_p$ at $p$.
-\end{enumerate}
-Then for $a,r<p$,
-\[
-  p^{\,w}B(ap+r)\;\equiv\;\chi_p\,B(a)\,A(r) \pmod p .
-\]
-\lean{theorem\_LB}
-\end{theorem}
-
-\section{Two instances}
-
-\begin{definition}
-$H^{(r)}_n=\sum_{j=1}^n j^{-r}$, and
-\[
-  b_n=\sum_{k=0}^n A(n,k)\bigl(2H^{(3)}_n-H^{(3)}_k\bigr),
-  \qquad
-  f_n=\sum_{k=0}^n\binom nk^3,
-\]
-\[
-  \beta_n=\sum_{k=0}^n\binom nk^3\Bigl(\tfrac14H^{(2)}_k+\tfrac34\bigl(H^{(1)}_k\bigr)^2
-    -\tfrac34H^{(1)}_kH^{(1)}_{n-k}\Bigr).
-\]
-\lean{Harm, bMin, franel, bFranel}
-\end{definition}
-
-\begin{theorem}\label{thm:inst}
-For $a,r<p$,
-\[
-  p^{3}\,b_{ap+r}\equiv b_a\,a_r \pmod p,
-  \qquad\text{and, for } p\neq2,\qquad
-  p^{2}\,\beta_{ap+r}\equiv \beta_a\,f_r \pmod p .
-\]
-\lean{bMin\_lucas, bFranel\_lucas}
-\end{theorem}
+The statement for $a_n$ is Gessel's \cite{Gessel1982}; the proof formalised here is the
+digit-block argument, and it applies verbatim to $Q_n$ because the extra binomial factors
+in $T$ satisfy the same carry dichotomy.
 
 \section{Ap\'ery's companion}
 
 \begin{definition}\label{def:bApery}
-$P(n)=34n^3+51n^2+27n+5$, and $b^{\mathrm{A}}:\NN\to\QQ$ is defined by
+$P(n)=34n^3+51n^2+27n+5$, and $b_n$ is defined by
 \[
-  b^{\mathrm{A}}_0=0,\qquad b^{\mathrm{A}}_1=6,\qquad
-  (n+2)^3b^{\mathrm{A}}_{n+2}=P(n+1)\,b^{\mathrm{A}}_{n+1}-(n+1)^3b^{\mathrm{A}}_{n} .
+  b_0=0,\qquad b_1=6,\qquad (n+2)^3b_{n+2}=P(n+1)\,b_{n+1}-(n+1)^3b_n .
 \]
 \lean{Ppol, bApery}
 \end{definition}
 
+This is Ap\'ery's recurrence; $b_2=351/4$ and $b_3=62531/36$.
+
+\begin{definition}
+$\displaystyle \tilde b_n=\sum_{k=0}^n A(n,k)\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)$.
+\lean{Harm, bMin}
+\end{definition}
+
 \begin{lemma}\label{lem:rec}
-$(m+2)^3b_{m+2}-P(m+1)\,b_{m+1}+(m+1)^3b_m=0$ for all $m$.
+$(m+2)^3\tilde b_{m+2}-P(m+1)\,\tilde b_{m+1}+(m+1)^3\tilde b_m=0$ for all $m\ge0$.
 \lean{bMin\_rec}
 \end{lemma}
 
+The proof is a single telescoping step: applying the recurrence operator to the summand
+of $\tilde b$ produces an exact difference $\Psi(m,k+1)-\Psi(m,k)$, whose sum collapses to
+the boundary values $\Psi(m,0)=\Psi(m,m+3)=0$. The two Zeilberger-type certificates
+involved are polynomial identities in $\QQ[m,k]$.
+\lean{star, star\_pre}
+
 \begin{theorem}\label{thm:closed}
-$b_n=b^{\mathrm{A}}_n$ for all $n$; that is,
+$\tilde b_n=b_n$ for all $n$; that is,
 \[
-  \sum_{k=0}^n\binom nk^2\binom{n+k}k^2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)=b^{\mathrm{A}}_n .
+  \sum_{k=0}^n\binom nk^2\binom{n+k}k^2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)=b_n .
 \]
 \lean{bMin\_eq\_bApery, apery\_b\_harmonic\_closed\_form}
 \end{theorem}
 
 \begin{theorem}\label{thm:bA}
-For $a,r<p$, \ $p^{3}\,b^{\mathrm{A}}_{ap+r}\equiv b^{\mathrm{A}}_a\,a_r \pmod p$.
+For $a,r<p$, \ $p^3\,b_{ap+r}\equiv b_a\,a_r\pmod p$.
 \lean{bApery\_lucas}
+\end{theorem}
+
+The weight $3$ enters as follows: modulo $p$ the summands with $k\not\equiv0$ contribute
+nothing after multiplication by $p^3$, while the layer $k=jp$ reproduces
+$H^{(3)}$ at $\lfloor\,\cdot\,/p\rfloor$, since $p^3\sum_{m\le y,\ p\mid m}m^{-3}
+=\sum_{j\le y/p}j^{-3}$. The remaining digit factorisation is Lemma \ref{lem:Adigits}.
+
+\begin{theorem}\label{thm:franel}
+Let $f_n=\sum_k\binom nk^3$ and
+$\beta_n=\sum_k\binom nk^3\bigl(\tfrac14H^{(2)}_k+\tfrac34(H^{(1)}_k)^2
+-\tfrac34H^{(1)}_kH^{(1)}_{n-k}\bigr)$. Then for $p\neq2$ and $a,r<p$,
+\[
+  p^2\,\beta_{ap+r}\equiv\beta_a\,f_r\pmod p .
+\]
+\lean{franel, bFranel, bFranel\_lucas}
 \end{theorem}
 
 \section{A denominator defect}
 
 \begin{definition}
-$d_n=\lcm(1,\dots,n)$, and $P_2=1190161/384$.
+$d_n=\lcm(1,\dots,n)$, and $P_2=1190161/384$ is the value printed in \cite{BZ}.
 \lean{dlcm, BZ\_P2}
 \end{definition}
 
 \begin{theorem}\label{thm:twelve}
-$d_2^{\,5}P_2=1190161/12\notin\ZZ$, while $12\,d_2^{\,5}P_2=1190161\in\ZZ$;
-and if $c\in\NN$ satisfies $c\,d_2^{\,5}P_2\in\ZZ$ then $12\mid c$.
+$d_2^{\,5}P_2=1190161/12\notin\ZZ$, while $12\,d_2^{\,5}P_2=1190161\in\ZZ$; and if
+$c\in\NN$ satisfies $c\,d_2^{\,5}P_2\in\ZZ$, then $12\mid c$.
 \lean{BZ\_P2\_not\_integral, BZ\_P2\_factor\_twelve, BZ\_twelve\_minimal}
 \end{theorem}
 
+Since $d_2=2$ and $1190161\equiv1\pmod{12}$, the defect is exactly $2^2\cdot3$: the claim
+of \cite{BZ} holds after multiplication by $12$ and by no smaller factor.
+
 \section{The development}
 
-Lean~4 (\texttt{v4.33.0-rc1}) with Mathlib \texttt{cd580e54}; ten modules,
-$2107$ lines; no \texttt{sorry} and no \texttt{native\_decide}. Every declaration
-cited above satisfies
+Lean~4 (\texttt{v4.33.0-rc1}) with Mathlib \texttt{cd580e54}; ten modules, $2107$ lines;
+no \texttt{sorry} and no \texttt{native\_decide}. Every declaration cited above satisfies
 \[
-  \texttt{\#print axioms} \;\longrightarrow\;
+  \texttt{\#print axioms}\;\longrightarrow\;
   [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
 \]
 Build with \texttt{lake exe cache get \&\& lake build}.
 
 \begin{thebibliography}{9}
-\bibitem{mathlib} The mathlib Community, \emph{The Lean mathematical library},
-CPP 2020, 367--381. \texttt{arXiv:1910.09336}.
-\bibitem{lean4} L.\ de Moura and S.\ Ullrich, \emph{The Lean 4 theorem prover and
-programming language}, CADE~28, LNCS 12699, 625--635.
+\bibitem{BZ}
+F.~Brown and W.~Zudilin, \emph{On cellular rational approximations to $\zeta(5)$},
+preprint \texttt{arXiv:2210.03391v3} (2022).
+\bibitem{Gessel1982}
+I.~M.~Gessel, \emph{Some congruences for Ap\'ery numbers},
+J.\ Number Theory \textbf{14} (1982), no.~3, 362--368.
+\bibitem{mathlib}
+The mathlib Community, \emph{The Lean mathematical library}, CPP 2020, 367--381.
+\texttt{arXiv:1910.09336}.
+\bibitem{lean4}
+L.~de Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming language},
+CADE~28, LNCS 12699, 625--635.
+\bibitem{Zu04}
+W.~Zudilin, \emph{Arithmetic of linear forms involving odd zeta values},
+J.\ Th\'eor.\ Nombres Bordeaux \textbf{16} (2004), 251--291.
 \end{thebibliography}
 
 \end{document}
