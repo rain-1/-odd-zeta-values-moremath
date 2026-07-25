@@ -1,0 +1,228 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\lean}[1]{\hfill\texttt{\footnotesize #1}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\vp}{v_p}
+\DeclareMathOperator{\lcm}{lcm}
+
+\title{Lucas congruences for Ap\'ery-like sequences and their second solutions}
+\author{[Author]}
+\date{}
+
+\begin{document}
+\begin{abstract}
+Every statement below is proved in Lean~4 and checked by its kernel. Each is
+followed by the name of the declaration that proves it.
+\end{abstract}
+\maketitle
+
+Throughout, $p$ is prime. For $q\in\QQ$ write $\vp$ for the $p$-adic valuation,
+and $x\equiv y \pmod p$ for $x,y\in\QQ$ to mean $\vp(x-y)\ge 1$.
+\lean{PInt, PDvd, PCong}
+
+\section{First solutions}
+
+\begin{definition}
+$A(n,k)=\binom nk^2\binom{n+k}k^2$ and $a_n=\sum_{k=0}^n A(n,k)$.
+\lean{A, apery}
+\end{definition}
+
+\begin{definition}
+$T(n,k,l)=\binom{n+k}n\binom nk^2\binom{n+l}n\binom nl^2\binom{n+k+l}n$ and
+$Q_n=\sum_{k=0}^n\sum_{l=0}^n T(n,k,l)$.
+\lean{T, Q}
+\end{definition}
+
+\begin{lemma}\label{lem:digits}
+For $r,s<p$,
+\[
+  \binom{ap+r}{bp+s}\equiv\binom ab\binom rs \pmod p,
+  \qquad
+  \binom{r+s}{s}\equiv 0 \pmod p \text{ if } r+s\ge p,\ s\le r .
+\]
+\lean{choose\_digits, choose\_digits\_zero, choose\_carry\_zero}
+\end{lemma}
+
+\begin{lemma}\label{lem:Adigits}
+For $r,s<p$,
+$A(ap+r,\,bp+s)\equiv \binom ab^2\binom{a+b}b^2\, A(r,s)\pmod p$, and
+$T(ap+r,\,bp+s,\,cp+t)\equiv T(a,b,c)\,T(r,s,t)\pmod p$ for $r,s,t<p$.
+\lean{A\_digits, T\_digits}
+\end{lemma}
+
+\begin{theorem}\label{thm:row1}
+For $r<p$ and all $a\ge 0$,
+\[
+  a_{ap+r}\equiv a_a\,a_r \pmod p,
+  \qquad
+  Q_{ap+r}\equiv Q_a\,Q_r \pmod p .
+\]
+Consequently $a_n\equiv\prod_i a_{n_i}$ and $Q_n\equiv\prod_i Q_{n_i}\pmod p$,
+where $n=\sum_i n_ip^i$ is the base-$p$ expansion.
+\lean{apery\_lucas, Q\_lucas, apery\_lucas\_digits, Q\_lucas\_digits}
+\end{theorem}
+
+\section{Descent for truncated twisted zeta values}
+
+\begin{definition}
+For $\chi:\NN\to\ZZ$ and $r,y\in\NN$,
+$\displaystyle K^{(r)}_\chi(y)=\sum_{m=0}^{y}\frac{\chi(m)}{m^r}$, with the term $m=0$ read as $0$.
+\lean{K}
+\end{definition}
+
+\begin{lemma}\label{lem:K}
+Let $\chi$ be completely multiplicative and $r\ge1$. Then for all $y$,
+\[
+  p^{\,r}K^{(r)}_\chi(y)\;\equiv\;\chi(p)\,K^{(r)}_\chi(\lfloor y/p\rfloor) \pmod p .
+\]
+\lean{K\_descent}
+\end{lemma}
+
+\begin{lemma}\label{lem:mon}
+Let $\ell_1,\dots,\ell_t$ be letters of weights $r_1,\dots,r_t$ and characters
+$\chi_1,\dots,\chi_t$. Then
+$p^{\,r_1+\cdots+r_t}\prod_i K^{(r_i)}_{\chi_i}(y_i)\equiv
+\bigl(\prod_i\chi_i(p)\bigr)\prod_i K^{(r_i)}_{\chi_i}(\lfloor y_i/p\rfloor)\pmod p$.
+\lean{mon\_descent}
+\end{lemma}
+
+\section{Second solutions}
+
+\begin{definition}
+A \emph{letter} is a triple $\ell=(r,\chi,x)$ with $r\ge1$, $\chi:\NN\to\ZZ$ completely
+multiplicative, and $x:\NN^2\to\NN$; its value is $\ell(n,k)=K^{(r)}_\chi\bigl(x(n,k)\bigr)$.
+A \emph{monomial} is a finite list of letters, evaluated by multiplication; its degree is
+$\sum r_i$ and its character value at $p$ is $\prod\chi_i(p)$.
+\lean{Letter, monVal, monDeg, monChi}
+\end{definition}
+
+\begin{definition}
+Given $S:\NN^2\to\ZZ$, a finite index set $J$, coefficients $c:J\to\QQ$ and monomials
+$\mathrm{mon}:J\to\mathrm{List}\,\mathrm{Letter}$, put
+$w(n,k)=\sum_{j\in J}c_j\,\mathrm{mon}_j(n,k)$ and
+\[
+  A(n)=\sum_{k=0}^n S(n,k),
+  \qquad
+  B(n)=\sum_{k=0}^n S(n,k)\,w(n,k).
+\]
+\lean{W, Arow, Brow}
+\end{definition}
+
+\begin{theorem}\label{thm:LB}
+Fix $w\in\NN$ and $\chi_p\in\ZZ$. Assume
+\begin{enumerate}
+\item[\textup{(H1)}] $S(ap+r,\,bp+s)\equiv S(a,b)S(r,s)\pmod p$ for $r,s<p$;
+\item[\textup{(H2)}] $S(n,k)=0$ for $k>n$;
+\item[\textup{(H3)}] for $r,s<p$, $b\le a$ and $S(r,s)\not\equiv0\pmod p$:
+      $\lfloor x(ap+r,\,bp+s)/p\rfloor=x(a,b)$ for every letter argument $x$ occurring in
+      $\mathrm{mon}$;
+\item[\textup{(H4)}] $x(n,k)\le n$ for every such $x$ and all $k\le n$;
+\item[\textup{(H4c)}] every $c_j$ is $p$-integral;
+\item[\textup{(Hw)}] every $\mathrm{mon}_j$ has degree $w$;
+\item[\textup{(H5)}] every $\mathrm{mon}_j$ has character value $\chi_p$ at $p$.
+\end{enumerate}
+Then for $a,r<p$,
+\[
+  p^{\,w}B(ap+r)\;\equiv\;\chi_p\,B(a)\,A(r) \pmod p .
+\]
+\lean{theorem\_LB}
+\end{theorem}
+
+\section{Two instances}
+
+\begin{definition}
+$H^{(r)}_n=\sum_{j=1}^n j^{-r}$, and
+\[
+  b_n=\sum_{k=0}^n A(n,k)\bigl(2H^{(3)}_n-H^{(3)}_k\bigr),
+  \qquad
+  f_n=\sum_{k=0}^n\binom nk^3,
+\]
+\[
+  \beta_n=\sum_{k=0}^n\binom nk^3\Bigl(\tfrac14H^{(2)}_k+\tfrac34\bigl(H^{(1)}_k\bigr)^2
+    -\tfrac34H^{(1)}_kH^{(1)}_{n-k}\Bigr).
+\]
+\lean{Harm, bMin, franel, bFranel}
+\end{definition}
+
+\begin{theorem}\label{thm:inst}
+For $a,r<p$,
+\[
+  p^{3}\,b_{ap+r}\equiv b_a\,a_r \pmod p,
+  \qquad\text{and, for } p\neq2,\qquad
+  p^{2}\,\beta_{ap+r}\equiv \beta_a\,f_r \pmod p .
+\]
+\lean{bMin\_lucas, bFranel\_lucas}
+\end{theorem}
+
+\section{Ap\'ery's companion}
+
+\begin{definition}\label{def:bApery}
+$P(n)=34n^3+51n^2+27n+5$, and $b^{\mathrm{A}}:\NN\to\QQ$ is defined by
+\[
+  b^{\mathrm{A}}_0=0,\qquad b^{\mathrm{A}}_1=6,\qquad
+  (n+2)^3b^{\mathrm{A}}_{n+2}=P(n+1)\,b^{\mathrm{A}}_{n+1}-(n+1)^3b^{\mathrm{A}}_{n} .
+\]
+\lean{Ppol, bApery}
+\end{definition}
+
+\begin{lemma}\label{lem:rec}
+$(m+2)^3b_{m+2}-P(m+1)\,b_{m+1}+(m+1)^3b_m=0$ for all $m$.
+\lean{bMin\_rec}
+\end{lemma}
+
+\begin{theorem}\label{thm:closed}
+$b_n=b^{\mathrm{A}}_n$ for all $n$; that is,
+\[
+  \sum_{k=0}^n\binom nk^2\binom{n+k}k^2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)=b^{\mathrm{A}}_n .
+\]
+\lean{bMin\_eq\_bApery, apery\_b\_harmonic\_closed\_form}
+\end{theorem}
+
+\begin{theorem}\label{thm:bA}
+For $a,r<p$, \ $p^{3}\,b^{\mathrm{A}}_{ap+r}\equiv b^{\mathrm{A}}_a\,a_r \pmod p$.
+\lean{bApery\_lucas}
+\end{theorem}
+
+\section{A denominator defect}
+
+\begin{definition}
+$d_n=\lcm(1,\dots,n)$, and $P_2=1190161/384$.
+\lean{dlcm, BZ\_P2}
+\end{definition}
+
+\begin{theorem}\label{thm:twelve}
+$d_2^{\,5}P_2=1190161/12\notin\ZZ$, while $12\,d_2^{\,5}P_2=1190161\in\ZZ$;
+and if $c\in\NN$ satisfies $c\,d_2^{\,5}P_2\in\ZZ$ then $12\mid c$.
+\lean{BZ\_P2\_not\_integral, BZ\_P2\_factor\_twelve, BZ\_twelve\_minimal}
+\end{theorem}
+
+\section{The development}
+
+Lean~4 (\texttt{v4.33.0-rc1}) with Mathlib \texttt{cd580e54}; ten modules,
+$2107$ lines; no \texttt{sorry} and no \texttt{native\_decide}. Every declaration
+cited above satisfies
+\[
+  \texttt{\#print axioms} \;\longrightarrow\;
+  [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
+\]
+Build with \texttt{lake exe cache get \&\& lake build}.
+
+\begin{thebibliography}{9}
+\bibitem{mathlib} The mathlib Community, \emph{The Lean mathematical library},
+CPP 2020, 367--381. \texttt{arXiv:1910.09336}.
+\bibitem{lean4} L.\ de Moura and S.\ Ullrich, \emph{The Lean 4 theorem prover and
+programming language}, CADE~28, LNCS 12699, 625--635.
+\end{thebibliography}
+
+\end{document}

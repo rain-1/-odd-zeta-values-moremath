@@ -1,0 +1,698 @@
+% !TeX program = pdflatex
+%
+% SHORT paper, VERIFIED-ONLY SCOPE.
+%
+% RULE (River, overriding all earlier briefs): the paper reports only what the Lean
+% kernel has checked.  Every theorem below carries its Lean declaration name, and every
+% one was verified by the author of this file by reading
+%   /home/ubuntu/fable-episode-2/zeta-math-2/lean/ZetaLucas/*.lean
+% and running `lake build` (full build clean, 8671 jobs) plus `#print axioms` on each
+% cited declaration (propext, Classical.choice, Quot.sound only).
+%
+% Nothing sourced from Mathematica sweeps, no conjectures, no fifteen-family table,
+% no transfer-principle material, no (8.7) note: those live in the companion papers and
+% are referred to in exactly one sentence (end of Section 1).
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\vp}{v_p}
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+\newcommand{\HH}[2]{H^{(#1)}_{#2}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Ln}[1]{\texttt{#1}}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\title[Formally verified congruences for Ap\'ery-like sequences]
+      {Formally verified congruences for Ap\'ery-like sequences,\\
+       and an arithmetic note on the Brown--Zudilin denominators}
+
+\author{}
+
+\date{\today}
+
+\subjclass[2020]{11A07, 11B65, 11Y99, 68V20}
+\keywords{Ap\'ery numbers, Lucas congruences, second solution, harmonic sums,
+formalisation, Lean~4, Mathlib}
+
+\begin{abstract}
+We report a Lean~4 development, checked by the Lean kernel and free of \Ln{sorry}, that
+proves: (i)~the Lucas congruence $a_{ap+r}\equiv a_aa_r\pmod p$ for Ap\'ery's $\zeta(3)$
+numbers, for \emph{every} prime and every $a\ge0$, together with its base-$p$ digit-product
+form, and the same pair of statements for the Brown--Zudilin double sum
+$Q_n=\sum_{k,l}T(n,k,l)$; (ii)~a descent lemma for truncated twisted zeta values,
+$p^rK^{(r)}_\chi(y)\equiv\chi(p)K^{(r)}_\chi(\lfloor y/p\rfloor)$, and its extension to
+monomials; (iii)~an abstract congruence for the \emph{second} solution of an
+Ap\'ery-like recurrence, $p^wB(ap+r)\equiv\chi_pB(a)A(r)\pmod p$, under seven explicit
+hypotheses on the summand and on a harmonic weight of uniform degree $w$, with the
+character value $\chi_p$ carried as a parameter; (iv)~two instances of it, at $w=3$ for
+Ap\'ery's $\zeta(3)$ pair and at $w=2$ for Franel's, both instantiated at $\chi_p=1$;
+(v)~the closed form
+$\sum_{k\le n}\bin nk^2\bin{n+k}k^2\bigl(2\HH3n-\HH3k\bigr)=b_n$, where $b_n$ is the sequence
+\emph{defined} by Ap\'ery's recurrence with $b_0=0$, $b_1=6$, and, as a consequence, the
+second-row congruence $p^3b_{ap+r}\equiv b_a\,a_r\pmod p$ for that classical companion
+sequence itself, for every prime $p$ and all $a,r<p$; and (vi)~a small arithmetic fact taking
+Brown--Zudilin's printed value $P_2=1190161/384$ as a quoted hypothesis: $d_2^5P_2\notin\Z$,
+$12\,d_2^5P_2\in\Z$, and --- minimality --- any $c\in\N$ with $c\,d_2^5P_2\in\Z$ is divisible
+by $12$. Each statement below is accompanied by the name of the declaration that proves it,
+so that it can be checked against the repository; the paper claims nothing that the kernel
+has not checked. In particular nothing about the \emph{value} $\zeta(3)$ is formalised
+anywhere: this is a paper about congruences satisfied by certain sequences.
+\end{abstract}
+
+\maketitle
+
+% ============================================================================
+\section{Introduction and scope}
+\label{sec:intro}
+
+Let $a_n=\sum_{k=0}^n\bin nk^2\bin{n+k}k^2$ be Ap\'ery's numbers for $\zeta(3)$ (OEIS
+\texttt{A005259}). They satisfy a congruence of Lucas type,
+\begin{equation}\label{eq:arow}
+   a_{ap+r}\equiv a_a\,a_r\pmod p\qquad(p\text{ prime},\ a\ge0,\ 0\le r<p),
+\end{equation}
+hence $a_n\equiv\prod_ia_{n_i}\pmod p$ over base-$p$ digits. This is classical
+\cite{Gessel1982}, and Malik and Straub \cite{MalikStraub} prove it for all fifteen
+sporadic Ap\'ery-like sequences, Straub \cite{Straub2301} sharpening it to modulus $p^2$.
+Ap\'ery's irrationality proof, however, uses a \emph{second} solution $b_n$ of the same
+recurrence, and for that row no congruence of Lucas type appears in the literature.
+
+This paper reports what has been proved about the second row \emph{and machine-checked}.
+The scope rule is strict and we state it once, because it is the point of the paper:
+
+\begin{quote}
+Every mathematical assertion in Sections~\ref{sec:setup}--\ref{sec:twelve} is the informal
+reading of a Lean~4 declaration that the Lean kernel has checked, with no \Ln{sorry}, no
+\Ln{admit}, no \Ln{native\_decide}, and no axioms beyond \Ln{propext},
+\Ln{Classical.choice} and \Ln{Quot.sound}. Each is displayed with the name of its
+declaration. Nothing that has been checked only numerically, or proved only on paper, is
+stated here as a result.
+\end{quote}
+
+Table~\ref{tab:coverage} is the inventory. \S\ref{sec:build} says how to rebuild and
+re-check the development in full.
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{The development. Each module is the file
+\Ln{ZetaLucas/}$\langle$module$\rangle$\Ln{.lean}, and every declaration listed lives in the
+\Ln{ZetaLucas} namespace with the single exception of \Ln{Finset.sum\_range\_mul}.}
+\label{tab:coverage}
+\begin{tabular}{@{}llc@{}}
+\toprule
+module & principal declarations & \S\\
+\midrule
+\Ln{Core} & \Ln{choose\_digits}, \Ln{choose\_digits'}, \Ln{choose\_digits\_zero},
+  \Ln{choose\_carry\_zero}, & \ref{sec:setup}\\
+ & \Ln{Finset.sum\_range\_mul}, \Ln{padicValNat\_choose\_lt\_sq} & \\
+\Ln{PadicBridge} & \Ln{PInt}, \Ln{PDvd}, \Ln{PCong}, \Ln{PCong.of\_zmod} & \ref{sec:setup}\\
+\Ln{Apery} & \Ln{apery\_lucas}, \Ln{apery\_lucas\_digits} & \ref{sec:firstrow}\\
+\Ln{BrownZudilin} & \Ln{Q\_lucas}, \Ln{Q\_lucas\_digits} & \ref{sec:firstrow}\\
+\Ln{Letters} & \Ln{Letter}, \Ln{K\_descent}, \Ln{mon\_descent} & \ref{sec:LB}\\
+\Ln{TheoremLB} & \Ln{theorem\_LB} & \ref{sec:LB}\\
+\Ln{Instances} & \Ln{bMin}, \Ln{bMin\_lucas}, \Ln{bFranel}, \Ln{bFranel\_lucas} & \ref{sec:instances}\\
+\Ln{MinimalForm} & \Ln{bApery}, \Ln{bMin\_rec}, \Ln{bMin\_eq\_bApery},
+  \Ln{apery\_b\_harmonic\_closed\_form}, & \ref{sec:instances}\\
+ & \Ln{bApery\_lucas} & \\
+\Ln{BZFactor12} & \Ln{dlcm}, \Ln{dlcm\_two\_pow\_five}, \Ln{BZ\_P2},
+  \Ln{BZ\_P2\_not\_integral}, & \ref{sec:twelve}\\
+ & \Ln{BZ\_P2\_factor\_twelve}, \Ln{BZ\_twelve\_minimal} & \\
+\Ln{Kummer} & seven carry-counting lemmas, headed by \Ln{padicValNat\_choose\_digits} & ---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four honest qualifications, stated here rather than buried.
+
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(\alph*)}]
+\item \emph{Nothing about the value $\zeta(3)$ is formalised anywhere in this development.}
+  There are no limits, no irrationality statements, and not even the convergence
+  $b_n/a_n\to\zeta(3)$. Every theorem below is a congruence, an integrality statement or an
+  identity between explicitly defined sequences of rationals. The word $\zeta(3)$ occurs in
+  this paper only as a label for which sequences are under discussion.
+\item \emph{Which sequence ``$b_n$'' means.} In Lean, $b_n$ is pinned by Ap\'ery's
+  recurrence together with the initial values $b_0=0$, $b_1=6$ --- the sequence-theoretic
+  characterisation --- and \emph{not} by the classical double-sum expression with its inner
+  alternating sum. That the two agree is proved on paper \cite{PaperLucas} and is
+  \emph{not} formalised.
+\item \emph{The character is never exercised.} Both instances of the general second-row
+  theorem instantiate its character parameter at $1$. The theorem carries a character, but no
+  instance with a nontrivial character is proved, here or on paper.
+\item \emph{One module is unused.} The \Ln{Kummer} module is a carry-counting toolkit that no
+  result below consumes; it is listed for completeness.
+\end{enumerate}
+
+Finally, one sentence on what is \emph{not} here. The same programme has produced further
+material --- a master depth law supported by exact sweeps over the fifteen sporadic families,
+harmonic decompositions for several of them, a transfer principle relating archimedean and
+Volkenborn linear forms, and denominator results for the Brown--Zudilin ladder --- none of
+which is machine-checked; it is reported in the companion papers
+\cite{PaperLucas,PaperSharp,PaperMap}, and nothing in this paper depends on any of it.
+
+\subsection*{Notation} $p$ is a prime, $\vp$ the $p$-adic valuation on $\Q$ with $\vp(p)=1$,
+$d_n=\lcm(1,\dots,n)$, and $\HH ry=\sum_{m=1}^ym^{-r}$. In Lean, primality is carried by the
+instance \Ln{[Fact p.Prime]}, and all sums are \Ln{Finset} sums over \Ln{range}.
+
+% ============================================================================
+\section{Setup: the two bridges}
+\label{sec:setup}
+
+Two small pieces of infrastructure carry everything else: a congruence relation on $\Q$, and
+a digitwise form of Lucas' theorem.
+
+\subsection{Congruences between rationals}
+
+Second-row statements are congruences between \emph{rational} numbers with controlled
+denominators, so the ambient relation cannot be \Ln{ZMod p} equality. We use the $p$-adic
+norm on $\Q$ directly.
+
+\begin{definition}[module \Ln{PadicBridge}]\label{def:bridge}
+For $x,y\in\Q$ put
+\[
+  \Ln{PInt}\ p\ x:\iff\lvert x\rvert_p\le1,\qquad
+  \Ln{PDvd}\ p\ x:\iff\lvert x\rvert_p<1,\qquad
+  \Ln{PCong}\ p\ x\ y:\iff\Ln{PDvd}\ p\ (x-y),
+\]
+where $\lvert\cdot\rvert_p$ is Mathlib's \Ln{padicNorm}. So \Ln{PInt} is $p$-integrality,
+i.e.\ membership of the local ring $\Z_{(p)}$, and \Ln{PCong}~$p\;x\;y$ is $x\equiv y\pmod
+p$ inside $\Z_{(p)}$.
+\end{definition}
+
+This relation is not vacuous: since $\lvert x-y\rvert_p<1$ forces $\lvert x-y\rvert_p\le1$,
+a congruence implies $p$-integrality of either side as soon as the other is $p$-integral
+(\Ln{PCong.pInt}). The module proves the expected closure properties --- sums, products by
+$p$-integral constants, \Ln{Finset} sums --- and one bridge lemma, \Ln{PCong.of\_zmod}:
+an equality of integers in \Ln{ZMod p} entails \Ln{PCong}~$p$ of their images in $\Q$. That
+lemma is what lets the integer-valued first row be used inside rational-valued second-row
+proofs.
+
+\subsection{Lucas' theorem, digitwise}
+
+\begin{lemma}[\Ln{Core.choose\_digits}]\label{lem:lucasstep}
+Let $p$ be prime, $a,b\ge0$ and $r,s<p$. Then
+$\bin{ap+r}{bp+s}\equiv\bin ab\bin rs\pmod p$.
+\end{lemma}
+
+The Lean proof specialises Mathlib's
+\Ln{Choose.choose\_modEq\_choose\_mod\_mul\_choose\_div} and computes the four base-$p$
+division and remainder terms explicitly. Two consequences are used repeatedly:
+\Ln{choose\_digits\_zero}, that $\bin nk\equiv0\pmod p$ whenever the low digit of $n$ is
+strictly below the low digit of $k$; and \Ln{choose\_carry\_zero}, the carry-annihilation
+form --- if $p\le x$, $y<p$ and $x-p<y$ then $\bin xy\equiv0\pmod p$, because the digits of
+$x$ are $(1,x-p)$ and those of $y$ are $(0,y)$.
+
+The third ingredient is a combinatorial identity, \Ln{Finset.sum\_range\_mul}: for any
+commutative monoid,
+$\sum_{k<mn}f(k)=\sum_{i<m}\sum_{j<n}f(in+j)$. This is what splits a summation range into
+base-$p$ blocks, and it is used in every proof in \S\ref{sec:firstrow} and \S\ref{sec:LB}.
+Finally \Ln{padicValNat\_choose\_lt\_sq} records that for $n<p^2$ and $k\le n$ Kummer's
+carry count collapses to a single indicator,
+$\vp\bin nk=[\,p\le k\bmod p+(n-k)\bmod p\,]$.
+
+% ============================================================================
+\section{The first row}
+\label{sec:firstrow}
+
+\begin{theorem}[\Ln{Apery.apery\_lucas}, \Ln{Apery.apery\_lucas\_digits}]\label{thm:apery}
+Let $A(n,k)=\bin nk^2\bin{n+k}k^2$ and $a_n=\sum_{k=0}^nA(n,k)$. For every prime $p$, every
+$a\ge0$ and every $r<p$,
+\[
+   a_{ap+r}\;\equiv\;a_a\,a_r\pmod p,
+   \qquad\text{and}\qquad
+   a_n\;\equiv\;\prod_{i}a_{n_i}\pmod p
+\]
+for the base-$p$ digits $(n_i)$ of $n$.
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Four steps. (1)~Extend the summation range from $\{0\le k\le ap+r\}$ to the full block
+$\{0\le k<(a+1)p\}$; this is an equality of integers, not a congruence, because
+$A(n,k)=0$ for $k>n$. (2)~Split the block into digits by \Ln{Finset.sum\_range\_mul}.
+(3)~Factor each summand modulo $p$ by Lemma~\ref{lem:lucasstep} applied to both binomials,
+which gives $A(ap+r,bp+s)\equiv A(a,b)A(r,s)$. (4)~The resulting double sum is a product of
+two independent sums, $\sum_b A(a,b)\cdot\sum_{s<p}A(r,s)$; the first factor is $a_a$ on the
+nose, and the second is $a_r$ because the terms with $r<s<p$ carry a vanishing $\bin rs$.
+The digit-product form is a strong induction on $n$ using \Ln{Nat.digits\_def'}, and it is
+available for \emph{all} $a\ge0$, which is what makes the induction go through.
+\end{proof}
+
+Note the absence of hypotheses: no $p\ge5$, no $a<p$, no $p$-unit condition. The same
+argument, with a two-index summand, gives the analogue for the double sum that carries the
+Brown--Zudilin cellular approximations to $\zeta(5)$ \cite{BZ}.
+
+\begin{theorem}[\Ln{BrownZudilin.Q\_lucas}, \Ln{BrownZudilin.Q\_lucas\_digits}]\label{thm:Q}
+Let
+\[
+   T(n,k,l)=\bin{n+k}n\bin nk^2\bin{n+l}n\bin nl^2\bin{n+k+l}n,
+   \qquad
+   Q_n=\sum_{k,l=0}^{n}T(n,k,l).
+\]
+For every prime $p$, every $a\ge0$ and every $r<p$, one has
+$Q_{ap+r}\equiv Q_aQ_r\pmod p$, and $Q_n\equiv\prod_iQ_{n_i}\pmod p$ over base-$p$ digits.
+\end{theorem}
+
+\begin{proof}[The verified argument]
+As for Theorem~\ref{thm:apery}, with both ranges extended and both split; the summand
+factorises as $T(ap+r,bp+s,cp+t)\equiv T(a,b,c)T(r,s,t)\pmod p$, the three wide binomials
+$\bin{n+k}n$, $\bin{n+l}n$, $\bin{n+k+l}n$ being handled in their carrying regimes by
+\Ln{choose\_carry\_zero} and \Ln{choose\_digits\_zero}. One extra step is needed
+relative to the single-index case: after factorisation the four sums appear in the order
+$b,s,c,t$, and a \Ln{Finset.sum\_comm} is required to bring the high-digit pair $(b,c)$ and
+the low-digit pair $(s,t)$ together before the quadruple sum separates into a product.
+\end{proof}
+
+% ============================================================================
+\section{The second row: harmonic letters and the abstract theorem}
+\label{sec:LB}
+
+\subsection{Letters}
+
+\begin{definition}[module \Ln{Letters}]\label{def:letter}
+For a completely multiplicative $\chi:\N\to\Z$ and $r,y\in\N$ put
+\[
+   K_\chi^{(r)}(y)\;=\;\sum_{m=0}^{y}\frac{\chi(m)}{m^{r}}\ \in\ \Q .
+\]
+The sum is over \Ln{range (y+1)}; the term $m=0$ is $\chi(0)/0^r=0$ in $\Q$ for $r\ge1$, so
+the object is the usual truncated twisted zeta value $\sum_{m=1}^y\chi(m)m^{-r}$, and no
+\Ln{Finset.Icc} reindexing is ever required. A \emph{letter} is a structure bundling $\chi$
+together with a proof of complete multiplicativity, a positive degree $r$, and an argument
+form $x:\N\to\N\to\N$; a \emph{monomial} is a \Ln{List Letter}, with $\Ln{monDeg}$ the sum of
+the degrees and $\Ln{monChi}\,M\,p=\prod_{\ell\in M}\chi_\ell(p)$.
+\end{definition}
+
+We deliberately do not use Mathlib's \Ln{DirichletCharacter}, which would force a modulus and
+a \Ln{ZMod}-valued target; complete multiplicativity as a hypothesis field is exactly what
+the descent needs, and it admits $\chi\equiv1$.
+
+\begin{lemma}[\Ln{Letters.K\_descent}]\label{lem:K}
+Let $\chi$ be completely multiplicative, $r\ge1$ and $y\ge0$. Then
+\[
+   p^{r}\,K^{(r)}_\chi(y)\;\equiv\;\chi(p)\,K^{(r)}_\chi\bigl(\lfloor y/p\rfloor\bigr)
+   \pmod p .
+\]
+\end{lemma}
+
+\begin{proof}[The verified argument]
+Split the sum at $p\mid m$. The $p$-divisible layer reproduces the right-hand side
+\emph{exactly}, before any congruence is taken: reindexing $m=jp$ and using complete
+multiplicativity,
+$\sum_{j\le\lfloor y/p\rfloor}\chi(jp)(jp)^{-r}=\chi(p)p^{-r}K^{(r)}_\chi(\lfloor
+y/p\rfloor)$. The remaining layer has $p$-integral denominators, so after multiplication by
+$p^{r}$ with $r\ge1$ it is $p$-divisible. Hence the difference of the two sides is
+$p^r$ times a $p$-integral number.
+\end{proof}
+
+Lemma~\ref{lem:K} is where the character enters, and it is the only place. Multiplying the
+lemma over the letters of a monomial gives \Ln{mon\_descent}: if every argument satisfies
+$\lfloor x(n,k)/p\rfloor<p$, then
+\[
+   p^{\Ln{monDeg}M}\cdot M(n,k)\;\equiv\;\Ln{monChi}\,M\,p\cdot M^{\downarrow}(n,k)\pmod p,
+\]
+where $M^\downarrow$ is $M$ with every argument $x$ replaced by $\lfloor x/p\rfloor$. The
+Lean proof is an induction over the list, using that each factor is $p$-integral so that the
+cross terms in the product of two congruences are absorbed.
+
+\subsection{The abstract second-row theorem}
+
+Fix a summand $S:\N\to\N\to\Z$, a finite index set $J$, coefficients $c:J\to\Q$ and monomials
+$\mathrm{mon}:J\to\Ln{List Letter}$, and put
+\[
+   w(n,k)=\sum_{j\in J}c_j\,\mathrm{mon}_j(n,k),\qquad
+   A(n)=\sum_{k\le n}S(n,k),\qquad
+   B(n)=\sum_{k\le n}S(n,k)\,w(n,k),
+\]
+the last two being \Ln{Arow} and \Ln{Brow} in the development. The theorem below carries a
+character value $\chi_p$ as a parameter, and since both instances proved here set it to $1$
+it is worth saying why it is there: in the companion work \cite{PaperLucas} the untwisted
+form of this congruence is found to fail for seven of the fifteen sporadic Ap\'ery-like
+families, at precisely the primes where a quadratic character takes the value $-1$, and
+Lemma~\ref{lem:K} --- formalised here as \Ln{K\_descent} --- is the mechanism that produces
+the compensating factor. We state that as motivation for the shape of the theorem, and claim
+none of it here.
+
+\begin{theorem}[\Ln{TheoremLB.theorem\_LB}]\label{thm:LB}
+Let $p$ be prime and let $w\in\N$, $\chi_p\in\Z$. Assume
+\begin{description}[leftmargin=3.2em,style=sameline]
+\item[\textup{(H1)}] $S(ap+r,bp+s)\equiv S(a,b)S(r,s)\pmod p$ for \emph{all} $a,b\ge0$ and
+  all $r,s<p$;
+\item[\textup{(H2)}] $S(n,k)=0$ whenever $n<k$;
+\item[\textup{(H3)}] for all $r,s<p$ and $b\le a$ with $S(r,s)\not\equiv0\pmod p$, every
+  argument form $x$ occurring in the weight satisfies
+  $\lfloor x(ap+r,bp+s)/p\rfloor=x(a,b)$;
+\item[\textup{(H4)}] every argument form satisfies $x(n,k)\le n$ whenever $k\le n$;
+\item[\textup{(H4c)}] every coefficient $c_j$ is $p$-integral;
+\item[\textup{(Hw)}] every monomial has total degree exactly $w$;
+\item[\textup{(H5)}] $\Ln{monChi}\,\mathrm{mon}_j\,p=\chi_p$ for every $j\in J$.
+\end{description}
+Then for all $a<p$ and $r<p$,
+\[
+   p^{w}\,B(ap+r)\;\equiv\;\chi_p\,B(a)\,A(r)\pmod p .
+\]
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Write $n=ap+r$, so $n<p^2$ and $\lfloor n/p\rfloor=a$. By (H4) every argument of the weight
+at $(n,k)$ is $\le n<p^2$, so its descent $\lfloor x/p\rfloor$ is $<p$; with (H4c) this makes
+$p^ww(n,k)$ $p$-integral for \emph{every} $k$, and $w(a,b)$ $p$-integral as well. Extend the
+range of $B(n)$ to the full block $\{0\le k<(a+1)p\}$ --- an equality, by (H2) --- and split
+it into digits. On the layer where $S(r,s)\equiv0\pmod p$, (H1) makes each term $\equiv0$,
+because it is $p$ times a $p$-integral number. On the complementary layer, (H3) identifies
+the descended weight with $w(a,b)$, \Ln{mon\_descent} and (Hw), (H5) give
+$p^ww(n,k)\equiv\chi_pw(a,b)$, and the double sum factors as
+$\bigl(\sum_{b\le a}S(a,b)w(a,b)\bigr)\bigl(\sum_{s<p}S(r,s)\bigr)=B(a)A(r)$, the second
+factor again by (H2).
+\end{proof}
+
+\begin{remark}[what the formal hypotheses cost, and save]\label{rem:hyps}
+Two features of the hypothesis list are worth flagging for anyone instantiating it. (H1) is
+an \emph{unconditional} congruence, required for all $a,b$ rather than only on a surviving
+set; in the carrying regime both sides vanish modulo $p$, so the usual case dichotomy is
+absorbed, and in consequence no product-region argument occurs anywhere in the formal proof:
+the double sum factors because a full block splits, and the extension to the full block is an
+equality of integers. (H3) is conditioned on $S(r,s)\not\equiv0\pmod p$, which is exactly
+what excludes a borrow in an argument such as $n-k$: an instance \emph{derives} the
+no-borrow condition instead of describing the surviving set. (H5) asks that the product of
+the letters' characters at $p$ be the same for every monomial, which is weaker than
+requiring a fixed number of twisted letters per monomial and permits mixed conductors.
+\end{remark}
+
+% ============================================================================
+\section{Two instances, and a closed form}
+\label{sec:instances}
+
+\subsection{The weight-three instance}
+
+\begin{definition}[\Ln{Instances.bMin}]\label{def:bmin}
+$\displaystyle B_{\min}(n)=\sum_{k=0}^{n}\bin nk^2\bin{n+k}k^2\bigl(2\HH3n-\HH3k\bigr)$.
+\end{definition}
+
+\begin{theorem}[\Ln{Instances.bMin\_lucas}]\label{thm:bmin}
+For every prime $p$ and all $a,r<p$,
+\[
+   p^3\,B_{\min}(ap+r)\;\equiv\;B_{\min}(a)\,a_r\pmod p .
+\]
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Theorem~\ref{thm:LB} with $S(n,k)=A(n,k)$, $J$ of size two, coefficients $(2,-1)$, monomials
+$[\HH3{\,\cdot\,}]$ at the arguments $x(n,k)=n$ and $x(n,k)=k$, degree $w=3$ and $\chi_p=1$.
+(H1) is the digit factorisation of $A$ established for Theorem~\ref{thm:apery}; (H2) is
+$\bin nk=0$ for $k>n$; (H3) holds because $\lfloor(ap+r)/p\rfloor=a$ and
+$\lfloor(bp+s)/p\rfloor=b$; (H4) because both arguments are $\le n$; (H4c) because the
+coefficients are the integers $2,-1$.
+\end{proof}
+
+There is no hypothesis $p\ge5$ and no hypothesis $a\ge1$ --- both of which the informal
+analysis of this instance had carried. The first is removable precisely because the
+coefficients of the minimal weight are integers, so (H4c) is vacuous; the second because
+$B_{\min}(0)=0$ and $p^3B_{\min}(r)$ is $p$-divisible for $r<p$.
+
+\subsection{The weight-two instance}
+
+\begin{theorem}[\Ln{Instances.bFranel\_lucas}]\label{thm:franel}
+Let $f_n=\sum_k\bin nk^3$ be the Franel numbers \textup{(OEIS \texttt{A000172})} and
+\[
+   B_{\mathbf F}(n)=\sum_{k=0}^{n}\bin nk^3
+     \Bigl(\tfrac14\HH2k+\tfrac34H_k^2-\tfrac34H_kH_{n-k}\Bigr).
+\]
+For every prime $p\ne2$ and all $a,r<p$, one has
+$p^2B_{\mathbf F}(ap+r)\equiv B_{\mathbf F}(a)f_r\pmod p$.
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Theorem~\ref{thm:LB} with $S(n,k)=\bin nk^3$, three monomials --- $\HH2k$, $H_kH_k$ and
+$H_kH_{n-k}$ --- coefficients $\tfrac14,\tfrac34,-\tfrac34$, degree $w=2$ and $\chi_p=1$.
+The only hypothesis needing care is (H3) for the argument $n-k$: it is here that the side
+condition $S(r,s)\not\equiv0\pmod p$ does its work, giving $\bin rs\ne0$, hence $s\le r$,
+hence $\lfloor(n-k)/p\rfloor=a-b$ with no borrow. The hypothesis $p\ne2$ enters only through
+(H4c), the coefficient denominators being $4$.
+\end{proof}
+
+\subsection{The closed form}
+
+Theorem~\ref{thm:bmin} is a statement about the explicit sum $B_{\min}$. The following
+identifies that sum with Ap\'ery's companion sequence.
+
+\begin{definition}[\Ln{MinimalForm.bApery}]\label{def:bapery}
+$b:\N\to\Q$ is defined by $b_0=0$, $b_1=6$ and
+$(n+1)^3b_{n+1}=P(n)b_n-n^3b_{n-1}$ with $P(n)=34n^3+51n^2+27n+5$; the leading coefficient
+never vanishes, so this determines $b_n$ uniquely.
+\end{definition}
+
+This is the sequence-theoretic characterisation of Ap\'ery's companion: the recurrence
+together with two initial values. It is \emph{not} the classical double-sum expression, in
+which the weight attached to $\bin nk^2\bin{n+k}k^2$ is
+$\HH3n+\sum_{m\le k}(-1)^{m-1}\bigl(2m^3\bin nm\bin{n+m}m\bigr)^{-1}$; that the two agree is
+proved on paper in \cite{PaperLucas} and is not formalised. Every occurrence of $b_n$ below
+means Definition~\ref{def:bapery}.
+
+\begin{theorem}[\Ln{MinimalForm.bMin\_eq\_bApery} and
+\Ln{apery\_b\_harmonic\_closed\_form}]\label{thm:closed}
+For every $n\ge0$,
+\[
+   \sum_{k=0}^{n}\bin nk^2\bin{n+k}k^2\bigl(2\HH3n-\HH3k\bigr)\;=\;b_n .
+\]
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Both sides satisfy the same order-two recurrence and agree at $n=0,1$; since the leading
+coefficient $(n+1)^3$ never vanishes, a two-step induction concludes. That $B_{\min}$
+satisfies the recurrence (\Ln{bMin\_rec}) is the substance. Everything is driven by four
+multiplicative absorption identities (\Ln{l0a}--\Ln{l0d}) which, writing $n=m+1$ and
+$\Phi(m,k)=\bin{m+2}k^2\bin{m+k}k^2/\bigl((m+1)^2(m+2)^2\bigr)$, express $A(m,k)$,
+$A(m+1,k)$, $A(m+2,k)$ and $\Phi(m,k+1)(k+1)^4$ as $\Phi(m,k)$ times explicit quadratic
+factors. These hold for \emph{all} $k\ge0$, including the degenerate range $k>n$, so no
+$0/0$ and no boundary case ever arises, and after them every step is $\Phi(m,k)$ times a
+polynomial identity in $\Q[m,k]$ discharged by \Ln{ring}. Two certificates are then
+exhibited: a Zeilberger certificate $G=\Phi k^4T$ with
+$T(n,k)=4(2n+1)(2k^2-3k-4n^2-4n)$, and a Gosper certificate
+$K=\Phi k^4U/\bigl(n^2(n+1)^2\bigr)$ with $U(n,k)=-4(k-1)(2n+1)(2n^2+2n+1-k)$ which absorbs
+the weight correction. They combine into a \emph{single} telescope: with $Gd=\Phi kT$ and
+\[
+   \Psi(m,k)=\bigl(2\HH3{m+1}-\HH3k\bigr)G(m,k)+K(m,k)+Gd(m,k),
+\]
+the $k$-summand of $(Lb)(m+1)$ is exactly $\Psi(m,k+1)-\Psi(m,k)$ (\Ln{star}), so
+\Ln{Finset.sum\_range\_sub} collapses the whole sum to $\Psi(m,m+3)-\Psi(m,0)=0$. There is no
+Abel summation and no boundary bookkeeping beyond the two evaluations
+$\Psi(m,0)=\Psi(m,m+3)=0$.
+\end{proof}
+
+\begin{remark}[what Theorem~\ref{thm:closed} does and does not say]\label{rem:closedscope}
+What is verified is an identity between an explicit binomial-harmonic sum and the solution of
+an explicit recurrence. That $b_n/a_n\to\zeta(3)$, that $b_n$ coincides with Ap\'ery's
+classical nested-sum expression, and that $d_n^3b_n\in\Z$ are \emph{not} formalised and are
+not asserted here.
+\end{remark}
+
+Combining the last two theorems removes the explicit sum from the statement altogether, and
+gives the congruence in the form a reader of \S\ref{sec:intro} would want it: a statement
+about the solution of Ap\'ery's recurrence.
+
+\begin{theorem}[\Ln{MinimalForm.bApery\_lucas}]\label{thm:bapery}
+Let $b$ be as in Definition~\ref{def:bapery} and $a_n$ as in Theorem~\ref{thm:apery}. For
+every prime $p$ and all $a,r<p$,
+\[
+   p^3\,b_{ap+r}\;\equiv\;b_a\,a_r\pmod p .
+\]
+\end{theorem}
+
+\begin{proof}[The verified argument]
+Theorem~\ref{thm:bmin} transported along Theorem~\ref{thm:closed}: rewrite both occurrences
+of $b$ as $B_{\min}$ and apply \Ln{bMin\_lucas}.
+\end{proof}
+
+\begin{remark}[status in the literature]\label{rem:lit}
+The recurrence of Definition~\ref{def:bapery} is Ap\'ery's, and that his companion sequence
+satisfies it is classical; a complete creative-telescoping proof is given by Schneider
+\cite{Schneider2007}, and the identity goes back to the reorganisation of Ap\'ery's proof
+reported by van der Poorten \cite[\S8]{vdPoorten1979}. What we have not been able to locate
+in the literature is the weight $2\HH3n-\HH3k$ of Theorem~\ref{thm:closed} --- in particular
+it is not among the closed forms recorded for OEIS \texttt{A059415}. The nearest published
+relative we found is Nesterenko's Lemma~1 \cite{Nesterenko1996}, which amounts to the longer
+weight $\HH3k+(2H_k-H_{n+k}-H_{n-k})\HH2k$.
+\end{remark}
+
+% ============================================================================
+\section{An arithmetic note on the Brown--Zudilin denominators}
+\label{sec:twelve}
+
+Brown and Zudilin \cite{BZ} construct cellular approximations to $\zeta(5)$ and record, as an
+experimental observation, the inclusions $Q_n,\;d_n^2d_{2n}\hat P_n,\;d_n^5P_n\in\Z$ for the
+totally symmetric member of their family. They also print the value $P_2=1190161/384$.
+
+The following is an arithmetic consequence of that printed numeral and nothing else. We
+emphasise what is and is not formalised: the module \Ln{BZFactor12} takes
+$P_2=1190161/384$ as a \emph{quoted rational literal}, a hypothesis of the file; no cellular
+integral, no period, and no part of the construction that produced the number is formalised
+or verified. If the printed value were a typographical error, the statements below would say
+nothing about the corrected value.
+
+\begin{theorem}[\Ln{BZ\_P2\_not\_integral}, \Ln{BZ\_P2\_factor\_twelve},
+\Ln{BZ\_twelve\_minimal}]\label{thm:twelve}
+Let $d_n=\lcm(1,\dots,n)$ be computed from \Ln{Nat.lcm} and let $P_2=1190161/384$. Then
+$d_2^5=32$ and
+\[
+   d_2^5\,P_2=\frac{1190161}{12}\notin\Z,
+   \qquad
+   12\,d_2^5\,P_2=1190161\in\Z,
+\]
+and moreover $12$ is minimal: every $c\in\N$ with $c\,d_2^5P_2\in\Z$ is divisible by $12$.
+\end{theorem}
+
+\begin{proof}[The verified argument]
+$d_2=\lcm(1,2)=2$ and $d_2^5=32$ are computed by \Ln{decide} from the definition of
+$d_n$ by recursion on \Ln{Nat.lcm}, not hard-coded; $32\cdot1190161/384=1190161/12$ by
+\Ln{norm\_num}. If $1190161/12$ were an integer $z$ then $1190161=12z$ in $\Z$, which
+\Ln{omega} refutes. For minimality, $c\cdot1190161/12=z$ gives $1190161c=12z$ in $\Z$, and
+since $1190161\equiv1\pmod{12}$ one gets $12\mid c$; the Lean proof exhibits the witness
+$c\cdot(-99180)+z$ directly.
+\end{proof}
+
+So with the printed $P_2$, the inclusion $d_n^5P_n\in\Z$ fails at $n=2$, and fails by exactly
+$12=2^2\cdot3$: no smaller multiplier repairs it, and $12$ does. We record it in this form
+because it is exactly the part of the matter that a kernel can settle. Whether $12$ is the
+right global constant for all $n$, and where its two prime factors come from, is a
+computational and structural question treated in \cite{PaperSharp}; nothing about it is
+claimed here.
+
+% ============================================================================
+\section{Building and checking the development}
+\label{sec:build}
+
+The development is $2107$ lines across the ten \Ln{ZetaLucas/} modules ($2117$ including the
+root import file), and depends only on Mathlib \cite{Mathlib,Lean4}. The toolchain is pinned
+in \Ln{lean-toolchain} and the Mathlib revision in \Ln{lake-manifest.json}:
+
+\begin{quote}\ttfamily\small
+leanprover/lean4:v4.33.0-rc1\\
+mathlib rev cd580e54f1a6b46063824e80cec92f64692cbe78\\[4pt]
+lake exe cache get\\
+lake build
+\end{quote}
+
+\noindent
+With Mathlib prebuilt this replays in seconds and reports
+\Ln{Build completed successfully}. Three independent checks establish the claim made in
+\S\ref{sec:intro}, and a reader is invited to run all three:
+
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(\arabic*)}]
+\item \emph{No holes.} \Ln{grep -rn "sorry\textbackslash|admit\textbackslash|native\_decide"
+  ZetaLucas/} returns only one hit, inside a prose comment in \Ln{Kummer.lean}
+  (``two digits admit at most one carry''). No declaration in the development is stated with
+  \Ln{sorry}, and no proof uses \Ln{native\_decide}, so no statement rests on compiled-code
+  evaluation.
+\item \emph{No extra axioms.} \Ln{\#print axioms} on each declaration named in this paper
+  returns \Ln{[propext, Classical.choice, Quot.sound]} and nothing else --- in particular no
+  \Ln{sorryAx}.
+\item \emph{The statements are the ones printed here.} Each theorem above cites its
+  declaration; the Lean statements are short and were written to be read.
+\end{enumerate}
+
+Two small points of hygiene. The development contains a handful of \Ln{\#eval} normalisation
+checks (Ap\'ery and Franel values, the first terms of $B_{\min}$ and $B_{\mathbf F}$, and
+digitwise sweeps of the two instances at $p=5,7$). These are \emph{evaluations, not kernel
+proofs}, they are marked as such in the source, and no statement in this paper depends on
+them. Separately, five anonymous \Ln{example}s \emph{are} kernel-checked: in \Ln{Apery.lean},
+by \Ln{decide}, that $a_0,\dots,a_5=1,5,73,1445,33001,819005$ and that
+$a_{5a+r}\equiv a_aa_r\pmod5$ for all $a,r<5$; and in \Ln{MinimalForm.lean}, by
+\Ln{norm\_num}, that $b_2=351/4$ and $b_3=62531/36$ from Definition~\ref{def:bapery} and that
+$B_{\min}(2)=351/4$ from the sum.
+
+\section*{Acknowledgements}
+
+% WORDING FLAGGED -- please review this sentence before circulation.
+This work was carried out in a human--AI collaboration: the statements were drafted and the
+Lean development written in a loop between the authors and language-model agents, with every
+theorem in this paper checked against the repository by rebuilding it and printing its
+axioms.
+
+% ============================================================================
+\begin{thebibliography}{99}
+\small
+
+\bibitem{Beukers2211}
+F.~Beukers, \emph{$p$-Linear schemes for sequences modulo $p^r$}, \texttt{arXiv:2211.15240}.
+
+\bibitem{BZ}
+F.~Brown and W.~Zudilin, \emph{On cellular rational approximations to $\zeta(5)$},
+\texttt{arXiv:2210.03391}.
+
+\bibitem{Gessel1982}
+I.~M.~Gessel, \emph{Some congruences for Ap\'ery numbers}, J.\ Number Theory \textbf{14}
+(1982), no.~3, 362--368.
+
+\bibitem{MalikStraub}
+A.~Malik and A.~Straub, \emph{Divisibility properties of sporadic Ap\'ery-like numbers},
+\texttt{arXiv:1508.00297}.
+
+\bibitem{Mathlib}
+The mathlib Community, \emph{The Lean mathematical library}, in: CPP~2020, ACM, 367--381;
+\texttt{arXiv:1910.09336}.
+
+\bibitem{Lean4}
+L.~de~Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming language},
+in: CADE~28, Lecture Notes in Comput.\ Sci.\ \textbf{12699}, Springer, 2021, 625--635.
+
+\bibitem{Nesterenko1996}
+Yu.~V.~Nesterenko, \emph{A few remarks on $\zeta(3)$}, Mat.\ Zametki \textbf{59} (1996),
+no.~6, 865--880; English transl., Math.\ Notes \textbf{59} (1996), 625--636, Lemma~1.
+
+\bibitem{Schneider2007}
+C.~Schneider, \emph{Ap\'ery's double sum is plain sailing indeed}, Electron.\ J.\ Combin.\
+\textbf{14} (2007), \#N5, 3 pp.
+
+\bibitem{Straub2301}
+A.~Straub, \emph{Gessel--Lucas congruences for sporadic sequences},
+\texttt{arXiv:2301.12248}; Monatsh.\ Math.\ (2023).
+
+\bibitem{vdPoorten1979}
+A.~van der Poorten, \emph{A proof that Euler missed\dots\ Ap\'ery's proof of the
+irrationality of $\zeta(3)$}, Math.\ Intelligencer \textbf{1:4} (1978/79), 195--203, \S8.
+
+\medskip
+\noindent\emph{Companion papers of the same programme. None of their contents is
+machine-checked, and nothing in the present paper depends on them:}
+
+\bibitem{PaperLucas}
+\emph{$\chi$-twisted Lucas congruences for the second solutions of Ap\'ery-like recurrences}
+(companion paper).
+
+\bibitem{PaperSharp}
+\emph{Sharp denominators for the Brown--Zudilin cellular approximations to $\zeta(5)$}
+(companion paper).
+
+\bibitem{PaperMap}
+\emph{A transfer principle for $p$-adic hypergeometric linear forms, and a margin map}
+(companion paper).
+
+\end{thebibliography}
+
+\end{document}

@@ -12,9 +12,12 @@
         p² · B_{ap+r} ≡ B_a · A_r   (mod p)     for a < p, r < p, p ≠ 2.
 
 **SCOPE WARNING.**  The Lean theorems are about the *explicit sums displayed above*.
-* The equivalence of the minimal form `b_n` with the classical Apéry numerator
-  `Σ_k C(n,k)²C(n+k,k)²(H⁽³⁾_n + Σ_{m≤k}(−1)^{m−1}/(2m³C(n,m)C(n+m,m)))` is **PROVED ON PAPER**
-  (`work/MINIMAL_FORM_PROOF.md` §7, six Zeilberger/Gosper certificates) but is **NOT formalized**.
+* That `bMin` is the sequence **defined by Apéry's recurrence** `(n+1)³b_{n+1} = P(n)b_n − n³b_{n−1}`
+  with `b₀ = 0`, `b₁ = 6` **IS now formalized**, in `ZetaLucas/MinimalForm.lean`
+  (`bMin_eq_bApery`); `bApery_lucas` there restates `bMin_lucas` for that sequence.
+  What remains *not* formalized is the equivalence with the classical **double-sum** form
+  `Σ_k C(n,k)²C(n+k,k)²(H⁽³⁾_n + Σ_{m≤k}(−1)^{m−1}/(2m³C(n,m)C(n+m,m)))`, which is
+  **PROVED ON PAPER** in `work/MINIMAL_FORM_PROOF.md` §5 (Step D, CERT-3…CERT-6).
 * That `bFranel` is the second solution of the Franel recurrence is **[VERIFIED numerically
   upstream, NOT formalized]**.
 The `#eval` blocks at the end pin both normalisations against the literature values.
