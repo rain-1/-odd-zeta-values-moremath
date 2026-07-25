@@ -1117,3 +1117,23 @@ divergence. Nothing downstream ran: `RFD_ann.m` was never written.
   `memwatch5.log` (pid 2209932) is the only live, correctly-targeted watch, on kernel 2207229.
 * **`ps -eo pid,args | grep` truncates and under-reports background loops** — a duplicate watch
   was invisible to it. Audit with `ps -eo pid,ppid,lstart,args` and match on the loop bound.
+
+## §13 — Post-close-out: D1 Annihilator landed (2026-07-25, ~11:57)
+
+The long continuation run (§12) completed on its own (not killed, not timed out at its 24000s
+budget — it finished early). Result:
+
+    D1 Annihilator[T*vtilde]: SUCCEEDED after 5801s, 12 generators, checkpointed to
+                               work/lb5/RFD_ann.m (289 MB)
+    D2 ct1 (eliminate l):     MEMORY ABORT after 1554s at MEMCAP=9GB — did not return
+
+This is the first time Annihilator has ever returned on the direct monolithic object
+(prior attempts on E(vtilde) diverged at 3.6 GB/min; this object's growth is much
+gentler — see §11's sawtooth trace). The failure has moved one full stage downstream.
+
+**Next step for a successor:** retry D2 (ct1, eliminate l) starting from the checkpointed
+RFD_ann.m, with MEMCAP raised well above 9 GB (try 14-16 GB if the host has room) and
+TimeConstrained generous (the D1 stage alone took 97 min, so budget hours not minutes).
+If ct1 lands, proceed to gb -> ct2 (known (3,9) box) -> certificate extraction ->
+RISC-free verification -> boundary checks -> 301 initial values, exactly as specced
+in §11 of this file. No kernel is currently running; the box is idle.
