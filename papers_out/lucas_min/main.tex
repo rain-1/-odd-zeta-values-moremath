@@ -56,8 +56,7 @@ Second, a Lucas-type congruence for the companion itself (Theorem \ref{thm:bA}):
   p^3\,b_{ap+r}\equiv b_a\,a_r \pmod p \qquad (a,r<p).
 \]
 The factor $p^3$ is the weight of $\zeta(3)$. The same argument gives the analogous
-congruence for Franel's companion at weight $2$ (Theorem \ref{thm:franel}), and for the
-first solution of the Brown--Zudilin family (Theorem \ref{thm:row1}).
+congruence for Franel's companion at weight $2$ (Theorem \ref{thm:franel}).
 
 Third, a correction. Brown and Zudilin \cite{BZ} record $d_n^{\,5}P_n\in\ZZ$ for the
 numerators of their cellular approximations to $\zeta(5)$, where $d_n=\lcm(1,\dots,n)$.
@@ -74,48 +73,21 @@ Throughout, $p$ is prime, and for $x,y\in\QQ$ we write $x\equiv y\pmod p$ to mea
 $\vp(x-y)\ge1$.
 \lean{PInt, PDvd, PCong}
 
-\section{First solutions}
+\section{Ap\'ery's companion}
 
 \begin{definition}
-\[
-  A(n,k)=\binom nk^2\binom{n+k}k^2,\qquad a_n=\sum_{k=0}^n A(n,k),
-\]
-\[
-  T(n,k,l)=\binom{n+k}n\binom nk^2\binom{n+l}n\binom nl^2\binom{n+k+l}n,
-  \qquad Q_n=\sum_{k=0}^n\sum_{l=0}^n T(n,k,l).
-\]
-\lean{A, apery, T, Q}
+$\displaystyle A(n,k)=\binom nk^2\binom{n+k}k^2$ \ and \ $a_n=\sum_{k=0}^n A(n,k)$.
+\lean{A, apery}
 \end{definition}
 
-\begin{lemma}\label{lem:digits}
-For $r,s<p$ one has $\binom{ap+r}{bp+s}\equiv\binom ab\binom rs\pmod p$; and
-$\binom{r+s}s\equiv0\pmod p$ when $s\le r$ and $r+s\ge p$.
-\lean{choose\_digits, choose\_carry\_zero}
-\end{lemma}
-
 \begin{lemma}\label{lem:Adigits}
-For $r,s<p$, \ $A(ap+r,\,bp+s)\equiv\binom ab^2\binom{a+b}b^2A(r,s)\pmod p$; and for
-$r,s,t<p$, \ $T(ap+r,\,bp+s,\,cp+t)\equiv T(a,b,c)\,T(r,s,t)\pmod p$.
-\lean{A\_digits, T\_digits}
+For $r,s<p$, \ $A(ap+r,\,bp+s)\equiv\binom ab^2\binom{a+b}b^2\,A(r,s)\pmod p$.
+\lean{A\_digits}
 \end{lemma}
 
-Summing Lemma \ref{lem:Adigits} over a full base-$p$ block, the double sum factors:
-
-\begin{theorem}\label{thm:row1}
-For $r<p$ and every $a\ge0$,
-\[
-  a_{ap+r}\equiv a_a\,a_r\pmod p,\qquad Q_{ap+r}\equiv Q_a\,Q_r\pmod p,
-\]
-and hence $a_n\equiv\prod_i a_{n_i}$, $Q_n\equiv\prod_i Q_{n_i}\pmod p$ for the base-$p$
-expansion $n=\sum_in_ip^i$.
-\lean{apery\_lucas, Q\_lucas, apery\_lucas\_digits, Q\_lucas\_digits}
-\end{theorem}
-
-The statement for $a_n$ is Gessel's \cite{Gessel1982}; the proof formalised here is the
-digit-block argument, and it applies verbatim to $Q_n$ because the extra binomial factors
-in $T$ satisfy the same carry dichotomy.
-
-\section{Ap\'ery's companion}
+This is Lucas' theorem applied to each binomial, together with the fact that a carry
+$r+s\ge p$ makes both sides vanish.
+\lean{choose\_digits, choose\_carry\_zero}
 
 \begin{definition}\label{def:bApery}
 $P(n)=34n^3+51n^2+27n+5$, and $b_n$ is defined by
@@ -190,7 +162,14 @@ of \cite{BZ} holds after multiplication by $12$ and by no smaller factor.
 \section{The development}
 
 Lean~4 (\texttt{v4.33.0-rc1}) with Mathlib \texttt{cd580e54}; ten modules, $2107$ lines;
-no \texttt{sorry} and no \texttt{native\_decide}. Every declaration cited above satisfies
+no \texttt{sorry} and no \texttt{native\_decide}. Besides the results above it contains
+Gessel's congruence $a_{ap+r}\equiv a_aa_r$ \cite{Gessel1982} and its analogue for the
+Brown--Zudilin double sum
+\[
+  Q_n=\sum_{k,l}\binom{n+k}n\binom nk^2\binom{n+l}n\binom nl^2\binom{n+k+l}n,
+\]
+in both cases with the base-$p$ digit-product form
+(\texttt{apery\_lucas}, \texttt{Q\_lucas}). Every declaration cited above satisfies
 \[
   \texttt{\#print axioms}\;\longrightarrow\;
   [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
