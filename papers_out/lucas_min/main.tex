@@ -10,6 +10,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
 \newcommand{\lean}[1]{\hfill\texttt{\footnotesize #1}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -26,9 +27,9 @@
 \begin{abstract}
 We give a two-term closed form for the numerators $b_n$ of Ap\'ery's approximations
 to $\zeta(3)$, a Lucas-type congruence $p^3b_{ap+r}\equiv b_a\,a_r\pmod p$
-for them, and a correction to a published integrality claim. Every statement is proved
-in Lean~4 and checked by its kernel; each is followed by the name of the declaration
-that proves it.
+for them, and a correction to a published integrality claim. Every theorem and lemma
+below is proved in Lean~4 and checked by its kernel, and is followed by the name of the
+declaration that proves it; the one conjecture is labelled as such.
 \end{abstract}
 \maketitle
 
@@ -60,8 +61,12 @@ congruence for Franel's companion at weight $2$ (Theorem \ref{thm:franel}).
 
 Third, a correction. Brown and Zudilin \cite{BZ} record $d_n^{\,5}P_n\in\ZZ$ for the
 numerators of their cellular approximations to $\zeta(5)$, where $d_n=\lcm(1,\dots,n)$.
-Their own printed value $P_2=1190161/384$ does not satisfy this: the defect is a factor
-$12=2^2\cdot3$, and $12$ is minimal (Theorem \ref{thm:twelve}).
+Their own printed value $P_2=1190161/384$ does not satisfy this. At $n=2$ the defect is
+exactly $12=2^2\cdot3$ (Theorem \ref{thm:twelve}); consequently any constant $c$ for
+which $c\,d_n^{\,5}P_n$ is always integral is divisible by $12$. Whether $12$ suffices
+for every $n$ we state only as Conjecture \ref{conj:twelve}: it is supported by
+computation and by a proof for the primes $p\ge5$ given elsewhere, and it is not
+formalised.
 
 A second, benign slip in the same author's earlier work is worth recording, though we do
 not formalise it: equation~(8.7) of \cite{Zu04}, defining the rational function $R(t)$,
@@ -156,8 +161,18 @@ $c\in\NN$ satisfies $c\,d_2^{\,5}P_2\in\ZZ$, then $12\mid c$.
 \lean{BZ\_P2\_not\_integral, BZ\_P2\_factor\_twelve, BZ\_twelve\_minimal}
 \end{theorem}
 
-Since $d_2=2$ and $1190161\equiv1\pmod{12}$, the defect is exactly $2^2\cdot3$: the claim
-of \cite{BZ} holds after multiplication by $12$ and by no smaller factor.
+Here $d_2=2$ and $1190161\equiv1\pmod{12}$, so at $n=2$ the defect is exactly $2^2\cdot3$.
+Specialising to $n=2$, any $c\in\NN$ with $c\,d_n^{\,5}P_n\in\ZZ$ for all $n$ is divisible
+by $12$.
+
+\begin{conjecture}\label{conj:twelve}
+$12\,d_n^{\,5}P_n\in\ZZ$ for every $n\ge1$.
+\end{conjecture}
+
+Theorem \ref{thm:twelve} shows that no smaller constant can serve. Conjecture
+\ref{conj:twelve} itself is \emph{not} formalised: it is supported by exact computation,
+and its restriction to the primes $p\ge5$ is proved elsewhere, conditionally on two
+finite identities verified but not machine-checked.
 
 \section{The development}
 
