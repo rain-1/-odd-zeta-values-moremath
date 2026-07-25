@@ -1,0 +1,24 @@
+START Fri 24 Jul 2026 23:46:15
+HF loaded Fri 24 Jul 2026 23:46:16
+V: loaded ann #3 ct1tel #2 ct2tel #1
+V1 ann gen 1 -> 0
+V1 ann gen 2 -> 0
+V1 ann gen 3 -> 0
+V2 ct1 pair 1 -> 0
+V2 ct1 pair 2 -> 0
+V3 telescoper coeffs vs L_BZ, ratio list = {1, 1, 1, 1}
+V3 Expand[cf3 - unit*LBZ] = {0, 0, 0, 0}
+STAGE V DONE Fri 24 Jul 2026 23:46:16
+--- r_g17 ---
+r_g17 ann #3 t=0s
+r_g17 ct1 #2 t=0s
+r_g17 gb #2 t=0s
+r_g17 ct2 #1 t=33s  TOTAL=34s
+r_g17 telescoper ORDER=4
+--- r_ak17 ---
+r_ak17 ann #3 t=0s
+r_ak17 ct1 #2 t=0s
+r_ak17 gb #2 t=0s
+r_ak17 ct2 #1 t=32s  TOTAL=32s
+r_ak17 telescoper ORDER=4
+ALL DONE Fri 24 Jul 2026 23:47:22

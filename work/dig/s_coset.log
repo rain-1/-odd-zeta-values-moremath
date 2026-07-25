@@ -1,0 +1,103 @@
+==============================================================================
+M3 : coset cancellation at p >= 5 -- the ACTUAL valuations, not the bound
+==============================================================================
+H(n) must be read against min*n: bounded H = no systematic cancellation.
+
+  [c] p=5 A=2 m=0: the weight-3 rank-1 shape, bricks on 1/5   p=5 r=1 A=2 m=0 delta=0 shifts=['4/5', '4/5']
+     v_p(C) = 5/2 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          31          17          17          17 |    17  |        17  |   k=0: 17      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          44          25          25          25 |    25  |        25  |   k=1: 26      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |          58          32          32          32 |    32  |        32  |   k=0: 32      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |          75          40          40          40 |    40  |        40  |   k=1: 42      |   14
+      18 |          87          47          47          47 |    47  |        47  |   k=0: 47      |   14
+      21 |         104          55          55          55 |    55  |        55  |   k=1: 57      |   14
+      24 |         116          62          62          62 |    62  |        62  |   k=0: 62      |   14
+      27 |         135          70          70          70 |    70  |        70  |   k=1: 71      |   14
+
+  [a] p=5 A=4: all 4 bricks aligned to the coset 1/5   p=5 r=1 A=4 m=0 delta=0 shifts=['4/5', '4/5', '4/5', '4/5']
+     v_p(C) = 5 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          60          34          34          34 |    34  |        34  |   k=0: 34      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          87          49          49          49 |    49  |        49  |   k=0: 49      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |         118          64          64          64 |    64  |        64  |   k=0: 64      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |         150          79          79          79 |    79  |        79  |   k=0: 79      |   26
+      18 |         176          94          94          94 |    94  |        94  |   k=0: 94      |   26
+      21 |         207         109         109         109 |   109  |       109  |   k=0: 109     |   26
+
+  [b] p=5 A=4: bricks spread over all 4 cosets (LLS shape)   p=5 r=1 A=4 m=0 delta=0 shifts=['4/5', '3/5', '2/5', '1/5']
+     v_p(C) = 5 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          41          41          41          41 |    41  |        42  |   k=1: 43      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          58          58          58          58 |    58  |        61  |   k=0: 61      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |          78          78          78          78 |    78  |        78  |   k=2: 80      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |          97          97          97          97 |    97  |        99  |   k=2: 101     |   0
+      18 |         117         115         115         115 |   115  |       116  |   k=0: 116     |   0
+      21 |         134         134         134         134 |   134  |       136  |   k=0: 136     |   0
+
+  [b2] p=5 A=4: 2+2 split over the two reflection classes   p=5 r=1 A=4 m=0 delta=0 shifts=['4/5', '4/5', '3/5', '3/5']
+     v_p(C) = 5 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          48          48          34          34 |    34  |        34  |   k=2: 35      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          68          68          49          49 |    49  |        50  |   k=0: 50      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |          90          90          64          64 |    64  |        64  |   k=2: 65      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |         114         114          79          79 |    79  |        80  |   k=0: 80      |   20
+      18 |         134         134          94          94 |    94  |        94  |   k=2: 95      |   20
+      21 |         158         158         109         109 |   109  |       110  |   k=0: 110     |   20
+
+  [d] p=5 A=4 m=1 delta=1: well-poised   p=5 r=1 A=4 m=1 delta=1 shifts=['4/5', '4/5', '4/5', '4/5']
+     v_p(C) = 5 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          62          34          34          35 |    34  |        35  |   k=0: 35      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          88          49          50          49 |    49  |        49  |   k=3: 50      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |         118          65          64          64 |    64  |        64  |   k=1: 65      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |         150          79          79          79 |    79  |        79  |   k=0: 79      |   28
+      18 |         178          94          94          94 |    94  |        94  |   k=0: 94      |   28
+      21 |         208         109         109         110 |   109  |       110  |   k=0: 110     |   28
+
+  [d2] p=5 A=3 delta=1   p=5 r=1 A=3 m=0 delta=1 shifts=['4/5', '4/5', '4/5']
+     v_p(C) = 15/4 ;  cosets j/5 for j in [1, 2, 3, 4]
+       n |  v_p S(1/5)  v_p S(2/5)  v_p S(3/5)  v_p S(4/5) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          47          25          25          25 |    25  |        25  |   k=1: 26      |   INF (rank 1 < 4 cosets: exact hyperplane)
+       9 |          66          36          36          36 |    36  |        36  |   k=0: 36      |   INF (rank 2 < 4 cosets: exact hyperplane)
+      12 |          87          47          47          47 |    47  |        47  |   k=0: 47      |   INF (rank 3 < 4 cosets: exact hyperplane)
+      15 |         114          59          59          59 |    59  |        60  |   k=0: 60      |   22
+      18 |         132          70          70          70 |    70  |        70  |   k=1: 73      |   22
+      21 |         156          81          81          81 |    81  |        81  |   k=0: 81      |   22
+
+  [e] p=7 A=3 delta=1: bricks on 1/7   p=7 r=1 A=3 m=0 delta=1 shifts=['6/7', '6/7', '6/7']
+     v_p(C) = 7/2 ;  cosets j/7 for j in [1, 2, 3, 4, 5, 6]
+       n |  v_p S(1/7)  v_p S(2/7)  v_p S(3/7)  v_p S(4/7)  v_p S(5/7)  v_p S(6/7) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       4 |          27          16          16          16          16          16 |    16  |        16  |   k=0: 16      |   INF (rank 1 < 6 cosets: exact hyperplane)
+       6 |          40          23          23          23          23          23 |    23  |        23  |   k=0: 23      |   INF (rank 2 < 6 cosets: exact hyperplane)
+       8 |          58          30          30          30          30          30 |    30  |        30  |   k=0: 30      |   INF (rank 3 < 6 cosets: exact hyperplane)
+      10 |          71          37          37          37          37          37 |    37  |        37  |   k=0: 37      |   INF (rank 4 < 6 cosets: exact hyperplane)
+      12 |          83          44          44          44          44          44 |    44  |        44  |   k=0: 44      |   INF (rank 5 < 6 cosets: exact hyperplane)
+      14 |          99          51          51          51          51          51 |    51  |        51  |   k=0: 51      |   11
+      16 |         110          58          58          58          58          58 |    58  |        58  |   k=0: 58      |   11
+      18 |         123          65          65          65          65          65 |    65  |        65  |   k=0: 65      |   11
+
+  [f] p=7 A=3: bricks spread over 3 cosets   p=7 r=1 A=3 m=0 delta=1 shifts=['6/7', '5/7', '4/7']
+     v_p(C) = 7/2 ;  cosets j/7 for j in [1, 2, 3, 4, 5, 6]
+       n |  v_p S(1/7)  v_p S(2/7)  v_p S(3/7)  v_p S(4/7)  v_p S(5/7)  v_p S(6/7) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       4 |          20          20          20          16          16          16 |    16  |        16  |   k=5: 17      |   INF (rank 1 < 6 cosets: exact hyperplane)
+       6 |          28          28          28          23          23          23 |    23  |        24  |   k=0: 24      |   INF (rank 2 < 6 cosets: exact hyperplane)
+       8 |          39          39          39          30          30          30 |    30  |        30  |   k=0: 30      |   INF (rank 3 < 6 cosets: exact hyperplane)
+      10 |          48          48          48          37          37          37 |    37  |        37  |   k=5: 39      |   INF (rank 4 < 6 cosets: exact hyperplane)
+      12 |          57          57          57          44          44          44 |    44  |        45  |   k=0: 45      |   INF (rank 5 < 6 cosets: exact hyperplane)
+      14 |          67          67          67          51          51          51 |    51  |        51  |   k=0: 51      |   10
+      16 |          76          76          76          58          58          58 |    58  |        58  |   k=5: 59      |   10
+      18 |          85          85          85          65          65          65 |    65  |        66  |   k=0: 66      |   10
+
+  [g] p=5 r=2 (20 cosets, depth-2 shift)   p=5 r=2 A=2 m=0 delta=0 shifts=['24/25', '24/25']
+     v_p(C) = 9/2 ;  cosets j/25 for j in [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24]
+       n |  v_p S(1/25)  v_p S(2/25)  v_p S(3/25)  v_p S(4/25)  v_p S(6/25)  v_p S(7/25)  v_p S(8/25)  v_p S(9/25)  v_p S(11/25)  v_p S(12/25)  v_p S(13/25)  v_p S(14/25)  v_p S(16/25)  v_p S(17/25)  v_p S(18/25)  v_p S(19/25)  v_p S(21/25)  v_p S(22/25)  v_p S(23/25)  v_p S(24/25) |   min  |  plain sum | best omega-twist | HYPERPLANE H(n)
+       6 |          57          31          31          31          43          31          31          31          43          31          31          31          43          31          31          31          43          31          31          31 |    31  |        32  |   k=0: 32      |   INF (rank 1 < 20 cosets: exact hyperplane)
+       9 |          82          45          45          45          63          45          45          45          63          45          45          45          63          45          45          45          63          45          45          45 |    45  |        46  |   k=1: 47      |   INF (rank 2 < 20 cosets: exact hyperplane)
+      12 |         108          58          58          58          82          58          58          58          82          58          58          58          82          58          58          58          82          58          58          58 |    58  |        59  |   k=0: 59      |   INF (rank 3 < 20 cosets: exact hyperplane)
+      15 |         137          72          72          72         102          72          72          72         102          72          72          72         102          72          72          72         102          72          72          72 |    72  |        73  |   k=1: 76      |   INF (rank 4 < 20 cosets: exact hyperplane)
+      18 |         161          85          85          85         121          85          85          85         121          85          85          85         121          85          85          85         121          85          85          85 |    85  |        86  |   k=0: 86      |   INF (rank 5 < 20 cosets: exact hyperplane)
+      21 |         190          99          99          99         141          99          99          99         141          99          99          99         141          99          99          99         141          99          99          99 |    99  |       100  |   k=1: 101     |   INF (rank 6 < 20 cosets: exact hyperplane)
+      24 |         214         112         112         112         160         112         112         112         160         112         112         112         160         112         112         112         160         112         112         112 |   112  |       113  |   k=0: 113     |   INF (rank 7 < 20 cosets: exact hyperplane)
+      27 |         245         126         126         126         180         126         126         126         180         126         126         126         180         126         126         126         180         126         126         126 |   126  |       127  |   k=1: 128     |   INF (rank 8 < 20 cosets: exact hyperplane)
+      30 |         273         139         139         139         199         139         139         139         199         139         139         139         199         139         139         139         199         139         139         139 |   139  |       140  |   k=0: 140     |   INF (rank 9 < 20 cosets: exact hyperplane)

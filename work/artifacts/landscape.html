@@ -1,0 +1,343 @@
+<title>One Object, Five Shadows — the zeta irrationality landscape</title>
+<style>
+  :root {
+    --ground: #F7F5F0;
+    --panel: #FFFFFF;
+    --ink: #1E1B2E;
+    --faint: #6E6880;
+    --line: #E2DED4;
+    --motive: #6B5CB8;
+    --arch: #A8842F;
+    --padic: #2E8C7E;
+    --derham: #4E70A8;
+    --betti: #A4537C;
+    --lattice: #6E8C45;
+    --ok: #3E8C5F;
+    --warn: #A8842F;
+    --dead: #A85454;
+    --open: #6E6880;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #131120;
+      --panel: #1B1830;
+      --ink: #E8E4F2;
+      --faint: #9A94B0;
+      --line: #2E2A44;
+      --motive: #A79AE0;
+      --arch: #D4B266;
+      --padic: #6BC4B2;
+      --derham: #8AAAD8;
+      --betti: #D488AE;
+      --lattice: #A6C478;
+      --ok: #6BBE8E;
+      --warn: #D4B266;
+      --dead: #D48484;
+      --open: #9A94B0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #131120; --panel: #1B1830; --ink: #E8E4F2; --faint: #9A94B0;
+    --line: #2E2A44; --motive: #A79AE0; --arch: #D4B266; --padic: #6BC4B2;
+    --derham: #8AAAD8; --betti: #D488AE; --lattice: #A6C478;
+    --ok: #6BBE8E; --warn: #D4B266; --dead: #D48484; --open: #9A94B0;
+  }
+  :root[data-theme="light"] {
+    --ground: #F7F5F0; --panel: #FFFFFF; --ink: #1E1B2E; --faint: #6E6880;
+    --line: #E2DED4; --motive: #6B5CB8; --arch: #A8842F; --padic: #2E8C7E;
+    --derham: #4E70A8; --betti: #A4537C; --lattice: #6E8C45;
+    --ok: #3E8C5F; --warn: #A8842F; --dead: #A85454; --open: #6E6880;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: "Palatino Linotype", Palatino, "URW Palladio L", "Book Antiqua", Georgia, serif;
+    line-height: 1.55; margin: 0; padding: 3rem 1.25rem 5rem;
+  }
+  main { max-width: 1060px; margin: 0 auto; }
+  .prose { max-width: 68ch; }
+  h1 {
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.12; margin: .2rem 0 .6rem;
+    letter-spacing: -0.01em; text-wrap: balance; font-weight: 600;
+  }
+  h1 em { color: var(--motive); font-style: italic; }
+  h2 { font-size: 1.35rem; margin: 0 0 .5rem; text-wrap: balance; font-weight: 600; }
+  p { margin: .5rem 0; }
+  .eyebrow {
+    font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 .35rem;
+  }
+  section { margin-top: 3.2rem; }
+  header p.lede { font-size: 1.08rem; color: var(--faint); max-width: 62ch; }
+  code, .m {
+    font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: .92em;
+  }
+  .mapwrap {
+    border: 1px solid var(--line); border-radius: 10px; background: var(--panel);
+    padding: 1rem; overflow-x: auto; margin-top: 1rem;
+  }
+  .legend { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin-top: .8rem; }
+  .legend span { font-family: ui-monospace, Menlo, monospace; font-size: .74rem; letter-spacing: .06em; }
+  .dot { display: inline-block; width: .6em; height: .6em; border-radius: 50%; margin-right: .45em; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .card h3 { margin: 0 0 .4rem; font-size: 1.02rem; }
+  .card p { margin: 0; font-size: .95rem; color: var(--ink); }
+  .card .eyebrow { margin-bottom: .5rem; }
+  .mirror { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .mirror .card ul { margin: .4rem 0 0; padding-left: 1.1rem; }
+  .mirror .card li { margin: .3rem 0; font-size: .95rem; }
+  table {
+    border-collapse: collapse; width: 100%; margin-top: 1rem;
+    font-size: .93rem; font-variant-numeric: tabular-nums;
+  }
+  th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: ui-monospace, Menlo, monospace; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 500;
+  }
+  .chip {
+    font-family: ui-monospace, Menlo, monospace; font-size: .7rem; letter-spacing: .08em;
+    padding: .12em .55em; border-radius: 99px; border: 1px solid currentColor; white-space: nowrap;
+  }
+  .thm { color: var(--ok); } .comp { color: var(--warn); } .openc { color: var(--open); } .neg { color: var(--dead); }
+  .tablewrap { overflow-x: auto; }
+  ol.prog { padding-left: 1.2rem; max-width: 75ch; }
+  ol.prog li { margin: .7rem 0; }
+  ol.prog b { font-weight: 600; }
+  footer { margin-top: 4rem; color: var(--faint); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  a { color: var(--derham); }
+  :focus-visible { outline: 2px solid var(--motive); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    header { animation: rise .5s ease-out; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<main>
+<header>
+  <p class="eyebrow">River × Fable · odd-zeta program · 2026-07-24/25</p>
+  <h1>One object, <em>five shadows</em></h1>
+  <p class="lede">Everything this program has measured, proved, or been stopped by is a projection of a single
+  object per weight: a <b>motive</b> — a piece of the cohomology of a family of varieties, degenerating at a
+  point of maximal unipotent monodromy, whose limiting extension class has ζ(w) as its period. The map below
+  is that object and its realizations, with our results pinned where they live.</p>
+</header>
+
+<section>
+  <p class="eyebrow" style="color:var(--motive)">The map</p>
+  <h2>The landscape</h2>
+  <div class="mapwrap">
+<pre class="mermaid">
+flowchart TB
+  subgraph GEO["GEOMETRY — where objects come from"]
+    G1["M&#772;₀,N cellular integrals<br/>(Brown's dinner parties)"]
+    G2["convergent configurations<br/>𝒞&#8342; = 1, 5, 17, 105, 771, 7028…"]
+    G1 --- G2
+  end
+
+  M(["THE MOTIVE M&#8340;<br/>rank 2 at w = 1,2,3 · rank 3 at w = 5 (M&#772;₀,₈) · rank 4 at w = 7 (M&#772;₀,₁₀)<br/>extension class in Ext¹(ℚ(0), ℚ(−w)) — its period IS the zeta value"])
+
+  GEO --> M
+
+  subgraph ARCH["SHADOW I — archimedean / Hodge"]
+    A1["Picard–Fuchs recurrence<br/>palindromic char. poly = duality"]
+    A2["three rays: dominant · middle · minimal<br/>weight 5: λ = 592, −0.084, 0.0050 &lt; e⁻⁵"]
+    A3["middle-root exile: pure classes ride λ₂<br/>purity defect c = −3/π² (identified, proved)"]
+    A4["positivity ⟹ sector B<br/>γ₅,₇ ≤ 0.34 — no window theorem"]
+    A1 --- A2 --- A3 --- A4
+  end
+
+  subgraph PAD["SHADOW II — crystalline / p-adic"]
+    P1["Frobenius ladder diag(1, p³, p⁵)"]
+    P2["a-row Lucas = Hasse–Witt (classical)<br/>b-row (LB&#8340;&#7594;): p&#7511;B&#8342;A&#8320; ≡ χ(p)B&#8320;A&#8342; — NEW<br/>χ = character of the Apéry limit"]
+    P3["master law: depth = weight, flat w ≤ 3<br/>graded at w = 5 · scaled multi-digit depth 3s"]
+    P4["tower limits Λ&#8336; exist (rate 3) but ≠ ζ&#8346;(3) —<br/>new constants · c&#8346; = 0: no p-adic defect<br/>ζ₂(5) irrational — minimal ray reachable"]
+    P1 --- P2 --- P3 --- P4
+  end
+
+  subgraph DER["SHADOW III — de Rham / certificates"]
+    D1["E&#8344; relations: ord&#8734; R&#8342; = 4n+5"]
+    D2["φ = (k&#7510;−k)²: jets ≡ (k+j)² mod (k+j)⁶<br/>at every pole — 𝔽&#8346;-translation invariance"]
+    D3["degree budget 2p ≤ 4n+3 = threshold law<br/>level 2: NOT FORCED (L2SPAN)"]
+    D1 --- D2 --- D3
+  end
+
+  subgraph BET["SHADOW IV — Betti / combinatorial"]
+    B1["Apéry-type sums · Lucas–Kummer<br/>carry ledgers (digit-splitting is free)"]
+    B2["b&#8342; = H₃a&#8342; + W · P&#770; = Σ T·ŵ₃ (Thm B)<br/>Lemma D: two carries from one overflow"]
+    B3["w₅ EXISTS at depth 1 (130 terms, verified)<br/>prior 'needs depth 2' was a basis-cap artifact"]
+    B1 --- B2 --- B3
+  end
+
+  subgraph LAT["SHADOW V — integral lattices / denominators"]
+    L1["d&#8342;&#7511; budgets · κ = ord&#8346; C(2n,n) carries"]
+    L2["sharp 12 = 2²·3 — Betti-lattice index,<br/>Bernoulli 24, von Staudt–Clausen {2,3}"]
+    L3["(CB): ord&#8346;(P&#8342;) ≥ κ − 5L —<br/>Phase 2, one gate from a theorem"]
+    L1 --- L2 --- L3
+  end
+
+  M --> ARCH
+  M --> PAD
+  M --> DER
+  M --> BET
+  M --> LAT
+
+  A3 -."same object:<br/>ζ(2)-elimination cost".- L2
+  A3 -."the impurity does NOT<br/>reach the letters (resolved)".- B3
+  D2 -."same Frobenius,<br/>two realizations".- B1
+  D3 -."same wall (H1):<br/>two-variable certificate".- B3
+  A4 -."positivity is charged<br/>only at ∞".- P4
+  P3 -."depth w ↔ pole order w+1".- D1
+
+  classDef geo fill:#8E86A6,stroke:#5E5678,color:#14121E;
+  classDef motive fill:#B0A4E4,stroke:#6B5CB8,color:#14121E;
+  classDef arch fill:#D8BC74,stroke:#A8842F,color:#14121E;
+  classDef padic fill:#7ECCBA,stroke:#2E8C7E,color:#14121E;
+  classDef derham fill:#9CB4DC,stroke:#4E70A8,color:#14121E;
+  classDef betti fill:#DC9CBC,stroke:#A4537C,color:#14121E;
+  classDef lattice fill:#B2C888,stroke:#6E8C45,color:#14121E;
+  class G1,G2 geo; class M motive;
+  class A1,A2,A3,A4 arch; class P1,P2,P3,P4 padic;
+  class D1,D2,D3 derham; class B1,B2,B3 betti; class L1,L2,L3 lattice;
+</pre>
+  </div>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--motive)"></span>the motive</span>
+    <span><span class="dot" style="background:var(--arch)"></span>archimedean</span>
+    <span><span class="dot" style="background:var(--padic)"></span>p-adic</span>
+    <span><span class="dot" style="background:var(--derham)"></span>de Rham</span>
+    <span><span class="dot" style="background:var(--betti)"></span>Betti</span>
+    <span><span class="dot" style="background:var(--lattice)"></span>lattices</span>
+  </div>
+  <p class="prose">Solid arrows: realization. Dotted edges: the identifications this week's work established —
+  each one is a place where two shadows turned out to be the same fact about the object.</p>
+</section>
+
+<section>
+  <p class="eyebrow" style="color:var(--betti)">The central discovery</p>
+  <h2>The purity defect, in three costumes</h2>
+  <p class="prose">Why does ζ(5) resist while ζ(3) fell? The rank-3 motive carries a middle graded piece
+  (the ζ(3)-companion P&#770;) that the rank-2 Apéry motive simply doesn't have. We sighted its cost three
+  times before interrogating each sighting — one identified, one confirmed, one retracted. The record
+  keeps all three, because the retraction is part of the mathematics.</p>
+  <div class="cards">
+    <div class="card">
+      <p class="eyebrow" style="color:var(--arch)">Analytic costume — confirmed</p>
+      <h3>The middle-root exile</h3>
+      <p>The operator contains a minimal ray decaying at 0.0050 &lt; e⁻⁵ — fast enough to prove ζ(5)
+      irrational. Every ℚ-rational (pure) class rides the middle ray instead. The ζ(2)-elimination that
+      purifies a class is exactly the rotation off the fast ray.</p>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="color:var(--motive)">Numeric costume — identified</p>
+      <h3>c = −3/π² = 12/(2πi)²</h3>
+      <p>Unmasked: a Tate twist, proved via BZ's own decomposition I = 2I′ + 4ζ(2)Î — the minimal ray
+      <i>is</i> the unpurified cellular integral (441-digit certificate). PSLQ had missed it because a
+      period basis can't see a <i>reciprocal</i> period. Purification costs exactly one ζ(2), in rate.</p>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="color:var(--betti)">Algebraic costume — retracted</p>
+      <h3>The depth-2 "obstruction" was an artifact</h3>
+      <p>The claim that w₅ needs nested letters is <b>false</b> — a 130-term depth-1 weight function
+      exists (found by CRT reconstruction, verified independently). The prior "proved-negative" capped
+      monomials at three factors. The impurity is real in the periods but does not reach the letters.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow" style="color:var(--padic)">One ratio, two completions</p>
+  <h2>The mirror</h2>
+  <p class="prose">The same extension class has two periods. On one side of the mirror everything is
+  provable; on the other sits the open problem. The asymmetry has a name: <b>positivity</b> — an
+  archimedean phenomenon with no p-adic counterpart.</p>
+  <div class="mirror">
+    <div class="card" style="border-top: 3px solid var(--arch)">
+      <p class="eyebrow" style="color:var(--arch)">Archimedean side · ℝ</p>
+      <ul>
+        <li>Period: ζ(3), ζ(5) — irrationality open beyond Apéry</li>
+        <li>Positivity forces forms onto the middle ray (sector B, proved via I′ = I + ζ₂|I″|)</li>
+        <li>Purity tax charged in full: γ = 0.866 (w=5), γ₅,₇ ≤ 0.34 (w=7)</li>
+        <li>Rank 2 is the loophole — no middle ray exists, purity is free: that is Apéry's ζ(3)</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--padic)">
+      <p class="eyebrow" style="color:var(--padic)">p-adic side · ℚ&#8346;</p>
+      <ul>
+        <li>Tower limits Λ&#8336; exist (exactly 3 digits/level) — but are <b>not</b> ζ&#8346;(3):
+        new intrinsic constants (order-3 operator can't reach ζ&#8346;(3)'s Frobenius slot)</li>
+        <li><b>c&#8346; = 0</b>: no p-adic purity defect — the diag(1, p³, p⁵) grading separates
+        what degenerates archimedean-ly; and p-adic limits exist even where archimedean ones don't (B, δ, η)</li>
+        <li>No positivity ⟹ minimal rays reachable: ζ₂(5) is <i>proved</i> irrational (LSZ; their
+        d&#8342;⁵ ledger confirmed tight, measures reproduced exactly)</li>
+        <li>But the linear forms diverge (n³): structurally clean, arithmetically weak — the exact
+        chiasmus of the archimedean side. Deficits: ζ₅(3) by 0.586, ζ₃(5) by 0.606</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Honest bookkeeping</p>
+  <h2>Status ledger</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Statement</th><th>Status</th><th>Where</th></tr>
+    <tr><td>ζ(3) b-row Lucas: <span class="m">p³b&#8336;&#8346;&#8330;&#7523; ≡ b&#8336;·a&#7523; (mod p)</span>, p ≥ 5 — first congruence for the second Apéry solution</td>
+        <td><span class="chip thm">THM · refereed</span></td><td>WARMUP_ZETA3_DWORK · VERIFY_ZETA3_PROOF</td></tr>
+    <tr><td>Q-row Lucas for the true BZ double sum (double-carry annihilation)</td>
+        <td><span class="chip thm">THM</span></td><td>PROOF_LB5_CAMPAIGN §A</td></tr>
+    <tr><td>H₅-layer reduction (LB₅) ⟺ (W5); Lemma D/D⁺; P&#770;-floors; Theorem B (exact fit)</td>
+        <td><span class="chip thm">THM / CT-cert pending</span></td><td>PROOF_LB5_CAMPAIGN §§B–D</td></tr>
+    <tr><td>χ-twisted general theorem: <span class="m">p&#7511;B&#8342;A&#8320; ≡ χ(p)B&#8320;A&#8342; (mod p&#7511;)</span>, χ = character of the Apéry limit; proved under (H1)–(H5); 15 pairs × 28 primes, 0 failures; naive law false for 7/15</td>
+        <td><span class="chip thm">THM + COMP</span></td><td>LBW_GENERAL</td></tr>
+    <tr><td>Purity defect identified: c = −3/π² (Tate twist; minimal ray = unpurified integral); cone-constant</td>
+        <td><span class="chip thm">THM · 441 digits</span></td><td>DEFECT_IDENTIFY</td></tr>
+    <tr><td>p-adic: tower limits exist (rate 3) but ≠ ζ&#8346;(3); c&#8346; = 0; LSZ ledger tight; no p-adic irrationality from these families (deficits 0.586 / 0.606)</td>
+        <td><span class="chip thm">THM + COMP</span></td><td>PADIC_SEAM</td></tr>
+    <tr><td>Lean, sorry-free: <span class="m">apery_lucas</span>, <span class="m">Q_lucas</span> + digit forms (axioms clean, 36 s build); b-row priced at ~550 lines</td>
+        <td><span class="chip thm">FORMAL</span></td><td>lean/ZetaLucas · LEAN_LUCAS_STATUS</td></tr>
+    <tr><td>Sector question for weight 7: sector A excluded by positivity; γ₅,₇ ≤ 0.34; RV leverage 7× short</td>
+        <td><span class="chip neg">CLOSED − </span></td><td>LTILDE_HUNT</td></tr>
+    <tr><td>Middle-row Theorem E proved (correction term λŴ&#8336; identified; unconditional a &lt; p/3); w₅ exists (130 terms, depth 1); BZ's own Q&#8342; formula CT-certified</td>
+        <td><span class="chip thm">THM / cert pending</span></td><td>PROOF_LB5_CLOSEOUT</td></tr>
+    <tr><td>Phase-2 endgame — all remnants named: <b>Lemma F</b> (mod-p^{1+d} fibre-Lucas, Granville-type; THE gate), canonical w₅, D⁺⁺ sub-case, ε-CT certificates; weight-5 path needs no integrality hypothesis</td>
+        <td><span class="chip openc">OPEN · Lemma F</span></td><td>P1b (running)</td></tr>
+    <tr><td>Gamma-deformation question (Apéry κ₅ and BZ's top period share ⟨ζ(5), ζ(2)ζ(3)⟩); redesigned cellular scan; connection constants A over the cone</td>
+        <td><span class="chip openc">QUEUED</span></td><td>P2b</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow" style="color:var(--motive)">Where this points</p>
+  <h2>The programs, ranked by what they'd teach us</h2>
+  <ol class="prog">
+    <li><b>Close Phase 2.</b> Certify Theorem B, run the corrected middle-row ledger, find w₅. Yield: the
+    first denominator theorem for M&#772;₀,₈ cellular periods, and the full rank-3 Frobenius congruence.</li>
+    <li><b>The defect program.</b> Identify c (Frobenius constants), vary it over the cone, then score
+    Brown's entire cellular enumeration by defect — the first search surface aimed at the binding
+    constraint. Jackpot odds are low; the tool is the point.</li>
+    <li><b>The p-adic seam.</b> Compute c&#8346;; if tame, p-adic minimal-ray forms exist and the
+    ζ₂(5)-style program extends. Our congruence machinery is native here.</li>
+    <li><b>The general (LB&#8340;) paper.</b> Fifteen sporadic pairs, one theorem: the Frobenius ladder
+    made elementary — and the coefficient form of Beukers–Vlasenko's open Conjecture 7.5 for the class.</li>
+  </ol>
+  <p class="prose" style="color:var(--faint)">Ruled out, with measurements rather than opinions: window
+  theorems from the known families, orbit optimization at weight 7, constant-sharpening, and every
+  direct attack on ζ(5) — the field's binding constraint is a new construction, and the defect is the
+  first instrument that scores one.</p>
+</section>
+
+<footer>
+  Produced 2026-07-24/25 · repos <span class="m">zeta-math</span> (July campaign) and
+  <span class="m">zeta-math-2/work/</span> (this session) · every claim carries its evidence class;
+  finite checks are evidence, never proof.
+</footer>
+</main>

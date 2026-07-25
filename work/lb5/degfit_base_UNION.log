@@ -1,0 +1,6 @@
+MODE=base  K=ABRY C=CDV N=NZ   basis 2666 cols   N=600 q=33554393
+degree histogram: {1: 18, 2: 236, 3: 822, 4: 1029, 5: 561}
+built design matrix (1813.0 s) -> /home/ubuntu/fable-episode-2/zeta-math-2/work/lb5/DF_ABRY_CDV_NZ_600_33554393.npz
+  D<=2 : cols=254   rank(fit)=232  fitINCONS=True  condrows=0    rank(joint)=232  nullity=22   INCONSISTENT=True  defect=1  (0.3 s)
+  D<=3 : cols=1076  rank(fit)=600  fitINCONS=False condrows=0    rank(joint)=600  nullity=476  INCONSISTENT=False defect=0  (3.6 s)
+  D<=4 : cols=2105  rank(fit)=600  fitINCONS=False condrows=0    rank(joint)=600  nullity=1505 INCONSISTENT=False defect=0  (9.3 s)

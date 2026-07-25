@@ -1,0 +1,200 @@
+{
+ "wE (E=7, proved-affine)": {
+  "monomials": [
+   [
+    "N3",
+    "1"
+   ],
+   [
+    "A3(l)",
+    "1"
+   ],
+   [
+    "A1(k)*A2(l)",
+    "1/2"
+   ],
+   [
+    "A1(k)*A2(k)",
+    "-1/2"
+   ],
+   [
+    "A2(k)*B1(k)",
+    "-3/2"
+   ],
+   [
+    "A3(k)",
+    "1"
+   ],
+   [
+    "B1(k)*A2(l)",
+    "3/2"
+   ]
+  ],
+  "S": 12,
+  "E": 7,
+  "S_symbols": [
+   "H^(1)_{k}",
+   "H^(2)_{k}",
+   "H^(3)_{k}",
+   "H^(2)_{l}",
+   "H^(3)_{l}",
+   "H^(3)_{n}",
+   "H^(1)_{n+k}",
+   "H^(2)_{n+k}",
+   "H^(3)_{n+k}",
+   "H^(2)_{n+l}",
+   "H^(3)_{n+l}",
+   "H^(1)_{n-k}"
+  ],
+  "E_symbols": [
+   "H^(1)_{k}",
+   "H^(2)_{k}",
+   "H^(2)_{l}",
+   "H^(1)_{n+k}",
+   "H^(2)_{n+k}",
+   "H^(2)_{n+l}",
+   "H^(1)_{n-k}"
+  ],
+  "exact_verified_n": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   33,
+   36,
+   40
+  ],
+  "proved_affine": true
+ },
+ "wS (S=10, proved-affine)": {
+  "monomials": [
+   [
+    "N3",
+    "1"
+   ],
+   [
+    "A1(k)*A2(l)",
+    "1/2"
+   ],
+   [
+    "A1(k)*A2(k)",
+    "-1/2"
+   ],
+   [
+    "A2(k)*B1(k)",
+    "-3/2"
+   ],
+   [
+    "A3(k)",
+    "2"
+   ],
+   [
+    "B1(k)*A2(l)",
+    "3/2"
+   ]
+  ],
+  "S": 10,
+  "E": 7,
+  "S_symbols": [
+   "H^(1)_{k}",
+   "H^(2)_{k}",
+   "H^(3)_{k}",
+   "H^(2)_{l}",
+   "H^(3)_{n}",
+   "H^(1)_{n+k}",
+   "H^(2)_{n+k}",
+   "H^(3)_{n+k}",
+   "H^(2)_{n+l}",
+   "H^(1)_{n-k}"
+  ],
+  "E_symbols": [
+   "H^(1)_{k}",
+   "H^(2)_{k}",
+   "H^(2)_{l}",
+   "H^(1)_{n+k}",
+   "H^(2)_{n+k}",
+   "H^(2)_{n+l}",
+   "H^(1)_{n-k}"
+  ],
+  "exact_verified_n": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   33,
+   36,
+   40
+  ],
+  "proved_affine": true
+ },
+ "vtilde_closed_form": {
+  "formula": "vtilde = H^(3)_n + 2*A3(k) + (1/2)*(A2(l) - A2(k))*Psi_k,  Psi_k = A1(k) + 3*B1(k)",
+  "letters": {
+   "A_r(x)": "H^(r)_{n+x} - H^(r)_x",
+   "B_r(x)": "H^(r)_{n-x} - H^(r)_x",
+   "N_r": "H^(r)_n"
+  },
+  "identity": "Phat_n = sum_{k,l=0}^{n} T(n,k,l) * vtilde(n,k,l)",
+  "T": "C(n+k,n)C(n,k)^2 C(n+l,n)C(n,l)^2 C(n+k+l,n)",
+  "verified_exact_n": "0..33 (sum == Phat) and L_BZ residual 0 for n=0..30",
+  "distinct_symbols_summand": 10,
+  "distinct_symbols_E": 7,
+  "no_C_letters": true,
+  "refold_identity": "sum_{k,l} T*[3*A2(k)*C1 + A2(k)*A1(l) + 2*A2(l)*A1(k) + 6*A2(l)*B1(k)] = 0  (PROVED span: Lemma-Phi species + k<->l folding)",
+  "E_form": "E(vtilde)/T = c0 + beta*(A2(l)-A2(k)) + alpha*Psi_k   (rank 3)"
+ }
+}

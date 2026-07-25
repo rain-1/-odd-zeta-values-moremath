@@ -1,0 +1,116 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                                                                                                                                                                                                                                         
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:=                         
+In[7]:= 
+In[8]:= 
+In[9]:=         
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= 
+In[17]:= START Sat 25 Jul 2026 05:49:29  JOBS=n2:A,n2:C,n2:B,n2:D,n3:C,n3:B,n3:A,n3:D
+ 
+>    DMAX=10 MEMCAP=3000000000
+
+In[18]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[19]:= HF loaded
+
+In[20]:= In[20]:= 
+In[21]:= 
+In[22]:= 
+In[23]:= 
+In[24]:= 
+In[25]:= 
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= 
+In[31]:= 
+In[32]:= 
+In[33]:= 
+In[34]:= rho,sigma loaded 10553 1819
+
+In[35]:= In[35]:= 
+In[36]:= 
+In[37]:= 
+In[38]:= 
+In[39]:= 
+In[40]:= In[40]:= 
+In[41]:= 
+In[42]:= 
+In[43]:= 
+In[44]:= 
+In[45]:= 
+In[46]:= 
+In[47]:= 
+In[48]:= 
+In[49]:= 
+In[50]:= In[50]:= 
+In[51]:= 
+In[52]:= 
+In[53]:= 
+In[54]:= In[54]:= 
+In[55]:= 
+In[56]:= 
+In[57]:= 
+In[58]:= 
+In[59]:= In[59]:= 
+In[60]:= 
+In[61]:= 
+In[62]:= In[62]:= 
+In[63]:= In[63]:=                   
+In[64]:= 
+In[65]:= 
+In[66]:= In[66]:=                                                       
+In[67]:= In[67]:= === JOB n2:A === Sat 25 Jul 2026 05:49:30
+  CHECK n2 : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 4230  obj/T 4262  lambda 1
+  n2:A ann #3 t=6s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:49:36
+  ann rank-ish: 3 generators
+  n2:A ct1 #2 t=22s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:49:58
+  ct1 telescopers: 2
+  n2:A gb #2 t=5s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:50:03
+  gb === ct1tel ? True
+  lambda = 1, no DFiniteTimes
+  ct2 FREE t=600s -> none  Sat 25 Jul 2026 06:00:03
+  ct2 third={} d=0 t=10s -> none  Sat 25 Jul 2026 06:00:14
+  ct2 third={} d=1 t=27s -> none  Sat 25 Jul 2026 06:00:41
+  ct2 third={} d=2 t=64s -> none  Sat 25 Jul 2026 06:01:45
+  ct2 third={} d=3 t=166s -> none  Sat 25 Jul 2026 06:04:30
+  ct2 third={} d=4 t=481s -> none  Sat 25 Jul 2026 06:12:31
+  ct2 third={} d=5 t=1985s -> none  Sat 25 Jul 2026 06:45:37
+  ct2 LADDERCAP 2700s exhausted at d=6 -- abandoning n2:A  
+ 
+>   Sat 25 Jul 2026 06:45:37
+  ct2 LADDERCAP 2700s exhausted at d=0 -- abandoning n2:A  
+ 
+>   Sat 25 Jul 2026 06:45:37
+  NO telescoper up to d=10
+=== JOB n2:C === Sat 25 Jul 2026 06:45:37
+  obj LeafCount 120  obj/T 151  lambda 
+ 
+>   -HH[k] + 3*(-HH[k] + HH[-k + n]) + HH[k + n]
+  n2:C ann #3 t=0s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:37
+  ann rank-ish: 3 generators
+  n2:C ct1 #2 t=1s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:38
+  ct1 telescopers: 2
+  n2:C gb #2 t=0s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:38
+  gb === ct1tel ? True
+  ann(lambda) #3
+  n2:C annL #4 t=25s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:46:03
+  ct2 FREE t=601s -> none  Sat 25 Jul 2026 06:56:04

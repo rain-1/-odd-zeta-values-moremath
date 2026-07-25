@@ -1,0 +1,12 @@
+START Fri 24 Jul 2026 20:49:16
+HF loaded
+=== part 1: Q double sum ===
+CT done in 0s
+Length ctQ = 0  Length ctQ[[1]] = 2
+  telescoper 1 order=0
+    poly = $Failed[[1,1]]
+    LBZ mod this (in SS) = 0
+  telescoper 2 order=0
+    poly = $Failed[[1,2]]
+    LBZ mod this (in SS) = 0
+DONE1 Fri 24 Jul 2026 20:49:16

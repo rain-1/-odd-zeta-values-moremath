@@ -1,0 +1,16 @@
+START Sat 25 Jul 2026 04:59:30  DMAX=10 MEMCAP=3000000000
+HF loaded
+rho,sigma loaded 10553 1819
+LeafCount Gll=2255  qll=59  GQ/T=1913
+HarmonicNumber count in GQ (must be 0): 0
+F_ll SPLIT CHECK (must all be 0): {0, 0, 0, 0}
+=== Q1 Annihilator[GQ] (rank 1 expected: 3 first-order generators) === Sat 25 Jul 2026 04:59:31
+  ann1 #3 t=0s  (checkpointed)  mem=0GB
+=== Q2 ct1: eliminate l on the RANK-1 object === Sat 25 Jul 2026 04:59:32
+  ct1 #2 t=3s  (checkpointed)  mem=2GB
+  ct1 telescopers: 3
+=== Q3 OreGroebnerBasis of the telescopers === Sat 25 Jul 2026 05:08:36
+  gb #3 t=1s  (checkpointed)  mem=2GB
+  gb === ct1tel ? True
+=== Q4 DFiniteTimes with A2(k) === Sat 25 Jul 2026 05:11:58
+  annA2 #3

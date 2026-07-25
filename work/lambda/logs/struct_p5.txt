@@ -1,0 +1,6 @@
+========================================================================
+p = 5   certified digits: 27
+  Atil_1 = 1 + c(2,1)^2 + ? :  first discrepancy at v_p = 3 (expect 2)
+  Atil_1 = ... + sum_j [c(p,j)c(p+j,j)]^2 :  discrepancy at v_p = 6 (expect 4)
+  (Lambda_1-h_p(1))*Atil_1 = c(2,1)/2 + ? : discrepancy at v_p = 3 (expect 3)
+  ... + c(2,1)^2 sum_j (-1)^{j-1}p^3/(2j^3 c(p,j)c(p+j,j)) : discrepancy at v_p = 4 (expect 5)

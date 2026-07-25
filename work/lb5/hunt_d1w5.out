@@ -1,0 +1,13 @@
+[d1w5] basis=682  |Sk|=55 |Sc|=12 |Sn|=33  N=900
+   n=100  0s
+   n=200  2s
+   n=300  6s
+   n=400  13s
+   n=500  25s
+   n=600  46s
+   n=700  74s
+   n=800  112s
+   n=900  163s
+[d1w5] matrix 900x682 in 163s
+[d1w5] rank(M)=478  rank([M|b])=478  INCONSISTENT=True  excess=422
+[d1w5] written

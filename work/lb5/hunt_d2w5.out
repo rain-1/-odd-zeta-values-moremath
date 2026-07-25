@@ -1,0 +1,16 @@
+[d2w5] basis=1053  |Sk|=113 |Sc|=28 |Sn|=79  N=1200
+   n=100  2s
+   n=200  9s
+   n=300  26s
+   n=400  59s
+   n=500  114s
+   n=600  202s
+   n=700  321s
+   n=800  472s
+   n=900  662s
+   n=1000  918s
+   n=1100  1272s
+   n=1200  1764s
+[d2w5] matrix 1200x1053 in 1764s
+[d2w5] rank(M)=752  rank([M|b])=752  INCONSISTENT=True  excess=448
+[d2w5] written

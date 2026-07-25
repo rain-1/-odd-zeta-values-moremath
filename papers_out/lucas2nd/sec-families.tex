@@ -1,0 +1,315 @@
+\section{The fifteen sporadic families}
+\label{sec:families}
+
+\subsection{The pairs}
+
+Zagier's search and its Almkvist--Zudilin and Cooper extensions produce fifteen sporadic
+Ap\'ery-like sequences, satisfying one of
+\begin{align}
+  \text{(R2)}&& (n+1)^2u_{n+1}&=(an^2+an+b)u_n-cn^2u_{n-1}, \label{eq:R2}\\
+  \text{(R3)}&& (n+1)^3u_{n+1}&=(2n+1)(an^2+an+b)u_n-n(cn^2+d)u_{n-1}. \label{eq:R3}
+\end{align}
+Zagier's six satisfy \eqref{eq:R2}; the six Almkvist--Zudilin sequences satisfy
+\eqref{eq:R3} with $d=0$, and Cooper's three satisfy \eqref{eq:R3} with $d\ne0$. The
+sequence tables we use are those of Malik--Straub \cite[Tables 1--2]{MalikStraub}; all
+fifteen binomial sums were \VerifiedR{$n\le11$} to reproduce the recurrence solution
+exactly.
+
+The \emph{second solution} $B(n)$ is normalised by $B(0)=0$, $B(1)=1$, with the recurrence
+enforced for $n\ge1$ --- the $n=0$ step is degenerate. This is exactly Ap\'ery's
+construction, and the same normalisation used by Chamberland--Straub \cite{ChamStraub}.
+Rescaling $B$ by a $p$-unit rational does not affect any statement below, so for $p\ge5$
+the normalisation is canonical up to harmless constants.
+
+\begin{table}[ht]
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{The fifteen sporadic pairs: parameters of \eqref{eq:R2}/\eqref{eq:R3}, the
+integral solution $A(n)$, the Ap\'ery limit $L=\lim B(n)/A(n)$, the weight $w$ and the
+character $\chi$.}
+\label{tab:fifteen}
+\begin{tabular}{@{}clllccl@{}}
+\toprule
+\# & label & $(a,b,c[,d])$ & $A(n)$ & $L$ & $w$ & $\chi$\\
+\midrule
+1 & $\mathbf A$ & $(7,2,-8)$ & $\sum_k\bin nk^3$ (Franel) & $\zeta(2)/4$ & 2 & $1$\\
+2 & $\mathbf B$ & $(9,3,27)$ & $\sum_k(-1)^k3^{n-3k}\bin n{3k}\frac{(3k)!}{k!^3}$ & none & 2 & $\chi_{-3}$\\
+3 & $\mathbf C$ & $(10,3,9)$ & $\sum_k\bin nk^2\bin{2k}k$ & $L_{-3}(2)/2$ & 2 & $\chi_{-3}$\\
+4 & $\mathbf D$ & $(11,3,-1)$ & $\sum_k\bin nk^2\bin{n+k}n$ & $\zeta(2)/5$ & 2 & $1$\\
+5 & $\mathbf E$ & $(12,4,32)$ & $\sum_k\bin nk\bin{2k}k\bin{2(n-k)}{n-k}$ & $L_{-4}(2)/2$ & 2 & $\chi_{-4}$\\
+6 & $\mathbf F$ & $(17,6,72)$ & $\sum_k(-1)^k8^{n-k}\bin nk\sum_l\bin kl^3$ & $\tfrac58L_{-3}(2)$ & 2 & $\chi_{-3}$\\
+7 & $(\alpha)$ & $(10,4,64,0)$ & $\sum_k\bin nk^2\bin{2k}k\bin{2(n-k)}{n-k}$ (Domb) & $7\zeta(3)/24$ & 3 & $1$\\
+8 & $(\gamma)$ & $(17,5,1,0)$ & $\sum_k\bin nk^2\bin{n+k}n^2$ (Ap\'ery) & $\zeta(3)/6$ & 3 & $1$\\
+9 & $(\delta)$ & $(7,3,81,0)$ & $\sum_k(-1)^k3^{n-3k}\bin n{3k}\bin{n+k}n\frac{(3k)!}{k!^3}$ & none & 3 & $1$\\
+10 & $(\varepsilon)$ & $(12,4,16,0)$ & $\sum_k\bin nk^2\bin{2k}n^2$ & $7\zeta(3)/32$ & 3 & $1$\\
+11 & $(\zeta)$ & $(9,3,-27,0)$ & $\sum_{k,l}\bin nk^2\bin nl\bin kl\bin{k+l}n$ & $L_{-3}(3)/3$ & 3 & $\chi_{-3}$\\
+12 & $(\eta)$ & $(11,5,125,0)$ & $\sum_k(-1)^k\bin nk^3\bigl[\bin{4n-5k-1}{3n}+\bin{4n-5k}{3n}\bigr]$ & none & 3 & $\chi_5$\\
+13 & $s_7$ & $(13,4,-27,3)$ & $\sum_k\bin nk^2\bin{n+k}k\bin{2k}n$ & $\zeta(2)/7$ & 2 & $1$\\
+14 & $s_{10}$ & $(6,2,-64,4)$ & $\sum_k\bin nk^4$ & $\zeta(2)/5$ & 2 & $1$\\
+15 & $s_{18}$ & $(14,6,192,-12)$ & Cooper's $s_{18}$ & $L_{-3}(2)/2$ & 2 & $\chi_{-3}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Limits, weights and integrality}
+
+\begin{observation}[Ap\'ery limits]\label{obs:limits}
+\Verified\ The limits in Table~\ref{tab:fifteen} were identified by two-term PSLQ at $400$
+digits against a $33$-constant basis --- $\zeta(2),\zeta(3),\zeta(4)$; $L_D(2)$ and
+$L_D(3)$ for $D=-3,-4,-7,-8,-11,-15,-20,-24,5,8,12,13,24$; $\log^22$, $\pi^2\log2$,
+$\log^32$ --- matching to between $31$ and $401$ digits (the weakest is $\mathbf F$, whose
+convergence rate is $(8/9)^n$; $s_{18}$ converges at $(3/4)^n$). The known values are
+recovered: $\zeta(2)/4$ for Franel and $\zeta(2)/5$ for $\sum_k\bin nk^4$
+(cf.\ \cite[eq.~(7.2)]{ChamStraub}) and $\zeta(3)/6$ for Ap\'ery. The remaining eight ---
+$7\zeta(3)/24$ (Domb), $7\zeta(3)/32$ ($\varepsilon$), $L_{-3}(3)/3$ ($\zeta$),
+$\zeta(2)/7$ ($s_7$), $\tfrac58L_{-3}(2)$ ($\mathbf F$), $L_{-3}(2)/2$ ($\mathbf C$ and
+$s_{18}$) and $L_{-4}(2)/2$ ($\mathbf E$, half Catalan's constant) --- are computed here.
+They are of the shape one expects (rational multiples of $\zeta(2)$, $L_{-3}(2)$,
+$L_{-4}(2)$), and some may well appear in existing numerical tables; we make no
+attribution claim.
+\end{observation}
+
+\begin{observation}[weights]\label{obs:weights}
+\Verified\ Let $w$ be the minimal exponent with $d_n^wB(n)\in\Z$, computed over $n\le600$.
+Then $w=2$ for all six of Zagier's \eqref{eq:R2} sequences \emph{and} for all three of
+Cooper's \eqref{eq:R3} sequences with $d\ne0$, and $w=3$ for all six Almkvist--Zudilin
+sequences ($d=0$). It is sharp in every case: $d_n^{w-1}B_n$ is non-integral for at least
+$596$ of the $600$ values of $n$. In every case $w$ equals the motivic weight of the
+Ap\'ery limit. The local form $\vp(B_n)\ge-w\lfloor\log_pn\rfloor$ holds with zero
+failures over 15 sequences $\times$ 16 primes $\times$ $n\le400$.
+\end{observation}
+
+\begin{observation}[Cooper's three are lighter than their recurrence]\label{obs:cooper}
+$s_7$, $s_{10}$, $s_{18}$ have weight $2$, not $3$, despite satisfying the cubic
+recurrence \eqref{eq:R3}: the weight tracks the Cooper deformation $d\ne0$, not the shape
+of the recurrence.
+\end{observation}
+
+\subsection{Where the untwisted law dies, and the repair}
+\label{ssec:twist}
+
+\begin{observation}[failure of the naive law]\label{obs:naive-fail}
+\Verified\ Testing $\vp\bigl(p^wB_nA_q-B_qA_n\bigr)\ge w$, $q=\lfloor n/p\rfloor$, over
+primes $5\le p\le43$ and $n\le300$ in exact arithmetic:
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+verdict & sequences\\
+\midrule
+holds flat, every prime tested & $\mathbf A$, $\mathbf D$, $\alpha$, $\gamma$, $\delta$, $\varepsilon$, $s_7$, $s_{10}$ \quad(8)\\
+fails at $p\equiv2\pmod3$ & $\mathbf B$, $\mathbf C$, $\mathbf F$, $\zeta$, $s_{18}$ \quad(5)\\
+fails at $p\equiv3\pmod4$ & $\mathbf E$ \quad(1)\\
+fails at $p\equiv\pm2\pmod5$ & $\eta$ \quad(1)\\
+\bottomrule
+\end{tabular}
+\end{center}
+The failures are total, not marginal: on the failing primes the single-digit floor is $0$
+--- the difference is a $p$-unit --- and in the multi-digit range the valuation drops to
+$-w(\#\text{digits}-1)$, i.e.\ as low as the integrality bound permits.
+\end{observation}
+
+The failing sets are not explained by exceptional digits ($p\mid A(a)$), nor by the centre
+residue, nor by $\kappa=\vp\bin{2n}n$: they are exactly the sets of primes at which a
+quadratic character takes the value $-1$. Three cross-checks isolate the character
+\Verified: the passing primes of the $\chi_{-3}$ group are mixed modulo $4$ and modulo
+$5$; those of $\mathbf E$ are mixed modulo $3$ and modulo $5$; and those of $\eta$, namely
+$11,19,29,31,41$, are mixed modulo $3$ and modulo $4$ and are precisely the primes
+$p\equiv\pm1\pmod 5$.
+
+\begin{observation}[the repair is one sign]\label{obs:repair}
+\VerifiedR{zero failures} At every cell with $\chi(p)=-1$, for all seven twisted
+sequences, all primes $5\le p\le31$ with $\chi(p)=-1$ and all $n<p^3$ (up to $1500$),
+\[
+   \vp\bigl(p^{w}B_nA_q+B_qA_n\bigr)\;=\;w \quad\text{exactly.}
+\]
+\end{observation}
+
+Observations~\ref{obs:naive-fail} and \ref{obs:repair} together are
+Conjecture~\ref{conj:master}. The character is the character of the Ap\'ery limit --- a
+correlation that is $12$ out of $12$ on the sequences whose limit exists --- and
+Lemma~\ref{lem:K} says why: the $\chi(p)$ in the congruence is the $\chi(p)$ that comes
+out of the $p$-divisible layer of a $\chi$-twisted harmonic letter.
+
+\begin{observation}[ramified primes are benign]\label{obs:ramified}
+For $\eta$ the prime $p=5$ is ramified, $\chi_5(5)=0$, and
+Conjecture~\ref{conj:master} degenerates to $p^3B_nA_q\equiv0\pmod{p^3}$ --- which is
+exactly the assertion that $B_n$ is $5$-integral. \VerifiedR{$n\le500$} it is:
+$\min_n v_5(B_n)=0$, so the pole simply does not develop at the ramified prime, and the
+floor is exactly $3$. This is the only ramified prime $\ge5$ among the fifteen; the
+$\chi_{-3}$ and $\chi_{-4}$ sequences ramify only at $3$ and $2$.
+\end{observation}
+
+\subsection{Harmonic decompositions}
+\label{ssec:decomp}
+
+To apply Theorem~\ref{thm:LB} one needs a harmonic-monomial weight. We found these by
+exact linear fitting: the ansatz is $B_n=\sum_kS(n,k)w(n,k)$ with $S$ the sequence's own
+binomial summand and $w$ a $\Q$-combination of weight-$w$ monomials in letters $\HH rx$
+(and, when needed, $K^{(r)}_{\chi,x}$) at arguments $x$ that are linear forms in $(n,k)$;
+the systems were solved exactly modulo the prime $2^{61}-1$, the coefficients rationally
+reconstructed, and then \emph{validated exactly over $\Q$} on held-out values of $n$.
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Harmonic-monomial weights found (all depth one, all validated exactly over $\Q$
+on held-out $n$). $S$ is the summand from Table~\ref{tab:fifteen}.}
+\label{tab:decomp}
+\begin{tabular}{@{}llll@{}}
+\toprule
+seq. & $w$ & weight $w(n,k)$ & held out\\
+\midrule
+$\gamma$ & 3 & $\frac13\HH3n-\frac16\HH3k$ & $n=60..72$\\
+$\mathbf A$ & 2 & $\frac14\HH2k+\frac34H_k(H_k-H_{n-k})$ & $n=60..72$\\
+$\mathbf D$ & 2 & $\frac15\bigl[\HH2n+H_k(2H_k-H_{n-k}-H_n)\bigr]$ & $n=60..72$\\
+$s_{10}$ & 2 & $\frac15\HH2k+\frac45H_k(H_k-H_{n-k})$ & $n=60..72$\\
+$s_7$ & 2 & 8 terms in $H^{(1,2)}$ at $\{k,n-k,n,2k\}$ & $n=60..72$\\
+$\varepsilon$ & 3 & 10 terms in $H^{(1,2,3)}$ at $\{k,n-k,2k,2k-n\}$ & $n=60..72$\\
+$\alpha$ (Domb) & 3 & 14 terms in $H^{(1,2,3)}$ at $\{k,n-k,2k,2n-2k\}$ & $n=60..72$\\
+$\mathbf E$ & 2 & $\frac12K^{(2)}_{2k}+\frac34H_k(K_{2k}-K_{2n-2k})-\frac12H_{2k}(K_{2k}-K_{2n-2k})$, $K=K_{\chi_{-4}}$ & $n=70..82$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $\gamma$ line, multiplied by $6$, is the minimal closed form
+\eqref{eq:minimal-intro}; Section~\ref{sec:minimal} proves it. Two structural comments.
+
+\begin{remark}[a uniform shape for $\sum_k\bin nk^d$]\label{rem:samefamily}
+$\mathbf A$ and $s_{10}$ have literally the same shape,
+$\frac1{d+1}\HH2k+\frac d{d+1}H_k(H_k-H_{n-k})$ for $A^{(d)}(n)=\sum_k\bin nk^d$ with
+$d=3,4$. This is the natural source of Chamberland--Straub's conjecture
+\cite[eq.~(7.4)]{ChamStraub} that the Ap\'ery limit of $A^{(d)}$ is $\zeta(2)/(d+1)$, and
+suggests it for every $d$ \VerifiedR{$d=3,4$ only; the recurrences for $d\ge5$ have order
+$\ge3$ and were not tested}.
+\end{remark}
+
+\begin{observation}[negative results, and the dichotomy]\label{obs:negatives}
+\Verified\ Exact inconsistency of the fitting systems:
+\begin{itemize}[leftmargin=1.4em]
+\item $\mathbf C$: no decomposition on the summand $\bin nk^2\bin{2k}k$ exists in
+  \emph{any} basis tried --- plain harmonic monomials at $\{n,k,n-k,2k\}$ (14 elements),
+  at $\{n,k,n-k,2k,n+k,2n-2k,2n,2n-k\}$ (44 elements), and with $\chi_{-3}$-letters
+  adjoined (44 and 152 elements, 110 and 220 exact equations). All inconsistent.
+\item $\mathbf E$: inconsistent in every \emph{pure} harmonic basis tried (up to 44
+  elements, 8 arguments), and consistent the moment $\chi_{-4}$-letters are allowed. This
+  is the decisive experiment.
+\item $\delta$: inconsistent in the weight-3 basis at $\{n,k,3k,n-3k,n+k\}$ (65 elements,
+  110 equations).
+\item $\mathbf B$, $\mathbf F$, $\zeta$, $\eta$, $s_{18}$: not attempted (double or
+  alternating sums; $\zeta$ needs a genuine two-index ansatz).
+\end{itemize}
+\end{observation}
+
+The dichotomy behind this is elementary but decisive. A pure harmonic monomial
+$\prod_t\HH{r_t}{x_t}$ can only ever produce values in the ring generated by
+$\zeta(2),\zeta(3),\dots$ in the limit; it can never produce $L(\chi,w)$. Hence \emph{no}
+$\chi$-twisted sequence can have a pure-$\zeta$ harmonic decomposition, and the letters
+must be twisted --- confirmed by $\mathbf E$, and the reason $\mathbf C$'s plain fits are
+inconsistent. $\mathbf C$'s residual obstruction is that its conductor-$3$ letters need
+arguments that $\bin nk^2\bin{2k}k$ does not provide; the right move there is a
+constant-term representation, not a bigger monomial basis \cite{Gorodetsky}. This remains
+\Open.
+
+\subsection{Verdict: which of the fifteen are proved}
+\label{ssec:verdict}
+
+We now state precisely which families Theorem~\ref{thm:LB} covers. \emph{The labels below
+are the paper's evidence classes and are not to be read as claims of uniform coverage.}
+
+\paragraph{\Proved\ --- hypotheses \textup{(H1)--(H5)} verified, Theorem~\ref{thm:LB}
+applies.}
+
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+seq. & $\chi$ & primes & why (H4) holds\\
+\midrule
+$\gamma$ (Ap\'ery $\zeta(3)$) & $1$ & $p\ge5$ & arguments $\{n,k\}$; coefficients $\frac13,\frac16$\\
+$\mathbf A$ (Franel) & $1$ & $p\ge5$ & arguments $\{k,n-k\}$; coefficients $\frac14,\frac34$\\
+$\mathbf D$ (Ap\'ery $\zeta(2)$)$^{\dagger}$ & $1$ & $p\ge7$ & arguments $\{n,k,n-k\}$; coefficients $\frac15,\frac25$\\
+$s_{10}$ ($\sum_k\bin nk^4$) & $1$ & $p\ge7$ & arguments $\{k,n-k\}$; coefficients $\frac15,\frac45$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% FIXED [MAJOR-1]: D is the unique defective row. Theorem \ref{thm:LB} controls the explicit
+%% FIXED sum B; identifying that sum with D's actual second solution needs (LB)=0, which this
+%% FIXED paper labels \VerifiedR{n<=25} at sec-minimal.tex and whose proof by the paper's own
+%% FIXED template is obstructed by Proposition \ref{prop:obstruction}. gamma, A and s_10 do not
+%% FIXED have this problem: for them (LB)=0 is \Proved\ in Section \ref{sec:minimal}.
+\noindent
+$^{\dagger}$\emph{One qualification, and it applies to $\mathbf D$ alone.} What
+Theorem~\ref{thm:LB} controls is the explicit harmonic sum $B$. For $\gamma$, $\mathbf A$ and
+$s_{10}$ the identity $(LB)=0$ --- which says that this $B$ \emph{is} the sequence's second
+solution --- is \Proved\ in Section~\ref{sec:minimal}. For $\mathbf D$ it is not: it is
+\VerifiedR{$n\le25$} only, and Proposition~\ref{prop:obstruction} shows that the template used
+for the other three provably cannot supply it. So the $\mathbf D$ row is \Proved\ as a statement
+about the explicit sum $B$, and \Verified\ as a statement about the $\zeta(2)$-Ap\'ery second
+solution.
+
+\noindent
+For these, (H1)--(H3) hold by the argument of Section~\ref{sec:weight3}: for
+$S=\bin nk^{\alpha}\bin{n+k}n^{\beta}$ the surviving set is $\{s\le r\}$ (no borrow in
+$\bin nk$) intersected with $\{r+s<p\}$ (no carry in $\bin{n+k}n$), a product region;
+there $\bin nk\equiv\bin ab\bin rs$ and $\bin{n+k}n\equiv\bin{a+b}a\bin{r+s}r$ by
+Lemma~\ref{lem:lucas-step}, and the deleted $r+s\ge p$ terms of $A(r)$ vanish modulo $p$
+--- this is verbatim Lemma~\ref{lem:fibre}. Digit compatibility holds because
+$\lfloor k/p\rfloor=b$, $\lfloor(n-k)/p\rfloor=a-b$ (no borrow) and
+$\lfloor n/p\rfloor=a$.
+
+The two steps of the proof of Theorem~\ref{thm:LB} --- ``the vanishing layer is
+$\equiv0$'' and ``the surviving layer is $\equiv\chi(p)^eB_aA_r$'' --- were also checked
+separately and exactly on all cells $n=ap+r<p^2$: zero failures for $\gamma$, $\mathbf A$,
+$s_{10}$ at $p=5,7,11,13$ (both layers); zero failures for $\mathbf D$ at $p=7,11,13$, but
+$11$ failing cells at $p=5$, which is exactly the (H4) coefficient condition biting
+($\mathbf D$'s coefficients are $\frac15(1,2,-1,-1)$). So $\mathbf D$'s proof is
+unconditional for $p\ge7$, and $p=5$ is \Verified\ only. $s_{10}$'s coefficients are also
+$\frac15(1,4,-4)$ yet it exhibits no defect at $p=5$ --- the layer valuations happen to be
+one higher there --- but the proof as written still needs $p\ge7$ for $s_{10}$. No other
+defect of any kind appears in the tame cases: the only obstruction the mechanism ever
+meets is the (H4) coefficient condition.
+
+\paragraph{Need the Lemma-D upgrade --- decomposition known, tameness fails.}
+\label{ssec:lemmaD}
+For $\alpha$ (Domb), $\varepsilon$, $s_7$ and $\mathbf E$ a decomposition is known
+(Table~\ref{tab:decomp}), but (H4) fails: the arguments reach $2n$ (letters at $2k$,
+$2n-2k$, $2k-n$), so $p^ww(n,k)$ acquires a pole on the vanishing layer and the two-layer
+split of the proof of Theorem~\ref{thm:LB} is \emph{invalid termwise}. \Verified: the
+vanishing-layer and surviving-layer defects occur in exactly equal numbers and cancel,
+which is why the congruence is nonetheless true. What is needed is a valuation bound
+showing that a Kummer carry in the wide binomial ($\bin{2k}k$, $\bin{2k}n$) beats the
+order-one pole of $H^{(r)}(\lfloor2k/p\rfloor)$. ($s_7$ additionally excludes $p=7$: its
+coefficients have denominator $28$; \Verified\ $13$ failing cells at $p=7$ and none at
+$p=5,11,13$.) Notably $\mathbf E$ is the only known instance of the twisted theorem
+($e=1$), and it is non-tame: attempts to find a \emph{tame} $\chi_{-4}$-decomposition for
+$\mathbf E$ (arguments $\{n,k,n-k\}$, and $\{n,k,n-k,2k\}$) were \VerifiedR{inconsistent}
+--- the wide arguments are essential. So the twisted case of Theorem~\ref{thm:LB} is
+proved as a mechanism but has, at present, no tame instance. This is \Open.
+
+\paragraph{Remain conjectural.}
+For $\mathbf B$, $\mathbf C$, $\mathbf F$, $\delta$, $\zeta$, $\eta$ and $s_{18}$ no
+harmonic decomposition is known, and Conjecture~\ref{conj:master} is \Verified\ only. Of
+these, $\mathbf C$ and $\delta$ carry \emph{proved-negative} results in the natural bases
+(Observation~\ref{obs:negatives}), so they need genuinely new letters: for $\mathbf C$ the
+conductor-$3$ letters, for $\delta$ presumably letters attached to the $3$-section of the
+summand.
+
+\subsection{The sequences with no archimedean Ap\'ery limit}
+\label{ssec:nolimit}
+
+\begin{observation}\label{obs:nolimit}
+\Verified\ Three of the fifteen have no Ap\'ery limit at all. For \eqref{eq:R2} the
+characteristic roots solve $\lambda^2-a\lambda+c=0$, and for \eqref{eq:R3},
+$\lambda^2-2a\lambda+c=0$. The discriminants are
+\[
+   \mathbf B:\;-27,\qquad \delta:\;-128,\qquad \eta:\;-16,
+\]
+i.e.\ complex-conjugate pairs of equal modulus, so Poincar\'e--Perron provides no dominant
+solution and $B(n)/A(n)$ does not converge --- numerically, $0$ digits of agreement
+between $n=590$ and $n=600$, against $380$ digits for the convergent sequences. Every
+other sporadic sequence has real distinct roots.
+\end{observation}
+
+Yet all three satisfy Conjecture~\ref{conj:master} with a flat floor, with
+$\chi=\chi_{-3}$, trivial, and $\chi_5$ respectively. \emph{The $p$-adic Ap\'ery limit
+exists where the archimedean one does not.} This is the cleanest evidence available to us
+that the descent is a statement about Frobenius and not about the archimedean limit; we
+return to it in Section~\ref{sec:discussion}.

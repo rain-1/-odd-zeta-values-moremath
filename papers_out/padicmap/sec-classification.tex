@@ -1,0 +1,157 @@
+%% =====================================================================
+\section{The classification of two-term forms}\label{sec:classification}
+%% =====================================================================
+
+The ledger has one input that is not a real number and cannot be optimised away: the number
+of cosets. This section shows that it decides the shape of the whole problem.
+
+\subsection{\texorpdfstring{$\varphi(p^r)=2$}{phi(p^r)=2}}\label{ss:phi2}
+
+\begin{theorem}\label{thm:classification}
+\PROVED{} Within the family of Definition~\ref{def:family}, a two-term $\Zp$-linear form in
+$1$ and the \emph{full} value $\zeta_p(w)$ --- as opposed to a form in $1$ and a Hurwitz
+value $\zeta_p(w,\theta_0)$ --- arises from a \emph{single} integration shift if and only if
+\[
+ \varphi(p^r)=2,\qquad\text{i.e.}\qquad p^r\in\{3,4\},\qquad\text{i.e.}\qquad
+ (p,r)\in\{(3,1),(2,2)\},
+\]
+together with the exceptional point $(p,r)=(2,1)$, at which
+\cite[Lemma 9]{LSZ2025} makes the single shift $\tfrac12$ already \emph{be} the full
+$\zeta_2$. In every other case the full twisted coset sum
+$\Theta=\{j/p^r:p\nmid j\}$ is forced, and the $p$-adic smallness of the resulting form is
+$\min_{\theta_0\in\Theta}$ of the per-coset smallness.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:cosetsum} (\cite[Lemma 12]{LaiSprang2023}), for $q_p\mid D$ and $i\ge2$ one has
+$D^i\zeta_p(i)=\sum_{p\nmid j}\omega(j/D)^{1-i}\zeta_p(i,j/D)$, a sum over $\varphi(D)$
+terms. By the reflection (K3), $\zeta_p(s,x)=\zeta_p(s,1-x)$, these pair up into
+$\varphi(D)/2$ independent classes. A single Hurwitz value is therefore a rational multiple
+of $\zeta_p(i)$ precisely when $\varphi(D)/2=1$, i.e.\ $\varphi(p^r)=2$, i.e.\
+$p^r\in\{3,4\}$. Concretely these are Beukers' identities
+$T_2(1/4)=4^3\zeta_2(3)$ and $T_3(1/3)=3^3\zeta_3(3)$
+\cite[Prop.~5.2]{Beukers2008}. The exceptional point is
+\cite[Lemma 9]{LSZ2025}: $\frac1{s-1}\int_{\ZZ_2}\dd t/(t+\tfrac12)^{s-1}=2^s\zeta_2(s)$,
+in which the single shift already produces $\zeta_2$ itself. Otherwise a single Hurwitz
+value spans a proper subspace and one must sum over $\Theta$; the $p$-adic valuation of a
+sum is at least the minimum of the valuations, with equality unless there is cancellation
+(tested in \S\ref{ss:hatch}).
+\end{proof}
+
+Theorem~\ref{thm:classification} is a hard finiteness statement: exactly three
+$(p,r)$-points in the entire family produce a two-term form for a single value from a single
+shift, and they are exactly the three points at which the three known measures
+\eqref{eq:three} live. It follows that any attack on $\zeta_p(w)$ with $p\ge5$ is
+\emph{necessarily} in regime T.
+
+\subsection{At \texorpdfstring{$p\ge5$}{p>=5} the smallness cancels the growth exactly}
+\label{ss:pge5}
+
+%% REFEREE [R1]: as drafted this proposition asserted margin = -E for EVERY rank-1
+%% configuration at p >= 5.  That is false, and the paper's own Finding~\ref{find:map1}
+%% refutes it: at (p,r,A,m,eps) = (5,1,4,1,1) with the four bricks on the four cosets
+%% j/5, ledger.py returns contributions (-1,-1,-1,+1/4) at the WORST coset, so
+%% A r + sum ctb = 4 - 11/4 = 5/4 and margin = (5/4) log 5 - E = -2.9882, which is
+%% exactly the (p,w) = (5,5) cell of that table.  The proof sketch below already carried
+%% the correct hypothesis ("if phi(p^r) > the number of distinct brick shifts"); it has
+%% now been promoted into the statement, and Remark~\ref{rem:pge5sharp} records the
+%% general bound and the exception.  Cor.~\ref{cor:noAhelp} is unaffected and is what
+%% carries the p >= 5 verdict in full generality.
+\begin{proposition}\label{prop:pge5}
+\DERIVED{}, and \VER{numerically at $p=5$, exact} For $p\ge5$, every rank-$1$ configuration
+of Definition~\ref{def:family} is in regime T. If moreover $\varphi(p^r)$ exceeds the number
+of distinct numerator-brick shifts --- so that some coset carries no aligned brick --- then
+at that coset
+\[
+ A\,r+\sum_c\ctb_c(\theta_0)=A\,r-A\,r=0\quad\text{exactly},
+\]
+whence $\alpha=G$ and $\marg=-E$. That is: \emph{the $p$-adic smallness of the twisted sum
+exactly cancels the archimedean growth of its coefficients, and the entire $d_n^E$
+denominator cost is unpaid.}
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+In regime T the shifts must be the full set $\{\nu/p^r:p\nmid\nu\}$
+(Proposition~\ref{prop:F1}), and $\alpha$ is a minimum over $\theta_0\in\Theta$. A numerator
+brick at $\theta'_c$ is aligned with exactly one coset, namely $\theta_0\equiv-\theta'_c$.
+Under the hypothesis some $\theta_0$ has no aligned
+brick; at that coset each of the $A$ bricks contributes $-l''=-r$ by \eqref{eq:contrib},
+cancelling the $+Ar$ of \eqref{eq:alpha}, so $\alpha=v_p(C)\log p=G$ and
+$\marg=\alpha-G-E=-E$.
+\end{proof}
+
+\begin{remark}[what happens without the hypothesis]\label{rem:pge5sharp}
+\VER{exact, $p=5$} The hypothesis is not vacuous and it is not automatic. It holds at the
+two cells that carry the headline of \S\ref{ss:map62} --- $\zeta_5(3)$ and $\zeta_7(3)$,
+where $A=2<\varphi(p)$ --- and there $\marg=-E=-3$ exactly. It fails as soon as the bricks
+can be spread over all cosets: at $p=5$, $r=1$, $A=4$, $m=1$, $\epsilon=1$ with the four
+bricks on the four cosets $j/5$, the worst coset still carries one aligned brick, the
+contributions are $(-1,-1,-1,+\tfrac14)$, and
+\[
+ \marg=\Bigl(4-\tfrac{11}4\Bigr)\log5-E=\tfrac54\log5-5=-2.9882 ,
+\]
+which is the $(p,w)=(5,5)$ entry of Finding~\ref{find:map1}. In general the correct
+statement is the ceiling of Corollary~\ref{cor:noAhelp}, $\marg\le A\,p\log p/(p-1)^2-E$,
+which covers every $A$, $r$ and $m$ in regime T and is what the $p\ge5$ verdict rests on.
+\end{remark}
+
+\begin{finding}[the alignment law made visible]\label{find:alignvisible}
+\VER{exact $v_p(S_n)$; configurations and $n$ stated} Predicted $\alpha/\log p$ against
+measured $v_p(S_n)/n$:
+\begin{center}
+\tabsmall
+\begin{tabular}{lcc}
+\toprule
+configuration & predicted $\alpha/\log p$ & measured $v_p(S_n)/n$\\
+\midrule
+LSZ, $\zeta_2(5)$ & $16$ & $16.00$ ($n=8,16,32$)\\
+Lai $B_n$, $s=0$ / $s=1$ & $12$ / $18$ & $12.06$ / $18.25$ ($n=16$); Lai prints $12$, $18$\\
+Lai $A_n$, $s=0$ / $s=1$ (mixed alignment) & $20$ / $30$ & $20.04$ / $30.1$ ($n=24$); Lai prints $20$, $30$\\
+Beukers $p=3$, weight $3$ & $6$ & $5.88\to6$ ($n=32$)\\
+$p=5$, $4$ bricks split over $2$ cosets & $7.5$ & $7.50$ ($n=12$)\\
+$p=5$, $4$ bricks all on coset $1/5$, \emph{evaluated at} $2/5$ & $5=v_5(C)$ & $5.33$ ($n=12$) $\Rightarrow$ rate $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The last line is Proposition~\ref{prop:pge5} in one row: the same form is $p^{-10n}$-small
+at one coset and only $p^{-5n}$-small at the other, and $5=v_5(C)$ means the $p$-adic
+smallness has been exactly cancelled by the archimedean growth.
+\end{finding}
+
+\begin{corollary}[raising $A$ does not help]\label{cor:noAhelp}
+\DERIVED{} The aligned fraction is at most $1/c_p$ with $c_p=\varphi(q_p)/2$, so
+\[
+ \marg\le A\cdot\frac{p\log p}{(p-1)^2}-E,
+\]
+and $p\log p/(p-1)^2<1$ for every $p\ge3$, with values
+$0.823959,\ 0.502949,\ 0.378371,\ 0.263768,\ 0.231558$ at $p=3,5,7,11,13$, while $E\ge A$.
+Raising $r$ multiplies the number of cosets and makes matters worse. Hence \emph{positive
+margins at $p\ge5$ exist only at rank $\ge2$}, which is exactly the ``one of
+$\zeta_p(3),\dots,\zeta_p(c_p)$'' regime of \cite{LLS2025} --- never an individual
+value, never a measure.
+\end{corollary}
+
+\subsection{What is actually missing at \texorpdfstring{$p\ge5$}{p>=5}}\label{ss:simultaneity}
+
+It is worth being precise about the nature of the $p\ge5$ obstruction, because it is not
+what one might guess.
+
+\begin{remark}\label{rem:beukersirr}
+Beukers already proves the \emph{individual Hurwitz values} irrational for every $p\ge3$:
+$\omega(a)^{-2}H_p(3,a,p)\notin\QQ$, \cite[Cor.~11.3]{Beukers2008}, his condition (C)
+holding for every prime power $F>2$. What is missing at $p\ge5$ is therefore not smallness
+of a $p$-adic linear form in \emph{some} Hurwitz value; it is \emph{simultaneity}. By
+\cite[Prop.~5.2]{Beukers2008},
+\[
+ T_5(1/5)=\tfrac{5^3}2\bigl(\zeta_5(3)-L_5(3,\chi_5)\bigr),\qquad
+ T_5(2/5)=\tfrac{5^3}2\bigl(\zeta_5(3)+L_5(3,\chi_5)\bigr),
+\]
+so $\zeta_5(3)$ sits in a two-dimensional space spanned by two Beukers-irrational numbers
+and is their half-sum. Beukers' machine proves each of $T_5(1/5),T_5(2/5)$ irrational; it
+does not prove their half-sum irrational, and one rational function can be $p$-adically
+aligned with only one coset at a time.
+\end{remark}
+
+This is the sharpest statement we can make of the $p\ge5$ problem: it is a
+\emph{simultaneous} approximation problem in disguise, and the family of
+Definition~\ref{def:family} is a rank-$1$ instrument.

@@ -1,0 +1,12 @@
+w5_allp.json: 178 terms
+--- (V1) exact ladder check ---
+  (V1) n=1..34 : 0 mismatches
+--- (V2) depth sweep  d5 <= 1+min(vT,2) ---
+  p= 5 cells=   54  max d5=3  violations=0  min slack=0
+  p= 7 cells=  139  max d5=3  violations=0  min slack=0
+  (V2) total violations: 0
+--- (V3) (GAP-5) cell-by-cell ---
+  p= 5 cells=  270  FAILING v_p(diff)>=1+d5: 0  worst=None
+  p= 7 cells=  707  FAILING v_p(diff)>=1+d5: 0  worst=None
+  (V3) total violations: 0
+VERDICT: V1=0 V2=0 V3=0  ->  ALL CLEAN

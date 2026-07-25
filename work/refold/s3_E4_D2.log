@@ -1,0 +1,16 @@
+SMAX=4  DP=2  DM=3  MODE=E  q=33554393
+closed symbol masks with <= 4 symbols: 235
+survive the p-adic pole test: 235 / 235
+    [0/235]  ['N1']  cols=46 rows=196 rank=32 excess=164  incons  (0 s)
+    [25/235]  ['A1(l)', 'B1(l)']  cols=106 rows=256 rank=101 excess=155  incons  (18 s)
+    [50/235]  ['B1(l)', 'N3']  cols=106 rows=256 rank=91 excess=165  incons  (46 s)
+    [75/235]  ['A1(k)', 'A2(l)']  cols=106 rows=256 rank=101 excess=155  incons  (72 s)
+    [100/235]  ['A1(l)', 'B2(k)']  cols=106 rows=256 rank=101 excess=155  incons  (119 s)
+    [125/235]  ['A2(k)', 'N1', 'N3']  cols=206 rows=356 rank=173 excess=183  incons  (160 s)
+    [150/235]  ['A3(k)', 'B3(k)', 'N3']  cols=206 rows=356 rank=189 excess=167  incons  (201 s)
+    [175/235]  ['B1(k)', 'B3(k)']  cols=106 rows=256 rank=100 excess=156  incons  (240 s)
+    [200/235]  ['B2(k)', 'N1', 'N3']  cols=206 rows=356 rank=173 excess=183  incons  (279 s)
+    [225/235]  ['C1', 'N1', 'N2']  cols=206 rows=356 rank=144 excess=212  incons  (323 s)
+UNDETERMINED (too few excess equations): 0
+
+RESULT: 0 / 235 letter sets with <= 4 symbols are CONSISTENT (poly coefficients deg <= 2, letter degree <= 3)

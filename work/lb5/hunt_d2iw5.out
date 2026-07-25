@@ -1,0 +1,15 @@
+[d2iw5] basis=1211  |Sk|=142 |Sc|=44 |Sn|=79  N=1100
+   n=100  4s
+   n=200  20s
+   n=300  58s
+   n=400  146s
+   n=500  258s
+   n=600  444s
+   n=700  707s
+   n=800  1035s
+   n=900  1571s
+   n=1000  2239s
+   n=1100  2908s
+[d2iw5] matrix 1100x1211 in 2908s
+[d2iw5] rank(M)=790  rank([M|b])=790  INCONSISTENT=False  excess=310
+[d2iw5] written

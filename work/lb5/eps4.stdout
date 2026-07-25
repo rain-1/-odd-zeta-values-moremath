@@ -1,0 +1,69 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:= 
+In[2]:= 
+In[3]:= 
+In[4]:= START Fri 24 Jul 2026 23:46:15
+
+In[5]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[6]:= HF loaded Fri 24 Jul 2026 23:46:16
+
+In[7]:= 
+In[8]:= 
+In[9]:= 
+In[10]:= V: loaded ann #3 ct1tel #2 ct2tel #1
+
+In[11]:= 
+In[12]:= V1 ann gen 1 -> 0
+V1 ann gen 2 -> 0
+V1 ann gen 3 -> 0
+
+In[13]:= 
+In[14]:= V2 ct1 pair 1 -> 0
+V2 ct1 pair 2 -> 0
+
+In[15]:= 
+In[16]:= 
+In[17]:= 
+In[18]:= 
+In[19]:= 
+In[20]:= 
+In[21]:= 
+In[22]:= V3 telescoper coeffs vs L_BZ, ratio list = {1, 1, 1, 1}
+
+In[23]:= V3 Expand[cf3 - unit*LBZ] = {0, 0, 0, 0}
+
+In[24]:= STAGE V DONE Fri 24 Jul 2026 23:46:16
+
+In[25]:= 
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= 
+In[31]:= 
+In[32]:= 
+In[33]:= --- r_g17 ---
+r_g17 ann #3 t=0s
+r_g17 ct1 #2 t=0s
+r_g17 gb #2 t=0s
+r_g17 ct2 #1 t=33s  TOTAL=34s
+r_g17 telescoper ORDER=4
+
+In[34]:= --- r_ak17 ---
+r_ak17 ann #3 t=0s
+r_ak17 ct1 #2 t=0s
+r_ak17 gb #2 t=0s
+r_ak17 ct2 #1 t=32s  TOTAL=32s
+r_ak17 telescoper ORDER=4
+
+In[35]:= ALL DONE Fri 24 Jul 2026 23:47:22
+
+In[36]:= 
+In[37]:= 

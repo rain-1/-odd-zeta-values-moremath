@@ -1,0 +1,8 @@
+basis 448 cols, N=600, primes [33554393, 33554467, 33554383], order=pref
+condition rows 212
+  q=33554393 rank=342 inconsistent=False (74.9 s)
+  q=33554467 rank=342 inconsistent=False (76.1 s)
+  q=33554383 rank=342 inconsistent=False (70.5 s)
+reconstruction failures: 0 ; nonzero terms: 155
+wrote w5_exIII.json : 155 terms
+denominator residual factors (after removing 2,3,5,7,11,13): [1, 71]

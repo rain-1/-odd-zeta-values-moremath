@@ -1,0 +1,15 @@
+basis 1210 columns, 194 k-monomials, 12 c-monomials
+  n=100  4.1 s
+  n=200  16.1 s
+  n=300  37.9 s
+  n=400  81.6 s
+  n=500  151.3 s
+  n=600  248.1 s
+  n=700  377.8 s
+  n=800  537.5 s
+  n=900  688.2 s
+  n=1000  865.3 s
+  n=1100  1076.8 s
+  n=1200  1330.5 s
+  n=1300  1630.0 s
+saved /home/ubuntu/fable-episode-2/zeta-math-2/work/p1g/M_R_1300_33554393.npy  (1630.0 s)

@@ -1,0 +1,173 @@
+%% =====================================================================
+\section{The margin map}\label{sec:map}
+%% =====================================================================
+
+We now assemble the whole picture. The map is presented three times: at rank $1$ with the
+ledger's $E$ (which is an independent re-derivation, and reproduces the earlier table
+exactly); at rank $1$ with the corrected, measured $\Etrue$; and along the rank axis, which
+is where the dichotomy becomes visible.
+
+\subsection{Rank 1, ledger \texorpdfstring{$E$}{E}}\label{ss:map61}
+
+\begin{finding}\label{find:map1}
+\COMP{$r\le3$, $A\le14$, $0\le m\le w+2$, $\epsilon\in\{0,1\}$, all coset spreads,
+$p\le13$, $w\le9$} Best rank-$1$ margin per cell, with $E=A+m+1-\epsilon$:
+\begin{center}
+\tabsmall
+\begin{tabular}{lcccc}
+\toprule
+$p\ \backslash\ w$ & $3$ & $5$ & $7$ & $9$\\
+\midrule
+$2$ & $\mathbf{+1.1589}$ (known) & $\mathbf{+0.5452}$ (known) & $-1.4548$ & $-3.4548$\\
+$3$ & $\mathbf{+0.2958}$ (known) & $-1.7042$ & $-3.7042$ & $-5.7042$\\
+$5$ & $-3.0000$ & $-2.9882$ & $-4.9882$ & $-6.9882$\\
+$7$ & $-3.0000$ & $-4.0000$ & $-6.0000$ & $-8.0000$\\
+$11$ & $-3.0000$ & $-4.0000$ & $-6.0000$ & $-8.0000$\\
+$13$ & $-3.0000$ & $-4.0000$ & $-6.0000$ & $-8.0000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The three known results come out positive, and \emph{only} those three.
+\end{finding}
+
+\begin{remark}[on reading this table]\label{rem:readtable}
+The optimised quantity is the margin, not $\mu$. A cell may attain its best margin at a
+configuration with a larger $\alpha$, hence a worse $\mu$, than the published one; the
+$\mu$-values quoted in Theorem~\ref{thm:optimal} and in Finding~\ref{find:map2} are those of
+the published configurations, which are separately optimal for $\mu$ over $\mathcal C$
+(\S\ref{ss:optimal}).
+\end{remark}
+
+\begin{remark}[a fitted law that misled]\label{rem:fitted}
+An earlier working extrapolation of the ledger, $\marg=(w+3)\log p/(p-1)-w$, matches all
+three anchors and predicts $\zeta_5(3)$ at $-0.586$ and $\zeta_3(5)$ at $-0.606$. It is an
+artefact. The anchors sit at $(p,r,A)=(2,2,2)$, $(2,1,4)$ and $(3,1,2)$, and
+$A(r+\tfrac1{p-1})$ happens to equal $(w+3)/(p-1)$ at exactly those points. The fit has no
+$r$, no $A$, and --- fatally --- no coset count. The first-principles values are $-3.000$ and
+$-1.704$. We record this because the $0.586$ figure drove a subsequent modelling step, and
+its refutation is the content of \S\ref{ss:tension}.
+\end{remark}
+
+\subsection{Rank 1, corrected \texorpdfstring{$\Etrue$}{E-true}}\label{ss:map62}
+
+\begin{finding}[the honest map]\label{find:map2}
+\COMP{as Finding~\ref{find:map1}, with $E$ measured per Finding~\ref{find:R1R2}}
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{cccccccl}
+\toprule
+$p$ & $w$ & ledger $\marg$ & $\Eled$ & $\Etrue$ & \textbf{true} $\marg$ & $\mu$ & configuration\\
+\midrule
+$2$ & $3$ & $+1.1589$ & $3$ & $3$ & $\mathbf{+1.1589}$ & $7.17740$ & $r{=}1$, $A{=}3$, $m{=}0$, $\epsilon{=}1$ \ \textbf{[published]}\\
+$2$ & $5$ & $+0.5452$ & $5$ & $5$ & $\mathbf{+0.5452}$ & $20.34265$ & $r{=}1$, $A{=}4$, $m{=}1$, $\epsilon{=}1$ \ \textbf{[published]}\\
+$2$ & $7$ & $-1.4548$ & $7$ & $\mathbf{11}$ & $\mathbf{-5.4548}$ & --- & $r{=}1$, $A{=}4$, $m{=}3$, $\epsilon{=}1$\\
+$2$ & $9$ & $-3.4548$ & $9$ & $15$ & $-9.4548$ & --- & $r{=}1$, $A{=}4$, $m{=}5$, $\epsilon{=}1$\\
+$3$ & $3$ & $+0.2958$ & $3$ & $3$ & $\mathbf{+0.2958}$ & $22.28145$ & $r{=}1$, $A{=}2$, $m{=}0$, $\epsilon{=}0$ \ \textbf{[published]}\\
+$3$ & $5$ & $-1.7042$ & $5$ & $6$ & $\mathbf{-3.8028}$ & --- & $r{=}3$, $A{=}4$, $m{=}1$, $\epsilon{=}0$\\
+$3$ & $7$ & $-3.7042$ & $7$ & $12$ & $-8.7042$ & --- & $r{=}1$, $A{=}2$, $m{=}4$, $\epsilon{=}0$\\
+$3$ & $9$ & $-5.7042$ & $9$ & $16$ & $-12.7042$ & --- & $r{=}1$, $A{=}2$, $m{=}6$, $\epsilon{=}0$\\
+$5$ & $3$ & $-3.0000$ & $3$ & $3$ & $\mathbf{-3.0000}$ & --- & $r{=}1$, $A{=}2$, $m{=}0$, $\epsilon{=}0$\\
+$5$ & $5$ & $-2.9882$ & $5$ & $6$ & $-3.9882$ & --- & $r{=}1$, $A{=}4$, $m{=}1$, $\epsilon{=}0$\\
+$5$ & $7$ & $-4.9882$ & $7$ & $12$ & $-9.9882$ & --- & $r{=}1$, $A{=}4$, $m{=}3$, $\epsilon{=}0$\\
+$5$ & $9$ & $-6.9882$ & $9$ & $16$ & $-13.9882$ & --- & $r{=}1$, $A{=}4$, $m{=}5$, $\epsilon{=}0$\\
+$7$ & $3$ & $-3.0000$ & $3$ & $3$ & $\mathbf{-3.0000}$ & --- & $r{=}1$, $A{=}2$, $m{=}0$, $\epsilon{=}0$\\
+$7$ & $5$ & $-4.0000$ & $4$ & $5$ & $-5.0000$ & --- & $r{=}1$, $A{=}3$, $m{=}1$, $\epsilon{=}0$\\
+$7$ & $7$ & $-6.0000$ & $6$ & $11$ & $-11.0000$ & --- & $r{=}1$, $A{=}3$, $m{=}3$, $\epsilon{=}0$\\
+$7$ & $9$ & $-8.0000$ & $8$ & $15$ & $-15.0000$ & --- & $r{=}1$, $A{=}3$, $m{=}5$, $\epsilon{=}0$\\
+$11,13$ & $3/5/7/9$ & $-3/{-}4/{-}6/{-}8$ & & $3/5/11/15$ & $-3/{-}5/{-}11/{-}15$ & --- & as $p=7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{finding}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{The headline row.} The three published results are exactly the three positive cells,
+and they are untouched by every correction. After the correction the nearest miss in the
+whole family is no longer $\zeta_2(7)$: it is $\zeta_5(3)$ and $\zeta_7(3)$ at exactly
+$-3.000$ --- and those two are the \emph{hardest} cells structurally
+(Proposition~\ref{prop:pge5}, whose hypothesis holds at both, since $A=2<\varphi(p)$ there),
+%% REFEREE [R1]: Prop.~\ref{prop:pge5} is conditional after repair; its hypothesis does
+%% hold at these two cells, which is why the deficit really is -E exactly here.
+because there the deficit is $-E$ exactly, with the $p$-adic
+smallness cancelling the archimedean growth to the last digit.
+\end{minipage}}\end{center}
+
+\begin{remark}[the one inherited assumption]\label{rem:R2inherit}
+Rule (R2) of Finding~\ref{find:R1R2} was verified for the single-shift shape; the
+multi-coset spreads at $p\ge5$ inherit it by assumption, not by measurement. The $p\ge5$
+conclusions do not depend on it: those cells are $3$ to $15$ short either way. It matters
+only for the $\Etrue$ column at $p\ge5$, and it is Open Lemma~\ref{ol:R2}.
+\end{remark}
+
+\subsection{The rank axis, and the dichotomy}\label{ss:rankaxis}
+
+\begin{finding}[best margin at rank $\le R$]\label{find:map3}
+\COMP{as Finding~\ref{find:map1}; ledger $E$; $R>1$ gives only ``one of $R$ values''}
+\begin{center}
+\tabsmall
+\begin{tabular}{cccccc|c}
+\toprule
+$p$ & $w$ & rank $1$ & rank $2$ & rank $3$ & rank $4$ & min rank for $\marg>0$\\
+\midrule
+$2$ & $3$ & $+1.1589$ & $+3.2383$ & $+4.3178$ & $+5.3972$ & $\mathbf1$\\
+$2$ & $5$ & $+0.5452$ & $+2.2383$ & $+4.3178$ & $+5.3972$ & $\mathbf1$\\
+$2$ & $7$ & $-1.4548$ & $\mathbf{+1.3178}$ & $+2.7041$ & $+4.3972$ & $\mathbf2$\\
+$2$ & $9$ & $-3.4548$ & $-0.6822$ & $\mathbf{+2.0904}$ & $+3.4766$ & $\mathbf3$\\
+\midrule
+$3$ & $3$ & $+0.2958$ & $+1.9438$ & $+2.5917$ & $+3.2396$ & $\mathbf1$\\
+$3$ & $5$ & $-1.7042$ & $\mathbf{+0.9438}$ & $+2.5917$ & $+3.2396$ & $\mathbf2$\\
+$3$ & $7$ & $-3.7042$ & $-1.0562$ & $\mathbf{+0.5917}$ & $+2.2396$ & $\mathbf3$\\
+$3$ & $9$ & $-5.7042$ & $-3.0562$ & $-1.4083$ & $\mathbf{+0.2396}$ & $\mathbf4$\\
+\midrule
+$5$ & $3$ & $-3.0000$ & $-1.9882$ & $-1.9882$ & $-1.9882$ & none $\le4$\\
+$5$ & $5$ & $-2.9882$ & $-1.9882$ & $-1.9882$ & $-1.9882$ & none $\le4$\\
+$5$ & $7$ & $-4.9882$ & $-3.9882$ & $-3.9882$ & $-3.9764$ & none $\le4$\\
+$5$ & $9$ & $-6.9882$ & $-5.9882$ & $-4.9764$ & $-3.9764$ & none $\le4$\\
+\midrule
+$7$ & $3$ & $-3.0000$ & $-3.0000$ & $-3.0000$ & $-3.0000$ & none $\le4$\\
+$7$ & $5$ & $-4.0000$ & $-4.0000$ & $-3.7298$ & $-3.7298$ & none $\le4$\\
+$7$ & $7$ & $-6.0000$ & $-4.7298$ & $-3.7298$ & $-3.7298$ & none $\le4$\\
+$7$ & $9$ & $-8.0000$ & $-6.7298$ & $-5.7298$ & $-5.7298$ & none $\le4$\\
+\midrule
+$11,13$ & $3/5/7/9$ & \multicolumn{4}{c|}{$-3/-4/-6/-8$, identical at every rank $\le4$} & none $\le4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{finding}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{The dichotomy.} Read the table as: \emph{at $p\in\{2,3\}$ the wall is rank; at
+$p\ge5$ the wall is size.} At $p\in\{2,3\}$ every cell becomes positive at a large enough
+rank --- the form exists and is small enough, it just carries too many zeta values. At
+$p\ge5$ no cell becomes positive at any rank $\le4$: the form is not small enough, and rank
+is irrelevant. These are two different obstructions, and the campaign literature has been
+treating them as one.
+\end{minipage}}\end{center}
+
+\subsection{The structural ceiling}\label{ss:ceiling}
+
+\begin{finding}\label{find:ceiling}
+\DERIVED{} + \VER{exact} The rank-$1$ ceiling of Corollary~\ref{cor:noAhelp} per prime:
+\begin{center}
+\tabsmall
+\begin{tabular}{ccl}
+\toprule
+$p$ & $p\log p/(p-1)^2$ & verdict at rank $1$\\
+\midrule
+$2$ & $1.386294$ & size never binds: $\marg=M(2\log2-1)-m\to+\infty$\\
+$3$ & $0.823959$ & $\marg\le A(0.8240-1)-1<0$ for every $A$\\
+$5$ & $0.502949$ & $\marg\le A(0.5029-1)-1<0$\\
+$7$ & $0.378371$ & $\marg\le A(0.3784-1)-1<0$\\
+$11$ & $0.263768$ & $<0$\\
+$13$ & $0.231558$ & $<0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The single number $p\log p/(p-1)^2$ crossing $1$ between $p=2$ and $p=3$ is the dichotomy in
+one line.
+\end{finding}
+
+Note that the ceiling is a \emph{derived} bound, valid for every $A$, $r$ and $m$ in regime
+T, and hence covers the whole rank-$1$ half of the map at $p\ge3$ without any search. The
+searches of \S\ref{sec:scan} are needed only for the rank axis, for $\Etrue$, and for the
+$p=2$ cells.

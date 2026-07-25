@@ -1,0 +1,23 @@
+==============================================================================
+s_recur  M1 : can a polynomial operator kill the zeta_2(5) coefficient
+             of the M=6 rank-2 family and keep the zeta_2(7) one?
+==============================================================================
+
+[R0] CONTROL -- the operator search on a family where the answer is known:
+     M=4, m=1 (LSZ) has rank 1 already; rho_3 is the only coefficient.
+     A kernel for rho_3 must therefore also kill rho_0 (S == 0).
+
+[R1] single symmetric form, shifts only (the minimal recurrence route)
+      built 79 rho-vectors up to n=84 in 3s
+      unknowns C=55, equations=75, rank=55 -> dim ker(rho_3) = 0
+      of the 0 kernel vectors, 0 give a NON-zero rho_5
+
+[R2] wider operator: L=6, D=12
+      built 117 rho-vectors up to n=122 in 10s
+      unknowns C=91, equations=111, rank=91 -> dim ker(rho_3) = 0
+      of the 0 kernel vectors, 0 give a NON-zero rho_5
+
+[R3] the inset cone: 4 distinct forms, shifts L=3, D=8
+      built 668 rho-vectors up to n=172 in 108s
+      unknowns C=144, equations=164, rank=78 -> dim ker(rho_3) = 66
+      of the 66 kernel vectors, 0 give a NON-zero rho_5

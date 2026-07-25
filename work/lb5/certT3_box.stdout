@@ -1,0 +1,32 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                 
+In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= START Sat 25 Jul 2026 02:32:10  MODE=box
+
+In[7]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[8]:= HF loaded
+
+In[9]:= In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= ratio checks (must be {3, 3/2, 1/2}): {3, 3/2, 1/2}
+
+In[13]:= In[13]:= 
+In[14]:= 
+In[15]:= Psi HarmonicNumber count (must be 8): 8
+
+In[16]:= In[16]:= 
+In[17]:= EE3 LeafCount 132917
+
+In[18]:= In[18]:= 
+In[19]:= 

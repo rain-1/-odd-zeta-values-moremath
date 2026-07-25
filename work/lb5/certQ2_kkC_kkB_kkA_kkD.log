@@ -1,0 +1,15 @@
+START Sat 25 Jul 2026 06:03:49  JOBS=kk:C,kk:B,kk:A,kk:D DMAX=10 MEMCAP=3000000000
+HF loaded
+rho,sigma loaded 10553 1819
+=== JOB kk:C === Sat 25 Jul 2026 06:03:49
+  CHECK kk : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 12489  obj/T 10611  lambda -HH[k] + 3*(-HH[k] + HH[-k + n]) + HH[k + n]
+  kk:C ann #3 t=34s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 06:04:24
+  ann rank-ish: 3 generators
+  kk:C ct1 #2 t=33s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 06:04:56
+  ct1 telescopers: 2
+  kk:C gb #2 t=2s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 06:04:58
+  gb === ct1tel ? True
+  ann(lambda) #3
+  kk:C annL #4 t=500s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 06:13:19
+  ct2 FREE t=421s -> none  Sat 25 Jul 2026 06:20:19

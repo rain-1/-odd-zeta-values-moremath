@@ -1,0 +1,21 @@
+lf=OpenWrite["/home/ubuntu/fable-episode-2/zeta-math-2/work/apery_ct.log"];
+log[x__]:=(WriteString[lf,x,"\n"];Flush[lf]);
+Get["/home/ubuntu/riscergosum/RISC/HolonomicFunctions.m"];
+log["HF ok"];
+rA=1; qA=5; etA={3,1,1,1,1,1};
+h0A=etA[[1]] nn+2; hjA=Table[etA[[j+1]] nn+1,{j,1,qA}];
+termA=(h0A+2 tt) Gamma[h0A+tt]^rA Product[Gamma[hjA[[j]]+tt],{j,1,qA}]/
+      (Gamma[1+tt]^rA Product[Gamma[1+h0A-hjA[[j]]+tt],{j,1,qA}]);
+annA=Annihilator[termA,{S[nn],S[tt]}]; log["ann #",Length[annA]];
+ctA=CreativeTelescoping[annA,S[tt]-1,{S[nn]}];
+log["telescoper #ops=",Length[ctA[[1]]]];
+ap=ApplyOreOperator[ctA[[1,1]],F[nn]];
+ord=Max[Cases[ap,F[nn+a_.]:>a,Infinity]];
+coeffs=Table[Coefficient[ap,F[nn+k]],{k,0,ord}];
+D0=Max[Exponent[coeffs,nn]];
+cp=Sum[Coefficient[coeffs[[k+1]],nn,D0]*lam^k,{k,0,ord}];
+log["ORDER=",ToString[ord]," DEG=",ToString[D0]];
+log["applied op = ",ToString[InputForm[ap]]];
+log["charpoly=",ToString[InputForm[Simplify[cp]]]];
+log["roots=",ToString[InputForm[N[lam/.Solve[cp==0,lam],8]]]];
+log["DONE"]; Close[lf]; Exit[];

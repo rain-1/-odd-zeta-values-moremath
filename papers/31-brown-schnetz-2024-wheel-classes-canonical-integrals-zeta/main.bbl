@@ -1,0 +1,307 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{SEVKM19}
+
+\bibitem[AB12]{AlexeevBrunyate}
+Valery Alexeev and Adrian Brunyate.
+\newblock Extending the {T}orelli map to toroidal compactifications of {S}iegel
+  space.
+\newblock {\em Invent. Math.}, 188(1):175--196, 2012.
+
+\bibitem[Ash24]{AshSharblies}
+Avner Ash.
+\newblock {On the cohomology of $\mathrm{SL}_n(\mathbb{Z})$}.
+\newblock {\em Preprint: arXiv:2402.08840}, Jan 2024.
+
+\bibitem[Bak11]{Baker}
+O.~Baker.
+\newblock The {J}acobian map on {O}uter space.
+\newblock {\em Ph.D Thesis, Cornell University. Available at
+  \url{https://ecommons.cornell.edu/handle/1813/30769}}, 2011.
+
+\bibitem[BB03]{BelkaleBrosnan}
+Prakash Belkale and Patrick Brosnan.
+\newblock Matroids, motives, and a conjecture of {K}ontsevich.
+\newblock {\em Duke Math. J.}, 116(1):147--188, 2003.
+
+\bibitem[BBC{\etalchar{+}}20]{TopWeightAg}
+M.~Brandt, J.~Bruce, M.~Chan, M.~Melo, G.~Moreland, and C.~Wolfe.
+\newblock On the top-weight rational cohomology of {$\mathcal{A}_g$}.
+\newblock {\em Preprint: arXiv:2012.02892}, 2020.
+
+\bibitem[BD21]{BrownDupont}
+Francis Brown and Cl\'{e}ment Dupont.
+\newblock Single-valued integration and superstring amplitudes in genus zero.
+\newblock {\em Comm. Math. Phys.}, 382(2):815--874, 2021.
+
+\bibitem[BEK06]{BEK}
+Spencer Bloch, H\'{e}l\`ene Esnault, and Dirk Kreimer.
+\newblock On motives associated to graph polynomials.
+\newblock {\em Comm. Math. Phys.}, 267(1):181--225, 2006.
+
+\bibitem[BL97]{BismutLott}
+Jean-Michel Bismut and John Lott.
+\newblock {Torus bundles and the group cohomology of
+  $\mathrm{GL}(N,\mathbb{Z})$}.
+\newblock {\em Journal of Differential Geometry}, 47(2):196 -- 236, 1997.
+
+\bibitem[BMV11]{BMV}
+Silvia Brannetti, Margarida Melo, and Filippo Viviani.
+\newblock On the tropical {T}orelli map.
+\newblock {\em Adv. Math.}, 226(3):2546--2586, 2011.
+
+\bibitem[BNM01]{GraphComplexComputations}
+D.~Bar-Natan and B.~McKay.
+\newblock Graph cohomology: an overview and some computations.
+\newblock {\em available at
+  \url{http://www.math.toronto.edu/~drorbn/papers/GCOC/GCOC.ps}}, 2001.
+
+\bibitem[Bor74]{Borel}
+Armand Borel.
+\newblock Stable real cohomology of arithmetic groups.
+\newblock {\em Ann. Sci. \'{E}cole Norm. Sup. (4)}, 7:235--272 (1975), 1974.
+
+\bibitem[Bor23]{BorinskyTMCQ}
+Michael Borinsky.
+\newblock Tropical {M}onte {C}arlo quadrature for {F}eynman integrals.
+\newblock {\em Annales de l'Institut Henri Poincar{\'{e}} D}, 10(4):635--685,
+  {J}an 2023.
+
+\bibitem[BPP20]{BanksPanzerPym}
+Peter Banks, Erik Panzer, and Brent Pym.
+\newblock Multiple zeta values in deformation quantization.
+\newblock {\em Invent. Math.}, 222(1):79--159, 2020.
+
+\bibitem[Bro10]{PeriodsFeynman}
+Francis C.~S. Brown.
+\newblock On the periods of some {F}eynman integrals.
+\newblock {\em Preprint: arXiv:0910.0114}, 2010.
+
+\bibitem[Bro12]{BrMTZ}
+Francis Brown.
+\newblock Mixed {T}ate motives over {$\mathbb{Z}$}.
+\newblock {\em Ann. of Math. (2)}, 175(2):949--976, 2012.
+
+\bibitem[Bro21]{BrSigma}
+Francis Brown.
+\newblock Invariant differential forms on complexes of graphs and {F}eynman
+  integrals.
+\newblock {\em SIGMA Symmetry Integrability Geom. Methods Appl.}, 17:Paper No.
+  103, 54, 2021.
+
+\bibitem[Bro23]{brown2023bordifications}
+Francis Brown.
+\newblock Bordifications of the moduli spaces of tropical curves and abelian
+  varieties, and unstable cohomology of $\mathrm{GL}_g(\mathbb{Z})$ and
+  $\mathrm{SL}_g(\mathbb{Z})$.
+\newblock {\em Preprint: arXiv:2309.12753}, 2023.
+
+\bibitem[BS12]{BrownSchnetz}
+Francis Brown and Oliver Schnetz.
+\newblock {A K3 in {$\phi^4$}}.
+\newblock {\em Duke Math. J.}, 161(10):1817--1862, 2012.
+
+\bibitem[BS22]{BorinskySchnetz}
+M.~Borinsky and O.~Schnetz.
+\newblock Graphical functions in even dimensions.
+\newblock {\em Comm.\ in Number Theory and Physics}, 16(3):515--614, 2022.
+
+\bibitem[CFP14]{ChurchFarbPutman}
+Thomas Church, Benson Farb, and Andrew Putman.
+\newblock A stability conjecture for the unstable cohomology of
+  {$\mathrm{SL}_n(\mathbb{Z})$}, mapping class groups, and
+  {$\mathrm{Aut}(F_n)$}.
+\newblock In {\em Algebraic topology: applications and new directions}, volume
+  620 of {\em Contemp. Math.}, pages 55--70. Amer. Math. Soc., Providence, RI,
+  2014.
+
+\bibitem[CGP22]{CGP}
+M.~Chan, S.~Galatius, and S.~Payne.
+\newblock Topology of moduli spaces of tropical curves with marked points.
+\newblock In {\em Facets of algebraic geometry. {V}ol. {I}}, volume 472 of {\em
+  London Math. Soc. Lecture Note Ser.}, pages 77--131. Cambridge Univ. Press,
+  Cambridge, 2022.
+
+\bibitem[CV03]{ConantVogtmann}
+James Conant and Karen Vogtmann.
+\newblock {On a theorem of Kontsevich}.
+\newblock {\em {Algebraic \& Geometric Topology}}, 3(2):1167 -- 1224, 2003.
+
+\bibitem[CV10]{CaporasoViviani}
+Lucia Caporaso and Filippo Viviani.
+\newblock Torelli theorem for graphs and tropical curves.
+\newblock {\em Duke Math. J.}, 153(1):129--171, 2010.
+
+\bibitem[Del89]{deligneP1}
+P.~Deligne.
+\newblock Le groupe fondamental de la droite projective moins trois points.
+\newblock In {\em Galois groups over $\mathbf{Q}$ ({B}erkeley, {CA}, 1987)},
+  volume~16 of {\em Math. Sci. Res. Inst. Publ.}, pages 79--297. Springer, New
+  York, 1989.
+
+\bibitem[Dri90]{Drinfeld}
+V.~G. Drinfeld.
+\newblock On quasitriangular quasi-{H}opf algebras and on a group that is
+  closely connected with {$\mathrm{Gal}(\overline{\mathbb{Q}}/{\mathbb{ Q}})$}.
+\newblock {\em Algebra i Analiz}, 2(4):149--181, 1990.
+
+\bibitem[EVGS13]{ElbazVincentGanglSoule}
+Philippe Elbaz-Vincent, Herbert Gangl, and Christophe Soul\'{e}.
+\newblock Perfect forms, {K}-theory and the cohomology of modular groups.
+\newblock {\em Adv. Math.}, 245:587--624, 2013.
+
+\bibitem[GPS16]{GolzPanzerSchnetz}
+Marcel Golz, Erik Panzer, and Oliver Schnetz.
+\newblock Graphical functions in parametric space.
+\newblock {\em Letters in Mathematical Physics}, 107(6):1177--1192, dec 2016.
+
+\bibitem[Gro13]{Grobner}
+Harald Grobner.
+\newblock Residues of {E}isenstein series and the automorphic cohomology of
+  reductive groups.
+\newblock {\em Compos. Math.}, 149(7):1061--1090, 2013.
+
+\bibitem[Hai02]{Hain3folds}
+Richard Hain.
+\newblock The rational cohomology ring of the moduli space of abelian 3-folds.
+\newblock {\em Math. Res. Lett.}, 9(4):473--491, 2002.
+
+\bibitem[Inc24]{Sloane}
+OEIS~Foundation Inc.
+\newblock Triangle read by rows, entry a036969 in the on-line encyclopedia of
+  integer sequences, published electronically at
+  \url{https://oeis.org/A036969}, 2024.
+
+\bibitem[Kon93]{Kontsevich93}
+Maxim Kontsevich.
+\newblock Formal (non)commutative symplectic geometry.
+\newblock In {\em The {G}elfand {M}athematical {S}eminars, 1990--1992}, pages
+  173--187. Birkh\"{a}user Boston, Boston, MA, 1993.
+
+\bibitem[KWv17]{SpectralSequenceGC2}
+Anton Khoroshkin, Thomas Willwacher, and Marko \v{Z}ivkovi\'{c}.
+\newblock Differentials on graph complexes.
+\newblock {\em Adv. Math.}, 307:1184--1214, 2017.
+
+\bibitem[Loo93]{Looijenga}
+Eduard Looijenga.
+\newblock Cohomology of {$\mathcal{M}_3$} and {$\mathcal{M}^1_3$}.
+\newblock In {\em Mapping class groups and moduli spaces of {R}iemann surfaces
+  ({G}\"{o}ttingen, 1991/{S}eattle, {WA}, 1991)}, volume 150 of {\em Contemp.
+  Math.}, pages 205--228. Amer. Math. Soc., Providence, RI, 1993.
+
+\bibitem[LS78]{LeeSzczarba}
+Ronnie Lee and R.~H. Szczarba.
+\newblock {On the torsion in $K_4(\mathbb{Z})$ and $K_5(\mathbb{Z})$}.
+\newblock {\em Duke Mathematical Journal}, 45(1):101 -- 129, 1978.
+
+\bibitem[MP14]{NAUTY}
+Brendan~D. McKay and Adolfo Piperno.
+\newblock Practical graph isomorphism, ii.
+\newblock {\em Journal of Symbolic Computation}, 60:94--112, 2014.
+
+\bibitem[MV12]{MeloViviani}
+Margarida Melo and Filippo Viviani.
+\newblock Comparing perfect and 2nd {V}oronoi decompositions: the matroidal
+  locus.
+\newblock {\em Math. Ann.}, 354(4):1521--1554, 2012.
+
+\bibitem[MZ08]{MikhalinZharkov}
+Grigory Mikhalkin and Ilia Zharkov.
+\newblock Tropical curves, their {J}acobians and theta functions.
+\newblock In {\em Curves and abelian varieties}, volume 465 of {\em Contemp.
+  Math.}, pages 203--230. Amer. Math. Soc., Providence, RI, 2008.
+
+\bibitem[Nag97]{Nagnibeda}
+Tatiana Nagnibeda.
+\newblock The {J}acobian of a finite graph.
+\newblock In {\em Harmonic functions on trees and buildings ({N}ew {Y}ork,
+  1995)}, volume 206 of {\em Contemp. Math.}, pages 149--151. Amer. Math. Soc.,
+  Providence, RI, 1997.
+
+\bibitem[OO21]{OdakaOshima}
+Yuji Odaka and Yoshiki Oshima.
+\newblock {\em Collapsing {K}3 surfaces, tropical geometry and moduli
+  compactifications of {S}atake, {M}organ-{S}halen type}, volume~40 of {\em MSJ
+  Memoirs}.
+\newblock Mathematical Society of Japan, Tokyo, 2021.
+
+\bibitem[Por23]{Portner}
+Jean-Luc Portner.
+\newblock {Computing the single-valued Knizhnik-Zamolodchikov associator}.
+\newblock {\em Master's Thesis, available at
+  \url{https://www.maths.ox.ac.uk/system/files/inline-files/Computing%20the%20single-valued%20Knizhnik-Zamolodchikov%20associator.pdf}},
+  2023.
+
+\bibitem[Pro15]{Procesi}
+Claudio Procesi.
+\newblock On the theorem of amitsur-levitzki.
+\newblock {\em Israel Journal of Mathematics}, 207:151--154, 2015.
+
+\bibitem[Ros76]{Rosset76}
+Shmuel Rosset.
+\newblock A new proof of the {A}mitsur-{L}evitski identity.
+\newblock {\em Israel J. Math.}, 23(2):187--188, 1976.
+
+\bibitem[RW14]{RossiWillwacher}
+Carlo~Antonio Rossi and Thomas Willwacher.
+\newblock {P. Etingof's conjecture about Drinfeld associators}.
+\newblock {\em Preprint: arXiv:1404.2047}, 2014.
+
+\bibitem[Sch14]{schnetz2014graphical}
+Oliver Schnetz.
+\newblock {Graphical functions and single-valued multiple polylogarithms}.
+\newblock {\em Commun. Num. Theor. Phys.}, 08:589--675, 2014.
+
+\bibitem[Sch18]{Schnetznumfunct}
+Oliver Schnetz.
+\newblock Numbers and functions in quantum field theory.
+\newblock {\em Phys. Rev. D}, 97:085018, Apr 2018.
+
+\bibitem[Sch21]{schnetz2021generalized}
+Oliver Schnetz.
+\newblock Generalized single-valued hyperlogarithms.
+\newblock {\em Preprint: arXiv:2111.11246}, 2021.
+
+\bibitem[Sch23]{7loops}
+Oliver Schnetz.
+\newblock ${\ensuremath{\phi}}^{4}$ theory at seven loops.
+\newblock {\em Phys. Rev. D}, 107:036002, Feb 2023.
+
+\bibitem[Sch24]{hlog}
+Oliver Schnetz.
+\newblock Hyperlog{P}rocedures,
+  \url{https://www.math.fau.de/person/oliver-schnetz/}, 2024.
+
+\bibitem[SEVKM19]{GL8}
+Mathieu~Dutour Sikiri\'c, Philippe Elbaz-Vincent, Alexander Kupers, and Jacques
+  Martinet.
+\newblock {Voronoi complexes in higher dimensions, cohomology of
+  $\mathrm{GL}_N(\mathbb{Z})$ for $N\geq 8$ and the triviality of
+  $K_8(\mathbb{Z})$}.
+\newblock {\em Preprint: arXiv:1910.11598}, 2019.
+
+\bibitem[Sou78]{SouleSL3}
+Christophe Soul\'e.
+\newblock {The cohomology of $\mathrm{SL}_3(\mathbb{Z})$}.
+\newblock {\em Topology}, 17(1):1--22, 1978.
+
+\bibitem[SS19]{SchlottererSchnetz}
+Oliver Schlotterer and Oliver Schnetz.
+\newblock Closed strings as single-valued open strings: a genus-zero
+  derivation.
+\newblock {\em Journal of Physics A: Mathematical and Theoretical},
+  52(4):045401, jan 2019.
+
+\bibitem[VZ22]{VanhoveZerbini}
+Pierre Vanhove and Federico Zerbini.
+\newblock Single-valued hyperlogarithms, correlation functions and closed
+  string amplitudes.
+\newblock {\em Adv. Theor. Math. Phys.}, 26(2):455--530, 2022.
+
+\bibitem[Wil15]{WillwacherGRT}
+Thomas Willwacher.
+\newblock M. {K}ontsevich's graph complex and the
+  {G}rothendieck-{T}eichm\"{u}ller {L}ie algebra.
+\newblock {\em Invent. Math.}, 200(3):671--760, 2015.
+
+\end{thebibliography}

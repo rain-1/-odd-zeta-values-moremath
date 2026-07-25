@@ -1,0 +1,16 @@
+[abl325] basis=789  |Sk|=55 |Sc|=12 |Sn|=74  N=1200
+   n=100  0s
+   n=200  2s
+   n=300  8s
+   n=400  18s
+   n=500  36s
+   n=600  67s
+   n=700  111s
+   n=800  174s
+   n=900  264s
+   n=1000  375s
+   n=1100  525s
+   n=1200  738s
+[abl325] matrix 1200x789 in 738s
+[abl325] rank(M)=554  rank([M|b])=554  INCONSISTENT=True  excess=646
+[abl325] written

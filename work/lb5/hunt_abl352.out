@@ -1,0 +1,16 @@
+[abl352] basis=711  |Sk|=55 |Sc|=19 |Sn|=33  N=1200
+   n=100  1s
+   n=200  4s
+   n=300  12s
+   n=400  26s
+   n=500  54s
+   n=600  100s
+   n=700  164s
+   n=800  260s
+   n=900  382s
+   n=1000  535s
+   n=1100  743s
+   n=1200  999s
+[abl352] matrix 1200x711 in 999s
+[abl352] rank(M)=486  rank([M|b])=486  INCONSISTENT=True  excess=714
+[abl352] written

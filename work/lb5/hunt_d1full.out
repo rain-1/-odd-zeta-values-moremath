@@ -1,0 +1,16 @@
+[d1full] basis=857  |Sk|=74 |Sc|=19 |Sn|=74  N=1200
+   n=100  1s
+   n=200  4s
+   n=300  13s
+   n=400  29s
+   n=500  56s
+   n=600  100s
+   n=700  162s
+   n=800  245s
+   n=900  355s
+   n=1000  495s
+   n=1100  663s
+   n=1200  901s
+[d1full] matrix 1200x857 in 901s
+[d1full] rank(M)=572  rank([M|b])=572  INCONSISTENT=False  excess=628
+[d1full] written

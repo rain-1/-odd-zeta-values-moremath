@@ -1,0 +1,20 @@
+basis 448
+patterns: {(0, 0, 0, 1): 1, (0, 0, 1, 1): 2, (0, 1, 1, 1): 3, (1, 0, 1, 1): 3, (1, 1, 0, 1): 3, (1, 1, 1, 1): 3, (1, 1, 1, 2): 3}
+condition rows built in 0s: 68 raw
+nonzero condition rows: 68 x 448
+   n=150  1s
+   n=300  8s
+   n=450  24s
+   n=600  58s
+q=33554393  rank(fit)=313  rank(cond)=42  rank(joint)=324  rank(aug)=324  INCONSISTENT=False
+   nullity after conditions = 124
+   n=150  1s
+   n=300  7s
+   n=450  23s
+   n=600  56s
+q=33554467  rank(fit)=313  rank(cond)=42  rank(joint)=324  rank(aug)=324  INCONSISTENT=False
+   nullity after conditions = 124
+reconstructed 126 nonzero coefficients (0 failed)
+primes in denominators: [2, 3, 5]
+factor-count histogram: {1: 2, 2: 12, 3: 40, 4: 48, 5: 24}
+written w5_canon2.json

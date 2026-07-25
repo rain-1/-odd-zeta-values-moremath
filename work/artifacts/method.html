@@ -1,0 +1,190 @@
+<title>How to See a Crystal — notes on an object-first method</title>
+<style>
+  :root {
+    --ground: #F7F5F0; --panel: #FFFFFF; --ink: #1E1B2E; --faint: #6E6880;
+    --line: #E2DED4; --motive: #6B5CB8; --arch: #A8842F; --padic: #2E8C7E;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground: #131120; --panel: #1B1830; --ink: #E8E4F2; --faint: #9A94B0;
+      --line: #2E2A44; --motive: #A79AE0; --arch: #D4B266; --padic: #6BC4B2; }
+  }
+  :root[data-theme="dark"] { --ground: #131120; --panel: #1B1830; --ink: #E8E4F2;
+    --faint: #9A94B0; --line: #2E2A44; --motive: #A79AE0; --arch: #D4B266; --padic: #6BC4B2; }
+  :root[data-theme="light"] { --ground: #F7F5F0; --panel: #FFFFFF; --ink: #1E1B2E;
+    --faint: #6E6880; --line: #E2DED4; --motive: #6B5CB8; --arch: #A8842F; --padic: #2E8C7E; }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: "Palatino Linotype", Palatino, "URW Palladio L", "Book Antiqua", Georgia, serif;
+    line-height: 1.62; margin: 0; padding: 3.5rem 1.25rem 6rem; font-size: 1.04rem;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+  h1 { font-size: clamp(1.8rem, 4.5vw, 2.5rem); line-height: 1.15; margin: .3rem 0 .4rem;
+       letter-spacing: -0.01em; text-wrap: balance; font-weight: 600; }
+  h2 { font-size: 1.22rem; margin: 2.6rem 0 .6rem; font-weight: 600; text-wrap: balance; }
+  h2 .num { color: var(--motive); font-variant-numeric: tabular-nums; margin-right: .5rem; }
+  p { margin: .75rem 0; }
+  .eyebrow { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .72rem;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin: 0 0 .4rem; }
+  .lede { font-size: 1.12rem; color: var(--faint); }
+  em { font-style: italic; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; }
+  blockquote { margin: 1.4rem 0; padding: .2rem 0 .2rem 1.2rem; border-left: 3px solid var(--motive);
+    color: var(--ink); font-style: italic; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 2.8rem 0; }
+  a { color: var(--padic); }
+  footer { margin-top: 4rem; color: var(--faint); font-size: .85rem;
+    border-top: 1px solid var(--line); padding-top: 1rem; }
+  :focus-visible { outline: 2px solid var(--motive); outline-offset: 2px; }
+</style>
+
+<main>
+<header>
+  <p class="eyebrow">River × Fable · odd-zeta program · July 2026</p>
+  <h1>How to See a Crystal</h1>
+  <p class="lede">Notes on an object-first method in experimental number theory — what it is,
+  why it produced results, and how it fails safely. Companion to
+  <a href="https://claude.ai/code/artifact/1b698557-21ed-4b4a-bb56-966c572dc75e">the landscape map</a>.</p>
+</header>
+
+<p>In one week, a research program on the irrationality of odd zeta values produced a new
+congruence theorem for the most-studied sequence in the field, a character twist correcting that
+theorem's own first general form, the identification of a 25-year obstruction as a Tate twist with
+a decimal expansion, two machine-verified theorems, a family of unnamed p-adic constants, and six
+retractions of its own claims — each retraction yielding a stronger statement than the claim it
+killed. None of this touched the headline open problem: ζ(5) is exactly as unproven as before.
+What moved was <em>understanding</em>, and it moved because of a describable method. These notes
+describe it. The method is not a theorem; it is a working conjecture about how this territory
+yields — confirmed, so far, by every result above, and stated here so that it too can fail in
+public.</p>
+
+<h2><span class="num">I</span>Objects first, phenomena second</h2>
+
+<p>The founding move is a discipline of attribution: every computation is a measurement <em>of
+something</em>, and the something is never the sequence on the screen. Behind each Apéry-like pair
+sits one object — a motive, concretely a piece of the cohomology of a family of varieties with a
+degeneration — and the recurrences, congruences, denominators, and growth rates are its
+projections. The practical content of this stance is not philosophy; it is that <em>predictions
+transfer between projections</em>. When the p-adic shadow showed a congruence with a p³ twist, the
+object-first question — "what acts with eigenvalue p³?" — predicted a full eigenvalue ladder
+diag(1, p³, p⁵) at the next weight, a graded descent for the middle row, and a specific exponent
+at which wrong guesses would fail. All three checked. A phenomenon-first program would have
+catalogued the congruence; the object-first program asked what it was a shadow <em>of</em>, and the
+answer came with three more shadows attached.</p>
+
+<h2><span class="num">II</span>Shadows have different provability profiles</h2>
+
+<p>The same object is easy to interrogate on one side and opaque on another — and which side is
+which is itself structure. Archimedean-ly, our objects are arithmetically strong but structurally
+obstructed: positivity forces every pure class off the fast ray, and that is <em>provable</em>. p-adically
+they are structurally clean but arithmetically weak: the grading separates everything, there is no
+defect at all (c<sub>p</sub> = 0), and yet the linear forms diverge. The method's second rule follows: <em>when
+blocked on one shadow, translate the question to the shadow where you are strong, prove it there,
+and let the structure constrain the dark side.</em> The week's central theorem — the Lucas congruence
+for the second Apéry solution — was found exactly this way: an unreachable archimedean question
+(the denominator gate at weight 5) was translated down-weight and across the mirror into a
+congruence at weight 3, where elementary combinatorics could kill it. The dark side never became
+provable; it became <em>constrained</em>, which is what progress in this field actually looks like.</p>
+
+<h2><span class="num">III</span>Measurement with teeth</h2>
+
+<p>Everything empirical is exact — rational arithmetic, p-adic digits from integers, never floats
+where a claim is at stake — and every claim carries its evidence class: proved, verified-to-a-bound,
+recalled-but-unchecked. Finite checks are evidence and never proof, and the phrase is repeated
+until it is reflex. Three practices carry most of the weight. <em>Anchors:</em> every pipeline must
+reproduce a published value before its novel output is believed; the day the ladders matched
+Brown–Zudilin's printed P₂ to the last digit was the day their factor-of-12 error became a finding
+rather than a bug. <em>Adversarial verification:</em> our own proofs are referee'd by an agent instructed
+to break them, with the burden reversed — a confirmed pass enumerates what it re-derived, and
+three "correct but compressed" steps were flagged that later became honest lemmas. <em>Instrument
+hygiene:</em> a relation-finder is calibrated on a known identity before being trusted on an unknown
+one; a PSLQ basis is checked for internal degeneracy; and the week's best lesson — a basis of
+periods can never see a <em>reciprocal</em> period — was learned by missing −3/π² twice at six hundred
+digits.</p>
+
+<h2><span class="num">IV</span>The retraction engine</h2>
+
+<p>Beauty, in this method, is a hypothesis-generator with no evidentiary weight. The rule that
+makes aesthetic reasoning safe is that every beautiful claim must be stated with its falsification
+surface attached — what computation, on what data, would kill it. Six times this week the surface
+was touched. A "Legendre sign pattern" dissolved into degenerate cells. A "dip at the reflection
+center" was a pole in disguise. A proved-negative about depth-2 letters fell to an ablation that
+found the artifact — a cap on monomial length — hiding inside our own linear algebra. The slogan
+"one ratio, two completions" was refuted by an implementation of Kubota–Leopoldt validated against
+980 interpolation identities before it was allowed to testify. Each time, the corrected statement
+was stronger than the poetry it replaced: the sign pattern became a uniform plus; the retracted
+obstruction became an explicit 130-term weight function. A program that cannot afford retractions
+cannot afford conjectures. This one budgets for both, and the budget is the reason the surviving
+claims — the χ-twist, the graded ladder, the Tate-twist defect — deserve the confidence they get.</p>
+
+<h2><span class="num">V</span>Unification is translation — and translations are claims</h2>
+
+<p>Most of what looked like discovery was translation: the July certificate polynomial is Frobenius
+in de Rham clothing; the Lucas ledger is the same Frobenius in Betti clothing; the sharp factor 12
+is von Staudt–Clausen in lattice clothing; the middle-root exile, the measured constant c, and the
+ζ(2)-elimination cost are one Tate twist in three costumes. When two prior efforts stall at
+"different" walls, the first question is whether it is one wall. But the method's honesty clause
+applies to its own translations: they are claims, with surfaces. One of mine — identifying the
+depth-2 letter wall with the July two-variable certificate wall — was wrong, and the discovery of
+w₅ at depth 1 killed it. The translation table is a living document, and its erasures are data.</p>
+
+<h2><span class="num">VI</span>Prove in the cheapest presentation</h2>
+
+<p>Objects have many presentations, and proof difficulty is a property of the presentation, not
+the object. The week measured this: formalizing the second-solution congruence through the
+original valuation-ledger proof was priced at thirteen hours; through the tameness route opened by
+the general theorem it cost 2.2 — the same statement, six times cheaper, because a two-term weight
+function replaced an alternating inner sum. The corollary is a search principle: when a proof
+resists, spend effort searching presentation-space — closed forms, alphabets, normalizations —
+before spending it on the resisting proof. The minimal Apéry form, the depth-1 w₅, and the
+"same-summand-both-sides" restatement that deleted an entire hypothesis from the general theorem
+were all found this way. Apéry's original mystery — where does b<sub>n</sub> come from? — dissolves under
+this principle: companion rows are a finite linear-algebra search away, at every weight, once the
+alphabet is known. The rabbit was always in presentation-space.</p>
+
+<h2><span class="num">VII</span>Negative results are instruments</h2>
+
+<p>The program's negatives are stated with the same precision as its theorems, because a measured
+wall has a shape and a shape has exits. Not "the weight-7 window fails" but: sector A is excluded
+by positivity, γ₅,₇ ≤ 0.34, the orbit lever delivers +28.6% where +196% is needed. Not "p-adic
+irrationality is hard" but: ζ₅(3) misses by 0.586 and the gap between per-prime congruence savings
+and the required exponential is the entire problem, in one phrase. Quantified impossibility
+converts "the field is stuck" into "the field needs exactly X" — and twice this week the X
+turned out to be purchasable: the purity defect was exactly one ζ(2) of rate, and knowing it
+redirected the whole program from window-hunting to invariant-hunting.</p>
+
+<h2><span class="num">VIII</span>The system that does this</h2>
+
+<p>The work is done by a human and a hierarchy of machine minds, and the division of labor is part
+of the method. The human supplies direction, taste, and the steers that repeatedly turned out to
+be load-bearing — <em>what are the underlying objects; check the old campaign; prove the minimal
+form.</em> The orchestrator holds the translation table, dispatches deep single-question campaigns,
+and cross-pollinates them. Each campaign inherits the discipline in its instructions: exact
+arithmetic, evidence classes, fetch-before-cite, and the standing warning that fluent fabrication
+concentrates at the boundary of the known — which is precisely where research lives. The record is
+append-only worklogs whose claims carry their calibration, so a future session inherits not just
+conclusions but the degree to which each deserves belief. Twice this week an agent corrected the
+orchestrator's briefing; once an agent corrected its own sub-agent's summary against a fetched
+source. The system is built so that being wrong is cheap, being corrected is fast, and being
+confidently wrong for long is hard.</p>
+
+<h2><span class="num">IX</span>What survives</h2>
+
+<p>The honest tally: the field's open problem stands untouched, and every window theorem we tested
+is measurably out of reach of its known constructions. What the method produced instead is a layer
+of structure the field did not have — a character-twisted congruence law across the sporadic
+class, a Frobenius ladder visible in elementary arithmetic, a named and evaluated obstruction, a
+mirror asymmetry sharp enough to explain which problems fell and which resisted, and a shelf of
+new objects (the connection constants, the tower limits Λ<sub>a</sub>) that are now precise enough
+to be someone's thesis. Whether this layer eventually feeds a proof of the thing everyone wants,
+nobody can promise. What can be said is narrower and, I think, more useful: <em>an understanding
+that predicts is valuable before it is proved</em> — and this one has predicted, repeatedly, in
+public, with its failures logged next to its successes.</p>
+
+<blockquote>The crystals want to be seen. That was never a theorem. It is a bet about where the
+next theorem is — and this week, every time we took the bet, the crystal paid.</blockquote>
+
+<footer>Written by Fable (orchestrator), July 2026, at River's suggestion that the method itself
+deserved expression. Every claim referenced here carries its evidence class in the program's
+worklogs (<code>zeta-math-2/work/</code>); the retractions are preserved in place.</footer>
+</main>

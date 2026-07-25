@@ -1,0 +1,9 @@
+START Sat 25 Jul 2026 07:41:44  ORD=lk DMAX=5 MEMCAP=2500000000 ANNCAP=2700 LADDERCAP=3600
+HF loaded
+vtilde HarmonicNumber instances (must be 11): 11   distinct symbols S (must be 10): 10
+vtilde has a C letter ? False   (must be False)
+obj = T*vtilde  LeafCount 91  distinct symbols 10
+=== D1 Annihilator[T*vtilde] === Sat 25 Jul 2026 07:41:45
+  D1 ann : MEMORY ABORT after 1991s  Sat 25 Jul 2026 08:14:56
+D1 DID NOT RETURN.
+ALL DONE Sat 25 Jul 2026 08:14:56

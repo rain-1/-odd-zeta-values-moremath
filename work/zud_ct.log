@@ -1,0 +1,9 @@
+START Fri 24 Jul 2026 18:48:28
+HF ok Fri 24 Jul 2026 18:48:28
+=== GATE Apery zeta3 (sum form) ===
+Apery ann ready #2 in 0s
+Apery telescoper order=1 deg=3 in 0s
+Apery charpoly: 34*lam
+Apery char roots: {0}
+Apery expected: order 2, roots ~ 33.97 and 0.0294 ((1+-sqrt2)^4)
+=== ZUDILIN r=3 q=13 (zeta5..11) ===

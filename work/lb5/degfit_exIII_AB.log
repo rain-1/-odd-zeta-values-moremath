@@ -1,0 +1,7 @@
+MODE=exIII  K=AB C=C N=N   basis 448 cols   N=600 q=33554393
+degree histogram: {1: 4, 2: 40, 3: 132, 4: 162, 5: 110}
+built design matrix (120.6 s) -> /home/ubuntu/fable-episode-2/zeta-math-2/work/lb5/DF_AB_C_N_600_33554393.npz
+  D<=2 : cols=44    rank(fit)=41   fitINCONS=True  condrows=66   rank(joint)=42   nullity=2    INCONSISTENT=True  defect=1  (0.0 s)
+  D<=3 : cols=176   rank(fit)=151  fitINCONS=True  condrows=163  rank(joint)=160  nullity=16   INCONSISTENT=True  defect=1  (0.4 s)
+  D<=4 : cols=338   rank(fit)=269  fitINCONS=True  condrows=212  rank(joint)=292  nullity=46   INCONSISTENT=True  defect=1  (1.2 s)
+  D<=5 : cols=448   rank(fit)=313  fitINCONS=False condrows=212  rank(joint)=342  nullity=106  INCONSISTENT=False defect=0  (1.8 s)

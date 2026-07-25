@@ -1,0 +1,8 @@
+ann #2
+tele #1
+ORDER=2 coeff degrees={3, 3, 3}
+applied=(-1 - 3*nn - 3*nn^2 - nn^3)*F[nn] + (117 + 231*nn + 153*nn^2 + 34*nn^3)*F[1 + nn] + (-8 - 12*nn - 6*nn^2 - nn^3)*F[2 + nn]
+charpoly(top-deg)=-1 + 34*lam - lam^2
+roots={0.0294372515228594143797536170754815114`10., 33.9705627484771405856`10.}
+expected roots (1+-sqrt2)^4 = {33.97056275, 0.02943725152}
+DONE

@@ -1,0 +1,434 @@
+{
+ "01-rivoal-2000-infinite-irrational-odd": {
+  "arxiv_id": "math/0008051v1",
+  "title": "La fonction Zeta de Riemann prend une infinite de valeurs irrationnelles aux entiers impairs",
+  "authors": [
+   "Tanguy Rivoal"
+  ],
+  "abstract": "We provide a lower bound for the dimension of the vector space spanned by 1 and by the values of the Riemann Zeta function at the first odd integers. As a consequence, the Zeta function takes infinitely many irrational values at odd integers.",
+  "published": "2000-08-07",
+  "updated": "2000-08-07",
+  "url": "https://arxiv.org/abs/math/0008051",
+  "journal_ref": null,
+  "doi": "10.1016/S0764-4442(00)01624-4"
+ },
+ "02-rivoal-2001-one-of-zeta5-to-zeta21": {
+  "arxiv_id": "math/0104221v2",
+  "title": "Irrationalite d'au moins un des neuf nombres zeta(5),zeta(7),...,zeta(21)",
+  "authors": [
+   "Tanguy Rivoal"
+  ],
+  "abstract": "We prove that there is at least one irrationnal among the nine numbers zeta(5), zeta(7),..., zeta(21).",
+  "published": "2001-04-24",
+  "updated": "2001-04-25",
+  "url": "https://arxiv.org/abs/math/0104221",
+  "journal_ref": null,
+  "doi": "10.4064/aa103-2-5"
+ },
+ "03-zudilin-2001-irrationality-of-zeta-values": {
+  "arxiv_id": "math/0104249v1",
+  "title": "Irrationality of values of zeta-function",
+  "authors": [
+   "Wadim Zudilin"
+  ],
+  "abstract": "We present several results on the number of irrational and linear independent values among $ζ(s),ζ(s+2),...,ζ(s+2n)$, where $s>2$ is an odd integer and $n>0$ is an integer. The main tool in our proofs is a certain generalization of Rivoal's construction (math.NT/0008051, math.NT/0104221).",
+  "published": "2001-04-26",
+  "updated": "2001-04-26",
+  "url": "https://arxiv.org/abs/math/0104249",
+  "journal_ref": "Contemp. Research in Math. and Mech., Proc. 23rd Young Scientists' Conference (Moscow State University, April 9--14, 2001), Moscow, Publ. Dept. Mech. Math. MSU, 2001, Part 2, 127--135 (Russian)",
+  "doi": "10.1070/IM2002v066n03ABEH000387"
+ },
+ "04-zudilin-2002-arithmetic-of-linear-forms": {
+  "arxiv_id": "math/0206176v2",
+  "title": "Arithmetic of linear forms involving odd zeta values",
+  "authors": [
+   "Wadim Zudilin"
+  ],
+  "abstract": "A general hypergeometric construction of linear forms in (odd) zeta values is presented. The construction allows to recover the records of Rhin and Viola for the irrationality measures of $ζ(2)$ and $ζ(3)$, as well as to explain Rivoal's \"infinitely-many\" result (math.NT/0008051) and to prove that at least one of the four numbers $ζ(5)$, $ζ(7)$, $ζ(9)$, and $ζ(11)$ is irrational.",
+  "published": "2002-06-18",
+  "updated": "2002-06-21",
+  "url": "https://arxiv.org/abs/math/0206176",
+  "journal_ref": "J. Théorie Nombres Bordeaux 16:1 (2004), 251--291",
+  "doi": null
+ },
+ "05-fischler-2003-bourbaki-survey": {
+  "arxiv_id": "math/0303066v1",
+  "title": "Irrationalité de valeurs de zêta (d'après Apéry, Rivoal, ...)",
+  "authors": [
+   "Stéphane Fischler"
+  ],
+  "abstract": "This survey text deals with irrationality, and linear independence over the rationals, of values at positive odd integers of Riemann zeta function. The first section gives all known proofs (and connections between them) of Apéry's Theorem (1978) : $ζ(3)$ is irrational. The second section is devoted to a variant of the proof, published by Rivoal and Ball-Rivoal, that infinitely many $ζ(2n+1)$ are irrational. The end of this text deals with more quantitative statements.",
+  "published": "2003-03-05",
+  "updated": "2003-03-05",
+  "url": "https://arxiv.org/abs/math/0303066",
+  "journal_ref": "Séminaire Bourbaki 2002-2003 exposé no. 910 (Nov. 2002); Astérisque 294 (2004), 27-62",
+  "doi": null
+ },
+ "06-zudilin-2018-zeta5-to-zeta25-elementary": {
+  "arxiv_id": "1801.09895v2",
+  "title": "One of the Odd Zeta Values from $ζ(5)$ to $ζ(25)$ Is Irrational. By Elementary Means",
+  "authors": [
+   "Wadim Zudilin"
+  ],
+  "abstract": "Available proofs of result of the type 'at least one of the odd zeta values $ζ(5),ζ(7),\\dots,ζ(s)$ is irrational' make use of the saddle-point method or of linear independence criteria, or both. These two remarkable techniques are however counted as highly non-elementary, therefore leaving the partial irrationality result inaccessible to general mathematics audience in all its glory. Here we modify the original construction of linear forms in odd zeta values to produce, for the first time, an elementary proof of such a result - a proof whose technical ingredients are limited to the prime number theorem and Stirling's approximation formula for the factorial.",
+  "published": "2018-01-30",
+  "updated": "2018-03-29",
+  "url": "https://arxiv.org/abs/1801.09895",
+  "journal_ref": "SIGMA 14 (2018), 028, 8 pages",
+  "doi": "10.3842/SIGMA.2018.028"
+ },
+ "07-krattenthaler-zudilin-2018-hypergeometry-irrationality": {
+  "arxiv_id": "1802.08856v2",
+  "title": "Hypergeometry inspired by irrationality questions",
+  "authors": [
+   "Christian Krattenthaler",
+   "Wadim Zudilin"
+  ],
+  "abstract": "We report new hypergeometric constructions of rational approximations to Catalan's constant, $\\log2$, and $π^2$, their connection with already known ones, and underlying \"permutation group\" structures. Our principal arithmetic achievement is a new partial irrationality result for the values of Riemann's zeta function at odd integers.",
+  "published": "2018-02-24",
+  "updated": "2018-08-05",
+  "url": "https://arxiv.org/abs/1802.08856",
+  "journal_ref": "Kyushu J. Math. 73:1 (2019) 189-203",
+  "doi": "10.2206/kyushujm.73.189"
+ },
+ "08-sprang-2018-infinitely-many-elementary": {
+  "arxiv_id": "1802.09410v1",
+  "title": "Infinitely many odd zeta values are irrational. By elementary means",
+  "authors": [
+   "Johannes Sprang"
+  ],
+  "abstract": "In this small note, we provide an elementary proof of the fact that infinitely many odd zeta values are irrational. For the first time, this celebrated theorem been proven by Rivoal and Ball--Rivoal. The original proof uses highly non-elementary methods like the saddle-point method and Nesterenko's linear independence criterion. Recently, Zudilin has re-proven a slightly weaker form of his important result that at least one of the odd zeta values $ζ(5),ζ(7),ζ(9)$ and $ζ(11)$ is irrational, by elementary means. His new main ingredient are certain 'twists by half' of hypergeometric series. Generalizing this to 'higher twists' allows us to give a purely elementary proof of the result of Rivoal and Ball--Rivoal.",
+  "published": "2018-02-26",
+  "updated": "2018-02-26",
+  "url": "https://arxiv.org/abs/1802.09410",
+  "journal_ref": null,
+  "doi": null
+ },
+ "09-rivoal-zudilin-2018-note-on-odd-zeta": {
+  "arxiv_id": "1803.03160v1",
+  "title": "A note on odd zeta values",
+  "authors": [
+   "Tanguy Rivoal",
+   "Wadim Zudilin"
+  ],
+  "abstract": "Using a new construction of rational linear forms in odd zeta values and the saddle point method, we prove the existence of at least two irrational numbers amongst the 33 odd zeta values $ζ$(5), $ζ$(7),. .. , $ζ$(69).",
+  "published": "2018-03-08",
+  "updated": "2018-03-08",
+  "url": "https://arxiv.org/abs/1803.03160",
+  "journal_ref": "Séminaire Lotharingien de Combinatoire 81 (2020), Art. B81b, 13 pp",
+  "doi": null
+ },
+ "10-fischler-sprang-zudilin-2018-many-odd-zeta": {
+  "arxiv_id": "1803.08905v2",
+  "title": "Many odd zeta values are irrational",
+  "authors": [
+   "Stéphane Fischler",
+   "Johannes Sprang",
+   "Wadim Zudilin"
+  ],
+  "abstract": "Building upon ideas of the second and third authors, we prove that at least $2^{(1-\\varepsilon)\\frac{\\log s}{\\log\\log s}}$ values of the Riemann zeta function at odd integers between 3 and $s$ are irrational, where $\\varepsilon$ is any positive real number and $s$ is large enough in terms of $\\varepsilon$. This lower bound is asymptotically larger than any power of $\\log s$; it improves on the bound $\\frac{1-\\varepsilon}{1+\\log2}\\log s$ that follows from the Ball--Rivoal theorem. The proof is based on construction of several linear forms in odd zeta values with related coefficients.",
+  "published": "2018-03-23",
+  "updated": "2018-04-09",
+  "url": "https://arxiv.org/abs/1803.08905",
+  "journal_ref": "Compositio Math. 155 (2019) 938-952",
+  "doi": "10.1112/S0010437X1900722X"
+ },
+ "11-zudilin-2018-hypergeometric-integrals-linear-forms": {
+  "arxiv_id": "1804.04129v1",
+  "title": "Some hypergeometric integrals for linear forms in zeta values",
+  "authors": [
+   "Wadim Zudilin"
+  ],
+  "abstract": "We prove integral representations of the approximation forms in zeta values constructed in arXiv:1801.09895 and arXiv:1803.08905.",
+  "published": "2018-04-11",
+  "updated": "2018-04-11",
+  "url": "https://arxiv.org/abs/1804.04129",
+  "journal_ref": "Bull. Austral. Math. Soc. 98:3 (2018) 372--375",
+  "doi": "10.1017/S0004972718000503"
+ },
+ "12-lai-yu-2019-number-of-irrational-odd-zeta": {
+  "arxiv_id": "1911.08458v2",
+  "title": "A note on the number of irrational odd zeta values",
+  "authors": [
+   "Li Lai",
+   "Pin Yu"
+  ],
+  "abstract": "It is proved that, for all odd integer $s \\geqslant s_0(\\varepsilon)$, there are at least $\\big( c_0 - \\varepsilon \\big) \\frac{s^{1/2}}{(\\log s)^{1/2}} $ many irrational numbers among the following odd zeta values: $ζ(3),ζ(5),ζ(7),\\cdots,ζ(s)$. The constant $c_0 = 1.192507\\ldots$ can be expressed in closed form. The work is based on the previous work of Fischler, Sprang and Zudilin [FSZ19], improves the lower bound $2^{(1-\\varepsilon)\\frac{\\log s}{\\log\\log s}}$ therein. The main new ingredient is an optimal design for the zeros of the auxiliary rational functions, which relates to the inverse of Euler totient funtion.",
+  "published": "2019-11-19",
+  "updated": "2020-01-16",
+  "url": "https://arxiv.org/abs/1911.08458",
+  "journal_ref": "Compositio Math. 156 (2020) 1699-1717",
+  "doi": "10.1112/S0010437X20007307"
+ },
+ "13-lai-zhou-2021-at-least-two-zeta5-to-zeta35": {
+  "arxiv_id": "2103.00904v2",
+  "title": "At least two of $ζ(5),ζ(7),\\ldots,ζ(35)$ are irrational",
+  "authors": [
+   "Li Lai",
+   "Li Zhou"
+  ],
+  "abstract": "Let $ζ(s)$ be the Riemann zeta function. We prove the statement in the title, which improves a recent result of Rivoal and Zudilin by lowering $69$ to $35$. We also prove that at least one of $β(2),β(4),\\ldots,β(10)$ is irrational, where $β(s) = L(s,χ_4)$ and $χ_4$ is the Dirichlet character with conductor $4$.",
+  "published": "2021-03-01",
+  "updated": "2021-10-18",
+  "url": "https://arxiv.org/abs/2103.00904",
+  "journal_ref": null,
+  "doi": null
+ },
+ "14-fischler-2021-siegel-lemma-linear-independence": {
+  "arxiv_id": "2109.10136v3",
+  "title": "Linear independence of odd zeta values using Siegel's lemma",
+  "authors": [
+   "Stéphane Fischler"
+  ],
+  "abstract": "We prove that among 1 and the odd zeta values $ζ(3)$, $ζ(5)$, \\ldots, $ζ(s)$, at least $ 0.21 \\sqrt{s}/\\sqrt{\\log s}$ are linearly independent over the rationals, for any sufficiently large odd integer $s$. This is the first asymptotic improvement on the lower bound, logarithmic in $s$, obtained by Ball-Rivoal in 2001. The proof is based on Siegel's lemma to construct non-explicit linear forms in values at odd integers of the Riemann zeta function, instead of using explicit well-poised hypergeometric series. A new refinement of Siegel's linear independence criterion is applied, together with a multiplicity estimate (namely a generalization of Shidlovsky's lemma). The result is also adapted to deal with values of the first $s$ polylogarithms at a fixed algebraic point in the unit disk, improving bounds of Rivoal and Marcovecchio.",
+  "published": "2021-09-21",
+  "updated": "2025-11-27",
+  "url": "https://arxiv.org/abs/2109.10136",
+  "journal_ref": null,
+  "doi": null
+ },
+ "15-lai-sprang-2023-many-p-adic-odd-zeta": {
+  "arxiv_id": "2306.10393v2",
+  "title": "Many $p$-adic odd zeta values are irrational",
+  "authors": [
+   "Li Lai",
+   "Johannes Sprang"
+  ],
+  "abstract": "For any prime $p$ and $\\varepsilon>0$ we prove that for any sufficiently large positive odd integer $s$ at least $(c_p-\\varepsilon) \\sqrt{\\frac{s}{\\log s}}$ of the $p$-adic zeta values $ζ_p(3),ζ_p(5),\\dots,ζ_p(s)$ are irrational. The constant $c_p$ is positive and does only depend on $p$. This result establishes a $p$-adic version of the elimination technique used by Fischler--Sprang--Zudilin and Lai--Yu to prove a similar result on classical zeta values. The main difficulty consists in proving the non-vanishing of the resulting linear forms. We overcome this problem by using a new irrationality criterion.",
+  "published": "2023-06-17",
+  "updated": "2025-02-17",
+  "url": "https://arxiv.org/abs/2306.10393",
+  "journal_ref": null,
+  "doi": null
+ },
+ "16-lai-2024-improvements-ball-rivoal": {
+  "arxiv_id": "2407.14236v2",
+  "title": "Small improvements on the Ball-Rivoal theorem and its $p$-adic variant",
+  "authors": [
+   "Li Lai"
+  ],
+  "abstract": "We prove that the dimension of the $\\mathbb{Q}$-linear span of $1,ζ(3),ζ(5),\\ldots,ζ(s-1)$ is at least $(1.119 \\cdot \\log s)/(1+\\log 2)$ for any sufficiently large even integer $s$. This slightly refines a well-known result of Rivoal (2000) or Ball-Rivoal (2001). Quite unexpectedly, the proof only involves inserting the arithmetic observation of Zudilin (2001) into the original proof of Ball-Rivoal. Although this result is covered by a recent development of Fischler (2021+), our proof has the advantages of being simple and providing explicit non-vanishing small linear forms in $1$ and odd zeta values. Moreover, we establish the $p$-adic variant: for any prime number $p$, the dimension of the $\\mathbb{Q}$-linear span of $1,ζ_p(3),ζ_p(5),\\ldots,ζ_p(s-1)$ is at least $(1.119 \\cdot \\log s)/(1+\\log 2)$ for any sufficiently large even integer $s$. This is new, it slightly refines a result of Sprang (2020).",
+  "published": "2024-07-19",
+  "updated": "2025-01-29",
+  "url": "https://arxiv.org/abs/2407.14236",
+  "journal_ref": null,
+  "doi": null
+ },
+ "17-lai-2025-number-of-irrational-odd-zeta-II": {
+  "arxiv_id": "2501.05321v2",
+  "title": "A note on the number of irrational odd zeta values, II",
+  "authors": [
+   "Li Lai"
+  ],
+  "abstract": "We prove that there are at least $1.284 \\cdot \\sqrt{s/\\log s}$ irrational numbers among $ζ(3)$, $ζ(5)$, $ζ(7)$, $\\ldots$, $ζ(s-1)$ for any sufficiently large even integer $s$. This result improves upon the previous finding by a constant factor. The proof combines the elimination technique of Fischler-Sprang-Zudilin (2019) with the $Φ_n$ factor method of Zudilin (2001).",
+  "published": "2025-01-09",
+  "updated": "2025-01-12",
+  "url": "https://arxiv.org/abs/2501.05321",
+  "journal_ref": null,
+  "doi": null
+ },
+ "18-lai-sprang-zudilin-2025-irrationality-zeta2-of-5": {
+  "arxiv_id": "2505.05005v2",
+  "title": "A note on the irrationality of $ζ_2(5)$",
+  "authors": [
+   "Li Lai",
+   "Johannes Sprang",
+   "Wadim Zudilin"
+  ],
+  "abstract": "In a spirit of Apéry's proof of the irrationality of $ζ(3)$, we construct a sequence $p_n/q_n$ of rational approximations to the $2$-adic zeta value $ζ_2(5)$ which satisfy $0 < |ζ_2(5)-p_n/q_n|_2 < \\max\\{|p_n|,|q_n|\\}^{-1-δ}$ for an explicit constant $δ>0$. This leads to a new proof of the irrationality of $ζ_2(5)$, the result established recently by Calegari, Dimitrov and Tang using a different method. Furthermore, our approximations allow us to obtain an upper bound for the irrationality measure of this $2$-adic quantity; namely, we show that $μ(ζ_2(5)) \\le (16\\log2)/(8\\log2-5) = 20.342\\dots$.",
+  "published": "2025-05-08",
+  "updated": "2026-05-26",
+  "url": "https://arxiv.org/abs/2505.05005",
+  "journal_ref": null,
+  "doi": null
+ },
+ "19-brown-2014-irrationality-proofs-moduli-dinner-parties": {
+  "arxiv_id": "1412.6508v1",
+  "title": "Irrationality proofs for zeta values, moduli spaces and dinner parties",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "A simple geometric construction on the moduli spaces $\\mathcal{M}_{0,n}$ of curves of genus $0$ with $n$ ordered marked points is described which gives a common framework for many irrationality proofs for zeta values. This construction yields Apéry's approximations to $ζ(2)$ and $ζ(3)$, and for larger $n$, an infinite family of small linear forms in multiple zeta values with an interesting algebraic structure. It also contains a generalisation of the linear forms used by Ball and Rivoal to prove that infinitely many odd zeta values are irrational.",
+  "published": "2014-12-19",
+  "updated": "2014-12-19",
+  "url": "https://arxiv.org/abs/1412.6508",
+  "journal_ref": null,
+  "doi": null
+ },
+ "20-brown-zudilin-2022-cellular-rational-approx-zeta5": {
+  "arxiv_id": "2210.03391v3",
+  "title": "On cellular rational approximations to $ζ(5)$",
+  "authors": [
+   "Francis Brown",
+   "Wadim Zudilin"
+  ],
+  "abstract": "We analyse a certain family of cellular integrals, which are period integrals on the moduli space $\\mathcal{M}_{0,8}$ of curves of genus zero with eight marked points, and give rise to simultaneous rational approximations to $ζ(3)$ and $ζ(5)$. By exploiting the action of a large symmetry group on these integrals, we construct an infinite $effective$ sequence of rational approximations $p/q$ to $ζ(5)$ satisfying \\[ 0<\\bigg|ζ(5)-\\frac pq\\bigg|<\\frac1{q^{0.86}}. \\]",
+  "published": "2022-10-07",
+  "updated": "2026-01-29",
+  "url": "https://arxiv.org/abs/2210.03391",
+  "journal_ref": null,
+  "doi": null
+ },
+ "21-brown-2026-mellin-transfinite-diameter-rational-approx": {
+  "arxiv_id": "2604.20741v1",
+  "title": "Mellin transforms, transfinite diameter and rational approximations of integrals",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "We establish a higher-dimensional irrationality criterion for periods which are presented as Mellin integrals depending on many parameters. The criterion is stated as an upper bound on the multi-variate transfinite diameter of the image of the domain of integration under the Mellin arguments. Most of the paper is devoted to studying notions of transfinite diameter relative to very general multivariate Vandermonde matrices. As a proof of principle, we illustrate how this approach works with detailed computations in the case of a 5-parameter family of integrals for $ζ(2)$ on $\\mathcal{M}_{0,5}$, the moduli space of curves of genus 0 with 5 marked points. This yields a `higher-dimensional' proof of the irrationality of $ζ(2)$, based on an upper bound for a certain kind of transfinite diameter associated to $\\mathcal{M}_{0,5}$.",
+  "published": "2026-04-22",
+  "updated": "2026-04-22",
+  "url": "https://arxiv.org/abs/2604.20741",
+  "journal_ref": null,
+  "doi": null
+ },
+ "22-cresson-fischler-rivoal-multiple-hypergeom-polyzetas": {
+  "arxiv_id": "math/0609743v1",
+  "title": "Séries hypergéométriques multiples et polyzêtas",
+  "authors": [
+   "Jacky Cresson",
+   "Stephane Fischler",
+   "Tanguy Rivoal"
+  ],
+  "abstract": "We describe a theoretical and effective algorithm which enables us to prove that rather general hypergeometric series and integrals can be decomposed as linear combinations of multiple zeta values, with rational coefficients.",
+  "published": "2006-09-27",
+  "updated": "2006-09-27",
+  "url": "https://arxiv.org/abs/math/0609743",
+  "journal_ref": null,
+  "doi": null
+ },
+ "23-cresson-fischler-rivoal-symmetry-linear-forms-polyzetas": {
+  "arxiv_id": "math/0609744v2",
+  "title": "Phénomènes de symétrie dans des formes linéaires en polyzêtas",
+  "authors": [
+   "Jacky Cresson",
+   "Stephane Fischler",
+   "Tanguy Rivoal"
+  ],
+  "abstract": "We give two generalizations, in arbitrary depth, of the symmetry phenomenon used by Ball-Rivoal to prove that infinitely many values of Riemann $ζ$ function at odd integers are irrational. These generalizations concern multiple series of hypergeometric type, which can be written as linear forms in some specific multiple zeta values. The proof makes use of the regularization procedure for multiple zeta values with logarithmic divergence.",
+  "published": "2006-09-27",
+  "updated": "2007-02-12",
+  "url": "https://arxiv.org/abs/math/0609744",
+  "journal_ref": null,
+  "doi": null
+ },
+ "24-fischler-rivoal-2013-mzv-pade-vasilyev": {
+  "arxiv_id": "1309.2534v1",
+  "title": "Multiple zeta values, Padé approximation and Vasilyev's conjecture",
+  "authors": [
+   "Stephane Fischler",
+   "Tanguy Rivoal"
+  ],
+  "abstract": "Sorokin gave in 1996 a new proof that pi is transcendental. It is based on a simultaneous Padé approximation problem involving certain multiple polylogarithms, which evaluated at the point 1 are multiple zeta values equal to powers of pi. In this paper we construct a Padé approximation problem of the same flavour, and prove that it has a unique solution up to proportionality. At the point 1, this provides a rational linear combination of 1 and multiple zeta values in an extended sense that turn out to be values of the Riemann zeta function at odd integers. As an application, we obtain a new proof of Vasilyev's conjecture for any odd weight, concerning the explicit evaluation of certain hypergeometric multiple integrals; it was first proved by Zudilin in 2003.",
+  "published": "2013-09-10",
+  "updated": "2013-09-10",
+  "url": "https://arxiv.org/abs/1309.2534",
+  "journal_ref": null,
+  "doi": null
+ },
+ "25-brown-2011-mixed-tate-motives-over-Z": {
+  "arxiv_id": "1102.1312v1",
+  "title": "Mixed Tate motives over $\\Z$",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "We prove that the category of mixed Tate motives over $\\Z$ is spanned by the motivic fundamental group of $\\Pro^1$ minus three points. We prove a conjecture by M. Hoffman which states that every multiple zeta value is a $\\Q$-linear combination of $ζ(n_1,..., n_r)$ where $n_i\\in \\{2,3\\}$.",
+  "published": "2011-02-07",
+  "updated": "2011-02-07",
+  "url": "https://arxiv.org/abs/1102.1312",
+  "journal_ref": null,
+  "doi": null
+ },
+ "26-brown-2011-decomposition-motivic-mzv": {
+  "arxiv_id": "1102.1310v2",
+  "title": "On the decomposition of motivic multiple zeta values",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "We review motivic aspects of multiple zeta values, and as an application, we give an exact-numerical algorithm to decompose any (motivic) multiple zeta value of given weight into a chosen basis up to that weight.",
+  "published": "2011-02-07",
+  "updated": "2011-02-08",
+  "url": "https://arxiv.org/abs/1102.1310",
+  "journal_ref": null,
+  "doi": null
+ },
+ "27-brown-2013-depth-graded-motivic-mzv": {
+  "arxiv_id": "1301.3053v2",
+  "title": "Depth-graded motivic multiple zeta values",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "We study the depth filtration on multiple zeta values, the motivic Galois group of mixed Tate motives over $\\mathbb{Z}$ and the Grothendieck-Teichmüller group, and its relation to modular forms. Using period polynomials for cusp forms for $\\mathrm{SL}_2(\\mathbb{Z})$, we construct an explicit Lie algebra of solutions to the linearized double shuffle equations, which gives a conjectural description of all identities between multiple zeta values modulo $ζ(2)$ and modulo lower depth. We formulate a single conjecture about the homology of this Lie algebra which implies conjectures due to Broadhurst-Kreimer, Racinet, Zagier and Drinfeld on the structure of multiple zeta values and on the Grothendieck-Teichmüller Lie algebra.",
+  "published": "2013-01-14",
+  "updated": "2020-01-10",
+  "url": "https://arxiv.org/abs/1301.3053",
+  "journal_ref": null,
+  "doi": null
+ },
+ "28-brown-2013-single-valued-periods-and-mzv": {
+  "arxiv_id": "1309.5309v1",
+  "title": "Single-valued periods and multiple zeta values",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "The values at 1 of single-valued multiple polylogarithms span a certain subalgebra of multiple zeta values. In this paper, the properties of this algebra are studied from the point of view of motivic periods.",
+  "published": "2013-09-20",
+  "updated": "2013-09-20",
+  "url": "https://arxiv.org/abs/1309.5309",
+  "journal_ref": null,
+  "doi": null
+ },
+ "29-brown-2015-notes-on-motivic-periods": {
+  "arxiv_id": "1512.06410v3",
+  "title": "Notes on Motivic Periods",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "The second part of a set of notes based on lectures given at the IHES in 2015 on Feynman amplitudes and motivic periods.",
+  "published": "2015-12-20",
+  "updated": "2017-02-22",
+  "url": "https://arxiv.org/abs/1512.06410",
+  "journal_ref": null,
+  "doi": null
+ },
+ "30-brown-2014-motivic-periods-P1-minus-3-points": {
+  "arxiv_id": "1407.5165v1",
+  "title": "Motivic periods and the projective line minus three points",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "This is a review of the theory of the motivic fundamental group of the projective line minus three points, and its relation to multiple zeta values.",
+  "published": "2014-07-19",
+  "updated": "2014-07-19",
+  "url": "https://arxiv.org/abs/1407.5165",
+  "journal_ref": null,
+  "doi": null
+ },
+ "31-brown-schnetz-2024-wheel-classes-canonical-integrals-zeta": {
+  "arxiv_id": "2402.06757v3",
+  "title": "The wheel classes in the locally finite homology of $\\mathrm{GL}_n(\\mathbb{Z})$, canonical integrals and zeta values",
+  "authors": [
+   "Francis Brown",
+   "Oliver Schnetz"
+  ],
+  "abstract": "We compute the canonical integrals associated to wheel graphs, and prove that they are proportional to odd zeta values. From this we deduce that wheel classes define explicit non-zero classes in: the locally finite homology of the general linear group $\\GL_n(\\ZZ)$ in both odd and even ranks, the homology of the moduli spaces of tropical curves, and the moduli space of tropical abelian varieties. We deduce the existence of a doubly infinite family of auxiliary classes in the even commutative graph complex.",
+  "published": "2024-02-09",
+  "updated": "2025-01-13",
+  "url": "https://arxiv.org/abs/2402.06757",
+  "journal_ref": "Geom. Topol. 29 (2025) 4389-4447",
+  "doi": "10.2140/gt.2025.29.4389"
+ },
+ "32-brown-2026-nonlinear-geometry-of-mzv": {
+  "arxiv_id": "2604.22735v1",
+  "title": "Non-linear geometry of multiple zeta values",
+  "authors": [
+   "Francis Brown"
+  ],
+  "abstract": "Since their rediscovery in the 1990s, multiple zeta values have become ubiquitous in many areas of mathematics and physics. Their standard integral and sum representations can usually be traced back to a single source, namely the iterated integrals on the Riemann sphere with three punctures. We refer to such representations as the \\emph{linear} geometry of multiple zeta values, since the denominators of the corresponding integrands factor completely into linear terms. However, there also exist equally important and entirely distinct integral representations for multiple zeta values arising in mathematics and physics, in which matrix determinants appear in the denominator of the integrand. We call this the \\emph{non-linear} geometry of multiple zeta values. These lectures trace the origins of this non-linear geometry and provide an introductory journey through a range of topics including tropical geometry, the moduli spaces of tropical curves, Feynman integrals in quantum field theory, the general linear group of integer matrices, and the reduction theory of quadratic forms. In doing so, we propose a geometric framework for multiple zeta values based on such non-linear, determinantal representations and set out a number of open questions for future research.",
+  "published": "2026-04-24",
+  "updated": "2026-04-24",
+  "url": "https://arxiv.org/abs/2604.22735",
+  "journal_ref": null,
+  "doi": null
+ }
+}

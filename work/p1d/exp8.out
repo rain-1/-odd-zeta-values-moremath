@@ -1,0 +1,2 @@
+Lemma B (general a) test: 8247294 in-regime cells, Ghat-1 not in pZ_p: 0
+[1]+  Done                    cd /home/ubuntu/fable-episode-2/zeta-math-2/work/lb5 && nohup python3 /tmp/claude-1000/-home-ubuntu-fable-episode-2-zeta-math-2/65d6d51f-5045-4f1b-98cc-77989fc30264/scratchpad/solve_strong.py vt2 > /tmp/claude-1000/-home-ubuntu-fable-episode-2-zeta-math-2/65d6d51f-5045-4f1b-98cc-77989fc30264/scratchpad/vt2.out 2>&1

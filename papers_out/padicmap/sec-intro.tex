@@ -1,0 +1,305 @@
+%% =====================================================================
+\section{Introduction}\label{sec:intro}
+%% =====================================================================
+
+\subsection{The three known measures}\label{ss:three}
+
+Let $p$ be a prime and let $\zeta_p$ denote the Kubota--Leopoldt $p$-adic zeta function,
+normalised as in \cite{LSZ2025} so that $\zeta_p(s)=L_p(s,\omega^{1-s})$ for integers
+$s\ge2$. Only three $p$-adic irrationality \emph{measures} are on record. Writing
+$\mu(\xi)$ for the irrationality exponent of $\xi\in\Qp\setminus\QQ$ in the $p$-adic sense
+of Bel \cite{Bel2019}, they are
+\begin{equation}\label{eq:three}
+\begin{aligned}
+ \mu(\zeta_2(3)) &\le \frac{12\log2}{6\log2-3} = 7.177398\dots,\\
+ \mu(\zeta_3(3)) &\le \frac{6\log3}{3\log3-3} = 22.281447\dots,\\
+ \mu(\zeta_2(5)) &\le \frac{16\log2}{8\log2-5} = 20.342651\dots .
+\end{aligned}
+\end{equation}
+The first two are extracted in \cite[\S1]{LSZ2025} from Calegari's work \cite{Calegari2005}
+by way of Bel's lemma, or equivalently from Beukers \cite[Thm.~11.2]{Beukers2008}; the third
+is the main theorem of \cite{LSZ2025}. The corresponding irrationality statements go back to
+Calegari \cite{Calegari2005} and Beukers \cite{Beukers2008} for weight $3$, and to
+\cite{LSZ2025} for $\zeta_2(5)$; the many-values theorems of Lai--Sprang
+\cite{LaiSprang2023} and Lai \cite{Lai2024} produce irrationality of \emph{one of} a list,
+never a measure for an individual value.
+
+Every one of the constructions behind \eqref{eq:three} is \emph{totally symmetric}: the
+underlying rational function has all its numerator bricks of the same length and all its
+pole bricks of the same length, sitting on the same interval. In the archimedean world that
+is precisely the configuration on which the Rhin--Viola arithmetic group method
+\cite{RhinViola}, and its hypergeometric reformulation by Zudilin \cite{Zudilin2004}, buy
+\emph{nothing}: the orbit of a totally symmetric point is a single point
+(Proposition~\ref{prop:symzero}). The archimedean record $\mu(\zeta(3))\le5.51389062$ of
+Rhin and Viola lives instead at a strongly asymmetric point, where the group removes about
+$40\%$ of the denominator (\S\ref{ss:howmuch}).
+
+\subsection{The questions we answer}\label{ss:questions}
+
+Lai, Sprang and Zudilin end \cite{LSZ2025} with two explicit invitations. The first
+\cite[Final remarks]{LSZ2025}:
+
+\begin{quote}
+``Speaking about the irrationality measure for $\zeta_2(5)$ and also for the related
+$p$-adic zeta values $\zeta_2(3),\zeta_3(3)$, our construction in this note and the earlier
+ones in [Beukers, Calegari, Lai] exploit exclusively the so-called totally symmetric
+hypergeometric approximations (or their equivalents). It may certainly be of interest to
+take a step further and investigate more general hypergeometric series leading to rational
+approximations that depend not only on $n\in\ZZ_{\ge0}$ but on multiple integer parameters.
+Such generalisations are amenable to additional arithmetic manipulations, for example, to
+the use of the arithmetic group method as developed in the works of Rhin and Viola.''
+\end{quote}
+
+\noindent The second, after observing that Lai's and Beukers' two rational functions produce
+the \emph{same} linear forms in $1$ and $\zeta_2(3)$ \cite[Final remarks]{LSZ2025}:
+
+\begin{quote}
+``It is natural to expect a hypergeometric-type identity for the Volkenborn integrals behind
+the coincidence $S_n^{(\mathrm L)}=S_n^{(\mathrm B)}$.''
+\end{quote}
+
+\noindent Independently, Brown \cite[Rem.~47]{Brown2026} records a referee's question in the
+%% REFEREE [R13]: the quotation was truncated mid-sentence, silently promoting Brown's
+%% comma to a full stop and dropping the clause about prime cancellation already visible
+%% in his experiments -- which is material to \S\ref{ss:evade}(A).  Restored in full.
+same spirit for his determinant criterion: ``A referee asked the excellent question of
+whether the matrices $D_n$ can be designed to make use of the cancellation of primes in the
+method of Rhin--Viola. I do not know the answer to this question, but the numerical
+experiments to be discussed later clearly demonstrate a large degree of `prime
+cancellation' of possibly a different nature.''
+
+This paper answers the second question completely and the first question
+quantitatively --- the latter in the negative, but in a way that we believe is more useful
+than a positive answer of the expected size would have been, because it comes with a map.
+
+\subsection{Results}\label{ss:results}
+
+\smallskip\noindent\textbf{(A) The Transfer Principle} (Theorem~\ref{thm:transfer},
+\PROVED). Let $R\in\QQ(t)$ have poles only at non-positive integers and $\deg R\le-2$, with
+partial fractions $R(t)=\sum_{i,k}r_{i,k}/(t+k)^i$, and set
+\[
+ \rho_i:=\sum_k r_{i,k},\qquad
+ \rho_{0,\theta}:=-\sum_{i,k}r_{i,k}\sum_{\nu=0}^{k-1}(\nu+\theta)^{-i}.
+\]
+Then, with $\widetilde R$ a primitive of $R$,
+\[
+ \sum_{m\ge0}R(m+\theta)=\rho_{0,\theta}+\sum_{i\ge2}\rho_i\,\zeta(i,\theta),
+ \qquad
+ -\int_{\Zp}\widetilde R(t+\theta)\,\dd t
+   =\rho_{0,\theta}+\sum_{i\ge2}\rho_i\,\omega(\theta)^{1-i}\zeta_p(i,\theta),
+\]
+\emph{with the same rational numbers} $\rho_{0,\theta},\rho_2,\rho_3,\dots$. The two
+constructions differ only in which \emph{value} is attached to each $\rho_i$; the
+coefficient map $R\mapsto(\rho_{0,\theta},\rho_2,\rho_3,\dots)$ is literally the same
+$\QQ$-linear functional of the partial-fraction data. The immediate corollary
+(Corollary~\ref{cor:transfer}) is that every Rhin--Viola/Zudilin transfer identity, being an
+identity between the rational coefficients at two parameter points, is simultaneously an
+archimedean and a $p$-adic identity; likewise every denominator and integrality lemma. In
+particular the second LSZ question is answered by observing that no hypergeometric-type
+identity \emph{for the Volkenborn integrals} is needed: the identity lives on the rational
+coefficients, and the Volkenborn integral never sees it.
+
+\smallskip\noindent\textbf{(B) The group, made explicit and made $p$-adic}
+(\S\ref{sec:group}). For the weight-$3$ family we realise Zudilin's group
+$\Gp=\langle\mathfrak a_1,\mathfrak a_2,\mathfrak a_3,\mathfrak b,\mathfrak h\rangle$ of
+order $1920=|W(D_5)|$ \VER{BFS closure, exact}, exhibit its invariant in the
+$h$-parametrisation, and verify the transfer identity coefficientwise --- on both the
+rational part and the $\zeta(3)$-part --- at every point of the orbits of four directions,
+$1200/1200$ at the generic direction with $0$ failures \VER{4 directions, orbits of size
+$1,40,80,1920$}. Crucially for the $p$-adic application, the same test passes at
+\emph{half-integer} parameters, $780/780$ comparable points with $0$ failures: the mechanism
+is lattice-robust, not an accident of integrality. The savings function $\dgr$ is
+implemented and validated end to end by recovering Rhin and Viola's published
+$\mu(\zeta(3))\le5.51389062$ as $5.51389063$ \VER{$8$ digits}. A cross-tabulated sweep of a
+$37$-paper corpus for $p$-adic markers against group markers returns no paper using a
+Rhin--Viola group $p$-adically \VER{corpus of $37$ papers, \S\ref{ss:corpus}}.
+
+\smallskip\noindent\textbf{(C) The ledger and its validation} (\S\ref{sec:ledger},
+\S\ref{sec:validation}). We write down a parametrised Volkenborn construction containing, as
+exact special cases with their printed constants, the constructions of Beukers, Calegari
+(through Beukers' reformulation), Lai, Lai--Sprang, Lai--Lupu--Sprang and LSZ, and derive an
+exact cost ledger
+\[
+\begin{gathered}
+ G=v_p(C)\log p,\qquad
+ \alpha=\Bigl[v_p(C)+Ar+\min_{\theta_0\in\Theta}\sum_c\ctb_c(\theta_0)\Bigr]\log p,\\
+ \beta=G+E,\qquad \marg=\alpha-\beta ,
+\end{gathered}
+\]
+in which every component is separately derived and separately measured. Fed \emph{only} the
+parameter tuple, the ledger returns all three measures \eqref{eq:three} to every printed
+digit, plus four further independent anchors. This validation section is the load-bearing
+part of the paper's credibility: nothing downstream is calibrated.
+
+\smallskip\noindent\textbf{(D) The classification} (Theorem~\ref{thm:classification},
+\PROVED). A single Volkenborn form in $1$ and the \emph{full} value $\zeta_p(w)$, rather
+than in Hurwitz values $\zeta_p(w,\theta)$, exists exactly when $\varphi(p^r)=2$, i.e.\
+$p^r\in\{3,4\}$, plus the exceptional point $(p,r)=(2,1)$ where the single shift $\tfrac12$
+already \emph{is} the full $\zeta_2$. Otherwise the full twisted coset sum is forced, and
+the $p$-adic smallness becomes a minimum over $\varphi(p^r)$ cosets. At $p\ge5$, whenever
+$\varphi(p^r)$ exceeds the number of distinct numerator-brick shifts, that
+minimum is attained at a coset with no aligned brick, and then
+$Ar+\sum_c\ctb_c=0$ \emph{exactly}: the $p$-adic smallness cancels the archimedean growth
+to the last digit and the entire $d_n^E$ denominator cost goes unpaid, so $\marg=-E$
+(Proposition~\ref{prop:pge5}). Without that hypothesis the deficit is bounded rather than
+equal to $-E$ (Corollary~\ref{cor:noAhelp}, Remark~\ref{rem:pge5sharp}).
+%% REFEREE [R1]: this passage asserted margin = -E for every rank-1 configuration at
+%% p >= 5.  False: at (p,r,A,m,eps) = (5,1,4,1,1) with the four bricks on the four
+%% cosets j/5 the worst coset still carries one aligned brick, contributions
+%% (-1,-1,-1,+1/4), so A r + sum ctb = 1.25 and margin = 1.25 log 5 - E = -2.9882.
+%% That is the (p,w) = (5,5) cell of Finding~\ref{find:map1}.  Hypothesis restored.
+
+\smallskip\noindent\textbf{(E) Optimality of the three known measures}
+(Theorem~\ref{thm:optimal}, \COMP{stated cone}). Over the cone described precisely in
+\S\ref{ss:optdomain} --- all $O(1)$ insets of the bricks, all scaled (Rhin--Viola) insets,
+all rank reductions by polynomial-coefficient difference operators, and the whole
+$1920$-element group orbit --- the bounds \eqref{eq:three} are attained and cannot be
+improved:
+\[
+ \mu(\zeta_2(3))\le7.17739889912418,\quad
+ \mu(\zeta_3(3))\le22.28144795149432,\quad
+ \mu(\zeta_2(5))\le20.34265173891448,
+\]
+with $E$ and the archimedean growth \emph{measured} rather than modelled, so that any
+$\Phi_n$-type or Rhin--Viola saving actually present is already counted. As stressed in
+\S\ref{ss:scope}, this is optimality over a family, not an absolute statement.
+
+\smallskip\noindent\textbf{(F) The rank wall} (\S\ref{ss:rank}). For the very-well-poised
+$p=2$ family a parity law forces $\rho_i=0$ whenever $i+M$ is even
+(Proposition~\ref{prop:parity}), whence the whole ledger collapses to
+$\marg(M,m)=2M\log2-(M+m)$, which tends to $+\infty$: \emph{size never binds at $p=2$}. The
+sole obstruction is that the form carries $\lfloor(M-1)/2\rfloor$ zeta values. Removing a
+coefficient requires a difference operator with polynomial coefficients; five searches over
+inset cones (dimensions $144,210,144,144,112$) return $0$ out of $300$ kernel vectors that
+keep the wanted coefficient, against positive controls at $300/300$
+\VER{$\FF_q$, $q=2^{61}-1$, every hit re-verified over $\QQ$}.
+
+\smallskip\noindent\textbf{(G) The shut hatch} (\S\ref{ss:hatch}). The only place where the
+$p\ge5$ verdict could be overturned inside this parameter space is cancellation between
+cosets, since $\alpha=\min_j$ is an inequality. Exact computation of every $S_n(j/p^r)$
+shows the plain and all $\omega$-twisted sums beat the per-coset minimum by at most $3$
+\emph{absolutely}, not per $n$; and the Smith-normal-form hyperplane depth of the coset
+vectors is bounded by $28$ and constant in $n$, while the requirement grows like $E\cdot n$
+\VER{$p\in\{5,7\}$, $r\in\{1,2\}$, $A\in\{2,3,4\}$, $m\in\{0,1\}$, $n\le30$}.
+
+\smallskip\noindent\textbf{(H) The map and the dichotomy} (\S\ref{sec:map}). Putting the
+above together gives a complete margin table over $p\le13$, $w\le9$ and rank $\le4$, in two
+versions: with the ledger's $E$, and with the corrected, measured $\Etrue$. The headline is
+a dichotomy that the campaign literature has been treating as one obstruction:
+\begin{center}
+\emph{at $p\in\{2,3\}$ the binding wall is rank; at $p\ge5$ it is size.}
+\end{center}
+After the $E$-correction the nearest misses in the whole family are $\zeta_5(3)$ and
+$\zeta_7(3)$ at exactly $-3.000$, and those are structurally the \emph{hardest} cells, since
+there the deficit is $-E$ exactly.
+
+\smallskip\noindent\textbf{(I) The structural finding} (\S\ref{ss:tension}). Bel's $p$-adic
+criterion requires $\alpha>\text{growth}+\text{denominators}$, whereas the archimedean
+Rhin--Viola criterion requires only $C_0>C_2$: the archimedean coefficient growth $C_1$
+enters the archimedean \emph{measure} but never the archimedean \emph{irrationality
+condition}, while $p$-adically it must be paid. And $C_1=0$ holds exactly on the degenerate
+locus where the numerator bricks overlie the poles --- which is exactly where the group
+saving $\dgr$ vanishes. \emph{$\dgr>0$ and $C_1=0$ have disjoint support.} Measured,
+$C_1/\bud$ is $1.175$, $0.969$, $1.073$ at three test directions, each alone exceeding the
+entire available $\dgr/\bud\le0.44$.
+
+\subsection{Scope of the optimality claims}\label{ss:scope}
+
+We state this once, prominently, and repeat it at each use. \emph{No claim in this paper is
+that the bounds \eqref{eq:three} are unimprovable.} What we prove and compute is optimality
+\emph{over the family and cone that we search}, which is stated explicitly, with the search
+domain written out, at every occurrence. The family is the parametrised Volkenborn
+construction of Definition~\ref{def:family} together with the inset cones of
+\S\ref{ss:optdomain} and the difference-operator module of \S\ref{ss:rank}. A construction
+outside that family is not covered; \S\ref{ss:evade} describes what such a construction
+would have to look like, precisely so that the boundary of our claim is visible.
+
+Similarly, the negative results of \S\ref{ss:rank} and \S\ref{ss:hatch} are fair sweeps with
+clean negatives and stated ranges, backed by positive controls; they are not impossibility
+proofs. \S\ref{ss:openlemmas} isolates the two lemmas that would convert them into theorems.
+
+\subsection{Evidence classes}\label{ss:evidence}
+
+Every substantive assertion below carries one of the following tags. This convention is
+inherited from the working memos underlying this paper and is used without exception.
+
+\begin{itemize}[leftmargin=2.2em,itemsep=2pt]
+\item \PROVED{} --- a proof is given here, or read out of a proof in a cited source, with the
+      source lemma named.
+\item \DERIVED{} --- derived here from cited lemmas by a chain that is written out, but not
+      separately measured.
+\item \VER{range} --- an exact finite computation in exact rational or integer arithmetic; the
+      range of parameters and the sample size are always stated inside the tag.
+\item \COMP{domain} --- a computed optimum, exhaustive over the stated domain; the domain is
+      always stated inside the tag.
+\item \EXCL{tolerance, bounds} --- a search that returned nothing, with the tolerance and the
+      coefficient/degree bounds of the search stated.
+\item \CALIB{} --- a modelling assumption. Exactly one such statement appears in this paper
+      (\S\ref{ss:calibrated}), it is flagged in place, and it was subsequently
+      \emph{refuted} by the first-principles computation of \S\ref{ss:tension}; we retain it
+      because the refutation is the structural finding.
+\item \OPENC{} --- a statement we believe and do not prove.
+\end{itemize}
+
+All arithmetic reported as exact is carried out in \texttt{fractions.Fraction} or in exact
+integer arithmetic; $p$-adic valuations come from exact truncated Volkenborn series.
+Wide combinatorial searches are run over $\FF_q$ with $q=2^{61}-1$ and every hit is
+re-verified over $\QQ$. Floating point appears only in the final evaluation of
+transcendental constants such as $\log2$, and the headline constants are re-verified at
+$50$ decimal digits.
+
+\begin{remark}[Methodology; flagged]\label{rem:method}
+The computations reported here were carried out with substantial machine assistance,
+including automated search over parameter cones and over candidate difference operators;
+every positive identification was re-derived independently of the search that proposed it,
+every negative is reported with its search domain, tolerance and positive control, and the
+programs are listed in Appendix~\ref{app:repro}.
+\end{remark}
+
+\subsection{Notation and one renaming}\label{ss:notation}
+
+$p$ is a prime, $q_p=p$ for odd $p$ and $q_2=4$, $\varphi$ is Euler's totient, $v_p$ is the
+$p$-adic valuation with $v_p(p)=1$, and $d_n=\lcm(1,\dots,n)$. We write $\omega$ for the
+Teichm\"uller character $\ZZ_p^\times\to\mu_{\varphi(q_p)}(\ZZ_p)$, \emph{extended to}
+$\Qp^\times$ as in \cite[\S2]{LaiSprang2023} by
+\begin{equation}\label{eq:omegaext}
+ \omega(x):=p^{v_p(x)}\,\omega\bigl(x/p^{v_p(x)}\bigr),\qquad
+ \langle x\rangle:=x/\omega(x).
+\end{equation}
+%% REFEREE [R3]: only the Teichmuller character on Z_p^times was defined, but
+%% omega(theta)^{1-i} in \eqref{eq:padic} and omega(a)^{-u} in \eqref{eq:Sn} are applied
+%% at |theta|_p > 1.  The extension is load-bearing: it carries the factor p^{r(i-1)}
+%% that reconciles Theorem~\ref{thm:transfer}(ii) with Proposition~\ref{prop:linform}.
+The extension is what carries the powers of $p$ in \eqref{eq:padic} and \eqref{eq:Sn}. We write $(x)_L=x(x+1)\cdots(x+L-1)$ for the
+Pochhammer symbol and $\zeta(s,\theta)$, $\zeta_p(s,\theta)$ for the Hurwitz and $p$-adic
+Hurwitz zeta functions. Following \cite[Lemma 12]{LaiSprang2023} we use
+\begin{equation}\label{eq:cosetsum}
+ D^i\,\zeta_p(i)=\sum_{\substack{1\le j\le D\\ \gcd(j,p)=1}}
+   \omega\Bigl(\frac jD\Bigr)^{1-i}\zeta_p\Bigl(i,\frac jD\Bigr),
+ \qquad q_p\mid D,\ i\ge2 .
+\end{equation}
+
+\begin{convention}[the well-poised flag]\label{conv:rename}
+In the source memos the very-well-poised indicator of the rational function is written
+$\delta\in\{0,1\}$, and the Rhin--Viola denominator saving is \emph{also} written $\delta$.
+Since both appear in the same formulas here, we write $\epsilon\in\{0,1\}$ for the
+well-poised flag (the exponent of the factor $2t+h_0$) and reserve
+$\dgr=\lim_n\log\Phi_n/n$ for the group saving. Consequently the denominator cost reads
+$E=A+m+1-\epsilon$ and never $A+m+1-\delta$.
+\end{convention}
+
+\subsection{Plan}\label{ss:plan}
+
+\S\ref{sec:transfer} proves the Transfer Principle and its corollaries.
+\S\ref{sec:group} makes the group explicit, records the verification of the transfer
+identity at integer and at half-integer parameters, states the four honest flags
+(F1)--(F4) including the Gauss-duplication bridge, and reports the corpus sweep.
+\S\ref{sec:ledger} sets up the parametrised construction and the exact ledger.
+\S\ref{sec:validation} is the validation section.
+\S\ref{sec:classification} proves the $\varphi(p^r)=2$ classification and the $p\ge5$ exact
+cancellation.
+\S\ref{sec:scan} reports the scan: optimality, the rank wall, the shut hatch.
+\S\ref{sec:map} gives the margin map and the dichotomy.
+\S\ref{sec:discussion} is the discussion: the two open lemmas, the disjoint-support tension,
+and what a construction evading the map would need. Appendix~\ref{app:repro} is the
+reproduction record.

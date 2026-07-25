@@ -1,0 +1,8 @@
+START Sat 25 Jul 2026 01:30:26
+HF loaded
+Eletters loaded {66499, 22317, 44011, 22317, 22317, 22317}
+labels: {delta, eps, c0}
+=== rank-1 CT for delta === Sat 25 Jul 2026 01:30:26
+  delta ann #3 t=135s
+  delta ct1 #3 t=409s
+  delta gb #3 t=56s gb===ct1? True

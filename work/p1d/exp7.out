@@ -1,0 +1,4 @@
+p= 5 a=1..30 cells=52075  (F-gen-weak) failures=0  min slack=0 at (a,r,b,c,s_a,v,need)=(1, 1, 0, 0, 0, 1, 1)
+p= 7 a=1..22 cells=30261  (F-gen-weak) failures=0  min slack=0 at (a,r,b,c,s_a,v,need)=(1, 1, 0, 0, 0, 1, 1)
+p=11 a=1..15 cells=16445  (F-gen-weak) failures=0  min slack=0 at (a,r,b,c,s_a,v,need)=(1, 1, 0, 0, 0, 1, 1)
+p=13 a=1..13 cells=13182  (F-gen-weak) failures=0  min slack=0 at (a,r,b,c,s_a,v,need)=(1, 1, 0, 0, 0, 1, 1)

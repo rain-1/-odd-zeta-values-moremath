@@ -1,0 +1,256 @@
+%% =====================================================================
+\section{Validation}\label{sec:validation}
+%% =====================================================================
+
+Everything after this section is a computation inside the model of \S\ref{sec:ledger}. The
+model's credibility therefore rests here, and we make the test as unforgiving as we can: the
+inputs are only the parameter tuples read off the sources, and the outputs are compared with
+printed constants that were obtained by entirely different routes.
+
+\subsection{The gate}\label{ss:gate}
+
+\begin{finding}[all three published measures, from the tuple alone]\label{find:gate}
+\VER{exact; input is only $(p,r,\text{shifts},A,m,\epsilon)$} The ledger
+\eqref{eq:exported} derives $E$, the regime, the weights, the rank, $G$, $\alpha$, $\beta$
+and $\mu$, and returns:
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccccl}
+\toprule
+target & parameters & regime & $\rk$ & $E$ & $G$ & $\mu\le$ \\
+\midrule
+$\zeta_2(3)$ (Beukers $F=4$ / Lai $B_n$, $s=0$) & $p{=}2$, $r{=}2$, $A{=}2$, $m{=}0$, $\epsilon{=}0$
+ & S & $1$ & $3$ & $6\log2$ & $7.17739889912418$\\
+$\zeta_2(3)$ (Beukers $R^{(\mathrm B)}$) & $p{=}2$, $r{=}1$, $A{=}3$, $m{=}0$, $\epsilon{=}1$
+ & S2 & $1$ & $3$ & $6\log2$ & $7.17739889912418$\\
+$\zeta_3(3)$ (Beukers $F=3$) & $p{=}3$, $r{=}1$, $A{=}2$, $m{=}0$, $\epsilon{=}0$
+ & S & $1$ & $3$ & $3\log3$ & $22.28144795149432$\\
+$\zeta_2(5)$ (LSZ) & $p{=}2$, $r{=}1$, $A{=}4$, $m{=}1$, $\epsilon{=}1$
+ & S2 & $1$ & $5$ & $8\log2$ & $20.34265173891448$\\
+\bottomrule
+\end{tabular}
+\end{center}
+against the published $7.177398\dots$, $22.281447\dots$, $20.342651\dots$ of
+\eqref{eq:three}. Every printed digit matches.
+\end{finding}
+
+\subsection{Four further independent anchors}\label{ss:anchors}
+
+A model that reproduces three numbers with three parameters is not yet evidence. The
+following four checks use no additional freedom.
+
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em,itemsep=4pt]
+\item \textbf{Beukers' second $\zeta_2(3)$ form.} Rows 1 and 2 of Finding~\ref{find:gate} are
+      \emph{different} parameter points --- depth $2$ with $\epsilon=0$, and depth $1$ with
+      $\epsilon=1$ --- and the ledger returns the identical measure. This matches LSZ's own
+      remark that the two forms coincide \cite[Final remarks]{LSZ2025}. \VER{exact}
+
+\item \textbf{Lai's family $B_n$, for every $s$.} The ledger returns both the smallness rate
+      $(6s+12)\log2$ and the margin $(3\log2-2)s+6\log2-3$, matching the printed constants of
+      \cite{Lai2025}. \VER{$s=0,1$ printed; formula for all $s$}
+
+\item \textbf{Lai's family $A_n$, for every $s$.} The ledger returns the smallness rate
+      $(10s+20)\log2$, matching \cite{Lai2025}. Here the ledger is \emph{sharper} than the
+      source on the archimedean side --- Lai prints $(2+4\log2)s+4+8\log2$, the ledger gives
+      $(6s+12)\log2$ --- and the exact measurement $8.12\to8.21$ at $n=8\to24$ confirms the
+      ledger, converging to $8.3178$. \VER{exact, $n\le24$}
+
+\item \textbf{The denominator of the $p\ge5$ constant.} Finding~\ref{find:LLS}: the ledger
+      reproduces the exact denominator of $c_p$ in \cite[Thm.~1.1]{LLS2025}.
+      \DERIVED{}
+\end{enumerate}
+
+%% REFEREE [R4]: the draft asserted flatly "there is no case in which a source is sharper
+%% than the ledger".  ledger.py's own cross-check prints, for Lai's A_n, ledger margins
+%% 1.5452 / 1.3178 / 1.0904 / 0.8629 against Lai's printed 1.3178 / 1.4767 / 1.6355 /
+%% 1.7944 at s = 0,1,2,3: from s = 1 on the source IS sharper -- for the reason
+%% \S\ref{ss:notcaptured}(a) already gives (his Phi^{-(s+2)}, which the ledger does not
+%% model).  The blanket claim contradicted \S\ref{ss:notcaptured}.  Restricted.
+On the three quantities the ledger models --- the smallness rate $\alpha$, the forced
+normalisation $G$ and the denominator exponent $E$ --- there is no case in which a source
+is sharper, and one case (iii) in which the ledger is sharper than a printed bound. On the
+\emph{margin} there is one exception, and it is the one predicted by
+\S\ref{ss:notcaptured}(a): for Lai's $A_n$ at $s\ge1$ his printed margin
+$(6\log2-4)s+12\log2-7$ exceeds the ledger's $(4\log2-3)s+8\log2-4$, because his family
+carries an additional asymptotic $\Phi^{-(s+2)}$ that the ledger has no term for. At $s=0$
+the ledger is the sharper of the two.
+
+\subsection{Independent re-derivation of the LSZ anchor}\label{ss:lszrederiv}
+
+\begin{finding}\label{find:lszanchor}
+\VER{exact rational arithmetic; ranges stated per item} Starting from the partial fractions
+of \cite[Def.~10]{LSZ2025} alone, we re-derive: their printed
+$\rho_{0,3}=768$, $\rho_{1,3}=73728$, $\rho_{0,0}=0$, $\rho_{1,0}=-1024$; the vanishing
+$\sum_kr_{n,1,k}=0$; the three-term recursion for both rows ($n\le11$); the Casoratian
+$3\cdot2^{16n+18}/(n+1)^5$ ($n\le11$); and the inclusions $\rho_{n,3}\in\ZZ$,
+$d_n^5\rho_{n,0}\in\ZZ$ ($n\le12$). Independently, the normalisation constants
+$\rho_n=1,96,14944$ are reproduced. Cross-checking the $p$-adic side against an
+independently validated implementation of the Kubota--Leopoldt $p$-adic $L$-function
+\cite{KubotaLeopoldt1964}, the reflection $\zeta_3(3,1/3)=\zeta_3(3,2/3)$ holds to $43$
+$3$-adic digits.
+\end{finding}
+
+Note the third item in the inclusions: the measured $d_n$-multiplicity clearing $\rho_0$ for
+LSZ is $5$, which is their \emph{conjectured} $d_n^5$ of the ``(den-con)'' discussion
+\cite[Final remarks]{LSZ2025}, not merely the $d_n^6$ they prove. The same happens for Lai's
+$A_n$, where the measured $E=A+m+1-\epsilon=3s+4$ is one better than his proved
+$d_n^{3s+5}$.
+
+\subsection{The direction that looked free and is not}\label{ss:mminus1}
+
+The ledger's $\alpha$ in \eqref{eq:alpha} does not depend on $m$, while $E=A+m+1-\epsilon$
+is smallest at $m=-1$ (the primitive, i.e.\ the Lai--Sprang convention). Taken at face
+value, applying this to \emph{the very rational function LSZ use},
+$2^{8n}(2t+n)(t+\tfrac12)_n^4/(t)_{n+1}^4$, would give a rank-$1$ form in $1$ and
+$\zeta_2(3)$ with $E=3$, $G=8\log2$, margin $+2.5452$ and $\mu(\zeta_2(3))\le4.3574$ --- a
+large record. It is false, and it is worth seeing why, because the failure is structural and
+it disciplines the rest of the scan.
+
+\begin{finding}[$m=-1$ is dead]\label{find:mminus1}
+\VER{exact truncated Volkenborn, $n\le22$} Measured smallness rates $v_2(C^nS_n)/n$ against
+the ledger prediction:
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+family & predicted $\alpha$ & measured $v_2(C^nS_n)/n$\\
+\midrule
+$M=3$, $m=0$ (Beukers $R^{(\mathrm B)}$) & $12\log2$ & $11.50\dots11.83\ \log2$\\
+$M=4$, $m=1$ (LSZ) & $16\log2$ & $15.17\dots15.72\ \log2$\\
+$M=5$, $m=0$ & $20\log2$ & $19.17\dots19.50\ \log2$\\
+$M=6$, $m=1$ & $24\log2$ & $23.14\dots23.50\ \log2$\\
+\midrule
+$M=4$, $m=-1$ & $16\log2$ & $\mathbf{8.11\dots8.33\ \log2}$\\
+$M=6$, $m=-1$ & $24\log2$ & $\mathbf{11.90\dots12.14\ \log2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+That is, $\alpha=G$, not $2G$: \emph{the primitive loses the entire $p$-adic doubling}, so
+$\marg=-E<0$ always. Confirmed a second way with no Volkenborn truncation at all:
+$y_n:=-\rho_0/\rho_w$ converges $2$-adically --- so the linear-form identity is right --- but
+at exactly half the rate of the $m\ge0$ controls ($135$ versus $272$ digits at $n=18$).
+\end{finding}
+
+\begin{proposition}\label{prop:whymminus1}
+\PROVED{} The smallness of $\int R^{(m)}(t+\theta_0)\dd t$ comes from the \emph{product}
+structure: $v_2(C^nR(t+\tfrac12))=2Mn+Mn+Mn=4Mn$ is an exponential cancellation between
+partial-fraction pieces that are individually of size $2^{-2Mn}$. The primitive
+$\widetilde R$ is not that product; its pieces $r_{i,k}(t+\tfrac12+k)^{1-i}/(1-i)$ are added
+without cancellation, and $v_2(C^n\widetilde R)=O(1)$.
+\end{proposition}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Correction 1.} The $m=-1$ slice is not a slice of the construction:
+$\alpha(m=-1)=G$. The ledger must carry $m\ge0$, and \eqref{eq:exported} is stated with that
+constraint.
+\end{minipage}}\end{center}
+
+\subsection{The denominator cost, measured --- and corrected}\label{ss:Emeasured}
+
+Equation \eqref{eq:E} is validated against LSZ ($m=1$), Beukers ($m=0$), Lai's $B_n$ and
+$A_n$ ($m=0,1$). \emph{Every anchor has $m\le1$.} But weight $7$ at rank $1$ forces $m\ge3$
+(\S\ref{ss:parity}), so the ledger extrapolates into unmeasured territory exactly where the
+next open question lives. We measured it.
+
+The exact denominator of $\rho_0$ was factored --- after applying the forced normalisation
+$C^n=p^{v_p(C)n}$, with the $p$-part removed since $C^n$ pays it --- and the exponent read
+off as a function of $\ell/n$. The profile is a clean two-band step:
+\begin{center}
+\tabsmall
+\begin{tabular}{llll}
+\toprule
+\multicolumn{4}{l}{$M=4$ very-well-poised, $p=2$, $r=1$, $n=48$}\\
+\midrule
+$m=1$ & exponent $5$ on every prime $\ell\le n$ & nothing above $n$ & $E=5$ (ledger $5$)\\
+$m=3$ & exponent $7$ on every prime $\ell\le n$ & exponent $4$ on $n<\ell<2n$ & $E=11$ (ledger $7$)\\
+$m=5$ & exponent $9$ on every prime $\ell\le n$ & exponent $6$ on $n<\ell<2n$ & $E=15$ (ledger $9$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Since $\log\lcm\{\ell:n<\ell<2n\}/n\to1$, the second band costs its exponent outright.
+
+%% REFEREE [R9]: the tag claimed 0 violations over n = 30..48.  Re-run over the stated
+%% range at n in {30,36,42,48}: 1120 configurations, 1084 non-degenerate, ONE violation --
+%% (p,r,A,m,eps) = (5,2,5,2,1) at n = 30 reads exponent 7 where the rules predict 8.  It
+%% is a small-n artefact of the modal-plateau estimator (at n = 30 the exponents are
+%% 7,7,7,8,8,7,8 on ell = 7,11,13,17,19,23,29; at n = 32,34,36,42,48 the plateau is 8).
+%% Range narrowed to n >= 32 and the exception recorded.  Note also that s_den.py as
+%% committed evaluates 15 listed configurations at n = 48 only and contains no p = 7 case;
+%% the sweep behind this tag was supplied by the referee.
+\begin{finding}[two denominator rules]\label{find:R1R2}
+\VER{$p\in\{2,3,5,7\}$, $r\in\{1,2\}$, $A\le5$, $m\le4$, $\epsilon\in\{0,1\}$, $n=32,\dots,48$;
+$0$ violations in $1084$ non-degenerate configurations}
+\begin{description}[leftmargin=2.6em,itemsep=3pt]
+\item[\textup{(R1)}] The well-poised saving $-\epsilon$ is real \emph{only where the symmetry
+  $R(-h_0-t)=\pm R(t)$ actually holds}: at $(p,r)=(2,1)$ with every shift $\tfrac12$, and at
+  $(2,2)$ with the $\tfrac14$- and $\tfrac34$-bricks \emph{paired} (Lai's $A_n$). Everywhere
+  else --- $p\ge3$, and $(2,2)$ with all bricks on one coset --- the measured exponent on the
+  primes $\le n$ is $A+m+1$ exactly: the factor $2t+n$ buys nothing.
+\item[\textup{(R2)}] A second band appears on the primes in $(n,2n)$, of exponent
+  $c=m+1$ when $m\ge A-1$, and $c=0$ otherwise (single-shift shape).
+\end{description}
+Hence
+\begin{equation}\label{eq:Etrue}
+ \Etrue=(A+m+1-\epsilon_{\mathrm{eff}})+c .
+\end{equation}
+\end{finding}
+
+The band comes from the half-integer sums $T_{k,u}=\sum_{\nu<k}(\nu+\theta_0)^{-u}$, whose
+denominators run over the odd numbers up to $2n$: for small $m$ they cancel against the
+$r_{i,k}$, and for $m\ge A-1$ they do not.
+
+\begin{remark}[the one exception, at the bottom of the range]\label{rem:R1R2exc}
+At $n=30$ the single configuration $(p,r,A,m,\epsilon)=(5,2,5,2,1)$ reads exponent $7$ on
+the primes $\ell\le n$ where (R1) predicts $8$; the plateau has not yet formed there (the
+exponents are $7,7,7,8,8,7,8$ on $\ell=7,11,13,17,19,23,29$), and the same configuration
+reads $8$ at $n=32,34,36,42,48$. This is why the range above starts at $n=32$.
+\end{remark}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{No published result is touched.} All four anchors of Finding~\ref{find:gate} have
+$c=0$ and the correct $\epsilon_{\mathrm{eff}}$, and the measurement re-derives their
+$E=3,3,5,3$ exactly. Lai's $B_n$ at $s=2,3$ (i.e.\ $m=2,3$) also has $c=0$, since $m<A-1$
+there, so his printed denominators stand as well.
+\end{minipage}}\end{center}
+
+\begin{finding}[the band cannot be shaped away]\label{find:bandshape}
+\COMP{the whole inset lattice $[0,2]^4\times[0,2]^4$ at the rank-$1$ $\zeta_2(7)$ point
+$M=4$, $m=3$, $\epsilon=1$} The attainable pairs
+(exponent on $\ell\le n$, exponent on $n<\ell<2n$) are
+$(6,6),(7,4),(7,5),(7,6),(7,7),(8,8)$. The minimum second-band exponent is $4$, attained at
+the symmetric point, so $\Etrue=11$ is optimal over the lattice.
+\end{finding}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Correction 2.} $\Etrue$ at the rank-$1$ $\zeta_2(7)$ point is $11$, not $7$; the
+margin is $-5.4548$, not $-1.4548$. Likewise $\zeta_2(9)$: $-9.4548$; $\zeta_3(5)$:
+$-3.8028$; $\zeta_3(7)$: $-8.7042$.\\[2pt]
+\textbf{Correction 3.} The $\epsilon=1$ saving is a $p=2$ phenomenon. Granting it at every
+$p$, as a naive reading of \eqref{eq:E} does, makes every $p\ge3$ cell that uses it $1$
+better than the truth.
+\end{minipage}}\end{center}
+
+All three corrections make the picture \emph{worse}, and none touches a published anchor.
+That combination is the reason we regard the ledger as validated rather than tuned: a fitted
+model does not produce corrections that hurt only in the unmeasured range.
+
+The status of (R2) deserves a sentence of its own, since it is one of the two open lemmas of
+\S\ref{ss:openlemmas}. It is \VER{$0$ violations over the range stated in
+Finding~\ref{find:R1R2}}, it is not \PROVED{}, and it was verified for the single-shift
+shape; the multi-coset spreads at $p\ge5$ inherit it \emph{by assumption}. As we note in
+\S\ref{ss:map62}, the $p\ge5$ conclusions do not depend on it, those cells being $3$ to $15$
+short either way.
+
+\subsection{What the ledger does not capture}\label{ss:notcaptured}
+
+For completeness, three known gaps.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.6em,itemsep=3pt]
+\item \emph{Family-specific $\Phi_n$ savings.} $E=A+m+1-\epsilon$ is the \emph{measured}
+      multiplicity for the anchors, but e.g.\ Lai's $A_n$ additionally carries an asymptotic
+      $\Phi^{-(s+2)}$. A sharper $E$ would move every margin by $O(1)$; it would not change
+      any sign in \S\ref{sec:map}, where the deficits are $3$ to $15$.
+\item \emph{Coset cancellation.} $\alpha=\min_j$ is an inequality and the ledger has no term
+      for cancellation between cosets. This is the escape hatch, tested in \S\ref{ss:hatch}.
+\item \emph{The saddle off the co-located locus} is modelled by $C_{\mathrm{sad}}=C_1$ and
+      measured in Finding~\ref{find:saddle}, but only at the directions tested.
+\end{enumerate}

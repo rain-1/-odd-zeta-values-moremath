@@ -1,0 +1,32 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                 
+In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= START Sat 25 Jul 2026 01:30:26
+
+In[7]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[8]:= HF loaded
+
+In[9]:= In[9]:= 
+In[10]:= 
+In[11]:= Eletters loaded {66499, 22317, 44011, 22317, 22317, 22317}
+
+In[12]:= 
+In[13]:= In[13]:= 
+In[14]:= In[14]:= 
+In[15]:= 
+In[16]:= labels: {delta, eps, c0}
+
+In[17]:= === rank-1 CT for delta === Sat 25 Jul 2026 01:30:26
+  delta ann #3 t=135s
+  delta ct1 #3 t=409s
+  delta gb #3 t=56s gb===ct1? True

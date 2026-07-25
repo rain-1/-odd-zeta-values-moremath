@@ -1,0 +1,33 @@
+==============================================================================
+s_rank : can the rank be cut to 1 inside a positive-margin p=2 family?
+==============================================================================
+
+[M1-a] zeta_2(7) from M=6, m=1 (margin +1.3178): kill rho_3, keep rho_5
+  M1-a   M=6  J=4 forms, L=3 shifts, deg<=8 -> C=144 unknowns, 164 eqs
+      rank of the kill-block = 78  ->  dim ker(rho_3) = 66   (163s)
+      kernel vectors giving a NON-ZERO rho_5 : 0 / 66   (all killed too)
+      [POSITIVE CONTROL] same kernel on a foreign sequence: 66 / 66 non-zero  (machinery CAN see survivors)
+
+[M1-b] same, wider: 6 forms, L=4, D=6
+  M1-b   M=6  J=6 forms, L=4 shifts, deg<=6 -> C=210 unknowns, 230 eqs
+      rank of the kill-block = 90  ->  dim ker(rho_3) = 120   (575s)
+      kernel vectors giving a NON-ZERO rho_5 : 0 / 120   (all killed too)
+      [POSITIVE CONTROL] same kernel on a foreign sequence: 120 / 120 non-zero  (machinery CAN see survivors)
+
+[M2-a] zeta_2(5) from M=5, m=0 (margin +1.9315): kill rho_2, keep rho_4
+  M2-a   M=5  J=4 forms, L=3 shifts, deg<=8 -> C=144 unknowns, 164 eqs
+      rank of the kill-block = 67  ->  dim ker(rho_2) = 77   (126s)
+      kernel vectors giving a NON-ZERO rho_4 : 0 / 77   (all killed too)
+      [POSITIVE CONTROL] same kernel on a foreign sequence: 77 / 77 non-zero  (machinery CAN see survivors)
+
+[M1-c] zeta_2(7) from M=7, m=0 (margin +2.7041): kill rho_2 & rho_4, keep rho_6
+  M1-c   M=7  J=4 forms, L=3 shifts, deg<=8 -> C=144 unknowns, 164 eqs
+      rank of the kill-block = 108  ->  dim ker(rho_2,rho_4) = 36   (198s)
+      kernel vectors giving a NON-ZERO rho_6 : 0 / 36   (all killed too)
+      [POSITIVE CONTROL] same kernel on a foreign sequence: 36 / 36 non-zero  (machinery CAN see survivors)
+
+[M1-d] zeta_2(7) from M=8, m=1 (margin +2.0904): kill rho_3 & rho_7, keep rho_5
+  M1-d   M=8  J=4 forms, L=3 shifts, deg<=6 -> C=112 unknowns, 132 eqs
+      rank of the kill-block = 111  ->  dim ker(rho_3,rho_7) = 1   (118s)
+      kernel vectors giving a NON-ZERO rho_5 : 0 / 1   (all killed too)
+      [POSITIVE CONTROL] same kernel on a foreign sequence: 1 / 1 non-zero  (machinery CAN see survivors)

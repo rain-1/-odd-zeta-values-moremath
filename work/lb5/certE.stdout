@@ -1,0 +1,93 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                         
+In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= START Sat 25 Jul 2026 00:24:02
+
+In[6]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[7]:= HF loaded
+
+In[8]:= In[8]:= 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+Out[12]= -HarmonicNumber[k, 3] - HarmonicNumber[l, 3] + 
+ 
+>    HarmonicNumber[n, 3] + HarmonicNumber[k + n, 3] + 
+ 
+>    HarmonicNumber[l + n, 3]
+
+In[13]:= 
+Out[13]= (-((-HarmonicNumber[k] + HarmonicNumber[k + n]) 
+ 
+>         (-HarmonicNumber[k, 2] + HarmonicNumber[k + n, 2])) - 
+ 
+>      (-HarmonicNumber[l] + HarmonicNumber[l + n]) 
+ 
+>       (-HarmonicNumber[l, 2] + HarmonicNumber[l + n, 2])) / 4
+
+In[14]:= 
+Out[14]= (-3 ((-HarmonicNumber[k] + HarmonicNumber[-k + n]) 
+ 
+>         (-HarmonicNumber[k, 2] + HarmonicNumber[k + n, 2]) + 
+ 
+>        (-HarmonicNumber[l] + HarmonicNumber[-l + n]) 
+ 
+>         (-HarmonicNumber[l, 2] + HarmonicNumber[l + n, 2]))) / 4
+
+In[15]:= 
+Out[15]= (-3 (-HarmonicNumber[k + l] + HarmonicNumber[k + l + n]) 
+ 
+>      (-HarmonicNumber[k, 2] - HarmonicNumber[l, 2] + 
+ 
+>        HarmonicNumber[k + n, 2] + HarmonicNumber[l + n, 2])) / 8
+
+In[16]:= 
+In[17]:= In[17]:= 
+In[18]:= In[18]:= 
+In[19]:= In[19]:= 
+In[20]:= In[20]:= 
+In[21]:= 
+In[22]:= ann0 #3 t=0s
+
+In[23]:= --- E1 joint delta, Support S[n]^0..^3 --- Sat 25 Jul 2026 00:24:03
+
+CreativeTelescoping::fail: More than one operator is involved in the delta.
+E1 t=0s  head=Symbol  len=-
+E1 no telescoper for this support
+
+In[24]:= In[24]:= 
+In[25]:= 
+In[26]:= annW #6 t=1s
+
+In[27]:= 
+In[28]:= --- E2 joint delta, Support S[n]^0..^3 --- Sat 25 Jul 2026 00:24:04
+
+CreativeTelescoping::fail: More than one operator is involved in the delta.
+E2 t=0s  head=Symbol  len=-
+E2 no telescoper for this support
+
+In[29]:= --- E3 joint delta, Support S[n]^0..^5 --- Sat 25 Jul 2026 00:24:04
+
+CreativeTelescoping::fail: More than one operator is involved in the delta.
+E3 t=0s  head=Symbol  len=-
+E3 no telescoper for this support
+
+In[30]:= --- E4 joint delta, Support S[n]^0..^8 --- Sat 25 Jul 2026 00:24:04
+
+CreativeTelescoping::fail: More than one operator is involved in the delta.
+E4 t=0s  head=Symbol  len=-
+E4 no telescoper for this support
+
+In[31]:= ALL DONE Sat 25 Jul 2026 00:24:04
+
+In[32]:= 

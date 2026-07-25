@@ -1,0 +1,49 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                         
+In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= START Sat 25 Jul 2026 00:53:38
+
+In[6]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[7]:= HF loaded
+
+In[8]:= In[8]:= 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= 
+In[17]:= In[17]:= 
+In[18]:= 
+In[19]:= TRUNCATION CHECK: #HarmonicNumber in vw = 19  (must be 19)
+
+In[20]:= 
+In[21]:= In[21]:= 
+In[22]:= rho,sigma loaded from disk
+
+In[23]:= LeafCount rho/sigma = 10553 / 1819
+
+In[24]:= In[24]:= 
+In[25]:= 
+In[26]:= 
+In[27]:= *** Q-ROW SINGLE-CERTIFICATE CHECK: 0 ***
+
+In[28]:= 
+In[29]:= In[29]:= 
+In[30]:= 
+In[31]:= E built, LeafCount=16067 #Harmonic=166
+
+In[32]:= 
+In[33]:= In[33]:= 
+In[34]:= 

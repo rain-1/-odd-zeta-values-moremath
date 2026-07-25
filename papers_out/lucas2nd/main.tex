@@ -1,0 +1,136 @@
+% !TeX program = pdflatex
+%
+% Paper A of River's odd-zeta programme.
+% Working title: "Lucas congruences for the second solutions of Apery-like recurrences".
+%
+% EVERY statement in this file is traceable to one of the source memos listed in
+% Section "Provenance of the statements" (sec-data.tex).  Citations are restricted to
+% references that carry an arXiv identifier in those memos; the remaining references
+% were verified separately against their sources (see work/BIBLIO_VERIFY.md).
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+% ---------------------------------------------------------------- theorem styles
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+% ---------------------------------------------------------------- notation
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Zp}{\Z_{(p)}}
+\newcommand{\vp}{v_p}
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+\newcommand{\HH}[2]{H^{(#1)}_{#2}}
+\newcommand{\Kchi}[2]{K^{(#1)}_{\chi}(#2)}
+\newcommand{\lcm}{\operatorname{lcm}}
+\DeclareMathOperator{\ct}{ct}
+
+% evidence-class markers.  These are load-bearing: they are never upgraded.
+\newcommand{\Proved}{\textup{\textsf{[PROVED]}}}
+\newcommand{\Verified}{\textup{\textsf{[VERIFIED]}}}
+\newcommand{\VerifiedR}[1]{\textup{\textsf{[VERIFIED: #1]}}}
+\newcommand{\Open}{\textup{\textsf{[OPEN]}}}
+
+\numberwithin{equation}{section}
+
+% ---------------------------------------------------------------- front matter
+\begin{document}
+
+\title[Lucas congruences for second solutions]
+      {$\chi$-twisted Lucas congruences for the second solutions\\ of Ap\'ery-like recurrences}
+
+%% FIXED [MINOR]: author placeholder was being typeset. Left empty, as in the companion
+%% FIXED drafts, to be filled in before circulation.
+\author{}
+
+\date{\today}
+
+\subjclass[2020]{11A07, 11B65, 11S80, 33F10}
+\keywords{Ap\'ery numbers, Lucas congruences, Dwork congruences, second solution,
+sporadic sequences, $p$-adic Ap\'ery limits, creative telescoping}
+
+\begin{abstract}
+Let $(A(n))_{n\ge 0}$ be one of the fifteen sporadic Ap\'ery-like sequences, and let
+$(B(n))_{n\ge 0}$ be the second solution of its three-term recurrence, normalised by
+$B(0)=0$, $B(1)=1$. The first row satisfies a Lucas congruence,
+$A(ap+r)\equiv A(a)A(r)\pmod p$; for the second row no congruence of Lucas type appears
+in the literature. We prove that the second row descends along base-$p$ digits as well,
+subject to two corrections: a normalising factor $p^{w}$, where $w$ is the total degree of
+the sequence's harmonic weight, and a quadratic Dirichlet character $\chi$. Concretely, for the
+classical Ap\'ery pair for $\zeta(3)$ we prove
+\[
+  p^{3}\,b_{ap+r}\;\equiv\;b_{a}\,a_{r}\pmod p
+  \qquad(p\ge 5,\;1\le a<p,\;0\le r<p),
+\]
+by an elementary self-contained argument, and we then prove a general theorem: if the
+second solution of a sporadic pair admits a harmonic-monomial weight of total degree $w$
+%% FIXED [MINOR x2]: (i) Theorem \ref{thm:LB} gives chi(p)^e, not chi(p); (ii) w and chi are
+%% FIXED defined here through the Apery limit, which three of the fifteen families do not have.
+satisfying five explicit hypotheses, then $p^{w}B(ap+r)\equiv\chi(p)^{e}B(a)A(r)\pmod p$, with
+$e\in\{0,1\}$ read off the weight. The
+character is not decorative. The untwisted law fails completely for seven of the fifteen
+families, at exactly the primes where $\chi(p)=-1$, and the single factor $\chi(p)$ --
+which we trace to one line of Frobenius descent for a $\chi$-twisted harmonic letter --
+repairs it. For the twelve families that have an archimedean Ap\'ery limit, $w$ and $\chi$
+are its weight and character; for the other three both are read off the harmonic weight
+directly, and the descent holds regardless. Exact computation
+over all primes $5\le p\le 103$ supports a master form,
+$\vp\bigl(p^{w}B_nA_q-\chi(p)B_qA_n\bigr)\ge w$ with $q=\lfloor n/p\rfloor$, with floor
+exactly $w$ in every cell tested; we state it as a conjecture and never as a theorem.
+Three of the fifteen sequences have no archimedean Ap\'ery limit at all, and satisfy the
+$p$-adic descent regardless. Along the way we prove a new closed form for the Ap\'ery
+numerators,
+$b_n=\sum_k\binom nk^2\binom{n+k}k^2\bigl(2\HH{3}{n}-\HH{3}{k}\bigr)$,
+which we have not located in the literature and which reduces the weight-three congruence
+to three lines of the general theorem. The general theorem, both first-row Lucas
+congruences and two instances of the second-row congruence are formalised in Lean~4,
+sorry-free. In the language of Beukers--Vlasenko's Dwork crystals our congruence concerns
+the non-unit diagonal entry of the Frobenius matrix, complementary to their
+Conjecture~7.5 about the unit root; the character is invisible in unit-root formulations
+and has to be put in by hand.
+\end{abstract}
+
+\maketitle
+
+{\small\tableofcontents}
+
+\input{sec-intro}
+\input{sec-weight3}
+\input{sec-depth}
+\input{sec-general}
+\input{sec-families}
+\input{sec-minimal}
+\input{sec-sharpness}
+\input{sec-discussion}
+\input{sec-lean}
+\input{sec-data}
+
+\input{refs}
+
+\end{document}

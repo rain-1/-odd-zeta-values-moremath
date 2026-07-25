@@ -1,0 +1,174 @@
+\section{The general \texorpdfstring{$\chi$}{chi}-twisted descent}
+\label{sec:general}
+
+The proof of Theorem~\ref{thm:brow} in Section~\ref{sec:weight3} is a two-page Kummer
+ledger. It turns out that the ledger is an artefact of Ap\'ery's own choice of weight: if
+one replaces the nested alternating sum $\sum_{m\le k}u(n,m)$ by a plain harmonic monomial
+--- which Section~\ref{sec:minimal} shows is possible, and in a startlingly short form ---
+the whole argument collapses to three lines, and generalises at once to all weights, to
+several sequences, and to a twist by a quadratic character.
+
+\subsection{Lemma K: Frobenius descent of a harmonic letter}
+
+\begin{lemma}[Lemma K]\label{lem:K}
+\Proved\ Let $\chi$ be a completely multiplicative arithmetic function (a Dirichlet
+character; $\chi\equiv1$ is allowed), let $r\ge1$ and $y\ge0$, and set
+$\Kchi ry=\sum_{m=1}^{y}\chi(m)m^{-r}$. Then, as an identity in $\Q$,
+\[
+   p^{r}\,\Kchi ry\;=\;\chi(p)\,\Kchi r{\lfloor y/p\rfloor}\;+\;p^{r}\,T,
+   \qquad
+   T:=\sum_{\substack{m\le y\\ p\nmid m}}\frac{\chi(m)}{m^{r}}\;\in\;\Zp .
+\]
+\end{lemma}
+
+\begin{proof}
+Split the sum according to $p\mid m$. The $p$-divisible part is
+\[
+   \sum_{j\le\lfloor y/p\rfloor}\frac{\chi(jp)}{(jp)^{r}}
+   \;=\;\chi(p)\,p^{-r}\sum_{j\le\lfloor y/p\rfloor}\frac{\chi(j)}{j^{r}}
+   \;=\;\chi(p)\,p^{-r}\,\Kchi r{\lfloor y/p\rfloor},
+\]
+using complete multiplicativity. The remaining terms have $p$-integral denominators, so
+their sum is $T\in\Zp$. Multiply by $p^r$.
+\end{proof}
+
+\emph{This single line is the entire source of the character in Conjecture~\ref{conj:master}.}
+Sequences whose second solution needs $\chi$-twisted harmonic letters acquire $\chi(p)$;
+sequences whose second solution is a pure $\zeta$-harmonic monomial acquire $+1$.
+
+\begin{corollary}[Corollary K2]\label{cor:K2}
+\Proved\ Let $M=\prod_{t=1}^{s}K^{(r_t)}_{\chi_t}(x_t)$ with $\sum_tr_t=w$ and each
+$K^{(r_t)}_{\chi_t}(\lfloor x_t/p\rfloor)\in\Zp$. Then
+\[
+   p^{w}M\;\equiv\;\Bigl(\prod_t\chi_t(p)\Bigr)\prod_tK^{(r_t)}_{\chi_t}
+   \bigl(\lfloor x_t/p\rfloor\bigr)\pmod p .
+\]
+\end{corollary}
+
+\begin{proof}
+$p^wM=\prod_t\bigl(p^{r_t}K^{(r_t)}_{\chi_t}(x_t)\bigr)
+=\prod_t\bigl(\chi_t(p)K^{(r_t)}_{\chi_t}(\lfloor x_t/p\rfloor)+p^{r_t}T_t\bigr)$
+by Lemma~\ref{lem:K}. Expanding, every term other than the pure product carries a factor
+$p$, and every factor is $p$-integral by hypothesis.
+\end{proof}
+
+\subsection{Theorem LB}
+
+\begin{definition}[admissible pair]\label{def:admissible}
+Let $p\ge5$. An \emph{admissible pair} consists of
+\begin{itemize}[leftmargin=1.4em]
+\item a summand $S(n,k)=\prod_i\bin{L_i(n,k)}{M_i(n,k)}$ with $L_i,M_i$ integer linear
+  forms, and $A(n)=\sum_kS(n,k)$;
+\item a weight $w(n,k)=\sum_jc_j\prod_tK^{(r_{jt})}_{\chi}(x_{jt})$, a $\Q$-combination of
+  monomials of total degree $\sum_tr_{jt}=w$ in letters attached to one fixed quadratic
+  character $\chi$ and to the trivial character, with the $x_{jt}$ integer linear forms in
+  $(n,k)$;
+\item the second row $B(n)=\sum_kS(n,k)w(n,k)$.
+\end{itemize}
+\end{definition}
+
+Fix $1\le a<p$ and $0\le r,s<p$, and write $n=ap+r$, $k=bp+s$. The hypotheses are:
+
+\begin{description}[leftmargin=3.0em,style=sameline]
+\item[(H1)] \emph{Lucas/carry dichotomy.} For every $k$, either $p\mid S(n,k)$, or
+  $S(n,k)\equiv S(a,b)S(r,s)\pmod p$.
+\item[(H2)] \emph{Product region.} The surviving set is $\{0\le b\le a\}\times\Sigma_r$
+  for some $\Sigma_r\subseteq[0,p)$, and $\sum_{s\in\Sigma_r}S(r,s)\equiv A(r)\pmod p$.
+\item[(H3)] \emph{Digit compatibility.} On the surviving set,
+  $\lfloor x(n,k)/p\rfloor=x(a,b)$ for every argument form $x$ occurring in $w$.
+\item[(H4)] \emph{Tameness.} Every argument form satisfies $0\le x(n,k)\le n$ on the
+  summation range, and $c_j\in\Zp$ for all $j$.
+\item[(H5)] \emph{$\chi$-homogeneity.} Every monomial of $w$ contains exactly the same
+  number $e\in\{0,1\}$ of $\chi$-letters, all other letters carrying the trivial
+  character.
+\end{description}
+
+\begin{theorem}[Theorem LB]\label{thm:LB}
+\Proved\ Let $p\ge5$ and let $(S,w,A,B)$ be an admissible pair satisfying
+\textup{(H1)--(H5)}. Then for all $1\le a<p$ and $0\le r<p$, with $n=ap+r$,
+\[
+   p^{w}\,B(ap+r)\;\equiv\;\chi(p)^{e}\,B(a)\,A(r)\pmod p .
+\]
+\end{theorem}
+
+\begin{proof}
+By (H4), every argument satisfies $x(n,k)\le n<p^2$, hence $\lfloor x/p\rfloor\le a<p$ and
+every letter $K^{(r)}(\lfloor x/p\rfloor)$ is $p$-integral; likewise $x(a,b)\le a<p$, so
+%% FIXED [MINOR]: the one-line reason for $p^w w(n,k) \in \Zp$ was missing.
+$w(a,b)\in\Zp$. For $p^ww(n,k)$: each letter $K^{(r)}_\chi(x)$ with $x\le n<p^2$ has
+$\vp\ge-r$ by Lemma~\ref{lem:K}, a monomial $\prod_tK^{(r_{jt})}_\chi$ of total degree $w$
+therefore has $\vp\ge-w$, and (H4) puts the coefficients $c_j$ in $\Zp$; hence
+$p^ww(n,k)\in\Zp$ for \emph{every} $k$.
+Corollary~\ref{cor:K2} then gives, for every $k$,
+\begin{equation}\label{eq:LB-letter}
+   p^{w}w(n,k)\;\equiv\;\chi(p)^{e}\,\widetilde w(n,k)\pmod p,
+   \qquad
+%% FIXED [MINOR]: the letter is the chi-twisted $K^{(r)}_\chi$; the subscript was dropped
+%% FIXED (log typo at LBW_GENERAL.md:271).
+   \widetilde w(n,k):=\sum_jc_j\prod_tK^{(r_{jt})}_{\chi}\bigl(\lfloor x_{jt}/p\rfloor\bigr),
+\end{equation}
+and (H3) upgrades $\widetilde w(n,k)=w(a,b)$ on the surviving set. Now split
+\[
+   p^{w}B(n)\;=\;\sum_{k\,:\,p\mid S(n,k)}S(n,k)\,p^{w}w(n,k)
+   \;+\;\sum_{k\text{ surviving}}S(n,k)\,p^{w}w(n,k).
+\]
+The first sum is $\equiv0\pmod p$, because each $p^ww(n,k)$ is $p$-integral and each
+$S(n,k)$ is divisible by $p$. In the second, substitute (H1) and
+\eqref{eq:LB-letter}:
+\[
+   p^{w}B(n)\;\equiv\;\chi(p)^{e}\sum_{b=0}^{a}\sum_{s\in\Sigma_r}S(a,b)S(r,s)w(a,b)
+   \;=\;\chi(p)^{e}\Bigl(\sum_{b=0}^{a}S(a,b)w(a,b)\Bigr)\Bigl(\sum_{s\in\Sigma_r}S(r,s)\Bigr),
+\]
+which by (H2) is $\equiv\chi(p)^{e}B(a)A(r)\pmod p$.
+\end{proof}
+
+\subsection{Remarks on the hypotheses}
+
+\begin{remark}[three lines instead of two pages]\label{rem:threeLines}
+With $e=0$, $S(n,k)=A(n,k)$ and the weight $w(n,k)=2\HH3n-\HH3k$ of
+Theorem~\ref{thm:minimal} below, Theorem~\ref{thm:LB} \emph{reproves
+Theorem~\ref{thm:brow}}. Hypotheses (H1)--(H3) for this instance are exactly
+Lemmas~\ref{lem:summand} and \ref{lem:fibre}; (H4) holds because the arguments are $n$ and
+$k$, both $\le n$, and the coefficients are the integers $2,-1$; (H5) is vacuous. No
+Lemma~\ref{lem:V}, no Corollary~\ref{cor:tailfact}, no Kummer ledger. The entire content
+of the long proof is absorbed into the choice of weight.
+\end{remark}
+
+\begin{remark}[what the mechanism actually needs]\label{rem:needs}
+In the language of Section~\ref{sec:weight3}: ``summand with Lucas factorisation and carry
+annihilation'' is (H1)$+$(H2), which is available for all fifteen sporadic sequences
+because it is Malik--Straub's theorem \cite{MalikStraub}; ``harmonic weight of depth one''
+is the shape of $w$; and the per-carry valuation bound $\vp\ge2$ of
+Remark~\ref{rem:square} is \emph{not} needed --- it is replaced by (H4), tameness, which
+makes $p^ww$ $p$-integral outright. Where tameness fails --- because an argument form
+reaches $2n$, so that $p^w w(n,k)$ acquires a pole on the vanishing layer --- one needs a
+substitute valuation bound; see Section~\ref{ssec:lemmaD}.
+\end{remark}
+
+\begin{remark}[scope: single digit, modulo $p$]\label{rem:LBscope}
+Theorem~\ref{thm:LB} gives the modulo-$p$, single-digit statement. The master form of
+Conjecture~\ref{conj:master} --- all $n$, modulo $p^w$ --- is \Verified\ but not proved
+here. The gap is exactly the one left open at weight three
+(Remark~\ref{rem:not-proved}).
+\end{remark}
+
+\begin{corollary}[integrality]\label{cor:integrality}
+Iterating the ratio form of Conjecture~\ref{conj:master} over the base-$p$ digits gives
+$\vp(B_n)\ge-w\lfloor\log_pn\rfloor$, i.e.\ $d_n^{w}B_n\in\Zp$ --- the coefficient-level
+shadow of $p$-integrality of the mirror map, see Section~\ref{sec:discussion}. Independent
+of the conjecture, this bound is \VerifiedR{15 sequences $\times$ 16 primes $\times$
+$n\le400$, zero failures}.
+\end{corollary}
+
+\begin{remark}[the formalised hypotheses differ, and are weaker]\label{rem:leanH}
+The Lean~4 formalisation of Theorem~\ref{thm:LB} (Section~\ref{sec:lean}) replaces
+(H1)$+$(H2) by the single unconditional congruence
+$S(ap+r,bp+s)\equiv S(a,b)S(r,s)\pmod p$ for \emph{all} $a,b$ together with the vanishing
+$S(n,k)=0$ for $k>n$. In the carrying regime both sides vanish modulo $p$, so the
+dichotomy is absorbed and no product-region argument occurs anywhere in the machine proof;
+the double sum factors because a \emph{full} block $\{0\le k<(a+1)p\}$ splits, and the
+extension from $\{0\le k\le n\}$ to the full block is an equality of integers rather than
+a congruence. It also replaces the counting form of (H5) by the equivalent but more
+flexible requirement that the product of the characters of the letters of each monomial,
+evaluated at $p$, be constant.
+\end{remark}

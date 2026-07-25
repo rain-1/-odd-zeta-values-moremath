@@ -1,0 +1,26 @@
+basis 448
+condition rows 68 x 448
+design q=33554393 built 58s
+design q=33554467 built 73s
+pref        terms=126  ratrec-fail=0  denominator primes=[2, 3, 5]
+prefrev     terms=129  ratrec-fail=0  denominator primes=[2, 3, 7, 121441, 3278837]
+nB_desc     terms=134  ratrec-fail=0  denominator primes=[2, 3, 16703]
+top_asc     terms=126  ratrec-fail=0  denominator primes=[2, 3, 5]
+nfac_desc   terms=129  ratrec-fail=0  denominator primes=[2, 3, 121441]
+rand0       terms=118  ratrec-fail=14  denominator primes=[2, 3, 5, 11, 19, 67, 1423, 85843, 902953, 924683, 10251743, 11886367, 21916127]
+rand1       terms=115  ratrec-fail=23  denominator primes=[2, 3, 5, 11, 31, 37, 79, 103, 109, 179, 277, 2437, 10111, 39461, 86017, 113279, 122053, 1165037, 3274867, 3496417, 6702343, 11455247, 17988871]
+rand2       terms=125  ratrec-fail=0  denominator primes=[2, 3, 4721]
+rand3       terms= 97  ratrec-fail=40  denominator primes=[2, 3, 5, 7, 11, 17, 19, 29, 41, 43, 47, 61, 101, 107, 127, 157, 181, 193, 1493, 1699, 2239, 2437, 2543, 17729, 62059, 70381, 106319, 106903, 168247, 184783, 220127, 274693, 338461, 531793, 803963, 1535467, 1860421, 2175853, 2260229, 3041921, 3241313, 3618929, 3844591, 3939361, 4174217, 6005033, 7423483, 8633941, 11285741, 13475321, 14472119, 15231373, 17309197, 19210973, 20599543, 22820339, 22842647]
+rand4       terms=129  ratrec-fail=0  denominator primes=[2, 3, 1129]
+rand5       terms= 87  ratrec-fail=57  denominator primes=[2, 3, 5, 7, 11, 13, 17, 19, 23, 31, 37, 41, 53, 59, 61, 71, 79, 89, 151, 167, 523, 701, 761, 887, 1433, 1733, 2417, 5003, 20287, 32537, 37573, 42083, 64901, 66533, 108553, 114553, 120979, 139187, 221443, 222289, 258673, 277597, 295679, 324011, 478589, 498863, 567673, 598607, 631681, 632941, 693227, 706481, 954257, 1160141, 1227899, 1401629, 1717673, 1783871, 1856977, 1998349, 2108089, 2798459, 3845249, 3982123, 4588879, 5032117, 5413439, 5707883, 5841119, 7029733, 7065293, 9319721, 12784753, 14955251, 15047113, 15489763]
+rand6       terms=133  ratrec-fail=14  denominator primes=[2, 3, 5, 7, 11, 47, 83, 101, 151, 479, 2677, 117349, 134093, 250043, 360007, 1753289, 6549307, 9212477, 15798397, 16165397, 20639743, 21993331]
+rand7       terms=112  ratrec-fail=21  denominator primes=[2, 3, 5, 11, 17, 107, 137, 461, 1193, 67213, 126107, 1266931, 1805203, 3218671, 4719329, 9758347, 13867037, 17896061]
+
+SUMMARY (denominator primes >= 5 are the ONLY bad primes for that representative):
+  pref       126 terms  bad primes [5]
+  prefrev    129 terms  bad primes [7, 121441, 3278837]
+  nB_desc    134 terms  bad primes [16703]
+  top_asc    126 terms  bad primes [5]
+  nfac_desc  129 terms  bad primes [121441]
+  rand2      125 terms  bad primes [4721]
+  rand4      129 terms  bad primes [1129]

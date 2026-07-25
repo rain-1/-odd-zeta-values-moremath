@@ -1,0 +1,17 @@
+START Sat 25 Jul 2026 00:24:02
+HF loaded
+ann0 #3 t=0s
+--- E1 joint delta, Support S[n]^0..^3 --- Sat 25 Jul 2026 00:24:03
+E1 t=0s  head=Symbol  len=-
+E1 no telescoper for this support
+annW #6 t=1s
+--- E2 joint delta, Support S[n]^0..^3 --- Sat 25 Jul 2026 00:24:04
+E2 t=0s  head=Symbol  len=-
+E2 no telescoper for this support
+--- E3 joint delta, Support S[n]^0..^5 --- Sat 25 Jul 2026 00:24:04
+E3 t=0s  head=Symbol  len=-
+E3 no telescoper for this support
+--- E4 joint delta, Support S[n]^0..^8 --- Sat 25 Jul 2026 00:24:04
+E4 t=0s  head=Symbol  len=-
+E4 no telescoper for this support
+ALL DONE Sat 25 Jul 2026 00:24:04

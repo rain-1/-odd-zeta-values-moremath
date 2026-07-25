@@ -1,0 +1,12 @@
+(R1) k-slot Apery letters R^(a)(n,k): pole order and indicator
+   a=1 : cells=812  max pole order=1  poles off alpha=1 : 0
+   a=2 : cells=812  max pole order=1  poles off alpha=1 : 0
+   a=3 : cells=812  max pole order=1  poles off alpha=1 : 0
+   a=4 : cells=812  max pole order=1  poles off alpha=1 : 0
+   a=5 : cells=812  max pole order=1  poles off alpha=1 : 0
+(D1) coupling Apery letters D^(a)(n,m): pole order by eps
+   a=1 : cells=1536  max order (eps=0)=1 [off kappa: 0]  max order (eps=1)=1
+   a=2 : cells=1536  max order (eps=0)=1 [off kappa: 0]  max order (eps=1)=2
+   a=3 : cells=1536  max order (eps=0)=1 [off kappa: 0]  max order (eps=1)=3
+   a=4 : cells=1536  max order (eps=0)=1 [off kappa: 0]  max order (eps=1)=4
+   a=5 : cells=1536  max order (eps=0)=1 [off kappa: 0]  max order (eps=1)=5

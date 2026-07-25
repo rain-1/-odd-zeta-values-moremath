@@ -1,0 +1,77 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{4}{section.1}%
+\contentsline {subsection}{\tocsubsection {}{1.1}{The three known measures}}{4}{subsection.1.1}%
+\contentsline {subsection}{\tocsubsection {}{1.2}{The questions we answer}}{5}{subsection.1.2}%
+\contentsline {subsection}{\tocsubsection {}{1.3}{Results}}{5}{subsection.1.3}%
+\contentsline {subsection}{\tocsubsection {}{1.4}{Scope of the optimality claims}}{7}{subsection.1.4}%
+\contentsline {subsection}{\tocsubsection {}{1.5}{Evidence classes}}{7}{subsection.1.5}%
+\contentsline {subsection}{\tocsubsection {}{1.6}{Notation and one renaming}}{8}{subsection.1.6}%
+\contentsline {subsection}{\tocsubsection {}{1.7}{Plan}}{8}{subsection.1.7}%
+\contentsline {section}{\tocsection {}{2}{The Transfer Principle}}{8}{section.2}%
+\contentsline {subsection}{\tocsubsection {}{2.1}{The coefficient functional}}{9}{subsection.2.1}%
+\contentsline {subsection}{\tocsubsection {}{2.2}{The principle}}{9}{subsection.2.2}%
+\contentsline {subsection}{\tocsubsection {}{2.3}{The two corollaries that do the work}}{10}{subsection.2.3}%
+\contentsline {subsection}{\tocsubsection {}{2.4}{The savings function is completion-independent}}{11}{subsection.2.4}%
+\contentsline {section}{\tocsection {}{3}{The group, and what it looks like $p$-adically}}{11}{section.3}%
+\contentsline {subsection}{\tocsubsection {}{3.1}{The group, explicitly}}{11}{subsection.3.1}%
+\contentsline {subsection}{\tocsubsection {}{3.2}{The transfer identity, verified coefficientwise}}{12}{subsection.3.2}%
+\contentsline {subsection}{\tocsubsection {}{3.3}{The savings function}}{13}{subsection.3.3}%
+\contentsline {subsection}{\tocsubsection {}{3.4}{The totally symmetric point banks nothing}}{14}{subsection.3.4}%
+\contentsline {subsection}{\tocsubsection {}{3.5}{How much money is there}}{14}{subsection.3.5}%
+\contentsline {subsection}{\tocsubsection {}{3.6}{Four honest flags}}{14}{subsection.3.6}%
+\contentsline {subsection}{\tocsubsection {}{3.7}{Non-vanishing under orbit moves}}{16}{subsection.3.7}%
+\contentsline {subsection}{\tocsubsection {}{3.8}{Literature position: the empty intersection}}{16}{subsection.3.8}%
+\contentsline {section}{\tocsection {}{4}{The parametrised construction and its exact cost ledger}}{16}{section.4}%
+\contentsline {subsection}{\tocsubsection {}{4.1}{The family}}{16}{subsection.4.1}%
+\contentsline {subsection}{\tocsubsection {}{4.2}{What the form is a linear form in}}{17}{subsection.4.2}%
+\contentsline {subsection}{\tocsubsection {}{4.3}{Which cosets must be covered}}{18}{subsection.4.3}%
+\contentsline {subsection}{\tocsubsection {}{4.4}{Non-vanishing across the family}}{18}{subsection.4.4}%
+\contentsline {subsection}{\tocsubsection {}{4.5}{The forced normalisation $G$}}{18}{subsection.4.5}%
+\contentsline {subsection}{\tocsubsection {}{4.6}{The smallness exponent $\alpha $}}{19}{subsection.4.6}%
+\contentsline {subsection}{\tocsubsection {}{4.7}{The denominator cost $E$}}{19}{subsection.4.7}%
+\contentsline {subsection}{\tocsubsection {}{4.8}{The criterion and the margin}}{19}{subsection.4.8}%
+\contentsline {subsection}{\tocsubsection {}{4.9}{Unequal lengths: where the saddle switches on}}{20}{subsection.4.9}%
+\contentsline {subsection}{\tocsubsection {}{4.10}{The free-factorial direction}}{20}{subsection.4.10}%
+\contentsline {subsection}{\tocsubsection {}{4.11}{The freedom map}}{21}{subsection.4.11}%
+\contentsline {subsection}{\tocsubsection {}{4.12}{The exported margin function}}{21}{subsection.4.12}%
+\contentsline {section}{\tocsection {}{5}{Validation}}{22}{section.5}%
+\contentsline {subsection}{\tocsubsection {}{5.1}{The gate}}{22}{subsection.5.1}%
+\contentsline {subsection}{\tocsubsection {}{5.2}{Four further independent anchors}}{22}{subsection.5.2}%
+\contentsline {subsection}{\tocsubsection {}{5.3}{Independent re-derivation of the LSZ anchor}}{23}{subsection.5.3}%
+\contentsline {subsection}{\tocsubsection {}{5.4}{The direction that looked free and is not}}{23}{subsection.5.4}%
+\contentsline {subsection}{\tocsubsection {}{5.5}{The denominator cost, measured --- and corrected}}{23}{subsection.5.5}%
+\contentsline {subsection}{\tocsubsection {}{5.6}{What the ledger does not capture}}{25}{subsection.5.6}%
+\contentsline {section}{\tocsection {}{6}{The classification of two-term forms}}{25}{section.6}%
+\contentsline {subsection}{\tocsubsection {}{6.1}{$\varphi (p^r)=2$}}{25}{subsection.6.1}%
+\contentsline {subsection}{\tocsubsection {}{6.2}{At $p\ge 5$ the smallness cancels the growth exactly}}{25}{subsection.6.2}%
+\contentsline {subsection}{\tocsubsection {}{6.3}{What is actually missing at $p\ge 5$}}{26}{subsection.6.3}%
+\contentsline {section}{\tocsection {}{7}{The scan}}{27}{section.7}%
+\contentsline {subsection}{\tocsubsection {}{7.1}{Four doors that had to be re-opened}}{27}{subsection.7.1}%
+\contentsline {subsection}{\tocsubsection {}{7.2}{The optimisation domain}}{27}{subsection.7.2}%
+\contentsline {subsection}{\tocsubsection {}{7.3}{Optimality of the three known measures}}{28}{subsection.7.3}%
+\contentsline {subsection}{\tocsubsection {}{7.4}{The parity law, and why size never binds at $p=2$}}{28}{subsection.7.4}%
+\contentsline {subsection}{\tocsubsection {}{7.5}{The rank wall}}{29}{subsection.7.5}%
+\contentsline {subsection}{\tocsubsection {}{7.6}{The length cone at $p=2$: the tension, measured}}{30}{subsection.7.6}%
+\contentsline {subsection}{\tocsubsection {}{7.7}{$\zeta _2(7)$: the verdict}}{30}{subsection.7.7}%
+\contentsline {subsection}{\tocsubsection {}{7.8}{The escape hatch, and why it is shut}}{31}{subsection.7.8}%
+\contentsline {subsection}{\tocsubsection {}{7.9}{Non-vanishing, for the record}}{32}{subsection.7.9}%
+\contentsline {section}{\tocsection {}{8}{The margin map}}{32}{section.8}%
+\contentsline {subsection}{\tocsubsection {}{8.1}{Rank 1, ledger $E$}}{32}{subsection.8.1}%
+\contentsline {subsection}{\tocsubsection {}{8.2}{Rank 1, corrected $E_{\mathrm {true}}$}}{32}{subsection.8.2}%
+\contentsline {subsection}{\tocsubsection {}{8.3}{The rank axis, and the dichotomy}}{33}{subsection.8.3}%
+\contentsline {subsection}{\tocsubsection {}{8.4}{The structural ceiling}}{34}{subsection.8.4}%
+\contentsline {section}{\tocsection {}{9}{Discussion}}{34}{section.9}%
+\contentsline {subsection}{\tocsubsection {}{9.1}{The two open lemmas}}{34}{subsection.9.1}%
+\contentsline {subsection}{\tocsubsection {}{9.2}{The calibrated step, stated and then refuted}}{35}{subsection.9.2}%
+\contentsline {subsection}{\tocsubsection {}{9.3}{The structural finding: disjoint support}}{36}{subsection.9.3}%
+\contentsline {subsection}{\tocsubsection {}{9.4}{What a construction evading the map would need}}{36}{subsection.9.4}%
+\contentsline {subsection}{\tocsubsection {}{9.5}{Where we would look next}}{37}{subsection.9.5}%
+\contentsline {subsection}{\tocsubsection {}{9.6}{Summary of what is proved, measured and open}}{37}{subsection.9.6}%
+\contentsline {section}{\tocsection {Appendix}{A}{Reproduction record}}{38}{appendix.A}%
+\contentsline {subsection}{\tocsubsection {}{A.1}{Programs}}{38}{subsection.A.1}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{The group (\S \ref {sec:group})}}{38}{section*.2}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{The ledger (\S \ref {sec:ledger}, \S \ref {sec:validation})}}{38}{section*.3}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{The scan (\S \ref {sec:scan}, \S \ref {sec:map})}}{39}{section*.4}%
+\contentsline {subsection}{\tocsubsection {}{A.2}{Reproducing the headline numbers}}{39}{subsection.A.2}%
+\contentsline {subsection}{\tocsubsection {}{A.3}{Four artefacts and one driver bug, recorded}}{40}{subsection.A.3}%
+\contentsline {subsection}{\tocsubsection {}{A.4}{What is \emph {not} reproduced by the code}}{40}{subsection.A.4}%
+\contentsline {section}{\tocsection {Appendix}{}{References}}{40}{section*.5}%

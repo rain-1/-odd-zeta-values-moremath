@@ -1,0 +1,9 @@
+START Sat 25 Jul 2026 08:13:10  ORD=lk DMAX=4 MEMCAP=3000000000 ANNCAP=600 LADDERCAP=300
+HF loaded
+vtilde HarmonicNumber instances (v: must be 13): 13   distinct symbols S (v: must be 12): 12
+vtilde has a C letter ? True   (v: must be True)
+obj = T*vtilde  LeafCount 110  distinct symbols 12
+=== D1 Annihilator[T*vtilde] === Sat 25 Jul 2026 08:13:10
+  D1 ann : TIME ABORT after 600s  Sat 25 Jul 2026 08:23:11
+D1 DID NOT RETURN.
+ALL DONE Sat 25 Jul 2026 08:23:11

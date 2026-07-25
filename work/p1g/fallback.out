@@ -1,0 +1,79 @@
+primes 5..199 : 44
+--- P-row (the (BASE) obligation) ---
+   {'genuine_tight': 43, 'genuine_slack': 1, 'a0_tight': 38, 'a0_slack': 0, 'FAIL': 0}
+--- P-hat row (known to FAIL -- the control) ---
+   p=  5 n=  0 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 3
+   p=  7 n=  2 [a0] v_p(num)=0 < v_p(c3)=1  -> level 5
+   p= 11 n=  3 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 6
+   p= 11 n=  5 [a0] v_p(num)=0 < v_p(c3)=1  -> level 8
+   p= 13 n=  4 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 7
+   p= 13 n=  7 [a0] v_p(num)=0 < v_p(c3)=1  -> level 10
+   p= 17 n=  6 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 9
+   p= 17 n=  8 [a0] v_p(num)=0 < v_p(c3)=1  -> level 11
+   p= 19 n=  7 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 10
+   p= 23 n=  9 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 12
+   p= 23 n= 17 [a0] v_p(num)=0 < v_p(c3)=1  -> level 20
+   p= 29 n= 12 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 15
+   p= 31 n= 13 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 16
+   p= 37 n= 16 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 19
+   p= 41 n= 18 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 21
+   p= 43 n= 19 [genuine] v_p(num)=1 < v_p(c3)=2  -> level 22
+   p= 47 n= 21 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 24
+   p= 53 n= 24 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 27
+   p= 53 n= 34 [a0] v_p(num)=0 < v_p(c3)=1  -> level 37
+   p= 53 n= 42 [a0] v_p(num)=0 < v_p(c3)=1  -> level 45
+   p= 59 n= 27 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 30
+   p= 61 n= 28 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 31
+   p= 61 n= 39 [a0] v_p(num)=0 < v_p(c3)=1  -> level 42
+   p= 67 n= 31 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 34
+   p= 67 n= 50 [a0] v_p(num)=0 < v_p(c3)=1  -> level 53
+   p= 71 n= 33 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 36
+   p= 71 n= 58 [a0] v_p(num)=0 < v_p(c3)=1  -> level 61
+   p= 73 n= 34 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 37
+   p= 73 n= 40 [a0] v_p(num)=0 < v_p(c3)=1  -> level 43
+   p= 79 n= 37 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 40
+   p= 83 n= 39 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 42
+   p= 89 n= 42 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 45
+   p= 97 n= 46 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 49
+   p= 97 n= 69 [a0] v_p(num)=0 < v_p(c3)=1  -> level 72
+   p=101 n= 48 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 51
+   p=101 n= 87 [a0] v_p(num)=0 < v_p(c3)=1  -> level 90
+   p=103 n= 49 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 52
+   p=103 n= 72 [a0] v_p(num)=0 < v_p(c3)=1  -> level 75
+   p=107 n= 51 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 54
+   p=107 n= 57 [a0] v_p(num)=0 < v_p(c3)=1  -> level 60
+   p=109 n= 52 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 55
+   p=113 n= 54 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 57
+   p=127 n= 61 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 64
+   p=131 n= 63 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 66
+   p=137 n= 66 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 69
+   p=139 n= 67 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 70
+   p=149 n= 72 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 75
+   p=151 n= 73 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 76
+   p=157 n= 76 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 79
+   p=163 n= 79 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 82
+   p=167 n= 81 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 84
+   p=167 n=126 [a0] v_p(num)=0 < v_p(c3)=1  -> level 129
+   p=173 n= 84 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 87
+   p=173 n=118 [a0] v_p(num)=0 < v_p(c3)=1  -> level 121
+   p=179 n= 87 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 90
+   p=179 n=106 [a0] v_p(num)=0 < v_p(c3)=1  -> level 109
+   p=181 n= 88 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 91
+   p=181 n= 99 [a0] v_p(num)=0 < v_p(c3)=1  -> level 102
+   p=181 n=151 [a0] v_p(num)=0 < v_p(c3)=1  -> level 154
+   p=191 n= 93 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 96
+   p=193 n= 94 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 97
+   p=193 n=125 [a0] v_p(num)=0 < v_p(c3)=1  -> level 128
+   p=197 n= 96 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 99
+   p=199 n= 97 [genuine] v_p(num)=0 < v_p(c3)=1  -> level 100
+   {'genuine_tight': 1, 'genuine_slack': 0, 'a0_tight': 17, 'a0_slack': 0, 'FAIL': 64}
+
+(REC-*) localisation: the single genuine step is n0=(p-5)/2, producing P_{(p+1)/2}.
+   p=  5 n0=  0  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 3)
+   p=  7 n0=  1  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 4)
+   p= 11 n0=  3  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 6)
+   p= 13 n0=  4  v_p(num)=2  v_p(c3)=1  slack=1  (level (p+1)/2 = 7)
+   p= 17 n0=  6  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 9)
+   p= 19 n0=  7  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 10)
+   p= 23 n0=  9  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 12)
+   p= 29 n0= 12  v_p(num)=1  v_p(c3)=1  slack=0  (level (p+1)/2 = 15)

@@ -1,0 +1,12 @@
+w5_I.json : 155 terms ; denominator primes beyond {2,3}: [71]
+--- (V1) exact ladder identity ---
+   n=1..20 : 0 mismatches
+--- (V2)/(V3) cell-wise outside region(s) III ---
+   p= 5 cells=   54 (exempt    7)  non-exempt cell-wise violations=0 
+   p= 7 cells=  139 (exempt   16)  non-exempt cell-wise violations=0 
+   p=11 cells=  505 (exempt   53)  non-exempt cell-wise violations=0 
+   p=13 cells=  818 (exempt   83)  non-exempt cell-wise violations=0 
+   p=17 cells= 1784 (exempt  174)  non-exempt cell-wise violations=0 
+   p=19 cells= 2469 (exempt  237)  non-exempt cell-wise violations=0 
+   p=23 cells= 4323 (exempt  406)  non-exempt cell-wise violations=0 
+VERDICT: V1=0  V2=0  V3=0  ->  ALL CLEAN

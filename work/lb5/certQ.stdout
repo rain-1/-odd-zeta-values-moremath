@@ -1,0 +1,74 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                                                                                                                                                                                                 
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= 
+In[7]:= 
+In[8]:= 
+In[9]:= START Sat 25 Jul 2026 04:59:30  DMAX=10 MEMCAP=3000000000
+
+In[10]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[11]:= HF loaded
+
+In[12]:= In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= rho,sigma loaded 10553 1819
+
+In[17]:= In[17]:= 
+In[18]:= 
+In[19]:= 
+In[20]:= 
+In[21]:= 
+In[22]:= LeafCount Gll=2255  qll=59  GQ/T=1913
+
+In[23]:= In[23]:= 
+In[24]:= 
+In[25]:= HarmonicNumber count in GQ (must be 0): 0
+
+In[26]:= 
+In[27]:= In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= F_ll SPLIT CHECK (must all be 0): {0, 0, 0, 0}
+
+In[31]:= 
+In[32]:= In[32]:= 
+In[33]:= 
+In[34]:= In[34]:= === Q1 Annihilator[GQ] (rank 1 expected: 3 first-order generators) === 
+ 
+>   Sat 25 Jul 2026 04:59:31
+
+In[35]:=   ann1 #3 t=0s  (checkpointed)  mem=0GB
+
+In[36]:= 
+In[37]:= In[37]:= === Q2 ct1: eliminate l on the RANK-1 object === Sat 25 Jul 2026 04:59:32
+
+In[38]:=   ct1 #2 t=3s  (checkpointed)  mem=2GB
+
+In[39]:= 
+In[40]:=   ct1 telescopers: 3
+
+In[41]:= In[41]:= === Q3 OreGroebnerBasis of the telescopers === Sat 25 Jul 2026 05:08:36
+
+In[42]:=   gb #3 t=1s  (checkpointed)  mem=2GB
+
+In[43]:= 
+In[44]:=   gb === ct1tel ? True
+
+In[45]:= In[45]:= === Q4 DFiniteTimes with A2(k) === Sat 25 Jul 2026 05:11:58
+
+In[46]:= 
+In[47]:=   annA2 #3
+
+In[48]:= 

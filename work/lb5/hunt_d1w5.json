@@ -1,0 +1,17 @@
+{
+ "tag": "d1w5",
+ "basis": 682,
+ "N": 900,
+ "depth2": false,
+ "mf": [
+  3,
+  2,
+  2
+ ],
+ "target": "P",
+ "W": 5,
+ "rank_aug": 478,
+ "rank_M": 478,
+ "inconsistent": true,
+ "excess_equations": 422
+}

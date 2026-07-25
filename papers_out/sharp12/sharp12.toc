@@ -1,0 +1,62 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{2}{section.1}%
+\contentsline {subsection}{\tocsubsection {}{1.1}{The Brown--Zudilin family}}{2}{subsection.1.1}%
+\contentsline {subsection}{\tocsubsection {}{1.2}{The denominator law, and the factor $12$}}{3}{subsection.1.2}%
+\contentsline {subsection}{\tocsubsection {}{1.3}{The main theorem}}{4}{subsection.1.3}%
+\contentsline {subsection}{\tocsubsection {}{1.4}{What is new}}{5}{subsection.1.4}%
+\contentsline {subsection}{\tocsubsection {}{1.5}{Conventions on evidence}}{5}{subsection.1.5}%
+\contentsline {section}{\tocsection {}{2}{Structure of the proof}}{6}{section.2}%
+\contentsline {subsection}{\tocsubsection {}{2.1}{The shape of the object}}{6}{subsection.2.1}%
+\contentsline {subsection}{\tocsubsection {}{2.2}{The three walls, and what they forced}}{6}{subsection.2.2}%
+\contentsline {subsection}{\tocsubsection {}{2.3}{The nucleus dissolves at the midpoint}}{7}{subsection.2.3}%
+\contentsline {subsection}{\tocsubsection {}{2.4}{The induction}}{7}{subsection.2.4}%
+\contentsline {section}{\tocsection {}{3}{The bottom row}}{7}{section.3}%
+\contentsline {subsection}{\tocsubsection {}{3.1}{The closed form is certified}}{7}{subsection.3.1}%
+\contentsline {subsection}{\tocsubsection {}{3.2}{Lucas for the bottom row}}{8}{subsection.3.2}%
+\contentsline {section}{\tocsection {}{4}{The graded $H$-layer}}{9}{section.4}%
+\contentsline {section}{\tocsection {}{5}{Carry lemmas for the Brown--Zudilin summand}}{10}{section.5}%
+\contentsline {section}{\tocsection {}{6}{The decomposition identities}}{11}{section.6}%
+\contentsline {subsection}{\tocsubsection {}{6.1}{The alphabet}}{11}{subsection.6.1}%
+\contentsline {subsection}{\tocsubsection {}{6.2}{The middle row: Theorem B}}{12}{subsection.6.2}%
+\contentsline {subsection}{\tocsubsection {}{6.3}{The top row: the family, and (T1-top)}}{12}{subsection.6.3}%
+\contentsline {subsection}{\tocsubsection {}{6.4}{New closed forms for Ap\'ery's $\zeta (3)$ numerators}}{13}{subsection.6.4}%
+\contentsline {section}{\tocsection {}{7}{The pole calculus and the depth conditions}}{14}{section.7}%
+\contentsline {subsection}{\tocsubsection {}{7.1}{Level expansion}}{14}{subsection.7.1}%
+\contentsline {subsection}{\tocsubsection {}{7.2}{Top-level residues and the pattern census}}{15}{subsection.7.2}%
+\contentsline {subsection}{\tocsubsection {}{7.3}{The depth conditions and their consistency}}{16}{subsection.7.3}%
+\contentsline {subsection}{\tocsubsection {}{7.4}{Level-lifting: the conditions are level-independent}}{17}{subsection.7.4}%
+\contentsline {subsection}{\tocsubsection {}{7.5}{A hard negative: the deficit is irremovable}}{18}{subsection.7.5}%
+\contentsline {section}{\tocsection {}{8}{The fibre congruence}}{19}{section.8}%
+\contentsline {subsection}{\tocsubsection {}{8.1}{The block factorisation}}{19}{subsection.8.1}%
+\contentsline {subsection}{\tocsubsection {}{8.2}{The residue identity}}{21}{subsection.8.2}%
+\contentsline {subsection}{\tocsubsection {}{8.3}{The two carry lemmas and Lemma $F$}}{21}{subsection.8.3}%
+\contentsline {subsection}{\tocsubsection {}{8.4}{Two carry inequalities}}{23}{subsection.8.4}%
+\contentsline {subsection}{\tocsubsection {}{8.5}{The multi-digit weakening}}{24}{subsection.8.5}%
+\contentsline {section}{\tocsection {}{9}{The digit-scaled induction}}{25}{section.9}%
+\contentsline {subsection}{\tocsubsection {}{9.1}{The inductive statement}}{25}{subsection.9.1}%
+\contentsline {subsection}{\tocsubsection {}{9.2}{The step and its ledger}}{25}{subsection.9.2}%
+\contentsline {subsection}{\tocsubsection {}{9.3}{The descent term, in-regime}}{26}{subsection.9.3}%
+\contentsline {section}{\tocsection {}{10}{The descent term off-regime}}{26}{section.10}%
+\contentsline {subsection}{\tocsubsection {}{10.1}{The digit dictionary}}{27}{subsection.10.1}%
+\contentsline {subsection}{\tocsubsection {}{10.2}{The descent Kummer lemma}}{27}{subsection.10.2}%
+\contentsline {subsection}{\tocsubsection {}{10.3}{Why the expected route fails}}{28}{subsection.10.3}%
+\contentsline {section}{\tocsection {}{11}{The nucleus: the base case}}{29}{section.11}%
+\contentsline {subsection}{\tocsubsection {}{11.1}{One band}}{30}{subsection.11.1}%
+\contentsline {subsection}{\tocsubsection {}{11.2}{Below the midpoint the band is empty}}{30}{subsection.11.2}%
+\contentsline {subsection}{\tocsubsection {}{11.3}{At the midpoint the band is three cells}}{30}{subsection.11.3}%
+\contentsline {subsection}{\tocsubsection {}{11.4}{Above the midpoint: the exceptional steps are apparent}}{32}{subsection.11.4}%
+\contentsline {subsection}{\tocsubsection {}{11.5}{Assembly, and a corollary that was expected to be an input}}{33}{subsection.11.5}%
+\contentsline {section}{\tocsection {}{12}{Two structural theorems}}{34}{section.12}%
+\contentsline {subsection}{\tocsubsection {}{12.1}{The base case is one identity}}{34}{subsection.12.1}%
+\contentsline {subsection}{\tocsubsection {}{12.2}{The wall}}{35}{subsection.12.2}%
+\contentsline {subsection}{\tocsubsection {}{12.3}{The weight-2 residue identities}}{35}{subsection.12.3}%
+\contentsline {section}{\tocsection {}{13}{The middle row}}{36}{section.13}%
+\contentsline {subsection}{\tocsubsection {}{13.1}{Why the product form fails, exactly}}{38}{subsection.13.1}%
+\contentsline {section}{\tocsection {}{14}{Certification status of the decomposition identities}}{38}{section.14}%
+\contentsline {subsection}{\tocsubsection {}{14.1}{Status}}{38}{subsection.14.1}%
+\contentsline {subsection}{\tocsubsection {}{14.2}{(T1-top)}}{39}{subsection.14.2}%
+\contentsline {subsection}{\tocsubsection {}{14.3}{Theorem B}}{40}{subsection.14.3}%
+\contentsline {section}{\tocsection {}{15}{The primes 2 and 3}}{41}{section.15}%
+\contentsline {section}{\tocsection {}{16}{Summary of the dependency structure}}{43}{section.16}%
+\contentsline {section}{\tocsection {Appendix}{A}{Reproduction}}{43}{appendix.A}%
+\contentsline {section}{\tocsection {Appendix}{}{Acknowledgments}}{44}{section*.2}%
+\contentsline {section}{\tocsection {Appendix}{}{References}}{44}{section*.3}%

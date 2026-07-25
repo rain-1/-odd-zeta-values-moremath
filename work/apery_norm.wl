@@ -1,0 +1,21 @@
+lf=OpenWrite["/home/ubuntu/fable-episode-2/zeta-math-2/work/apery_norm.log"];
+log[x__]:=(WriteString[lf,x,"\n"];Flush[lf]);
+Get["/home/ubuntu/riscergosum/RISC/HolonomicFunctions.m"]; log["HF ok"];
+rA=1; qA=5; etA={3,1,1,1,1,1};
+h0A=etA[[1]] nn+2; hjA=Table[etA[[j+1]] nn+1,{j,1,qA}];
+NN=Product[(h0A-2 hjA[[j]])!,{j,rA+1,qA}]/Product[(hjA[[j]]-1)!^2,{j,1,rA}];
+termA=NN (h0A+2 tt) Gamma[h0A+tt]^rA Product[Gamma[hjA[[j]]+tt],{j,1,qA}]/
+      (Gamma[1+tt]^rA Product[Gamma[1+h0A-hjA[[j]]+tt],{j,1,qA}]);
+annA=Annihilator[termA,{S[nn],S[tt]}]; log["ann #",Length[annA]];
+ctA=CreativeTelescoping[annA,S[tt]-1,{S[nn]}]; log["tele #",Length[ctA[[1]]]];
+ap=ApplyOreOperator[ctA[[1,1]],F[nn]];
+ord=Max[Cases[ap,F[nn+a_.]:>a,Infinity]];
+coeffs=Table[Coefficient[ap,F[nn+k]],{k,0,ord}];
+degs=Exponent[coeffs,nn]; D0=Max[degs];
+cp=Sum[Coefficient[coeffs[[k+1]],nn,D0]*lam^k,{k,0,ord}];
+log["ORDER=",ToString[ord]," coeff degrees=",ToString[degs]];
+log["applied=",ToString[InputForm[ap]]];
+log["charpoly(top-deg)=",ToString[InputForm[Simplify[cp]]]];
+log["roots=",ToString[InputForm[N[lam/.Solve[cp==0,lam],10]]]];
+log["expected roots (1+-sqrt2)^4 = ",ToString[N[{(1+Sqrt[2])^4,(1-Sqrt[2])^4},10]]];
+log["DONE"]; Close[lf]; Exit[];

@@ -1,0 +1,3309 @@
+%% A sharp denominator theorem for the cellular rational approximations to zeta(5)
+%% Draft. Compile with: pdflatex sharp12 (twice)
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{linknavy}{rgb}{0.10,0.20,0.50}
+\usepackage[colorlinks=true,linkcolor=linknavy,citecolor=linknavy,urlcolor=linknavy]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{evidence}[theorem]{Evidence}
+
+\numberwithin{equation}{section}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\Zp}{\ZZ_p}
+\newcommand{\Qp}{\QQ_p}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\den}{\operatorname{den}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\car}{\operatorname{car}}
+\newcommand{\ii}[1]{[\![#1]\!]}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\LBZ}{L_{\mathrm{BZ}}}
+\newcommand{\wfive}{w_5}
+\newcommand{\wthree}{\hat w_3}
+\newcommand{\vfive}{v_5}
+\newcommand{\PROVED}{\textsf{[PROVED]}}
+\newcommand{\VERIFIED}{\textsf{[VERIFIED]}}
+\newcommand{\CERTIFIED}{\textsf{[CERTIFIED]}}
+\newcommand{\CERT}{\textsf{[CERT]}}
+\newcommand{\LEAN}{\textsf{[LEAN]}}
+\newcommand{\OPEN}{\textsf{[OPEN]}}
+
+\begin{document}
+
+\title[A sharp denominator theorem for cellular approximations to $\zeta(5)$]
+{A sharp denominator theorem for the cellular\\ rational approximations to $\zeta(5)$}
+
+%% AUTHOR PLACEHOLDER --- to be filled in before circulation
+\author{}
+\address{}
+\email{}
+
+\date{\today}
+
+\subjclass[2020]{11J82, 11B65, 11A07, 33F10, 14H10}
+\keywords{Cellular integrals, $\zeta(5)$, denominators, Lucas congruences, Kummer's theorem,
+Wolstenholme's congruence, creative telescoping}
+
+\begin{abstract}
+Brown and Zudilin analyse a family of cellular integrals on the moduli space
+$\mathcal M_{0,8}$ whose totally symmetric member produces simultaneous rational
+approximations $I'_n=Q_n\zeta(5)-P_n$ and $I''_n=Q_n\zeta(3)-\hat P_n$. On the basis of
+extensive computation they record the inclusions
+$Q_n,\;d_n^2d_{2n}\hat P_n,\;d_n^5P_n\in\ZZ$, where $d_n=\lcm(1,\dots,n)$. We complete this
+picture. The inclusions hold after multiplication by the single global factor
+$12=2^2\cdot 3$ --- as their own printed value $P_2=1190161/384$ already shows, since
+$d_2^5=32$ and $384=12\cdot 32$ --- and the factor $12$ is sharp.
+
+Our main theorem is the $p\ge5$ half of the resulting law:
+$\ord_p(P_n)\ge-5\lfloor\log_p n\rfloor=-\ord_p(d_n^5)$ for every prime $p\ge5$ and every
+$n\ge1$. The proof is a digit-scaled induction on the number of base-$p$ digits of $n$,
+%% FIXED [CRITICAL/MAJOR M-1,M-2, m-1, m-3]: the abstract now counts TWO unproved inputs for
+%% FIXED Theorem \ref{thm:main} --- (T1-top) and (DEPTH) --- names Theorem B as a third input used
+%% FIXED only by the weight-3 companion, states the exact-over-$\QQ$ ranges, and no longer calls
+%% FIXED Wolstenholme and $\sum j^{-2}$ the only arithmetic inputs simpliciter.
+applied to the graded remainder $W_n=P_n-H^{(5)}_nQ_n$, and it rests on exactly two inputs
+that are not proved here. The first is the finite decomposition identity
+$P_n=\sum_{k,l}T(n,k,l)\,w_5(n,k,l)$ over the Brown--Zudilin summand
+$T(n,k,l)=\binom{n+k}{n}\binom{n}{k}^2\binom{n+l}{n}\binom{n}{l}^2\binom{n+k+l}{n}$ of
+$Q_n=\sum_{k,l}T(n,k,l)$, with $w_5$ an explicit weight-$5$ form in harmonic letters; it is
+verified exactly over $\QQ$ for $n\le34$ (for the representative used in the base case,
+$n\le20$), agrees with $P_n$ at every $n\le360$ and satisfies the Brown--Zudilin operator at
+$748$ consecutive values modulo two $25$-bit primes, but is not yet machine-certified. The
+second is the linear-algebra certificate (DEPTH) cutting out the depth-conditioned family in
+which $w_5$ is chosen: an exact rank computation, reproduced at two auxiliary primes with
+identical pivot sets, but not a human proof. We state both statuses precisely and isolate what
+a certificate for the first must contain.
+
+Everything else in that chain is proved: an exact Lucas congruence $Q_{ap+r}\equiv Q_aQ_r\pmod p$ for the
+bottom row (formalised in Lean~4 with no axioms beyond \texttt{propext},
+\texttt{Classical.choice}, \texttt{Quot.sound}), a graded $H^{(5)}$-layer reduction, a
+level-independent depth calculus for $w_5$, an exact fibre block factorisation of $T$ whose
+only external input is Wolstenholme's congruence, a descent Kummer lemma, and a base case
+that dissolves at the midpoint $n=(p+1)/2$ into a three-cell corner sum equal to
+$-14\sum_{j<p}j^{-2}\equiv0\pmod p$. Those two classical facts --- Wolstenholme, and
+$\sum_{j<p}j^{-2}\equiv0$ --- are the only arithmetic inputs of the chain that constrain the
+prime (Wilson's theorem is used as well, but holds at every prime and so costs nothing), and
+they are exactly why $p\ge5$ is the right hypothesis. We also prove two structural obstruction
+theorems that explain why several natural routes cannot work; and we prove the weight-$3$
+companion statement for $\hat P_n$ modulo a third unproved input, the weight-$3$ decomposition
+identity $\hat P_n=\sum_{k,l}T\,\hat w_3$ (Theorem B, likewise verified but not certified),
+which the $p\ge5$ law for $P_n$ does \emph{not} use. The residual factor $12$ at $p\in\{2,3\}$ is of a different nature; we record its
+status honestly, including the fact that the geometric mechanism proposed for it provably
+cannot produce the factor $3$.
+\end{abstract}
+
+\maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The Brown--Zudilin family}
+
+In \cite{BZ} Brown and Zudilin study the family of five-fold cellular integrals
+\[
+I(\boldsymbol a)=I(a_1,\dots,a_8)
+\]
+of \cite[Example 7.5]{Br16}, period integrals on the moduli space $\mathcal M_{0,8}$ of genus
+zero curves with eight marked points. General results on periods of these moduli spaces
+\cite{Br09} force $I(\boldsymbol a)$ to be a $\QQ$-linear combination of multiple zeta values
+of weight $\le5$; the cellular nature of the integral kills the subleading weight and pins the
+leading weight to the single period $\zeta(5)+2\zeta(3)\zeta(2)$, and the coefficient of
+$\zeta(3)$ vanishes identically. The upshot \cite[(deco)]{BZ} is a decomposition
+\[
+I=Q\cdot\bigl(2\zeta(5)+4\zeta(3)\zeta(2)\bigr)-4\hat P\cdot\zeta(2)-2P,
+\qquad Q\in\ZZ,\ P,\hat P\in\QQ,
+\]
+and, after ``setting $\zeta(2)$ to zero'', a \emph{pair} of simultaneous rational
+approximations
+\[
+I'(\boldsymbol a)=Q\zeta(5)-P,\qquad I''(\boldsymbol a)=Q\zeta(3)-\hat P .
+\]
+
+A large transformation group $\mathfrak G$ of order $7!$ acts on the normalised integrals and on
+$Q,P,\hat P$, and it is by exploiting that action that Brown and Zudilin compute a sharp
+denominator; such Rhin--Viola groups are a recurring and arithmetically decisive feature of
+rational approximations to $\zeta(2)$, $\zeta(3)$ and $\zeta(4)$ \cite{RV96,RV01,MZ20}, as they
+are of the hypergeometric constructions for odd zeta values generally \cite{Zu04,Zu02a}. The
+whole subject descends from Ap\'ery \cite{Ap79} and Beukers' re-reading of it \cite{Be79}.
+
+We work throughout with the \emph{totally symmetric} member $a_1=\dots=a_8=n$ of the family,
+and write $Q_n$, $P_n$, $\hat P_n$ for the resulting coefficients, normalised as in \cite{BZ}:
+\begin{equation}\label{eq:normalisation}
+Q_0=1,\quad Q_1=21,\quad Q_2=2989;\qquad
+P_1=\tfrac{87}{4},\quad P_2=\tfrac{1190161}{384};\qquad
+\hat P_1=\tfrac{101}{4},\quad \hat P_2=\tfrac{344923}{96}.
+\end{equation}
+All three sequences satisfy one and the same Ap\'ery-type recursion of order $3$
+\cite{Zu02b}, which we call $\LBZ$:
+\begin{equation}\label{eq:LBZ}
+c_0(\nu)Y_\nu+c_1(\nu)Y_{\nu+1}+c_2(\nu)Y_{\nu+2}+c_3(\nu)Y_{\nu+3}=0,
+\end{equation}
+\begin{equation}\label{eq:LBZcoeffs}
+\begin{aligned}
+c_0(\nu)&=(\nu+1)^5(\nu+2)\,a_0(\nu+1), &\qquad c_1(\nu)&=-2(\nu+2)B_8(\nu),\\
+c_2(\nu)&=-2B_9(\nu), &\qquad c_3(\nu)&=2(\nu+3)^5(2\nu+5)\,a_0(\nu),
+\end{aligned}
+\end{equation}
+with $a_0(x)=41218x^3+198849x^2+320790x+173057$ and $B_8,B_9$ explicit polynomials making all
+four $c_i$ of degree $9$.
+
+The bottom row has a closed form \cite[(Q\_n)]{BZ}: with
+\begin{equation}\label{eq:T}
+T(n,k,l):=\binom{n+k}{n}\binom{n}{k}^{2}\binom{n+l}{n}\binom{n}{l}^{2}\binom{n+k+l}{n},
+\end{equation}
+one has
+\begin{equation}\label{eq:BZQ}
+Q_n=\sum_{k,l=0}^{n}T(n,k,l)\in\ZZ .
+\end{equation}
+We refer to $T$ as the \emph{Brown--Zudilin summand}, and to the triple $(Q_n,\hat P_n,P_n)$
+as the \emph{bottom}, \emph{middle} and \emph{top row} of the ladder.
+
+\subsection{The denominator law, and the factor \texorpdfstring{$12$}{12}}
+
+On the basis of extensive computation, Brown and Zudilin record
+\cite[(dn-totsym)]{BZ}
+\begin{equation}\label{eq:BZincl}
+Q_n,\qquad d_n^2d_{2n}\hat P_n,\qquad d_n^5P_n\ \in\ \ZZ
+\qquad\text{for } n=0,1,2,\dots,
+\end{equation}
+where $d_n=\lcm(1,2,\dots,n)$; the general-parameter analogues are their inclusions
+\cite[(incl), (sharp\_incl)]{BZ}, which they describe as an experimental observation that ``it
+is in principle possible to prove, with considerable effort''.
+
+The purpose of this paper is to complete \eqref{eq:BZincl}. The inclusions hold after
+multiplication by one global constant, and that constant is $12=2^2\cdot3$. This is already
+visible in \cite{BZ}'s own printed value: $P_2=1190161/384$ and $d_2^5=2^5=32$, so
+$d_2^5P_2=1190161/12\notin\ZZ$, while $12\,d_2^5P_2\in\ZZ$. The corrected law is sharp in
+both directions.
+
+%% FIXED [M-3]: the $c=4$ row (the one that shows the factor 3 is real) has been added;
+%% FIXED recomputed independently, 330/361 with 31 failures, first at n=2,6,8,18,20,24,26,54.
+\begin{evidence}[the empirical law]\label{ev:law12}
+$\VERIFIED$ Over the $361$ exact ladder values $n=0,\dots,360$, the number of $n$ with
+$\den(P_n)\mid c\,d_n^5$ is
+\[
+\begin{array}{c|ccccccc}
+c & 1 & 2 & 3 & 4 & 6 & 12 & 24\\\hline
+\#\{n\le360\} & 1 & 1 & 1 & 330 & 1 & 361 & 361
+\end{array}
+\]
+So the constant is exactly $12$: it suffices, and neither of its maximal proper divisors $6$
+and $4$ does. The two halves fail very differently. Dropping the $2^2$ to $6$ (hence also $3$,
+$2$, $1$) fails at all $360$ values $n\ge1$; dropping the $3$ to $4$ fails at only $31$ values,
+the first being $n=2,6,8,18,20,24,26,54$ --- so the factor $3$ is real but rare, which is
+consistent with its provenance being the least understood part of the constant
+(\S\ref{sec:twothree}). Moreover $\log\den(P_n)/\log(d_n^5)\to1$ (values
+$0.9953,0.9928,0.9947,0.9936$ at $n=80,200,320,355$), so the exponent $5$ is itself tight.
+\end{evidence}
+
+\begin{remark}
+We stress the framing. Brown and Zudilin state \eqref{eq:BZincl} explicitly as an experimental
+observation, not as a theorem, and their paper is careful to flag which of its assertions are
+proved and which are computational. What we do here is supply the missing constant and prove
+the arithmetic half of the resulting statement; we regard this as completing their analysis
+rather than correcting it. The $2$-adic and $3$-adic content of the constant $12$ is, as we
+explain in \S\ref{sec:twothree}, of a genuinely different flavour from the $p\ge5$ part, and
+Brown and Zudilin's own heuristic --- that the construction obtains $I'$ by motivically
+setting $\zeta(2):=0$, a row operation against the period $(2\pi i)^2$ whose integral
+normalisation carries a Bernoulli denominator --- is precisely the mechanism one would expect
+to leave a universal $2^2\cdot3$ behind.
+\end{remark}
+
+\subsection{The main theorem}
+
+Throughout, $p$ denotes a prime, $v_p$ (equivalently $\ord_p$) the $p$-adic valuation on
+$\QQ$, and
+\[
+L=L(n):=\lfloor\log_p n\rfloor=v_p(d_n),\qquad H^{(m)}_N:=\sum_{i=1}^{N}i^{-m}.
+\]
+
+%% FIXED [M-1]: (DEPTH) added to the hypothesis list here, in \S16's root row and in
+%% FIXED Remark \ref{rem:flip}; it is [CERT], not [PROVED].
+\begin{theorem}[Sharp-$12$, $p\ge5$ part]\label{thm:main}
+Assume the decomposition identity \textup{(T1-top)} of \S\ref{sec:decomp} and the
+linear-algebra certificate \textup{(DEPTH)} of \S\ref{sec:depth}. Then for every
+prime $p\ge5$ and every $n\ge1$,
+\[
+\ord_p(P_n)\ \ge\ -5\lfloor\log_p n\rfloor\ =\ -\ord_p(d_n^5).
+\]
+Equivalently $d_n^5P_n\in\ZZ[1/6]$, which is the $p\ge5$ half of $\den(P_n)\mid 12\,d_n^5$.
+\end{theorem}
+
+The two hypotheses are both finite, and isolated as sharply as we know how:
+
+\begin{itemize}[leftmargin=1.6em]
+\item \textbf{(T1-top).} $P_n=\sum_{k,l=0}^{n}T(n,k,l)\,\wfive(n,k,l)$, where $\wfive$ is an
+  explicit $\QQ$-combination of weight-$5$ monomials in the harmonic letters
+  $A_m,B_m,C_m,N_m$ of \S\ref{sec:decomp}. Evidence class $\VERIFIED$.
+\item \textbf{(DEPTH).} The linear system of \S\ref{sec:depth} cutting out the
+  depth-conditioned family in which $\wfive$ is chosen is consistent, with the ranks recorded
+  in Theorem~\ref{thm:depthcons}. Evidence class $\CERT$: an exact rank computation reproduced
+  at two auxiliary primes with identical pivot sets. It is what Proposition~\ref{prop:LIFT}
+  and hence the depth bound (DEPTH-gen) rest on, and it is inherited by every statement below
+  that quotes a depth bound.
+\end{itemize}
+
+Neither is $\PROVED$: see \S\ref{sec:certs} for exactly what has
+been checked for (T1-top), what a creative-telescoping certificate would have to contain, and a
+structural obstruction (Theorem~\ref{thm:degfit}) which shows why the cheap route that works at
+weight $3$ has no weight-$5$ analogue. Section~\ref{sec:certs} is written so that a single
+sentence flips when that certificate lands. We stress that the weight-$3$ decomposition
+identity (Theorem~\ref{thm:B}) is \emph{not} among the hypotheses of
+Theorem~\ref{thm:main}: nothing in the $P_n$ chain of \S\S\ref{sec:Qrow}--\ref{sec:nucleus}
+consumes $\wthree$. Theorem~\ref{thm:B} is a third unproved input of this paper, used only for
+the middle row (Theorem~\ref{thm:Eintro}).
+
+Everything else in the chain is proved. The statements below record the main intermediate
+results together with the hypotheses each one carries; of them only
+Theorem~\ref{thm:Aintro} is unconditional.
+
+\begin{theorem}[Bottom row]\label{thm:Aintro}
+For every prime $p$, every $a\ge0$ and every $0\le r<p$,
+\[
+Q_{ap+r}\equiv Q_a\,Q_r \pmod p,
+\]
+hence $Q_n\equiv\prod_i Q_{n_i}\pmod p$ over the base-$p$ digits of $n$. Moreover
+\[
+Q_{ap+r}\equiv Q_a\bigl(Q_r+p\,a\,\Psi_a\bigr)\pmod{p^2}\qquad(p\ge5,\ 1\le a<p,\ p\nmid Q_a)
+\]
+with $\Psi_a$ the explicit level-$r$ weight-$1$ harmonic functional of
+Corollary~\textup{\ref{cor:Qsuper}}.
+\end{theorem}
+
+\begin{theorem}[Base case]\label{thm:baseintro}
+Assume \textup{(T1-top)} for the representative $w_5^{\mathrm I}$ of \S\ref{sec:decomp} and the
+linear-algebra certificate \textup{(DEPTH)}. Then $\ord_p(P_n)\ge0$ for every prime $p\ge5$
+and every $n<p$.
+\end{theorem}
+
+\begin{theorem}[One radical short, unconditionally in $n$]\label{thm:51intro}
+Assume \textup{(T1-top)} and \textup{(DEPTH)}. For every prime $p\ge5$ and every $n\ge1$,
+\[
+\ord_p(P_n)\ \ge\ -5\lfloor\log_p n\rfloor-1,
+\]
+i.e.\ $d_n^5\cdot\!\!\prod_{5\le p\le3n}\!\!p\cdot P_n\in\ZZ[1/6]$; and $\ord_p(P_n)\ge0$
+outright whenever $p>3n$.
+\end{theorem}
+
+Theorem~\ref{thm:51intro} does not use the base case or the off-regime descent, and it is
+recorded separately because it is what the depth calculus alone buys.
+
+\begin{theorem}[Middle row]\label{thm:Eintro}
+Assume the weight-$3$ decomposition identity \textup{(Theorem B)} of \S\ref{sec:decomp}. Let
+$p\ge5$, $1\le a<p$, $0\le r<p$, $n=ap+r$ and $p\nmid Q_a$. Then
+\[
+v_p\bigl(p^3\hat P_n-\hat P_a Q_r\bigr)\ \ge\ 1+\min\bigl(0,v_p(\hat P_a)\bigr).
+\]
+In particular $p^3\hat P_{ap+r}\equiv \hat P_aQ_r\pmod p$ if and only if $\hat P_a\in\Zp$.
+\end{theorem}
+
+Theorem~\ref{thm:Eintro} corrects a natural expectation: the na\"ive ``Frobenius
+$\operatorname{diag}(1,p^3,p^5)$'' product congruence is \emph{false} in the middle slot, and
+\S\ref{sec:middle} explains exactly why --- the letter $A_3(k)$ has upper argument $n+k$
+reaching $2n$, which is the source of the $d_{2n}$ in \eqref{eq:BZincl}.
+
+Finally, two obstruction theorems delimit the landscape; they are stated in
+\S\ref{sec:wall} and are, we think, of independent interest.
+
+\begin{theorem}[The $\theta$ wall, informally]\label{thm:wallintro}
+The entire content of the base case is a linear functional $\theta_{p,n}$ on the space of
+depth-conditioned weight-$5$ forms which \emph{factors through the value map}
+$w\mapsto\sum_{k,l}T(n,k,l)w(n,k,l)$. Consequently no exact summation identity
+$\sum_{k,l}T\cdot M=0$ --- no member of the ``Lemma $\Phi$ species'', including the new
+weight-$2$ identities of Lemma~\textup{\ref{lem:Phi2}} --- can ever move $\theta$; and
+$\theta\not\equiv0$ on that space. The depth calculus plus arbitrarily much summand-side
+identity work therefore cannot prove the base case.
+\end{theorem}
+
+\subsection{What is new}
+
+The proof of Theorem~\ref{thm:main} is a digit-scaled induction whose four ingredients are, we
+believe, all new:
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(\arabic*)}]
+\item a \emph{level-lifting} proposition (Proposition~\ref{prop:LIFT}) showing that a finite
+  list of $42$ linear conditions on the coefficients of $\wfive$, computed at a single
+  base-$p$ digit, controls the $p$-adic depth of $\wfive$ at \emph{every} digit level
+  simultaneously and at every prime $p\ge5$ at once;
+\item an exact block factorisation of $T$ over a base-$p$ fibre (Lemma~\ref{lem:B}) together
+  with an exact residue identity (Lemma~\ref{lem:Phi}) that annihilates the entire first-order
+  dependence of the fibre sum on the fibre coordinates, giving the sharp fibre congruence
+  Lemma~\ref{lem:F} and its multi-digit weakening Lemma~\ref{lem:Fgen}; the only external
+  input is Wolstenholme's congruence, used once;
+\item a descent Kummer lemma (Lemma~\ref{lem:DK}) whose one-line mechanism is that
+  \emph{off-regime means a carry in base-$p$ position $0$, the depth-pattern indicators live
+  in position $L\ge1$, and Kummer's theorem counts both};
+\item a base case that is not a cancellation argument at all above or below the midpoint, and
+  at the midpoint reduces to three cells whose residues sum to $-14\sum_{j<p}j^{-2}$
+  (Theorem~\ref{thm:nucleus}).
+\end{enumerate}
+
+Along the way we obtain: a $\bmod\ p^2$ supercongruence for the bottom row
+(Corollary~\ref{cor:Qsuper}); an explicit order-$4$ left multiple $\tilde L$ of $\LBZ$ whose
+leading coefficient is $2D(\nu+3)^5(2\nu+5)$, i.e.\ with the factor $a_0$ removed
+(\S\ref{sec:desing}); a universal normalised midpoint row
+$(11907,-334374,-19292)$ (\S\ref{sec:recstar}); new exact weight-$2$ residue identities on the
+Brown--Zudilin summand (Lemma~\ref{lem:Phi2}); and two new harmonic closed forms for Ap\'ery's
+$\zeta(3)$ numerators $b_n$ (\S\ref{sec:apery}), one of which is cell-wise $p$-integral.
+
+\subsection{Conventions on evidence}\label{sec:evidence}
+
+Because part of the chain is machine-assisted, we are explicit about evidence classes and use
+them uniformly.
+
+\begin{itemize}[leftmargin=1.6em]
+\item $\PROVED$ --- a complete human proof is given here or in a named predecessor.
+\item $\CERTIFIED$ --- a machine proof object (a creative-telescoping operator together with
+  its certificate) has been produced \emph{and} independently re-checked by exact
+  rational-function arithmetic in a session that does not trust the search.
+\item $\CERT$ --- a linear-algebra certificate: an exact rank computation reproduced at two or
+  three auxiliary primes with identical pivot sets.
+\item $\VERIFIED\ r$ --- an exact finite check on the stated range $r$, $0$ failures. This is
+  evidence, never proof. Ranges are always given.
+\item $\LEAN$ --- formalised in Lean~4 with $0$ \texttt{sorry}s and no axioms beyond the three
+  standard ones (\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}).
+\item $\OPEN$ --- not settled; stated precisely.
+\end{itemize}
+
+All numerical checks quoted below are exact (integer, \texttt{Fraction}, $\FF_q$, or tracked-precision
+$p$-adic arithmetic); no floating point enters any arithmetic statement. Appendix~\ref{app:repro}
+lists the scripts.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Structure of the proof}\label{sec:structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section is a narrative map. Nothing is proved here; every statement is proved in the
+section named.
+
+\subsection{The shape of the object}
+
+The three rows of the ladder sit in a graded tower. The bottom row is integral and obeys an
+exact Lucas congruence (\S\ref{sec:Qrow}). The upper rows are not integral, and their
+denominators are exactly what we must control. The first move (\S\ref{sec:Hlayer}) is to strip
+off the part of $P_n$ that is visibly responsible for the pole: writing
+\[
+W_n:=P_n-H^{(5)}_n Q_n,
+\]
+the ``$H$-layer'' $H^{(5)}_nQ_n$ contributes $-5L$ for free because $Q_n\in\ZZ$, and all
+remaining content sits in $W_n$. The second move is to give $W_n$ a summand-level shape:
+\[
+W_n=\sum_{k,l}T(n,k,l)\,\vfive(n,k,l),\qquad \vfive:=\wfive-H^{(5)}_n,
+\]
+which is exactly the decomposition identity (T1-top). Everything downstream is a
+\emph{cell-by-cell ledger}: a comparison, at each summand, between the $p$-adic \emph{depth}
+of $\vfive$ (how negative its valuation can be) and the Kummer \emph{carries} of $T$ (how many
+powers of $p$ the summand supplies).
+
+\subsection{The three walls, and what they forced}
+
+The route to Theorem~\ref{thm:main} was not the expected one, and three hard negatives shaped
+it. We state them because each is a theorem, and each closes off a natural approach.
+
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(W\arabic*)}]
+\item \textbf{Lemma $F$ is sharp} (\S\ref{sec:F}). The fibre congruence delivers relative
+  precision $p^{2+\min(v_pT,2)}$ and that value is \emph{attained}; so no strengthening of the
+  fibre analysis can pay for the weight-$5$ depth. The fix had to come from the $\wfive$ side,
+  and it is a \emph{linear} fix: the depth conditions of \S\ref{sec:depth}.
+\item \textbf{No $p$-independent representative makes the base case cell-wise}
+  (\S\ref{sec:depth}, Theorem~\ref{thm:DEPTHplus}). The strengthened depth systems
+  $(\mathrm{DEPTH}^+)$ and $(\mathrm{DEPTH}^{++})$ are \emph{inconsistent} with the fitting
+  system, at two auxiliary primes, and the inconsistency localises to exactly the three pole
+  patterns carrying the deficit. Enlarging the alphabet by Ap\'ery-type letters
+  $R^{(a)}$ or by genuinely nested depth-$2$ letters $Y_{ab},V_{ab}$ does not help
+  (Theorem~\ref{thm:rletter}).
+\item \textbf{The $\theta$ wall} (\S\ref{sec:wall}, Theorem~\ref{thm:wall}). The obstruction
+  functional factors through the value map, so no summand-side identity can move it. This
+  \emph{explains} (W2) rather than merely recording it: those linear systems were trying to
+  buy, with $p$-independent linear conditions, something that is not $p$-independent-linear.
+\end{enumerate}
+
+The walls all point the same way: the base case is a statement about the \emph{number} $P_n$,
+so a proof must import a property of $P_n$. There are exactly two such properties available:
+the summand decomposition, and the recurrence $\LBZ$. The proof in \S\ref{sec:nucleus} uses
+both.
+
+\subsection{The nucleus dissolves at the midpoint}
+
+The base case is $\ord_p(P_n)\ge0$ for $n<p$. The cell-wise bound the depth calculus supplies
+is $-1$, and the deficit is \emph{attained}, at $(n,k,l)=\bigl(\tfrac{p+1}{2},0,\tfrac{p-1}{2}\bigr)$
+for every $p$. So a genuine cancellation is needed. The proof splits the range at the midpoint
+and finds that the cancellation is a three-term identity:
+
+\begin{itemize}[leftmargin=1.6em]
+\item For $n\le(p-1)/2$ the region $\mathrm{III}=\{k,l\ge q:=p-n,\ p\le k+l<p+q\}$ where the
+  chosen representative $w_5^{\mathrm I}$ can fail to be cell-wise integral is \emph{empty}: it
+  requires $2n\ge p$. Half the base case is free.
+\item At $n=(p+1)/2$ the region collapses to the \emph{three corner cells}
+  $(n-1,n)$, $(n,n-1)$, $(n,n)$. There $T/p^2\equiv(2,2,24)$ by Wilson's theorem, Lucas'
+  theorem and Kummer's theorem, and the relevant coefficients of the pole expansion are
+  $K_3=(3-s_2/2,\,3-s_2/2,\,-1/2-s_2/2)$ where $s_2=\sum_{j<p}j^{-2}$; the corner sum is
+  \[
+  2\Bigl(3-\tfrac{s_2}{2}\Bigr)+2\Bigl(3-\tfrac{s_2}{2}\Bigr)+24\Bigl(-\tfrac12-\tfrac{s_2}{2}\Bigr)
+  \ =\ -14\,s_2\ \equiv\ 0\pmod p ,
+  \]
+  because $\sum_{j<p}j^{-2}\equiv\sum_{j<p}j^{2}=\tfrac{(p-1)p(2p-1)}{6}\equiv0$ for $p\ge5$.
+  \emph{One classical input; no Fermat quotient, no Bernoulli number.}
+\item Above the midpoint the forward $\LBZ$ induction has only one kind of exceptional step,
+  the roots of $a_0$ modulo $p$, and those are \emph{apparent singularities}: all three
+  $2\times2$ minors of a certain $2\times3$ coefficient matrix are divisible by $a_0(\nu)$ in
+  $\QQ[\nu]$. Equivalently there is an explicit order-$4$ left multiple $\tilde L$ of $\LBZ$
+  with $a_0$ removed from the leading coefficient (\S\ref{sec:desing}).
+\end{itemize}
+
+The two halves dovetail with no residue: \emph{on the desingularised ladder the only singular
+step below $p-3$ is exactly the midpoint, which is exactly the single level the region
+computation supplies.} A congruence $(\mathrm{REC}\text{-}\star)$ that had been expected to be
+the \emph{input} to the base case comes out as its \emph{output}, and its universal normalised
+row $(11907,-334374,-19292)$ turns out to be the same row that governs the $a=1$ midpoint band
+one digit up in the prior campaign of this program \cite{ProgA1MID}.
+
+\subsection{The induction}
+
+With the base case in hand, the induction (\S\ref{sec:IND}) is a per-digit ledger. Writing
+$n=ap+r$ and grouping the cells of $W_n$ by $(b,c)=(\lfloor k/p\rfloor,\lfloor l/p\rfloor)$,
+\[
+p^5W_n-Q_rW_a=\underbrace{\sum_{k,l}T(n,k,l)\,\Ecal(n,k,l)}_{\text{(I) descent}}
++\underbrace{\sum_{b,c}\vfive(a,b,c)\bigl[\Tcal(b,c)-Q_rT(a,b,c)\bigr]}_{\text{(II) fibre}} ,
+\]
+$\Ecal=p^5\vfive(n,k,l)-\vfive(a,b,c)$ and $\Tcal(b,c)=\sum_{s,t}T(n,bp+s,cp+t)$. Term (II) is
+paid for by the depth bound (DEPTH-gen) against the fibre congruence Lemma~\ref{lem:Fgen},
+with slack \emph{exactly zero}. Term (I) splits by regime: in-regime the letter descent is
+exact and costs nothing; off-regime it is Lemma~\ref{lem:DK}. Every line of the ledger is
+tight; there is no spare power of $p$ anywhere in the chain.
+
+Two remarks on that. First, the route the off-regime term was expected to take --- a
+letter-wise carry ledger --- is \emph{refuted} (\S\ref{sec:trap}): at weight $5$ the mismatch
+of the letter $A_m(k)$ costs $m\lambda$ against a total Kummer gain of $1+\lambda$, and at
+$p=5$, $n=19$, $(k,l)=(6,0)$ the letter-wise ledger is short by exactly one power. The pole is
+not in $\Ecal$ at all; it is annihilated inside $\vfive$ by the depth conditions at level $n$.
+Second, the fact that the two sharpnesses --- Lemma $F$'s and (DEPTH)'s --- meet exactly is not
+a coincidence of bookkeeping but the reason the theorem is true at the stated exponent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The bottom row}\label{sec:Qrow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The closed form is certified}
+
+\begin{theorem}\label{thm:Qcert}
+$\CERTIFIED$ The double sum $\sum_{k,l}T(n,k,l)$ is annihilated by $\LBZ$; together with the
+natural boundaries and agreement at $n=0,1,2$ this proves \eqref{eq:BZQ}.
+\end{theorem}
+
+The certificate was produced by two-step creative telescoping \cite{Zei91,WZ92} using the
+package of \cite{Ko10}. The single call
+$\mathtt{CreativeTelescoping}[\mathrm{ann},\{S_k{-}1,S_l{-}1\},\{S_n\}]$ returns
+\texttt{\$Failed} even here, where a telescoper provably exists; the two-step split is the fix:
+\[
+\begin{gathered}
+\mathrm{ann}=\mathtt{Annihilator}[T,\{S_n,S_k,S_l\}]\ \leadsto\
+\mathrm{ct}_1=\mathtt{CreativeTelescoping}[\mathrm{ann},S_k-1,\{S_n,S_l\}]\\
+\leadsto\ \mathtt{OreGroebnerBasis}\ \leadsto\ \mathrm{ct}_2 .
+\end{gathered}
+\]
+The resulting order-$3$ telescoper has coefficients \emph{identically} those of
+\eqref{eq:LBZcoeffs}: the coefficient ratio is $\{1,1,1,1\}$ and
+$\mathtt{Expand}[\text{coeffs}-\LBZ]=\{0,0,0,0\}$. Every check was redone by exact
+rational-function arithmetic on the explicit binomial expression for $T$ --- each annihilator
+generator satisfies $\mathtt{Together}[(L\cdot T)/T]=0$, and each $k$-step pair satisfies
+$\mathrm{tel}\cdot T+(S_k-1)(\mathrm{cert}\cdot T)=0$. Separately, a \emph{single}-certificate
+(WZ-pair) form
+\[
+\LBZ\cdot T=\Delta_k(\rho T)+\Delta_l(\sigma T)
+\]
+with explicit rational $\rho,\sigma$ has been produced and checked to exactly $0$ twice, the
+second time in a kernel that never loaded the package at all; this is the object every
+weight-lowering step of \S\ref{sec:certs} consumes.
+
+\subsection{Lucas for the bottom row}
+
+The following is the ``$T$-level'' input used everywhere below. Its proof is uniform in $p$
+(no prime is excluded) and, importantly, uniform in $a$ --- it is already multi-digit.
+
+\begin{lemma}[Lucas step]\label{lem:L1}
+For $a,b\ge0$ and $0\le r,s<p$: $\binom{ap+r}{bp+s}\equiv\binom{a}{b}\binom{r}{s}\pmod p$.
+\end{lemma}
+
+\begin{proof}
+Lucas' theorem applied twice: first to the last digit $s$ against $r$, then to the reassembled
+higher digits.
+\end{proof}
+
+\begin{lemma}[Single carry annihilation]\label{lem:L2}
+With $N=ap+r$, $k=bp+s$: if $r+s<p$ then $\binom{N+k}{N}\equiv\binom{a+b}{a}\binom{r+s}{r}$,
+and if $r+s\ge p$ then $\binom{N+k}{N}\equiv0\pmod p$.
+\end{lemma}
+
+\begin{proof}
+If $r+s<p$ then $N+k=(a+b)p+(r+s)$ and Lemma~\ref{lem:L1} applies. If $r+s\ge p$ then
+$N+k=(a+b+1)p+(r+s-p)$ with $0\le r+s-p<p$, and Lemma~\ref{lem:L1} gives
+$\binom{N+k}{N}\equiv\binom{a+b+1}{a}\binom{r+s-p}{r}$; but $s<p$ forces $r+s-p<r$, so
+$\binom{r+s-p}{r}=0$.
+\end{proof}
+
+\begin{lemma}[Double carry annihilation]\label{lem:L3}
+Assume $s\le r$, $t\le r$, $r+s<p$, $r+t<p$. Then $s+t<p$, and
+$\binom{N+k+l}{N}\equiv\binom{a+b+c}{a}\binom{r+s+t}{r}\pmod p$ if $r+s+t<p$, while
+$\binom{N+k+l}{N}\equiv0\pmod p$ otherwise.
+\end{lemma}
+
+\begin{proof}
+First, $s+t<p$. Suppose $s+t\ge p$. From $s\le r$ and $t\le r$ we get $p\le s+t\le 2r$, so
+$r\ge p/2$; from $r+s<p$ and $r+t<p$ we get $s,t\le p-1-r$, so $s+t\le2(p-1-r)<2(p-p/2)=p$, a
+contradiction. Hence $s+t<p$, so $r+s+t<2p$ and $N+k+l=(a+b+c+\varepsilon)p+(r+s+t-\varepsilon p)$
+with $\varepsilon\in\{0,1\}$. If $\varepsilon=0$, Lemma~\ref{lem:L1} gives the stated product.
+If $\varepsilon=1$, the low digit is $\rho=r+s+t-p$, and $\rho<r$ precisely because $s+t<p$;
+Lemma~\ref{lem:L1} then produces a factor $\binom{\rho}{r}=0$.
+\end{proof}
+
+The deduction ``$s+t<p$'' in Lemma~\ref{lem:L3} is the non-obvious step, and it is what
+upgrades a previously verified ``carry-kill predicate'' to a proof.
+
+\begin{lemma}[Summand factorisation]\label{lem:L4}
+With $N=ap+r$, $k=bp+s$, $l=cp+t$ as above,
+\[
+T(N,bp+s,cp+t)\equiv\ii{r+s+t<p}\cdot T_{\mathrm{hi}}(a,b,c)\,T_{\mathrm{lo}}(r,s,t)\pmod p,
+\]
+\[
+T_{\mathrm{hi}}(a,b,c)=\tbinom{a+b}{a}\tbinom{a}{b}^2\tbinom{a+c}{a}\tbinom{a}{c}^2\tbinom{a+b+c}{a},
+\qquad
+T_{\mathrm{lo}}(r,s,t)=\tbinom{r+s}{r}\tbinom{r}{s}^2\tbinom{r+t}{r}\tbinom{r}{t}^2\tbinom{r+s+t}{r}.
+\]
+\end{lemma}
+
+\begin{proof}
+$\binom{N}{k}^2\equiv\binom{a}{b}^2\binom{r}{s}^2$ and $\binom{N}{l}^2\equiv\binom{a}{c}^2\binom{r}{t}^2$
+by Lemma~\ref{lem:L1}; these vanish unless $s\le r$ and $t\le r$. The factors
+$\binom{N+k}{N}$, $\binom{N+l}{N}$ are handled by Lemma~\ref{lem:L2} (they vanish unless
+$r+s<p$, $r+t<p$). On the surviving regime Lemma~\ref{lem:L3} applies to $\binom{N+k+l}{N}$.
+Multiplying the five congruences, and noting that when any factor is $\equiv0$ both sides
+vanish, gives the statement.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:Aintro}}, Lucas part]
+Write every summation index in base $p$: $k=bp+s$, $l=cp+t$ with $0\le s,t<p$; since
+$k,l\le N<(a+1)p$ we have $0\le b,c\le a$. Summing Lemma~\ref{lem:L4} over
+$0\le b,c\le a$ and $0\le s,t<p$,
+\[
+Q_N\equiv\sum_{b,c=0}^{a}\ \sum_{s,t:\,r+s+t<p}T_{\mathrm{hi}}(a,b,c)\,T_{\mathrm{lo}}(r,s,t)\pmod p .
+\]
+Two boundary points. First, the true index region is
+$\{(b,s):bp+s\le N\}\times\{(c,t):cp+t\le N\}$ intersected with the surviving set; completing
+to the full box adds only terms with $b=a$, $s>r$ (for which $\binom{r}{s}=0$), and
+identically for $(c,t)$, so the completed sum is congruent to the true one. Second, the
+$(b,c)$-region and the $(s,t)$-region are independent, since $r+s+t<p$ constrains only $s,t$;
+so the double sum factors. The high factor is $\sum_{b,c=0}^{a}T_{\mathrm{hi}}(a,b,c)=Q_a$, an
+\emph{integer identity} (it is \eqref{eq:BZQ} at $n=a$). For the low factor,
+$Q_r=\sum_{s,t=0}^{r}T_{\mathrm{lo}}(r,s,t)$, and every term with $r+s+t\ge p$ vanishes mod
+$p$: if $r+s\ge p$ or $r+t\ge p$ this is the computation of Lemma~\ref{lem:L2}; otherwise
+Lemma~\ref{lem:L3} applies and $\binom{r+s+t}{r}\equiv0$. Hence
+$\sum_{s,t:\,r+s+t<p}T_{\mathrm{lo}}\equiv Q_r$ and $Q_N\equiv Q_aQ_r$. The multi-digit
+product form follows by induction on the number of base-$p$ digits, since the two-digit
+statement holds for \emph{all} $a\ge0$.
+\end{proof}
+
+\begin{evidence}\label{ev:A}
+$\PROVED$, and $\LEAN$: the statement $Q_{ap+r}\equiv Q_aQ_r\pmod p$ and its full digit-product
+form are formalised in Lean~4 with $0$ \texttt{sorry}s, no \texttt{native\_decide}, and axioms
+exactly $\{\texttt{propext},\texttt{Classical.choice},\texttt{Quot.sound}\}$. The same
+development formalises the Ap\'ery-row analogue $a_{ap+r}\equiv a_aa_r$, an abstract
+$\chi$-twisted weight-$w$ Frobenius descent theorem, and its minimal-Ap\'ery
+($p^3b_{ap+r}\equiv b_aa_r$) and Franel ($p^2B_{ap+r}\equiv B_aA_r$) instances. In the
+minimal-Ap\'ery instance the formalised object is $b_{\min}(n)=\sum_k\binom nk^2\binom{n+k}k^2
+(2H^{(3)}_n-H^{(3)}_k)$; the identity $b_{\min}=b$ is proved on paper but is not formalised, and
+likewise for the Franel analogue. The $\bmod\ p^2$ supercongruence of
+Corollary~\ref{cor:Qsuper} is not formalised either.
+Independently, $\VERIFIED$ $0$ failures for $p\in\{5,\dots,31\}$, all single-digit cells and
+iterated digits, $n\le360$.
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The graded \texorpdfstring{$H$}{H}-layer}\label{sec:Hlayer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lemma}[Digit split of a harmonic sum]\label{lem:H}
+For $x\ge0$ and $m\ge1$,
+$H^{(m)}_x=U_m(x)+p^{-m}H^{(m)}_{\lfloor x/p\rfloor}$ with
+$U_m(x):=\sum_{j\le x,\ p\nmid j}j^{-m}\in\Zp$.
+\end{lemma}
+
+\begin{proof}
+Split the summation range according to whether $p\mid j$.
+\end{proof}
+
+\begin{theorem}[$H$-layer reduction]\label{thm:C}
+Let $p\ge5$, $1\le a<p$, $0\le r<p$, $n=ap+r$ \textup{(}so $n<p^2$\textup{)}. Put
+$W_n:=P_n-H^{(5)}_nQ_n$ and $\hat W_n:=\hat P_n-H^{(3)}_nQ_n$. Then
+\[
+p^5P_n-P_aQ_r\equiv p^5W_n-W_aQ_r\pmod p,\qquad
+p^3\hat P_n-\hat P_aQ_r\equiv p^3\hat W_n-\hat W_aQ_r\pmod p,
+\]
+each congruence being the assertion that the difference of its two sides lies in $p\Zp$.
+\end{theorem}
+
+%% FIXED [m-5]: ``both sides being $p$-integral'' was asserted, not shown, and is not free at
+%% FIXED this point in the exposition. The statement now asserts only what the proof gives.
+\begin{remark}
+The difference of the two sides is $p^5H^{(5)}_nQ_n-H^{(5)}_aQ_aQ_r$ (respectively
+$p^3H^{(3)}_nQ_n-H^{(3)}_aQ_aQ_r$), and both of \emph{those} terms are $p$-integral for free,
+since $v_p(H^{(m)}_N)\ge-m\lfloor\log_pN\rfloor$ gives $p^5H^{(5)}_n,\,p^3H^{(3)}_n\in\Zp$ for
+$n<p^2$, while $H^{(m)}_a\in\Zp$ for $a<p$ and $Q_n,Q_a,Q_r\in\ZZ$. That is what the proof
+below establishes, and it is unconditional. The $p$-integrality of the individual sides is
+\emph{not} available here: $\ord_p(P_a)\ge0$ for $a<p$ is the base case
+(Theorem~\ref{thm:baseintro}), $\ord_p(p^5P_n)\ge0$ for $n<p^2$ is Theorem~\ref{thm:main} at
+$L=1$, and the middle-row analogues are Proposition~\ref{prop:Phatsize} and
+Theorem~\ref{thm:Eintro} --- all of them later, and all of them conditional. Nothing below
+needs them.
+\end{remark}
+
+\begin{proof}
+For $n=ap+r<p^2$ the indices $m\le n$ divisible by $p$ are exactly $m=jp$ with
+$1\le j\le\lfloor n/p\rfloor=a$, and $p\nmid j$ since $j\le a<p$. Hence
+$H^{(5)}_n=S+p^{-5}H^{(5)}_a$ with $S:=\sum_{m\le n,\ p\nmid m}m^{-5}\in\Zp$, so
+$p^5H^{(5)}_n=p^5S+H^{(5)}_a\equiv H^{(5)}_a\pmod{p^5}$. Since $Q_n\in\ZZ$, we get
+$p^5H^{(5)}_nQ_n\equiv H^{(5)}_aQ_n\pmod{p^5}$; reducing mod $p$ and using
+Theorem~\ref{thm:Aintro} together with $H^{(5)}_a\in\Zp$ (as $a<p$) gives
+$p^5H^{(5)}_nQ_n\equiv H^{(5)}_aQ_aQ_r\pmod p$. On the other side
+$P_aQ_r=H^{(5)}_aQ_aQ_r+W_aQ_r$. Subtract. The weight-$3$ statement is identical with
+$5\mapsto3$.
+\end{proof}
+
+Theorem~\ref{thm:C} is unconditional and weight-agnostic: it needs nothing but
+Theorem~\ref{thm:Aintro} and a two-line valuation computation, and it works verbatim at every
+weight. Its consequence is that the entire ``$p^5$ pole'' of the one-digit product congruence
+\[
+(\mathrm{LB}_5)\qquad p^5P_{ap+r}\equiv P_a\,Q_r\pmod p\qquad(p\ge5,\ 1\le a<p,\ 0\le r<p)
+\]
+is free, and $(\mathrm{LB}_5)$ is \emph{equivalent} to the same statement for $W$:
+\[
+(\mathrm{W}5)\qquad p^5W_{ap+r}\equiv W_a\,Q_r\pmod p .
+\]
+
+\begin{evidence}\label{ev:W5}
+$\VERIFIED$ $0$ failures: $(\mathrm{W}5)$ holds for every $p\in\{5,7,11,13,17,19,23,29,31\}$ and
+every single-digit cell $n=ap+r\le360$, with
+$\min v_p(p^5W_n-W_aQ_r)=1$ exactly at every one of those primes --- so $(\mathrm{W}5)$ is
+sharp and carries the full content. Also $\min_{n<p^2}v_p(W_n)=-5$ at every one of those
+primes. The prime $p=5$ is not exceptional.
+\end{evidence}
+
+\begin{remark}
+The induction of \S\ref{sec:IND} does \emph{not} use $(\mathrm{LB}_5)$. As assembled, the last
+step of $(\mathrm{LB}_5)$ needs $v_p((\Lambda-Q_r)W_a)\ge1$, i.e.\ it needs the base case; the
+inequality-shaped induction on $v_p(W_n)$ avoids this entirely and needs only
+Lemma~\ref{lem:Fgen}, which is unconditional. We record $(\mathrm{LB}_5)$ because it is the
+sharp statement at $n<p^2$ and because the middle-row theorem is of that shape.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Carry lemmas for the Brown--Zudilin summand}\label{sec:carry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the $\zeta(3)$ template the summand $\binom nk^2\binom{n+k}{k}^2$ is a perfect square, so a
+single Kummer carry already gives $v_p\ge2$. The Brown--Zudilin summand \eqref{eq:T} has
+\emph{three unsquared} binomials, so a single carry gives only $v_p\ge1$. The replacement is
+that one digit overflow forces carries in two \emph{different} unsquared binomials.
+
+\begin{lemma}[Triple-carry slack]\label{lem:D}
+Let $p$ be prime, $N=ap+r$ with $0\le a,r<p$, and $k=bp+s$, $l=cp+t$ with $0\le s,t<p$ and
+$0\le b,c\le a$ \textup{(}automatic when $k,l\le N$\textup{)}. If $a+b\ge p$ then
+$v_p(T(N,k,l))\ge2$.
+\end{lemma}
+
+\begin{proof}
+By Kummer's theorem $v_p\binom{N+k}{N}$ is the number of carries in the base-$p$ addition
+$N+k$. The position-$0$ carry is $\varepsilon_0=\ii{r+s\ge p}$; the position-$1$ sum is
+$a+b+\varepsilon_0\ge a+b\ge p$, so there is a carry at position $1$. Hence
+$v_p\binom{N+k}{N}\ge1$, with $\ge2$ if $r+s\ge p$. So assume, else we are done:
+(i) $r+s<p$; (ii) $s\le r$ and $t\le r$ --- otherwise $s>r$ (resp.\ $t>r$) forces a borrow in
+$N-k$ (resp.\ $N-l$), so $v_p\binom{N}{k}\ge1$ and the \emph{squared} factor already gives
+$v_p\ge2$; (iii) $a+c<p$ --- otherwise the position-$1$ argument applied to $\binom{N+l}{N}$
+gives another power; (iv) $r+t<p$ --- otherwise $\binom{N+l}{N}$ has a position-$0$ carry.
+From (i),(ii),(iv), $s+t<p$: if $s+t\ge p$ then $p\le s+t\le 2r$ forces $r\ge p/2$, while
+$r+s<p$, $r+t<p$ force $s,t\le p-1-r$, hence $s+t\le2(p-1-r)<p$, a contradiction. From (iii)
+and $b\le a$, $b+c\le a+c<p$. Therefore $k+l=(b+c)p+(s+t)$ is the base-$p$ expansion, and the
+position-$1$ sum in $N+(k+l)$ is $a+(b+c)+\ii{r+s+t\ge p}\ge a+b\ge p$: a carry. So
+$v_p\binom{N+k+l}{N}\ge1$ as well, and $v_pT\ge2$.
+\end{proof}
+
+\begin{lemma}[Refined triple carry]\label{lem:Dplus}
+With $N,k,l$ as above set $\beta:=\lfloor(N+k)/p\rfloor=a+b+\ii{r+s\ge p}$. If $\beta\ge p$
+then $v_p(T(N,k,l))\ge2$ for every $l$.
+\end{lemma}
+
+\begin{proof}
+If $a+b\ge p$ this is Lemma~\ref{lem:D}. Otherwise $\beta\ge p$ forces $\ii{r+s\ge p}=1$ and
+$a+b=p-1$; then $N+k$ carries at position $0$ and at position $1$ ($a+b+1=p$), so
+$v_p\binom{N+k}{N}\ge2$ by Kummer alone.
+\end{proof}
+
+\begin{lemma}[Boundary carry]\label{lem:Dpp}
+Let $p$ be prime, $N=ap+r$, $k=bp+s$, $l=cp+t$ with $0\le a,r,s,t<p$, $0\le b,c\le a$,
+$k,l\le N$, and put $\beta=\lfloor(N+k)/p\rfloor$. If $\beta\ge p$ \emph{and} $a+b<p$ ---
+equivalently $a+b=p-1$ and $r+s\ge p$ --- then $v_p(T(N,k,l))\ge4$.
+\end{lemma}
+
+\begin{proof}
+$a+b=p-1$ and $r+s\ge p$ make $N+k=p^2+(r+s-p)$: the addition carries at position $0$ and at
+position $1$, so by Kummer
+\begin{equation}\label{eq:Dppstar}
+v_p\tbinom{N+k}{N}=2 .
+\end{equation}
+Two further powers are needed. Note $b\le a$ and $a+b=p-1$ force $2a+1\ge p$.
+
+\emph{Case $s>r$.} The subtraction $N-k$ borrows at position $0$, so $v_p\binom{N}{k}\ge1$ and
+the squared factor supplies $2$; with \eqref{eq:Dppstar}, $v_pT\ge4$.
+
+\emph{Case $s\le r$, $s+t<p$.} Then $k+l=(b+c)p+(s+t)$ is the base-$p$ expansion and
+$r+s+t\ge r+s\ge p$, so $N+(k+l)$ carries at position $0$; its position-$1$ sum is
+$a+(b+c)+1\ge a+b+1=p$, so it carries there too. Hence $v_p\binom{N+k+l}{N}\ge2$.
+
+\emph{Case $s\le r$, $s+t\ge p$.} From $s\le r$ and $s+t\ge p$ we get $t\ge p-s\ge p-r$, i.e.
+\begin{equation}\label{eq:Dppstst}
+r+t\ge p ,
+\end{equation}
+so $N+l$ carries at position $0$ and $v_p\binom{N+l}{N}\ge1$. Write $\beta':=b+c+1$, the
+position-$1$ digit sum of $k+l$ (here $k+l=\beta'p+(s+t-p)$).
+If $\beta'<p$, the position-$1$ sum of $N+(k+l)$ is
+$a+\beta'+\ii{r+s+t\ge2p}=p+c+\ii{\cdot}\ge p$ (using $a+b=p-1$), a carry, so
+$v_p\binom{N+k+l}{N}\ge1$; total $2+1+1=4$. If $\beta'\ge p$ then $c\ge p-1-b=a$, so $c=a$; by
+\eqref{eq:Dppstst} the position-$0$ carry of $N+l$ exists and its position-$1$ sum is
+$a+c+1=2a+1\ge p$, a second carry, so $v_p\binom{N+l}{N}\ge2$ and with \eqref{eq:Dppstar},
+$v_pT\ge4$.
+\end{proof}
+
+\begin{evidence}\label{ev:D}
+Lemma~\ref{lem:D}: $\VERIFIED$ $24\,741$ cases ($p\in\{5,7\}$, all $a,r$, all $k,l\le N$), $0$
+failures. The three-carry strengthening is \emph{false}: ``$a+b\ge p$ and $a+c\ge p$'' does
+\emph{not} give $v_p\ge3$ ($649$ counterexamples in the same range), so Lemma~\ref{lem:D} is
+exactly the available slack. Lemma~\ref{lem:Dplus}: $\VERIFIED$ $28\,128$ cases, $0$ failures.
+Lemma~\ref{lem:Dpp}: $\VERIFIED$ $0$ failures with $\min v_p(T)=4$ exactly (hence sharp) at
+$p=5,7,11,13$ on $518/2\,869/28\,340/65\,918$ index triples, of which
+$174/892/8\,175/18\,620$ lie in the last sub-case $s\le r$, $s+t\ge p$. By contrast,
+$\beta\ge p$ \emph{with} $a+b\ge p$ gives $\min v_p(T)=2$ exactly over $1.3$M triples ---
+Lemma~\ref{lem:D} is sharp there.
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The decomposition identities}\label{sec:decomp}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The alphabet}
+
+For $n\ge0$, $0\le k,l\le n$ and $1\le m\le5$ define the \emph{letters}
+\begin{equation}\label{eq:letters}
+A_m(x):=H^{(m)}_{n+x}-H^{(m)}_{x},\qquad
+B_m(x):=H^{(m)}_{n-x}-H^{(m)}_{x},\qquad
+C_m:=H^{(m)}_{n+k+l}-H^{(m)}_{k+l},\qquad
+N_m:=H^{(m)}_{n},
+\end{equation}
+with $x\in\{k,l\}$; each has \emph{weight} $m$. These are exactly the parameter
+log-derivatives of the $\Gamma$-quotient form of $T$, which is why they are the right
+alphabet: with
+\[
+\begin{aligned}
+F(n,k,l;\alpha_k,\alpha_l,\beta_k,\beta_l,g)
+&=\frac{\Gamma(n+k+1+\alpha_k)}{\Gamma(n+1)\Gamma(k+1+\alpha_k)}
+\Bigl(\frac{\Gamma(n+1)}{\Gamma(k+1+\beta_k)\Gamma(n-k+1-\beta_k)}\Bigr)^{2}\\
+&\qquad\times(\text{the same with } k\mapsto l)\times
+\frac{\Gamma(n+k+l+1+g)}{\Gamma(n+1)\Gamma(k+l+1+g)},
+\end{aligned}
+\]
+one has $\partial_{\alpha_k}^m\log F|_0=(-1)^{m+1}(m-1)!\,A_m(k)$,
+$\partial_{\beta_k}^m\log F|_0=2(-1)^{m+1}(m-1)!\,B_m(k)$ and
+$\partial_g^m\log F|_0=(-1)^{m+1}(m-1)!\,C_m$.
+
+\subsection{The middle row: Theorem B}
+
+\begin{theorem}[Theorem B]\label{thm:B}
+$\VERIFIED$
+\[
+\hat P_n=\sum_{k,l=0}^{n}T(n,k,l)\,\wthree(n,k,l),
+\]
+where
+\begin{equation}\label{eq:w3}
+\begin{aligned}
+\wthree(n,k,l)={}& H^{(3)}_n+A_3(k)+A_3(l)
+-\tfrac14\bigl[A_2(k)A_1(k)+A_2(l)A_1(l)\bigr]\\
+&-\tfrac34\bigl[A_2(k)B_1(k)+A_2(l)B_1(l)\bigr]
+-\tfrac38\bigl[A_2(k)+A_2(l)\bigr]C_1
+-\tfrac18\bigl[A_2(k)A_1(l)+A_2(l)A_1(k)\bigr].
+\end{aligned}
+\end{equation}
+\end{theorem}
+
+This is a decomposition of the middle row over the \emph{same} Brown--Zudilin summand that
+gives $Q_n$, with a graded harmonic weight and no extra nested corrections. Two structural
+features are worth recording, since they are not assumptions but outputs: every non-constant
+term carries an $A$-letter of the highest weight in its monomial, and every monomial whose top
+letter is $B$, $C$ or $H^{(r)}_n$ has coefficient $0$ --- the fit was run in a basis that
+allowed all of these.
+
+The single most consequential feature of \eqref{eq:w3} is that the letter
+$A_r(k)=H^{(r)}_{n+k}-H^{(r)}_k$ has upper argument up to $2n$. \emph{This one fact is the
+source of the $d_{2n}$ in \eqref{eq:BZincl} and of the entire middle-row anomaly of
+\S\ref{sec:middle}}: $A_3(k)$ acquires a second $p$-pole as soon as
+$\lfloor(n+k)/p\rfloor\ge p$, which for $n=a<p$ happens iff $a+k\ge p$.
+
+\subsection{The top row: the family, and (T1-top)}
+
+At weight $5$ the situation is subtler, and the history is instructive. A first search, in a
+basis of $149$ symmetric weight-$5$ monomials with at most three factors, was inconsistent, and
+this was read as evidence that the depth-$2$ period $\zeta(5)+2\zeta(3)\zeta(2)$ forces
+genuinely nested letters. That reading is \emph{false}. Removing only the factor-count cap ---
+same alphabet, no nested letters --- makes the system consistent.
+
+\begin{proposition}[Existence]\label{prop:w5exists}
+$\VERIFIED$ In the alphabet $\{A_r,B_r\}$ (at $k$ and $l$) $\cup\{C_r\}\cup\{N_r\}$,
+$r=1,\dots,5$, with at most $5$ factors in each single-variable slot and at most $2$ in the
+coupling and constant slots, the fitting system
+$P_n=\sum_{k,l}T(n,k,l)\,\wfive(n,k,l)$ has $448$ basis monomials and rank $313$; it is
+\emph{consistent}, with all $687$ independent excess equations satisfied at $N=1000$. The
+solution space is a $135$-dimensional affine family.
+\end{proposition}
+
+The ablation that pins this is decisive. At $N=1200$ equations, caps
+$(\mathrm{mf}_k,\mathrm{mf}_c,\mathrm{mf}_n)$:
+\[
+\begin{gathered}
+(3,2,2)\ \text{inconsistent},\quad(3,2,5)\ \text{inconsistent},\quad(3,5,2)\ \text{inconsistent},\\
+(5,2,2)\ \text{CONSISTENT},\quad(5,5,5)\ \text{CONSISTENT}.
+\end{gathered}
+\]
+\emph{The missing ingredient is monomials with four or five factors in one variable} ---
+e.g.\ $A_1(k)^4A_1(l)$, $A_1(k)^3B_1(k)^2$, $A_1(k)^5$. Likewise the alphabet ablation
+(at $N=1000$) shows $\{A_r,B_r,C_r,N_r\}$ is exactly right: dropping $B$ or dropping $C$
+is inconsistent, and $H^{(r)}_{2n}$ is not needed. \emph{So the alphabet of $\wfive$ is
+exactly the alphabet of $\wthree$; the sole difference between the weights is the number of
+factors} --- $\wthree$ uses at most two, $\wfive$ needs up to five.
+
+The family is then cut down by the depth conditions of \S\ref{sec:depth} to a
+$124$-dimensional subfamily, and inside it we fix explicit representatives.
+
+%% FIXED [m-4]: the stored coefficient files are now named, so that a reader does not pick up
+%% FIXED the 155-term intermediate (denominators $\{2,3,71\}$, not $p$-integral at $p=71$).
+\begin{definition}[The representatives]\label{def:reps}
+\leavevmode
+\begin{itemize}[leftmargin=1.6em]
+\item $w_5^{\mathrm{allp}}$: $178$ terms, coefficient denominators supported on $\{2,3\}$,
+  hence $p$-integral for \emph{every} $p\ge5$. Obtained by a CRT combination of two
+  depth-minimal representatives with disjoint bad primes (Lemma~\ref{lem:CRT}).
+\item $w_5^{\mathrm I}$: $207$ terms, denominators on $\{2,3\}$; in addition to the depth
+  conditions it satisfies the full cell-wise cap on every pole pattern except one band, which
+  is what makes the base case of \S\ref{sec:nucleus} work.
+\end{itemize}
+Both are the CRT outputs, not the intermediates they are built from; in the accompanying
+archive they are the files \texttt{w5\_allp.json} ($178$ terms) and
+\texttt{w5\_exIII\_allp.json} ($207$ terms). The intermediate from which the second is built,
+\texttt{w5\_exIII.json} (equivalently \texttt{w5\_I.json}), has $155$ terms and denominators
+$\{2,3,71\}$, so it is \emph{not} $p$-integral at $p=71$ and must not be substituted for
+$w_5^{\mathrm I}$.
+\end{definition}
+
+\begin{lemma}[CRT combination]\label{lem:CRT}
+$\PROVED$ Let $x_1,x_2$ lie in the depth-conditioned family; suppose $x_1$ is $p$-integral for
+all $p\ge5$ except $P_1$ (with maximal denominator exponent $e_1$) and $x_2$ except $P_2$
+(exponent $e_2$), $P_1\ne P_2$. Put $d=x_2-x_1$ and choose $t\in\ZZ$ with
+$t\equiv1\pmod{P_1^{e_1+1}}$, $t\equiv0\pmod{P_2^{e_2+1}}$. Then $x=x_1+td$ lies in the family
+and is $p$-integral for every $p\ge5$.
+\end{lemma}
+
+\begin{proof}
+At $P_1$, $x=x_2-(1-t)d$ with $v_{P_1}((1-t)d)\ge(e_1+1)-e_1=1$; at $P_2$, $x=x_1+td$ with
+$v_{P_2}(td)\ge(e_2+1)-e_2=1$; at every other $p\ge5$ both $x_1$ and $d$ are $p$-integral and
+$t\in\ZZ$.
+\end{proof}
+
+\noindent We can now state the first of the two hypotheses of Theorem~\ref{thm:main} (the
+second, (DEPTH), is stated in \S\ref{sec:depth}).
+
+\begin{quote}
+\textbf{(T1-top).} $P_n=\displaystyle\sum_{k,l=0}^{n}T(n,k,l)\,\wfive(n,k,l)$ for all $n\ge0$,
+where $\wfive$ is $w_5^{\mathrm{allp}}$ or $w_5^{\mathrm I}$ as appropriate.
+\end{quote}
+
+\begin{remark}[which representative]\label{rem:onerep}
+The induction of \S\ref{sec:IND} consumes $\wfive$ \emph{only} through the depth bound
+(DEPTH-gen), so it works for any point of the depth-conditioned family; and the base case of
+\S\ref{sec:nucleus} uses $w_5^{\mathrm I}$. Hence the whole $p\ge5$ theorem can be run
+end-to-end on the \emph{single} representative $w_5^{\mathrm I}$, and its certificate target is
+then the \emph{one} identity $P_n=\sum_{k,l}T\cdot w_5^{\mathrm I}$. Alternatively one may
+certify $w_5^{\mathrm{allp}}$ and add the homogeneous identity
+$\sum_{k,l}T\cdot(w_5^{\mathrm I}-w_5^{\mathrm{allp}})=0$; these are genuinely different
+obligations (see Proposition~\ref{prop:ptrank}), and which is cheaper is a computational
+question, not a mathematical one.
+\end{remark}
+
+\subsection{New closed forms for Ap\'ery's \texorpdfstring{$\zeta(3)$}{zeta(3)} numerators}\label{sec:apery}
+
+The residue construction behind \eqref{eq:w3} also produces pure harmonic-monomial closed forms
+one weight down, replacing the classical non-generalising weight
+$\sum_{m\le k}(-1)^{m-1}/(2m^3\binom nm\binom{n+m}{m})$.
+
+\begin{proposition}\label{prop:apery-b}
+$\PROVED$ For Ap\'ery's $\zeta(3)$ numerators \cite{Ap79},
+\[
+b_n=\sum_{j=0}^{n}\binom nj^2\binom{n+j}{n}^2
+\Bigl[H^{(3)}_j+\bigl(2H_j-H_{n+j}-H_{n-j}\bigr)H^{(2)}_j\Bigr].
+\]
+\end{proposition}
+
+\begin{proof}
+Put $F(t)=\prod_{m=1}^{n}(t-m)\big/\prod_{m=0}^{n}(t+m)$, so that
+$F(t)^2=\sum_{j=0}^{n}\bigl[\beta_{2,j}(t+j)^{-2}+\beta_{1,j}(t+j)^{-1}\bigr]$ with
+$\beta_{2,j}=\binom nj^2\binom{n+j}{n}^2$ and
+$\beta_{1,j}=\beta_{2,j}\cdot\frac{d}{dt}\log[(t+j)^2F(t)^2]\big|_{t=-j}
+=2\beta_{2,j}(2H_j-H_{n+j}-H_{n-j})$. Since $\deg\mathrm{num}-\deg\mathrm{den}=-2$, the
+residues sum to zero: $\sum_j\beta_{1,j}=0$. Now
+$-(F^2)'(t)=\sum_j\bigl[2\beta_{2,j}(t+j)^{-3}+\beta_{1,j}(t+j)^{-2}\bigr]$, so summing over
+$t\ge1$ and using $\sum_{t\ge1}(t+j)^{-m}=\zeta(m)-H^{(m)}_j$,
+\[
+\sum_{t\ge1}-(F^2)'(t)=2\Bigl(\sum_j\beta_{2,j}\Bigr)\zeta(3)+\Bigl(\sum_j\beta_{1,j}\Bigr)\zeta(2)
+-\Bigl[2\sum_j\beta_{2,j}H^{(3)}_j+\sum_j\beta_{1,j}H^{(2)}_j\Bigr].
+\]
+The $\zeta(2)$ coefficient vanishes, $\sum_j\beta_{2,j}=a_n$ is Ap\'ery's identity, and the
+linear form produced is $2(a_n\zeta(3)-b_n)$.
+\end{proof}
+
+%% FIXED [CRITICAL C-1]: the left-hand side was $a_n$; the displayed right-hand side evaluates
+%% FIXED to Ap\'ery's NUMERATOR $b_n$ (0, 6, 351/4, 62531/36, ...) at every $n\le14$ (exact
+%% FIXED Fraction recomputation), and to $a_n$ at no $n>0$. Root cause: work/p1g/zeta3.py and
+%% FIXED work/p1g/z3ex.py name the numerator sequence ``a_n''. The proposition is now stated for
+%% FIXED $b_n$ --- a SECOND closed form for the same sequence --- and \S1.3's promise of a closed
+%% FIXED form ``for $a_n$'' has been withdrawn. The cell-wise integrality claim is unaffected and
+%% FIXED was re-confirmed (819 cells, 0 violations).
+\begin{proposition}\label{prop:apery-a}
+$\PROVED$ over $\QQ$ Writing $A_1(k)=H_{n+k}-H_k$, $B_1(k)=H_{n-k}-H_k$,
+$B_2(k)=H^{(2)}_{n-k}-H^{(2)}_k$, the same numerators $b_n$ also have the closed form
+\[
+b_n=\sum_{k=0}^{n}\binom nk^2\binom{n+k}{k}^2\Bigl[H^{(3)}_n
++\tfrac12\bigl(A_1(k)^2B_1(k)+A_1(k)B_1(k)^2+A_1(k)B_2(k)\bigr)\Bigr],
+\]
+i.e.\ with the weight $w_3=H^{(3)}_n+\tfrac12A_1\bigl(B_1(A_1+B_1)+B_2\bigr)$, and this weight
+is \emph{cell-wise $p$-integral}: $d_3(n,k)\le v_pT_A(n,k)$ with $0$ violations for
+$p\in\{5,7,11,13,17,19,23\}$, all $n<p$ and all $k$.
+\end{proposition}
+
+\begin{remark}
+Propositions~\ref{prop:apery-b} and \ref{prop:apery-a} are two closed forms for \emph{the same}
+sequence $b_n$; they are not a pair of forms for $b_n$ and $a_n$. (The denominators $a_n$ need
+no harmonic weight: $a_n=\sum_k\binom nk^2\binom{n+k}{k}^2$ is Ap\'ery's own closed form.) That
+the two weights differ while their $T_A$-sums agree is an instance of the non-uniqueness that
+Proposition~\ref{prop:ptrank} quantifies one weight up: the fitting system has a large kernel of
+genuine summation identities, so a representative is never determined by the identity it
+satisfies.
+\end{remark}
+
+Proposition~\ref{prop:apery-a} matters here for a negative reason: it shows that Ap\'ery's own
+base case is cell-wise in the \emph{purely harmonic} alphabet, so the $\zeta(3)$ precedent does
+\emph{not} argue for binomial-reciprocal letters at weight $5$. The mechanism it does name ---
+spend the weight on the non-polar $B$ slot --- is exactly what the weight-$5$ alphabet turns
+out not to have room for, by exactly one functional (\S\ref{sec:wall}).
+
+\begin{evidence}\label{ev:apery}
+Proposition~\ref{prop:apery-b}: $\VERIFIED$ exact agreement with the standard $b_n$ for
+$n=0,\dots,5$: $0,\,6,\,351/4,\,62531/36,\,11424695/288,\,35441662103/36000$.
+Proposition~\ref{prop:apery-a}: exact $\QQ$ solve over $14$ levels plus one $u^3$ condition
+(rank $15$), then $\VERIFIED$ on $24$ levels and $7$ primes, $0$ mismatches; and its right-hand
+side agrees with the standard $b_n$ exactly for $n=0,\dots,14$.
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The pole calculus and the depth conditions}\label{sec:depth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Throughout this section fix $p\ge5$ and $n\ge1$, put $L=\lfloor\log_p n\rfloor$, $M:=L+1$,
+$P:=p^{M}$ (so $n<P$), fix a cell $0\le k,l\le n$, and write $u:=p^{-1}$. Set
+\[
+\vfive(n,k,l):=\wfive(n,k,l)-H^{(5)}_n,\qquad
+d_5(n,k,l):=\max\bigl(0,-v_p\vfive(n,k,l)\bigr).
+\]
+
+\subsection{Level expansion}
+
+\begin{lemma}[Level expansion]\label{lem:U}
+For all $N\ge0$ and $m\ge1$,
+$H^{(m)}_N=\sum_{e\ge0}u^{em}\,\Sigma^{(m)}_e(N)$ where
+$\Sigma^{(m)}_e(N):=\sum_{j\le\lfloor N/p^e\rfloor,\ p\nmid j}j^{-m}\in\Zp$, and
+$\Sigma^{(m)}_e(N)=0$ for $p^e>N$.
+\end{lemma}
+
+\begin{proof}
+Partition $\{1,\dots,N\}$ by $e=v_p(i)$: $i=p^ej$ with $p\nmid j$, $j\le N/p^e$, and
+$i^{-m}=p^{-em}j^{-m}$.
+\end{proof}
+
+Two consequences are used constantly: $\Sigma^{(m)}_e(N)=\Sigma^{(m)}_{e-1}(\lfloor N/p\rfloor)$
+for $e\ge1$, and $v_p(H^{(m)}_N)\ge-m\lfloor\log_pN\rfloor$.
+
+Since $n+k,n+l<2P$, $k+l<2P$, $n+k+l<3P$ and $n-k,k,l,n<P$, and since $p\ge5$ gives
+$3P<pP=p^{M+1}$, \emph{every} letter has an expansion $X_m=\sum_{e=0}^{M}u^{em}\mathsf X_{m,e}$
+with $\mathsf X_{m,e}\in\Zp$, and a weight-$5$ monomial has $u$-order at most $5M$. Hence
+\begin{equation}\label{eq:Kexp}
+\vfive(n,k,l)=\sum_{j=0}^{5M}K_j\,u^{j},\qquad K_j\in\Zp,
+\qquad\text{so}\qquad d_5\le\max\{j:K_j\ne0\}.
+\end{equation}
+
+\subsection{Top-level residues and the pattern census}
+
+\begin{definition}\label{def:pattern}
+Put
+\[
+\begin{gathered}
+\alpha:=\ii{n+k\ge P},\qquad \gamma:=\ii{n+l\ge P},\qquad
+\varepsilon:=\lfloor(k+l)/P\rfloor\in\{0,1\},\\
+\kappa:=\ii{n+k+l\ge(\varepsilon+1)P},\qquad \theta:=\varepsilon+1,
+\end{gathered}
+\]
+($\theta$ set to $1$ when $\kappa=0$), and $s:=\alpha+\gamma+\kappa$. The tuple
+$\pi=(\alpha,\gamma,\kappa,\theta)$ is the \emph{pole pattern} of the cell.
+\end{definition}
+
+\begin{lemma}[Top-level residues]\label{lem:R}
+The $e=M$ coefficient of a letter is: $\alpha$ for $A_m(k)$, $\gamma$ for $A_m(l)$, $0$ for
+every $B_m$ and for $N_m$, and $\kappa\,\theta^{-m}$ for $C_m$.
+\end{lemma}
+
+\begin{proof}
+$k,l,n,n-k<P$ gives $\Sigma_M(\cdot)=0$ for those arguments. $\Sigma^{(m)}_M(n+k)$ is a sum
+over $j\le\lfloor(n+k)/P\rfloor\le1$ with $p\nmid j$, i.e.\ equals $\alpha$. For $C_m$: with
+$\Theta:=\lfloor(n+k+l)/P\rfloor\le2$ and $\varepsilon=\lfloor(k+l)/P\rfloor$, every $j\le2<p$,
+so the coefficient is $\sum_{j=\varepsilon+1}^{\Theta}j^{-m}$; and $n<P$ forces
+$\varepsilon\le\Theta\le\varepsilon+1$, so $\Theta-\varepsilon=\kappa$ and the coefficient is
+$\kappa\theta^{-m}$.
+\end{proof}
+
+Note $\theta^{-m}$ is a $p$-unit for every $p\ge5$, so the whole calculus is $p$-independent.
+
+\begin{lemma}[Kummer floor]\label{lem:K}
+$v_p\binom{n+k}{n}\ge\alpha$, $v_p\binom{n+l}{n}\ge\gamma$, $v_p\binom{n+k+l}{n}\ge\kappa$;
+hence
+\begin{equation}\label{eq:vTfloor}
+vT:=v_pT(n,k,l)\ \ge\ \alpha+\gamma+\kappa=s .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Kummer: $v_p\binom{n+k}{n}$ is the number of carries in $n+k$. Both $n,k<P=p^M$, so a carry out
+of position $M-1$ occurs iff $n+k\ge P$, i.e.\ iff $\alpha=1$; same for $\gamma$. For $\kappa$:
+write $k+l=\varepsilon P+\rho$, $0\le\rho<P$; the carry out of position $M-1$ in $n+(k+l)$
+occurs iff $n+\rho\ge P$, i.e.\ iff $n+k+l\ge(\varepsilon+1)P$.
+\end{proof}
+
+\begin{lemma}[The census, at every level]\label{lem:census}
+The pattern $\pi$ takes exactly the seven values
+\[
+(0,0,0,1),\ (0,0,1,1),\ (1,0,1,1),\ (0,1,1,1),\ (1,1,0,1),\ (1,1,1,1),\ (1,1,1,2),
+\]
+with $s=0,1,2,2,2,3,3$ respectively.
+\end{lemma}
+
+\begin{proof}
+(i) $\kappa=0\Rightarrow\alpha=\gamma$. Suppose $\alpha=1$, $\kappa=0$. If $\varepsilon=0$ then
+$\kappa=\ii{n+k+l\ge P}=0$ gives $n+k+l<P$, contradicting $n+k\ge P$. So $\varepsilon=1$, i.e.
+$k+l\ge P$; then $n+l\ge k+l\ge P$ (using $k\le n$), so $\gamma=1$. Symmetrically for
+$\gamma=1$, $\kappa=0$. So the $\kappa=0$ patterns are $(0,0,0)$ and $(1,1,0)$.
+(ii) $\theta=2$ (i.e.\ $k+l\ge P$) forces $n+k\ge k+l\ge P$ (using $l\le n$) and
+$n+l\ge k+l\ge P$, i.e.\ $\alpha=\gamma=1$.
+(iii) With $\kappa=1$, $\varepsilon=0$ all four $(\alpha,\gamma)$ occur. Total $2+4+1=7$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:census} is level-free and does \emph{not} go through Lemma~\ref{lem:D}: at
+$M=1$ it \emph{reproves} ``$a+b\ge p\Rightarrow vT\ge2$'' as a corollary rather than using it.
+The absence of the patterns $(1,0,0,\cdot)$ and $(0,1,0,\cdot)$ is precisely the census form of
+that statement.
+\end{remark}
+
+\subsection{The depth conditions and their consistency}
+
+The Lemma-$F$ budget of \S\ref{sec:F} supplies precision $p^{2+\min(vT,2)}$, and the ledger
+needs $p^{1+d_5}$; so the pattern-determined cap we must enforce is
+\begin{equation}\label{eq:cap}
+J(\pi):=1+\min(s,2)\qquad\text{(and $J=0$ at the trivial pattern $\pi=(0,0,0,1)$)}.
+\end{equation}
+
+\begin{definition}[(DEPTH)]\label{def:depth}
+For each reachable pattern $\pi$ and each $j>J(\pi)$, require $K_j=0$ \emph{identically in the
+$\Zp$-symbols} $\mathsf X_{m,e}$.
+\end{definition}
+
+Treating the symbols as independent indeterminates is a strengthening; it is $\QQ$-linear and
+$p$-independent in the coefficients of $\wfive$, and --- as the next theorem shows --- it costs
+nothing.
+
+\begin{theorem}[Consistency of (DEPTH)]\label{thm:depthcons}
+$\CERT$ Over two auxiliary primes $q=33554393$ and $q=33554467$, with $N=600$ fitting
+equations:
+\[
+\begin{array}{ll}
+\text{raw condition rows}&68\\
+\rank(\text{conditions alone})&42\\
+\rank(\text{fitting system alone})&313\\
+\rank(\text{joint system})&324\\
+\rank(\text{augmented joint system})&324\\
+\end{array}
+\]
+so the joint system is \emph{consistent} at both primes, and the depth-conditioned family has
+dimension $448-324=124$.
+\end{theorem}
+
+Thus of the $42$ independent depth conditions, $31$ are already implied by the decomposition
+identity itself and only $11$ are new.
+
+\begin{corollary}[Depth-minimal family]\label{cor:W5DEPTH}
+$\PROVED$ modulo the certificate of Theorem~\textup{\ref{thm:depthcons}}. The decomposition
+family contains a $124$-dimensional affine subfamily on which, for \emph{every} prime $p\ge5$
+and every cell $0\le b,c\le a<p$,
+\[
+d_5(a,b,c)\ \le\ 1+\min\bigl(v_pT(a,b,c),2\bigr),
+\]
+provided the chosen representative's coefficients are $p$-integral --- which
+Lemma~\textup{\ref{lem:CRT}} arranges for every $p\ge5$ at once.
+\end{corollary}
+
+\begin{evidence}\label{ev:depth}
+$\VERIFIED$ $0$ failures. Three independent exact tests on each saved representative:
+(V1) the exact-$\QQ$ ladder identity $P_n=\sum T\wfive$; (V2) the depth sweep
+$d_5\le1+\min(vT,2)$ over \emph{all} cells; (V3) the cell-by-cell test
+$v_p(\Tcal(b,c)-(Q_n/Q_a)T(a,b,c))\ge1+d_5(b,c)$ computed mod $p^{10}$ from the true fibre
+tables. For $w_5^{\mathrm{allp}}$: (V1) $n\le34$, $0$; (V2) $\max d_5=3$, $0$ violations, min
+slack $0$, up to $p=31$; (V3) $0$ failures at $p=5,7,11,13$. The comparison is the point:
+\[
+\begin{array}{lcccc}
+\text{representative} & p=5 & p=7 & p=11 & p=13\\\hline
+\text{130-term (pre-depth)} & 1/270 & 18/707 & 3385/5379 & 1285/10634\\
+\text{106-term sparsest canonical} & 34/270 & 91/707 & 3503/5379 & \text{---}\\
+\textbf{depth-minimal} & \mathbf 0 & \mathbf 0 & \mathbf 0 & \mathbf 0
+\end{array}
+\]
+i.e.\ $0/16\,990$ cells fail, where the sparsest representatives failed thousands.
+\emph{Sharpness:} min slack is $0$ at every prime --- the value $d_5=1+\min(vT,2)$ is attained.
+So (DEPTH) sits exactly at the edge of what Lemma~\ref{lem:F} supplies.
+\end{evidence}
+
+\begin{remark}[sparsest is not depth-minimal]
+Canonicalisation by sparsity and canonicalisation by depth are different, and it is depth that
+is load-bearing. The sparsest representative found ($106$ terms) has $\max d_5=5$ and violates
+the cap on the $vT\ge2$ cells; a $130$-term one has $\max d_5=4$. Neither works. Depth is not
+visible in any sparsity or weight statistic --- and neither is the second load-bearing
+criterion, $p$-integrality of the coefficients: a stray prime in a denominator destroys the
+bound at that one prime and nowhere else.
+\end{remark}
+
+\subsection{Level-lifting: the conditions are level-independent}
+
+This is the technical heart of the induction. Fix a pattern $\pi$. For a letter-multiset $S$
+(letters counted with multiplicity) write $\wt(S)=\sum_{X\in S}\text{weight}(X)$ and
+\begin{equation}\label{eq:Phifunctional}
+\Phi_\pi(S):=\sum_{\Mcal\supseteq S}c_\Mcal\prod_{X\in\Mcal\setminus S}\rho(X;\pi),
+\end{equation}
+where $c_\Mcal$ is the $\wfive$-coefficient of the monomial $\Mcal$ and
+$\rho(X;\pi)\in\{\alpha,\gamma,\kappa\theta^{-m},0\}$ is the top-level residue of
+Lemma~\ref{lem:R}. These are $\QQ$-linear functionals of the $448$ coefficients, independent of
+$p$, $n$ and $M$.
+
+\begin{proposition}[LIFT]\label{prop:LIFT}
+$\PROVED$ Let $J\ge0$ and suppose
+\begin{equation}\label{eq:DEPTHpiJ}
+\Phi_\pi(S)=0\quad\text{for every letter-multiset $S$ with }\wt(S)\le4-J .
+\end{equation}
+Then for \emph{every} $M\ge1$ and every cell $(n,k,l)$ with $\lfloor\log_pn\rfloor=M-1$ and
+pattern $\pi$,
+\[
+d_5(n,k,l)\ \le\ 5(M-1)+J\ =\ 5L+J .
+\]
+Moreover at $M=1$ the conditions \eqref{eq:DEPTHpiJ} are \emph{exactly} the conditions
+``$K_j=0$ identically in the symbols for $j>J$'' of Definition~\textup{\ref{def:depth}}.
+\end{proposition}
+
+\begin{proof}
+Expand each letter by Lemma~\ref{lem:U} and collect. Writing $j=5M-\delta$ and
+$f_i:=M-e_i\ge0$ (so $\sum_if_im_i=\delta$),
+\[
+K_{5M-\delta}=\sum_{\Mcal}c_\Mcal\sum_{\substack{f:\ \sum f_im_i=\delta\\ f_i\le M}}
+\Bigl(\prod_{i:\,f_i\ge1}\mathsf X_{i,M-f_i}\Bigr)
+\Bigl(\prod_{i:\,f_i=0}\rho(X_i;\pi)\Bigr).
+\]
+Regard the $\mathsf X_{i,e}$ ($0\le e\le M-1$, one indeterminate per (letter, level)) as
+independent symbols --- this is the same strengthening already made at $M=1$. Two contributions
+carry the same symbol monomial iff they have the same multiset
+$\{(X_i,M-f_i):f_i\ge1\}$; that multiset determines the dropped multiset $S$ and the drop
+profile $f|_S$. Summing over $\Mcal$ at fixed $(S,f|_S)$ produces $c(S,f)\,\Phi_\pi(S)$, where
+$c(S,f)$ is the multinomial count of ways to distribute the copies of a repeated letter among
+the prescribed levels --- a \emph{nonzero rational independent of $\Mcal$}: for a letter
+occurring $N\ge q$ times in $\Mcal$ the count is $\binom Nq q!/\prod_uq_u!$, and its ratio to
+the $M=1$ count $\binom Nq$ is $q!/\prod_uq_u!$, free of $N$. Hence
+\[
+\begin{gathered}
+K_{5M-\delta}=0\ \text{identically in the symbols}\\
+\iff\ \Phi_\pi(S)=0\ \text{for every $S$ realisable by an admissible $f$ with }\textstyle\sum_if_im_i=\delta .
+\end{gathered}
+\]
+The minimal $\delta$ realising a given support $S$ is $\delta=\wt(S)$ (all $f_i=1$), admissible
+for every $M\ge1$. Therefore
+$\{K_j=0\ \forall j>5(M-1)+J\}\Longleftarrow\{\Phi_\pi(S)=0\ \forall S,\ \wt(S)\le4-J\}$,
+because $j>5(M-1)+J\iff\delta=5M-j<5-J\iff\wt(S)\le\delta\le4-J$. With \eqref{eq:Kexp} this
+gives $d_5\le5(M-1)+J$. At $M=1$, $\delta=5-(u\text{-order})$, so $u>J\iff\wt(S)\le4-J$: the two
+condition sets coincide row for row.
+\end{proof}
+
+\begin{corollary}[(DEPTH-gen)]\label{cor:depthgen}
+$\PROVED$ With $\wfive$ any point of the depth-conditioned $124$-dimensional family, for
+\emph{every} prime $p\ge5$, \emph{every} $n\ge1$ and \emph{every} cell,
+\[
+d_5(n,k,l)\ \le\ 5L+1+\min(\alpha+\gamma+\kappa,2)\ \le\ 5L+1+\min\bigl(v_pT(n,k,l),2\bigr).
+\]
+\end{corollary}
+
+\begin{proof}
+The caps are $J(\pi)=1+\min(s,2)$ for $s\ge1$; for $\pi=(0,0,0,1)$ every top residue vanishes,
+so $\Phi_\pi(S)=0$ automatically whenever $\Mcal\setminus S\ne\emptyset$, i.e.\ whenever
+$\wt(S)\le4$, and the corollary holds there with $J=0$. Apply Proposition~\ref{prop:LIFT}. The
+second inequality is Lemma~\ref{lem:K}.
+\end{proof}
+
+\begin{evidence}\label{ev:depthgen}
+$\VERIFIED$ $0$ violations in $150\,955$ cells: $p\in\{5,7,11,13\}$, $n\le40/55/45/45$ (digit
+levels $L=0,1,2$), all $(k,l)$. In the same sweep $v_pT\ge\alpha+\gamma+\kappa$ has $0$
+counterexamples, and the bound is \emph{sharp} (min slack $0$ at every prime, attained already
+at $L=0$).
+\end{evidence}
+
+\begin{corollary}[Theorem~\ref{thm:51intro}]\label{cor:51}
+$\PROVED$ Assume \textup{(T1-top)} and \textup{(DEPTH)}. Then
+$\ord_p(P_n)\ge-5\lfloor\log_pn\rfloor-1$ for every prime $p\ge5$ and every $n\ge1$;
+equivalently $d_n^5\cdot\prod_{5\le p\le3n}p\cdot P_n\in\ZZ[1/6]$. For $p>3n$ all letter
+arguments are $<p$, so $\ord_p(P_n)\ge0$ outright.
+\end{corollary}
+
+\begin{proof}
+Cell by cell, $v_p(T\vfive)\ge vT-d_5\ge vT-5L-1-\min(vT,2)\ge-5L-1$ by
+Corollary~\ref{cor:depthgen}; and $v_p(H^{(5)}_nQ_n)\ge-5L$ because $Q_n\in\ZZ$ and by
+Lemma~\ref{lem:U}.
+\end{proof}
+
+\subsection{A hard negative: the deficit is irremovable}\label{sec:hardneg}
+
+The cell-wise bound at $L=0$ is $v_p(T\vfive)\ge-1$, and the value $-1$ is \emph{attained}, at
+$(n,k,l)=\bigl(\tfrac{p+1}{2},0,\tfrac{p-1}{2}\bigr)$ for every $p$ (so $p=5:(3,0,2)$,
+$p=7:(4,0,3)$, $p=11:(6,0,5)$, $p=13:(7,0,6)$, \dots), where $vT=2$, $d_5=3$ and the pattern is
+$(0,1,1,1)$. The cell-wise bound would follow from $d_5\le v_pT$, i.e.\ from strengthened
+conditions. It does not exist.
+
+\begin{theorem}\label{thm:DEPTHplus}
+$\CERT$ at two auxiliary primes $q=33554393$, $q=33554467$, $N=600$:
+\[
+\small
+\begin{array}{lccccc}
+\text{system} & \text{caps }J(\pi) & \text{rows} & \rank(\text{cond}) & \rank(\text{joint}) & \text{consistent?}\\\hline
+\text{(DEPTH)} & 1+\min(s,2) & 68 & 42 & 324 & \text{yes, nullity }124\\
+(\mathrm{DEPTH}^{+}) & s & 239 & 123 & 342 & \textbf{NO}\\
+(\mathrm{DEPTH}^{++}) & 2\text{ on the three }s=2\text{ patterns} & 149 & 81 & 342 & \textbf{NO}
+\end{array}
+\]
+\end{theorem}
+
+The third row is the sharp localisation: it is \emph{exactly the three $s=2$ patterns --- the
+ones carrying the $-1$ deficit --- that cannot be tightened}; the $s\le1$ and $s=3$ patterns
+are already at the cell-wise optimum. So within the $p$-independent linear framework the
+deficit is irreducible, and the base case requires a genuine cancellation \emph{between} cells.
+It is moreover global in both indices: $\VERIFIED$ ($p\le13$) the partial sums
+$\sum_cT(a,b,c)\vfive(a,b,c)$ at fixed $b$ still have $v_p=-1$; only the full double sum is
+integral. No row identity suffices.
+
+\begin{theorem}[Alphabet enlargement does not help]\label{thm:rletter}
+$\VERIFIED$ Let $R^{(a)}$ be the Ap\'ery-type letters and $Y_{a,b},V_{a,b}$ the nested interval
+letters,
+\[
+\begin{gathered}
+R^{(a)}(n,k)=\sum_{m\le k}\frac{(-1)^{m-1}}{m^a\binom nm\binom{n+m}{m}},\\
+Y_{a,b}(n,k)=\!\!\sum_{k<m_2<m_1\le n+k}\!\! m_1^{-a}m_2^{-b},\qquad
+V_{a,b}(n,k+l)=\!\!\sum_{k+l<m_2<m_1\le n+k+l}\!\! m_1^{-a}m_2^{-b}.
+\end{gathered}
+\]
+Then $R^{(a)}$ has pole order $\le1$ at every weight $a=1,\dots,5$ with indicator exactly
+$\alpha$, and $Y_{a,b}$ has pole order exactly $\max(a,b)<a+b$ with indicator $\alpha$
+\textup{(}$V_{a,b}$ likewise with indicator $\kappa$\textup{)} --- i.e.\ both families supply
+precisely the missing order. Nevertheless, with the full Ap\'ery alphabet $R^{(1..5)}$ at both
+slots ($1210$ coefficients, $\rank(\mathrm{fit})$ $313\to960$, depth-conditioned value space
+$\dim U$ $261\to641$) the strengthened system is \emph{still inconsistent}, at both the
+$(\mathrm{DEPTH}^{++})$ and the $(\mathrm{DEPTH}^{+})$ cap, at $N=1300$ (row-saturated). The
+same for $Y/V$.
+\end{theorem}
+
+The structural reason is worth recording, since it applies to \emph{any} enlargement.
+
+\begin{proposition}[Block diagonality]\label{prop:blockdiag}
+$\PROVED$ Let the alphabet be enlarged by new letters whose $u^0$ part is a \emph{new} $\Zp$
+symbol (true for $R,D,Y,V,Z$). Split the basis into \emph{old} (monomials using no new letter)
+and \emph{new}. Then the depth-condition matrix is block diagonal,
+$C=\operatorname{diag}(C_{\mathrm{old}},C_{\mathrm{new}})$, because every $u$-expansion term of
+a new monomial carries at least one new symbol in its symbol key and no old term does. Hence
+$\rank C=\rank C_{\mathrm{old}}+\rank C_{\mathrm{new}}$, and with
+$W_{\mathrm{old}}:=M_{\mathrm{old}}\ker C_{\mathrm{old}}$,
+$W_{\mathrm{new}}:=M_{\mathrm{new}}\ker C_{\mathrm{new}}$ in value-sequence space,
+\[
+\text{the enlarged system is consistent}\iff P\in W_{\mathrm{old}}+W_{\mathrm{new}} .
+\]
+\end{proposition}
+
+So enlargement does not relax the old conditions at all: the new letters must supply the
+missing value-direction from scratch. And the obstruction is \emph{global}: the smallest prefix
+of levels $n=1,\dots,\Lambda$ on which the strengthened system is already inconsistent is
+$\Lambda=262$, one more than $\dim U=261$, exactly the generic threshold. There is no short
+window of levels and hence no small-$n$ congruence carrying the obstruction.
+
+\begin{remark}[the honest caveat]\label{rem:honest}
+The depth conditions used throughout are the \emph{symbol-independent} form: for every
+reachable pattern $\pi$ and every $u$-power $j>\mathrm{cap}(\pi)$, $K_j$ must vanish
+identically in the $\Zp$ symbols. This is \emph{sufficient} for the cell-wise depth bound at
+every prime simultaneously, and it is what makes the computation possible at all. It is
+\emph{not necessary}: at a fixed prime the symbols range over the finitely many values the
+cells supply. So Theorem~\ref{thm:rletter} refutes the $p$-independent symbol-independent form
+of the enlargement route; the prime-by-prime form is a different, non-linear question which we
+have not settled. Two remarks bound its plausibility: the symbol-independent conditions are
+\emph{sharp} at the base cap (min slack $0$), so nothing is being wasted; and as $p\to\infty$
+the cells fill out and the symbols become generic, so the two forms agree asymptotically. Any
+gap lives at small primes.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The fibre congruence}\label{sec:F}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Throughout this section $p\ge5$, $n=ap+r$, $0\le r<p$, $k=bp+s$, $l=cp+t$ with $0\le b,c\le a$,
+and
+\[
+\Tcal(b,c):=\sum_{s,t=0}^{p-1}T(n,\,bp+s,\,cp+t)\in\ZZ .
+\]
+
+\subsection{The block factorisation}
+
+Write $T$ as a \emph{balanced factorial ratio} --- this is the form that makes everything work:
+\begin{equation}\label{eq:Tfact}
+T(n,k,l)=\frac{(n+k)!\,(n+l)!\,(n+k+l)!\,n!}
+{k!^3\,l!^3\,(n-k)!^2\,(n-l)!^2\,(k+l)!},
+\end{equation}
+which is checked by expanding the five binomials; the argument sums balance,
+$(n+k)+(n+l)+(n+k+l)+n=3k+3l+2(n-k)+2(n-l)+(k+l)=4n+2k+2l$. Call the $15$ factorial slots
+$(n+k),(n+l),(n+k+l),n$ (numerator) and $k,k,k,l,l,l,(n-k),(n-k),(n-l),(n-l),(k+l)$
+(denominator). For $m\ge0$ write $m=m_1p+m_0$ with $0\le m_0<p$, and
+$(m!)_p:=\prod_{j\le m,\ p\nmid j}j$, so that $m!=p^{m_1}m_1!\,(m!)_p$.
+
+\begin{lemma}[Wolstenholme block]\label{lem:W}
+$\PROVED$ For $p\ge5$ and every $i\ge0$,
+\[
+B_i:=\prod_{u=1}^{p-1}(ip+u)\ \equiv\ (p-1)!\pmod{p^3}.
+\]
+\end{lemma}
+
+\begin{proof}
+$B_i=\sum_{j\ge0}(ip)^je_{p-1-j}(1,\dots,p-1)$ with $e_{p-1}=(p-1)!$,
+$e_{p-2}=(p-1)!\,H_{p-1}$ and $e_{p-3}=(p-1)!\,(H_{p-1}^2-H^{(2)}_{p-1})/2$. Wolstenholme's
+congruence ($p\ge5$) gives $H_{p-1}\equiv0\pmod{p^2}$ and $H^{(2)}_{p-1}\equiv0\pmod p$. Hence
+the $j=1$ term lies in $p^3\Zp$, the $j=2$ term is
+$p^2i^2(p-1)!(H_{p-1}^2-H^{(2)}_{p-1})/2\in p^3\Zp$, and the terms $j\ge3$ lie in $p^3\Zp$.
+\end{proof}
+
+Consequently, writing
+\begin{equation}\label{eq:G}
+G(m_1,m_0):=\Bigl[\prod_{i<m_1}B_i\Big/((p-1)!)^{m_1}\Bigr]\prod_{u=1}^{m_0}\Bigl(1+\frac{m_1p}{u}\Bigr),
+\end{equation}
+one has the \emph{exact} identity $(m!)_p=((p-1)!)^{m_1}\,m_0!\,G(m_1,m_0)$ together with
+\[
+G(m_1,m_0)=1+p\,m_1H_{m_0}+p^2m_1^2\frac{H_{m_0}^2-H^{(2)}_{m_0}}{2}+O(p^3),
+\qquad G\in1+p\Zp
+\]
+(all $H_{m_0}$ here are $p$-integral because $m_0<p$).
+
+\begin{lemma}[Exact fibre block factorisation]\label{lem:B}
+$\PROVED$ Let $p\ge5$, $n=ap+r$ with $0\le r<p$, $k=bp+s$, $l=cp+t$ with $0\le b,c\le a$ and
+$0\le s\le r$, $0\le t\le r$. Put
+\[
+e_1=\ii{r+s\ge p},\quad e_2=\ii{r+t\ge p},\quad e_3=\lfloor(r+s+t)/p\rfloor\in\{0,1,2\},\quad
+e_4=\ii{s+t\ge p}.
+\]
+Then, \emph{exactly},
+\begin{equation}\label{eq:LemB}
+T(n,k,l)=T(a,b,c)\,T(r,s,t)\,\Pi\,\hat G,\qquad
+\Pi=\frac{\binom{a+b+e_1}{e_1}\binom{a+c+e_2}{e_2}\binom{a+b+c+e_3}{e_3}}{\binom{b+c+e_4}{e_4}},
+\qquad \hat G\in1+p\Zp,
+\end{equation}
+where $\hat G=\prod_{\mathrm{slots}}\bigl[G(m_1,m_0)/G(e_{\mathrm{slot}},m_0)\bigr]^{\pm1}$,
+with $(m_1,m_0)$ the true base-$p$ digits of each slot and $e_{\mathrm{slot}}\in\{e_1,e_2,e_3,e_4\}$
+on the four shifted slots, $0$ on the other eleven. The hypothesis $a<p$ is \emph{not} used.
+\end{lemma}
+
+\begin{proof}
+Under $s\le r$, $t\le r$ the true digit pairs of the $15$ slots are
+\[
+\begin{gathered}
+(n+k)\to(a+b+e_1,\,r+s-e_1p),\qquad (n+l)\to(a+c+e_2,\,r+t-e_2p),\\
+(n+k+l)\to(a+b+c+e_3,\,r+s+t-e_3p),
+\end{gathered}
+\]
+$n\to(a,r)$, $k\to(b,s)$, $l\to(c,t)$, $(n-k)\to(a-b,r-s)$, $(n-l)\to(a-c,r-t)$,
+$(k+l)\to(b+c+e_4,\,s+t-e_4p)$. Substituting
+$m!=p^{m_1}m_1!\,((p-1)!)^{m_1}m_0!\,G(m_1,m_0)$ in all $15$ slots gives
+\[
+T(n,k,l)=p^{E}((p-1)!)^{E}\Bigl[\prod(m_1!)^{\pm1}\Bigr]\Bigl[\prod(m_0!)^{\pm1}\Bigr]
+\Bigl[\prod G(m_1,m_0)^{\pm1}\Bigr],
+\]
+with $E=\sum\pm m_1=e_1+e_2+e_3-e_4$.
+For each shifted slot write $m_1!=(m_1-e)!\cdot m_1!/(m_1-e)!$ and
+$m_0!=(m_0+ep)!\big/\bigl(p^ee!\,((p-1)!)^e\,G(e,m_0)\bigr)$ (the second by the same
+substitution applied to $m_0+ep$, whose digits are $(e,m_0)$). The unshifted level-$a$ digits
+are exactly $a+b,\,a+c,\,a+b+c,\,a;\,b,b,b,\,c,c,c,\,a-b,a-b,\,a-c,a-c,\,b+c$, i.e.
+$\prod(m_1-e)!^{\pm1}=T(a,b,c)$; and the unshifted level-$r$ digits are
+$r+s,\,r+t,\,r+s+t,\,r;\,s,s,s,\,t,t,t,\,r-s,r-s,\,r-t,r-t,\,s+t$, i.e.
+$\prod(m_0+ep)!^{\pm1}=T(r,s,t)$. Collecting, the powers $p^{\pm e}$ and $((p-1)!)^{\pm e}$
+cancel $p^E((p-1)!)^E$ exactly, $\prod[m_1!/((m_1-e)!e!)]^{\pm1}=\Pi$, and the leftover $G$'s
+are $\hat G$. Finally $\hat G\in1+p\Zp$ because each $G(m_1,m_0)\in1+p\Zp$ by
+Lemma~\ref{lem:W}, for every $m_1\ge0$.
+\end{proof}
+
+The admissible carry patterns involve only $r,s,t$ and are
+\begin{equation}\label{eq:epatterns}
+(e_1,e_2,e_3,e_4)\in\{(0,0,0,0),(0,0,1,0),(1,0,1,0),(0,1,1,0),(1,1,1,0),(1,1,1,1),(1,1,2,1)\}
+\end{equation}
+($e_4=1\Rightarrow e_1=e_2=1$ since $t\le r$ gives $r+s\ge s+t\ge p$; $e_1=1\Rightarrow e_3\ge1$;
+$e_3=2\Rightarrow e_4=1$).
+
+\begin{evidence}\label{ev:LemB}
+$\VERIFIED$ $8\,247\,294$ in-regime cells, $0$ failures ($p\in\{5,7,11\}$, all $a\le3p+1$, all
+$r$, all $0\le b,c\le a$, all $s,t\le r$): $\hat G$ recomputed as
+$T(n,k,l)/(T(a,b,c)T(r,s,t)\Pi)$ over $\QQ$ and tested for $\hat G-1\in p\Zp$.
+\end{evidence}
+
+\subsection{The residue identity}
+
+\begin{lemma}[$\Phi$]\label{lem:Phi}
+$\PROVED$ For all integers $r\ge0$, $t\ge0$,
+\[
+\sum_{s=0}^{r}T(r,s,t)\,\Phi_b(s,t)=0,\qquad
+\Phi_b(s,t):=H_{r+s}+H_{r+s+t}-3H_s+2H_{r-s}-H_{s+t}=A_1(s)+2B_1(s)+C_1
+\]
+in the level-$r$ letters. By the $k\leftrightarrow l$ symmetry of $T$, also
+$\sum_{t=0}^{r}T(r,s,t)\Phi_c(s,t)=0$ for each $s$, with $\Phi_c(s,t)=A_1(t)+2B_1(t)+C_1$.
+\end{lemma}
+
+\begin{proof}
+$\Phi_b=\partial_s\log T(r,s,t)$ in the $\Gamma$-continuation, and the identity is a residue
+sum. Concretely, put
+\[
+G(x):=\prod_{i=1}^{r}(x+i)\prod_{i=1}^{r}(x+t+i)\Big/\prod_{j=0}^{r}(x-j)^2 .
+\]
+$G$ is rational with $\deg(\mathrm{den})-\deg(\mathrm{num})=(2r+2)-2r=2$, so $G(x)=O(x^{-2})$
+and the sum of all its residues vanishes. Its poles are exactly the double poles at
+$x=0,1,\dots,r$ (the numerator zeros are at $x=-1,\dots,-r$ and $x=-t-1,\dots,-t-r$, all
+negative, so no cancellation). At $x=s$ write $G=N/((x-s)^2E)$ with $E(x)=\prod_{j\ne s}(x-j)^2$;
+then
+\[
+\begin{aligned}
+\Res_{x=s}G&=\frac NE(s)\Bigl[\frac{N'}{N}(s)-\frac{E'}{E}(s)\Bigr]\\
+&=\frac NE(s)\bigl[(H_{r+s}-H_s)+(H_{r+s+t}-H_{s+t})-2H_s+2H_{r-s}\bigr]
+=\frac NE(s)\,\Phi_b(s,t),
+\end{aligned}
+\]
+and $\frac NE(s)=\frac{(r+s)!(r+s+t)!}{s!^3(s+t)!(r-s)!^2}=T(r,s,t)/K_t$ with
+$K_t=\frac{(r+t)!\,r!}{t!^3(r-t)!^2}$ independent of $s$. Summing the residues gives the claim.
+\end{proof}
+
+\begin{remark}
+$\Phi_b,\Phi_c$ are exactly the level-$r$ weight-$1$ letter combinations $A_1+2B_1+C_1$ ---
+the same alphabet as $\wthree$ and $\wfive$. Lemma~\ref{lem:Phi} is the weight-$1$ shadow of
+the same residue mechanism that produced the closed forms of \S\ref{sec:apery}; the weight-$2$
+level is Lemma~\ref{lem:Phi2}. $\VERIFIED$ exact, $0$ exceptions, $r\le11$, all $t$, plus the
+aggregated $\sum_{s,t}$ version for $r\le10$ over $\QQ$.
+\end{remark}
+
+\subsection{The two carry lemmas and Lemma \texorpdfstring{$F$}{F}}
+
+Write $vT:=v_pT(a,b,c)=\alpha+\gamma+\kappa$ with $\alpha=\ii{a+b\ge p}$,
+$\gamma=\ii{a+c\ge p}$, $\kappa=v_p\binom{a+b+c}{a}\in\{0,1\}$, each a single Kummer carry
+because $a,b,c<p$; so $vT\le3$.
+
+\begin{lemma}[Off-fibre-regime vanishing]\label{lem:F2}
+$\PROVED$ If $s>r$ or $t>r$ then $v_p\bigl(T(n,bp+s,cp+t)\bigr)\ge2+\min(vT,2)$.
+\end{lemma}
+
+\begin{proof}
+By $k\leftrightarrow l$ symmetry assume $s>r$. If $b=a$ then $k=ap+s>ap+r=n$ and $T=0$; so
+$b<a$. The subtraction $n-k$ borrows at position $0$, so $v_p\binom nk\ge1$ and the
+\emph{squared} factor contributes $2$. It remains to produce $\min(vT,2)$ further powers.
+If $\alpha=1$, the position-$1$ digit sum of $n+k$ is $a+b+\ii{r+s\ge p}\ge a+b\ge p$, a carry,
+so $v_p\binom{n+k}{n}\ge1$; identically if $\gamma=1$. If $\kappa=1$, write $k+l=\beta p+\sigma$
+with $\beta=b+c+e_4$, $\sigma=s+t-e_4p$: if $b+c\ge p$ then $\kappa=1$ means $a+b+c\ge2p$ and
+the position-$1$ sum of $n+(k+l)$ is $a+(\beta-p)+\text{carry}\ge a+b+c-p\ge p$, a carry; if
+$b+c<p$ and $\beta<p$, the position-$1$ sum is $a+\beta+\text{carry}\ge a+b+c\ge p$, a carry.
+The only gap is $\beta=p$, i.e.\ $b+c=p-1$ and $e_4=1$.
+Now count. If $vT\le1$, at most one of $\alpha,\gamma,\kappa$ is $1$ and the above supplies it
+(in the gap case $\kappa=1$, $\alpha=\gamma=0$ one gets $b+c=p-1$, $b,c<p-a$, hence
+$p-1<2(p-a)$ and $p-1\le2a$, forcing $a=(p-1)/2$ and $b=c=a$, contradicting $b<a$). If
+$vT\ge2$, at least two of $\alpha,\gamma,\kappa$ equal $1$; if they are $\alpha,\gamma$ we are
+done. Otherwise the gap $b+c=p-1$, $e_4=1$ may occur: if $\alpha=1,\gamma=0$ then $\gamma=0$
+gives $c\le p-a-1$, hence $b=p-1-c\ge a$, contradicting $b<a$ --- vacuous. If
+$\gamma=1,\alpha=0$ then symmetrically $c=a$; if $t>r$ then $\binom nl^2$ gives $2$ more and we
+are done, so $t\le r$, and $e_4=1$ gives $s\ge p-t\ge p-r$, i.e.\ $r+s\ge p$; then $n+k$
+carries at position $0$ and (since $a+b+1=a+(p-1-a)+1=p$) at position $1$, so
+$v_p\binom{n+k}{n}\ge2$ and the total is $\ge2+1+2=5\ge4$. If $\alpha=\gamma=1$ then
+$v_p\binom{n+k}{n}+v_p\binom{n+l}{n}\ge2$.
+\end{proof}
+
+\begin{lemma}[First-order fibre expansion]\label{lem:F1}
+$\PROVED$ For $0\le s\le r$, $0\le t\le r$,
+\[
+T(n,bp+s,cp+t)\equiv T(a,b,c)T(r,s,t)\bigl(1+p[a\Phi_a+b\Phi_b+c\Phi_c]\bigr)\pmod{p^{2+vT}},
+\]
+\[
+\Phi_a(s,t)=H_{r+s}+H_{r+t}+H_{r+s+t}+H_r-2H_{r-s}-2H_{r-t},
+\]
+except in the single carry pattern $(e_1,e_2,e_3,e_4)=(1,1,1,1)$ with $\alpha=\gamma=1$, where
+the congruence holds mod $p^{1+vT}$ (and then $vT=3$, so $1+vT=4=2+\min(vT,2)$). In all cases
+the congruence holds mod $p^{2+\min(vT,2)}$.
+\end{lemma}
+
+\begin{proof}
+Set $\Delta_1:=a\Phi_a+b\Phi_b+c\Phi_c$; expanding the definitions,
+$\Delta_1=\sum_{\mathrm{slots}}\pm\mu_1H_{\mu_0}$ where $(\mu_1,\mu_0)$ are the \emph{na\"ive}
+(level-$a$, level-$r$) digits, i.e.\ $\mu_0=m_0+e_{\mathrm{slot}}p$. Each $H_{\mu_0}$ has
+$\mu_0<3p$, hence $H_{\mu_0}=(\Zp)+p^{-1}H_{\lfloor\mu_0/p\rfloor}$ with
+$\lfloor\mu_0/p\rfloor\le2<p$, so $p\Delta_1\in\Zp$; moreover
+$H_{\mu_0}-H_{m_0}=p^{-1}H_{e_{\mathrm{slot}}}+(\Zp)$, whence
+$1+p\Delta_1=1+pX+\sum_{\text{shifted}}\pm\mu_1H_{e_{\mathrm{slot}}}+p(\Zp)$ with
+$X=\sum_{\mathrm{slots}}\pm\mu_1H_{m_0}$. By Lemma~\ref{lem:B},
+$T(n,k,l)/(T(a,b,c)T(r,s,t))=\Pi\hat G=\Pi(1+pX+O(p^2))$, so the difference equals
+$T(a,b,c)T(r,s,t)\bigl[\Pi-1-\sum\pm\mu_1H_e+O(p)\bigr]$. Let $J:=v_pT(r,s,t)$ and $K$ the
+valuation of the bracket; the conclusion is $v_p(\mathrm{diff})\ge vT+J+K$. Running the seven
+patterns \eqref{eq:epatterns}:
+\[
+\begin{array}{lcccc}
+(e_1,e_2,e_3,e_4) & \Pi & 1+\sum\pm\mu_1H_e & K\ge & J\ge\\\hline
+(0,0,0,0) & 1 & 1 & 2 & 0\\
+(0,0,1,0) & a{+}b{+}c{+}1 & 1+(a{+}b{+}c)\ \text{---\ equal} & 1 & 1\\
+(1,0,1,0),(0,1,1,0) & (a{+}b{+}1)(a{+}b{+}c{+}1) & 1+(a{+}b)+(a{+}b{+}c) & 0 & 2\\
+(1,1,1,0) & \text{3 factors} & \text{---} & 0 & 3\\
+(1,1,1,1) & \frac{(a+b+1)(a+c+1)(a+b+c+1)}{b+c+1} & \text{---} & -1 & 2\\
+(1,1,2,1) & \text{with }\binom{a+b+c+2}{2} & \text{---} & -1 & 3
+\end{array}
+\]
+$K\ge0$ whenever $e_4=0$ (then $\Pi\in\ZZ$), and $K\ge-1$ always since $b+c+1\le2a+1<2p$. So
+$J+K\ge2$, i.e.\ $v_p(\mathrm{diff})\ge vT+2$, in every pattern except $(1,1,1,1)$, and there
+$K=-1$ forces $v_p\binom{b+c+1}{1}=1$, i.e.\ $b+c=p-1$, with $v_p(a+c+1)=v_p(a+b+1)=0$. But
+$b+c=p-1$ gives $\kappa=1$, and: $\alpha=\gamma=0$ forces (as in Lemma~\ref{lem:F2})
+$a=(p-1)/2$, $b=c=a$, so $a+b+1=p$, a contradiction; exactly one of $\alpha,\gamma$ equal to
+$1$ forces $b=a$ resp.\ $c=a$, hence $a+c+1=p$ resp.\ $a+b+1=p$, again a contradiction. So
+$K=-1$ implies $\alpha=\gamma=1$, hence $vT=2+\kappa=3$ and
+$v_p(\mathrm{diff})\ge3+2-1=4=2+\min(vT,2)$.
+\end{proof}
+
+\begin{theorem}[Lemma $F$]\label{lem:F}
+$\PROVED$ Let $p\ge5$, $n=ap+r$, $1\le a<p$, $0\le r<p$, $p\nmid Q_a$ and $0\le b,c\le a$. Then
+\[
+\Tcal(b,c)\ \equiv\ \frac{Q_n}{Q_a}\,T(a,b,c)\pmod{p^{\,2+\min(v_pT(a,b,c),\,2)}} .
+\]
+\end{theorem}
+
+\begin{proof}
+Split the fibre at $s\le r$, $t\le r$. By Lemma~\ref{lem:F2} the complementary terms are
+$\equiv0$ mod $p^{2+\min(vT,2)}$, and there $T(r,s,t)=0$. By Lemma~\ref{lem:F1}, for
+$s,t\le r$,
+$T(n,bp+s,cp+t)\equiv T(a,b,c)T(r,s,t)(1+p[a\Phi_a+b\Phi_b+c\Phi_c])$ mod $p^{2+\min(vT,2)}$.
+Every product $T(r,s,t)\Phi_x(s,t)$ is $p$-\emph{integral}: a pole of $\Phi_x$ needs $r+s\ge p$
+(so $\binom{r+s}{r}$ carries), $r+t\ge p$, $s+t\ge p$ (so $r+s\ge s+t\ge p$), or $r+s+t\ge p$
+with $r+s,r+t<p$ (so $s+t<p$ by Lemma~\ref{lem:L3}, hence $\binom{r+s+t}{r}$ carries); in each
+case $v_pT(r,s,t)\ge1$, and every pole has order exactly $1$ because all arguments are $<3p$.
+Summing over $0\le s,t\le p-1$ and using $T(r,s,t)=0$ for $s>r$ or $t>r$,
+\[
+\Tcal(b,c)\equiv T(a,b,c)\Bigl[\sum_{s,t=0}^{r}T(r,s,t)+p\,a\,\Psi_a
++p\,b\!\sum_{s,t}\!T\Phi_b+p\,c\!\sum_{s,t}\!T\Phi_c\Bigr]\pmod{p^{2+\min(vT,2)}},
+\]
+with $\Psi_a:=\sum_{s,t=0}^{r}T(r,s,t)\Phi_a(s,t)\in\Zp$. Now
+$\sum_{s,t=0}^{r}T(r,s,t)=Q_r$ by \eqref{eq:BZQ} at $n=r$, and by Lemma~\ref{lem:Phi} the last
+two sums vanish. \emph{The whole $(b,c)$-dependence of the first-order term therefore cancels},
+leaving $\Tcal(b,c)\equiv\mu\,T(a,b,c)$ mod $p^{2+\min(vT(b,c),2)}$ with
+$\mu:=Q_r+p\,a\,\Psi_a\in\Zp$ independent of $(b,c)$. Summing over $0\le b,c\le a$ and using
+$\sum_{b,c}\Tcal(b,c)=Q_n$, $\sum_{b,c}T(a,b,c)=Q_a$ and $2+\min(vT,2)\ge2$ gives
+$Q_n\equiv\mu Q_a\pmod{p^2}$, hence $\Lambda:=Q_n/Q_a\equiv\mu\pmod{p^2}$ as $p\nmid Q_a$.
+Finally $\Tcal(b,c)-\Lambda T(a,b,c)=T(a,b,c)(\mu-\Lambda)+[\Tcal(b,c)-\mu T(a,b,c)]$, whose
+two terms have $v_p\ge vT+2$ and $\ge2+\min(vT,2)$ respectively.
+\end{proof}
+
+\begin{corollary}[A $\bmod\ p^2$ supercongruence for the bottom row]\label{cor:Qsuper}
+$\PROVED$ For $p\ge5$, $1\le a<p$, $0\le r<p$ with $p\nmid Q_a$,
+\[
+Q_{ap+r}\equiv Q_a\bigl(Q_r+p\,a\,\Psi_a\bigr)\pmod{p^2},\qquad
+\Psi_a=\sum_{s,t=0}^{r}T(r,s,t)\,\Phi_a(s,t),
+\]
+with $\Phi_a=A_1(s)+A_1(t)+C_1-2B_1(s)-2B_1(t)-H_s-H_t+H_{s+t}+H_r$ in the level-$r$ letters.
+\end{corollary}
+
+This is a genuine $\bmod\ p^2$ refinement of Theorem~\ref{thm:Aintro}, and $\Psi_a$ is the
+level-$r$ weight-$1$ harmonic functional of the Brown--Zudilin summand. $\VERIFIED$ $0$
+mismatches at $p=5,7,11,13$, all $a,r$ with $p\nmid Q_a$, $n\le360$.
+
+\begin{evidence}[sharpness of Lemma $F$]\label{ev:F}
+$\VERIFIED$ $0$ failures, and \emph{sharp}: over $20\,998$ cells at $p=5,7,11,13$ the pairs
+$(vT,v_p(\mathrm{diff}))$ realised are exactly $(0,2),(1,3),(2,4),(3,4)$, i.e.\ the bound
+$2+\min(vT,2)$ is attained in every stratum (min slack $0$). Consequently ``prove Lemma $F$ one
+order deeper'' is \emph{impossible}: the congruence mod $p^{3+\min(vT,2)}$ is false. Lemmas
+\ref{lem:F2} and \ref{lem:F1} are each $\VERIFIED$ at $p=5,7$ over all $(a,b,c,r,s,t)$,
+stratified by carry pattern ($26$ strata; min slack $\ge0$ in every one and $=0$ in seven).
+\end{evidence}
+
+\begin{remark}[what Lemma $F$ did \emph{not} need]
+Not needed: Jacobsthal's $\binom{ap}{bp}\equiv\binom ab\pmod{p^3}$, and Granville's general
+prime-power binomial congruences. The only external input is Wolstenholme, used once, in
+Lemma~\ref{lem:W} --- and that is exactly why $p\ge5$ is the right hypothesis. The real content
+is (i) the exact block factorisation, where $T$'s being a \emph{balanced} factorial ratio is
+used, and (ii) Lemma~\ref{lem:Phi}. The proof is weight-agnostic: Lemma~\ref{lem:F} is a
+statement about $T$ alone.
+\end{remark}
+
+\subsection{Two carry inequalities}
+
+The next three sections use two elementary base-$p$ facts repeatedly; we isolate them once.
+Write $\car(x,y,\epsilon)$ for the number of carries in the base-$p$ addition $x+y+\epsilon$,
+with $\epsilon\in\{0,1\}$ the carry into position $0$; write $\mathrm s(N)$ for the base-$p$
+digit sum of $N$, and $z(N)$ for the number of trailing digits of $N$ equal to $p-1$.
+
+\begin{lemma}[Carry inequalities]\label{lem:carry}
+$\PROVED$ With $n=ap+r$, $k=bp+s$, $l=cp+t$ and $e_1=\ii{r+s\ge p}$, $e_2=\ii{r+t\ge p}$ as in
+Lemma~\textup{\ref{lem:B}}:
+\begin{enumerate}[leftmargin=2.4em,label=\textup{(C\arabic*)}]
+\item $\car(x,y,1)=\car(x,y,0)+z(x+y)\ \ge\ \car(x,y,0)$ for all $x,y\ge0$;
+\item $v_p\binom{n+k}{n}=e_1+\car(a,b,e_1)\ge v_p\binom{a+b}{a}$, and likewise for
+  $(n+l,n)$ with $e_2$; and
+  $v_p\binom nk=\ii{s>r}+\car(b,\,a-b-\ii{s>r},\,\ii{s>r})\ge v_p\binom ab+\ii{s>r}$,
+  and likewise for $(n,l)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(C1): $\car(x,y,\epsilon)=(\mathrm s(x)+\mathrm s(y)+\epsilon-\mathrm s(x+y+\epsilon))/(p-1)$,
+and $\mathrm s(N+1)=\mathrm s(N)+1-(p-1)z(N)$.
+
+(C2): by Kummer's theorem $v_p\binom{n+k}{n}$ counts the carries of $n+k$ in base $p$; splitting
+that addition at position $0$ contributes $e_1$ there and $\car(a,b,e_1)$ above, and (C1) gives
+$\car(a,b,e_1)\ge\car(a,b,0)=v_p\binom{a+b}{a}$. For the second, split the subtraction
+$n-k$ at position $0$: it borrows exactly when $s>r$, the higher-position carries of
+$k+(n-k)$ sum to $a$, and $\mathrm s(a-b-1)+1\ge\mathrm s(a-b)$.
+\end{proof}
+
+\subsection{The multi-digit weakening}
+
+The induction consumes one order less precision, and at that precision the statement holds for
+\emph{all} $a$, with a shorter proof and no auxiliary hypotheses at all.
+
+\begin{lemma}[Lemma $F$-gen]\label{lem:Fgen}
+$\PROVED$ Let $p\ge5$, $a\ge1$, $0\le r<p$, $n=ap+r$, $0\le b,c\le a$. Let $\alpha,\gamma,\kappa$
+be the level-$a$ indicators of Definition~\textup{\ref{def:pattern}} evaluated at $(a,b,c)$ with
+$P_a=p^{\lfloor\log_pa\rfloor+1}$, and $s_a:=\alpha+\gamma+\kappa$. Then
+\[
+v_p\bigl(\Tcal(b,c)-Q_r\,T(a,b,c)\bigr)\ \ge\ 1+\min(s_a,2)\ =:\ G\ (\le3).
+\]
+\end{lemma}
+
+Three features distinguish this from Theorem~\ref{lem:F}: it holds for \emph{all} $a$, not only
+$a<p$; the comparison constant is $Q_r$ itself, with no $\mu=Q_r+pa\Psi_a$ correction and no
+$\Lambda=Q_n/Q_a$, hence \emph{no $p\nmid Q_a$ hypothesis} and no exceptional-prime
+compensation; and it is one order weaker, which is what makes the general-$a$ proof short. It
+is exactly the precision the induction consumes.
+
+%% FIXED [m-6]: (C1) and (C2) were stated and proved inside this proof body and then invoked
+%% FIXED twice more, two sections later. They are now the displayed Lemma \ref{lem:carry}.
+\begin{proof}
+Both parts use the carry inequalities of Lemma~\ref{lem:carry}.
+
+\emph{(A) Off-regime terms $s>r$ or $t>r$.} By symmetry assume $s>r$. If $b=a$ then $k>n$ and
+$T=0$. So $b<a$; the subtraction $n-k$ borrows at position $0$, so $v_p\binom nk\ge1$ and the
+squared factor gives $v_pT\ge2$. That settles $G\le2$, i.e.\ $s_a\le1$. If $s_a\ge2$ then at
+least two of $\alpha,\gamma,\kappa$ are $1$; $\alpha=\gamma=0$ would force $s_a=\kappa\le1$, so
+$\alpha=1$ or $\gamma=1$, and then Lemma~\ref{lem:carry}(C2) gives one further power: $v_pT\ge3=G$.
+
+\emph{(B) In-regime terms $s\le r$, $t\le r$.} Since $Q_r=\sum_{s,t\le r}T(r,s,t)$ exactly,
+\eqref{eq:LemB} gives
+$\sum_{s,t\le r}T(n,k,l)-Q_rT(a,b,c)=T(a,b,c)\sum_{s,t\le r}T(r,s,t)[\Pi\hat G-1]$, so it
+suffices termwise that $vT+J+v_p(\Pi\hat G-1)\ge G$ with $J:=v_pT(r,s,t)$. Note
+$v_p(\Pi\hat G-1)\ge\min(v_p(\Pi-1),\,v_p(\Pi)+1)\ge\min(v_p(\Pi),0)$, and $G\le3$,
+$vT\ge s_a$. Running the seven patterns \eqref{eq:epatterns}:
+\[
+\begin{array}{lcccl}
+(e_1,e_2,e_3,e_4) & \Pi & J\ge & v_p(\Pi\hat G-1)\ge & \text{total}\ge\\\hline
+(0,0,0,0) & 1 & 0 & 1 & s_a+1\ \checkmark\\
+(0,0,1,0) & a{+}b{+}c{+}1\in\ZZ & 1 & 0 & s_a+1\ \checkmark\\
+(1,0,1,0),(0,1,1,0) & \in\ZZ & 2 & 0 & s_a+2\ \checkmark\\
+(1,1,1,0) & \in\ZZ & 3 & 0 & 3\ \checkmark\\
+(1,1,1,1) & \frac{(a+b+1)(a+c+1)(a+b+c+1)}{b+c+1} & 2 & \text{see below} & \checkmark\\
+(1,1,2,1) & \frac{(a+b+1)(a+c+1)\binom{a+b+c+2}{2}}{b+c+1} & 3 & \text{see below} & \checkmark
+\end{array}
+\]
+(the $J$ column: $e_1=1\Rightarrow\binom{r+s}{r}$ carries; $e_2=1\Rightarrow\binom{r+t}{r}$
+carries; if $e_4=0$ and $e_3\ge1$ then $\binom{r+s+t}{r}$ carries at position $0$; if $e_4=1$
+and $e_3=2$ then $r+\sigma\ge p$ with $\sigma=s+t-p$, so $\binom{r+s+t}{r}$ carries).
+
+For the two $e_4=1$ patterns put $m:=v_p(b+c+1)$ and $\tau:=v_p(a)$. Then $a+b+c+1=a+(b+c+1)$
+has $v_p\ge\min(\tau,m)$, so $v_p(\Pi)\ge\min(\tau,m)-m$ and therefore
+$v_p(\Pi\hat G-1)\ge\min(\tau,m)-m$ (which is $\le0$, so the bound is valid whether or not
+$v_p(\Pi)\ge0$).
+
+\emph{Case $\tau\ge m$.} Then $v_p(\Pi\hat G-1)\ge0$ and the totals are $vT+2\ge2$ resp.
+$vT+3\ge3$; since $G\le3$ and, for $(1,1,1,1)$, $vT+2\ge s_a+2\ge\min(s_a,2)+1=G$.
+
+\emph{Case $\tau<m$ (so $m\ge1$).} Then $b+c\equiv-1\pmod{p^m}$, i.e.\ the digits of $b+c$ in
+positions $0,\dots,m-1$ are all $p-1$, while $a$ has digits $0$ in positions $0,\dots,\tau-1$
+and $a_\tau\ge1$. In the addition $a+(b+c)$: no carry at positions $0,\dots,\tau-1$
+($0+(p-1)=p-1$), a carry at position $\tau$ ($a_\tau+(p-1)\ge p$), and a carry at each of
+$\tau+1,\dots,m-1$ ($a_i+(p-1)+1\ge p$). Hence
+\[
+E:=v_p\tbinom{a+b+c}{a}\ge m-\tau,\qquad\text{so}\qquad vT\ge(m-\tau)+A+A'+2D+2D',
+\]
+with $A=v_p\binom{a+b}{a}\ge\alpha$, $A'=v_p\binom{a+c}{a}\ge\gamma$, $D=v_p\binom ab$,
+$D'=v_p\binom ac$. For $(1,1,1,1)$ the total is $\ge vT+2+(\tau-m)\ge2+A+A'+2D+2D'$: if
+$s_a\le1$ then $G\le2$; if $s_a\ge2$ then as in (A) $\alpha=1$ or $\gamma=1$, so $A+A'\ge1$ and
+the total is $\ge3=G$. For $(1,1,2,1)$ the total is $\ge vT+3+(\tau-m)\ge3\ge G$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:Phi} is \emph{not} used. The single-digit Lemma~\ref{lem:F} needs it because it
+aims at relative precision $p^2$, so its first-order term must be $(b,c)$-independent; at
+relative precision $p^1$ the first-order term is simply absorbed, and the whole first-order
+analysis --- Lemmas \ref{lem:F1}, \ref{lem:F2}, \ref{lem:Phi} and the $\Psi_a$
+supercongruence --- disappears. That is the structural reason the multi-digit statement is
+\emph{easier} than the single-digit one.
+\end{remark}
+
+\begin{evidence}\label{ev:Fgen}
+$\VERIFIED$ $0$ failures in $111\,963$ cells: $p=5,7,11,13$, multi-digit $a\le30/22/15/13$, all
+$r$, all $(b,c)$; sharp (min slack $0$).
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The digit-scaled induction}\label{sec:IND}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The inductive statement}
+
+\begin{definition}[(IND)]\label{def:IND}
+Let $p\ge5$. For $L\ge0$ let $\mathcal I(L)$ be the assertion
+\[
+\text{for every }m\ge1\text{ with }\lfloor\log_pm\rfloor\le L:\quad
+v_p(W_m)\ \ge\ -5\lfloor\log_pm\rfloor,\qquad W_m=P_m-H^{(5)}_mQ_m .
+\]
+\end{definition}
+
+Note $v_p(H^{(5)}_mQ_m)\ge-5\lfloor\log_pm\rfloor$ always ($Q_m\in\ZZ$, Lemma~\ref{lem:U}), so
+$\mathcal I(L)$ is \emph{equivalent} to $v_p(P_m)\ge-5\lfloor\log_pm\rfloor$ on the same range.
+
+\begin{remark}[why this form]
+The na\"ive per-digit ratio statement $p^5P_n/Q_n\equiv P_a/Q_a\pmod p$ fails multi-digit: the
+depth of the single-step ratio is $5-2s$, negative for $s\ge3$. (IND) is scaled: it never
+divides by $Q$, never renormalises, and its per-level target is an inequality on $v_p(W)$, not
+a congruence.
+\end{remark}
+
+\subsection{The step and its ledger}
+
+Let $L\ge1$, $\lfloor\log_pn\rfloor=L$, $n=ap+r$ with $0\le r<p$, $a=\lfloor n/p\rfloor$, so
+$\lfloor\log_pa\rfloor=L-1$. Group the cells of $W_n$ by
+$(b,c)=(\lfloor k/p\rfloor,\lfloor l/p\rfloor)$, $0\le b,c\le a$, and split
+\begin{equation}\label{eq:split}
+p^5W_n-Q_rW_a=(\mathrm I)+(\mathrm{II}),\qquad
+\begin{aligned}
+(\mathrm{II})&:=\sum_{b,c}\vfive(a,b,c)\bigl[\Tcal(b,c)-Q_rT(a,b,c)\bigr],\\
+(\mathrm I)&:=\sum_{k,l}T(n,k,l)\,\Ecal(n,k,l),\ \
+\Ecal:=p^5\vfive(n,k,l)-\vfive(a,b,c).
+\end{aligned}
+\end{equation}
+If $v_p(\mathrm I),v_p(\mathrm{II})\ge-5(L-1)$ then, using $\mathcal I(L-1)$ for
+$v_p(Q_rW_a)\ge v_p(W_a)\ge-5(L-1)$,
+\[
+v_p(p^5W_n)\ge-5(L-1)\quad\Longrightarrow\quad v_p(W_n)\ge-5-5(L-1)=-5L,
+\]
+which is $\mathcal I(L)$.
+
+\begin{proposition}[Ledger for the fibre term]\label{prop:ledgerII}
+$\PROVED$ Per cell, per digit level:
+\[
+\begin{array}{lll}
+\text{provided: } v_p\vfive(a,b,c) & \ge-5(L-1)-1-\min(s_a,2) & \text{Corollary~\ref{cor:depthgen}}\\
+\text{provided: } v_p(\Tcal-Q_rT) & \ge1+\min(s_a,2) & \text{Lemma~\ref{lem:Fgen}}\\
+\text{consumed: target} & \ge-5(L-1) & \text{(IND) step}\\
+\textbf{slack} & \textbf{exactly }0 & \text{both inputs sharp}
+\end{array}
+\]
+\end{proposition}
+
+So the two lemmas match to the digit: nothing is wasted and nothing is missing in (II). Note
+what is \emph{not} needed: $\Lambda=Q_n/Q_a$, the hypothesis $p\nmid Q_a$, the supercongruence
+of Corollary~\ref{cor:Qsuper}, and Lemma~\ref{lem:Phi}. The exceptional primes (where
+$v_p(Q_n)$ can reach $7$ at $p=7$) are irrelevant to (IND).
+
+\subsection{The descent term, in-regime}
+
+By Lemma~\ref{lem:U}, $p^mH^{(m)}_N=H^{(m)}_{\lfloor N/p\rfloor}+p^m\Sigma^{(m)}_0(N)$. Hence,
+letter by letter,
+\begin{equation}\label{eq:letterdescent}
+\begin{aligned}
+p^mA_m^{(n)}(k)&=A_m^{(a)}(b)+e_1(a+b+1)^{-m}+p^m\sigma^A, &\quad \sigma^A&:=\Sigma_0(n+k)-\Sigma_0(k)\in\Zp,\\
+p^mB_m^{(n)}(k)&=B_m^{(a)}(b)-\ii{s>r}(a-b)^{-m}+p^m\sigma^B,\\
+p^mC_m^{(n)}&=C_m^{(a)}(b,c)+[e_3\text{-terms}]-[e_4\text{-terms}]+p^m\sigma^C,\\
+p^mN_m^{(n)}&=N_m^{(a)}+p^m\sigma^N .
+\end{aligned}
+\end{equation}
+
+\begin{definition}[regimes]\label{def:regime}
+A cell is \emph{in-regime} if $s\le r$, $t\le r$ and $e_1=e_2=e_3=e_4=0$; otherwise
+\emph{off-regime}.
+\end{definition}
+
+In-regime all the mismatch terms vanish and $p^mX^{(n)}_m=X^{(a)}_m+p^m\sigma^X$ exactly.
+Expanding the product,
+\[
+\Ecal=\sum_{S\ne\emptyset}p^{\wt(S)}\sigma_S\Psi_S,\qquad
+\sigma_S=\prod_{X\in S}\sigma^X\in\Zp,\qquad
+\Psi_S:=\sum_{\Mcal\supseteq S}c_\Mcal\prod_{X\in\Mcal\setminus S}X^{(a)},
+\]
+a level-$a$ form of weight $5-\wt(S)$.
+
+\begin{proposition}[In-regime descent costs nothing]\label{prop:inregime}
+$\PROVED$ For every in-regime cell and every digit level, $v_p(T\Ecal)\ge-5(L-1)$.
+\end{proposition}
+
+\begin{proof}
+By the argument of Proposition~\ref{prop:LIFT} applied to $\Psi_S$ --- its $u$-order is
+$(5-\wt S)M_a-\delta'$ and its top non-vanishing $\delta'$ obeys $\wt(S)+\delta'\ge5-J(\pi)$
+because $\Phi_\pi(S\cup S')=0$ for $\wt(S\cup S')\le4-J(\pi)$ --- one gets
+\[
+v_p\bigl(p^{\wt S}\sigma_S\Psi_S\bigr)\ \ge\ 5-J(\pi)-(5-\wt S)M_a
+\]
+whenever $\wt(S)\le5-J(\pi)$; if $\wt(S)>5-J(\pi)$ then $\wt(S)\ge6-J(\pi)\ge3$, so
+$\wt(S)M_a\ge3\ge J(\pi)$ and the requirement below holds trivially. In the fully in-regime
+case Lemma~\ref{lem:carry}(C2) is an equality at every slot, so $v_pT(n,k,l)=v_pT(a,b,c)=vT$. The requirement
+$v_p(T\Ecal)\ge-5(M_a-1)$ becomes $vT\ge J(\pi)-\wt(S)M_a$, and with $J(\pi)=1+\min(s_a,2)\le3$,
+$\wt(S)\ge1$, $vT\ge s_a$:
+\[
+\begin{array}{cccl}
+M_a & \wt(S) & \text{needed }vT\ge & \\\hline
+1 & 1 & \min(s_a,2) & \text{have }vT\ge s_a\ \checkmark\\
+1 & 2 & \min(s_a,2)-1 & \checkmark\\
+1 & \ge3 & \le0 & \checkmark\\
+\ge2 & \ge1 & \le1,\ =1\text{ only when }J=3\text{ i.e. }s_a\ge2 & \text{have }vT\ge2\ \checkmark
+\end{array}
+\]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The descent term off-regime}\label{sec:gapdesc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Fix $p\ge5$ and $n\ge p$; put $L=\lfloor\log_pn\rfloor\ge1$, $M=L+1$, $P=p^M$,
+$a=\lfloor n/p\rfloor$, $r=n-ap$, $P_a=p^L$ (so $p^{L-1}\le a<P_a$ and
+$\lfloor\log_pa\rfloor=L-1$). For a cell write $b=\lfloor k/p\rfloor$, $s=k-bp$,
+$c=\lfloor l/p\rfloor$, $t=l-cp$, and set $\zeta:=e_3-e_4$. Let $(\alpha,\gamma,\kappa,\theta)$
+be the level-$n$ pattern (with $P$) and $(\alpha_a,\gamma_a,\kappa_a,\theta_a)$ the level-$a$
+pattern (with $P_a$); $s_n:=\alpha+\gamma+\kappa$, $s_a:=\alpha_a+\gamma_a+\kappa_a$.
+
+\subsection{The digit dictionary}
+
+\begin{lemma}[Digit dictionary]\label{lem:D1}
+$\PROVED$
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(\arabic*)}]
+\item $\lfloor(n+k)/p\rfloor=a+b+e_1$, $\lfloor(n+l)/p\rfloor=a+c+e_2$,
+  $\lfloor(n+k+l)/p\rfloor=a+b+c+e_3$, $\lfloor(k+l)/p\rfloor=b+c+e_4$,
+  $\lfloor(n-k)/p\rfloor=a-b-\ii{s>r}$, $\lfloor n/p\rfloor=a$.
+\item $0\le\zeta=e_3-e_4\le1$, and $\zeta=1$ iff the addition $n+(k+l)$ carries out of
+  position $0$.
+\item $\alpha=\ii{a+b+e_1\ge P_a}\ge\alpha_a$ and $\gamma=\ii{a+c+e_2\ge P_a}\ge\gamma_a$.
+\item $\varepsilon:=\lfloor(k+l)/P\rfloor=\lfloor(b+c+e_4)/P_a\rfloor
+  =\varepsilon_a+e_4\ii{b+c=P_a-1}$, and $\kappa=\ii{a+b+c+e_3\ge(\varepsilon+1)P_a}$.
+\item $\kappa\ge\kappa_a$ \emph{unless} $e_4=1$ and $b+c=P_a-1$; hence in all cases
+  $s_n\ge s_a-\ii{e_4=1}$.
+\item In-regime, $s_n=s_a$ and $v_pT(n,k,l)=v_pT(a,b,c)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) is the definition of the four indicators ($n=ap+r$, $k=bp+s$, $l=cp+t$, and
+$n-k=(a-b-\ii{s>r})p+((r-s)\bmod p)$).
+(2) $e_4\le e_3$ because $r+s+t\ge s+t$, and $e_3\le e_4+1$ because $r<p$. The digit of $k+l$
+in position $0$ is $s+t-e_4p$, so $n+(k+l)$ carries out of position $0$ iff
+$r+s+t-e_4p\ge p$ iff $e_3\ge e_4+1$.
+(3) $n+k\ge P=p\,P_a$ iff $\lfloor(n+k)/p\rfloor\ge P_a$ iff $a+b+e_1\ge P_a$, and
+$a+b+e_1\ge a+b$.
+(4) $b+c\le2a\le2P_a-2$, so the interval $[1,b+c+1]$ shifted appropriately contains exactly one
+multiple of $P_a$, namely $P_a$ itself; hence
+$\lfloor(b+c+1)/P_a\rfloor-\lfloor(b+c)/P_a\rfloor=\ii{b+c=P_a-1}$. The formula for $\kappa$ is
+$n+k+l\ge(\varepsilon+1)P\iff\lfloor(n+k+l)/p\rfloor\ge(\varepsilon+1)P_a$.
+(5) If $\varepsilon=\varepsilon_a$ then
+$\kappa=\ii{a+b+c+e_3\ge(\varepsilon_a+1)P_a}\ge\ii{a+b+c\ge(\varepsilon_a+1)P_a}=\kappa_a$.
+Otherwise $\varepsilon$ exceeds $\varepsilon_a$, which by (4) forces $e_4=1$ and $b+c=P_a-1$;
+and always $\kappa\ge\kappa_a-1$ since both are $0/1$. Adding (3) gives the display.
+(6) In-regime all four $e_i$ vanish, so (3),(4) give $\alpha=\alpha_a$, $\gamma=\gamma_a$,
+$\varepsilon=\varepsilon_a$, $\kappa=\kappa_a$.
+\end{proof}
+
+Item (5) is sharp: $e_4=1$ with $b+c=P_a-1$ really does drop $\kappa$ from $1$ to $0$. Example:
+$p=5$, $n=101$, $(k,l)=(63,63)$, so $L=2$, $a=20$, $r=1$, $b=c=12$, $s=t=3$, $b+c=24=P_a-1$,
+$(e_3,e_4)=(1,1)$, level-$a$ pattern $(1,1,1,1)$ with $s_a=3$, level-$n$ pattern $(1,1,0,1)$
+with $s_n=2$; there $B=4$ and $v_pT=10\ge1+\max(s_n,s_a)=4$.
+
+\subsection{The descent Kummer lemma}
+
+Define the \emph{bottom-carry count}
+\begin{equation}\label{eq:Bcount}
+B:=e_1+e_2+2\ii{s>r}+2\ii{t>r}+\zeta .
+\end{equation}
+
+\begin{lemma}[Descent Kummer]\label{lem:DK}
+$\PROVED$ Let $p\ge5$, $n\ge p$, $L=\lfloor\log_pn\rfloor\ge1$, and let $(k,l)$ be off-regime.
+Then
+\[
+\begin{gathered}
+\text{(DK1)}\ \ B\ge1,\ \text{and if } e_4=1 \text{ then } B\ge2;\\
+\text{(DK2)}\ \ v_pT(n,k,l)\ge s_n+B;\qquad
+\text{(DK3)}\ \ v_pT(n,k,l)\ge1+\max(s_n,s_a).
+\end{gathered}
+\]
+\end{lemma}
+
+\begin{proof}
+\emph{(DK1).} Three exhaustive cases. If $s>r$ or $t>r$ then $B\ge2$ outright, from the term
+$2\ii{s>r}$ resp.\ $2\ii{t>r}$. If $s\le r$, $t\le r$ and $e_4=1$ then $r+s\ge s+t\ge p$ and
+$r+t\ge s+t\ge p$, so $e_1=e_2=1$ and again $B\ge2$. If $s\le r$, $t\le r$ and $e_4=0$ then
+$\zeta=e_3$, and off-regime forces $e_1+e_2+e_3\ge1$; each summand contributes $1$ to $B$ (for
+$e_3$ through $\zeta=e_3$), so $B\ge1$. Since $e_4=1$ occurs only in the first two cases,
+$e_4=1\Rightarrow B\ge2$.
+
+\emph{(DK2).} Write $T=\binom{n+k}{n}\binom nk^2\binom{n+l}{n}\binom nl^2\binom{n+k+l}{n}$ and
+let $V_1,\dots,V_5$ be the $v_p$ of the five binomials, so $v_pT=V_1+V_2+2V_3+2V_4+V_5$. By
+Kummer each $V_i$ is a count of carries in one addition. In each addition we locate the
+\emph{bottom} carry (out of base-$p$ position $0$) and, where the level-$n$ pattern demands
+one, the \emph{top} carry (out of position $M-1=L$); the two positions are distinct precisely
+because $L\ge1$ --- this is the one and only place the hypothesis is used.
+\begin{itemize}[leftmargin=1.6em]
+\item $V_1$ counts the carries of $n+k$. Position $0$: carries iff $r+s\ge p$, i.e.\ iff
+  $e_1=1$. Position $L$: since $n,k<P$, it carries iff $n+k\ge P$, i.e.\ iff $\alpha=1$
+  (Lemma~\ref{lem:K}). Hence $V_1\ge\alpha+e_1$; likewise $V_2\ge\gamma+e_2$.
+\item $V_3$ counts the carries of $k+(n-k)$. In position $0$ the digits are $s$ and
+  $(r-s)\bmod p$, summing to $r+p\ii{s>r}$, so it carries iff $s>r$. Hence $V_3\ge\ii{s>r}$,
+  likewise $V_4\ge\ii{t>r}$.
+\item $V_5$ counts the carries of $n+(k+l)$. Position $0$: carries iff $\zeta=1$
+  (Lemma~\ref{lem:D1}(2)). Position $L$: writing $k+l=\varepsilon P+\rho$ with $0\le\rho<P$,
+  the low $M$ digits of the addition sum to $n+\rho$, so it carries out of position $M-1=L$ iff
+  $n+\rho\ge P$, i.e.\ iff $\kappa=1$. Hence $V_5\ge\kappa+\zeta$.
+\end{itemize}
+Summing with multiplicities $(1,1,2,2,1)$,
+$v_pT\ge(\alpha+\gamma+\kappa)+(e_1+e_2+2\ii{s>r}+2\ii{t>r}+\zeta)=s_n+B$.
+
+\emph{(DK3).} By (DK2) and (DK1), $v_pT\ge s_n+1$. For the level-$a$ half,
+Lemma~\ref{lem:D1}(5) gives $s_n\ge s_a-\ii{e_4=1}$ and (DK1) gives $B\ge1+\ii{e_4=1}$; hence
+$v_pT\ge s_n+B\ge(s_a-\ii{e_4=1})+(1+\ii{e_4=1})=s_a+1$.
+\end{proof}
+
+The mechanism is one line: \emph{off-regime means a carry in base-$p$ position $0$, the
+depth-pattern indicators live in position $L\ge1$, and Kummer counts both.}
+
+\begin{theorem}[Off-regime descent]\label{thm:gapdesc}
+$\PROVED$ Let $p\ge5$, $n\ge p$, $L=\lfloor\log_pn\rfloor\ge1$, $a=\lfloor n/p\rfloor$, and let
+$(k,l)$ with $0\le k,l\le n$ be off-regime. Then, with
+$\Ecal=p^5\vfive(n,k,l)-\vfive(a,b,c)$,
+\[
+v_p\bigl(T(n,k,l)\,\Ecal(n,k,l)\bigr)\ \ge\ -5(L-1).
+\]
+\end{theorem}
+
+\begin{proof}
+Corollary~\ref{cor:depthgen} at level $n$ ($\lfloor\log_pn\rfloor=L$, pattern sum $s_n$) gives
+$v_p\vfive(n,k,l)\ge-5L-1-\min(s_n,2)$, hence
+$v_p(p^5\vfive(n,k,l))\ge-5(L-1)-1-\min(s_n,2)$. The same corollary at level $a$
+($\lfloor\log_pa\rfloor=L-1$, pattern sum $s_a$) gives
+$v_p\vfive(a,b,c)\ge-5(L-1)-1-\min(s_a,2)$. Therefore
+\[
+v_p(\Ecal)\ \ge\ -5(L-1)-1-\max\bigl(\min(s_n,2),\min(s_a,2)\bigr)\ \ge\ -5(L-1)-1-\max(s_n,s_a),
+\]
+while Lemma~\ref{lem:DK} gives $v_pT(n,k,l)\ge1+\max(s_n,s_a)$. Add.
+\end{proof}
+
+\begin{corollary}[The descent term]\label{cor:termI}
+$\PROVED$ For every $p\ge5$ and every $n$ with $L=\lfloor\log_pn\rfloor\ge1$,
+$v_p((\mathrm I))\ge-5(L-1)$, cell by cell: off-regime by Theorem~\ref{thm:gapdesc}, in-regime
+by Proposition~\ref{prop:inregime}.
+\end{corollary}
+
+\begin{corollary}[The induction step]\label{cor:step}
+$\PROVED$ $\mathcal I(L-1)\Rightarrow\mathcal I(L)$ for every $L\ge1$.
+\end{corollary}
+
+\begin{proof}
+In \eqref{eq:split}, term (II) is bounded by Proposition~\ref{prop:ledgerII} and term (I) by
+Corollary~\ref{cor:termI}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main}}]
+$\mathcal I(0)$ is Theorem~\ref{thm:baseintro}, proved in \S\ref{sec:nucleus}; the step is
+Corollary~\ref{cor:step}. Hence $v_p(W_m)\ge-5\lfloor\log_pm\rfloor$ for all $m\ge1$, and
+therefore $\ord_p(P_m)\ge-5\lfloor\log_pm\rfloor$.
+\end{proof}
+
+\begin{remark}[scope]
+Theorem~\ref{thm:gapdesc} is uniform in the level: nothing in \S\ref{sec:gapdesc} distinguishes
+$a<p$ from $a\ge p$, and the hypothesis $L\ge1$ enters exactly once, in (DK2), to know that
+digit positions $0$ and $L$ are distinct. At $L=0$ there is no descent to make. It uses no
+$p\nmid Q_a$, no $\Lambda$, no supercongruence, no Lemma~\ref{lem:Phi}, no Lemma~\ref{lem:Dpp},
+and --- in itself --- no Wolstenholme: $p\ge5$ is inherited only from
+Corollary~\ref{cor:depthgen}. And it consumes $\wfive$ only through
+Corollary~\ref{cor:depthgen}, so it holds verbatim for any point of the depth-conditioned
+family, in particular for $w_5^{\mathrm I}$.
+\end{remark}
+
+\subsection{Why the expected route fails}\label{sec:trap}
+
+It is worth recording that the natural letter-wise route to Theorem~\ref{thm:gapdesc} does not
+exist, since the failure is instructive. That route reads off from \eqref{eq:letterdescent} the
+mismatch $e_1(a+b+1)^{-m}$ and observes that a mismatch \emph{forces carries}:
+\begin{equation}\label{eq:trap}
+v_p\tbinom{n+k}{n}=v_p\tbinom{a+b}{a}+e_1(1+\lambda_1),\qquad \lambda_1:=v_p(a+b+1)
+\end{equation}
+(correct, and a consequence of Lemma~\ref{lem:carry}(C1) with $z(a+b)=\lambda_1$). \emph{But at weight $5$ the trade
+loses.} Expanding $\Ecal$ letter-wise as $\sum_{S\ne\emptyset}(\prod_{X\in S}D_X)\Psi_S$ with
+$D_X$ the per-letter mismatch, the single term $S=\{A_5(k)\}$ contributes
+$c\,(a+b+1)^{-5}$ of valuation $-5\lambda_1$, where $c$ is the $\wfive$-coefficient of the
+symmetrised $A_5(k)+A_5(l)$ monomial ($=3830046703/48$ for $w_5^{\mathrm{allp}}$, a $p$-unit),
+against a total Kummer gain of only $1+\lambda_1$ in the whole of $T$. Cell-wise:
+\[
+\begin{array}{cccccccc}
+p & n & (k,l) & (a,b) & \lambda_1 & v_pT & \text{letter-wise } vT-5\lambda_1 & \text{target }-5(L-1)\\\hline
+5 & 19 & (6,0) & (3,1) & 1 & 4 & \mathbf{-1} & 0\\
+5 & 19 & (6,19) & (3,1) & 1 & 4 & \mathbf{-1} & 0\\
+5 & 99 & (26,30) & (19,5) & 2 & 8 & -2 & -5\\
+7 & 244 & (100,50) & (34,14) & 2 & 8 & -2 & -5
+\end{array}
+\]
+At $p=5$, $n=19$, $(k,l)=(6,0)$ the letter-wise ledger is short by exactly one power, and no
+refinement of the carry bookkeeping can repair it because \eqref{eq:trap} is an
+\emph{equality}. (The true value there is $v_p(T\Ecal)=1$, comfortably above the target.) What
+actually happens is that the pole is not present in $\Ecal$ at all: the mismatch poles of the
+individual letters cancel among themselves \emph{inside} $\vfive$, because the (DEPTH)
+conditions annihilate its top $u$-coefficients at level $n$. Hence the correct instrument is
+Corollary~\ref{cor:depthgen}, not a letter-wise ledger --- and the only thing left to check is
+that $T$ pays for the \emph{two} depth caps, which is Lemma~\ref{lem:DK}. This is the weight-$5$
+shadow of the fact that the $a<p$ analysis could afford the trade only up to weight $3$:
+Lemma~\ref{lem:Dpp} supplies $v_pT\ge4$, which covers $A_3$ but not $A_5$.
+
+\begin{evidence}\label{ev:DK}
+All exact; $p$-adic valuations computed with tracked precision, the evaluator cross-checked
+against exact \texttt{Fraction} evaluation of the $178$-term $w_5^{\mathrm{allp}}$ on $1290$
+cells with $0$ mismatches of valuation or unit.
+\[
+\small
+\begin{array}{llrr}
+\text{sweep} & \text{range} & \text{cells} & \text{failures}\\\hline
+\text{Lem.~\ref{lem:DK} (DK1)--(DK3), Lem.~\ref{lem:D1}(2),(5)}
+ & 931\text{ levels},\ p\le31,\ L=1,2,3 & 142\,820\,576 & \mathbf 0\\
+\text{the same, at } L=4\ (\text{and }L=3) & 13\text{ levels},\ p\le11,\ n\le3124 & 45\,533\,157 & \mathbf 0\\
+\text{slot-wise inequalities behind (DK2)} & p\le31,\ L=1,2,3 & 11\,096\,075 & \mathbf 0\\
+\text{Thm~\ref{thm:gapdesc}, exact }p\text{-adic }\Ecal & p\le13,\ L=1 & 174\,527 & \mathbf 0\\
+\text{Thm~\ref{thm:gapdesc}, exact }p\text{-adic }\Ecal & p\le13,\ L=2 & 530\,900 & \mathbf 0\\
+\text{Thm~\ref{thm:gapdesc}, exact }p\text{-adic }\Ecal & p\le7,\ L=3 & 934\,656 & \mathbf 0\\
+\text{whole term (I), both regimes, }+\ v_p(\sum T\Ecal) & p\le13,\ L=2,3 & 15\,553+345\,334 & \mathbf 0\\
+\text{Cor.~\ref{cor:depthgen} and Thm~\ref{thm:gapdesc} for } w_5^{\mathrm I} & p\le13,\ L\le2 & 15\,228+43\,213 & \mathbf 0
+\end{array}
+\]
+The first two rows are decisive: together they check the criterion on \emph{every} cell of $944$
+different levels --- $188\,353\,733$ off-regime cells, $0$ failures, no sampling inside a level.
+\emph{Control:} in-regime, $B=0$ and $s_n=s_a$ at every one of the $13\,082\,671$ in-regime
+cells of the sweep (as Lemma~\ref{lem:D1}(6) predicts) and the criterion
+$v_pT\ge\max(J(\pi_n),J(\pi_a))$ \emph{fails} at $134\,964$ of them --- by design. So
+off-regime is not a convenience of the proof: it is exactly the hypothesis that buys the extra
+power of $p$. \emph{Sharpness:} the slack is $0$ at $41\,284$ cells, so neither
+Lemma~\ref{lem:DK} nor Theorem~\ref{thm:gapdesc} can be weakened; and the true quantity
+$v_p(T\Ecal)+5(L-1)$ attains $0$ (e.g.\ $p=13$, $n=153$, $(k,l)=(1,41)$: $v_pT=3$,
+$v_p\Ecal=-3$, target $0$).
+\end{evidence}
+
+\begin{remark}[a formalisation target]
+Lemmas~\ref{lem:D1} and \ref{lem:DK} are pure base-$p$ combinatorics over $\NN$ --- no harmonic
+numbers, no representative, no analysis. They are the most formalisation-ready statements in
+the chain after Theorem~\ref{thm:Aintro} (already $\LEAN$), and formalising them would make the
+Kummer half of the induction step machine-checked, leaving Corollary~\ref{cor:depthgen} as the
+analytic input.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The nucleus: the base case}\label{sec:nucleus}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+By \S\ref{sec:hardneg} the base case is not cell-wise for any $p$-independent representative,
+and by \S\ref{sec:wall} below no summand-side identity can supply it. What does work is a split
+of the range $n<p$ at the midpoint. Throughout this section $\wfive=w_5^{\mathrm I}$ and
+$\vfive=w_5^{\mathrm I}-H^{(5)}_n$.
+
+\subsection{One band}
+
+\begin{theorem}[Partial closure]\label{thm:oneband}
+$\PROVED$ given \textup{(T1-top)} for $w_5^{\mathrm I}$ and the $\CERT$ linear-algebra
+certificate. For every prime $p\ge5$ and every $n<p$, every cell outside the band
+\begin{equation}\label{eq:III}
+\mathrm{III}=\bigl\{(k,l):\ k,l\ge q:=p-n,\ \ p\le k+l<p+q\bigr\}
+\end{equation}
+contributes a $p$-integral summand to $P_n=\sum_{k,l}T(n,k,l)w_5^{\mathrm I}(n,k,l)$.
+Consequently
+\[
+\text{\textup{(BASE)}}\quad\Longleftrightarrow\quad
+v_p\Bigl(\sum_{(k,l)\in\mathrm{III}}T(n,k,l)\,\vfive(n,k,l)\Bigr)\ \ge\ 0 .
+\]
+\end{theorem}
+
+The conditions cutting out $w_5^{\mathrm I}$ are the full cell-wise cap $d_5\le v_pT$ on every
+pole pattern \emph{except} the one giving $\mathrm{III}$, where the cap of \eqref{eq:cap} is
+kept. They are $p$-independent, so their sufficiency is the pole calculus of \S\ref{sec:depth};
+the joint system has $\rank(\mathrm{cond})=111$, $\rank(\mathrm{joint})=342$ and is consistent,
+against $\rank(\mathrm{cond})=123$, $\rank(\mathrm{joint})=342$ and \emph{inconsistent} with no
+exemption. So \emph{the entire residue of the base case is one order of pole on one pattern
+group}, and the harmonic alphabet already supplies everything else.
+
+This is a strict sharpening: the previously known reduction was $2\Sigma_{\mathrm I}+\Sigma_{\mathrm{III}}\equiv0$
+over two regions, and the attained deficit cell $\bigl(\tfrac{p+1}{2},0,\tfrac{p-1}{2}\bigr)$
+has $k=0<q$, so it lies in region $\mathrm I$: \emph{the representative $w_5^{\mathrm I}$
+genuinely moves the deficit off the cell where it was found.}
+
+\begin{evidence}\label{ev:oneband}
+$\VERIFIED$, exact \texttt{Fraction} arithmetic: (V1) $P_n=\sum T\,w_5^{\mathrm I}$ exactly over
+$\QQ$ for $n=1,\dots,20$ (and $n=1,\dots,16$ for the all-primes form), $0$ mismatches;
+(V2) $v_p(T\vfive)\ge0$ at every cell outside $\mathrm{III}$ over
+$p=5,7,11,13,17,19,23$: $10\,092$ cells ($1\,025$ exempt), $0$ violations; and $5\,769$ cells,
+$0$ violations, for the all-primes form; (V3) the reduction itself, $0$ failures.
+\end{evidence}
+
+\subsection{Below the midpoint the band is empty}
+
+\begin{lemma}\label{lem:below}
+$\PROVED$ If $n\le(p-1)/2$ then $\mathrm{III}=\emptyset$, hence $v_p(P_n)\ge0$.
+\end{lemma}
+
+\begin{proof}
+$\mathrm{III}$ requires $k+l\ge p$ with $k,l\le n$, so $2n\ge p$; but $2n\le p-1$.
+\end{proof}
+
+So half of the base case is free, and the deficit can first appear only at $n=(p+1)/2$ ---
+exactly where \S\ref{sec:hardneg} located the attained deficit cell. The two localisations
+agree for a structural reason: the midpoint singularity of $\LBZ$ ($2n+5\equiv0$) and the
+midpoint appearance of $\mathrm{III}$ ($2n\ge p$) are the same phenomenon seen from the
+recurrence side and from the summand side.
+
+\subsection{At the midpoint the band is three cells}
+
+Let $n=(p+1)/2$, $q=p-n=(p-1)/2$.
+
+\begin{lemma}\label{lem:threecells}
+$\PROVED$ $\mathrm{III}=\{(q,q+1),(q+1,q),(q+1,q+1)\}=\{(n-1,n),(n,n-1),(n,n)\}$.
+\end{lemma}
+
+\begin{proof}
+$k,l\ge q$ and $k,l\le n=q+1$ force $k,l\in\{q,q+1\}$. Then $k+l\in\{p-1,p,p+1\}$; the
+condition $k+l\ge p$ excludes $(q,q)$, and $k+l<p+q$ holds for the other three since
+$p+1<p+(p-1)/2$ for $p\ge5$.
+\end{proof}
+
+\begin{lemma}\label{lem:Tcorner}
+$\PROVED$ At $n=(p+1)/2$, $p\ge5$: $v_p(T)=2$ at all three cells and
+\[
+T(n,n-1,n)/p^2\equiv T(n,n,n-1)/p^2\equiv2,\qquad T(n,n,n)/p^2\equiv24 \pmod p .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $\epsilon:=(-1)^{(p+1)/2}$, $q=(p-1)/2$; Wilson's theorem gives $(q!)^2\equiv\epsilon$.
+
+\emph{Cell $B=(n,n)$.} $T=\binom{p+1}{n}^2\binom{3n}{n}$. Kummer: $n+n=p+1$ has exactly one
+carry in base $p$, so $v_p\binom{p+1}{n}=1$; $n+(p+1)$ has none, so $v_p\binom{3n}{n}=0$; thus
+$v_p(T)=2$. As $p+1-n=n$, $\binom{p+1}{n}/p=(p+1)(p-1)!/(n!)^2\equiv-1/(n!)^2$; with
+$n!=(q+1)q!$ and $q+1\equiv1/2$, $(n!)^2\equiv\epsilon/4$, so $\binom{p+1}{n}/p\equiv-4\epsilon$
+and $(\binom{p+1}{n}/p)^2\equiv16$. Lucas on $3n=p+(p+3)/2$, $n=(p+1)/2$ gives
+$\binom{3n}{n}\equiv\binom{(p+3)/2}{(p+1)/2}=(p+3)/2\equiv3/2$. Hence
+$T/p^2\equiv16\cdot(3/2)=24$.
+
+\emph{Cell $A=(n-1,n)=(q,q+1)$.} $\binom{n+k}{n}=\binom pn$ with $v_p=1$ and
+$\binom pn/p=(p-1)!/(n!q!)\equiv-1/((q+1)(q!)^2)\equiv-2\epsilon$; $\binom nk=\binom{q+1}{q}=q+1\equiv1/2$;
+$\binom{n+l}{n}=\binom{p+1}{n}$ with $\binom{p+1}{n}/p\equiv-4\epsilon$; $\binom nl=1$;
+$\binom{n+k+l}{n}=\binom{(3p+1)/2}{(p+1)/2}\equiv\binom10\binom{(p+1)/2}{(p+1)/2}=1$ by Lucas.
+So $v_p(T)=2$ and $T/p^2\equiv(-2\epsilon)(1/2)^2(-4\epsilon)=2\epsilon^2=2$.
+\end{proof}
+
+At $n=(p+1)/2$ every letter argument is $<2p$, so each letter contains at most one multiple of
+$p$ and its $u$-expansion is exact and elementary. With $h_r:=H^{(r)}_q\bmod p$,
+$s_r:=\sum_{j=1}^{p-1}j^{-r}\bmod p$, $(q+1)^{-1}\equiv2$, $(q+2)^{-1}\equiv2/3$:
+\[
+\begin{array}{lll}
+\text{letter} & \text{cell } A=(q,q+1) & \text{cell } B=(q+1,q+1)\\\hline
+A_r(k) & u^r+s_r-h_r & u^r+s_r+1-h_r-2^r\\
+B_r(k) & 1-h_r & -h_r-2^r\\
+A_r(l) & u^r+s_r+1-h_r-2^r & u^r+s_r+1-h_r-2^r\\
+B_r(l) & -h_r-2^r & -h_r-2^r\\
+C_r\ (\text{no pole}) & h_r+2^r & h_r+2^r+(2/3)^r-1\\
+N_r & h_r+2^r & h_r+2^r
+\end{array}
+\]
+
+\begin{lemma}\label{lem:K3}
+$\PROVED$ (finite exact symbolic computation over $\QQ[h_1,\dots,h_5,s_1,\dots,s_5]$). For every
+prime $p\ge5$, substituting the table above into the $207$ monomials of $w_5^{\mathrm I}$ and
+extracting the $u^j$ coefficients gives
+\[
+K_4=K_5=0\ \text{ at both cells},\qquad K_3(A)=3-\tfrac{s_2}{2},\qquad K_3(B)=-\tfrac12-\tfrac{s_2}{2}.
+\]
+Both are \emph{free of $h_1,\dots,h_5$ and of $s_1,s_3,s_4,s_5$}: the entire harmonic content of
+the $u^3$ coefficient cancels.
+\end{lemma}
+
+Only letters of weight $\le3$ can reach $K_3$ --- the pole part must have total weight $3$ and
+the remainder weight $2$ --- which is why $s_4,s_5$ cannot appear and the lemma is valid down to
+$p=5$. That $K_4=K_5=0$ is the Lemma-$F$ cap $d_5\le3$ being met.
+
+\begin{theorem}[The nucleus, dissolved]\label{thm:nucleus}
+$\PROVED$ For every prime $p\ge5$, at $n=(p+1)/2$,
+\[
+\sum_{(k,l)\in\mathrm{III}}\frac{T}{p^2}\,K_3
+\ \equiv\ 2\Bigl(3-\frac{s_2}{2}\Bigr)+2\Bigl(3-\frac{s_2}{2}\Bigr)+24\Bigl(-\frac12-\frac{s_2}{2}\Bigr)
+\ =\ -14\,s_2\ \equiv\ 0\pmod p,
+\]
+because $s_2=\sum_{j=1}^{p-1}j^{-2}\equiv\sum_{j=1}^{p-1}j^{2}=\frac{(p-1)p(2p-1)}{6}\equiv0$
+for $p\ge5$. Since $K_0,K_1,K_2\in\Zp$ and $T/p^2\in\ZZ$, this gives
+$v_p(\sum_{\mathrm{III}}T\vfive)\ge0$, hence by Theorem~\ref{thm:oneband}
+$v_p(P_{(p+1)/2})\ge0$.
+\end{theorem}
+
+\emph{The whole nucleus consumes exactly one classical fact}, $\sum_{j<p}j^{-2}\equiv0$, i.e.\
+the same $p\ge5$ hypothesis Wolstenholme imposes elsewhere. No Fermat quotient, no Bernoulli
+number.
+
+\begin{remark}[the statement is not vacuous]
+The same extraction on $w_5^{\mathrm{allp}}$ gives an $h_1$-dependent $K_3$ with non-vanishing
+corner combination. The content of Theorem~\ref{thm:nucleus} lives precisely in the extra depth
+conditions defining $w_5^{\mathrm I}$ --- exactly as the wall theorem of \S\ref{sec:wall}
+predicts: the value cannot be moved by summand-side identities, only by pinning the
+representative. \emph{The wall is respected, and the door it points at is the representative.}
+\end{remark}
+
+\begin{evidence}\label{ev:corner}
+$\VERIFIED$ $0$ failures: $v_p(T)=2$ and $T/p^2\bmod p=2,2,24$ at every prime
+$p\in\{5,\dots,31\}$; and, by exact \texttt{Fraction} arithmetic through an independent
+evaluator, at every prime $5\le p\le139$ the three corner residues $p\,T\vfive\bmod p$ are
+exactly $(6,6,-12)\bmod p$ and sum to $0$ --- $32/32$ primes clean. Cell-wise integrality below
+the midpoint: $1\,588$ cells over all levels $n<(p+1)/2$, $p\le23$, $0$ violations, plus the top
+below-midpoint level $n=(p-1)/2$ at $p=29,31,37$ ($842$ cells, $|\mathrm{III}|=0$ as
+Lemma~\ref{lem:below} predicts).
+\end{evidence}
+
+\subsection{Above the midpoint: the exceptional steps are apparent}\label{sec:desing}
+
+For $n>(p+1)/2$ we use forward induction along $\LBZ$. To produce level $m\le p-1$ we use the
+step $\nu=m-3\ge(p-3)/2$; on that range $2\nu+5\in[p+2,2p-3]$ is odd and $\ne p$, and
+$\nu+3\le p-1$. \emph{Hence the only possible exceptional steps above the midpoint are roots of
+$a_0$ modulo $p$.}
+
+\begin{lemma}[Apparency]\label{lem:APP}
+$\PROVED$ by exact polynomial division. Put $U(\nu):=(c_0,c_1,c_2)(\nu)$ and
+$V(\nu):=(c_1,c_2,c_3)(\nu-1)$, both acting on $(Y_\nu,Y_{\nu+1},Y_{\nu+2})$. All three
+$2\times2$ minors of $[U(\nu);V(\nu)]$ are divisible by $a_0(\nu)$ in $\QQ[\nu]$ (each minor has
+degree $18$; the remainders on division by $a_0$ are exactly $0$). Hence if $p\mid a_0(\nu)$,
+$\nu\ge1$, $V(\nu)\not\equiv0\pmod p$, and $Y$ solves $\LBZ$ with
+$Y_{\nu-1},\dots,Y_{\nu+2}\in\Zp$, then $U(\nu)\cdot(Y_\nu,Y_{\nu+1},Y_{\nu+2})\equiv0
+\pmod{p^{v_p(a_0(\nu))}}$, so $Y_{\nu+3}\in\Zp$.
+\end{lemma}
+
+\begin{proof}
+Because $c_0(\nu-1)=\nu^5(\nu+1)a_0(\nu)$, the row at $\nu-1$ degenerates in the same place as
+the row at $\nu$; it gives $V(\nu)\cdot(Y_\nu,Y_{\nu+1},Y_{\nu+2})=-\nu^5(\nu+1)a_0(\nu)Y_{\nu-1}
+\equiv0\pmod{p^v}$ with $v:=v_p(a_0(\nu))$. Each minor is $a_0(\nu)\cdot(\text{integer})$, so
+$\equiv0\pmod{p^v}$. Pick $i$ with $V_i$ a $p$-unit and set $\lambda:=U_i/V_i\in\Zp$; then
+$U_j-\lambda V_j=(U_jV_i-U_iV_j)/V_i\equiv0\pmod{p^v}$, so
+$U\cdot Y\equiv\lambda(V\cdot Y)\equiv0\pmod{p^v}$. On this range $v_p(c_3(\nu))=v$.
+\end{proof}
+
+Lemma~\ref{lem:APP} is the shadow of an explicit desingularisation. $a_0$ is irreducible over
+$\QQ$, so $K:=\QQ[\nu]/(a_0)$ is a field and $U=\lambda V$ in $K$ with
+$\lambda=c_0(\nu)/c_1(\nu-1)$ of degree $\le2$:
+\[
+\lambda(\nu)=\frac{392627556035671426586\,\nu^2+1282015597875460006266\,\nu
++1052781309790247665282}{D},
+\]
+\[
+D=3641620092914355321=3\cdot7\cdot11\cdot29\cdot p_0,\qquad p_0:=543606522303979 .
+\]
+Every coefficient of $\mathrm{row}(\nu)-\lambda\,\mathrm{row}(\nu-1)$ --- an order-$4$ relation
+on $Y_{\nu-1},\dots,Y_{\nu+3}$ --- is divisible by $a_0(\nu)$ in $\QQ[\nu]$; dividing through
+and clearing $D$ leaves:
+
+\begin{proposition}[Desingularisation]\label{prop:Ltilde}
+$\PROVED$, $\VERIFIED$ There is an order-$4$ left multiple
+$\tilde L:\ d_0Y_{\nu-1}+d_1Y_\nu+d_2Y_{\nu+1}+d_3Y_{\nu+2}+d_4Y_{\nu+3}=0$ of $\LBZ$ with
+$d_i\in\ZZ[\nu]$, $\deg d_0,\dots,d_3=8$ and
+\[
+d_4=2D(\nu+3)^5(2\nu+5)=7283240185828710642\,(\nu+3)^5(2\nu+5):
+\]
+$a_0$ is gone from the leading coefficient. ($\tilde L$ annihilates $Q$, $P$ and $\hat P$
+exactly over $\QQ$ for $\nu=1,\dots,40$, $0$ residuals. Note $d_1$ is not identically zero: the
+$Y_\nu$ coefficient vanishes only modulo $a_0$, and
+$d_1=(c_0(\nu)-\lambda c_1(\nu-1))/a_0(\nu)$ is a genuine degree-$8$ polynomial.)
+\end{proposition}
+
+Consequently, \emph{on the desingularised ladder the only singular step in $0\le n\le p-4$ is
+the midpoint $n_0=(p-5)/2$} (the alternative $\nu+3\equiv0$ gives $\nu=p-3$, out of range), for
+every $p\notin\{2,3,7,11,29,p_0\}$. The recurrence half and the
+region half of the proof dovetail with no residue: $\tilde L$'s single singular step is
+precisely the single level that Theorem~\ref{thm:nucleus} supplies.
+
+%% FIXED [M-5]: (1) ``exactly three occurrences'' was false without a range hypothesis --- the
+%% FIXED fourth pair is $(p,\nu)=(29,27)$, out of range at $p=29$ since $[(p-3)/2,p-4]=[13,25]$;
+%% FIXED the lemma now carries the hypothesis $1\le\nu\le p-4$ and lists (29,27) explicitly.
+%% FIXED (2) the uniqueness claim for $p_0$ was false: $\Res_\nu(a_0(\nu),a_0(\nu-1))
+%% FIXED = -2^2\cdot11\cdot37^2\cdot557^3\cdot p_0$ and $p=11$ has the consecutive pair (5,6).
+%% FIXED Both recomputed exactly (sympy resultants; root-by-root over 2,3,7,11,29,37,557,p_0).
+\begin{lemma}[The fully degenerate steps]\label{lem:degen}
+$\PROVED$ (explicit finite set). Let $p\ge5$ and let $\nu$ be a root of $a_0$ modulo $p$ with
+$1\le\nu\le p-4$. Then $V(\nu)\equiv0$ forces $p$ to divide all
+three resultants $\Res_\nu(a_0,c_i(\nu-1))$, whose gcd is
+$2^6\cdot3^3\cdot7^3\cdot11\cdot29^3\cdot37^2\cdot557^3\cdot p_0$, and a root-by-root check over
+every prime in that gcd gives exactly three occurrences:
+\[
+(p,\nu)=(7,2),\qquad (11,6),\qquad (p_0,\,416574044722681).
+\]
+In all three cases
+$\mathrm{row}(\nu-1)/p$ is a valid $\ZZ$-functional with a unit $Y_{\nu+2}$ coefficient;
+combined with the regular row at $\nu-2$ it gives two independent functionals, and the ranks
+over $\FF_p$ are: $(11,6)$ and $(p_0,\cdot)$ give $\rank=2$ both with and without $U(\nu)$
+\emph{(apparent)}; $(7,2)$ gives $2$ and $3$, so $p=7$ is a finite check (levels $5,6$;
+$\VERIFIED$).
+\end{lemma}
+
+\begin{remark}
+The range hypothesis $\nu\le p-4$ is not cosmetic. Dropping it admits exactly one further pair,
+$(p,\nu)=(29,27)$: there $a_0(27)\equiv0$ and $c_1(26)\equiv c_2(26)\equiv c_3(26)\equiv0
+\pmod{29}$, the last because $\nu+2=29$. It is harmless for us --- the forward induction of
+\S\ref{sec:recstar} only ever uses steps $\nu\le p-4$, and at $p=29$ the above-midpoint range is
+$[(p-3)/2,\,p-4]=[13,25]$ --- but it is a genuine fourth solution of the unrestricted system.
+(At $p=2,3$ the pair $(p,1)$ is likewise fully degenerate; both are excluded by $p\ge5$.)
+
+Two of the three listed cases arise from consecutive roots of $a_0$, and there are exactly two
+such primes, not one: $\Res_\nu\bigl(a_0(\nu),a_0(\nu-1)\bigr)=-2^2\cdot11\cdot37^2\cdot557^3
+\cdot p_0$, and of its prime divisors only $p=11$ (roots $5,6,9$; the pair $(5,6)$) and $p=p_0$
+(roots $416574044722680$, $416574044722681$, $423023739121937$) actually carry a consecutive
+pair --- $a_0$ has no root at all modulo $37$, a single root $49$ modulo $557$, and a single
+root $1$ modulo $2$. The case $(11,6)$ is thus produced by the same mechanism as $(p_0,\cdot)$,
+while $(7,2)$ and the out-of-range $(29,27)$ are not.
+\end{remark}
+
+\begin{evidence}\label{ev:above}
+$\VERIFIED$ Sweep over all $428$ primes $5\le p<3000$: $296\,267$ steps above the midpoint,
+$223$ exceptional, \emph{every one} an $a_0$-root, $0$ exceptions; $2$ fully degenerate, both
+predicted by the resultant computation.
+\end{evidence}
+
+\subsection{Assembly, and a corollary that was expected to be an input}\label{sec:recstar}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:baseintro}}]
+For $n\le(p-1)/2$, Lemma~\ref{lem:below}. For $n=(p+1)/2$, Theorem~\ref{thm:nucleus}. For
+$n>(p+1)/2$, forward induction from the four consecutive integral levels below: each step
+$\nu\ge(p-3)/2$ has $p\nmid(\nu+3)(2\nu+5)$, so is exceptional only if $p\mid a_0(\nu)$, and
+then it is apparent by Lemma~\ref{lem:APP} (Lemma~\ref{lem:degen} for the three fully
+degenerate cases; $p=7$ by the finite check).
+\end{proof}
+
+\begin{proposition}[The universal midpoint row]\label{prop:univrow}
+$\PROVED$ $n_0:=(p-5)/2$ is the unique $n$ with $2n+5=p$, so $n_0\equiv-5/2\pmod p$, and since
+$\deg c_i=9$,
+\[
+2^9c_i(n_0)\equiv2^9c_i(-5/2)=28\,R_i\pmod p,\qquad (R_0,R_1,R_2,R_3)=(11907,-334374,-19292,0);
+\]
+equivalently, as an identity in $\ZZ[m]$, $128\,c_i(m)=7R_i+(2m+5)H_i(m)$. The content
+$28=2^2\cdot7$ is a $p$-unit for every $p\ge5$ except $p=7$, where the whole row vanishes mod
+$p$ and the recurrence obligation at $n_0$ is vacuous. The row $(R_0,R_1,R_2)$ is primitive
+($11907=3^5\cdot7^2$, $334374=2\cdot3\cdot23\cdot2423$, $19292=2^2\cdot7\cdot13\cdot53$).
+\end{proposition}
+
+\begin{corollary}[$(\mathrm{REC}\text{-}\star)$]\label{cor:recstar}
+$\PROVED$ For every prime $p\ge5$, with $n_0=(p-5)/2$,
+\[
+11907\,P_{n_0}-334374\,P_{n_0+1}-19292\,P_{n_0+2}\ \equiv\ 0\pmod p .
+\]
+\end{corollary}
+
+\begin{proof}
+$c_0(n_0)P_{n_0}+c_1(n_0)P_{n_0+1}+c_2(n_0)P_{n_0+2}=-c_3(n_0)P_{(p+1)/2}$ has
+$v_p\ge v_p(c_3(n_0))\ge1$ by Theorem~\ref{thm:baseintro}; multiply by $2^9/28$ and use
+Proposition~\ref{prop:univrow}. At $p=7$ use the finite check.
+\end{proof}
+
+\emph{The order of implication is inverted relative to expectation:}
+$(\mathrm{REC}\text{-}\star)$ was the anticipated \emph{input} to the base case; it is its
+\emph{output}. And its universal normalised row is \emph{identical} to the row governing the
+$a=1$ midpoint band one digit up in the earlier campaign of this program \cite{ProgA1MID} ---
+the base level and its $a=1$ lift are governed by the same universal row.
+
+\begin{evidence}\label{ev:recstar}
+$\VERIFIED$ $0$ failures, exact \texttt{Fraction} ladders, all $44$ primes $5\le p\le199$:
+$v_p\bigl(11907P_{n_0}-334374P_{n_0+1}-19292P_{n_0+2}\bigr)=1$ \emph{exactly} at every one, so
+the congruence is tight everywhere. The corresponding quantity for $Q$ is $1$ (except $p=29,131$
+where it is $2$) --- automatic, since $Q\in\ZZ$ solves $\LBZ$ --- and for $\hat P$ it is $0$ at
+$42$ of the $44$ primes, which is the control showing the congruence is real content.
+A previously reported anomaly at $p=13$ was an artefact of the \emph{un-normalised} row:
+writing $c_i(n_0)=uR_i+pe_i$ with $u=28\cdot2^{-9}$, the raw combination is
+$u\varphi_R(P)+p\sum e_iP_{n_0+i}$, whose valuation is $\ge1$ always and jumps to $2$ exactly
+when a second-order term vanishes mod $p$, as it happens to at $p=13$. In the normalised row
+$p=13$ is tight like every other prime.
+\end{evidence}
+
+\begin{remark}[two harmless primes]
+$v_p(c_3(n_0))=1+v_p(a_0(n_0))$ (as $n_0+3=(p+1)/2\in[1,p-1]$ and $2$ are units), and
+$8a_0(-5/2)=-241144=-2^3\cdot43\cdot701$, so $p\mid a_0(n_0)$ exactly for $p\in\{43,701\}$,
+both with multiplicity $1$. There the recurrence route would need $v_p\ge2$; the proof above
+never uses the midpoint recurrence step, so $\{43,701\}$ cost nothing.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two structural theorems}\label{sec:wall}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section is not needed for Theorem~\ref{thm:main}; it explains why the proof has the shape
+it has, and we believe the statements are of independent interest.
+
+\subsection{The base case is one identity}
+
+Let $n<p$. At $L=0$ one has $v_pT=\alpha+\gamma+\kappa$ \emph{exactly} (by Kummer:
+$v_p\binom{n+k}{n}=\alpha$, $v_p\binom nl=v_p\binom nk=0$, $v_p\binom{n+k+l}{n}=\kappa$, all
+arguments being $<2p$ and $n,k,l<p$). Write $\vfive=\sum_jK_ju^j$ as in \eqref{eq:Kexp} and
+$S_j:=\sum_{k,l}T(n,k,l)K_j(n,k,l)$.
+
+\begin{proposition}\label{prop:V2vac}
+$\PROVED$ For $\wfive=w_5^{\mathrm{allp}}$, $K_2=0$ identically on every pattern with $s\le1$ ---
+strictly stronger than the cap $J=1+\min(s,2)$, which permits $K_2\ne0$ at $s=1$. Hence at
+$L=0$ every cell with $K_2\ne0$ has $v_pT=s\ge2$, so $(T/p)K_2\equiv0\pmod p$ cell by cell.
+\end{proposition}
+
+\begin{proposition}\label{prop:V3}
+$\PROVED$ For $p\ge5$ and $n<p$, the base case is \emph{equivalent} to the single congruence
+\[
+(\mathrm V3)_0\qquad \sum_{k,l=0}^{n}\frac{T(n,k,l)}{p^2}\,K_3(n,k,l)\ \equiv\ 0\pmod p,
+\]
+a \emph{full} double sum: $K_3=0$ off the five patterns with $s\ge2$, and on those $v_pT=s\ge2$,
+so every summand is $p$-integral.
+\end{proposition}
+
+\begin{proof}
+$v_p(W_n)\ge0\iff v_p(P_n)\ge0$ ($n<p$ makes $H^{(5)}_nQ_n$ integral). $W_n=\sum_jp^{-j}S_j$
+with $S_0\in\Zp$; $K_1\ne0\Rightarrow s\ge1\Rightarrow v_pT\ge1$, so $v_p(S_1)\ge1$;
+$K_2\ne0\Rightarrow s\ge2$ by Proposition~\ref{prop:V2vac}, so $v_p(S_2)\ge2$; and
+$K_4=K_5=0$. Hence $v_p(W_n)\ge0\iff v_p(S_3)\ge3$.
+\end{proof}
+
+With $q=p-n$, $\tilde n=2n-p$, the $s=2$ locus is exactly
+\[
+\begin{gathered}
+\mathrm I:\ (\alpha,\gamma,\kappa)=(0,1,1),\ k<q,\ l\ge q;\qquad
+\mathrm{II}:\ (1,0,1)\ \text{(the mirror)};\\
+\mathrm{III}:\ (1,1,0),\ k,l\ge q,\ p\le k+l<p+q,
+\end{gathered}
+\]
+and $\Sigma_{\mathrm I}=\Sigma_{\mathrm{II}}$, so $(\mathrm V3)_0\iff
+2\Sigma_{\mathrm I}+\Sigma_{\mathrm{III}}\equiv0$. Theorem~\ref{thm:oneband} improves this to
+one region.
+
+\begin{evidence}\label{ev:V3}
+$\VERIFIED$ $0$ failures. The residue density $R(k,l):=p\,T\vfive\bmod p$ is supported
+\emph{exactly} on $\mathrm I\cup\mathrm{II}\cup\mathrm{III}$, is $k\leftrightarrow l$ symmetric,
+and $\sum_{k,l}R=0$ for all $66$ levels $n<p$, $p\in\{5,7,11,13,17,19\}$; row sums are
+\emph{not} $0$. Graded checks at $L=0$ (reconstruction of $\vfive$ from the $K_j$, integrality
+of each $K_j$, the caps, and $v_p(S_j)\ge j$): $1\,516$ cells, $p\le13$, $0$ failures, with
+$v_p(S_3)=3$ attained at most $n$. At $p=199$ the identity holds at all $99$ levels
+$n=100,\dots,198$ and at all $15$ levels tested at $p=31$ --- by far the strongest single
+verification, in exact $\FF_p$ arithmetic. Graded $L=1$ checks at $p=5$, $n\le14$: $0$
+failures.
+\end{evidence}
+
+\begin{remark}[it is irreducibly a congruence]
+$(\mathrm V3)_0$ can be completely de-$p$-adicised. Using Wilson's theorem, the reflections
+$H_{p-1-j}\equiv H_j$ and $H^{(2)}_{p-1-j}\equiv-H^{(2)}_j$ ($p\ge5$), and the carry binomial
+$\binom{p+m}{n}/p\equiv(-1)^{n-m+1}/(n\binom{n-1}{m})$ for $0\le m<n<p$, every ingredient
+becomes an explicit rational function of $(n,q)$ alone, and $(\mathrm V3)_0$ becomes
+$F(n,p-n)\equiv0\pmod p$ for an explicit finite double sum $F$ in which $p$ does not occur.
+$\VERIFIED$ for all $24$ pairs $(n,q)$ with $2\le n\le12$, $q=p-n$, $p=n+q$ prime $\ge5$.
+\emph{But $F(n,q)\ne0$ as a rational number} for every tested pair: the reduction consumes
+Wilson and the reflections, so $(\mathrm V3)_0$ is genuinely a mod-$p$ congruence, not the
+specialisation of a rational identity. In particular creative telescoping has nothing to
+telescope here.
+\end{remark}
+
+\subsection{The wall}
+
+\begin{theorem}[The $\theta$ wall]\label{thm:wall}
+$\PROVED$ Let $\Dcal\subset\QQ^{448}$ be the space of weight-$5$ forms satisfying the
+\textup{(DEPTH)} conditions ($\dim\Dcal=406$), and for $w\in\Dcal$ put
+$V_w(n):=\sum_{k,l}T(n,k,l)w(n,k,l)$. \textup{(DEPTH)} gives $v_p(V_w(n))\ge-1$ for $n<p$, and
+the entire content of the cancellation is the linear functional
+\[
+\theta_{p,n}:\Dcal\to\FF_p,\qquad \theta_{p,n}(w):=\bigl(p\,V_w(n)\bigr)\bmod p .
+\]
+Then $\theta_{p,n}(w)$ depends on $w$ only through the single rational number $V_w(n)$.
+Consequently:
+\begin{enumerate}[leftmargin=1.9em,label=\textup{(\arabic*)}]
+\item every exact identity $\sum_{k,l}T\cdot M=0$ lies in $\ker V$ and therefore satisfies
+  $\theta_{p,n}(M)=0$ trivially; adding any such $M$ to $\wfive$ changes neither $V$ nor
+  $\theta$;
+\item $(\mathrm V3)_0$ for $\wfive$ is \emph{literally} the assertion $v_p(P_n)\ge0$ and
+  carries no information beyond it.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Immediate from the definition: $V$ is linear and $\sum T\,M=0$ means $M\in\ker V$.
+\end{proof}
+
+\begin{proposition}\label{prop:thetanonzero}
+$\VERIFIED$ $\theta\not\equiv0$ on $\Dcal$: three independent random $w\in\Dcal$ (each with
+$\approx420$ nonzero coefficients, drawn by rref-completion of the $\QQ$ condition system) give
+$\min_{n<p}v_p(\sum_{k,l}T(n,k,l)w(n,k,l))=-1$ at $p=5,7,11,13$ --- all $12$ (trial, prime)
+pairs --- with cell-wise minimum also $-1$.
+\end{proposition}
+
+\begin{corollary}[the wall]\label{cor:wall}
+The \textup{(DEPTH)} calculus \emph{plus arbitrarily much summand-side identity work} cannot
+prove the base case. The property ``$v_p(V_w(n))\ge0$ for all $p\ge5$, $n<p$'' is a
+$p$-\emph{dependent} linear condition on $w$ for each $(p,n)$, is false at a generic point of
+$\Dcal$, and can only be enforced by conditions that pin the value sequence $V_w$ --- i.e.\ by
+the fitting system itself.
+\end{corollary}
+
+This is the structural explanation of Theorem~\ref{thm:DEPTHplus}: those systems were trying to
+buy, with $p$-independent linear conditions, something that is not $p$-independent-linear. It
+also explains why the proof of \S\ref{sec:nucleus} had to import a property of the
+\emph{number} $P_n$ --- which it does twice, through the decomposition identity and through
+$\LBZ$.
+
+\begin{remark}[a reflection route, refuted]
+One might hope to pair the deficit cells by an involution. This fails concretely. The attained
+cell $\bigl(\tfrac{p+1}{2},0,\tfrac{p-1}{2}\bigr)$ is the \emph{corner} of region $\mathrm I$,
+not a reflection centre. In coordinates $(u,v)=(\lambda,k+\lambda)$ on $\mathrm I$ and
+$(u,v)=(\tilde n-\lambda',\kappa')$ on $\mathrm{III}$, both regions are width-$q$ bands
+$0\le v-u\le q-1$ and $\mathrm{III}=\mathrm I\cap\{v\le\tilde n\}$; so the index sets \emph{are}
+related by $\lambda'\mapsto\tilde n-\lambda'$, but the summands are not --- the two $T/p^2$
+weights carry $\binom n{v-u}^2\binom n{\tilde n-u}^2/\binom{n-1}{u}$ and
+$-\binom n{\tilde n-v}^2\binom nu^2/\binom{n-1}{\tilde n-u}$, which no substitution matches.
+Numerically, $|\mathrm I\cup\mathrm{II}|\ne|\mathrm{III}|$ ($12$ vs $3$ at $p=7$, $n=4$; $16$
+vs $5$ at $p=7$, $n=5$) and the residue multisets differ ($\{1,2,3,5,1,6\}\times2$ vs
+$\{1,1,4\}$ at $p=7$, $n=4$). And by Theorem~\ref{thm:wall} even a successful pairing would
+have been a kernel identity and could not have proved the base case.
+\end{remark}
+
+\subsection{The weight-2 residue identities}
+
+Lemma~\ref{lem:Phi} is the weight-$1$ member of a family. Here is the weight-$2$ level; it is
+new, and by Theorem~\ref{thm:wall} it cannot prove the base case --- but it is exactly the kind
+of kernel element by which the $\wfive$ family is translated, and it is reusable.
+
+\begin{lemma}[$\Phi_2$]\label{lem:Phi2}
+$\PROVED$ Fix $n\ge0$ and $0\le l\le n$; write $\Phi:=A_1(k)+2B_1(k)+C_1$ in the level-$n$
+letters. Then
+\[
+\begin{aligned}
+\text{(P1)}&& \sum_{k=0}^{n}T(n,k,l)\bigl[\Phi\,A_1(k)-A_2(k)\bigr]&=0,\\
+\text{(P2)}&& \sum_{k=0}^{n}T(n,k,l)\bigl[\Phi\,C_1-C_2\bigr]&=0,\\
+\text{(P3)}&& \sum_{k=0}^{n}T(n,k,l)\bigl[\Phi\,B_1(k)-\tfrac12(\Phi^2-A_2(k)-C_2)\bigr]&=0 .
+\end{aligned}
+\]
+$\text{(P1)}+2\text{(P3)}+\text{(P2)}$ is the trivial $\Phi^2-\Phi^2=0$, so exactly two of the
+three are independent; with $\text{(P0)}:\sum_kT\Phi=0$ they span a $3$-dimensional space of
+exact $k$-row identities. The $k\leftrightarrow l$ mirrors hold by symmetry of $T$.
+\end{lemma}
+
+\begin{proof}
+Let $G(x):=\prod_{i=1}^n(x+i)\prod_{i=1}^n(x+l+i)\big/\prod_{j=0}^n(x-j)^2$, so
+$\deg\mathrm{den}-\deg\mathrm{num}=2$ and $\Res_{x=k}G=(T(n,k,l)/K_l)\Phi(k,l)$ with $K_l$
+independent of $k$ (Lemma~\ref{lem:Phi}).
+
+\emph{(P1).} For $1\le i\le n$ put $G_i:=G(x)/(x+i)$. Since $(x+i)$ divides the numerator of
+$G$, $G_i$ has no pole at $x=-i$; its only poles are the double poles at $x=0,\dots,n$, and
+$\deg\mathrm{den}-\deg\mathrm{num}=3\ge2$, so all residues sum to $0$. Writing $(x-k)^2G=N/E$
+with $(N/E)(k)=T(n,k,l)/K_l$ and $(N/E)'(k)=(T/K_l)\Phi(k,l)$, we get
+$\Res_{x=k}G_i=(T/K_l)[\Phi/(k+i)-(k+i)^{-2}]$. Sum over $k$, then over $i=1,\dots,n$, using
+$\sum_i(k+i)^{-1}=A_1(k)$ and $\sum_i(k+i)^{-2}=A_2(k)$.
+
+\emph{(P2).} Identical with $G(x)/(x+l+i)$ (again a numerator factor), using
+$\sum_i(k+l+i)^{-1}=C_1$ and $\sum_i(k+l+i)^{-2}=C_2$.
+
+\emph{(P3).} Take $G_j:=G(x)/(x-j)$, $0\le j\le n$; now $x=j$ is a \emph{triple} pole and
+$\deg\mathrm{den}-\deg\mathrm{num}=3$. For $k\ne j$,
+$\Res_{x=k}G_j=(T_k/K_l)[\Phi(k)/(k-j)-(k-j)^{-2}]$. At $x=j$, with $\Lambda:=\log(N/E)$,
+$\Res=\tfrac12(N/E)''(j)=\tfrac12(T_j/K_l)[\Phi(j)^2+\Lambda''(j)]$ and
+$\Lambda''(j)=-A_2(j)-C_2+2(H^{(2)}_j+H^{(2)}_{n-j})$. Sum over $j=0,\dots,n$ and use
+$\sum_{j\ne k}(k-j)^{-1}=-B_1(k)$, $\sum_{j\ne k}(k-j)^{-2}=H^{(2)}_k+H^{(2)}_{n-k}$. The two
+occurrences of the \emph{non-alphabet} symbol $H^{(2)}_k+H^{(2)}_{n-k}$ cancel exactly ($-1$
+from the double poles, $+1$ from the triple pole), leaving (P3).
+\end{proof}
+
+The cancellation of $H^{(2)}_j+H^{(2)}_{n-j}$ in (P3) is why a \emph{closed} weight-$2$ identity
+exists inside the $\{A,B,C,N\}$ alphabet at all; the same construction with
+$G(x)/((x+i)(x+i'))$ produces the weight-$3$ level. $\VERIFIED$ exact over $\QQ$, $0$ failures:
+all $120$ pairs $(n,l)$ with $0\le l\le n\le14$, each of (P0)--(P3) exactly $0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The middle row}\label{sec:middle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The weight-$3$ companion is proved by the same machinery, and it is instructive because it
+\emph{fails} in a way the top row does not. Throughout, $n=ap+r$ with $p\ge5$, $1\le a<p$,
+$0\le r<p$, and
+\[
+v(n,k,l):=\wthree(n,k,l)-H^{(3)}_n,\qquad
+\hat W_n=\hat P_n-H^{(3)}_nQ_n=\sum_{k,l}T(n,k,l)\,v(n,k,l)
+\]
+by Theorem~\ref{thm:B}; the constant letter is exactly the $H$-layer removed by
+Theorem~\ref{thm:C}, and $v$ has no constant letter. Level-$a$ letters are written
+$A^{(a)}_m(b)=H^{(m)}_{a+b}-H^{(m)}_b$, $B^{(a)}_m(b)=H^{(m)}_{a-b}-H^{(m)}_b$,
+$C^{(a)}_m(b,c)=H^{(m)}_{a+b+c}-H^{(m)}_{b+c}$.
+
+\begin{lemma}[Letter descent]\label{lem:G}
+$\PROVED$ In-regime (Definition~\ref{def:regime}) one has
+$\lfloor(n+k)/p\rfloor=a+b$, $\lfloor(n-k)/p\rfloor=a-b$, $\lfloor(k+l)/p\rfloor=b+c$,
+$\lfloor(n+k+l)/p\rfloor=a+b+c$, and hence by Lemma~\ref{lem:H} applied twice
+\[
+p^mA_m(k)=A^{(a)}_m(b)+p^m\Zp,\qquad p^mB_m(k)=B^{(a)}_m(b)+p^m\Zp,\qquad
+p^mC_m=C^{(a)}_m(b,c)+p^m\Zp .
+\]
+Consequently, for every in-regime $(k,l)$,
+$p^3\,T(n,k,l)\,v(n,k,l)\equiv T(n,k,l)\,v(a,b,c)\pmod p$. Off-regime the same congruence holds,
+using Lemma~\textup{\ref{lem:Dpp}}.
+\end{lemma}
+
+\begin{proof}
+For the displayed identities, e.g.\
+$A_m(k)=[U_m(n+k)-U_m(k)]+p^{-m}[H^{(m)}_{a+b}-H^{(m)}_b]$ by Lemma~\ref{lem:H}, and the
+bracket is $A^{(a)}_m(b)$; multiply by $p^m$. (For $B$ one needs $s\le r$ to get
+$\lfloor(n-k)/p\rfloor=a-b$; for $C$ one needs $s+t<p$ and $r+s+t<p$.)
+Now let $M=L_1L_2$ (or $L_1$) be one of the five monomial types of $v$, of total weight $3$;
+then $p^3M=\prod(L_i^{(a)}+p^{m_i}z_i)$ with $z_i\in\Zp$, so
+$p^3M-M^{(a)}=\sum_{\emptyset\ne S}\prod_{i\in S}p^{m_i}z_i\prod_{i\notin S}L_i^{(a)}$. The
+level-$a$ letters obey $B^{(a)}_m\in\Zp$ (both arguments $<p$), $C^{(a)}_m\in p^{-m}\Zp$, and
+$A^{(a)}_m(b)\in\Zp$ unless $a+b\ge p$, in which case $A^{(a)}_m(b)\in p^{-m}\Zp$. Checking the
+five types: for $A_3(k)$ the error is $p^3z$; for $A_2(k)X_1$ with
+$X_1\in\{A_1(k),B_1(k),C_1,A_1(l)\}$ the errors are $p^2z_1X_1^{(a)}$ (and
+$X_1^{(a)}\in p^{-1}\Zp$, so this is in $p\Zp$), $p\,z_2A^{(a)}_2(b)$, and $p^3z_1z_2$. The only
+dangerous term is $p\,z_2A^{(a)}_2(b)$, which lies in $p^{-1}\Zp$ \emph{only if} $a+b\ge p$ ---
+and then Lemma~\ref{lem:D} gives $v_p(T(n,k,l))\ge2$, so after multiplying by $T$ it lies in
+$p\Zp$. Off-regime the digit identities acquire a $+1$ and the mismatch of $p^mA_m(k)$ against
+$A^{(a)}_m(b)$ is $\varepsilon_1(a+b+1)^{-m}$ with $\varepsilon_1=\ii{r+s\ge p}$, a $p$-unit
+except when $a+b+1=p$; there Lemma~\ref{lem:Dpp} supplies $v_p(T)\ge4$, which the $A_3$
+monomial needs, and $\ge3$ suffices for the $A_2X_1$ monomials.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:Eintro}}]
+By Theorem~\ref{thm:C}, $p^3\hat P_n-\hat P_aQ_r\equiv p^3\hat W_n-\hat W_aQ_r\pmod p$. By
+Theorem~\ref{thm:B} and Lemma~\ref{lem:G},
+\[
+p^3\hat W_n=\sum_{k,l}p^3T(n,k,l)v(n,k,l)\equiv\sum_{k,l}T(n,k,l)v(a,b,c)
+=\sum_{b,c}v(a,b,c)\,\Tcal(b,c)\pmod p .
+\]
+Put $d(b,c):=\max(0,-v_p(v(a,b,c)))\in\{0,1,2,3\}$. Every monomial of $v$ contains an $A_2$ or
+an $A_3$ letter, so $d(b,c)\ge2$ forces $a+b\ge p$ or $a+c\ge p$; and then
+$v_p(T(a,b,c))\ge2$, whence $d(b,c)\le1+\min(v_pT(a,b,c),2)$. Therefore Theorem~\ref{lem:F}
+applies and $v(a,b,c)\bigl[\Tcal(b,c)-(Q_n/Q_a)T(a,b,c)\bigr]$ has
+$v_p\ge-d(b,c)+1+d(b,c)=1$, so
+\[
+p^3\hat W_n\equiv\frac{Q_n}{Q_a}\sum_{b,c}v(a,b,c)T(a,b,c)=\frac{Q_n}{Q_a}\hat W_a\pmod p .
+\]
+Hence $p^3\hat W_n-\hat W_aQ_r\equiv\lambda\hat W_a$ with $\lambda:=Q_n/Q_a-Q_r$ and
+$v_p(\lambda)\ge1$ by Theorem~\ref{thm:Aintro}. Finally
+$\hat W_a=\hat P_a-H^{(3)}_aQ_a$ with $H^{(3)}_a\in\Zp$ (as $a<p$) and $Q_a\in\ZZ$, so
+$v_p(\hat W_a)\ge\min(0,v_p(\hat P_a))$ and $v_p(\lambda\hat W_a)\ge1+\min(0,v_p(\hat P_a))$.
+\end{proof}
+
+\begin{corollary}\label{cor:Eprime}
+$\PROVED$ --- no Lemma~\ref{lem:F}, no off-regime descent, no integrality hypothesis. For
+$1\le a<p/3$, every level-$a$ letter is $p$-integral ($a+b\le2a<p$ kills the $A$-poles,
+$a+b+c\le3a<p$ kills the $C$-poles, $B$ never has one), hence $v(a,b,c)\in\Zp$,
+$d(b,c)=0$, and Lemma~\ref{lem:F} degenerates to Lemma~\ref{lem:L4}. Therefore
+\[
+p^3\hat P_{ap+r}\equiv\hat P_a\,Q_r\pmod p\qquad\text{for all } 1\le a<p/3,\ 0\le r<p,
+\]
+and $\hat P_a\in\Zp$ automatically in that range.
+\end{corollary}
+
+\subsection{Why the product form fails, exactly}
+
+\begin{proposition}[Size of the middle row]\label{prop:Phatsize}
+$\PROVED$, conditional on Theorem~\ref{thm:B}. For $n<p^2$ and $p\ge5$,
+$v_p(\hat P_n)\ge-4$; and for $n<p$, $v_p(\hat P_n)\ge-1$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Inspect $\wthree$'s letters. $H^{(3)}_n=(\Zp)+p^{-3}H^{(3)}_a$ with $H^{(3)}_a\in\Zp$: pole
+order $3$. $A_3(k)=(\Zp)+p^{-3}(H^{(3)}_\beta-H^{(3)}_b)$ with $\beta=\lfloor(n+k)/p\rfloor$ and
+$b=\lfloor k/p\rfloor<p$; since $\beta\le2a+1<2p$, $H^{(3)}_\beta=(\Zp)+p^{-3}\ii{\beta\ge p}$,
+so $A_3(k)=p^{-6}\ii{\beta\ge p}+p^{-3}(\Zp)+(\Zp)$ --- only the indicator term reaches depth
+$6$, and by Lemma~\ref{lem:Dplus} every $(k,l)$ contributing to it has $v_pT\ge2$: pole order
+$\le4$ after weighting. For $A_2(k)X_1$ the deepest term is $A_2(k)C_1$, which reaches $p^{-4}$
+already with $\beta<p$, whenever $\lfloor(n+k+l)/p\rfloor\ge p>\lfloor(k+l)/p\rfloor$; that case
+also gives $-4$. Taking the minimum gives $-4$. For $n=a<p$ the only offending letter is
+$A_3(k)$ with $a+k\ge p$ (no $p$-divisible $m\le a$ exists, so $H^{(3)}_a$, $B_r$ and $C_r$ are
+all $p$-integral), giving $-3+2=-1$ by Lemma~\ref{lem:D}.
+\end{proof}
+
+Proposition~\ref{prop:Phatsize} explains the anomaly: the na\"ive product congruence
+$p^3\hat P_{ap+r}\equiv\hat P_aQ_r\pmod p$ is \emph{false}, and it fails precisely by the term
+$\lambda\hat W_a$ of the proof above --- $\lambda$ supplies one power of $p$,
+and $\hat W_a$ eats it back when $v_p(\hat P_a)=-1$. Equivalently, the middle Frobenius slot
+needs $p^4$, not $p^3$, if one insists on an unnormalised product congruence.
+
+\emph{The top row has no such defect}: $\VERIFIED$, $0$ exceptions for
+$p\in\{5,7,\dots,31\}$, $v_p(P_a)\ge0$ \emph{and} $v_p(W_a)\ge0$ for every $1\le a<p$, whereas
+$v_p(\hat P_a)=-1$ for most $a\in(p/2,p)$. That is why $(\mathrm{LB}_5)$ and $(\mathrm W5)$ are
+clean and need no integrality hypothesis.
+
+\begin{evidence}\label{ev:middle}
+$\VERIFIED$ $0$ failures, all $1\le a<p$, $0\le r<p$, $n=ap+r\le360$,
+$p\in\{5,7,11,13,17,19\}$: $v_p(p^3\hat P_n-\hat P_aQ_r)\ge1+\min(0,v_p(\hat P_a))$ with both
+floors attained --- the minimum is $1$ on the cells with $v_p(\hat P_a)=0$ and $0$ on those with
+$v_p(\hat P_a)=-1$. The plain product form fails on $3/5/24/55/84/128$ of the
+$5/7/33/65/119/152$ cells with $v_p(\hat P_a)=-1$ at those primes and on \emph{none} of the
+cells with $\hat P_a\in\Zp$. Also $\VERIFIED$: $v_p(\hat P_a)\ge0\Rightarrow v_p(\hat P_{ap+r})\ge-3$
+for every $r$, and every cell with $v_p(\hat P_n)=-4$ has $v_p(\hat P_a)=-1$; and
+$\min_{n<p^2}v_p(\hat P_n)=-4$ for $p\in\{5,\dots,23\}$, $\min_{a<p}v_p(\hat P_a)=-1$ for every
+$p\in\{5,\dots,31\}$ --- both bounds of Proposition~\ref{prop:Phatsize} attained. The
+\emph{master} form $p^3\hat P_nQ_a\equiv\hat P_aQ_n\pmod p$ holds on all cells; it does not
+imply the product form when $p\mid Q_a$ or $\hat P_a\notin\Zp$.
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Certification status of the decomposition identities}\label{sec:certs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section states, as of the time of writing, exactly what is and is not certified. It is
+written so that a single sentence flips when a certificate lands.
+
+\subsection{Status}
+
+The table records the state at the date of this preprint. Both $\VERIFIED$ entries are the
+subject of ongoing machine computation; if either is upgraded, the only change to this paper is
+the corresponding row and the sentence in Remark~\ref{rem:flip}.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+object & class & basis \\
+\midrule
+$Q_n=\sum_{k,l}T(n,k,l)$ &$\CERTIFIED$& two-step CT; telescoper $=\LBZ$ exactly; re-verified\\
+$\LBZ\cdot T=\Delta_k(\rho T)+\Delta_l(\sigma T)$ &$\CERTIFIED$& explicit $\rho,\sigma$; checked to $0$ twice\\
+(DEPTH) linear system &$\CERT$& $\rank$(joint)$\,=\,\rank$(aug)$\,=324$, two primes\\
+$w_5^{\mathrm I}$ cell-wise conditions &$\CERT$& three primes, identical pivot sets\\
+Theorem~\ref{thm:B} \ $\hat P_n=\sum T\wthree$ &$\VERIFIED$& see \S\ref{sec:certsB}\\
+(T1-top) \ $P_n=\sum T\wfive$ &$\VERIFIED$& see \S\ref{sec:certsT1}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{(T1-top)}\label{sec:certsT1}
+
+\begin{evidence}\label{ev:T1}
+$\VERIFIED$ For $\wfive=w_5^{\mathrm{allp}}$, evaluating $\sum_{k,l}T(n,k,l)\wfive(n,k,l)$
+directly from the saved representative --- a code path different from the linear algebra that
+produced it --- modulo $q=33554393$ and $q=33554467$ for $n=0,\dots,750$:
+\[
+\begin{array}{ll}
+\text{against the exact ladder } P_n,\ \text{every } n\le360 & \textbf{0 mismatches, both primes}\\
+\LBZ\ \text{residual},\ n=0,\dots,747 & \textbf{0 at all 748 values, both primes}\\
+\text{minimal recurrence (search over order}\le12,\ \deg\le30) & \textbf{(order 3, degree 9), nullity 1}
+\end{array}
+\]
+The fitting system imposed equations only for $n\le600$, so roughly $147$ of these are genuine
+excess checks; and the minimal recurrence being exactly $\LBZ$ pins what a certificate must
+produce. Separately, exact over $\QQ$: $n\le34$ for $w_5^{\mathrm{allp}}$, $n\le20$ for
+%% FIXED [M-4]: ``287 of 687'' was a misreading of the source shorthand and, as printed, asserted
+%% FIXED that 400 excess checks had FAILED. The two numbers are two separate all-satisfied counts:
+%% FIXED 600-313=287 at N=600 (PHASE2_ENDGAME R2.1) and 1000-313=687 at N=1000
+%% FIXED (PROOF_LB5_CLOSEOUT). Both now stated as complete successes, with their N named.
+$w_5^{\mathrm I}$, $0$ mismatches, by standalone re-implementations reading only the stored
+coefficients and the ladder; plus \emph{all} $287$ excess equations satisfied modulo two primes
+at $N=600$ (that is, $600$ equations against rank $313$), and, in the earlier run at $N=1000$,
+all $687$.
+\end{evidence}
+
+\begin{proposition}[No cheap representative]\label{prop:ptrank}
+$\PROVED$ The $448$ basis monomials are linearly independent \emph{as functions} on the cells:
+the cell-level matrix (rows the $1331$ cells of $n=17,\dots,22$, columns the $448$ symmetrised
+monomials) has rank $448$ modulo $q=33554393$, hence rank $448$ over $\QQ$. Consequently
+$\ker(\text{design})\cap\{\text{pointwise zero}\}=0$: every one of the $135$ kernel directions
+is a genuine \emph{summation} identity $\sum_{k,l}T\cdot z=0$, of exactly the same difficulty as
+the target. \emph{Certifying one representative does not certify another for free}, and the
+representative one certifies must be the representative one uses.
+\end{proposition}
+
+%% FIXED [M-6]: relabelled $\PROVED$ negative -> $\CERT$ negative. This is a mod-$q$ rank
+%% FIXED computation, exactly what \S\ref{sec:evidence} defines as $\CERT$, and exactly how
+%% FIXED Theorem \ref{thm:DEPTHplus} (the same kind of computation) is labelled. Inconsistency
+%% FIXED over $\FF_q$ does not formally imply inconsistency over $\QQ$. Also flagged in the
+%% FIXED statement that the third alphabet was run at one prime only, and in \S16's table.
+\begin{theorem}[Structural obstruction at weight 5]\label{thm:degfit}
+$\CERT$ negative. The weight-$5$ fitting system $P_n=\sum_{k,l}T\cdot w$ is
+\emph{inconsistent} when the support is restricted to letter monomials of degree $\le3$, and
+the obstruction is the \emph{fit identity alone} --- not the $p$-integrality conditions --- so
+no pole-cap regime can rescue it. Verified in three alphabets at $N=600$ equations,
+$q=33554393$ (and re-run at $q=33554467$ for the two depth-$1$ alphabets, identical verdicts):
+\[
+\begin{array}{lccl}
+\text{alphabet} & \text{degree cap} & \text{cols},\ \rank(\mathrm{fit}) & \text{fit alone}\\\hline
+A_r,B_r,C_r,N_r & \le2 & 44,\ 41 & \text{INCONSISTENT}\\
+ & \le3 & 176,\ 151 & \text{INCONSISTENT}\\
+ & \le4 & 338,\ 269 & \text{INCONSISTENT}\\
+ & \le5 & 448,\ 313 & \text{consistent}\\
++\,R_r(k)\ \text{(Ap\'ery)} & \le3 & 369,\ 329 & \text{INCONSISTENT}\\
++\,Y_{ab},V_{ab},Z_{ab}\ \text{(nested)} & \le3 & 488,\ 327 & \text{INCONSISTENT}
+\end{array}
+\]
+(The third alphabet was run at $q=33554393$ only.)
+The harness reproduces both a known positive ($\rank(\mathrm{fit})=313$; the $w_5^{\mathrm I}$
+system with $212$ condition rows, $\rank(\mathrm{joint})=342$, consistent) and a known negative.
+Every negative entry is immune to the ``vacuous consistency'' caveat: at degree $\le3$ the ranks
+are $151/329/327$ against $N=600$, i.e.\ the systems are overdetermined by $449/271/273$
+independent equations and fail.
+\end{theorem}
+
+\begin{remark}[what the label means here]
+Inconsistency over $\FF_q$ does not formally imply inconsistency over $\QQ$: reduction can lower
+both $\rank(A)$ and $\rank([A\mid b])$, and a rational solution can hide $q$ in a denominator.
+Two auxiliary primes with identical verdicts make this overwhelming evidence, which is what
+$\CERT$ means in \S\ref{sec:evidence}; it is not a proof. What would upgrade it to $\PROVED$ is
+a finite, exactly checkable object: a rational annihilator $y$ with $y^\top A=0$ and
+$y^\top b\ne0$, verified over $\QQ$. We have not produced one. Nothing else in this paper
+depends on Theorem~\ref{thm:degfit}; it is an explanation of where the certification cost sits,
+not a step in any proof.
+\end{remark}
+
+The consequence for certification is concrete. Weight-lowering by the certified $\rho,\sigma$
+turns the target into a creative telescoping whose cost is governed by the \emph{degree} of the
+monomials of $w$, because a squarefree degree-$d$ monomial contributes $2^d-1$ sub-monomials
+under the shift. Measured supports of $E(w)/T$: $\mathbf 6$ for $\wthree$ (whose folded form has
+degree $\le2$), $208$ for $w_5^{\mathrm{allp}}$, $220$ for $w_5^{\mathrm I}$. Degree histograms
+of the known representatives ($w_5^{\mathrm I}$: $1{:}3,2{:}19,3{:}59,4{:}73,5{:}53$;
+$w_5^{\mathrm{allp}}$: $1{:}2,2{:}14,3{:}52,4{:}66,5{:}44$; $\wthree$ folded: $1{:}4,2{:}2$) sit
+exactly where Theorem~\ref{thm:degfit} says they must. \emph{So $\wthree$'s degree-$\le2$ folded
+form --- the single structural fact that makes the weight-$3$ certificate route exist --- has no
+weight-$5$ analogue.} We record this as a mathematical fact about $\wfive$, not a resource
+shortfall: the cheapest certified route to (T1-top) is a creative telescoping on a
+$\partial$-finite module of rank $100$ to $220$, against rank $3$ for Theorem~\ref{thm:B}, and
+nothing short of a new idea about the shape of $\wfive$ changes this. Adding depth would not
+have helped even had the degree test passed: a single nested letter is degree $1$ but its
+$\partial$-module is not rank $2$ (shifting it produces $A_a(k),A_b(k),H^{(a)}_k,H^{(b)}_k$), so
+the $2^d$ support model becomes roughly $4^d$.
+
+\subsection{Theorem B}\label{sec:certsB}
+
+\begin{evidence}\label{ev:B}
+$\VERIFIED$ exact over $\QQ$ for $n\le40$ (and independently re-derived and re-checked for
+$n\le30$, and re-implemented directly from the displayed formula \eqref{eq:w3} for $n\le16$),
+$0$ discrepancies; $340$ excess equations satisfied modulo $q$ in a $93$-element basis at
+$N=400$ (with a negative control: the same basis against the target $P$ is inconsistent, as it
+must be); and $\hat P_n-\sum_{k,l}T\wthree=0$ exactly for $n=0,\dots,300$ --- $301$ values.
+\end{evidence}
+
+Theorem~\ref{thm:B} is a \emph{compute} node, not a structural one. It has been reduced by proof
+to $\sum_{k,l}E(v)=0$ for an explicit $E(v)$; the boundary and telescoping steps are proved from
+the pole structure of $\rho,\sigma$ (using $\rho(n,0,l)=\sigma(n,k,0)=0$ and the double zeros of
+$T$), the regularised boundary lemma is $\VERIFIED$ exactly for $n_0=1,\dots,6$, and $E(v)/T$ is
+a single hypergeometric term times a rank-$3$ factor ($E(v)/T=c_0+\beta A_2(k)+\alpha\Psi$ after
+the proved relations $\gamma=3\alpha$, $\delta=\tfrac32\alpha$, $\varepsilon=\tfrac12\alpha$).
+Splitting $E(v)=\sum_\tau F_\tau$ over the five shift terms before telescoping --- a split that
+is itself $\CERTIFIED$, symbolically and without loading any package --- drops the weights from
+$132\,917$ leaves to $\{84,86,66,12471,2255\}$ at unchanged rank $\le3$; splitting further by
+letter reduces every piece to a rational multiple of $T$, i.e.\ to rank $1$. Since
+$\hat P_n-\sum T\wthree=0$ is $\VERIFIED$ for $n=0,\dots,300$, any operator of order $\le298$
+finishes the identity by matching initial values.
+
+%% FIXED [Mo-1]: snapshot brought up to the 06:15 state (PHASE2\_CERTS \S\S18.18--18.19):
+%% FIXED $R4$ \texttt{DFiniteTimes} has cleared, so four of the five stages are clear on every
+%% FIXED $\tau$ and $ct_2$ is the sole wall, with zero returns under unconstrained search;
+%% FIXED \S18.13's \texttt{guessrec} measurement is now acknowledged against the ``compute node''
+%% FIXED claim; and the loose ``the same object before the split'' has been corrected.
+At the date of this preprint no complete $M_\tau$ has been produced. What has changed, and is
+worth recording because it inverts the earlier diagnosis, is where the cost sits. The pipeline
+has five stages --- annihilator, first telescoping (eliminate $l$), Gr\"obner normalisation,
+$\partial$-finite product, second telescoping --- and after the letter-split \emph{four of the
+five are clear on every $\tau$ and every piece tried}. On the largest piece the annihilator
+returns in $34$~s and the first telescoping in $33$~s (the $12489$-leaf term; the $13069$-leaf
+unsplit object of which it is one piece had failed with an out-of-memory at $7.8$~GB after $85$
+minutes), the Gr\"obner step in $1$--$5$~s, and the $\partial$-finite product --- until recently
+the second wall --- in $500$~s at no measurable memory, returning $4$ generators on the largest
+cofactor in the problem. The \emph{second} telescoping is now the sole remaining obstacle, and it
+returns no telescoper by any method: not under any support bound attempted (a full ladder
+$d=0,\dots,5$ on two pieces), and not under unconstrained search with no ansatz box at all
+($421$~s on the largest piece, $600$~s on another). We therefore do not quote a kernel-hour
+estimate: earlier ones were withdrawn, and we prefer to state the position as measured.
+
+That the residual difficulty is exactly one stage sharpens, but also qualifies, the description
+of Theorem~\ref{thm:B} as a compute node. A direct measurement (\texttt{guessrec} over
+$\mathrm{order}\le12$, $\deg\le30$) finds that \emph{no} single-letter component sum satisfies
+an operator in that box, while their combination satisfies the unique minimal one, of order $3$
+and degree $9$ --- namely $\LBZ$. So the second telescoping, applied to split pieces, has been
+searching an empty box: the split that made the first four stages cheap is the same split that
+puts the target out of range.
+
+%% FIXED [P1e-s7]: the structural finding of PHASE2\_CERTS \S19.1--19.2 added (the $E$-route is
+%% FIXED blocked for a reason internal to $E$, measured at $7$ letters as well as at $9$); the
+%% FIXED closing sentence no longer says ``algebraic rather than computational'' without
+%% FIXED qualification, because the direct route is a live computation, not a dead one.
+A subsequent measurement locates a second obstruction one stage earlier, and this one is
+structural rather than a matter of resources. The cost model above --- support size, hence
+monomial degree --- is only one of two axes: \texttt{Annihilator} needs the summand small both
+in the number of distinct harmonic letters it carries \emph{and} in the size of the rational
+coefficients multiplying them, and refolding $w$ can address only the first. Carried out, it
+does: a refolded $\tilde v$, equal to $v$ modulo proved kernel identities of the
+Lemma~\ref{lem:Phi2} family together with the $k\leftrightarrow l$ symmetry, reduces $E$ from
+$9$ distinct letters to $7$. The annihilator
+nevertheless becomes \emph{more} expensive, not less --- it aborts against an $8.5$~GB memory
+cap after $536$~s (peak $8.4$~GB) with memory rising a straight $3.6$~GB per minute, where the
+$13069$-leaf $9$-letter object above reached $7.8$~GB only after $85$ minutes. The reason is
+visible in $E$ itself. Writing $E(w)=\sum_\tau F_\tau$ with $F_\tau=G_\tau\,(\tau.w-w)$ over
+the five shifts, the two one-variable shifts have $G_{kk}=-(\rho\,T)|_{k\to k+1}$ and
+$G_{ll}=-(\sigma\,T)|_{l\to l+1}$: the coefficients of $E(w)$ carry the very cofactors
+$\rho,\sigma$ of $\LBZ\cdot T=\Delta_k(\rho T)+\Delta_l(\sigma T)$ --- the two largest rational
+functions in the problem --- unless
+$\tau.w-w=0$ for $\tau=kk$ and $\tau=ll$ both, i.e.\ unless $w$ is a function of $n$ alone,
+which the fit for $\wthree$ excludes. \emph{So no choice of representative makes $E(w)$ cheap.}
+The obstruction lives in the certificate for $Q_n$ that produced $E$, not in the weight $w$,
+and it is invariant under every refolding of $w$.
+
+Splitting further cannot help either, so what remains is the one route that never forms $E$ at
+all: telescope the summand $T\,w$ directly. Its coefficients are polynomial rather than
+$\Theta(\rho,\sigma)$, it needs no weight-lowering step and hence no boundary lemma for $E$,
+and its second telescoping searches the support $\{1,S_n,S_n^2,S_n^3\}$ --- the one box in this
+problem known to contain its answer, since $\LBZ\hat P_n=0$ is $\PROVED$ and
+$\sum_{k,l}T\wthree=\hat P_n$ is $\VERIFIED$ to $n=300$. Every side condition such a certificate
+would need is discharged in advance: $\sum_{k,l}T\tilde v=\hat
+P_n$ exactly for $n\le33$, $\wthree-\tilde v$ is an explicit combination of proved summation
+identities, the far-edge boundary
+terms vanish ($T$ has a double zero at each integer $k>n$ where $\tilde v$ has at worst a simple
+pole, and none in $l$), and $301$ exact initial values are banked. The next move on
+Theorem~\ref{thm:B} is therefore a single annihilator on a $91$-leaf object, or else an
+algebraic one; in neither case is it a larger version of the computation already attempted.
+
+%% FIXED [M-1]: (DEPTH) restored here. A (T1-top) certificate alone does NOT make Theorems
+%% FIXED \ref{thm:main}, \ref{thm:baseintro}, \ref{thm:51intro} unconditional --- (DEPTH) is
+%% FIXED [CERT] and is consumed by all three.
+\begin{remark}[what would flip]\label{rem:flip}
+If a certificate for (T1-top) lands, Theorem~\ref{thm:main} and Theorems~\ref{thm:baseintro},
+\ref{thm:51intro} rest on the single remaining input (DEPTH); they become
+\emph{unconditional} only when (DEPTH) is in addition promoted from $\CERT$ to a proof, which
+is a separate and much smaller task --- a rational consistency witness for a finite linear
+system, of the kind described after Theorem~\ref{thm:degfit}. If a certificate for
+Theorem~\ref{thm:B} lands, Theorem~\ref{thm:Eintro} becomes unconditional outright, since it
+does not consume (DEPTH). No other statement in this paper changes; in particular a certificate
+for Theorem~\ref{thm:B} changes nothing about Theorem~\ref{thm:main}, which does not use it.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The primes 2 and 3}\label{sec:twothree}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The constant $12=2^2\cdot3$ is not covered by anything above: $p\ge5$ is forced by the single
+use of Wolstenholme inside Lemma~\ref{lem:W}, and again by $\sum_{j<p}j^{-2}\equiv0$ at the
+nucleus. The residual statement is:
+
+\begin{quote}
+\textbf{(Sharp-$12$, $p\in\{2,3\}$ part).}
+$\ord_2(P_n)\ge-2-5\lfloor\log_2n\rfloor$ and $\ord_3(P_n)\ge-1-5\lfloor\log_3n\rfloor$,
+i.e.\ the \emph{constant} $12=2^2\cdot3$ and nothing worse.
+\end{quote}
+
+$\VERIFIED$ $361/361$, $n\le360$ (Evidence~\ref{ev:law12}). We state its provenance precisely,
+including a wrinkle we have not resolved.
+
+The mechanism proposed for the factor $2$ in the earlier campaign of this program is an index-$2$
+computation on the Betti side of the period matrix, via the bicomplex of \cite{Du18}; its own
+recorded bottom line is that
+\begin{quote}
+``the claim `index $2$ derived from geometry alone' is \textbf{not} yet earned; the honest status
+is `index $2$ is the unique value consistent with all closed sub-computations, with the sole
+open input being the integral bicomplex differential at two explicitly identified strata'.''
+\end{quote}
+Of the three sub-results there, two are proved and one is not: it is \emph{proved} that the
+factor $2$ is absent from the arrangement combinatorics on the other side (all Smith elementary
+divisors are $1$, under every orientation convention); it is \emph{proved} that only the prime
+$2$ can arise from those incidence matrices; and the factor $2$ itself is \emph{not closed},
+being localised to the integral weight spectral-sequence differential across the uncoloured
+generic facets on two explicitly identified strata --- i.e.\ to an integral refinement of the
+$\QQ$-only bicomplex of \cite{Du18} that is not in the literature.
+
+The honest consequence, which we flag rather than paper over, is this: \emph{the second proved
+sub-result says the geometric route cannot produce a $3$.} So the source of the factor $3$ in
+$12=2^2\cdot3$ is at present unidentified, and \eqref{eq:BZincl} at $p=3$ has no derivation at
+all --- only the $361/361$ verification. It is possible that the $3$ has a different origin
+entirely (for instance in the normalisation constant $24=2^3\cdot3$ attached to $\zeta(2)=\pi^2/6$
+in Brown and Zudilin's own heuristic), and we regard identifying it as the most concrete open
+question left by this paper.
+
+The general-parameter conjecture of the earlier campaign, which our totally symmetric statement
+specialises, is
+\[
+12\cdot D_\nu(\boldsymbol a,n)\cdot I'(\boldsymbol a\cdot n)\in\ZZ\zeta(5)+\ZZ
+\]
+for all admissible $\boldsymbol a$ and $n\ge1$, where $D_\nu$ is \cite{BZ}'s $\Phi_n$-sharpened
+denominator with the exponents $\nu_p$ of \cite[(nu\_p)]{BZ} extended from $p>\sqrt{m_1n}$ to
+%% FIXED [M-7]: the three numbers came from three different audits. Now quoting one consistent
+%% FIXED pair --- the 164-cell audit of the source's updated header, 46x / 30x. (The 28x / 14x
+%% FIXED figures belong to an earlier 103-cell audit; ``~215 cells'' is the count in the later
+%% FIXED slack-trajectory section, a different sweep again.)
+every prime \cite{ProgCONJ}. Its evidence is $164$ audited cells: excess at $p=2$ is at
+most $+2$ (attained $46$ times), at $p=3$ at most $+1$ (attained $30$ times). One verified cell
+at $n=1$ shows excess $+1$ at $p=7=m_1$, the boundary prime of the multiset --- a rare,
+orbit-coherent, non-persistent fluctuation which a re-audit at $n=2$ flips to slack at both
+partner points. That effect is outside the totally symmetric family treated here, but it is a
+reminder that the general-parameter statement has a boundary-prime subtlety the symmetric one
+does not.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary of the dependency structure}\label{sec:summary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}lll@{}}
+\toprule
+node & class & where\\
+\midrule
+%% FIXED [M-1]: root rows now name both unproved inputs, (T1-top) and (DEPTH).
+Theorem~\ref{thm:main} (Sharp-$12$, $p\ge5$) & $\PROVED$ modulo (T1-top) $+$ (DEPTH) & \S\ref{sec:gapdesc}\\
+\quad Theorem~\ref{thm:51intro} ($-5L-1$, all $n$) & $\PROVED$ modulo (T1-top) $+$ (DEPTH) & Cor.~\ref{cor:51}\\
+\quad (IND) step $\mathcal I(L-1)\Rightarrow\mathcal I(L)$ & $\PROVED$ & Cor.~\ref{cor:step}\\
+\qquad fibre term (II) & $\PROVED$, slack $0$ & Prop.~\ref{prop:ledgerII}\\
+\qquad\quad (DEPTH-gen) & $\PROVED$ + $\CERT$ & Cor.~\ref{cor:depthgen}\\
+\qquad\qquad Prop.\ LIFT & $\PROVED$ & Prop.~\ref{prop:LIFT}\\
+\qquad\quad Lemma $F$-gen & $\PROVED$ & Lem.~\ref{lem:Fgen}\\
+\qquad\qquad Lemma $B$ (general $a$) $\to$ Lemma $W$ & $\PROVED$ & Lem.~\ref{lem:B}, \ref{lem:W}\\
+\qquad descent (I), in-regime & $\PROVED$ & Prop.~\ref{prop:inregime}\\
+\qquad descent (I), off-regime & $\PROVED$ & Thm~\ref{thm:gapdesc}\\
+\qquad\quad Lemma DK, Lemma D1 & $\PROVED$ & Lem.~\ref{lem:DK}, \ref{lem:D1}\\
+\quad base case $\mathcal I(0)$ & $\PROVED$ modulo (T1-top) $+$ (DEPTH) & Thm~\ref{thm:baseintro}\\
+\qquad one-band reduction & $\PROVED$ + $\CERT$ & Thm~\ref{thm:oneband}\\
+\qquad corner sum $=-14s_2$ & $\PROVED$ & Thm~\ref{thm:nucleus}\\
+\qquad apparency of the $a_0$ steps; $\tilde L$ & $\PROVED$ & Lem.~\ref{lem:APP}, Prop.~\ref{prop:Ltilde}\\
+\midrule
+%% FIXED [M-1/M-2]: (T1-top) is not the only open node --- (DEPTH) is a second, and Theorem B
+%% FIXED a third (consumed only by the middle row).
+(T1-top) $P_n=\sum T\wfive$ & $\VERIFIED$ \textbf{-- open} & \S\ref{sec:certsT1}\\
+(DEPTH) depth linear system & $\CERT$ \textbf{-- open} & Thm~\ref{thm:depthcons}\\
+\midrule
+%% FIXED [m-2]: the $\LEAN$ tag covers only the $\bmod\ p$ statement and its digit-product form
+%% FIXED (LEAN\_LUCAS\_STATUS: Q\_lucas, Q\_lucas\_digits); the $\bmod\ p^2$ supercongruence is not
+%% FIXED formalised. The row now says so, as Evidence \ref{ev:A} already did.
+Theorem~\ref{thm:Aintro} (Lucas, $\bmod\ p$) & $\PROVED$, $\LEAN$ & \S\ref{sec:Qrow}\\
+\quad the $\bmod\ p^2$ supercongruence & $\PROVED$ (not formalised) & Cor.~\ref{cor:Qsuper}\\
+Theorem~\ref{thm:C} ($H$-layer) & $\PROVED$ & \S\ref{sec:Hlayer}\\
+Theorem~\ref{thm:Eintro} (middle row) & $\PROVED$ modulo Theorem~\ref{thm:B} & \S\ref{sec:middle}\\
+Theorem~\ref{thm:B} $\hat P_n=\sum T\wthree$ & $\VERIFIED$ & \S\ref{sec:certsB}\\
+Theorem~\ref{thm:wall} ($\theta$ wall) & $\PROVED$ & \S\ref{sec:wall}\\
+Theorem~\ref{thm:degfit} (degree obstruction) & $\CERT$ negative & \S\ref{sec:certsT1}\\
+Sharp-$12$ at $p\in\{2,3\}$ & $\VERIFIED$; $2$-part reduced, $3$-part open & \S\ref{sec:twothree}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent
+Two remarks close the summary. First, \emph{the ledger has no slack anywhere}: (DEPTH) is
+attained, Lemma~\ref{lem:F} is attained, Lemma~\ref{lem:Fgen} is attained,
+Lemma~\ref{lem:DK} is attained, and the induction consumes exactly what they provide, digit by
+digit. That is not bookkeeping tidiness; it is why the exponent in Theorem~\ref{thm:main} is
+$5$ and not $6$.
+%% FIXED [m-1]: ``exactly two arithmetic inputs'' was not as stated --- Lemma \ref{lem:Tcorner}
+%% FIXED uses Wilson's theorem (and Lucas and Kummer), and \S\ref{sec:wall}'s de-$p$-adicisation
+%% FIXED remark uses Wilson and the reflections. The defensible claim, now made, is that exactly
+%% FIXED two of them constrain the prime.
+Second, \emph{the whole chain has exactly two arithmetic inputs that constrain the prime} ---
+Wolstenholme's congruence, used once inside Lemma~\ref{lem:W}, and
+$\sum_{j<p}j^{-2}\equiv0\pmod p$, used once at the nucleus. Both fail at $p=3$, and both are
+exactly why the hypothesis of Theorem~\ref{thm:main} is $p\ge5$. The chain does use three
+further classical facts --- Lucas's theorem, Kummer's theorem and Wilson's theorem (the last in
+Lemma~\ref{lem:Tcorner} and in the de-$p$-adicisation remark of \S\ref{sec:wall}) --- but all
+three hold at every prime and so cost nothing.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\section{Reproduction}\label{app:repro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+All numerical statements in this paper are exact. The Python computations use exact rational
+arithmetic, arbitrary-precision integers, $\FF_q$ linear algebra, or tracked-precision $p$-adic
+arithmetic; the symbolic computations use exact rational-function
+arithmetic. Design matrices over $\FF_q$ use a $13$-bit \texttt{float64} split (two
+\texttt{dgemm} calls), exact for all sizes used and cross-checked against a direct
+implementation. The creative-telescoping work uses the package of \cite{Ko10}; every
+certificate quoted as $\CERTIFIED$ was re-verified by exact arithmetic in a session that does
+not trust the search, at least once in a kernel that never loaded that package.
+
+\medskip
+\noindent The principal artefacts, by section:
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+what it settles & where\\
+\midrule
+consistency of (DEPTH): $\rank(\mathrm{joint})=\rank(\mathrm{aug})=324$, two primes & Thm~\ref{thm:depthcons}\\
+$(\mathrm{DEPTH}^+)$, $(\mathrm{DEPTH}^{++})$ inconsistent & Thm~\ref{thm:DEPTHplus}\\
+$w_5^{\mathrm{allp}}$: ladder identity, depth sweep, cell-by-cell test & Evidence~\ref{ev:depth}\\
+$w_5^{\mathrm I}$: ladder identity, one-band integrality & Evidence~\ref{ev:oneband}\\
+(DEPTH-gen) $+$ Kummer floor, digit levels $L\le2$ & Evidence~\ref{ev:depthgen}\\
+Lemma $F$-gen at multi-digit $a$ & Evidence~\ref{ev:Fgen}\\
+Lemma $B$ for general $a$ & Evidence~\ref{ev:LemB}\\
+Lemma DK, its slot-wise ingredients, Theorem~\ref{thm:gapdesc} & Evidence~\ref{ev:DK}\\
+base case over every prime $5\le p\le367$ & Evidence~\ref{ev:base}\\
+corner identity, apparency sweep, $\tilde L$ & Evidence~\ref{ev:corner}, \ref{ev:above}\\
+$(\mathrm{REC}\text{-}\star)$ normalised sweep & Evidence~\ref{ev:recstar}\\
+the $\theta$ wall trials & Prop.~\ref{prop:thetanonzero}\\
+the degree-cap experiment & Thm~\ref{thm:degfit}\\
+(Sharp-$12$) sweeps $n\le360$ and $n\le3000$ & Evidence~\ref{ev:sweep}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{evidence}[the base case, directly]\label{ev:base}
+%% FIXED [m-7]: the range is $1\le n$; $n=0$ included would give 11955 cells, not 11884.
+$\VERIFIED$ $11\,884/11\,884$ cells, $0$ failures: $\ord_p(P_n)\ge0$ for every prime
+$5\le p\le367$ and every $1\le n<\min(p,361)$, with minimum value exactly $0$.
+\end{evidence}
+
+\begin{evidence}[the main theorem, directly]\label{ev:sweep}
+$\VERIFIED$ $0$ failures:
+\[
+\small
+\begin{array}{llrl}
+\text{sweep} & \text{range} & \text{cells} & \min\bigl(\ord_p(P_n)+5L\bigr)\\\hline
+\text{exact ladders} & n\le360,\ p\in\{5,\dots,31\} & 3\,240 & 0\ (\text{at } p=5,\ n=1)\\
+\text{same, as } \ord_p(p_n)\ge\kappa(n)-5L & n\le360,\ p\le31 & 3\,240 & \text{---}\\
+\text{certified order-3 recurrence, exact }\QQ & n\le3000,\ p\in\{5,\dots,31\} & 27\,000 & 0\\
+\text{recurrence vs.\ exact ladder} & n\le360 & 361 & \text{0 mismatches}
+\end{array}
+\]
+where $p_n=\binom{2n}{n}P_n$ and $\kappa(n)=v_p\binom{2n}{n}$, so that
+$\ord_p(p_n)\ge\kappa(n)-5L\iff\ord_p(P_n)\ge-5L$. The minimum slack is $0$: the bound is
+attained.
+\end{evidence}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgments}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% METHODOLOGY SENTENCE --- FLAGGED FOR RIVER: keep, edit, or delete before circulation.
+The exploratory computations, the search for the weight-$5$ representatives, and a first
+assembly of several of the arguments above were carried out with the assistance of AI language
+models; every statement labelled $\PROVED$ has a human-readable proof given here, and every
+numerical claim was re-verified by exact arithmetic in an independent implementation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+
+\bibitem[Ap79]{Ap79}
+R.~Ap\'ery, \emph{Irrationalit\'e de $\zeta(2)$ et $\zeta(3)$}, Ast\'erisque \textbf{61} (1979),
+11--13.
+
+\bibitem[Be79]{Be79}
+F.~Beukers, \emph{A note on the irrationality of $\zeta(2)$ and $\zeta(3)$}, Bull.\ London Math.\
+Soc.\ \textbf{11} (1979), 268--272.
+
+\bibitem[Br09]{Br09}
+F.~C.~S.~Brown, \emph{Multiple zeta values and periods of moduli spaces
+$\overline{\mathfrak M}_{0,n}$}, Ann.\ Sci.\ \'Ec.\ Norm.\ Sup\'er.\ (4) \textbf{42} (2009),
+no.~3, 371--489.
+
+\bibitem[Br16]{Br16}
+F.~Brown, \emph{Irrationality proofs for zeta values, moduli spaces and dinner parties}, Mosc.\
+J. Comb.\ Number Theory \textbf{6} (2016), no.~2--3, 102--165.
+
+\bibitem[BZ]{BZ}
+F.~Brown and W.~Zudilin, \emph{On cellular rational approximations to $\zeta(5)$}, preprint
+\texttt{arXiv:2210.03391v3} (2022).
+
+\bibitem[Du18]{Du18}
+C.~Dupont, \emph{Odd zeta motive and linear forms in odd zeta values}, with a joint appendix
+with D.~Zagier, Compos.\ Math.\ \textbf{154} (2018), no.~2, 342--379.
+
+\bibitem[Ko10]{Ko10}
+C.~Koutschan, \emph{HolonomicFunctions (user's guide)}, RISC Report 10-01 (2010).
+
+\bibitem[MZ20]{MZ20}
+R.~Marcovecchio and W.~Zudilin, \emph{Hypergeometric rational approximations to $\zeta(4)$},
+Proc.\ Edinburgh Math.\ Soc.\ \textbf{63} (2020), 374--397.
+
+\bibitem[RV96]{RV96}
+G.~Rhin and C.~Viola, \emph{On a permutation group related to $\zeta(2)$}, Acta Arith.\
+\textbf{77} (1996), no.~1, 23--56.
+
+\bibitem[RV01]{RV01}
+G.~Rhin and C.~Viola, \emph{The group structure for $\zeta(3)$}, Acta Arith.\ \textbf{97}
+(2001), no.~3, 269--293.
+
+\bibitem[WZ92]{WZ92}
+H.~S.~Wilf and D.~Zeilberger, \emph{An algorithmic proof theory for hypergeometric (ordinary and
+``q'') multisum/integral identities}, Invent.\ Math.\ \textbf{108} (1992), no.~3, 575--633.
+
+\bibitem[Ze91]{Zei91}
+D.~Zeilberger, \emph{The method of creative telescoping}, J. Symbolic Comput.\ \textbf{11}
+(1991), no.~3, 195--204.
+
+\bibitem[Zu02]{Zu02a}
+W.~Zudilin, \emph{Irrationality of values of the Riemann zeta function}, Izv.\ Ross.\ Akad.\
+Nauk Ser.\ Mat.\ \textbf{66} (2002), no.~3, 49--102; English transl., Russian Acad.\ Sci.\ Izv.\
+Math.\ \textbf{66} (2002), no.~3, 489--542.
+
+\bibitem[Zu02b]{Zu02b}
+W.~Zudilin, \emph{A third-order Ap\'ery-like recursion for $\zeta(5)$}, Mat.\ Zametki
+\textbf{72} (2002), no.~5, 796--800; English transl., Math.\ Notes \textbf{72} (2002),
+no.~5--6, 733--737.
+
+\bibitem[Zu04]{Zu04}
+W.~Zudilin, \emph{Arithmetic of linear forms involving odd zeta values}, J. Th\'eor.\ Nombres
+Bordeaux \textbf{16} (2004), 251--291.
+
+\bibitem[P-C]{ProgCONJ}
+Internal report \texttt{CONJECTURE.md} of the present programme, 16 July 2026 (unpublished):
+the general-parameter sharp-$12$ conjecture and its audit data.
+
+\bibitem[P-M]{ProgA1MID}
+Internal report \texttt{PHASE2\_A1\_MIDPOINT\_THEOREM.md} of the present programme,
+20 July 2026 (unpublished): the complete generic midpoint theorem for the $a=1$ band.
+
+\end{thebibliography}
+
+\end{document}

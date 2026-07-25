@@ -1,0 +1,2 @@
+p=13  L1min=1 (#fail 0)  L2min=0 (#fail 66)  L3min=0 (#fail 55, of which Phat_a integral: 0)
+   L2 fails: [(7, 1, 0), (7, 2, 0), (7, 3, 0), (7, 4, 0), (7, 5, 0)]

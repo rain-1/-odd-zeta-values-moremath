@@ -1,0 +1,14 @@
+START Sat 25 Jul 2026 00:17:36
+HF loaded
+Options[CreativeTelescoping] = {Method -> Automatic, Support -> {}, Incomplete -> False, Return -> Automatic}
+Options[OreReduce] = {ModuleBasis -> {}, ReduceTail -> True, NormalizeCoefficients -> False, Modulus -> 0, Extended -> False, OrePolynomialSubstitute -> {}}
+Options[OreGroebnerBasis] = {MonomialOrder -> None, ModuleBasis -> {}, Incomplete -> False, Modulus -> 0, Method -> "sugar", Extended -> False, ReduceTail -> True, NormalizeCoefficients -> True, Reduce -> True}
+Options[Annihilator] = {MonomialOrder -> DegreeLexicographic, Head -> None, Inhomogeneous -> False, Assumptions :> $Assumptions, Method -> Automatic}
+=== X0 (elim k) === Sat 25 Jul 2026 00:17:36
+X0 ann #3 t=0s ords={{0, 0, 1}, {0, 1, 0}, {1, 0, 0}}
+X0 ct1 #2 t=0s
+X0 gb #2 t=0s  gb===ct1tel? True
+X0 ct2 #1 t=4s
+X0 ORDER=3 Sat 25 Jul 2026 00:17:40
+=== X1 (elim k) === Sat 25 Jul 2026 00:17:40
+X1 ann #4 t=0s ords={{0, 1, 1}, {1, 0, 2}, {1, 0, 1}, {2, 0, 0}}

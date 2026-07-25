@@ -1,0 +1,587 @@
+read(HP):
+
+GraphList:=[[],[],[{{0,1},{0,2},{1,2},{0,3},{1,3},{2,3}}],
+[],[{{0,1},{0,2},{0,3},{1,4},{2,4},{3,4},{1,5},{2,5},{3,5},{4,5}},
+{{0,1},{2,3},{0,4},{1,4},{2,4},{3,4},{0,5},{1,5},{2,5},{3,5}},
+{{0,1},{0,2},{1,3},{2,4},{3,4},{0,5},{1,5},{2,5},{3,5},{4,5}},
+{{0,1},{0,2},{1,3},{0,4},{2,4},{3,4},{1,5},{2,5},{3,5},{4,5}}],
+[],[{{0,1},{0,2},{0,3},{4,5},{1,6},{2,6},{3,6},{4,6},{5,6},{1,7},{2,7},{3,7},{4,7},{5,7}},
+{{0,1},{0,5},{2,5},{3,5},{4,5},{1,6},{2,6},{3,6},{4,6},{0,7},{1,7},{2,7},{3,7},{4,7}},
+{{0,4},{3,4},{1,5},{2,5},{0,6},{1,6},{2,6},{3,6},{0,7},{1,7},{2,7},{3,7},{4,7},{5,7}},
+{{0,2},{0,3},{1,4},{1,5},{0,6},{2,6},{3,6},{4,6},{5,6},{1,7},{2,7},{3,7},{4,7},{5,7}},
+{{2,4},{3,4},{0,5},{1,5},{2,5},{0,6},{1,6},{3,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{0,3},{1,4},{2,4},{3,5},{4,5},{0,6},{1,6},{2,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,3},{3,4},{1,5},{2,5},{4,5},{0,6},{1,6},{2,6},{4,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{1,2},{0,3},{0,4},{2,5},{1,6},{3,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{0,4},{1,4},{3,4},{2,5},{3,5},{0,6},{1,6},{2,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,4},{3,4},{1,5},{2,5},{3,5},{0,6},{1,6},{2,6},{4,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,5},{3,5},{4,5},{2,6},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7}},
+{{0,4},{1,4},{2,5},{3,5},{4,5},{0,6},{1,6},{2,6},{3,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{0,3},{1,4},{1,5},{2,6},{3,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{0,3},{2,3},{1,4},{2,4},{0,5},{1,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,3},{2,3},{3,4},{0,5},{1,5},{4,5},{0,6},{2,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{2,4},{0,5},{2,5},{1,6},{3,6},{4,6},{5,6},{1,7},{3,7},{4,7},{5,7}},
+{{0,4},{1,4},{2,4},{3,4},{0,5},{2,5},{3,5},{1,6},{2,6},{3,6},{0,7},{1,7},{5,7},{6,7}},
+{{0,4},{1,4},{2,4},{0,5},{1,5},{3,5},{0,6},{2,6},{3,6},{5,6},{1,7},{2,7},{3,7},{4,7}},
+{{0,1},{2,4},{3,5},{4,5},{0,6},{1,6},{2,6},{3,6},{0,7},{1,7},{2,7},{3,7},{4,7},{5,7}},
+{{0,1},{2,3},{0,4},{1,5},{0,6},{2,6},{3,6},{4,6},{5,6},{1,7},{2,7},{3,7},{4,7},{5,7}},
+{{1,3},{2,4},{0,5},{1,5},{2,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{0,3},{1,4},{3,4},{2,5},{4,5},{0,6},{1,6},{2,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,3},{1,4},{2,5},{3,5},{4,5},{0,6},{1,6},{2,6},{4,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{0,3},{1,4},{2,5},{1,6},{3,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,5},{3,5},{4,5},{1,6},{2,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7}},
+{{1,2},{3,4},{0,5},{1,5},{2,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{1,2},{0,4},{3,4},{3,5},{4,5},{0,6},{1,6},{2,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{1,2},{3,4},{0,5},{3,5},{4,5},{0,6},{1,6},{2,6},{4,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,2},{0,3},{4,5},{1,6},{3,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,5},{1,5},{4,5},{2,6},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7}},
+{{0,1},{0,2},{3,4},{1,5},{3,5},{2,6},{4,6},{0,7},{1,7},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{2,3},{1,4},{3,4},{0,5},{1,5},{0,6},{2,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{1,3},{0,4},{2,4},{0,5},{1,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{1,2},{2,4},{3,4},{0,5},{3,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{1,2},{0,4},{3,4},{2,5},{3,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,3},{2,4},{3,5},{1,6},{2,6},{4,6},{5,6},{0,7},{3,7},{4,7},{5,7},{6,7}},
+{{1,2},{2,3},{3,4},{0,5},{4,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{1,2},{2,3},{0,4},{3,5},{4,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,3},{2,4},{3,5},{0,6},{2,6},{4,6},{5,6},{1,7},{3,7},{4,7},{5,7},{6,7}},
+{{1,2},{0,3},{2,4},{3,5},{4,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{2,3},{0,4},{2,4},{1,5},{3,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,3},{2,4},{3,5},{0,6},{1,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7},{6,7}},
+{{1,3},{2,3},{2,4},{0,5},{1,5},{4,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{2,3},{0,4},{1,4},{3,4},{1,5},{2,5},{0,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,3},{2,3},{1,4},{2,4},{0,5},{4,5},{1,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,3},{2,4},{3,4},{0,5},{1,5},{4,5},{0,6},{2,6},{3,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{1,4},{2,4},{3,4},{0,5},{2,5},{3,5},{0,6},{2,6},{4,6},{1,7},{3,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{2,4},{0,5},{3,5},{1,6},{2,6},{4,6},{5,6},{1,7},{3,7},{4,7},{5,7}},
+{{0,1},{0,4},{2,4},{3,4},{0,5},{2,5},{3,5},{1,6},{2,6},{4,6},{1,7},{3,7},{5,7},{6,7}},
+{{0,1},{0,2},{2,4},{3,4},{0,5},{3,5},{1,6},{3,6},{4,6},{5,6},{1,7},{2,7},{4,7},{5,7}},
+{{0,1},{0,4},{2,4},{3,4},{1,5},{2,5},{3,5},{0,6},{2,6},{4,6},{1,7},{3,7},{5,7},{6,7}},
+{{0,3},{1,3},{2,3},{2,4},{0,5},{4,5},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,3},{2,4},{3,4},{0,5},{1,5},{2,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,4},{3,4},{0,5},{1,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{2,3},{0,4},{1,4},{0,5},{1,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{3,7},{4,7},{6,7}},
+{{0,1},{2,4},{3,4},{2,5},{3,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,3},{2,3},{4,5},{0,6},{3,6},{4,6},{5,6},{1,7},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{2,4},{3,5},{4,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,3},{2,3},{4,5},{0,6},{2,6},{4,6},{5,6},{1,7},{3,7},{4,7},{5,7},{6,7}},
+{{1,2},{1,3},{2,4},{0,5},{3,5},{4,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{1,3},{2,4},{3,4},{0,5},{4,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{2,4},{0,5},{3,5},{4,5},{1,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{0,2},{2,4},{3,4},{2,5},{3,5},{1,6},{3,6},{4,6},{5,6},{0,7},{1,7},{4,7},{5,7}},
+{{0,1},{0,4},{1,4},{3,4},{0,5},{2,5},{3,5},{1,6},{2,6},{5,6},{2,7},{3,7},{4,7},{6,7}},
+{{0,1},{1,4},{2,4},{3,4},{0,5},{2,5},{3,5},{0,6},{1,6},{5,6},{2,7},{3,7},{4,7},{6,7}},
+{{0,1},{2,3},{1,4},{0,5},{3,5},{4,5},{2,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,2},{1,3},{2,4},{3,4},{0,5},{3,5},{0,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{1,4},{3,4},{0,5},{4,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{2,4},{3,4},{0,5},{3,5},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{2,4},{3,5},{4,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{0,2},{2,3},{3,4},{1,5},{4,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{0,2},{3,4},{1,5},{3,5},{4,5},{2,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{1,4},{0,5},{2,5},{4,5},{1,6},{3,6},{5,6},{2,7},{3,7},{4,7},{6,7}},
+{{0,1},{0,4},{1,4},{3,4},{0,5},{2,5},{3,5},{1,6},{2,6},{4,6},{2,7},{3,7},{5,7},{6,7}},
+{{0,1},{0,4},{1,4},{2,4},{0,5},{1,5},{3,5},{2,6},{3,6},{4,6},{2,7},{3,7},{5,7},{6,7}},
+{{0,3},{2,3},{1,4},{1,5},{2,5},{4,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,3},{2,3},{1,4},{2,4},{0,5},{3,5},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{2,3},{1,4},{2,4},{3,4},{0,5},{1,5},{0,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,3},{2,4},{3,4},{0,5},{1,5},{3,5},{0,6},{2,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,2},{2,3},{0,4},{1,4},{0,5},{3,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{1,3},{2,3},{2,4},{0,5},{4,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{1,4},{2,4},{3,4},{0,5},{3,5},{2,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{1,4},{3,4},{0,5},{2,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,2},{2,3},{3,4},{0,5},{1,5},{4,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{3,4},{1,5},{2,5},{4,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{0,4},{1,4},{2,4},{3,4},{0,5},{2,5},{1,6},{3,6},{5,6},{2,7},{3,7},{5,7},{6,7}},
+{{1,2},{0,3},{1,4},{2,4},{0,5},{3,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,2},{1,3},{2,3},{3,4},{0,5},{4,5},{0,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{2,4},{3,4},{0,5},{1,5},{3,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{3,4},{0,5},{1,5},{4,5},{2,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{1,4},{0,5},{1,5},{2,6},{3,6},{4,6},{5,6},{2,7},{3,7},{4,7},{5,7}},
+{{0,1},{0,4},{1,4},{2,4},{3,4},{0,5},{1,5},{2,6},{3,6},{5,6},{2,7},{3,7},{5,7},{6,7}},
+{{0,3},{1,4},{2,4},{1,5},{2,5},{3,5},{0,6},{3,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{1,3},{2,3},{1,4},{2,4},{0,5},{3,5},{0,6},{4,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,3},{1,4},{2,4},{3,4},{1,5},{2,5},{0,6},{3,6},{5,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{2,3},{2,4},{3,4},{0,5},{1,5},{3,5},{0,6},{1,6},{4,6},{0,7},{1,7},{2,7},{5,7},{6,7}},
+{{0,3},{1,3},{2,4},{2,5},{4,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{2,3},{0,4},{1,4},{2,5},{3,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{2,3},{2,4},{3,4},{0,5},{1,5},{0,6},{1,6},{4,6},{5,6},{0,7},{1,7},{2,7},{3,7},{5,7}},
+{{0,1},{0,2},{1,2},{3,4},{3,5},{2,6},{3,6},{4,6},{5,6},{0,7},{1,7},{4,7},{5,7},{6,7}},
+{{0,1},{1,4},{2,4},{3,4},{1,5},{2,5},{3,5},{0,6},{2,6},{3,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{2,4},{3,4},{2,5},{3,5},{0,6},{4,6},{5,6},{1,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,4},{2,4},{3,4},{0,5},{3,5},{1,6},{2,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,3},{1,4},{2,4},{1,5},{2,5},{3,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,4},{3,4},{2,5},{3,5},{0,6},{3,6},{4,6},{5,6},{1,7},{2,7},{4,7},{5,7}},
+{{0,1},{0,2},{2,4},{3,4},{1,5},{3,5},{2,6},{3,6},{4,6},{5,6},{0,7},{1,7},{4,7},{5,7}},
+{{0,1},{2,3},{0,4},{2,4},{0,5},{2,5},{4,5},{1,6},{3,6},{4,6},{1,7},{3,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{1,4},{0,5},{2,5},{4,5},{1,6},{3,6},{4,6},{2,7},{3,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{2,4},{0,5},{3,5},{4,5},{1,6},{2,6},{4,6},{1,7},{3,7},{5,7},{6,7}},
+{{0,1},{0,4},{2,4},{3,4},{1,5},{2,5},{3,5},{0,6},{1,6},{3,6},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,3},{1,4},{2,4},{1,5},{3,5},{2,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,4},{2,4},{3,4},{0,5},{2,5},{1,6},{3,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,4},{2,4},{3,4},{2,5},{3,5},{0,6},{3,6},{5,6},{1,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{1,4},{2,4},{0,5},{3,5},{2,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{2,3},{0,4},{3,5},{4,5},{1,6},{4,6},{5,6},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{1,2},{0,3},{1,4},{2,4},{0,5},{2,5},{3,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{1,2},{0,3},{1,4},{3,4},{2,5},{3,5},{0,6},{4,6},{5,6},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{1,4},{2,4},{3,4},{0,5},{3,5},{1,6},{2,6},{5,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,4},{2,4},{3,4},{1,5},{3,5},{2,6},{3,6},{5,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{1,2},{0,3},{0,4},{3,4},{2,5},{3,5},{1,6},{4,6},{5,6},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,4},{2,4},{3,4},{2,5},{3,5},{1,6},{3,6},{5,6},{1,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{0,4},{1,4},{2,5},{3,5},{2,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{2,4},{3,4},{1,5},{2,5},{1,6},{3,6},{5,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,4},{1,4},{3,4},{2,5},{3,5},{1,6},{2,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{1,4},{0,5},{1,5},{4,5},{2,6},{3,6},{4,6},{2,7},{3,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,4},{1,4},{2,4},{1,5},{3,5},{2,6},{3,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{0,4},{1,4},{3,4},{2,5},{3,5},{2,6},{3,6},{5,6},{1,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,3},{0,4},{2,4},{1,5},{3,5},{2,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,2},{2,4},{3,4},{0,5},{1,5},{3,6},{4,6},{5,6},{3,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{0,4},{1,4},{2,4},{1,5},{3,5},{2,6},{3,6},{5,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,2},{0,3},{3,4},{3,5},{4,5},{1,6},{4,6},{5,6},{2,7},{4,7},{5,7},{6,7}},
+{{0,1},{2,3},{1,4},{2,4},{3,4},{0,5},{1,5},{2,6},{3,6},{5,6},{0,7},{4,7},{5,7},{6,7}},
+{{0,1},{0,2},{1,2},{1,4},{3,4},{2,5},{3,5},{3,6},{4,6},{5,6},{0,7},{4,7},{5,7},{6,7}}]];
+
+perm:=proc(x1,x2) local j1,j2,j3,n,p,y:
+ n:=nops(x1):
+ if nops(x2)<>n then error"wrong input" end if:
+ j1,j3,p:=0,0,combinat[firstperm](n):
+ for j2 from 1 to n! do
+  j3:=j3+mul(f[x1[y],x2[p[y]]],y=1..n):
+  p:=combinat[nextperm](p):
+  if j2 mod 1000=0 then j1,j3:=j1+j3,0 end if end do:
+ j1+j3 end proc:
+
+permsym:=proc(x1,x2) local j1,j2,j3,n,p,y:
+ n:=nops(x1):
+ if nops(x2)<>n then error"wrong input" end if:
+ j1,j3,p:=0,0,combinat[firstperm](n):
+ for j2 from 1 to n! do
+  j3:=j3+mul(f[op(sort([x1[y],x2[p[y]]]))],y=1..n):
+  p:=combinat[nextperm](p):
+  if j2 mod 1000=0 then j1,j3:=j1+j3,0 end if end do:
+ j1+j3 end proc:
+
+submat:=proc(M,x1,x2) local j1,j2,j3,j4:
+ j1:=[]:
+ for j2 in x1 do
+  j3:=[]:
+  for j4 in x2 do
+   j3:=[op(j3),M[j2,j4]] end do:
+  j1:=[op(j1),j3] end do:
+ j1 end proc:
+
+facmat:=proc(M,x1,x2) local j1,j2,y:
+ j1,j2:=LinearAlgebra[Dimension](M):
+ j1:=[op({seq(y,y=1..j1)} minus {op(x1)})]:
+ j2:=[op({seq(y,y=1..j2)} minus {op(x2)})]:
+ LinearAlgebra[SubMatrix](M,j1,j2) end proc:
+
+Sign:=proc(p::list)
+local i, j, n, N;
+n:=nops(p); N:=0;
+for i from 1 to n-1 do
+for j from i+1 to n do
+if p[i]>p[j] then N:=N+1 fi;
+od; od;
+`if`(N::even,1,-1);
+end proc:
+
+MultW:=proc(x1,x2) local n,A,j0,j1,j2,j3,j4,s,mulw:
+ mulw:=proc(y1,y2) local j1,j2:
+  if op(0,y1)<>`w` then return y1*y2 end if:
+  j1:=sort(subsop(1=NULL,convertprodtolist(y2,w))):
+  if y1 in j1 then return 0 end if:
+  member(y1,sort([y1,op(j1)]),'j2'):#print(y1,y2,j2):
+  (-1)^(j2-1)*y1*y2 end proc:
+ n:=nops(x1):
+ A:=[]:
+ for j1 from 1 to n do
+  j0:=[]:
+  for j2 from 1 to n do
+   s:=0:
+   for j3 from 1 to n do
+    j4:=x2[j3,j2]:
+    if type(j4,`+`) then s:=s+map2(mulw,x1[j1,j3],j4) else s:=s+mulw(x1[j1,j3],j4) end if end do:
+   j0:=[op(j0),expand(s)] end do:
+  A:=[op(A),j0] end do:
+ A end proc:
+
+MultW:=proc(x1,x2) local n,A,j0,j1,j2,j3,j4,s,mulw,mulw1,mulw2:
+ mulw:=proc(y1,y2) local j0,j1,j2:
+  j0:=pickindets(y1,w):
+  if j0={} then return y1*y2 end if:
+  if nops(j0)>1 then error"cannot multiply with %1",y1 else j0:=j0[1] end if:
+  j1:=sort(subsop(1=NULL,convertprodtolist(y2,w))):
+  if j0 in j1 then return 0 end if:
+  member(j0,sort([j0,op(j1)]),'j2'):
+  (-1)^(j2-1)*y1*y2 end proc:
+ mulw1:=proc(z1,z2)
+  if type(z1,`+`) then map(mulw,z1,z2) else mulw(z1,z2) end if end proc:
+ n:=nops(x1):
+ A:=[]:
+ for j1 from 1 to n do
+  j0:=[]:
+  for j2 from 1 to n do
+   s:=0:
+   for j3 from 1 to n do
+    j4:=x2[j3,j2]:
+    if type(j4,`+`) then s:=s+map2(mulw1,x1[j1,j3],j4) else s:=s+mulw1(x1[j1,j3],j4) end if end do:
+   j0:=[op(j0),expand(s)] end do:
+  A:=[op(A),j0] end do:
+ A end proc:
+
+pq:=proc(x,n) local j1,j2,j3,j4,y:
+ j1:=[[],[]]:
+ for j2 from 1 to n do
+  j3:=map(proc(y) if op(1,y)=j2 then y else NULL end if end proc,[op(x)]):
+  j4:=map(proc(y) if op(2,y)=j2 then y else NULL end if end proc,[op(x)]):
+  j1:=[[op(j1[1]),nops(j3)],[op(j1[2]),nops(j4)]] end do:
+ j1 end proc:
+ 
+block:=proc(x,n) local j1,j2,isblock:
+ isblock:=proc(x1,x2) local j1,j2,y:
+  for j1 in x1 do
+   for j2 in x2 do
+    if w[j1,j2] in x then return false end if end do end do:
+  for j1 in {seq(y,y=1..n)} minus x1 do
+   for j2 in {seq(y,y=1..n)} minus x2 do
+    if w[j1,j2] in x then return false end if end do end do:
+ true end proc:
+ for j1 in combinat[powerset](n) minus {{}} do
+  for j2 in combinat[powerset](n) minus {{}} do
+   if isblock(j1,j2) then return [j1,j2] end if end do end do:
+ [] end proc:
+
+paths:=proc(x) local y,path1:
+ path1:=proc(x,s) local j1,y:
+  if x={s} then [[s]]
+   else j1:=[op(map(proc(y) if op(1,y)=op(1,s) or op(2,y)=op(2,s) then y else NULL end if end proc,x minus {s}))]:#print(j1,args):
+   map(proc(y) local y1:op(map(y1->[s,op(y1)],path1(x minus {s},y))) end proc,j1) end if end proc:
+ map(y->op(path1(x,y)),[op(x)]) end proc:
+
+compos:=proc(n) local j0,j1,j2,j3,m,p,y,addto:
+ addto:=proc(x,y) local y1:
+  map(y1->[op(x),y1],combinat[choose](j0 minus {op(map(op,x))},y)) end proc:
+ p:=[]:
+ j0:={seq(y,y=1..n)}:
+ for j1 in combinat[partition](n/2) do
+  m,j2:=nops(j1),{[]}:
+  for j3 in j1 do j2:=map(y->op(map(sort,addto(y,j3))),j2) end do:#print(1,nops(j2)):
+  for j3 in j1 do j2:=map(y->op(addto(y,j3)),j2) end do:#print(2,nops(j2)):
+  j2:=map(proc(y) local y1:{seq(sort([y[y1],y[y1+m]]),y1=1..m)} end proc,j2):#print(3,nops(j2)):
+  p:=[op(p),op(j2)] end do end proc:
+
+#indexsets:=proc(x1,x2) local j1,n,y:
+# n:=nops(x1):
+# j1:=subs([seq(y=op([x1[y],x2[y]]),y=1..n)],map(y->[op(y)],compos(n))):#print(j1):
+# map(proc(y) local y1:if add(map(y1->nops(y1[1]),[op(y)]))<n or add(map(y1->nops(y1[2]),[op(y)]))<n then NULL else y end if end proc,j1) end proc:
+
+#indexsets:=proc(x1,x2) local j1,n,y:
+# n:=nops(x1):
+# j1:=subs([seq(y=op([x1[y],x2[y]]),y=1..n)],map(y->[op(map(y1->map(y2->[op(y2)],y1),y))],compos(n))):#print(j1):
+# map(proc(y) local y1:if add(map(y1->nops({op(y1[1])}),[op(y)]))<n or add(map(y1->nops({op(y1[2])}),[op(y)]))<n then NULL else y end if end proc,j1) end proc:
+
+#Sumdet:=proc(x) sumdet(map2(op,1,[op(x)]),map2(op,2,[op(x)])) end proc:
+#sumdet:=proc(x1,x2) local B,n,j1,y,y1,y2:
+# n:=nops(x1):
+# B:=[seq([seq(b[op(sort([y1,y2]))],y2=1..n+1)],y1=1..n+1)]:
+# expand(add(map(proc(y) local y1:(-2)^nops(y)*nops(y)!*mul(map(y1->linalg[det](submat(B,op(y1))),[op(y)])) end proc,indexsets(x1,x2)))) end proc:
+
+Sumdet:=proc(x)
+ expand(add(map(y->(-2)^nops(y)*nops(y)!*mul(map(y1->linalg[det](submat(B,op(map(y2->map(y3->op(x[y3]),[op(y2)]),y1)))),[op(y)])),compos(nops(x)))))
+ end proc:
+
+btoc:=proc(x) local btoc1:
+ btoc1:=proc(x) local j1:
+  j1:=convertprodtolist(x,b):
+  j1[1]*c[op(sort(map(y->sort([op(y)]),subsop(1=NULL,j1))))] end proc:
+ if type(x,`+`) then map(btoc1,x) else btoc1(x) end if end proc:
+
+sortset:=proc(x,n) local j1,j2,j3,j4,x1,x2,y,y1:
+ j1,x1:=[[0$n],[0$n]],x:
+ while true do
+  for j2 from 1 to 2 do
+   x2:=x1:
+   for j3 from 1 to n do
+    if j1[j2,j3]<>0 then next end if:
+    j4:=map(proc(y) if op(j2,y)=j3 then y else NULL end if end proc,x1):
+    if nops(j4)=0 then return 0 end if:
+    if nops(j4)=1 and nops(x1)>1 then j1[j2,j3],x1:=j4[1],x1 minus j4 end if end do:
+   if x1=x2 then return 0 end if:#print(j2,x1,j1):
+   if nops(x1)=1 then member(x1[1],x,'j4'):
+    return [j4,op(map(y->map(proc(y1) local i1:if y1=0 then 0 else member(y1,x,'i1'):i1 end if end proc,y),j1))] end if end do end do
+  end proc:
+
+signset:=proc(x,n) local j1,j2:
+ j1:=sortset(x,n):
+ if j1=0 then 0
+  elif j1[3,1]=0 then Sign([op(subs(0=j1[1],j1[2])),op(subsop(1=NULL,j1[3]))])
+  else Sign([op(subs(0=j1[3,1],j1[2])),op(subsop(1=NULL,subs(0=j1[1],j1[3])))]) end if
+ end proc:
+
+freqtolist:=proc(x) local y:
+ [seq(y$x[y],y=1..nops(x))] end proc:
+
+kronecker:=proc(i,j)
+ if i=j then 1 else 0 end if end proc:
+
+laplacian2:=proc(g) local j1,j2,j3,j4,j5,j6,L,L0,n,v,v0,vars,vars0,vers0,vars1:
+ v:=[op(map(y->op(y[1]),g))]:
+ j1,n:=map(valence,v,g),nops(v)-1:
+ member(max(j1),j1,'j2'):
+ v,v0:={op(v)} minus {v[j2]},v[j2]:
+ L:=facmat(laplacian(g,[]),[j2],[j2]):
+ vars:=indets(L):
+ L0:=copy(L):for j1 from 1 to n do L0[j1,j1]:=0 end do:
+ vars0:=vars minus indets(L0):
+ vers0:=map(y->(g[op(y),1] minus {v0})[1],vars0):#print("*",v0,L,vars,vars0,vers0):
+ while nops(vars0)<n do
+  for j1 from 1 to nops(g) do
+   j3:=g[j1,1] minus {v0,op(vers0)}:
+   if nops(j3)<>1 then next else j3:=j3[1] end if:
+   if not member(j3,v,'j6') then error"This should not happen 1, %1",j3 end if:
+   for j5 from 1 to n do
+    if j5=j6 or not depends(L[j5,j6],alpha[j1]) then next end if:#print(j5,j6):
+    for j4 from 1 to n do L[j5,j4]:=L[j5,j4]+L[j6,j4] end do:
+    for j4 from 1 to n do L[j4,j5]:=L[j4,j5]+L[j4,j6] end do end do:
+   L0:=copy(L):for j4 from 1 to n do L0[j4,j4]:=0 end do:
+   vars1:=vars minus indets(L0):#print(j1,j3,"#",j5,j6,L,vars,vars0,vars1,vers0):
+   if not ((vars0 subset vars1) and (nops(vars1)=nops(vars0)+1)) then error"This should not happen 3, %1",j1 end if:
+   vars0:=vars1:
+   vers0:=[op(vers0),j3]:#print("*",j5,j6,L,vars,vars0,vers0):
+   break end do:
+  if n1=n+1 then error"This should not happen 4, %1",j1 end if end do:
+  L end proc:
+ 
+laplace2SD:=proc(L) local j0,j1,j2,j3,n,L0,diag,vars,vars0,vars1,dovar,y,y1:
+ dovar:=proc(x,var,n) local j0,j1,j2,j3,L1:
+  j0:=[]:
+  for j1 from 1 to n-1 do
+   for j2 from j1+1 to n do
+    j3:=coeff(x[3][j1,j2],var):
+    if j3<>0 then
+     L1:=subs(var=0,copy(x[3])):
+     L1[j1,j2]:=0:
+     j0:=[op(j0),[j3*x[1],[op(x[2]),[j1,j2]],L1]] end if end do end do:
+  op(j0) end proc:
+n:=LinearAlgebra[Dimension](L[1]):
+ vars:=indets(L):
+ L0:=copy(L):for j1 from 1 to n do for j2 from 1 to j1 do L0[j1,j2]:=0 end do end do:
+ vars0:=vars minus indets(L0):
+ diag:={seq(w[y,y],y=1..n)}:
+ vars1:=vars minus vars0:
+ L0:=subs(vars1[-1]=0,L0):
+ vars1:=vars1 minus {vars1[-1]}:
+ j0:=[[Sign(sort([op(vars0),op(vars1)],output=permutation)),[],L0]]:
+ for j1 in vars1 do
+  j0:=map(dovar,j0,j1,n) end do:#print(j0,diag):
+ add(map(y->y[1]*signset({op(map(y1->w[op(y1)],y[2]))} union diag,n)*SD[op(y[2])],j0)) end proc:
+
+laplace2SD:=proc(L) local j0,j1,j2,j3,n,L0,diag,vars,vars0,vars1,dovar,y,y1:
+ dovar:=proc(x,var,n) local j0,j1,j2,j3,L1:
+  j0:=[]:
+  for j1 from 1 to n-1 do
+   for j2 from j1+1 to n do
+    j3:=coeff(x[3][j1,j2],var):
+    if j3<>0 then
+     L1:=subs(var=0,copy(x[3])):
+     L1[j1,j2]:=0:
+     j0:=[op(j0),[j3*x[1],[op(x[2]),[j1,j2]],L1]] end if end do end do:
+  op(j0) end proc:
+ n:=LinearAlgebra[Dimension](L[1]):
+ vars:=indets(L):
+ L0:=copy(L):for j1 from 1 to n do for j2 from 1 to j1 do L0[j1,j2]:=0 end do end do:
+ vars0:=vars minus indets(L0):
+ diag:={seq(w[y,y],y=1..n)}:
+ vars1:=vars minus vars0:
+ L0:=subs(vars1[-1]=0,L0):
+ vars1:=vars1 minus {vars1[-1]}:
+ j0:=[[Sign(sort([op(vars0),op(vars1)],output=permutation)),[],L0]]:
+ for j1 in vars1 do
+  j0:=map(dovar,j0,j1,n) end do:#print(j0,diag):
+ add(map(proc(y) local i1,i2:
+  i1:=[op(diag),op(map(y1->w[op(y1)],y[2]))]:
+  i2:=Sign(sort(i1,output=permutation)):
+#  print("**",i1,i2):
+  y[1]*i2*signset({op(i1)},n)*SD[op(y[2])] end proc,j0)) end proc: 
+
+doSD:=proc(x,L) local n,L0,j1,vars,vars1,comp,doSD1:
+ doSD1:=proc(x1) local y,y1,y2,y3,facmat1,det1:#print(1,args):
+  det1:=proc(L) option remember:
+   if L=0 then 0 else LinearAlgebra[Determinant](L) end if end proc:
+  facmat1:=proc(L,x1,x2)# print(args):
+  if min(nops({op(x1)}),nops({op(x2)}))<nops(x1) then 0
+   else Sign(x1)*Sign(x2)*(-1)^(add(x1)+add(x2))*facmat(L,x1,x2) end if end proc:
+  expand(add(map(y->(-2)^nops(y)*nops(y)!/Psi^(nops(y)+1)*mul(map(y1->det1(facmat1(L0,op(map(y2->map(y3->op(op(y3,x1)),[op(y2)]),y1)))),[op(y)])),comp))) end proc:
+ n:=LinearAlgebra[Dimension](L[1]):
+ comp:=compos(n-1):
+ vars:=indets(L):
+ L0:=copy(L):for j1 from 1 to n do L0[j1,j1]:=0 end do:
+ vars1:=vars minus (vars minus indets(L0)):
+ member(vars1[-1],vars,'j1'):
+ L0:=subs(vars1[-1]=1,L):#print(j1,L0):
+ collect((-1)^j1*(2*n-1)*subsproc(doSD1,x,SD),Psi,expand) end proc:
+
+par2P:=proc(x,g) local vars,x1,y,par2P1:
+ par2P1:=proc(x) local n1,j1,vset,vars1:#print(args):
+  n1:=degree(denom(x),Psi)-2:
+  j1:=numer(x):
+  j1:=map(y->normal((degree(j1,y)+1-2*epsilon/2)/(1+n1-epsilon/2)),[op(vars)]):##2*
+  vset:=map(y->op(op(1,y)),g):
+  j1:=[op(j1),normal((nops(vset)-1)*(4+2*n1-epsilon)/(2+2*n1-epsilon)-add(j1))]:
+  vars1:=[op(vars),({seq(alpha[y],y=1..nops(g))} minus vars)[1]]:
+  subs(map(y->y=1,indets(x)),x)*mul(map(y->GAMMA(normal(y*(1+n1-epsilon/2))),j1))/GAMMA(2+n1-epsilon/2)*P[[{seq([g[op(vars1[y]),1],j1[y]],y=1..nops(g))},n1]] end proc:
+ vars:=({seq(alpha[y],y=1..nops(g))} minus pickindets(x,alpha))[-1]:
+ vars:={seq(alpha[y],y=1..nops(g))} minus {vars}:
+ x1:=expand(x):#print(x1):
+ if type(x1,`+`) then map(par2P1,x1) else par2P1(x1) end if end proc:
+
+calcP:=proc(x) local calcP1:
+ calcP1:=proc(x)# print(args):
+   epsilonexpand(subsproc(y->periodN(op(op(y)),0),x,P),0) end proc:
+ if type(x,`+`) then map(calcP1,x) else calcP1(x) end if end proc:
+
+doSD:=proc(x,L) local n,L0,j1,vars,vars1,comp,doSD1:
+ doSD1:=proc(x1) local y,y1,y2,y3,facmat1,det1:#print(1,args):
+  det1:=proc(L) option remember:
+   if L=0 then 0 else LinearAlgebra[Determinant](L) end if end proc:
+  facmat1:=proc(L,x1,x2)# print(args):
+  if min(nops({op(x1)}),nops({op(x2)}))<nops(x1) then 0
+   else Sign(x1)*Sign(x2)*(-1)^(add(x1)+add(x2))*facmat(L,x1,x2) end if end proc:
+  expand(add(map(y->(-2)^nops(y)*nops(y)!/Psi^(nops(y)+1)/vars1[-1]*
+   mul(map(y1->det1(facmat1(L,op(map(y2->map(y3->op(op(y3,x1)),[op(y2)]),y1)))),[op(y)])),comp))) end proc:
+ n:=LinearAlgebra[Dimension](L[1]):
+ comp:=compos(n-1):
+ vars:=indets(L):
+ L0:=copy(L):for j1 from 1 to n do L0[j1,j1]:=0 end do:
+ vars1:=vars minus (vars minus indets(L0)):
+ member(vars1[-1],vars,'j1'):
+# L0:=subs(vars1[-1]=1,L):print(j1,L0):
+# L0:=L:
+ collect((-1)^(j1+(n+1)*(n+3)/8)*(2*n-1)*subsproc(doSD1,x,SD),Psi,expand) end proc:
+
+par2P:=proc(x,g) local vars,x1,y,par2P1:
+ par2P1:=proc(x) local n1,j1,vset,vars1,y:
+  n1:=degree(denom(x),Psi)-2:
+  j1:=numer(x):
+  j1:=map(y->(degree(j1,y)+1)/(1+n1),[op(vars)]):
+  vset:=map(y->op(op(1,y)),g):
+  j1:=[op(j1),(nops(vset)-1)*(4+2*n1)/(2+2*n1)-add(j1)]:
+  vars1:=[op(vars),({seq(alpha[y],y=1..nops(g))} minus vars)[1]]:
+  subs(map(y->y=1,indets(x)),x)*mul(map(y->(y*(1+n1)-1)!,j1))/(1+n1)!*P[[{seq([g[op(vars1[y]),1],j1[y]],y=1..nops(g))},n1]] end proc:
+ vars:=({seq(alpha[y],y=1..nops(g))} minus pickindets(x,alpha))[-1]:
+ vars:={seq(alpha[y],y=1..nops(g))} minus {vars}:
+ x1:=expand(x):
+ if type(x1,`+`) then map(par2P1,x1) else par2P1(x1) end if end proc:
+
+par2P:=proc(x,g) local vars,x1,y,par2P1:
+ par2P1:=proc(x) local n1,j1,vset,y:
+  n1:=degree(denom(x),Psi)-2:
+  j1:=numer(x):
+  j1:=map(y->(degree(j1,y)+1)/(1+n1),[op(vars)]):
+  subs(map(y->y=1,indets(x)),x)*mul(map(y->(y*(1+n1)-1)!,j1))/(1+n1)!*P[[{seq([g[op(vars[y]),1],j1[y]],y=1..nops(g))},n1]] end proc:
+ vars:={seq(alpha[y],y=1..nops(g))}:
+ x1:=expand(x):
+ if type(x1,`+`) then map(par2P1,x1) else par2P1(x1) end if end proc:
+
+par2P:=proc(x,g) local vars,x1,y,par2P1:
+ par2P1:=proc(x) local n1,j1,vset,y:
+  n1:=degree(denom(x),Psi)-2:
+  j1:=numer(x):
+  j1:=map(y->(degree(j1,y)+1)/(1+n1),[op(vars)]):
+  subs(map(y->y=1,indets(x)),x)*mul(map(y->(y*(1+n1)-1)!,j1))/(1+n1)!*
+   P[[relabel({seq([g[op(vars[y]),1],j1[y]],y=1..nops(g))},[])[1],n1]] end proc:
+ if x=0 then return 0 end if:
+ vars:={seq(alpha[y],y=1..nops(g))}:
+ x1:=expand(x):
+ if type(x1,`+`) then map(par2P1,x1) else par2P1(x1) end if end proc:
+
+calcP:=proc(x) local j1,j2,j3,e,n1,ti:
+ j1:=[op(pickindets(x,P))]:
+ for j2 from 1 to nops(j1) do
+  ti:=time():
+  e,n1:=op(op(j1[j2])):
+  e:=relabel(e,[])[1]:#print(e,n1):
+  if ldegreegfnbound(e,e[1,1],n1)<>0 then error"subdivergence in graph %1 with n=%2",e,n1 end if:
+  j3:=periodn(e,n1,'silent',op(subsop(1=NULL,[args]))):
+  if j3=FAIL then printf("graph %a of %a fail in %a seconds\n",j2,nops(j1),time()-ti):return FAIL
+   else printf("graph %a of %a done in %a seconds\n",j2,nops(j1),time()-ti) end if:
+  j1:=subsop(j2=(j1[j2]=j3),j1) end do:
+ subs(j1,x) end proc:
+ 
+dograph:=proc(l,j1) local j2,j3,j4,j5,j6,g,ti:
+ ti:=time():
+ g:=graphedges(GraphList[l,j1]):
+ j2:=laplacian2(g):
+ j3:=laplace2SD(j2):
+ j4:=doSD(j3,j2):
+ j5:=par2P(j4,g):
+ printf("Topology: %a\n",map2(op,1,g)):
+ if type(j5,`+`) then printf("Graphs: %a\n",nops(j5)) else printf("Graphs: 1\n") end if:
+ j6:=calcP(j5):
+ if type(op(1,j6),integer) and op(1,j6)<0 then j6:=-j6 end if:
+# save(g,j2,j3,j4,j5,j6,InvariantIntegral_||l||_||j1):
+ printf("Result: %a in %a seconds\n",j6,time()-ti) end proc:
+
+cycleedgeincidence:=proc(g) local e1,c1,j1,j2,y:
+ c1,e1:=map(y->[op(y),y[1]],GraphTheory[CycleBasis](GraphTheory[Graph](g))),map(y->[op(y[1])],[op(g)]):
+ j2:=[]:
+ for j1 from 1 to nops(c1) do
+  j2:=[op(j2),map(proc(y) local y1:
+   if y in {seq([c1[j1,y1],c1[j1,y1+1]],y1=1..nops(c1[j1])-1)} then 1
+   elif y in {seq([c1[j1,y1+1],c1[j1,y1]],y1=1..nops(c1[j1])-1)} then -1
+   else 0 end if end proc,e1)] end do:
+ Matrix(j2) end proc:
+
+laplacian1:=proc(g) local j1,j2:
+ j1:=[[0$nops(g)]$nops(g)]:
+ for j2 from 1 to nops(g) do j1[j2,j2]:=alpha[j2] end do:
+ j2:=cycleedgeincidence(g):
+ j2.Matrix(j1).j2^%T end proc:
+
+calcP1:=proc(x) local j1,j2,j3,e,n1,ti:
+ j1:=[op(pickindets(x,P))]:
+ for j2 from 1 to nops(j1) do
+  ti:=time():
+  e,n1:=op(op(j1[j2])):
+  e:=relabel(e,[])[1]:#print(e,n1):
+  if ldegreegfnbound(e,e[1,1],n1)<>0 then printf("subdivergence in graph %a with n=%a",e,n1) end if:
+  j3:=periodN(e,n1,0,'silent',op(subsop(1=NULL,[args]))):
+  if j3=FAIL then printf("graph %a of %a fail in %a seconds\n",j2,nops(j1),time()-ti):return FAIL
+   else printf("graph %a of %a done in %a seconds\n",j2,nops(j1),time()-ti) end if:
+  j1:=subsop(j2=(j1[j2]=j3),j1) end do:
+ subs(j1,x) end proc:
+
+dograph1:=proc(l,j1) local j2,j3,j4,j5,j6,g,ti,y:
+ read(feyngraphs_||l):
+ ti:=time():
+ g:=graphedges(GraphList[j1]):
+ j2:=laplacian1(g):
+ j3:=laplace2SD(j2):
+ j4:=doSD(j3,j2):
+ j4:=collect(subs([seq(alpha[y]=1/alpha[y],y=1..2*l),Psi=Psi/mul(alpha[y],y=1..2*l)],j4)/mul(alpha[y],y=1..2*l)^2,Psi,normal);
+ j5:=par2P(j4,g):
+ print(l,j1,nops(j5),time()-ti):
+ j6:=calcP(j5):
+ if type(op(1,j6),integer) and op(1,j6)<0 then j6:=-j6 end if:
+ save(g,j2,j3,j4,j5,j6,helpgraph1_||l||_||j1):
+ print(j6,time()-ti) end proc:
+
+comparegraph:=proc(l,j1) local j2,j3,j4,j6,j21,j31,j41,j51,ti,y:global g,j5:
+ ti:=time():
+ if nargs>2 and args[3]='disk' then read(helpgraph_||l||_||j1):
+  else read(feyngraphs_||l):
+  g:=graphedges(GraphList[j1]):
+  j2:=laplacian2(g):
+  j3:=laplace2SD(j2):
+  j4:=doSD(j3,j2):
+  j5:=par2P(j4,g) end if:
+ j21:=laplacian1(g):
+ j31:=laplace2SD(j21):
+ j41:=doSD(j31,j21):
+ j41:=collect(subs([seq(alpha[y]=1/alpha[y],y=1..2*l),Psi=Psi/mul(alpha[y],y=1..2*l)],j41)/mul(alpha[y],y=1..2*l)^2,Psi,normal);
+ j51:=par2P(j41,g):
+ print(l,j1,nops(j51),time()-ti):
+ j6:=collect(j5-j51,Psi,normal):
+ if j6<>0 then print("sign"):j6:=collect(j5+j51,Psi,normal) end if:
+ save(g,j21,j31,j41,j51,j6,comparegraph_||l||_||j1):
+ j6 end proc:
+

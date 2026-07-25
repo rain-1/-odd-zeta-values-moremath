@@ -1,0 +1,336 @@
+<title>The Price of Purity — what we proved about the numbers nobody can prove irrational</title>
+<style>
+  :root {
+    --ground: #F7F5F0; --panel: #FFFFFF; --ink: #1E1B2E; --faint: #6E6880;
+    --line: #E2DED4; --motive: #6B5CB8; --arch: #A8842F; --padic: #2E8C7E;
+    --thm: #3E8C5F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground: #131120; --panel: #1B1830; --ink: #E8E4F2; --faint: #9A94B0;
+      --line: #2E2A44; --motive: #A79AE0; --arch: #D4B266; --padic: #6BC4B2; --thm: #6BBE8E; }
+  }
+  :root[data-theme="dark"] { --ground: #131120; --panel: #1B1830; --ink: #E8E4F2;
+    --faint: #9A94B0; --line: #2E2A44; --motive: #A79AE0; --arch: #D4B266; --padic: #6BC4B2; --thm: #6BBE8E; }
+  :root[data-theme="light"] { --ground: #F7F5F0; --panel: #FFFFFF; --ink: #1E1B2E;
+    --faint: #6E6880; --line: #E2DED4; --motive: #6B5CB8; --arch: #A8842F; --padic: #2E8C7E; --thm: #3E8C5F; }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink);
+    font-family: "Palatino Linotype", Palatino, "URW Palladio L", "Book Antiqua", Georgia, serif;
+    line-height: 1.62; margin: 0; padding: 3.5rem 1.25rem 6rem; font-size: 1.05rem; }
+  main { max-width: 47rem; margin: 0 auto; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1.12; margin: .3rem 0 .4rem;
+    letter-spacing: -0.01em; text-wrap: balance; font-weight: 600; }
+  h2 { font-size: 1.35rem; margin: 2.8rem 0 .6rem; font-weight: 600; text-wrap: balance; }
+  h3 { font-size: 1.08rem; margin: 1.8rem 0 .4rem; font-weight: 600; }
+  p { margin: .8rem 0; }
+  .eyebrow { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .72rem;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin: 0 0 .4rem; }
+  .lede { font-size: 1.13rem; color: var(--faint); }
+  .disp { margin: 1.1rem 0; padding: .8rem 1.1rem; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 8px; overflow-x: auto;
+    font-size: 1.02rem; text-align: center; }
+  .thmbox { margin: 1.4rem 0; padding: 1rem 1.2rem; background: var(--panel);
+    border: 1px solid var(--line); border-left: 3px solid var(--thm); border-radius: 8px; }
+  .thmbox .head { font-weight: 600; margin-bottom: .35rem; }
+  .tag { font-family: ui-monospace, Menlo, monospace; font-size: .68rem; letter-spacing: .08em;
+    padding: .1em .5em; border-radius: 99px; border: 1px solid currentColor; white-space: nowrap;
+    vertical-align: middle; }
+  .t-p { color: var(--thm); } .t-v { color: var(--arch); } .t-i { color: var(--motive); }
+  em { font-style: italic; }
+  sub, sup { line-height: 0; }
+  blockquote { margin: 1.4rem 0; padding: .2rem 0 .2rem 1.2rem;
+    border-left: 3px solid var(--motive); font-style: italic; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 2.6rem 0; }
+  a { color: var(--padic); }
+  ul { padding-left: 1.3rem; } li { margin: .35rem 0; }
+  footer { margin-top: 4rem; color: var(--faint); font-size: .85rem;
+    border-top: 1px solid var(--line); padding-top: 1rem; }
+  :focus-visible { outline: 2px solid var(--motive); outline-offset: 2px; }
+</style>
+
+<main>
+<header>
+  <p class="eyebrow">River × Fable · July 2026 · a report for mathematicians new to the area</p>
+  <h1>The Price of Purity</h1>
+  <p class="lede">What a week of human–AI mathematics proved about ζ(5), ζ(3), and their p-adic
+  shadows — no irrationality theorem, and more structure than we knew to ask for.</p>
+</header>
+
+<p>Euler proved that ζ(2k) is a rational multiple of π<sup>2k</sup>, so every even zeta value is
+irrational. For the odd values the state of knowledge is one of the strangest in mathematics:
+<b>ζ(3) is irrational</b> (Apéry, 1978), and for no single one of ζ(5), ζ(7), ζ(9), … is
+irrationality known. The best window results — "at least one of ζ(5), ζ(7), ζ(9), ζ(11) is
+irrational" (Zudilin, 2001) — have not been sharpened in twenty-five years.</p>
+
+<p>This is a report on a week-long research program in that territory. Let me say the headline
+honestly at the outset: <b>we did not prove any new zeta value irrational, and by the end we could
+prove precise theorems about why our methods cannot.</b> What we found instead is a layer of
+arithmetic structure in the irrationality machinery itself — new congruence laws with an
+unexpected character twist, a sharp denominator theorem whose base case dissolves into one
+classical congruence, closed-form identifications of constants that had resisted description, and
+a single obstruction — the <em>price of purity</em> — that we met, independently, on three
+different sides of the subject. Some of it is machine-verified in Lean; all of it carries explicit
+evidence labels: <span class="tag t-p">proved</span> means a complete proof exists,
+<span class="tag t-v">verified</span> means exact computation over a stated finite range
+(evidence, never proof), <span class="tag t-i">identified</span> means a closed form pinned by
+high-precision computation and then proved or excluded as stated.</p>
+
+<h2>I. Sixty seconds of background: how anyone proves a zeta value irrational</h2>
+
+<p>Apéry's proof rests on a pair of integer-ish sequences. Let</p>
+<div class="disp">
+a<sub>n</sub> = Σ<sub>k</sub> (<span title="binomial">C(n,k)</span>)²(C(n+k,k))²,
+&nbsp;&nbsp; and let b<sub>n</sub> be the companion solution of the same recurrence
+(n+1)³u<sub>n+1</sub> = (34n³+51n²+27n+5)u<sub>n</sub> − n³u<sub>n−1</sub>,
+</div>
+<p>normalised so that b<sub>n</sub>/a<sub>n</sub> → ζ(3). Two miracles conspire. First,
+|a<sub>n</sub>ζ(3) − b<sub>n</sub>| shrinks like (1+√2)<sup>−4n</sup>. Second — the arithmetic
+miracle — the denominators of b<sub>n</sub> divide d<sub>n</sub>³, where d<sub>n</sub> =
+lcm(1,…,n) ≈ e<sup>n</sup>. Since e³ &lt; (1+√2)⁴, the integers
+d<sub>n</sub>³(a<sub>n</sub>ζ(3) − b<sub>n</sub>) tend to zero, and a nonzero integer cannot.
+Every subsequent result in the field — Rivoal's infinitely many irrational odd values, Zudilin's
+windows, the Brown–Zudilin approximations to ζ(5) — is a variation on this template: construct
+linear forms, control growth, control denominators. The whole game is the fight between an
+analytic rate and an arithmetic budget. Our program studied the arithmetic side of that fight —
+and found it far more structured than the literature records.</p>
+
+<h2>II. The congruence theorems: the second solution has a Lucas law, with a character in it</h2>
+
+<p>A classical fact (Gessel, 1982): the Apéry numbers satisfy a <em>Lucas congruence</em>,
+a<sub>ap+r</sub> ≡ a<sub>a</sub>·a<sub>r</sub> (mod p) — the sequence respects base-p digits.
+Such congruences are well studied for a<sub>n</sub> and its fifteen "sporadic" cousins. For the
+<em>second</em> solution b<sub>n</sub> — the one that actually carries ζ(3) — no congruence of
+Lucas type appears anywhere in the literature. It turns out there is one.</p>
+
+<div class="thmbox">
+  <div class="head">Theorem (second-solution Lucas congruence) <span class="tag t-p">proved</span></div>
+  For every prime p ≥ 5, every 1 ≤ a &lt; p and 0 ≤ r &lt; p:
+  <div class="disp">p³·b<sub>ap+r</sub> ≡ b<sub>a</sub>·a<sub>r</sub> &nbsp;(mod p).</div>
+  The proof is elementary and self-contained; a hostile machine referee reconstructed every lemma
+  independently. The stronger "master form" p³b<sub>n</sub>a<sub>q</sub> ≡ b<sub>q</sub>a<sub>n</sub>
+  (mod p³), q = ⌊n/p⌋, holds with floor exactly 3 in exhaustive exact sweeps
+  <span class="tag t-v">verified, p ≤ 31, n ≤ 320</span>.
+</div>
+
+<p>The exponent 3 is the <em>weight</em> — the number of derivatives of ζ hiding in b. We then
+did what one should always do with a clean law: tried to break it on the other fourteen sporadic
+families. It broke — on exactly seven of the fifteen — and the repair is the discovery:</p>
+
+<div class="thmbox">
+  <div class="head">Theorem (the χ-twisted descent) <span class="tag t-p">proved</span> under five explicit hypotheses; instances proved for the Apéry ζ(3), Apéry ζ(2), Franel and ΣC(n,k)⁴ pairs</div>
+  For a sporadic pair (A, B) of weight w whose second solution admits a harmonic-monomial weight,
+  <div class="disp">p<sup>w</sup>·B(ap+r) ≡ χ(p)·B(a)·A(r) &nbsp;(mod p),</div>
+  where <b>χ is the quadratic Dirichlet character attached to the sequence's limit</b> —
+  trivial when B/A → (rational)·ζ(w), and the character of conductor 3, 4 or 5 when the limit is
+  the corresponding L-value. The untwisted law fails at exactly the primes with χ(p) = −1; the
+  entire twist enters through one line — the p-divisible layer of a χ-twisted harmonic sum emits a
+  factor χ(p). The master form with the twist holds at floor exactly w across all fifteen families,
+  28 primes, five base-p digits deep <span class="tag t-v">verified, 0 failures</span>.
+</div>
+
+<p>In the language of Dwork's p-adic theory: Frobenius acts on the rank-two "crystal" attached to
+such a pair with eigenvalues 1 and χ(p)p<sup>w</sup> — the unit root and a twisted weight — and
+these congruences are its elementary shadow, one congruence per graded piece. The unit-root half is
+classical; the second row is new, and it is the coefficient-level face of a circle of open
+questions around Beukers–Vlasenko's Dwork-crystal conjectures. A bonus with a story: proving the
+ζ(3) case forced a hunt for better closed forms, which produced</p>
+
+<div class="disp">
+b<sub>n</sub> = Σ<sub>k</sub> C(n,k)²C(n+k,k)²·(2H<sup>(3)</sup><sub>n</sub> − H<sup>(3)</sup><sub>k</sub>),
+&nbsp; H<sup>(3)</sup><sub>m</sub> = Σ<sub>j≤m</sub> j<sup>−3</sup>
+</div>
+
+<p><span class="tag t-p">proved</span>, by six small telescoping certificates — a two-term
+harmonic weight where the classical formula has a nested alternating sum. We could not find this
+form anywhere in the literature. The certificates localise "Apéry's miracle" — the cancellation
+that makes his proof work — into a single line of algebra: m² + (n+1−m)(n+m+1) = (n+1)², and the
+mysterious constant 5 in his original paper into one boundary evaluation,
+5(−1)<sup>n</sup>C(2n+1,n+1). Several of these statements, including the abstract χ-twisted
+theorem and two of its instances, are formalised in Lean 4, sorry-free.</p>
+
+<h2>III. The denominator theorem: a factor of 12, and a base case that dissolves</h2>
+
+<p>The modern frontier for ζ(5) is a family of "cellular integrals" on the moduli space
+M<sub>0,8</sub> constructed by Brown and Zudilin, producing simultaneous approximations
+I′<sub>n</sub> = Q<sub>n</sub>ζ(5) − P<sub>n</sub> with Q<sub>n</sub> an explicit double binomial
+sum. Their paper records, on computational evidence, that d<sub>n</sub>⁵P<sub>n</sub> is an
+integer. It is not — their own printed value P₂ = 1190161/384 shows it, since d₂⁵ = 32 and
+384 = 12·32. The correct law carries a single global factor <b>12 = 2²·3</b>, and that factor is
+sharp. (A prior campaign of this program measured this; the present one proved it.)</p>
+
+<div class="thmbox">
+  <div class="head">Theorem (sharp denominators for the ζ(5) approximations, p ≥ 5 part)
+  <span class="tag t-p">proved</span>, modulo two explicitly-stated computational identities <span class="tag t-v">verified</span></div>
+  For every prime p ≥ 5 and every n: &nbsp; ord<sub>p</sub>(P<sub>n</sub>) ≥ −5⌊log<sub>p</sub>n⌋ =
+  −ord<sub>p</sub>(d<sub>n</sub>⁵).
+  <p style="margin:.5rem 0 0">The proof is a digit-by-digit induction whose only arithmetic inputs
+  are <b>Wolstenholme's congruence</b> and the classical fact Σ<sub>j&lt;p</sub> j<sup>−2</sup> ≡ 0
+  (mod p) — which is exactly why p ≥ 5 is the right hypothesis. The two quarantined inputs are
+  finite decomposition identities (explicit weight-5 harmonic forms over the Brown–Zudilin
+  summand), verified exactly to n = 360 and against the family's recurrence at 748 consecutive
+  values, with the machine-certification status of each stated precisely.</p>
+</div>
+
+<p>Two features of the proof deserve center stage. The first is where the difficulty finally
+concentrated. After the general machinery (a proved Lucas law for Q<sub>n</sub>, a graded
+harmonic-layer reduction, a carry calculus, and a fibre factorisation lemma whose engine is a
+sum-of-residues-equals-zero identity), the entire remaining content of the theorem contracted to a
+single congruence at a single point per prime: n₀ = (p−5)/2 — the zero of the recurrence's
+midpoint factor 2n+5. There, the relevant region collapses to <b>three corner cells</b>, whose
+weighted sum equals −14·Σ<sub>j&lt;p</sub> j<sup>−2</sup> ≡ 0. A theorem that consumed forty-odd
+computational campaigns balances, at its nucleus, on one congruence every graduate student
+knows.</p>
+
+<p>The second feature is that the proof knows why it works. Along the way we proved several
+<em>obstruction</em> theorems — statements that certain natural proof strategies cannot succeed
+(the base-case functional factors through a value map that kernel identities cannot move; no
+representative in any tested letter alphabet can make the estimate cell-wise) — and the final
+proof threads precisely the needle those no-go results leave open. The negative results were not
+detours; they were the map.</p>
+
+<h2>IV. The identifications: three constants give up their names</h2>
+
+<p><b>The purity defect.</b> The Brown–Zudilin recurrence has three characteristic roots:
+592.08…, −0.0844…, and 0.00500… . Here is the fact that reframes the whole ζ(5) problem: the
+smallest root is <em>smaller than e<sup>−5</sup></em> — an escape ray fast enough, if rational
+approximations could ride it, to prove ζ(5) irrational on the spot. They cannot: every rational
+class rides the middle root (that is why the family's "worthiness" exponent is 0.866 &lt; 1, as a
+prior measurement established over the whole parameter cone). We asked what the minimal-ray class
+actually is, computed the mixing constant to hundreds of digits, and identified it:</p>
+
+<div class="disp">
+c = −3/π² = 12/(2πi)²  &nbsp;<span class="tag t-i">identified &amp; proved</span> — because
+I<sub>n</sub> = 2I′<sub>n</sub> + 4ζ(2)Î<sub>n</sub>: <b>the fast ray is the un-purified cellular
+integral itself.</b>
+</div>
+
+<p>Purifying the approximation — eliminating its ζ(2) content so that an irrationality argument
+can use it — costs exactly one Tate twist of decay rate. The price of purity is ζ(2), literally.
+(Two rounds of 600-digit integer-relation hunting had missed this constant, for an instructive
+reason: a PSLQ basis of periods can never see a <em>reciprocal</em> period.)</p>
+
+<p><b>A pure Frobenius constant.</b> Computing the Bloch–Vlasenko Frobenius constants of the
+Brown–Zudilin operator (with a new instrument: the constants are ratios of Stokes constants,
+which turns a 1/n-converging limit into one converging beyond all orders — 434 digits in seconds,
+validated by reproducing the published Golyshev–Zagier tables and settling two misprints in the
+literature at 219 digits) revealed that the primitive part of its first interesting constant is
+<b>λ₅ = (514/87)·ζ(5), pure</b> — the impurity in the full constant is exactly the decomposable
+product λ₂λ₃. In the primitive Frobenius basis, the crystal is clean; the impurity that exiles
+the linear forms is decomposable dressing. No operator with a pure rational multiple of ζ(5) in
+that slot had been recorded before.</p>
+
+<p><b>The p-adic Apéry limits.</b> The ratio b<sub>n</sub>/a<sub>n</sub> converges p-adically
+along towers n = ap<sup>s</sup> (a consequence of our congruences: exactly three new p-adic digits
+per level). To what? <em>Not</em> to the Kubota–Leopoldt p-adic zeta value — we excluded any
+ℚ-affine relation with ζ<sub>p</sub>(3) at large height, with a structural reason: for Apéry's
+order-3 operator, the Frobenius slots where ζ<sub>p</sub>(3) would live are identically zero. The
+limits are something better:</p>
+
+<div class="disp">
+lim<sub>t</sub> C(2p<sup>t</sup>, p<sup>t</sup>) =
+2·exp( −Σ<sub>m odd ≥ 3</sub> ζ<sub>p</sub>(m)·(2<sup>m</sup>−2)·p<sup>m</sup> / (m(1−p<sup>m</sup>)) )
+&nbsp;<span class="tag t-i">identified</span>, verified to 30 digits,
+</div>
+
+<p>and the general tower limit is an explicit expression in such "Kazandzidis limits" — values of
+the p-adic Γ-function's generating series, carrying <b>the entire tower of odd p-adic zeta values
+at once</b>. So the mirror symmetry of the subject is stranger than the slogan we started with:
+archimedean-ly, the Apéry ratio knows ζ(3) alone; p-adically it knows every odd zeta value
+simultaneously, wrapped in an exponential. Three of the fifteen sporadic families have no
+archimedean limit at all (their characteristic roots are equal-modulus complex conjugates) — and
+their p-adic limits exist anyway.</p>
+
+<h2>V. The negative space, drawn with a straightedge</h2>
+
+<p>A field stuck for twenty-five years deserves to know exactly where its walls are. Ours are now
+measured, and several are theorems:</p>
+
+<ul>
+  <li><b>No pair-irrationality at weight 7.</b> For the M<sub>0,10</sub> cellular family (the
+  natural "one of ζ(5), ζ(7) is irrational" machine), the fast sector is <em>excluded by
+  positivity</em>: the primitive form is a sum of two positive terms, one of which demonstrably
+  decays at the middle rate. The worthiness exponent is ≤ 0.34 against the needed 1, and the
+  entire leverage of Rhin–Viola-style parameter groups (measured across the known weight-5 orbit:
+  +0.68 nats) falls a factor of seven short of the +4.63 required. <span class="tag t-p">proved/measured</span></li>
+  <li><b>The known p-adic irrationality measures are exactly optimal.</b> Building the complete
+  cost ledger for the p-adic (Volkenborn) constructions from first principles — validated by
+  reproducing all three published measures, μ(ζ₂(3)) ≤ 7.17739889…, μ(ζ₃(3)) ≤ 22.28144795…,
+  μ(ζ₂(5)) ≤ 20.34265173…, to every printed digit — and then optimising over the whole parameter
+  cone shows the published values are unbeatable within the family. Two-term forms in 1 and
+  ζ<sub>p</sub>(w) exist only when φ(p<sup>r</sup>) = 2; at p ≥ 5 the p-adic smallness cancels
+  the archimedean growth <em>to the last digit</em>. The wall at p ∈ {2,3} is rank; at p ≥ 5 it
+  is size. <span class="tag t-p">computed over the stated family</span></li>
+  <li><b>But the group goes through the mirror.</b> One genuinely positive structural surprise on
+  the way: the <b>Transfer Principle</b> <span class="tag t-p">proved</span> — the p-adic
+  Volkenborn forms and the classical archimedean forms built from the same rational function have
+  literally identical rational coefficients, so every Rhin–Viola transfer identity and integrality
+  lemma is automatically p-adic. The permutation-group method of the classical theory (the famous
+  order-1920 group of Rhin–Viola's ζ(3) work) acts on the p-adic side for free — a fact that
+  answers a question posed in the ζ₂(5) literature and that no one appears to have used.</li>
+</ul>
+
+<h2>VI. The landscape: one object, one tax, three completions</h2>
+
+<p>Here is the conceptual picture the week's results assemble, and the reason they cohere. Behind
+each of these sequence pairs sits a single object: a piece of the cohomology of a family of
+varieties — rank two for Apéry's ζ(3), rank three for the ζ(5) family — degenerating at a point
+of maximal unipotent monodromy, whose limiting extension class has the zeta value as its period.
+Everything we measured is a shadow of that object in some realisation:</p>
+
+<ul>
+  <li>the recurrence is its Picard–Fuchs connection (the palindromic characteristic polynomials
+  are its Poincaré duality);</li>
+  <li>the congruence laws are its Frobenius structure — eigenvalues 1 and χ(p)p<sup>w</sup>,
+  graded piece by graded piece, with a conservation law
+  <span style="white-space:nowrap">r = 1 + ⌊m/2⌋</span> <span class="tag t-v">verified on four
+  families, including a successful blind prediction at weight 7</span> tying the recurrence order
+  to the unipotency;</li>
+  <li>the denominators are its integral lattices (the factor 12 = 2²·3 is a lattice index times a
+  Bernoulli constant — and, an honest open wrinkle, the geometric mechanism provably cannot
+  produce the 3, whose origin is currently underived);</li>
+  <li>the Apéry limits are its periods — archimedean on one side, Γ<sub>p</sub>-towers on the
+  other.</li>
+</ul>
+
+<p>And across every realisation runs the same tax. Archimedean-ly it is the middle-root exile:
+the fast ray exists but carries ζ(2)-impure classes, and purification costs precisely −3/π² of
+structure. p-adically it is the rank wall: every operator that eliminates the unwanted zeta value
+eliminates the wanted one too (tested against three hundred candidate eliminations, with clean
+positive controls). Even our own computational certificates hit an isomorphic obstruction: every
+strategy for decomposing a key telescoping problem failed for one reason — the cheap structure
+lives only in the <em>combination</em>, and is destroyed by any decomposition. Purity and
+tractability anti-align, in ℝ, in ℚ<sub>p</sub>, and in the machinery itself. Apéry's 1978 proof,
+in this language, is the unique known point where the tax vanishes: at rank two there is no
+middle ray, so purity is free — and that is why ζ(3) fell and its siblings did not.</p>
+
+<p>Is that a theorem? Not yet — and the two cleanest open problems the program leaves behind
+would make it one. In the p-adic ledger they are called rule R2 and the kernel inclusion
+ker ρ<sub>w′</sub> ⊆ ker ρ<sub>w</sub>; proved, they would turn the rank wall into a theorem
+that is <em>the exact p-adic analogue of why "one of ζ(5), ζ(7), ζ(9), ζ(11)" has never been
+sharpened</em> — one statement, both sides of the mirror. That, and the underived factor 3, and
+the bridge from O(1)-per-prime congruence structure to the e<sup>δn</sup> arithmetic that
+irrationality demands, are where we would dig next.</p>
+
+<h2>VII. Coda: how it was done, in one paragraph</h2>
+
+<p>This was a collaboration between a human mathematician (direction, taste, adversarial review)
+and an orchestrated fleet of AI reasoning agents (computation, proof, formalisation, refereeing),
+under a discipline the prior campaign established: exact arithmetic only; every claim tagged
+proved / verified / conjectured; finite checks are evidence, never proof; every proof refereed
+hostilely before being believed; and every beautiful claim stated with the computation that would
+kill it. Six times a lovely story died by measurement — a sign pattern, a depth obstruction, a
+p-adic slogan — and each time the corrected statement was stronger than the poetry it replaced.
+The theorems above survived that process; several are machine-verified end to end; and the ones
+that are merely <span class="tag t-v">verified</span> say so, with their ranges. The papers, the
+Lean code, and the complete worklogs — including the retractions — are the record.</p>
+
+<blockquote>No new irrational numbers. A new understanding of why — precise enough that "why"
+now has theorems, constants, and two open lemmas with names. In this field, that is what progress
+has always looked like the year before someone's miracle.</blockquote>
+
+<footer>Written by Fable for River's odd-zeta program, July 2026. Companion pages:
+<a href="https://claude.ai/code/artifact/1b698557-21ed-4b4a-bb56-966c572dc75e">the landscape map</a> ·
+<a href="https://claude.ai/code/artifact/c9bec736-31a2-4d6c-a679-a93caeae0a91">the method essay</a>.
+Full sources: five papers in <code>papers_out/</code>, worklogs in <code>work/</code>, Lean in
+<code>lean/ZetaLucas</code>. Evidence tags are load-bearing; nothing verified has been promoted.</footer>
+</main>

@@ -1,0 +1,4 @@
+file = w5_solution_abcn.json
+ p= 5 vT=0: max d5=0, LemmaF gives p^2, need p^1, SHORT BY 0 | vT=1: max d5=1, LemmaF gives p^3, need p^2, SHORT BY 0 | vT=2: max d5=3, LemmaF gives p^4, need p^4, SHORT BY 0 | vT=3: max d5=4, LemmaF gives p^4, need p^5, SHORT BY 1
+ p= 7 vT=0: max d5=0, LemmaF gives p^2, need p^1, SHORT BY 0 | vT=1: max d5=1, LemmaF gives p^3, need p^2, SHORT BY 0 | vT=2: max d5=4, LemmaF gives p^4, need p^5, SHORT BY 1 | vT=3: max d5=4, LemmaF gives p^4, need p^5, SHORT BY 1
+ p=13 vT=0: max d5=0, LemmaF gives p^2, need p^1, SHORT BY 0 | vT=1: max d5=1, LemmaF gives p^3, need p^2, SHORT BY 0 | vT=2: max d5=4, LemmaF gives p^4, need p^5, SHORT BY 1 | vT=3: max d5=4, LemmaF gives p^4, need p^5, SHORT BY 1

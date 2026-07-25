@@ -1,0 +1,5 @@
+START Sat 25 Jul 2026 02:32:10  MODE=box
+HF loaded
+ratio checks (must be {3, 3/2, 1/2}): {3, 3/2, 1/2}
+Psi HarmonicNumber count (must be 8): 8
+EE3 LeafCount 132917

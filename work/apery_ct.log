@@ -1,0 +1,8 @@
+HF ok
+ann #2
+telescoper #ops=1
+ORDER=2 DEG=5
+applied op = (-1 - nn)*F[nn] + (117 + 231*nn + 153*nn^2 + 34*nn^3)*F[1 + nn] + (-32 - 80*nn - 80*nn^2 - 40*nn^3 - 10*nn^4 - nn^5)*F[2 + nn]
+charpoly=-lam^2
+roots={0, 0}
+DONE

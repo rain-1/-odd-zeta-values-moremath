@@ -1,0 +1,599 @@
+\section{Minimal closed forms for second solutions}
+\label{sec:minimal}
+
+Theorem~\ref{thm:LB} needs a harmonic-monomial weight. For Ap\'ery's $b_n$ the fitting
+procedure of Section~\ref{ssec:decomp} returned one of startling brevity, and this section
+proves that it is correct. We then prove two more closed forms of the same kind, and
+record a sharp obstruction: the method provably fails for the $\zeta(2)$-Ap\'ery
+sequence.
+
+\subsection{The minimal form}
+
+\begin{theorem}[minimal form]\label{thm:minimal}
+\Proved\ For every integer $n\ge0$,
+\[
+   \sum_{k=0}^{n}\bin nk^2\bin{n+k}k^2\bigl(2\HH3n-\HH3k\bigr)
+   \;=\;
+   \sum_{k=0}^{n}\bin nk^2\bin{n+k}k^2
+     \Bigl(\HH3n+\sum_{m=1}^{k}\frac{(-1)^{m-1}}{2m^3\bin nm\bin{n+m}m}\Bigr)
+   \;=\;b_n .
+\]
+Equivalently,
+$\sum_{k=0}^{n}A(n,k)\bigl(\HH3n-\HH3k-\sum_{m=1}^ku(n,m)\bigr)=0$.
+\end{theorem}
+
+Write $B_{\min}(n)$ for the left-hand sum. The proof is by the classical route: both
+sides satisfy Ap\'ery's recurrence and agree at $n=0,1$. Set
+\begin{equation}\label{eq:Ldef}
+   P(n):=34n^3+51n^2+27n+5,\qquad
+   (Lu)(n):=(n+1)^3u(n+1)-P(n)u(n)+n^3u(n-1),
+\end{equation}
+and, for integers $n\ge1$, $k\ge0$, the \emph{base term}
+\begin{equation}\label{eq:Phi}
+   \Phi(n,k):=\frac{\bin{n+1}k^2\bin{n+k-1}k^2}{n^2(n+1)^2}.
+\end{equation}
+
+\begin{lemma}[conversion]\label{lem:conv}
+\Proved\ For all integers $n\ge1$, $k\ge0$:
+\begin{align}
+   A(n,k)&=\Phi(n,k)(n+1-k)^2(n+k)^2, \tag{0a}\\
+   A(n+1,k)&=\Phi(n,k)(n+k)^2(n+k+1)^2, \tag{0b}\\
+   A(n-1,k)&=\Phi(n,k)(n+1-k)^2(n-k)^2, \tag{0c}\\
+   \Phi(n,k+1)(k+1)^4&=\Phi(n,k)(n+1-k)^2(n+k)^2. \tag{0d}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Each reduces to the binomial conversions
+$\bin nk(n+1)=\bin{n+1}k(n+1-k)$, $\bin{n+k}kn=\bin{n+k-1}k(n+k)$,
+$\bin{n+k+1}kn(n+1)=\bin{n+k-1}k(n+k)(n+k+1)$,
+$\bin{n-1}kn(n+1)=\bin{n+1}k(n+1-k)(n-k)$, and, for (0d),
+%% FIXED [MINOR]: only the last two are literal instances of $\bin N{j+1}(j+1)=\bin Nj(N-j)$;
+%% FIXED the first four move the UPPER index and are instances of the companion form. The
+%% FIXED hedge present at MINIMAL_FORM_PROOF.md:48-51 had been dropped.
+$\bin{n+1}{k+1}(k+1)=\bin{n+1}k(n+1-k)$, $\bin{n+k}{k+1}(k+1)=\bin{n+k-1}k(n+k)$. The last
+two, those of (0d), are absorption identities $\bin N{j+1}(j+1)=\bin Nj(N-j)$ --- the second of
+them followed by one step of the companion. The first four move the \emph{upper} index instead
+and are instances of that companion, $\bin{N+1}j(N+1-j)=\bin Nj(N+1)$, applied once or twice.
+All six hold for
+\emph{every} integer $k\ge0$, including the degenerate range $k>n$ where both sides
+vanish: the conversions are stated multiplicatively, so no $0/0$ arises.
+\end{proof}
+
+Lemma~\ref{lem:conv} is the device that removes every boundary subtlety: after it, all
+identities below are $\Phi(n,k)$ times polynomial identities in $\Q[n,k]$.
+\VerifiedR{all six conversions, $n=1..12$, $k=0..n+4$, difference exactly $0$}.
+
+\subsection{Step B: the Zeilberger certificate for \texorpdfstring{$a_n$}{a\_n}}
+
+Set
+\begin{equation}\label{eq:TG}
+   T(n,k):=4(2n+1)\bigl(2k^2-3k-4n^2-4n\bigr),
+   \qquad
+   G(n,k):=\Phi(n,k)\,k^4\,T(n,k).
+\end{equation}
+
+\begin{lemma}[CERT-1]\label{lem:cert1}
+\Proved\ As an identity in $\Q[n,k]$,
+\begin{multline*}
+  T(n,k+1)(n+1-k)^2(n+k)^2-k^4T(n,k)\\
+  =(n+1)^3(n+k+1)^2(n+k)^2-P(n)(n+1-k)^2(n+k)^2+n^3(n-k)^2(n+1-k)^2 .
+\end{multline*}
+\end{lemma}
+
+\begin{proposition}\label{prop:B}
+\Proved\ For all integers $n\ge1$, $k\ge0$,
+\begin{equation}\label{eq:dagger}
+   (n+1)^3A(n+1,k)-P(n)A(n,k)+n^3A(n-1,k)\;=\;G(n,k+1)-G(n,k).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By (0a)--(0c) the left side is $\Phi(n,k)$ times the right-hand side of
+Lemma~\ref{lem:cert1}. By (0d),
+$G(n,k+1)=\Phi(n,k+1)(k+1)^4T(n,k+1)=\Phi(n,k)(n+1-k)^2(n+k)^2T(n,k+1)$ and
+$G(n,k)=\Phi(n,k)k^4T(n,k)$, so the right side is $\Phi(n,k)$ times the left-hand side of
+Lemma~\ref{lem:cert1}.
+\end{proof}
+
+The boundary values are $G(n,0)=0$ (factor $k^4$), $G(n,k)=0$ for $k\ge n+2$ (factor
+$\bin{n+1}k^2$), and $G(n,n+1)=-4(n+1)^3\bin{2n+1}{n+1}^2$. Summing \eqref{eq:dagger} over
+$k=0,\dots,N$ with $N\ge n+1$ telescopes to $G(n,N+1)-G(n,0)=0$, which recovers Ap\'ery's
+recurrence $(La)(n)=0$.
+
+\subsection{Step B\texorpdfstring{$'$}{'} and Step C: \texorpdfstring{$L$ annihilates $B_{\min}$}{L annihilates B\_min}}
+
+Write $w(n,k):=2\HH3n-\HH3k$, so $B_{\min}(n)=\sum_{k\ge0}A(n,k)w(n,k)$ (terms with $k>n$
+vanish). Since $w(n+1,k)=w(n,k)+2/(n+1)^3$ and $w(n-1,k)=w(n,k)-2/n^3$,
+\[
+   (LB_{\min})(n)=\sum_{k\ge0}w(n,k)\bigl(G(n,k+1)-G(n,k)\bigr)+2a_{n+1}-2a_{n-1},
+\]
+by Proposition~\ref{prop:B}. Abel summation, with $w(n,k+1)-w(n,k)=-1/(k+1)^3$ and the
+boundary values of $G$, turns this into
+\begin{equation}\label{eq:Bprime}
+   (LB_{\min})(n)\;=\;\sum_{j\ge1}\frac{G(n,j)}{j^3}+2a_{n+1}-2a_{n-1}.
+\end{equation}
+
+Now set
+\begin{equation}\label{eq:UK}
+   U(n,k):=-4(k-1)(2n+1)\bigl(2n^2+2n+1-k\bigr),
+   \qquad
+   K(n,k):=\frac{\Phi(n,k)k^4U(n,k)}{n^2(n+1)^2}.
+\end{equation}
+
+\begin{lemma}[CERT-2]\label{lem:cert2}
+\Proved\ As an identity in $\Q[n,k]$,
+\begin{multline*}
+   U(n,k+1)(n+1-k)^2(n+k)^2-k^4U(n,k)\\
+   =n^2(n+1)^2\Bigl[kT(n,k)+2\bigl((n+k)^2(n+k+1)^2-(n+1-k)^2(n-k)^2\bigr)\Bigr],
+\end{multline*}
+and the bracket equals $4k(2n+1)(4k^2-3k-2n-2n^2)$.
+\end{lemma}
+
+\begin{proposition}\label{prop:C}
+\Proved\ For all integers $n\ge1$, $k\ge0$, with the convention $G(n,0)/0^3:=0$
+(consistent, since $G(n,k)/k^3=\Phi(n,k)kT(n,k)$),
+\begin{equation}\label{eq:ddagger}
+   \frac{G(n,k)}{k^3}+2A(n+1,k)-2A(n-1,k)\;=\;K(n,k+1)-K(n,k).
+\end{equation}
+Consequently $\sum_{j\ge1}G(n,j)/j^3+2a_{n+1}-2a_{n-1}=0$, since $K(n,0)=0$ and
+$K(n,k)=0$ for $k\ge n+2$.
+\end{proposition}
+
+\begin{proof}
+By (0b), (0c) the left side is $\Phi(n,k)\bigl[kT(n,k)
++2((n+k)^2(n+k+1)^2-(n+1-k)^2(n-k)^2)\bigr]$; by (0d) the right side is
+$\Phi(n,k)\bigl[(n+1-k)^2(n+k)^2U(n,k+1)-k^4U(n,k)\bigr]/(n^2(n+1)^2)$. Equality is
+Lemma~\ref{lem:cert2}. Summing over $k=0,\dots,N$ with $N\ge n+1$ telescopes.
+\end{proof}
+
+\begin{theorem}\label{thm:LBmin}
+\Proved\ $(LB_{\min})(n)=0$ for all $n\ge1$.
+\end{theorem}
+
+\begin{proof}
+Combine \eqref{eq:Bprime} with Proposition~\ref{prop:C}.
+\end{proof}
+
+\subsection{Step D: the classical companion satisfies the same recurrence}
+
+This is the half in which Ap\'ery's harmonic weight $c(n,k)$ must be differenced
+\emph{in $n$}. Everything collapses because of two one-line Gosper certificates whose
+entire content is the pair of polynomial identities
+\begin{equation}\label{eq:miracle}
+   m^2+(n+m)(n-m)=n^2,
+   \qquad
+   m^2+(n+1-m)(n+1+m)=(n+1)^2 .
+\end{equation}
+
+Put $D(n,k):=\bin nk\bin{n+k}k$ (so $A=D^2$), and
+\[
+ \begin{gathered}
+   \varphi(n,m):=m\,u(n,m)=\frac{(-1)^{m-1}((m-1)!)^2(n-m)!}{2(n+m)!},\\
+   \Lambda(n,k):=(n-k)\varphi(n,k+1)=\frac{(-1)^k}{2(n+k+1)D(n,k)} .
+ \end{gathered}
+\]
+Since $D(n,k)\ne0$ for $0\le k\le n$, every division below is legitimate on its stated
+range.
+
+\begin{lemma}[the two inner Gosper certificates]\label{lem:D1}
+\Proved\ For $1\le m\le n$ put
+\[
+   Y_1(m):=-\frac{(n+m)\varphi(n,m)}{n^2},
+   \qquad
+   Y_2(m):=-\frac{(n+1-m)\varphi(n,m)}{(n+1)^2} .
+\]
+Then, using $\varphi(n,m+1)/\varphi(n,m)=-m^2/\bigl((n-m)(n+m+1)\bigr)$,
+\[
+   Y_1(m+1)-Y_1(m)=\frac{\varphi(n,m)}{n-m}\ (1\le m\le n-1),
+   \quad
+   Y_2(m+1)-Y_2(m)=\frac{\varphi(n,m)}{n+m+1}\ (1\le m\le n),
+\]
+the two brackets collapsing by the identities \eqref{eq:miracle}.
+\end{lemma}
+
+\begin{lemma}[the $n$-differences of Ap\'ery's weight]\label{lem:D2}
+\Proved\ Using $u(n+1,m)=u(n,m)\frac{n+1-m}{n+m+1}$ and $u(n-1,m)=u(n,m)\frac{n+m}{n-m}$,
+i.e.\ $u(n+1,m)-u(n,m)=-2\varphi(n,m)/(n+m+1)$ and
+$u(n-1,m)-u(n,m)=2\varphi(n,m)/(n-m)$, Lemma~\ref{lem:D1} telescopes with
+$Y_2(1)=-\tfrac1{2(n+1)^3}$, $Y_1(1)=-\tfrac1{2n^3}$ to give
+\[
+ \begin{gathered}
+   c(n+1,k)-c(n,k)=\frac{2\Lambda(n,k)}{(n+1)^2}\quad(0\le k\le n),\\
+   c(n-1,k)-c(n,k)=-\frac{2(n+k+1)\Lambda(n,k)}{(n-k)n^2}\quad(0\le k\le n-1).
+ \end{gathered}
+\]
+\end{lemma}
+
+\begin{remark}[Ap\'ery's miracle]\label{rem:miracle}
+In Lemma~\ref{lem:D2} the rational pieces $1/(n+1)^3$ and $-1/n^3$ coming from
+$\HH3{n\pm1}-\HH3n$ cancel \emph{exactly} against the boundary values $Y_2(1)$, $Y_1(1)$
+of the inner Gosper antidifferences, and that cancellation is precisely the polynomial
+identity $m^2+(n+1-m)(n+m+1)=(n+1)^2$. This is why Ap\'ery's weight carries the $\tfrac12$,
+the $(-1)^{m-1}$ and the $m^3\bin nm\bin{n+m}m$: the weight is not found, it is
+\emph{forced} --- $c(n,k)$ is the unique weight, up to the kernel of the recurrence, whose
+$n$-difference is a \emph{single hypergeometric term} rather than a sum.
+\end{remark}
+
+\begin{lemma}[the correction term]\label{lem:D3}
+\Proved\ For $0\le k\le n$ set
+$\mathcal E(n,k):=(n+1)^3A(n+1,k)\bigl(c(n+1,k)-c(n,k)\bigr)+n^3A(n-1,k)\bigl(c(n-1,k)-c(n,k)\bigr)$,
+the second summand being $0$ at $k=n$ because $A(n-1,n)=0$. Then by Lemma~\ref{lem:D2},
+(0b), (0c) and $A(n,k)\Lambda(n,k)=(-1)^kD(n,k)/\bigl(2(n+k+1)\bigr)$,
+\[
+   \mathcal E(n,k)=(-1)^kD(n,k)\Bigl[\frac{(n+1)(n+k+1)}{(n+1-k)^2}-\frac{n(n-k)}{(n+k)^2}\Bigr].
+\]
+\end{lemma}
+
+\begin{proposition}\label{prop:D4}
+\Proved\ For $0\le k\le n$, with $B(n-1,k):=0$ for $k\ge n$ and $B(n,k):=A(n,k)c(n,k)$,
+\[
+   (n+1)^3B(n+1,k)-P(n)B(n,k)+n^3B(n-1,k)
+   =c(n,k)\bigl(G(n,k+1)-G(n,k)\bigr)+\mathcal E(n,k).
+\]
+At $k=n+1$ only the first term survives: the left side equals
+$(n+1)^3A(n+1,n+1)c(n+1,n+1)$.
+\end{proposition}
+
+\begin{proof}
+Substitute $c(n\pm1,k)=c(n,k)+\bigl(c(n\pm1,k)-c(n,k)\bigr)$ and use
+Proposition~\ref{prop:B}.
+\end{proof}
+
+\begin{lemma}[the top term]\label{lem:D5}
+\Proved\ $G(n,n+1)=-4(n+1)^3\bin{2n+1}{n+1}^2=-(n+1)^3A(n+1,n+1)$, using
+$\bin{2n+2}{n+1}=2\bin{2n+1}{n+1}$. Moreover
+$u(n+1,n+1)=\frac{(-1)^n}{4(n+1)^3\bin{2n+1}{n+1}}$ and
+$\Lambda(n,n)=\frac{(-1)^n}{2(n+1)\bin{2n+1}{n+1}}$, so that
+$c(n+1,n+1)-c(n,n)=\tfrac54\,(-1)^n\bigl/\bigl((n+1)^3\bin{2n+1}{n+1}\bigr)$ and
+\[
+   \mathrm{Top}(n):=c(n,n)G(n,n+1)+(n+1)^3A(n+1,n+1)c(n+1,n+1)
+   =5(-1)^n\bin{2n+1}{n+1}.
+\]
+\end{lemma}
+
+This is where the classical $5$ of $\zeta(3)=\tfrac52\sum_m(-1)^{m-1}m^{-3}\bin{2m}m^{-1}$
+enters.
+
+Summing Proposition~\ref{prop:D4} over $k=0,\dots,n$, adding the $k=n+1$ term, and
+Abel-summing $\sum_{k=0}^nc(n,k)(G(n,k+1)-G(n,k))=c(n,n)G(n,n+1)-\sum_{j=1}^nu(n,j)G(n,j)$
+(using $G(n,0)=0$), we get
+\begin{equation}\label{eq:Lb-assembly}
+   (Lb)(n)=\mathrm{Top}(n)+\sum_{k=0}^{n}V(n,k),
+   \qquad V(n,k):=\mathcal E(n,k)-u(n,k)G(n,k),
+\end{equation}
+the $k=0$ term of the second piece being $0$. Since
+\[
+  u(n,k)G(n,k)=\frac{(-1)^{k-1}D(n,k)\,k\,T(n,k)}{2(n+1-k)^2(n+k)^2},
+\]
+we have $V(n,k)=(-1)^kD(n,k)W(n,k)$ with
+\[
+   W(n,k)=\frac{(n+1)(n+k+1)}{(n+1-k)^2}-\frac{n(n-k)}{(n+k)^2}
+          +\frac{kT(n,k)}{2(n+1-k)^2(n+k)^2}.
+\]
+
+\begin{lemma}[CERT-3]\label{lem:cert3}
+\Proved\ As an identity in $\Q[n,k]$,
+\[
+   2(n+1)(n+k+1)(n+k)^2-2n(n-k)(n+1-k)^2+kT(n,k)+10k(2n+1)(n+1-k)(n+k)=0,
+\]
+that is,
+\[
+ \begin{gathered}
+   W(n,k)=\frac{-5k(2n+1)}{(n+1-k)(n+k)},\qquad\text{whence}\\
+   V(n,k)=\frac{-5(2n+1)}{n(n+1)}\,(-1)^k\,k\,\bin{n+1}k\bin{n+k-1}k,
+ \end{gathered}
+\]
+using $\bin nk/(n+1-k)=\bin{n+1}k/(n+1)$ and $\bin{n+k}k/(n+k)=\bin{n+k-1}k/n$.
+\end{lemma}
+
+The entire weight-three structure thus collapses to a single linear-over-quadratic
+rational function.
+
+\begin{lemma}[residual binomial identity]\label{lem:D6}
+\Proved\
+\[
+   \text{(D-BIN)}\qquad
+   \sum_{k=0}^{n}(-1)^k\,k\,\bin{n+1}k\bin{n+k-1}k\;=\;(-1)^n\,n\bin{2n}n .
+\]
+\end{lemma}
+
+\begin{proof}
+Put $s(n,k):=(-1)^kk\bin{n+1}k\bin{n+k-1}k$ and $Y(n,k):=-k(k-1)s(n,k)/(n(n+1))$. The
+absorption identities $\bin{n+1}{k+1}(k+1)=\bin{n+1}k(n+1-k)$ and
+$\bin{n+k}{k+1}(k+1)=\bin{n+k-1}k(n+k)$ of Lemma~\ref{lem:conv} give
+$(k+1)s(n,k+1)=-(-1)^k\bin{n+1}k\bin{n+k-1}k(n+1-k)(n+k)$, hence for \emph{every} integer
+$k\ge0$, division-free,
+\begin{multline*}
+   n(n+1)\bigl(Y(n,k+1)-Y(n,k)\bigr)\\
+   =(-1)^kk\bin{n+1}k\bin{n+k-1}k\bigl[(n+1-k)(n+k)+k(k-1)\bigr]=n(n+1)s(n,k),
+\end{multline*}
+by the polynomial identity $(n+1-k)(n+k)+k(k-1)=n(n+1)$. So $Y(n,\cdot)$ telescopes
+$s(n,\cdot)$ and $\sum_{k=0}^ns(n,k)=Y(n,n+1)-Y(n,0)=Y(n,n+1)=-s(n,n+1)
+=(-1)^nn\bin{2n}n$, using $\bin{2n}{n+1}=n\bin{2n}n/(n+1)$.
+\end{proof}
+
+\begin{theorem}\label{thm:Lb}
+\Proved\ $(Lb)(n)=0$ for all $n\ge1$.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:Lb-assembly}, Lemma~\ref{lem:cert3} and Lemma~\ref{lem:D6},
+\begin{align*}
+   \sum_{k=0}^{n}V(n,k)
+   &=\frac{-5(2n+1)}{n(n+1)}(-1)^nn\bin{2n}n
+    =-5(-1)^n\bin{2n}n\frac{2n+1}{n+1}\\
+   &=-5(-1)^n\bin{2n+1}{n+1}=-\mathrm{Top}(n). \qedhere
+\end{align*}
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:minimal}]
+Theorems~\ref{thm:LBmin} and \ref{thm:Lb} say that both sides are annihilated by $L$,
+whose leading coefficient $(n+1)^3$ never vanishes for $n\ge1$. It remains to check
+agreement at $n=0,1$. We have $B_{\min}(0)=A(0,0)(2\HH30-\HH30)=0=b_0$, and
+$B_{\min}(1)=A(1,0)\cdot2+A(1,1)\cdot1=1\cdot2+4\cdot1=6$; on the other side
+$u(1,1)=1/(2\cdot1^3\bin11\bin21)=1/4$, so $c(1,0)=1$, $c(1,1)=5/4$ and
+$b_1=1\cdot1+4\cdot\tfrac54=6$. Induct.
+\end{proof}
+
+\begin{table}[ht]
+\centering\small
+\caption{Certificate inventory for Theorem~\ref{thm:minimal}. All are verified by exact
+polynomial arithmetic (\texttt{Expand}$\to0$).}
+\label{tab:certs}
+\begin{tabular}{@{}llp{6.4cm}@{}}
+\toprule
+\# & role & certificate\\
+\midrule
+CERT-1 & Zeilberger certificate for $a_n$ & $T(n,k)=4(2n+1)(2k^2-3k-4n^2-4n)$, $G=\Phi k^4T$\\
+CERT-2 & Gosper certificate for the $w$-correction & $U(n,k)=-4(k-1)(2n+1)(2n^2+2n+1-k)$, $K=\Phi k^4U/(n^2(n+1)^2)$\\
+CERT-3 & the $W$-collapse & $W(n,k)=-5k(2n+1)/\bigl((n+1-k)(n+k)\bigr)$\\
+CERT-4 & inner Gosper certificate, $\Delta^+_n$ & $Y_2(m)=-(n+1-m)\varphi(n,m)/(n+1)^2$\\
+CERT-5 & inner Gosper certificate, $\Delta^-_n$ & $Y_1(m)=-(n+m)\varphi(n,m)/n^2$\\
+CERT-6 & Gosper certificate for (D-BIN) & $Y(n,k)=-k(k-1)s(n,k)/\bigl(n(n+1)\bigr)$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The supporting polynomial identities, all \texttt{Expand}$\to0$, are
+$m^2+(n+m)(n-m)=n^2$; $m^2+(n+1-m)(n+m+1)=(n+1)^2$; $(n+1-k)(n+k)+k(k-1)=n(n+1)$; and
+CERT-1, CERT-2, CERT-3 as displayed. Numerically, $B_{\min}(n)-b_n=0$ exactly for
+$n=0..50$ in exact rational arithmetic, in two independent implementations
+\VerifiedR{$n\le50$}; and $B_{\min}$ reproduces the literature values
+$0,6,\tfrac{351}4,\tfrac{62531}{36},\tfrac{11424695}{288},\tfrac{35441662103}{36000}$.
+
+\begin{remark}[formalisation-friendliness]\label{rem:leanfriendly}
+Nothing above uses Gamma functions, limits or $0/0$: Lemma~\ref{lem:conv} converts every
+binomial ratio into a \emph{multiplicative} absorption identity valid for all integers
+$k\ge0$, after which each step is a polynomial identity in $\Q[n,k]$ plus a finite
+telescoping sum. The only analytic input is $\HH3{n+1}-\HH3n=1/(n+1)^3$.
+\end{remark}
+
+\subsection{Two more closed forms, and the mechanism behind them}
+
+\begin{observation}[symmetrisation]\label{obs:symm}
+\Proved\ For the $d$-fold binomial sums $A^{(d)}(n)=\sum_k\bin nk^d$ the summand is
+symmetric under $k\mapsto n-k$, so the fitted weights of Table~\ref{tab:decomp} may be
+replaced by their $k\leftrightarrow n-k$ averages without changing the sum:
+\[
+   \tfrac1{d+1}\HH2k+\tfrac d{d+1}H_k(H_k-H_{n-k})
+   \;\rightsquigarrow\;
+   \tfrac1{2(d+1)}\bigl(\HH2k+\HH2{n-k}\bigr)+\tfrac d{2(d+1)}\bigl(H_k-H_{n-k}\bigr)^2 .
+\]
+\VerifiedR{exactly, $n=0..12$, $d=3,4$}. Concretely,
+\[
+ \begin{gathered}
+   B_{\mathbf A}(n)=\sum_k\bin nk^3\Bigl[\tfrac18\bigl(\HH2k+\HH2{n-k}\bigr)+\tfrac38\bigl(H_k-H_{n-k}\bigr)^2\Bigr],\\
+   B_{s_{10}}(n)=\sum_k\bin nk^4\Bigl[\tfrac1{10}\bigl(\HH2k+\HH2{n-k}\bigr)+\tfrac25\bigl(H_k-H_{n-k}\bigr)^2\Bigr].
+ \end{gathered}
+\]
+\end{observation}
+
+This is not cosmetic. In the symmetric form the only weight-one letter that ever appears
+is the single antisymmetric combination $\delta(n,k):=H_k-H_{n-k}$, because
+$\sigma:=\HH2k+\HH2{n-k}$ differences to \emph{rational} functions under both $n\mapsto
+n\pm1$ and $k\mapsto k+1$. The certificate module is therefore of rank $2$
+($\{1,\delta\}$) instead of rank $4$ ($\{1,H_k,H_{n-k},H_n\}$), and one faces two Gosper
+problems instead of four.
+
+The template is then: (i) a Zeilberger certificate
+$G(n,k)=S(n,k)k^d\rho(n,k)/(n+1-k)^d$, whose defining equation collapses to one polynomial
+equation in $\Q[n,k]$ because $S(n,k+1)/S(n,k)=((n-k)/(k+1))^d$, so that the shifted
+certificate is the summand times a polynomial; (ii) a split of the recurrence applied to
+$S\cdot w$ into $w\cdot\Delta_kG$ plus a correction whose $n$-differences lie in
+$\Q(n,k)+\Q(n,k)\delta$; (iii) Abel summation; (iv) two Gosper problems
+\[
+ \begin{gathered}
+   r(n,k)z_1(n,k+1)-z_1(n,k)=B(n,k),\\
+   r(n,k)z_0(n,k+1)-z_0(n,k)=A(n,k)-r(n,k)z_1(n,k+1)e(n,k),
+ \end{gathered}
+\]
+with $r=S(n,k+1)/S(n,k)$ and $e=\frac1{k+1}+\frac1{n-k}$, both solved by rational ans\"atze
+$z_1=N(k)/(n+1-k)^{p}$, $z_0=M(k)/(n+1-k)^{p+1}$; and (v) three scalar boundary
+identities, of which the first,
+\[
+   \text{(b1)}\qquad \rho(n,n+1)=-c_+(n)\,S(n+1,n+1)/S(n,n),
+\]
+is structural: it says that the Zeilberger certificate at the top of its support
+reproduces the leading term of the recurrence, and it is what forces a harmonic
+decomposition to exist at all.
+
+%% FIXED [MAJOR-2]: \Proved\ is defined at sec-intro.tex as "a complete proof is written out
+%% FIXED here", and neither this theorem nor Theorem \ref{thm:s10} writes one out: the Gosper
+%% FIXED equations the certificates solve are not stated, and Theorem \ref{thm:s10}'s N_10, M_10
+%% FIXED are not in the paper at all. Both are now labelled for what they are: certificates
+%% FIXED exhibited and checked, with the verification exact.
+\begin{theorem}[Franel]\label{thm:franel}
+\Proved\ modulo the certificate check described after Theorem~\ref{thm:s10}; the displayed
+identities are \Proved\ (\texttt{Factor}$\to0$, exact).
+With $A(n)=\sum_k\bin nk^3$ (A000172), $(n+1)^2u_{n+1}=(7n^2+7n+2)u_n+8n^2u_{n-1}$
+and $B(n)=\sum_k\bin nk^3\bigl[\tfrac18(\HH2k+\HH2{n-k})+\tfrac38(H_k-H_{n-k})^2\bigr]$,
+one has $(LB)=0$ for the Franel operator, so $B$ is the second solution, with values
+$B(0),\dots,B(8)$ equal to
+$0$, $1$, $4$, $\tfrac{208}9$, $\tfrac{1280}9$, $\tfrac{208384}{225}$,
+$\tfrac{1404928}{225}$, $\tfrac{95174656}{2205}$, $\tfrac{3351248896}{11025}$.
+The certificates are
+\[
+ \begin{gathered}
+  \rho_F(n,k)=-\tfrac1n\bigl(4-12k+12k^2-4k^3+22n-39kn+18k^2n+32n^2-27kn^2+14n^3\bigr),\\
+  G_F=\tfrac{k^3\rho_F\bin{n+1}k^3}{(n+1)^3},
+ \end{gathered}
+\]
+$z_1=N_F(k)/(n+1-k)^4$, $z_0=M_F(k)/(n+1-k)^5$ with
+{\small
+\begin{align*}
+  N_F&=\tfrac{3k^2}{4n}\bigl(4-16k+24k^2-16k^3+4k^4+26n-68kn+63k^2n-20k^3n\\
+     &\qquad\qquad+54n^2-88kn^2+39k^2n^2+46n^3-36kn^3+14n^4\bigr),\\
+  M_F&=-\tfrac{k}{2n}\bigl(2-10k+20k^2-20k^3+10k^4-2k^5+15n-50kn+70k^2n-45k^3n+11k^4n\\
+     &\qquad\qquad+40n^2-90kn^2+80k^2n^2-25k^3n^2+50n^3-70kn^3+30k^2n^3\\
+     &\qquad\qquad+30n^4-20kn^4+7n^5\bigr),
+\end{align*}}
+and the boundary identities, all \texttt{Factor}$\to0$, are
+$\rho_F(n,n+1)=-(n+1)^2$, $N_F(n)=\tfrac34\bigl((n+1)^5-(n+1)\bigr)$,
+$M_F(n)=-\tfrac12\bigl(1+(n+1)^5\bigr)$.
+\end{theorem}
+
+\begin{theorem}[$s_{10}=\sum_k\bin nk^4$]\label{thm:s10}
+\Proved\ modulo the certificate check described below.
+With $(n+1)^3u_{n+1}=(2n+1)(6n^2+6n+2)u_n+n(64n^2-4)u_{n-1}$ and
+$B(n)=\sum_k\bin nk^4\bigl[\tfrac1{10}(\HH2k+\HH2{n-k})+\tfrac25(H_k-H_{n-k})^2\bigr]$,
+one has $(LB)=0$, with $B(0),\dots,B(6)$ equal to
+$0$, $1$, $\tfrac{21}4$, $\tfrac{1001}{18}$, $\tfrac{85085}{144}$,
+$\tfrac{4203199}{600}$, $\tfrac{52055003}{600}$.
+The certificate is $G_{10}=k^4\rho_{10}\bin{n+1}k^4/(n+1)^4$ with
+{\small
+\begin{align*}
+ \rho_{10}(n,k)=-\tfrac1{n^3}\bigl(&-4k+16k^2-24k^3+16k^4-4k^5\\
+ &+10n-72kn+172k^2n-184k^3n+90k^4n-16k^5n\\
+ &+80n^2-368kn^2+600k^2n^2-416k^3n^2+104k^4n^2\\
+ &+255n^3-796kn^3+818k^2n^3-276k^3n^3\\
+ &+385n^4-756kn^4+374k^2n^4+275n^5-260kn^5+75n^6\bigr),
+\end{align*}}
+$z_1=N_{10}(k)/(n+1-k)^5$ and $z_0=M_{10}(k)/(n+1-k)^6$ (both of degree $9$ in $k$, with
+factors $k^3$ and $k^2$; full coefficients in the certificate file, see
+Section~\ref{sec:data}), and boundary identities $\rho_{10}(n,n+1)=-(n+1)^3$,
+$N_{10}(n)=\tfrac45\bigl((n+1)^7-(n+1)^2\bigr)$,
+$M_{10}(n)=-\tfrac12\bigl((n+1)+(n+1)^7\bigr)$, all \texttt{Factor}$\to0$.
+\end{theorem}
+
+\begin{remark}[what the two theorems above do and do not contain]\label{rem:certstatus}
+Both are proved by the same route as Theorem~\ref{thm:Lb}: one exhibits $\rho$, $G$,
+$z_1$, $z_0$, checks $\Delta_k G=\rho S$ and the two Gosper identities as polynomial identities
+in $\Q(n)[k]$, and checks the boundary identities. Every displayed identity above was verified
+that way, by exact expansion to $0$. What is \emph{not} written out here is the derivation: we
+do not state the Gosper key equations that $z_1,z_0$ solve, and for Theorem~\ref{thm:s10} the
+polynomials $N_{10}$, $M_{10}$ themselves are not printed --- their full coefficients are in the
+certificate file (Section~\ref{sec:data}). A reader wanting a self-contained proof must read
+that file. We flag this because \Proved\ is defined in Section~\ref{ssec:evidence} as ``a
+complete proof is written out here'', and for these two theorems the certificate half is
+delegated rather than printed.
+\end{remark}
+
+\begin{observation}[the pattern]\label{obs:pattern}
+With $\beta_d=\frac d{2(d+1)}$ the $\delta^2$-coefficient and $c_+(n)=(n+1)^{d-1}$, both
+theorems read
+\[
+ \begin{gathered}
+   \rho(n,n+1)=-(n+1)^{d-1},\qquad
+   N(n)=2\beta_d\bigl((n+1)^{2d-1}-(n+1)^{d-2}\bigr),\\
+   M(n)=-\tfrac12\bigl((n+1)^{2d-1}+(n+1)^{d-3}\bigr).
+ \end{gathered}
+\]
+It is natural to conjecture that this is the general-$d$ shape, i.e.\ that
+Chamberland--Straub's conjecture that $A^{(d)}$ has Ap\'ery limit $\zeta(2)/(d+1)$ is
+provable this way for every $d$ for which the sequence satisfies an order-two recurrence
+\VerifiedR{$d=3,4$ only}.
+\end{observation}
+
+\subsection{A sharp obstruction: the \texorpdfstring{$\zeta(2)$}{zeta(2)}-Ap\'ery case}
+\label{ssec:obstruction}
+
+The template of the previous subsection does not merely fail to apply to the
+$\zeta(2)$-Ap\'ery sequence $\mathbf D$; it provably cannot apply.
+
+Let $A(n)=\sum_k\bin nk^2\bin{n+k}k$ (A005258: $1,3,19,147,1251,\dots$),
+$(n+1)^2u_{n+1}=(11n^2+11n+3)u_n+n^2u_{n-1}$, and
+$B(n)=\sum_k\bin nk^2\bin{n+k}k\cdot\frac15\bigl[\HH2n+H_k(2H_k-H_{n-k}-H_n)\bigr]$, with
+$(LB)=0$ \VerifiedR{$n\le25$}. Everything up to the Gosper step goes through, and
+beautifully: the Zeilberger certificate is the smallest in this paper,
+\[
+   \rho_{\mathbf D}(n,k)=k^2+k(1+6n)-4-15n-11n^2,
+   \qquad
+   G_{\mathbf D}(n,k)=\frac{k^3\rho_{\mathbf D}(n,k)\bin{n+1}k^2\bin{n+k-1}k}{n(n+1)^2},
+\]
+\Proved\ (\texttt{Expand}$\to0$; \VerifiedR{pointwise, $n=1..9$, $k=0..n+3$}), and the
+structural boundary identity (b1) holds exactly:
+\[
+   \rho_{\mathbf D}(n,n+1)=-2(n+1)(2n+1)=-(n+1)^2\frac{\bin{2n+2}{n+1}}{\bin{2n}n}
+   =-c_+(n)\frac{S(n+1,n+1)}{S(n,n)} .
+\]
+The correction decomposes as $Y(n,k)/S(n,k)=A+B_1H_k+B_2(H_{n-k}+H_n)$ with
+$B_2=\rho_{\mathbf D}(n,k+1)/\bigl(5(k+1)\bigr)$ \VerifiedR{exactly, $n=2..8$,
+$0\le k\le n-1$}.
+
+\begin{proposition}[the $H_{n-k}$ component is not Gosper-summable]\label{prop:obstruction}
+\Proved\ Let $T(k):=S_{\mathbf D}(n,k)B_2(n,k)$. In Gosper's decomposition
+$T(k+1)/T(k)=\frac{a(k)}{b(k)}\frac{c(k+1)}{c(k)}$ one has $a=(n-k)^2(n+k+1)$,
+$b=(k+1)^2(k+2)$, $c(k)=\rho_{\mathbf D}(n,k+1)$, and $\gcd\bigl(a(k),b(k+j)\bigr)=1$ for
+all $j\ge0$ (the roots are $n,-n-1$ versus $-j-1,-j-2$, with $n$ generic). Gosper's key
+equation is $a(k)x(k+1)-b(k-1)x(k)=c(k)$. Since
+\[
+   a(k)-b(k-1)=-n\bigl(k^2+(n+2)k-n(n+1)\bigr)
+\]
+has degree $2$ with leading coefficient $-n\ne0$, the degree bound forces $\deg x=0$; and
+$x=x_0$ constant forces $x_0=-1/n$ from the $k^2$ coefficient, which then produces the
+$k$-coefficient $n+2$ against the required $3+6n$. Contradiction. Independently
+\Verified: the corresponding linear system has no solution for any $\deg x\le8$.
+\end{proposition}
+
+\begin{remark}[diagnosis]\label{rem:diagnosis}
+In the Franel and $s_{10}$ cases the weight is $k\leftrightarrow n-k$ symmetric, the
+certificate module has rank $2$, and each component telescopes. Here the weight is
+genuinely three-lettered ($H_k$, $H_{n-k}$, $H_n$), the components do not telescope
+separately, and the weight-two part of any enlarged ansatz is forced to vanish
+($\Delta(Sz)=0\Rightarrow z=0$). Closing this case needs either a different gauge for $w$
+--- the harmonic-monomial fit has a large kernel, $11$-dimensional in the $\zeta(3)$ case,
+and a kernel shift changes the antidifference --- or a genuine $\Pi\Sigma$-field ansatz
+allowing nested sums rather than rational $\times$ harmonic-monomial. This is \Open, and
+it is the first place in this programme where the rank-two mechanism is provably
+insufficient.
+\end{remark}
+
+\subsection{Literature}
+\label{ssec:minlit}
+
+The recurrence $(Lb)=0$ itself is not new. It is proved in full by Schneider
+\cite{Schneider2007} using Karr's $\Pi\Sigma$ difference fields and creative
+telescoping, with a certificate whose numerator, after the substitution $n\mapsto n-1$,
+is exactly the numerator of our $G(n,k)$ --- an independent confirmation of the
+normalisation of \eqref{eq:TG}. Historically it goes back to the Zagier--Cohen
+reorganisation of Ap\'ery's proof reported by van der Poorten
+\cite[\S8]{vdPoorten1979}, who gives
+$B_{n,k}=4(2n+1)\bigl(k(2k+1)-(2n+1)^2\bigr)\bin nk^2\bin{n+k}k^2$ and, for the second
+solution, $A_{n,k}=B_{n,k}c_{n,k}+\bigl[5(2n+1)(-1)^{k-1}k/(n(n+1))\bigr]\bin nk\bin{n+k}k$
+--- precisely our Step-D certificate, with $G(n,k)=B_{n,k-1}$ and $V$ as in
+Lemma~\ref{lem:cert3}. But van der Poorten dispatches the verification as ``after some
+massive reorganisation (9) becomes $A_{n,k}-A_{n,k-1}$'': it is exhibited, not written
+out; Fischler \cite[\S1.2]{Fischler2004} likewise calls it ``une simple
+v\'erification''. Zudilin \cite[eqs.~(5)--(6)]{Zudilin0202159} has the rational-function
+form $s_n(t)=4(2n+1)(-2t^2+t+(2n+1)^2)$, the same polynomial under $t\leftrightarrow-k$.
+
+What appears to be new is the \emph{minimal form} itself. We could not locate
+$2\HH3n-\HH3k$ anywhere: not in OEIS \texttt{A059415} (which is exactly this $b_n$, and
+whose only recorded closed form is the classical double sum), nor in
+\cite{ChamStraub,Gorodetsky,Straub1401,Cooper2302}, nor in
+\cite{vdPoorten1979,Schneider2007,Fischler2004,
+PauleSchneider2003}. The nearest published relative is Nesterenko's Lemma~1
+\cite{Nesterenko1996}, reproduced as formula (3) of \cite{Zudilin0202159},
+which amounts to the weight $\HH3k+(2H_k-H_{n+k}-H_{n-k})\HH2k$ --- a longer
+representation, not the minimal one. (The harmonic-monomial fitting system for $b_n$ has
+an $11$-dimensional kernel, so such representations are far from unique; the pivot choice
+delivered the shortest.) Similarly, (D-BIN) of Lemma~\ref{lem:D6} we could not locate as a
+named identity, though it is one line from Chu--Vandermonde: from
+$\sum_{k\ge0}(-1)^k\bin{n+1}k\bin{n+k-1}kx^k={}_2F_1(-(n+1),n;1;x)$, apply $x\,d/dx$ at
+$x=1$ to get $-n(n+1)\,{}_2F_1(-n,n+1;2;1)=0$ for $n\ge1$, and peel off the $k=n+1$ term.
+Its relative $\sum_k(-1)^k\bin nk\bin{n+k}k=(-1)^n$ is $P_n(-1)$. Finally, Paule and
+Schneider \cite{PauleSchneider2003} prove Ahlgren's
+$\sum_j(1-4jH_j+4jH_{n-j})\bin nj^4=(-1)^n\bin{2n}n$ --- the same right-hand side and the
+same $d=4$ summand as Theorem~\ref{thm:s10} --- but only weight-one identities;
+$H^{(3)}$ never appears there, so Theorem~\ref{thm:s10} is not covered by that work.

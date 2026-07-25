@@ -1,0 +1,10 @@
+(S1) exact ladder n<=360, p in [5, 7, 11, 13, 17, 19, 23, 29, 31]: cells=3240 failures=0  min(ord_p P_n + 5L)=0 at (5, 1)
+(S1b) (CB) form  ord_p(p_n) >= kappa-5L : failures=0
+   extend n=0  0s
+   extend n=500  0s
+   extend n=1000  0s
+   extend n=1500  0s
+   extend n=2000  1s
+   extend n=2500  2s
+(S2) recurrence extension cross-check against exact ladder n<=360: mismatches=0
+(S2) n<=3000 sweep: cells=27000 failures=0 min(ord_p P_n+5L)=0 at (5, 1)

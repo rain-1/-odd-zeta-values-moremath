@@ -1,0 +1,46 @@
+ladders to n=520 in 0.2s; Q_3=714549
+n=420: log10|I'|=-457.65356 log10|I|=-972.17483 (rel prec left ~1072 digits)
+n=470: log10|I'|=-511.46247 log10|I|=-1087.3318 (rel prec left ~818 digits)
+n=520: log10|I'|=-565.25904 log10|I|=-1202.4765 (rel prec left ~564 digits)
+
+lambda_3=592.0793805346115628484048  lambda_2=-0.08438431610850905176025982  lambda_1=0.005003781496946203355496761
+purity gap  log|lambda_2/lambda_1| = 2.82518763026242262053918841603
+rate(min) = 5.297561353009062581089142   rate(mid) = 2.472373722746639960549954
+A_Q      alpha=-2.5  = 0.0666764257271567678416533406393454444696287455924559300242811   [agree 322 digits across n]
+A_I'     alpha=-2.5  = -0.751355876474989299509392021708018149940768130341030826253742   [agree 288 digits across n]
+A_Ihat   alpha=-2.5  = 0.228384800223216134984520978825375064420714931582040497484098   [agree 288 digits across n]
+A_I      alpha=-2.5  = 4.78381719294327891215233374724085460054978566493764352967709   [agree 287 digits across n]
+
+ratio A_Ihat/A_I' = -0.30396355092701331433163838962918291671307632401674
+   -3/pi^2         = -0.30396355092701331433163838962918291671307632401674
+   difference      = 5.6833076e-381
+
+================ T5: Gamma-value identification ================
+
+-- finder validation (must FIND these) --
+  Gamma(1/3)Gamma(2/3)=2pi/sqrt3                 : -2*lnG13 -2*lnG23 +2*logpi +2*log2 -1*log3
+  Gamma(1/4)Gamma(3/4)=pi*sqrt2                  : -2*lnG14 -2*lnG34 +2*logpi +1*log2
+  Gamma(1/6) duplication                         : -6*lnG16 +12*lnG13 -3*logpi -2*log2 +3*log3
+
+-- the BZ constants --
+  log|A_Q| in span(logs)                         : +2*log2 -1*log|z1| -1*log|z2| -1*log|z3|
+  log|A_I'| in span(logs)                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Ihat| in span(logs)                      : +2*log2 -1*log|z1| -1*log|z2| -1*log|z3|
+  log|A_I| in span(logs)                         : +2*log2 -1*log|z1| -1*log|z2| -1*log|z3|
+  log|A_Q| + Gamma(k/[3])                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[4])                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[3, 4])                     : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[5])                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[6])                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[8])                        : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[12])                       : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[3, 4, 6])                  : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q| + Gamma(k/[24])                       : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+
+-- ratios --
+  log|A_I'/A_Q| in span(logs)                    : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_I/A_Q| in span(logs)                     : +2*log2 -1*log|z1| -1*log|z2| -1*log|z3|
+  log|A_I/A_I'| in span(logs)                    : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+  log|A_Q*A_I'*A_I| in span(logs)                : -2*log2 +1*log|z1| +1*log|z2| +1*log|z3|
+
+saved conn.json

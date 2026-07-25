@@ -1,0 +1,184 @@
+%% =====================================================================
+%%  Rhin-Viola groups are p-adic:
+%%  the transfer principle, the margin map, and the optimality of the
+%%  known p-adic irrationality measures
+%%
+%%  Draft.  Compile:  pdflatex padicmap  (three passes)
+%%  Sources: work/DIG_GROUP.md, work/DIG_LEDGER.md, work/DIG_SCAN.md,
+%%           code in work/dig/.
+%% =====================================================================
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{linknavy}{rgb}{0.10,0.20,0.50}
+\usepackage[colorlinks=true,linkcolor=linknavy,citecolor=linknavy,urlcolor=linknavy]{hyperref}
+
+%% The three named Theorems carry their own running counter (Theorem 1, 2, 3);
+%% everything else shares a per-section counter.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{remark}[proposition]{Remark}
+\newtheorem{example}[proposition]{Example}
+\newtheorem{finding}[proposition]{Finding}
+\newtheorem{openlemma}[proposition]{Open Lemma}
+\newtheorem{convention}[proposition]{Convention}
+
+\numberwithin{equation}{section}
+
+%% ---- letters -------------------------------------------------------
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\Zp}{\ZZ_p}
+\newcommand{\Qp}{\QQ_p}
+\newcommand{\Gp}{\mathfrak{G}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\den}{\operatorname{den}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\marg}{\operatorname{margin}}
+\newcommand{\bud}{\operatorname{budget}}
+\newcommand{\ctb}{\operatorname{ctb}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Etrue}{E_{\mathrm{true}}}
+\newcommand{\Eled}{E_{\mathrm{led}}}
+\newcommand{\dgr}{\delta_{\Gp}}
+%% wide-table helper: used inside a center environment, so the scope is local
+\newcommand{\tabsmall}{\footnotesize\setlength{\tabcolsep}{4pt}}
+
+%% ---- evidence classes ---------------------------------------------
+\newcommand{\PROVED}{\textsf{[PROVED]}}
+\newcommand{\DERIVED}{\textsf{[DERIVED]}}
+\newcommand{\VER}[1]{\textsf{[VERIFIED: #1]}}
+\newcommand{\COMP}[1]{\textsf{[COMP: #1]}}
+\newcommand{\EXCL}[1]{\textsf{[EXCLUDED: #1]}}
+\newcommand{\CALIB}{\textsf{[CALIBRATED]}}
+\newcommand{\OPENC}{\textsf{[OPEN]}}
+
+\begin{document}
+
+\title[Rhin--Viola groups are $p$-adic]
+{Rhin--Viola groups are $p$-adic:\\
+the transfer principle, the margin map,\\
+and the optimality of the known\\ $p$-adic irrationality measures}
+
+%% AUTHOR PLACEHOLDER --- to be filled in before circulation
+\author{}
+\address{}
+\email{}
+
+\date{\today}
+
+\subjclass[2020]{11J82, 11J72, 11S80, 33C20, 11M35, 20F55}
+\keywords{$p$-adic zeta values, Volkenborn integral, irrationality measure,
+Rhin--Viola group, hypergeometric transformation, $p$-adic Hurwitz zeta function,
+denominator conjectures}
+
+\begin{abstract}
+Three $p$-adic irrationality measures are known:
+$\mu(\zeta_2(3))\le 7.177398\dots$, $\mu(\zeta_3(3))\le 22.281447\dots$ and
+$\mu(\zeta_2(5))\le 20.342651\dots$. All three come from \emph{totally symmetric}
+hypergeometric approximations, and Lai, Sprang and Zudilin close their note on
+$\zeta_2(5)$ by asking (i) whether the arithmetic group method of Rhin and Viola can be
+brought to bear on such constructions, and (ii) whether there is a hypergeometric-type
+identity for the Volkenborn integrals themselves. We answer both, and then map what the
+answers buy.
+
+Our first result is a \emph{Transfer Principle}. For $R\in\QQ(t)$ with poles only at
+non-positive integers and $\deg R\le-2$, the archimedean sum $\sum_{m\ge0}R(m+\theta)$ and
+the Volkenborn integral $-\int_{\Zp}\widetilde R(t+\theta)\,\dd t$ are linear forms with
+\emph{the same} rational coefficients $\rho_{0,\theta},\rho_2,\rho_3,\dots$, produced by one
+and the same $\QQ$-linear functional of the partial-fraction data of $R$. Hence every
+Rhin--Viola/Zudilin transfer identity, and every denominator lemma, is simultaneously an
+archimedean and a $p$-adic statement: question (ii) needs no new Volkenborn transformation
+theory, because the group acts on the rational function and the Volkenborn integral is a
+passive spectator. Concretely, we exhibit the order-$1920$ group $W(D_5)$ acting on the
+weight-$3$ family, verify its transfer identity coefficientwise at $1200$ orbit points with
+$0$ failures --- and, decisively for the $p$-adic application, at $780$ points with
+half-integer parameters --- and validate the resulting savings function end to end by
+recovering Rhin and Viola's $\mu(\zeta(3))\le5.51389062$ as $5.51389063$. A sweep of a
+$37$-paper corpus finds no prior $p$-adic use of a Rhin--Viola group.
+
+The rest of the paper answers question (i) quantitatively, and the answer is negative in a
+sharp and informative way. We set up a parametrised Volkenborn construction and an exact
+cost ledger --- growth $G$, smallness $\alpha$, denominator cost $E$, $\marg=\alpha-G-E$ ---
+whose only inputs are the parameter tuple $(p,r,\text{shifts},A,m)$ and the well-poised flag.
+Fed the published parameters, it returns all three known measures to every printed digit,
+together with four further independent anchors. We prove that a two-term $p$-adic form in
+$1$ and $\zeta_p(w)$ arises from a \emph{single integration shift} exactly when
+$\varphi(p^r)=2$, i.e.\ $p^r\in\{3,4\}$ (plus the
+%% REFEREE [R6]: the abstract stated Theorem 2 without "from a single integration shift";
+%% without that qualifier the claim is false, since the twisted coset sum produces such a
+%% form in every other case (Theorem 2's own final sentence).  Qualifier restored.
+exceptional point $(p,r)=(2,1)$); that for $p\ge5$, whenever the coset count exceeds the
+number of distinct brick shifts, the $p$-adic smallness of the twisted
+coset sum cancels the archimedean coefficient growth exactly, leaving $\marg=-E$; and, for
+%% REFEREE [R1]: "for p>=5 ... leaving margin = -E" was stated unconditionally, and is
+%% contradicted by the paper's own Finding~\ref{find:map1} at (p,w)=(5,5), where four
+%% bricks spread over the four cosets give margin -2.9882, not -E.  Hypothesis restored;
+%% see the repaired Proposition~\ref{prop:pge5} and Remark~\ref{rem:pge5sharp}.
+the very-well-poised family at $p=2$, a parity law that collapses the whole ledger to
+$\marg(M,m)=2M\log2-(M+m)$.
+
+Three computations then close the space. First, over the cone searched --- $O(1)$ insets,
+scaled insets, all rank-reductions by polynomial-coefficient operators, and the group orbit
+--- the three published measures are \emph{exactly optimal}, with no improvement anywhere; the
+group saving $\dgr$ is provably $0$ at the symmetric point and is nowhere positive on the
+part of the $p$-adic locus we search. Second, the rank cannot be cut: five elimination searches over inset
+%% REFEREE [scope]: "never positive anywhere on the p-adic locus" was the one optimality
+%% sentence in the paper without its cone qualifier; sec-scan carries
+%% [VERIFIED: the cone of \S\ref{ss:cone}] for the same claim.  Qualifier restored.
+cones return $0/300$ surviving operators against positive controls at $300/300$. Third, the one escape hatch at $p\ge5$ --- cancellation
+between cosets --- is shut over a fair sweep: gains over the per-coset minimum are $\le3$
+\emph{absolutely}, and the hyperplane depth of the coset vector is bounded and constant in
+$n$, while the requirement grows like $E\cdot n$. The resulting margin map exhibits a clean
+dichotomy: \emph{at $p\in\{2,3\}$ the binding wall is rank; at $p\ge5$ it is size}, and after
+a correction to $E$ (a second prime band on $(n,2n)$, invisible to every published anchor)
+the nearest misses in the whole family are $\zeta_5(3)$ and $\zeta_7(3)$ at exactly $-3.000$.
+
+The structural finding is a disjoint-support tension: the archimedean coefficient growth
+$C_1$, which Bel's $p$-adic criterion must pay and the archimedean Rhin--Viola criterion
+never does, vanishes exactly on the degenerate locus where the group saving vanishes. Buying
+$\dgr>0$ switches $C_1$ on, and $C_1$ alone exceeds the entire available $\dgr$. We isolate
+two open lemmas that would upgrade the two obstructions to theorems, and describe what a
+construction evading the map would have to look like. Optimality claims are scoped
+throughout to the stated family and cone; evidence classes are attached to every assertion,
+and a reproduction appendix lists the programs.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\input{sec-intro}
+\input{sec-transfer}
+\input{sec-group}
+\input{sec-ledger}
+\input{sec-validation}
+\input{sec-classification}
+\input{sec-scan}
+\input{sec-map}
+\input{sec-discussion}
+
+\appendix
+\input{app-repro}
+
+\input{refs}
+
+\end{document}

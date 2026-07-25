@@ -1,0 +1,62 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                                                                                                                                                 
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= 
+In[7]:= 
+In[8]:= 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= START Sat 25 Jul 2026 08:13:10  ORD=lk DMAX=4 MEMCAP=3000000000 ANNCAP=600
+ 
+>    LADDERCAP=300
+
+In[16]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[17]:= HF loaded
+
+In[18]:= In[18]:= 
+In[19]:= 
+In[20]:= 
+In[21]:= 
+In[22]:= 
+In[23]:= 
+In[24]:= 
+In[25]:= In[25]:=                            
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= 
+In[31]:= vtilde HarmonicNumber instances (v: must be 13): 13
+ 
+>      distinct symbols S (v: must be 12): 12
+
+In[32]:= 
+In[33]:= vtilde has a C letter ? True   (v: must be True)
+
+In[34]:= In[34]:= 
+In[35]:= obj = T*vtilde  LeafCount 110  distinct symbols 12
+
+In[36]:= In[36]:= 
+In[37]:= 
+In[38]:= 
+In[39]:= In[39]:= 
+In[40]:= === D1 Annihilator[T*vtilde] === Sat 25 Jul 2026 08:13:10
+
+In[41]:=   D1 ann : TIME ABORT after 600s  Sat 25 Jul 2026 08:23:11
+
+In[42]:= D1 DID NOT RETURN.
+ALL DONE Sat 25 Jul 2026 08:23:11

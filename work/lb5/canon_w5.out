@@ -1,0 +1,17 @@
+basis 448
+columns reordered; first 12: ['[1|A5]x1x1', '[1|1]x1xN5', '[1|1]xC5x1', '[1|B5]x1x1', '[1|A1*A4]x1x1', '[A1|A4]x1x1', '[1|A2*A3]x1x1', '[A2|A3]x1x1', '[1|A1]x1xN4', '[1|A4]x1xN1', '[1|A2]x1xN3', '[1|A3]x1xN2']
+   n=150  1s
+   n=300  7s
+   n=450  24s
+   n=600  73s
+q=33554393 rank(M)=313 rank(aug)=313 inconsistent=False
+   n=150  2s
+   n=300  13s
+   n=450  33s
+   n=600  71s
+q=33554467 rank(M)=313 rank(aug)=313 inconsistent=False
+pivot profiles agree, rank=313, nullity=135
+reconstructed 106 nonzero coefficients (0 failed)
+primes occurring in denominators: [2, 3, 11]
+factor-count histogram: {1: 2, 2: 11, 3: 34, 4: 39, 5: 20}
+written w5_canon.json

@@ -1,0 +1,147 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{WLK{\etalchar{+}}25}
+
+\bibitem[And83]{Andreief1883}
+C.~Andr{\'e}ief.
+\newblock Note sur une relation entre les int{\'e}grales d{\'e}finies des
+  produits des fonctions.
+\newblock {\em M{\'e}moires de la Soci{\'e}t{\'e} des Sciences Physiques et
+  Naturelles de Bordeaux}, 2:1--14, 1883.
+
+\bibitem[Ape79]{Apery}
+Roger Apery.
+\newblock Irrationalit\'e de {$\zeta(2)$} et {$\zeta(3)$}.
+\newblock In {\em Luminy Conference on Arithmetic}, number~61 in Ast\'erisque,
+  pages 11--13. 1979.
+
+\bibitem[BB18]{HankelSolvability2016}
+Andrew Bakan and Christian Berg.
+\newblock Solvability of the {H}ankel determinant problem for real sequences.
+\newblock In {\em Frontiers in orthogonal polynomials and {$q$}-series},
+  volume~1 of {\em Contemp. Math. Appl. Monogr. Expo. Lect. Notes}, pages
+  85--117. World Sci. Publ., Hackensack, NJ, 2018.
+
+\bibitem[BBL18]{BBL2018}
+T.~Bayraktar, T.~Bloom, and N.~Levenberg.
+\newblock Pluripotential theory and convex bodies.
+\newblock {\em Sb. Math.}, 209(3):352--384, 2018.
+
+\bibitem[BC99]{BloomCalvi}
+Thomas Bloom and Jean-Paul Calvi.
+\newblock On the multivariate transfinite diameter.
+\newblock {\em Ann. Polon. Math.}, 72(3):285--305, 1999.
+
+\bibitem[Beu79]{Beukers}
+F.~Beukers.
+\newblock A note on the irrationality of {$\zeta (2)$}\ and {$\zeta (3)$}.
+\newblock {\em Bull. London Math. Soc.}, 11(3):268--272, 1979.
+
+\bibitem[Bos89]{Bos}
+Len Bos.
+\newblock A characteristic of points in r2 having lebesgue function of
+  polynomial growth.
+\newblock {\em Journal of Approximation Theory}, 56(3):316--329, 1989.
+
+\bibitem[Bro09]{BrENS}
+Francis Brown.
+\newblock {Multiple zeta values and periods of moduli spaces ${\cal M}_{0 ,n}(
+  \mathbb R )$}.
+\newblock {\em Annales Sci. Ecole Norm. Sup.}, 42:371, 2009.
+
+\bibitem[Bro16]{DinnerParties}
+Francis Brown.
+\newblock Irrationality proofs for zeta values, moduli spaces and dinner
+  parties.
+\newblock {\em Mosc. J. Comb. Number Theory}, 6(2-3):102--165, 2016.
+
+\bibitem[Bro17]{NotesMot}
+F.~Brown.
+\newblock Notes on motivic periods.
+\newblock {\em Commun. Number Theory Phys.}, 11(3):557--655, 2017.
+
+\bibitem[Bro25]{BrVdM}
+Francis Brown.
+\newblock Multivariable vandermonde determinants, amalgams of matrices and
+  specht modules.
+\newblock {\em Journal of Algebra}, 678:253--278, 2025.
+
+\bibitem[CM17]{CoxMau}
+David~A. Cox and Sione Ma`u.
+\newblock Transfinite diameter on complex algebraic varieties.
+\newblock {\em Pacific J. Math.}, 291(2):279--317, 2017.
+
+\bibitem[DR07]{DeMarcoRumely}
+Laura DeMarco and Robert Rumely.
+\newblock Transfinite diameter and the resultant.
+\newblock {\em J. Reine Angew. Math.}, 611:145--161, 2007.
+
+\bibitem[Jed91]{LimitsTransfinite}
+Mieczyslaw Jedrzejowski.
+\newblock The homogeneous transfinite diameter of a compact subset of
+  {${\mathbb{C}}^N$}.
+\newblock In {\em Proceedings of the {T}enth {C}onference on {A}nalytic
+  {F}unctions ({S}zczyrk, 1990)}, volume~55, pages 191--205, 1991.
+
+\bibitem[LS91]{LoeserSabbah}
+F.~Loeser and C.~Sabbah.
+\newblock \'{E}quations aux diff\'{e}rences finies et d\'{e}terminants
+  d'int\'{e}grales de fonctions multiformes.
+\newblock {\em Commentarii Mathematici Helvetici}, 66(1):458--503, 1991.
+
+\bibitem[LW21]{LevenbergWielonsky}
+Norman Levenberg and Franck Wielonsky.
+\newblock On transfinite diameters in {$\Bbb C^d$} for generalized notions of
+  degree.
+\newblock {\em Math. Scand.}, 127(2):337--360, 2021.
+
+\bibitem[Ma`11]{Mau}
+S.~Ma`u.
+\newblock Chebyshev constants and transfinite diameter on algebraic curves in
+  {$\Bbb C^2$}.
+\newblock {\em Indiana Univ. Math. J.}, 60(5):1767--1796, 2011.
+
+\bibitem[Pow82]{PowerHankel}
+S.C. Power.
+\newblock Finite rank multivariable hankel forms.
+\newblock {\em Linear Algebra and its Applications}, 48:237--244, 1982.
+
+\bibitem[RV96]{RVzeta2}
+Georges Rhin and Carlo Viola.
+\newblock On a permutation group related to {$\zeta(2)$}.
+\newblock {\em Acta Arith.}, 77(1):23--56, 1996.
+
+\bibitem[RV01]{RVzeta3}
+Georges Rhin and Carlo Viola.
+\newblock The group structure for {$\zeta(3)$}.
+\newblock {\em Acta Arith.}, 97(3):269--293, 2001.
+
+\bibitem[SS62]{SchifferSiciak}
+M.~Schiffer and J.~Siciak.
+\newblock Transfinite diameter and analytic continuation of functions of two
+  complex variables.
+\newblock In {\em Studies in mathematical analysis and related topics}, pages
+  341--358. Stanford University Press, 1962.
+
+\bibitem[TB12]{BloomBosLevenberg}
+N.~Levenberg T.~Bloom, L.~Bos.
+\newblock The transfinite diameter of the real ball and simplex.
+\newblock {\em Annales Polonici Mathematici}, 106(1):83--96, 2012.
+
+\bibitem[WLK{\etalchar{+}}25]{CMF}
+Shachar Weinbaum, Elyasheev Leibtag, Rotem Kalisch, Michael Shalyt, and Ido
+  Kaminer.
+\newblock On conservative matrix fields: Continuous asymptotics and arithmetic,
+  2025.
+
+\bibitem[Zah75]{Zaharjuta}
+V.~P. Zaharjuta.
+\newblock Transfinite diameter, \v{C}eby\v{s}ev constants and capacity for a
+  compactum in {$C\sp{n}$}.
+\newblock {\em Mat. Sb. (N.S.)}, pages 374--389, 503, 1975.
+
+\bibitem[Zud17]{ZudilinDet}
+Wadim Zudilin.
+\newblock A determinantal approach to irrationality.
+\newblock {\em Constr. Approx.}, 45(2):301--310, 2017.
+
+\end{thebibliography}

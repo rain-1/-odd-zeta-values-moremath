@@ -1,0 +1,98 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                                                                                                                                                                                                                                         
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:=                         
+In[7]:= 
+In[8]:= 
+In[9]:=         
+In[10]:= 
+In[11]:= 
+In[12]:=          
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= 
+In[17]:= 
+In[18]:= 
+In[19]:= 
+In[20]:= START Sat 25 Jul 2026 07:20:56  JOBS=n2:A DMAX=0 MEMCAP=3000000000
+
+In[21]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[22]:= HF loaded
+
+In[23]:= In[23]:= 
+In[24]:= 
+In[25]:= 
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= 
+In[31]:= 
+In[32]:= 
+In[33]:= 
+In[34]:= 
+In[35]:= 
+In[36]:= 
+In[37]:= rho,sigma loaded 10553 1819
+
+In[38]:= In[38]:= 
+In[39]:= 
+In[40]:= 
+In[41]:= 
+In[42]:= 
+In[43]:= In[43]:= 
+In[44]:= 
+In[45]:= 
+In[46]:= 
+In[47]:= 
+In[48]:= 
+In[49]:= 
+In[50]:= 
+In[51]:= 
+In[52]:= 
+In[53]:= In[53]:= 
+In[54]:= 
+In[55]:= 
+In[56]:= 
+In[57]:= In[57]:= 
+In[58]:= 
+In[59]:= 
+In[60]:= 
+In[61]:= 
+In[62]:= In[62]:= 
+In[63]:= 
+In[64]:= 
+In[65]:= In[65]:= 
+In[66]:= In[66]:=                   
+In[67]:= 
+In[68]:= 
+In[69]:= In[69]:=                                                                                                             
+In[70]:= In[70]:= === JOB n2:A === Sat 25 Jul 2026 07:20:57
+  CHECK n2 : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 4230  obj/T 4262  lambda 1
+  n2:A ann : loaded checkpoint
+  ann rank-ish: 3 generators
+  n2:A ct1 : loaded checkpoint
+  ct1 telescopers: 2
+  n2:A gb : loaded checkpoint
+  gb === ct1tel ? True
+  lambda = 1, no DFiniteTimes
+  ct2 FREE t=2s -> none  Sat 25 Jul 2026 07:20:59
+  ct2 third={} d=0 t=16s -> none  Sat 25 Jul 2026 07:21:15
+  ct2 third={S[n]} d=0 t=14s -> none  Sat 25 Jul 2026 07:21:29
+  NO telescoper up to d=0
+
+In[71]:= ALL DONE Sat 25 Jul 2026 07:21:29
+
+In[72]:= 

@@ -1,0 +1,13 @@
+SMAX=4  DP=2  DM=4  MODE=S  q=33554393
+closed symbol masks with <= 4 symbols: 235
+survive the p-adic pole test: 171 / 235
+    [0/171]  ['A1(k)']  cols=50 rows=200 rank=47 excess=153  incons  (0 s)
+    [25/171]  ['A3(k)', 'B3(k)']  cols=150 rows=300 rank=147 excess=153  incons  (28 s)
+    [50/171]  ['A1(k)', 'B1(l)']  cols=150 rows=300 rank=147 excess=153  incons  (91 s)
+    [75/171]  ['A1(l)', 'C3']  cols=150 rows=300 rank=135 excess=165  incons  (185 s)
+    [100/171]  ['A2(l)', 'B2(k)']  cols=150 rows=300 rank=147 excess=153  incons  (308 s)
+    [125/171]  ['A3(k)', 'N1', 'N3']  cols=350 rows=525 rank=305 excess=220  incons  (416 s)
+    [150/171]  ['B2(l)', 'C1']  cols=150 rows=300 rank=135 excess=165  incons  (490 s)
+UNDETERMINED (too few excess equations): 0
+
+RESULT: 0 / 171 letter sets with <= 4 symbols are CONSISTENT (poly coefficients deg <= 2, letter degree <= 4)

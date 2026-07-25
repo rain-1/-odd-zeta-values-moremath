@@ -1,0 +1,476 @@
+\section{The weight-three theorem}
+\label{sec:weight3}
+
+This section is self-contained. Its only inputs are Lucas' theorem on binomial
+coefficients modulo $p$ and Kummer's carry criterion for $\vp\bin NM$.
+
+\subsection{The pair, and the harmonic decomposition}
+
+Write
+\begin{equation}\label{eq:Ank}
+   A(n,k)\;=\;\bin nk^2\bin{n+k}k^2,
+   \qquad
+   u(n,m)\;=\;\frac{(-1)^{m-1}}{2m^3\bin nm\bin{n+m}m},
+   \qquad
+   c(n,k)\;=\;\HH3n+\sum_{m=1}^{k}u(n,m),
+\end{equation}
+so that $a_n=\sum_{k=0}^nA(n,k)$ and $b_n=\sum_{k=0}^nA(n,k)\,c(n,k)$ as in
+\eqref{eq:apery-a}, \eqref{eq:apery-b}. Since $\HH3n$ does not depend on $k$, we may split
+off the constant letter:
+\begin{equation}\label{eq:split}
+   b_n\;=\;\HH3n\,a_n\;+\;W(n),
+   \qquad
+   W(n)\;:=\;\sum_{k=0}^{n}A(n,k)\sum_{m=1}^{k}u(n,m).
+\end{equation}
+Both terms of \eqref{eq:split} will be treated separately, and the theorem is the sum of
+the two congruences \eqref{eq:Hpart} and \eqref{eq:Wpart} below.
+
+We shall also need the tail sums of the summand,
+\begin{equation}\label{eq:Tdef}
+  T(n,m)\;:=\;\sum_{k=m}^{n}A(n,k)\;\in\;\Z\qquad(0\le m\le n+1),
+\end{equation}
+with the convention $T(n,m)=0$ for $m>n$.
+
+\begin{lemma}[interchange]\label{lem:interchange}
+For every $n\ge0$,
+\[
+  W(n)\;=\;\sum_{m=1}^{n}u(n,m)\,T(n,m).
+\]
+\end{lemma}
+
+\begin{proof}
+All sums are finite, so we may reorder freely. The $k=0$ term of $W(n)$ has an empty inner
+sum and contributes $0$; the remaining terms are indexed by the triangular region
+$\{(m,k):1\le m\le k\le n\}$, over which
+\[
+  W(n)=\sum_{k=1}^{n}\sum_{m=1}^{k}A(n,k)u(n,m)
+       =\sum_{\substack{1\le m\le k\le n}}A(n,k)u(n,m)
+       =\sum_{m=1}^{n}u(n,m)\sum_{k=m}^{n}A(n,k),
+\]
+which is the assertion. Note that every $u(n,m)$ occurring has $1\le m\le n$, so
+$\bin nm\ne0$ and $\bin{n+m}m\ne0$ and no division by zero occurs.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:interchange} is one of the three steps flagged as compressed in the
+referee pass of the first write-up; it is elementary, but it is the definition of the
+object $T(n,m)$ on which the whole $W$-part rests, so we have stated it as a lemma.
+\end{remark}
+
+\subsection{Lucas and Kummer inputs}
+
+\begin{lemma}[Lucas step]\label{lem:lucas-step}
+Let $p$ be prime, $a,b\ge0$ and $0\le r,s<p$. Then
+$\bin{ap+r}{bp+s}\equiv\bin ab\bin rs\pmod p$.
+\end{lemma}
+
+\begin{proof}
+The base-$p$ expansion of $ap+r$ has last digit $r$ and higher digits those of $a$; that
+of $bp+s$ has last digit $s$ and higher digits those of $b$. Lucas' theorem gives
+$\bin{ap+r}{bp+s}\equiv\bin rs\prod_{j\ge1}\bin{a_{j-1}}{b_{j-1}}$ where $a_j$, $b_j$ are
+the digits of $a$, $b$; and $\prod_{j\ge1}\bin{a_{j-1}}{b_{j-1}}\equiv\bin ab$ by Lucas'
+theorem again.
+\end{proof}
+
+\begin{lemma}[carry annihilation]\label{lem:carry-ann}
+Fix $a,b\ge0$ and $0\le r,s<p$, and put $n=ap+r$, $k=bp+s$. Then
+\[
+  \bin{n+k}{k}\;\equiv\;
+  \begin{cases}
+    \bin{a+b}{b}\bin{r+s}{s} & \text{if }r+s<p,\\[2pt]
+    0 & \text{if }r+s\ge p,
+  \end{cases}
+  \pmod p .
+\]
+\end{lemma}
+
+\begin{proof}
+We have $n+k=(a+b)p+(r+s)$. If $r+s<p$ this is a legitimate digit decomposition and
+Lemma~\ref{lem:lucas-step} applies directly. If $r+s\ge p$, write
+$n+k=(a+b+1)p+(r+s-p)$ with $0\le r+s-p<p$; Lemma~\ref{lem:lucas-step} then gives
+$\bin{n+k}{k}\equiv\bin{a+b+1}{b}\bin{r+s-p}{s}$, and $r<p$ forces $r+s-p<s$, so
+$\bin{r+s-p}{s}=0$.
+\end{proof}
+
+\begin{lemma}[summand factorisation]\label{lem:summand}
+With $n=ap+r$, $k=bp+s$ as above,
+\[
+   A(n,k)\;\equiv\;[\,r+s<p\,]\cdot\bin ab^2\bin{a+b}b^2\cdot\bin rs^2\bin{r+s}s^2
+   \pmod p,
+\]
+where $[\,\cdot\,]$ is the indicator of a condition. In particular $A(n,k)\equiv0\pmod p$
+whenever $s>r$ or $r+s\ge p$.
+\end{lemma}
+
+\begin{proof}
+$A(n,k)=\bin nk^2\bin{n+k}k^2$. By Lemma~\ref{lem:lucas-step},
+$\bin nk^2\equiv\bin ab^2\bin rs^2$; by Lemma~\ref{lem:carry-ann},
+$\bin{n+k}k^2\equiv[\,r+s<p\,]\bin{a+b}b^2\bin{r+s}s^2$. Multiply. The last sentence
+follows since $\bin rs=0$ for $s>r$.
+\end{proof}
+
+The next two lemmas are the entire Kummer ledger, and they are where the hypothesis
+$a<p$, i.e. $n<p^2$, is used.
+
+\begin{lemma}[borrow count]\label{lem:borrow}
+Let $p$ be prime, $n=ap+r$ with $0\le a,r<p$, and let $0\le m\le n$ have digits
+$m=m_1p+m_0$, $0\le m_0<p$. Then
+\[
+  \vp\bin nm\;=\;[\,m_0>r\,]\;\in\;\{0,1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Kummer's theorem, $\vp\bin nm$ is the number of borrows in the base-$p$ subtraction
+$n-m$. Since $n<p^2$ and $m\le n$, both $n$ and $m$ have at most two base-$p$ digits, so
+there are at most two borrow positions, and $m_1\le a$.
+
+At position $0$ a borrow occurs precisely when $m_0>r$. At position $1$ a borrow occurs
+precisely when $m_1+[\,m_0>r\,]>a$. We check that this never happens.
+
+\emph{Case $m_0\le r$.} Then position $1$ requires $m_1>a$, contradicting $m_1\le a$.
+
+\emph{Case $m_0>r$.} We claim $m_1\le a-1$. Indeed, if $m_1\ge a$ then
+$m=m_1p+m_0\ge ap+m_0>ap+r=n$, contradicting $m\le n$. Hence $m_1+1\le a$ and there is no
+borrow at position $1$.
+
+There is no position $\ge2$, so the borrow count is $[\,m_0>r\,]$.
+\end{proof}
+
+\begin{remark}
+The step ``$m_0>r\Rightarrow m_1\le a-1$'' is the second of the three compressions flagged
+by the referee pass; in the first write-up it was abbreviated to ``the second borrow would
+need $m_1=a$ with $m_0>r$, i.e.\ $m>n$''.
+\end{remark}
+
+\begin{lemma}[carry count]\label{lem:carrycount}
+With $n=ap+r$, $0\le a,r<p$, and $0\le m=m_1p+m_0\le n$, put
+\[
+  c_0=[\,r+m_0\ge p\,],\qquad c_1=[\,a+m_1+c_0\ge p\,].
+\]
+Then $\vp\bin{n+m}{m}=c_0+c_1\le 2$.
+\end{lemma}
+
+\begin{proof}
+By Kummer's theorem this valuation is the number of carries in the base-$p$ addition
+$n+m$. The digits of $n$ are $(a,r)$ and those of $m$ are $(m_1,m_0)$, all in $[0,p)$. A
+carry out of position $0$ occurs iff $r+m_0\ge p$, i.e.\ iff $c_0=1$; a carry out of
+position $1$ occurs iff $a+m_1+c_0\ge p$, i.e.\ iff $c_1=1$. At position $2$ the digits
+are $0$ and $0$ and the incoming carry is $c_1\le1<p$, so no further carry is produced.
+\end{proof}
+
+\begin{lemma}[level-$a$ carry]\label{lem:levelcarry}
+If $0\le b\le a<p$ and $a+b\ge p$ then $\vp\bin{a+b}b\ge1$, hence $\vp A(a,b)\ge2$.
+Consequently, if $0\le j\le a<p$ and $a+j\ge p$ then
+\[
+   \vp\,T(a,j)\;\ge\;2 .
+\]
+\end{lemma}
+
+\begin{proof}
+$a,b<p$ and $a+b\ge p$ means the base-$p$ addition of $a$ and $b$ carries out of position
+$0$, so $\vp\bin{a+b}b\ge1$ by Kummer, and $A(a,b)=\bin ab^2\bin{a+b}b^2$ has valuation at
+least $2$. In $T(a,j)=\sum_{b=j}^{a}A(a,b)$ every index satisfies $b\ge j$, hence
+$a+b\ge a+j\ge p$, so every summand has valuation $\ge2$.
+\end{proof}
+
+\subsection{The fibre lemma, and the first row}
+
+The following lemma does the combinatorial work three times over: it yields the first-row
+Lucas congruence, and it yields the two ``tail-factorisation'' facts needed for the second
+row. Its proof contains the product-completion argument in full; this is the third of the
+compressions flagged in the referee pass, and it is the one that genuinely needs care,
+because the true summation region is \emph{not} a product set.
+
+\begin{lemma}[fibre lemma]\label{lem:fibre}
+Let $p$ be prime, $n=ap+r$ with $a\ge0$ and $0\le r<p$. For $0\le\beta\le a+1$ set
+\[
+   T_\beta(n)\;:=\;\sum_{\substack{0\le k\le n\\ \lfloor k/p\rfloor\ge\beta}}A(n,k).
+\]
+Then
+\[
+   T_\beta(n)\;\equiv\;T(a,\beta)\cdot a_r\pmod p ,
+   \qquad T(a,\beta)=\sum_{b=\beta}^{a}A(a,b).
+\]
+\end{lemma}
+
+\begin{proof}
+Write each $k$ in the range uniquely as $k=bp+s$ with $0\le s<p$; then $b=\lfloor
+k/p\rfloor$ and $0\le k\le n=ap+r<(a+1)p$ forces $\beta\le b\le a$. By
+Lemma~\ref{lem:summand},
+\begin{equation}\label{eq:fibre1}
+   T_\beta(n)\;\equiv\;
+   \sum_{b=\beta}^{a}\ \sum_{\substack{0\le s<p\\ r+s<p\\ bp+s\le n}}
+   \bin ab^2\bin{a+b}b^2\,\bin rs^2\bin{r+s}s^2 \pmod p .
+\end{equation}
+The constraint $bp+s\le n=ap+r$ is vacuous for $b<a$, and for $b=a$ it reads $s\le r$.
+Now, all summands with $b=a$ and $s>r$ carry the factor $\bin rs^2=0$ and therefore vanish
+\emph{identically}, not merely modulo $p$. Hence they may be adjoined to the sum
+\eqref{eq:fibre1} without changing it, and after this adjunction the index region is the
+product set
+\[
+  \{\beta\le b\le a\}\times\{0\le s<p:\;r+s<p\},
+\]
+in which the two constraints involve $b$ and $s$ separately. The double sum therefore
+factors:
+\begin{equation}\label{eq:fibre2}
+  T_\beta(n)\;\equiv\;
+  \Bigl(\sum_{b=\beta}^{a}\bin ab^2\bin{a+b}b^2\Bigr)
+  \Bigl(\sum_{\substack{0\le s<p\\ r+s<p}}\bin rs^2\bin{r+s}s^2\Bigr)\pmod p .
+\end{equation}
+The first factor is $T(a,\beta)$ --- an equality of integers, by the definition
+\eqref{eq:Tdef} of $T$ applied at level $a$.
+
+For the second factor we claim
+\begin{equation}\label{eq:fibre3}
+   \sum_{\substack{0\le s<p\\ r+s<p}}\bin rs^2\bin{r+s}s^2\;\equiv\;a_r \pmod p .
+\end{equation}
+Indeed $a_r=\sum_{s=0}^{r}\bin rs^2\bin{r+s}s^2$. Terms with $s>r$ have $\bin rs=0$, so
+the range may be taken to be $0\le s<p$. It remains to see that the terms with $s\le r$
+and $r+s\ge p$ vanish modulo $p$: for those,
+$\bin{r+s}s=\bin{1\cdot p+(r+s-p)}{0\cdot p+s}\equiv\bin10\bin{r+s-p}s=0$ by
+Lemma~\ref{lem:lucas-step}, because $0\le r+s-p<s$. This proves \eqref{eq:fibre3} and,
+with \eqref{eq:fibre2}, the lemma.
+\end{proof}
+
+\begin{theorem}[first row; Lucas congruence for $a_n$]\label{thm:arow}
+\Proved\ Let $p$ be prime. For every $a\ge0$ and every $0\le r<p$,
+\[
+   a_{ap+r}\;\equiv\;a_a\,a_r\pmod p ,
+\]
+and hence $a_n\equiv\prod_i a_{n_i}\pmod p$ for the base-$p$ expansion $n=\sum_in_ip^i$.
+\end{theorem}
+
+\begin{proof}
+Take $\beta=0$ in Lemma~\ref{lem:fibre}: the left-hand side is $T_0(n)=\sum_{k=0}^nA(n,k)=a_n$
+and the right-hand side is $T(a,0)a_r=a_a\,a_r$. The product form follows by induction on
+the number of base-$p$ digits of $a$, the two-digit statement being available for every
+$a\ge0$.
+\end{proof}
+
+Theorem~\ref{thm:arow} is classical \cite{Gessel1982,MalikStraub,Straub2301};
+we have reproved it because the fibre lemma it rests on is used twice more below, and
+because the whole point of this paper is what happens one row down.
+
+\begin{corollary}[tail factorisation]\label{cor:tailfact}
+Let $n=ap+r$ with $a\ge0$, $0\le r<p$, and let $1\le m\le n$ have digits $m=m_1p+m_0$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $m_0>r$ then $T(n,m)\equiv T(a,m_1+1)\,a_r\pmod p$.
+\item If $m_0=0$, say $m=jp$ with $1\le j\le a$, then $T(n,jp)\equiv T(a,j)\,a_r\pmod p$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(ii) The condition $k\ge jp$ is exactly $\lfloor k/p\rfloor\ge j$, so $T(n,jp)=T_j(n)$ and
+Lemma~\ref{lem:fibre} applies verbatim.
+
+(i) Here $T(n,m)$ and $T_{m_1+1}(n)$ differ only by the terms with $m\le k<(m_1+1)p$,
+i.e.\ by those $k$ with $\lfloor k/p\rfloor=m_1$ and low digit $s=k-m_1p\ge m_0>r$. By the
+last sentence of Lemma~\ref{lem:summand}, each such term is $\equiv0\pmod p$. Hence
+$T(n,m)\equiv T_{m_1+1}(n)\equiv T(a,m_1+1)a_r\pmod p$.
+\end{proof}
+
+\subsection{The constant letter}
+
+\begin{lemma}[$H$-part]\label{lem:Hpart}
+Let $p\ge3$, $n=ap+r$ with $0\le a,r<p$. Then
+\[
+   p^3\HH3n\;\equiv\;\HH3a \pmod{p^3},
+\]
+and consequently
+\begin{equation}\label{eq:Hpart}
+   p^3\,\HH3n\,a_n\;\equiv\;\HH3a\,a_a\,a_r\pmod p .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The indices $m\le n$ divisible by $p$ are $m=jp$ for $1\le j\le\lfloor n/p\rfloor=a$, and
+they contribute $\sum_{j=1}^{a}(jp)^{-3}=p^{-3}\HH3a$. Writing
+$S=\sum_{m\le n,\;p\nmid m}m^{-3}\in\Zp$ we get $\HH3n=S+p^{-3}\HH3a$, whence
+$p^3\HH3n=p^3S+\HH3a\equiv\HH3a\pmod{p^3}$. Multiplying by the integer $a_n$ preserves the
+congruence modulo $p^3$, so $p^3\HH3n\,a_n\equiv\HH3a\,a_n\pmod{p^3}$, in particular
+modulo $p$. Finally $\HH3a\in\Zp$ because $a<p$, and $a_n\equiv a_aa_r\pmod p$ by
+Theorem~\ref{thm:arow}; multiplying the latter congruence by $\HH3a\in\Zp$ gives
+\eqref{eq:Hpart}.
+\end{proof}
+
+\subsection{The singular layer}
+
+The terms of $W(n)$ indexed by $m$ with $p\nmid m$ can carry a pole of order up to $3$,
+and it is exactly the perfect-square shape of $A(n,k)$ that keeps them under control after
+multiplication by $p^3$.
+
+\begin{lemma}[singular layer]\label{lem:V}
+Let $p\ge5$, $n=ap+r$ with $1\le a<p$, $0\le r<p$. For every $m$ with $1\le m\le n$ and
+$p\nmid m$,
+\[
+   \vp\bigl(p^3\,u(n,m)\,T(n,m)\bigr)\;\ge\;1 .
+\]
+Consequently $\displaystyle\sum_{1\le m\le n,\;p\nmid m}p^3u(n,m)T(n,m)\equiv0\pmod p$.
+\end{lemma}
+
+\begin{proof}
+Since $p\ge5$ and $p\nmid m$ we have $\vp(2m^3)=0$, so with
+$CC:=\bin nm\bin{n+m}m$,
+\begin{equation}\label{eq:ledger}
+   \vp\bigl(p^3u(n,m)T(n,m)\bigr)\;=\;3-\vp(CC)+\vp\,T(n,m).
+\end{equation}
+By Lemmas~\ref{lem:borrow} and \ref{lem:carrycount},
+$\vp(CC)=[\,m_0>r\,]+c_0+c_1\le3$.
+
+If $\vp(CC)\le2$ then \eqref{eq:ledger} is $\ge3-2+0=1$, since $T(n,m)$ is an integer.
+
+If $\vp(CC)=3$ then necessarily $[\,m_0>r\,]=c_0=c_1=1$. From $m_0>r$ and $c_1=1$, i.e.\
+$a+m_1+1\ge p$, we get: Corollary~\ref{cor:tailfact}(i) applies, so
+$T(n,m)\equiv T(a,m_1+1)a_r\pmod p$; and $m_1+1\ge p-a$, so every index $b\ge m_1+1$
+occurring in $T(a,m_1+1)$ satisfies $a+b\ge a+m_1+1\ge p$, whence $\vp A(a,b)\ge2$ by
+Lemma~\ref{lem:levelcarry} and $T(a,m_1+1)\equiv0\pmod p$. Therefore
+$\vp T(n,m)\ge1$ and \eqref{eq:ledger} is $\ge3-3+1=1$.
+\end{proof}
+
+\begin{remark}\label{rem:square}
+Lemma~\ref{lem:V} is the load-bearing step, and the only place where the \emph{square}
+shape of $A(n,k)=\bin nk^2\bin{n+k}k^2$ is essential: a single Kummer carry buys
+$\vp\ge2$, which is precisely the slack that rescues the case $\vp(CC)=3$. A summand with
+an unsquared wide binomial would buy only $\vp\ge1$ and the ledger would not close. This
+is a concrete obstruction for any port of the argument to a non-square summand.
+\end{remark}
+
+\subsection{The \texorpdfstring{$p$}{p}-divisible layer}
+
+\begin{lemma}[$W$-part]\label{lem:Wpart}
+Let $p\ge5$, $n=ap+r$ with $1\le a<p$, $0\le r<p$. Then
+\begin{equation}\label{eq:Wpart}
+   p^3\,W(n)\;\equiv\;a_r\,W(a)\pmod p .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:interchange} and Lemma~\ref{lem:V},
+\[
+   p^3W(n)\;\equiv\;\sum_{j=1}^{a}\tau_j^{(n)}\pmod p ,
+   \qquad
+   \tau^{(n)}_j:=p^3u(n,jp)\,T(n,jp)
+   =\frac{(-1)^{j-1}\,T(n,jp)}{2j^3\bin n{jp}\bin{n+jp}{jp}},
+\]
+where we used $p^3/(jp)^3=j^{-3}$ and $(-1)^{jp-1}=(-1)^{j-1}$ ($p$ odd). Likewise, by
+Lemma~\ref{lem:interchange} at level $a$,
+\[
+   W(a)=\sum_{j=1}^{a}\tau_j,
+   \qquad
+   \tau_j:=u(a,j)T(a,j)=\frac{(-1)^{j-1}T(a,j)}{2j^3\bin aj\bin{a+j}j} .
+\]
+We compare $\tau^{(n)}_j$ with $a_r\tau_j$ for each $j$ separately. Throughout,
+Lemma~\ref{lem:lucas-step} gives
+\begin{equation}\label{eq:lucas-jp}
+   \bin n{jp}=\bin{ap+r}{jp+0}\equiv\bin aj\bin r0=\bin aj,
+   \quad
+   \bin{n+jp}{jp}=\bin{(a+j)p+r}{jp+0}\equiv\bin{a+j}j \pmod p,
+\end{equation}
+the second because $n+jp=(a+j)p+r$ with $0\le r<p$ is a legitimate digit decomposition,
+Lemma~\ref{lem:lucas-step} being valid for arbitrary high digits. Note also
+$\vp\bin n{jp}=0$ by Lemma~\ref{lem:borrow} (here $m_0=0\le r$) and
+$\vp\bin{n+jp}{jp}=c_0+c_1=0+[\,a+j\ge p\,]$ by Lemma~\ref{lem:carrycount}, while
+$\vp\bin aj=0$ and $\vp\bin{a+j}j=[\,a+j\ge p\,]$ since $j\le a<p$.
+
+\emph{Case $a+j<p$.} Then all four binomials in sight are $p$-units, and by
+\eqref{eq:lucas-jp} the two at level $n$ are congruent modulo $p$ to the two at level
+$a$; a $p$-unit congruence may be inverted modulo $p$. Combining with
+Corollary~\ref{cor:tailfact}(ii), $T(n,jp)\equiv T(a,j)a_r$, we obtain
+\[
+   \tau^{(n)}_j\;\equiv\;\frac{(-1)^{j-1}T(a,j)\,a_r}{2j^3\bin aj\bin{a+j}j}
+   \;=\;a_r\,\tau_j\pmod p .
+\]
+
+\emph{Case $a+j\ge p$.} We show that both $\tau^{(n)}_j$ and $\tau_j$ are $\equiv0\pmod
+p$. For $\tau_j$: $\vp\tau_j=\vp T(a,j)-\vp\bin aj-\vp\bin{a+j}j\ge2-0-1=1$ by
+Lemma~\ref{lem:levelcarry}. For $\tau^{(n)}_j$: we have
+$\vp\tau^{(n)}_j=\vp T(n,jp)-0-1$, and we claim $\vp T(n,jp)\ge2$. Indeed every $k$ in the
+range of $T(n,jp)=\sum_{k\ge jp}A(n,k)$ has $b:=\lfloor k/p\rfloor\ge j$, so with
+$s=k-bp$ the carry count of Lemma~\ref{lem:carrycount} for $\bin{n+k}k$ satisfies
+$c_1=[\,a+b+c_0\ge p\,]\ge[\,a+j\ge p\,]=1$, whence $\vp\bin{n+k}k\ge1$ and
+$\vp A(n,k)\ge2$. Therefore $\vp\tau_j^{(n)}\ge2-1=1$.
+
+Summing over $j$ and discarding the terms with $a+j\ge p$ from both sides,
+\[
+   p^3W(n)\equiv\sum_{j=1}^{a}\tau^{(n)}_j
+   \equiv\sum_{\substack{1\le j\le a\\ a+j<p}}a_r\tau_j
+   \equiv a_r\sum_{j=1}^{a}\tau_j=a_rW(a)\pmod p . \qedhere
+\]
+\end{proof}
+
+\subsection{The theorem}
+
+%% FIXED [MINOR x3]: (i) the range was $0\le a<p$ but Lemmas \ref{lem:V} and \ref{lem:Wpart},
+%% FIXED which the proof invokes, both require $1\le a<p$; the $a=0$ case is true but unused, and
+%% FIXED it is now excluded. (ii) the identity $W(a)=\sum_j u(a,j)T(a,j)$ used in the first
+%% FIXED paragraph is Lemma \ref{lem:interchange} and was uncited. (iii) the second paragraph
+%% FIXED appealed to the internals of the proof of Lemma \ref{lem:Wpart}; the statement it needs
+%% FIXED is now made explicitly.
+\begin{lemma}[local integrality]\label{lem:integrality}
+Let $p\ge5$ and $1\le a<p$, $0\le r<p$, $n=ap+r$. Then $b_a\in\Zp$ and $p^3b_n\in\Zp$.
+\end{lemma}
+
+\begin{proof}
+For $b_a=\HH3a\,a_a+W(a)$: the letter $\HH3a$ is $p$-integral because $a<p$, and by
+Lemma~\ref{lem:interchange} $W(a)=\sum_{j=1}^{a}u(a,j)T(a,j)$, whose terms have
+$\vp\bigl(u(a,j)T(a,j)\bigr)=-[\,a+j\ge p\,]+\vp T(a,j)$, which is $\ge0$ when $a+j<p$ and
+$\ge-1+2=1$ when $a+j\ge p$ by Lemma~\ref{lem:levelcarry}.
+
+For $p^3b_n=p^3\HH3n\,a_n+p^3W(n)$: the first term is $p$-integral by
+Lemma~\ref{lem:Hpart}. For the second, use Lemma~\ref{lem:interchange} again and split the
+range of $m$. The terms with $p\nmid m$ have $\vp\bigl(p^3u(n,m)T(n,m)\bigr)\ge1$ by
+Lemma~\ref{lem:V}. The terms with $m=jp$ have $\vp\bigl(p^3u(n,jp)T(n,jp)\bigr)\ge0$: this is
+the content of the two cases $a+j<p$ and $a+j\ge p$ established inside the proof of
+Lemma~\ref{lem:Wpart}, where the first gives $\vp\ge0$ directly and the second gains the two
+powers of Lemma~\ref{lem:levelcarry} against a pole of order at most $1$.
+\end{proof}
+
+\begin{theorem}[second row, weight three]\label{thm:brow}
+\Proved\ Let $p\ge5$ be prime, $1\le a<p$, $0\le r<p$ and $n=ap+r$. Then both sides below
+lie in $\Zp$ and
+\[
+   p^3\,b_{ap+r}\;\equiv\;b_a\,a_r\pmod p .
+\]
+\end{theorem}
+
+\begin{proof}
+Local integrality is Lemma~\ref{lem:integrality}. By \eqref{eq:split},
+$p^3b_n=p^3\HH3n\,a_n+p^3W(n)$, and by \eqref{eq:Hpart} and \eqref{eq:Wpart},
+\[
+  p^3b_n\;\equiv\;\HH3a\,a_a\,a_r+a_r\,W(a)
+  \;=\;a_r\bigl(\HH3a\,a_a+W(a)\bigr)\;=\;a_r\,b_a \pmod p . \qedhere
+\]
+\end{proof}
+
+\begin{remark}[$p=5$ is not exceptional]\label{rem:p5}
+The proof uses only that $p$ is odd, that $p\nmid2$, and that $1\le j\le a<p$ implies
+$p\nmid j$; it therefore applies verbatim at $p=5$. This matters, because at $p=5$ one has
+$a_1=5\equiv0$ and $a_3=1445\equiv0\pmod5$, so the \emph{ratio} form
+$p^3(b_n/a_n)\equiv b_a/a_a$ acquires a pole (of order as low as $-1$) at the cells where
+a base-$p$ digit of $a$ meets a zero of $a_\bullet$. Theorem~\ref{thm:brow} never divides
+by $a_a$, so it sees no pole; the pole is an artefact of dividing, not a defect of the
+congruence. Zeros of $a_\bullet$ modulo $p$ occur for $r\in\{1,3\}$ ($p=5$), $\{5\}$
+($p=11$), $\{3,13\}$ ($p=17$), $\{8,10\}$ ($p=19$), $\{8,22\}$ ($p=31$), and for none of
+$r$ when $p=7,13,23,29$ \VerifiedR{$5\le p\le31$}.
+\end{remark}
+
+\begin{remark}[independent verification]\label{rem:verify3}
+Theorem~\ref{thm:arow} and Theorem~\ref{thm:brow}, together with every lemma above and
+every case split in their proofs, were checked by an independent exact-arithmetic
+implementation --- one not derived from the write-up --- with zero failures: the theorems
+for $p\in\{5,7,11,13,17\}$ and all cells $(a,r)$; the fibre and tail factorisations for
+$p\in\{5,7,11\}$ and all $(a,r,m)$; the Kummer counts of Lemmas~\ref{lem:borrow} and
+\ref{lem:carrycount} for $p\in\{5,7,11,13\}$ and all $p\nmid m$; and the ledger of
+Lemma~\ref{lem:V}, whose minimum over all $p\nmid m$ is exactly $1$, so the bound is
+sharp. The dangerous branch $\vp(CC)=3$ was confirmed on all $14\,292$ of its occurrences
+for $p\le19$, and $\vp(CC)$ was never observed to exceed $3$.
+\end{remark}
+
+\begin{remark}[what is \emph{not} proved here]\label{rem:not-proved}
+Theorem~\ref{thm:brow} is a single-digit, modulo-$p$ statement. The multi-digit master
+form and the sharpening from modulo $p$ to modulo $p^3$ are \Verified\ only; see
+Section~\ref{sec:depth}. The single-digit case is the base case of a digit-by-digit
+induction, but the induction step is not available, because the natural inductive
+statement is the ratio form and the ratio form has poles (Remark~\ref{rem:p5}).
+\end{remark}

@@ -1,0 +1,16 @@
+[abl522] basis=721  |Sk|=74 |Sc|=12 |Sn|=33  N=1200
+   n=100  1s
+   n=200  3s
+   n=300  11s
+   n=400  23s
+   n=500  47s
+   n=600  87s
+   n=700  143s
+   n=800  228s
+   n=900  332s
+   n=1000  465s
+   n=1100  645s
+   n=1200  900s
+[abl522] matrix 1200x721 in 900s
+[abl522] rank(M)=489  rank([M|b])=489  INCONSISTENT=False  excess=711
+[abl522] written

@@ -1,0 +1,15 @@
+jobs = 931
+   in-regime cells   = 10281175
+   off-regime cells  = 142820576
+   B0_FAIL                0   <-- must be 0
+   B1_FAIL                0   <-- must be 0
+   B2_FAIL                0   <-- must be 0
+   K1_FAIL                0   <-- must be 0
+   K2_FAIL                0   <-- must be 0
+   K2b_FAIL               0   <-- must be 0
+   KC_FAIL                0   <-- must be 0
+   in_KC_fails            134289
+   in_B_nonzero           0
+   in_sn_ne_sa            0
+   K2_excep_harmless      20798
+   off-regime slack of (KC), 5 = >=5: {0: 41284, 1: 601615, 2: 2484189, 3: 3770650, 4: 8136148, 5: 127786690}

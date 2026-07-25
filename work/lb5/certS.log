@@ -1,0 +1,7 @@
+START Sat 25 Jul 2026 01:01:53
+HF loaded
+rho,sigma loaded 10553 1819
+EE LeafCount=16067 #H=166
+after hb: #distinct HarmonicNumber = 9 t=2s
+  they are: {HarmonicNumber[k], HarmonicNumber[l], HarmonicNumber[k + l], HarmonicNumber[-k + n], HarmonicNumber[k + n], HarmonicNumber[l + n], HarmonicNumber[k + l + n], HarmonicNumber[k, 2], HarmonicNumber[k + n, 2]}
+  max degree in a single harmonic symbol = 1

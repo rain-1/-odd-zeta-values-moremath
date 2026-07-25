@@ -1,0 +1,191 @@
+\section{The master depth law}
+\label{sec:depth}
+
+Theorem~\ref{thm:brow} is a modulo-$p$ statement about a single base-$p$ digit. The
+numerical evidence says that the true statement is stronger in three independent
+directions at once: it holds modulo $p^3$, it holds for all $n$ (not only $n<p^2$), and
+it needs no $p$-unit hypothesis anywhere. We state it as a conjecture and we do not
+upgrade it.
+
+\subsection{The weight-three master form}
+
+For $n\ge1$ put $q=\lfloor n/p\rfloor$ and
+\begin{equation}\label{eq:Edef}
+   E(n):=\vp\bigl(p^3\,b_n\,a_q-b_q\,a_n\bigr).
+\end{equation}
+This quantity is defined for every $n$ and every $p$ --- no division occurs, so the
+$p=5$ and exceptional-digit cells are not special.
+
+\begin{conjecture}[master depth law, weight three]\label{conj:master3}
+For every prime $p\ge5$ and every $n\ge1$, with $q=\lfloor n/p\rfloor$,
+\[
+   p^3\,b_n\,a_q\;\equiv\;b_q\,a_n \pmod{p^3},
+   \qquad\text{i.e.}\qquad E(n)\ge3 .
+\]
+\end{conjecture}
+
+\noindent\textbf{Evidence.} \VerifiedR{zero failures; all primes $5\le p\le31$; all
+$n\in[1,320]$; exact rational arithmetic}. This range covers the single-digit cells
+$n<p^2$, the multi-digit range, and $p=5$. The floor is attained: $\min_nE(n)=3$ exactly,
+for every one of the nine primes. On $p$-unit cells the statement is equivalent to the
+ratio descent
+\[
+   p^3\,\frac{b_n}{a_n}\;\equiv\;\frac{b_q}{a_q}\pmod{p^3},
+\]
+which iterates down the whole base-$p$ expansion; and the minimum of
+$\vp\bigl(p^3b_n/a_n-b_q/a_q\bigr)$ over $p$-unit single-digit cells is likewise exactly
+$3$, for every prime $7\le p\le31$, with no cell of depth $\le2$
+\VerifiedR{$7\le p\le31$}.
+
+Restricted to single-digit cells $n=ap+r$ ($1\le a<p$, $0\le r<p$) the quantity
+\eqref{eq:Edef} is $E(a,r)=\vp(p^3b_na_a-b_aa_n)$, and its distribution is remarkably
+rigid: overwhelmingly $3$, with a handful of sporadic boosts.
+
+\begin{table}[ht]
+\centering
+\caption{Distribution of the single-digit depth
+$E(a,r)=\vp\bigl(p^3b_{ap+r}a_a-b_aa_{ap+r}\bigr)$ over all cells $1\le a<p$,
+$0\le r<p$. \VerifiedR{exact; zero cells with $E<3$}.}
+\label{tab:Etally}
+\begin{tabular}{@{}rcl@{}}
+\toprule
+$p$ & $\min E$ & $E$-value tally over single-digit cells ($E$:\ count)\\
+\midrule
+ 5 & 3 & $3{:}18,\ 4{:}1,\ 6{:}1$\\
+ 7 & 3 & $3{:}35,\ 4{:}5,\ 5{:}1,\ 6{:}1$\\
+11 & 3 & $3{:}104,\ 4{:}4,\ 6{:}2$\\
+13 & 3 & $3{:}147,\ 4{:}7,\ 5{:}1,\ 6{:}1$\\
+17 & 3 & $3{:}260,\ 4{:}10,\ 5{:}1,\ 6{:}1$\\
+19 & 3 & $3{:}302,\ 4{:}35,\ 5{:}4,\ 6{:}1$\\
+23 & 3 & $3{:}478,\ 4{:}25,\ 5{:}2,\ 6{:}1$\\
+29 & 3 & $3{:}774,\ 4{:}35,\ 5{:}2,\ 6{:}1$\\
+31 & 3 & $3{:}912,\ 4{:}16,\ 5{:}1,\ 6{:}1$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Fine structure of the boosts}
+
+%% FIXED [MINOR]: the reflection (a,r) -> (p-1-a, p-1-r) sends a = p-1 to a = 0, which is
+%% FIXED outside the cell range 1 <= a < p, so it cannot pair the edge and corner boosts.
+The cells with $E>3$ are not noise, but they do not follow a clean law either. They
+concentrate at extreme digits, and the interior ones are symmetric under the reflection
+$(a,r)\mapsto(p-1-a,\,p-1-r)$ --- a symmetry which says nothing about the $a=p-1$ boosts,
+since it carries them to $a=0$, outside the range of the table \VerifiedR{$5\le p\le31$}:
+\begin{itemize}[leftmargin=1.4em]
+%% FIXED [MAJOR-3]: "E = 5 at the edge" was false at p=5 (E=4) and p=11 (E=6), contradicting
+%% FIXED Table \ref{tab:Etally} above, which lists no E=5 cell at either prime, and the bullet
+%% FIXED immediately above it. Recomputed exactly here for 5<=p<=31: E(edge) = 4, 5, 6, 5, 5, 5,
+%% FIXED 5, 5, 5 at p = 5, 7, 11, 13, 17, 19, 23, 29, 31. The correction was already on file at
+%% FIXED work/VERIFY_ZETA3_PROOF.md:87 ("E(edge (p-1,0)) in {4,5,6}") and was dropped in favour
+%% FIXED of the uncorrected WARMUP_ZETA3_DWORK.md:125.
+%% FIXED Also fixed: at p=11 the corner and edge cells BOTH have E=6 (Table \ref{tab:Etally}
+%% FIXED shows 6:2), so the boost is duplicated, not split.
+\item $E=6$ at the corner $(a,r)=(p-1,p-1)$, i.e.\ $n=p^2-1$, at every prime in range;
+\item $E\in\{4,5,6\}$ at the edge $(a,r)=(p-1,0)$, i.e.\ $n=p(p-1)$: it is $5$ at
+$p=7,13,17,19,23,29,31$, but $4$ at $p=5$ and $6$ at $p=11$. At $p=11$ the edge therefore
+carries a second $E=6$ cell, which is the whole of that prime's $6{:}2$ entry in
+Table~\ref{tab:Etally};
+\item $E=4$ on symmetric interior and edge pairs, e.g.\ for $p=13$ at
+$(3,5)$, $(3,7)$, $(9,5)$, $(9,7)$, $(12,2)$, $(12,6)$, $(12,10)$.
+\end{itemize}
+The robust, conjecturable content is the floor $E\ge3$; the boosts we record as data.
+
+\subsection{Two strengthenings that the data kills}
+
+It is worth recording two natural-looking sharpenings that are \emph{false}, because both
+were conjectured at some point in this programme.
+
+\begin{observation}\label{obs:false1}
+The floor is \emph{flat}: it is independent of $\kappa=\vp\bin{2n}n$. Cells with
+$\kappa=0,1,2$ all floor at $E=3$ \VerifiedR{$5\le p\le31$, $n\le320$}. In particular the
+bound $E\ge\vp(a_aa_n)+1$ is false: $E-\vp(a_aa_n)$ reaches $-2$ at $p=17$.
+\end{observation}
+
+\begin{observation}\label{obs:false2}
+The integrality statement $\vp(b_n)\ge-3\vp(d_n)$, equivalently $d_n^3b_n\in\Z$, holds
+\VerifiedR{$5\le p\le31$, $n\le320$, zero failures}, with $\vp(d_n)=\lfloor\log_pn\rfloor$.
+But the corresponding \emph{equality} $\vp(b_n/a_n)=-3\vp(d_n)$ is false: the numerators
+of $b_n$ carry sporadic extra $p$-factors, for instance $7\mid62531=\operatorname{num}(b_3)$.
+The correct statement is an inequality.
+\end{observation}
+
+\subsection{The weight panel}
+\label{ssec:panel}
+
+Running the same experiment at lower weight explains both why the weight-three case is
+clean and where the danger lives. Let $(A,B)$ be an Ap\'ery-like pair with Ap\'ery limit
+of weight $w$, and consider the master quantity $\vp\bigl(p^wB_nA_q-B_qA_n\bigr)$,
+$q=\lfloor n/p\rfloor$.
+
+\begin{observation}[congruence depth $=$ weight]\label{obs:panel}
+\VerifiedR{zero failures} the master floor is $\ge w$, flat, for all $p\ge5$:
+\begin{itemize}[leftmargin=1.4em]
+\item $w=1$: the central Delannoy numbers $1,3,13,63,\dots$ with their companion,
+  $B_n/A_n\to\log2$; $n\le300$.
+\item $w=2$: the Ap\'ery pair for $\zeta(2)$, $(n+1)^2u_{n+1}=(11n^2+11n+3)u_n+n^2u_{n-1}$,
+  $A=1,3,19,147,1251,\dots$; $n\le300$, floor exactly $2$ for $p\ge7$.
+\item $w=3$: the pair \eqref{eq:apery-a}--\eqref{eq:apery-b}, floor exactly $3$
+  (Conjecture~\ref{conj:master3}).
+\end{itemize}
+\end{observation}
+
+The panel also shows what the \emph{ratio} form does at low weight, and it is instructive.
+At $w=2$ the ratio descent $\vp\bigl(p^2B_n/A_n-B_q/A_q\bigr)$ has a clean floor $2$ at
+all residues except the reflection centre $r=(p-1)/2$, where the behaviour splits by $p$
+modulo $4$: for $p\equiv1\pmod4$ it \emph{boosts} (values $5,8$ at $p=5$; $5$ at $p=13$),
+while for $p\equiv3\pmod4$ it \emph{collapses to $0$} ($p=7,11$) and the naive modulo-$p$
+statement fails outright. At $w=1$ the floor is barely $1$, the centre fails at $p=7$
+(depth $0$) and $p=11$ (depth $-1$), and there are sporadic dips to $0$ elsewhere ($p=13$
+at $r=2,10$). Exceptional digits behave exactly as textbook: the case $p=7$, $a=3$ fails
+wholesale at $w=2$ because $7^2\mid A(3)=147$; at $w=1$ the failures sit at
+$(p,a)=(7,3)$ with $7\mid63$, at $(13,2)$ with $13=A(2)$, and at $(3,1)$ with $3\mid3$.
+
+\begin{observation}[the product form is the right universal statement]\label{obs:product}
+Every low-weight ratio-form failure just listed is a division artefact: it occurs exactly
+where $p$ divides the Lucas factor $A(a)$. The product form
+\[
+   p^{w}B_{ap+r}\;\equiv\;B_a\,A_r\pmod p
+\]
+holds at \emph{every} previously failing site \VerifiedR{$w=2$: $p=7,11$, all $a\le3$;
+$w=1$: $p=7,11,13$, all $a\le3$, including the cell $13=A(2)$; $w=3$: $p=5$, $a\le3$}.
+\end{observation}
+
+Observation~\ref{obs:product} is the reason this paper states its theorems in product form
+and not in ratio form, and it is what makes Theorem~\ref{thm:brow} valid at $p=5$
+(Remark~\ref{rem:p5}). Historically, the programme first recorded a ``dip to depth $2$ at
+the reflection centre'' at weight three; the full sweep showed that those cells are
+precisely the ratio-form pole cells --- $11\mid a_5=819005$, for example --- and that on
+unit cells the depth floor is a flat $3$. The correction is recorded here because it is
+the same phenomenon that governs the low-weight panel.
+
+\subsection{The general master form}
+
+Section~\ref{sec:families} will show that at the level of all fifteen sporadic pairs one
+further correction is needed, a quadratic character $\chi$. The general statement, of
+which Conjecture~\ref{conj:master3} is the case $\gamma$ (with $\chi$ trivial and $w=3$),
+is:
+
+\begin{conjecture}[master form $(\mathrm{LB}_w^\chi)$]\label{conj:master}
+Let $(A,B)$ be one of the fifteen sporadic Ap\'ery-like pairs, $w$ the weight of its
+Ap\'ery limit and $\chi$ the quadratic character attached to it
+(Table~\ref{tab:fifteen}). Then for every prime $p\ge5$ and every $n\ge1$, with
+$q=\lfloor n/p\rfloor$,
+\[
+   \vp\bigl(p^{w}B_nA_q-\chi(p)\,B_qA_n\bigr)\;\ge\;w .
+\]
+\end{conjecture}
+
+\noindent\textbf{Evidence.} \VerifiedR{zero failures} for all fifteen pairs, every prime
+$5\le p\le103$, all $n\le400$; and, for $p=5,7,11$, all $n\le1200$ --- five base-$p$
+digits at $p=5$. Exact rational arithmetic throughout. The floor is exactly $w$ in every
+single (sequence, prime) cell: perfectly flat, with no $\kappa$-dependence, no
+centre-residue exception and no exceptional-digit exception. The runs were organised as
+$15\times16$ cells for the primes $5\le p\le61$ with $n\le400$, plus $15\times9$ cells for
+the primes $67\le p\le103$ with $n\le400$, plus $15\times3$ cells for $p=5,7,11$ with
+$n\le1200$. In the same sweeps the single-digit twisted Lucas form
+$p^wB_{ap+r}\equiv\chi(p)B_aA_r\pmod p$ and the integrality bound
+$\vp(B_n)\ge-w\lfloor\log_pn\rfloor$ each recorded zero failures.
+
+The mod-$p$, single-digit shadow of Conjecture~\ref{conj:master} is a theorem for a
+specified subclass; that is the content of Section~\ref{sec:general}.

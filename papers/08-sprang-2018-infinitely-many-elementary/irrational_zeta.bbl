@@ -1,0 +1,28 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{{Zud}18}
+
+\bibitem[BR01]{ball_rivoal}
+Keith Ball and Tanguy Rivoal, \emph{Irrationalit\'e d'une infinit\'e de valeurs
+  de la fonction z\^eta aux entiers impairs}, Invent. Math. \textbf{146}
+  (2001), no.~1, 193--207. \MR{1859021}
+
+\bibitem[dB70]{deBruijn}
+N.G. de~Bruijn, \emph{Asymptotic methods in analysis}, Bibliotheca mathematica,
+  Dover Publications, 1970.
+
+\bibitem[Riv00]{rivoal}
+Tanguy Rivoal, \emph{La fonction z\^eta de {R}iemann prend une infinit\'e de
+  valeurs irrationnelles aux entiers impairs}, C. R. Acad. Sci. Paris S\'er. I
+  Math. \textbf{331} (2000), no.~4, 267--270. \MR{1787183}
+
+\bibitem[{Zud}18]{zudilin}
+W.~{Zudilin}, \emph{{One of the odd zeta values from $\zeta(5)$ to $\zeta(25)$
+  is irrational. By elementary means}}, ArXiv e-prints (2018).
+
+\end{thebibliography}

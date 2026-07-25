@@ -1,0 +1,14 @@
+======================================================================
+p = 11  verifying c_p(a,b) closed form to 12 digits
+   c_p(2   ,1  ) v=0   direct=2 0 0 2 4 4  formula MATCH(all 12)
+   c_p(3   ,1  ) v=0   direct=3 0 0 9 7 2  formula MATCH(all 12)
+   c_p(3   ,2  ) v=0   direct=3 0 0 9 7 2  formula MATCH(all 12)
+   c_p(4   ,1  ) v=0   direct=4 0 0 2 6 1  formula MATCH(all 12)
+   c_p(5   ,2  ) v=0   direct=10 0 0 7 5 5  formula MATCH(all 12)
+   c_p(7   ,3  ) v=0   direct=2 3 0 7 4 4  formula MATCH(all 12)
+   c_p(11  ,1  ) v=1   direct=1 0 0 0 5 10  formula MATCH(all 12)
+   c_p(11  ,2  ) v=1   direct=5 0 0 0 1 6  formula MATCH(all 12)
+   c_p(12  ,1  ) v=0   direct=1 1 0 0 6 7  formula MATCH(all 12)
+   c_p(12  ,11 ) v=0   direct=1 1 0 0 6 7  formula MATCH(all 12)
+   c_p(22  ,11 ) v=0   direct=2 0 0 2 4 4  formula MATCH(all 12)
+   c_p(121 ,11 ) v=1   direct=1 0 0 0 5 10  formula MATCH(all 6)

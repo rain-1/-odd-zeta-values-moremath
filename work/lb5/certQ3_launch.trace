@@ -1,0 +1,5 @@
+seat freed (pid 1205156 gone) at Sat Jul 25 05:49:25 BST 2026; launching JOBS=n2:A,n2:C,n2:B,n2:D,n3:C,n3:B,n3:A,n3:D
+certQ2 seat freed at Sat Jul 25 06:03:45 BST 2026; launching kk pieces
+certQ3 exited rc=137 at Sat Jul 25 06:57:11 BST 2026
+seat freed (pid 1332392 gone) at Sat Jul 25 06:57:22 BST 2026; launching ll:B + n3
+certQ3 kk exited rc=137 at Sat Jul 25 07:17:44 BST 2026

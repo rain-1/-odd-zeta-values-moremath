@@ -1,0 +1,233 @@
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{The first row}
+\label{ssec:firstrow}
+
+Let
+\begin{equation}\label{eq:apery-a}
+  a_n \;=\; \sum_{k=0}^{n}\bin nk^2\bin{n+k}k^2
+  \;=\;1,\;5,\;73,\;1445,\;33001,\;819005,\;21460825,\;\dots
+\end{equation}
+be Ap\'ery's numbers for $\zeta(3)$ (OEIS \texttt{A005259}). They satisfy a congruence of
+Lucas type: for every prime $p$, every $a\ge 0$ and every $r$ with $0\le r<p$,
+\begin{equation}\label{eq:arow}
+  a_{ap+r}\;\equiv\;a_a\,a_r \pmod p ,
+\end{equation}
+and consequently $a_n\equiv\prod_i a_{n_i}\pmod p$ for the base-$p$ expansion
+$n=\sum_i n_ip^i$. This is classical \cite{Gessel1982}, and it is by now known
+to be a structural, not accidental, feature of the whole \emph{sporadic} class:
+Malik and Straub \cite[Thm.~3.1]{MalikStraub} prove \eqref{eq:arow} for every one of the
+fifteen sporadic Ap\'ery-like sequences in Zagier's classification, by McIntosh's
+constant-term method, and Straub \cite{Straub2301} sharpens it to a congruence modulo
+$p^2$ for all fifteen. Beyond Lucas congruences there is a supercongruence:
+$a_{p^rm}\equiv a_{p^{r-1}m}\pmod{p^{3r}}$ for $p\ge 5$
+\cite[Thm.~3.2]{Straub1401}, a statement whose history runs through Beukers' conjecture
+and Coster's proof, as recorded in the survey of Osburn and Sahu \cite{OsburnSahu}. On the
+crystalline side, Beukers and Vlasenko's Dwork-crystal papers
+\cite{BVone,BVtwo,BVthree} and Mellit--Vlasenko \cite{MellitVlasenko} put the same
+first-row congruences into a Frobenius framework, where they appear as statements about
+the \emph{unit root} $F(t)/F(t^\sigma)$ of the holomorphic period.
+
+In short: the arithmetic of the integral solution of an Ap\'ery-like recurrence is
+well-trodden ground.
+
+\subsection{The second row, and the gap}
+\label{ssec:gap}
+
+Ap\'ery's proof of the irrationality of $\zeta(3)$ uses a \emph{second} solution of the
+same recurrence,
+\begin{equation}\label{eq:apery-b}
+  b_n \;=\; \sum_{k=0}^n \bin nk^2\bin{n+k}k^2
+     \Bigl(\HH{3}{n} \;+\; \sum_{m=1}^{k}
+       \frac{(-1)^{m-1}}{2m^3\bin nm\bin{n+m}m}\Bigr),
+  \qquad \HH{r}{x}=\sum_{m=1}^{x}\frac1{m^r},
+\end{equation}
+with $b_n/a_n\to\zeta(3)$; the first values are
+$0,\,6,\,\tfrac{351}{4},\,\tfrac{62531}{36},\,\tfrac{11424695}{288},\dots$
+(OEIS \texttt{A059415} for the numerators). The pair $(a_n,b_n)$ is not integral: $b_n$
+has denominators, bounded by $d_n^3b_n\in\Z$ with $d_n=\lcm(1,\dots,n)$.
+
+For this second row, nothing of the shape \eqref{eq:arow} appears in the literature. We
+surveyed the relevant technology in detail, working only from fetched sources, and the
+picture is uniform:
+
+\begin{itemize}[leftmargin=1.4em]
+\item \emph{Lucas congruences for constant-term sequences} (Malik--Straub
+  \cite{MalikStraub}, Henningsen--Straub \cite{HenningsenStraub}, Mellit--Vlasenko
+  \cite{MellitVlasenko}, Straub \cite{Straub1401,Straub2301}) treat the integral solution
+  only.
+\item \emph{Dwork crystals} \cite{BVone,BVtwo,BVthree} construct the logarithmic second
+  solution $F(t)\log t+G(t)$, whose coefficients are exactly our $B(n)$; they explain the
+  $p^w$ normalisation, since the Cartier matrix on the rank-two quotient is
+  $\Lambda=Y\Lambda_0(Y^\sigma)^{-1}$ with
+  $\Lambda_0=\begin{psmallmatrix}\alpha_0&\alpha_1\\0&p\alpha_0\end{psmallmatrix}$, so
+  that the second-solution Frobenius eigenvalue carries exactly one extra factor of $p$
+  per Hodge step \cite[Prop.~7.7]{BVthree}; and they prove $p$-integrality of the mirror
+  map $q(t)=t\exp(G/F)$ \cite[Cor.~7.11]{BVthree}. What they do \emph{not} prove is any
+  congruence modulo $p$ or $p^s$ for the second solution: the corresponding deepening is
+  their Conjecture~7.5, explicitly open, and stated for the \emph{unit root} at that.
+\item \emph{Mirror-map integrality} (Delaygue--Rivoal--Roques \cite{DRR}, Delaygue
+  \cite{Delaygue}, \cite{MirrorNote}) and \emph{strong Frobenius structures}
+  (Vargas-Montoya \cite{VMcanon,VMmum}) control the denominators of the second-solution
+  ratio, and in \cite{VMmum} prove Lucas congruences --- but explicitly only for the
+  \emph{holomorphic} solution.
+\item \emph{$p$-adic zeta values} sit in the Frobenius matrix entries of a MUM operator
+  (Beukers--Vlasenko \cite{BVfrob}), which is the conceptual reason a weight-$w$ second
+  solution should descend with a factor $p^w$ --- but that is a statement about a $p$-adic
+  \emph{limit}, proved for simplicial and hyperoctahedral Calabi--Yau families, and the
+  classical Ap\'ery operator is not among them.
+\item The one genuine precedent is Gessel's companion congruence, in the form given by
+  Beukers \cite[Thm.~1.4]{Beukers2211}: with
+  $A'_k=\sum_{m=0}^k\bin km^2\bin{m+k}m^2\bigl(\tfrac1{m+1}+\dots+\tfrac1k\bigr)$ one has
+  $A_{kp+\ell}\equiv A_\ell A_k+p\,A'_\ell\,k\,A_k \pmod{p^2}$. This is a
+  \emph{weight-one} harmonic companion, and the depth stops at $p^2$. (We have confirmed
+  the modulus $p^2$ and the definition of $A'$ against the source; the placement of the
+  indices in the $p$-term should be checked against the published version before it is
+  relied upon.)
+\end{itemize}
+
+So the second row is a genuine gap: weight one is known modulo $p^2$; weight three, the
+weight of $\zeta(3)$ and of Ap\'ery's own companion, is not known at all.
+
+\subsection{Results}
+\label{ssec:results}
+
+\subsubsection*{(A) The weight-three theorem}
+Our first result is elementary and self-contained.
+
+\begin{theorem}[weight-three descent; Theorem~\ref{thm:brow} below]
+\label{thm:intro-brow}
+Let $p\ge 5$ be prime, let $1\le a<p$ and $0\le r<p$, and put $n=ap+r$. Then $b_a$ and
+$p^3b_n$ lie in $\Zp$ and
+\[
+   p^3\,b_{ap+r}\;\equiv\;b_a\,a_r \pmod p .
+\]
+\end{theorem}
+
+The proof occupies Section~\ref{sec:weight3}; it needs Lucas' theorem, Kummer's carry
+criterion, and nothing else. The three steps that a referee found compressed in the first
+write-up --- the borrow count in $\bin nm$, the product-completion of the summation
+region, and the interchange defining the tail sums --- are here isolated as
+Lemma~\ref{lem:borrow}, Lemma~\ref{lem:fibre} and Lemma~\ref{lem:interchange}
+respectively, and proved in full.
+
+\subsubsection*{(B) The master depth law}
+Numerically the congruence of Theorem~\ref{thm:intro-brow} is the mod-$p$ shadow of a
+sharper and more symmetric statement which we can verify but not prove. Writing
+$q=\lfloor n/p\rfloor$, the quantity $\vp(p^3b_na_q-b_qa_n)$ is $\ge 3$, with minimum
+exactly $3$, for every prime $5\le p\le 31$ and every $n\le 320$ --- including the
+multi-digit range and including $p=5$. Section~\ref{sec:depth} states this as
+Conjecture~\ref{conj:master3} and records the exact sweep parameters, the fine structure
+of the sporadic boosts above the floor, and two false statements that the data kills. The
+descent depth equals the motivic weight of the Ap\'ery limit; this is what makes the
+programme's name for it, \emph{the master depth law}, appropriate.
+
+\subsubsection*{(C) The general $\chi$-twisted theorem}
+The classification of Ap\'ery-like recurrences produces fifteen sporadic pairs
+$(A(n),B(n))$. Running the same experiment on all fifteen produces the paper's main
+discovery: the naive law is \emph{false} for seven of them, and the failure is governed by
+a quadratic Dirichlet character.
+
+\begin{conjecture}[master form; Conjecture~\ref{conj:master} below]
+\label{conj:intro-master}
+For each sporadic pair, with $w$ the weight of its Ap\'ery limit, $\chi$ the quadratic
+character attached to it, $p\ge 5$ and $q=\lfloor n/p\rfloor$,
+\[
+  \vp\bigl(p^{w}B_nA_q-\chi(p)B_qA_n\bigr)\;\ge\;w .
+\]
+\end{conjecture}
+
+\noindent
+\VerifiedR{zero failures} for all fifteen pairs, all primes $5\le p\le 103$, all $n\le400$,
+and $n\le 1200$ for $p=5,7,11$ (five base-$p$ digits), in exact rational arithmetic; the
+floor is exactly $w$ in every single (sequence, prime) cell.
+
+The mod-$p$, single-digit form of Conjecture~\ref{conj:intro-master} we can prove, in a
+generality that covers four of the fifteen families outright:
+
+\begin{theorem}[Theorem~\ref{thm:LB} below]
+\label{thm:intro-LB}
+Let $p\ge5$ and let $B(n)=\sum_kS(n,k)w(n,k)$, where $S$ is a product of binomials in
+linear forms and $w$ is a $\Q$-combination of weight-$w$ monomials in harmonic letters
+$\Kchi{r}{x}=\sum_{m\le x}\chi(m)m^{-r}$. Under the five hypotheses
+\textup{(H1)--(H5)} of Section~\ref{sec:general},
+\[
+  p^{w}\,B(ap+r)\;\equiv\;\chi(p)^{e}\,B(a)\,A(r)\pmod p
+  \qquad(1\le a<p,\;0\le r<p),
+\]
+where $e\in\{0,1\}$ is the common number of $\chi$-letters per monomial.
+\end{theorem}
+
+The mechanism is a two-line lemma (Lemma~\ref{lem:K}): for a completely multiplicative
+$\chi$,
+\[
+   p^r\Kchi ry \;=\; \chi(p)\,\Kchi r{\lfloor y/p\rfloor}\;+\;p^r\cdot(\text{$p$-integral}),
+\]
+because the $p$-divisible indices $m=jp$ contribute $\chi(jp)(jp)^{-r}
+=\chi(p)p^{-r}\chi(j)j^{-r}$. \emph{The factor $\chi(p)$ in the congruence is exactly the
+$\chi(p)$ coming out of the $p$-divisible layer of the harmonic weight.} Correspondingly,
+$\chi$ is the character of the sequence's Ap\'ery limit: the limit is a rational multiple
+of $\zeta(w)$ when $\chi$ is trivial, and of $L(\chi_D,w)$ when $\chi=\chi_D$. The
+correlation is $12$ out of $12$ on the sequences whose limit exists.
+
+\subsubsection*{(D) A minimal closed form}
+The general theorem needs a harmonic-monomial weight, and finding one for Ap\'ery's $b_n$
+produced a formula we have not been able to locate anywhere:
+\begin{equation}\label{eq:minimal-intro}
+   b_n\;=\;\sum_{k=0}^n\bin nk^2\bin{n+k}k^2\bigl(2\HH3n-\HH3k\bigr).
+\end{equation}
+Section~\ref{sec:minimal} proves \eqref{eq:minimal-intro} by six explicit
+Zeilberger/Gosper certificates, and proves two further closed forms of the same kind, for
+Franel's numbers and for $\sum_k\bin nk^4$. Substituted into Theorem~\ref{thm:intro-LB},
+\eqref{eq:minimal-intro} reduces Theorem~\ref{thm:intro-brow} to three lines. It also
+removes the hypothesis $p\ge5$ for that instance, since the coefficients $2,-1$ are
+integers.
+
+\subsubsection*{(E) Sharpness, positioning, formalisation}
+Section~\ref{sec:sharpness} documents the failure of the master law at $p=2,3$, and
+locates the obstruction where the proof says it should be: in the denominators of the
+weight's coefficients. Section~\ref{sec:discussion} positions
+Conjecture~\ref{conj:intro-master} against Beukers--Vlasenko's Conjecture~7.5: the two are
+statements about the two diagonal entries of one $2\times2$ Frobenius matrix, neither
+implies the other, and the character is invisible in the unit-root formulation.
+Section~\ref{sec:lean} reports what is machine-verified: Theorem~\ref{thm:intro-LB},
+Lemma~\ref{lem:K}, the two first-row Lucas congruences, and two instances of the
+second-row congruence are formalised in Lean~4, sorry-free, on the three standard Mathlib
+axioms.
+
+\subsection{Evidence classes}
+\label{ssec:evidence}
+
+This paper reports a mixture of proofs and of exact finite computations, and it labels
+them. We use exactly three markers, and we never upgrade one to another:
+
+\begin{description}[leftmargin=2.2em,style=nextline]
+\item[\Proved] a complete proof is written out here.
+\item[\Verified] an exact finite computation, always with its range stated. Exact rational
+  or modular arithmetic, no floating point. This is evidence and never proof, however
+  large the range.
+\item[\Open] neither.
+\end{description}
+
+Statements carrying only \Verified\ are called \emph{conjectures}, and are stated in
+\texttt{conjecture} environments, with the sweep parameters attached. Where a computation
+was run twice, by independent implementations, we say so.
+
+\subsection{Notation}
+\label{ssec:notation}
+
+Throughout, $p$ is a prime, $\vp$ is the $p$-adic valuation on $\Q$ normalised by
+$\vp(p)=1$, and $\Zp=\{x\in\Q:\vp(x)\ge0\}$ is the local ring; a congruence
+$x\equiv y\pmod{p^s}$ between rationals means $\vp(x-y)\ge s$. We write $d_n=\lcm(1,\dots,n)$,
+$\HH rx=\sum_{m=1}^x m^{-r}$ (so $\HH r0=0$), and for a completely multiplicative
+arithmetic function $\chi$,
+\[
+   \Kchi ry\;=\;\sum_{m=1}^{y}\frac{\chi(m)}{m^{r}} ,
+\]
+which for $\chi\equiv1$ is $\HH ry$. For a sporadic pair we write $A(n)$ for the integral
+solution and $B(n)$ for the second solution normalised by $B(0)=0$, $B(1)=1$; for the
+classical $\zeta(3)$ pair we write $a_n$ and $b_n$, with the relation $b_n=6B(n)$. Digits:
+for $n=ap+r$ with $0\le r<p$ we call $a=\lfloor n/p\rfloor$ the high digit and $r$ the low
+digit, and similarly $k=bp+s$. Finally $\bin nk=0$ whenever $k>n$ or $k<0$, which we use
+without comment.

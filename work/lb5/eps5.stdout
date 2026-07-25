@@ -1,0 +1,27 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:= 
+In[2]:= 
+In[3]:= 
+In[4]:= START Fri 24 Jul 2026 23:49:25
+
+In[5]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[6]:= HF loaded Fri 24 Jul 2026 23:49:25
+
+In[7]:= 
+In[8]:= 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= --- s_g ---
+s_g ann #3 t=0s
+s_g ct1 #2 t=1s
+s_g gb #2 t=0s

@@ -1,0 +1,411 @@
+%% =====================================================================
+\section{The parametrised construction and its exact cost ledger}\label{sec:ledger}
+%% =====================================================================
+
+The Transfer Principle says the group is available. Whether it is \emph{worth} anything is a
+quantitative question, and to answer it one needs a cost model that is exact, that contains
+every published construction as a special case, and that is not fitted to them. This section
+builds it; \S\ref{sec:validation} tests it.
+
+\subsection{The family}\label{ss:family}
+
+\begin{definition}\label{def:family}
+Fix a prime $p$. The family is
+\begin{equation}\label{eq:family}
+ R_n(t)=C^n\cdot(2t+n)^{\epsilon}\cdot
+   \frac{\prod_{c=1}^{M}(t+\theta'_c)_{L_c}}{(t)_{n+1}^{A}},
+ \qquad
+ S_n(\theta_0)=\int_{\Zp}R_n^{(m)}(t+\theta_0)\,\dd t,
+ \qquad
+ S_n=\sum_{\theta_0\in\Theta}S_n(\theta_0),
+\end{equation}
+with free parameter tuple
+\begin{center}
+\tabsmall
+\begin{tabular}{lll}
+\toprule
+parameter & meaning & constraint\\
+\midrule
+$p$ & the prime & ---\\
+$\theta_0=a/p^r$ & integration shift, depth $r=-v_p(\theta_0)$ & $\theta_0\in\Theta$; see \S\ref{ss:cosets}\\
+$\theta'_c$, $c\le M$ & numerator Pochhammer shifts, depths $l'_c$ & fractional; alignment \S\ref{ss:alpha}\\
+$L_c=\lambda_cn$ & Pochhammer lengths (asymmetric allowed) & $\sum_c\lambda_c\le A$\\
+$A$ & pole order of $(t)_{n+1}^A$ & $\deg R=\epsilon+\sum L_c-A(n+1)\le-2$\\
+$m\ge0$ & derivative order & see \S\ref{ss:mminus1}\\
+$\epsilon\in\{0,1\}$ & the very-well-poised factor & $\epsilon\le A-2$ (degree)\\
+$C$ & normalisation --- \emph{forced}, \S\ref{ss:G} & $C=p^{v_p(C)}$\\
+$\Theta$ & cosets at which the \emph{same} form must be small & \S\ref{ss:cosets}\\
+\bottomrule
+\end{tabular}
+\end{center}
+The asymmetric lengths $L_c=\lambda_cn$ are exactly the Rhin--Viola direction; setting all
+$\lambda_c=1$ recovers the totally symmetric slice.
+\end{definition}
+
+\begin{finding}[the family contains the literature]\label{find:contains}
+\VER{exact special cases with the printed constants} Definition~\ref{def:family} contains:
+\cite[Def.~10]{LSZ2025} at $(p,r)=(2,1)$, $\theta'=\tfrac12$ four times, $A=4$, $m=1$,
+$\epsilon=1$, $C=2^8$; Lai's family $B_n$ \cite[(3.2)]{Lai2025} at $(2,2)$,
+$\theta'=\tfrac34$ with multiplicity $s+2$, $A=s+2$, $m=s$, $\epsilon=0$, $C=2^{3s+6}$;
+Lai's family $A_n$ \cite[(3.1)]{Lai2025} at $\theta'=\tfrac14^{\,s+2}\tfrac34^{\,s+2}$,
+$A=2s+4$, $m=s$, $\epsilon=1$, $C=2^{6s+12}$; Beukers' $R^{(\mathrm B)}$
+\cite{Beukers2008} at $(2,1)$, $\theta'=\tfrac12$ three times, $A=3$, $m=0$, $\epsilon=1$,
+$C=2^6$; and \cite[Def.~16]{LaiSprang2023} together with
+\cite[Def.~3.1]{LLS2025} once free-factorial bricks are allowed
+(\S\ref{ss:freefact}).
+\end{finding}
+
+\subsection{What the form is a linear form in}\label{ss:linearform}
+
+\begin{proposition}\label{prop:linform}
+\PROVED{} Write $R_n(t)=\sum_{i=1}^{A}\sum_{k=0}^{n}r_{i,k}/(t+k)^i$ and set
+$J_u:=\int_{\Zp}\dd t/(t+\theta_0)^u$ and $T_{k,u}:=\sum_{\nu<k}(\nu+\theta_0)^{-u}$. Then
+\begin{equation}\label{eq:Sn}
+ S_n(\theta_0)=\rho_0+\sum_{i=1}^{A}(-1)^m(i)_m\,\rho_i\,J_{i+m},
+ \qquad
+ \rho_i=\sum_kr_{i,k},\quad
+ \rho_0=-(-1)^m\sum_{i,k}r_{i,k}(i)_{m+1}T_{k,i+m+1},
+\end{equation}
+and $J_u=u\,p^{ru}\,\omega(a)^{-u}\,\zeta_p(u+1,\theta_0)$. Hence $S_n(\theta_0)$ is a
+$\Zp$-linear form in $1$ and the Hurwitz values $\zeta_p(i+m+1,\theta_0)$, $i=1,\dots,A$.
+\end{proposition}
+
+This is \cite[Lemma 5]{LSZ2025} and \cite[Lemma 21]{LaiSprang2023} in the notation of
+Definition~\ref{def:family}; it is the case $\theta=\theta_0$ of
+Theorem~\ref{thm:transfer}(ii) after $m$ differentiations --- except at $(p,r)=(2,1)$,
+%% REFEREE [R2]: |1/2|_2 = 2 < q_2 = 4, so theta_0 = 1/2 is outside the hypothesis of
+%% Theorem~\ref{thm:transfer}(ii) and zeta_2(s,1/2) is not defined.  The regime-S2 row of
+%% every table below sits at exactly that point; it is covered by LSZ Lemma 9 instead.
+where $|\theta_0|_2=2<q_2$ and $\zeta_2(u+1,\tfrac12)$ is undefined: there
+Remark~\ref{rem:halfexcl} applies and $J_u=u\,2^{u+1}\zeta_2(u+1)$ by
+\cite[Lemma 9]{LSZ2025}, so the form is directly a form in $1$ and the full $\zeta_2$
+values (this is regime S2).
+
+Three mechanisms kill unwanted weights, each with its own parameter dependence.
+
+\begin{enumerate}[label=\textbf{(K\arabic*)},leftmargin=3.0em,itemsep=3pt]
+\item \emph{purity by degree} \PROVED{}: $\rho_1=\lim_{t\to\infty}tR_n(t)=0$ when
+      $\deg R_n\le-2$ (Lemma~\ref{lem:rho1}). This kills the weight-$(m+2)$ term. It is the
+      \emph{only} mechanism that kills an odd weight.
+\item \emph{even vanishing} \PROVED{}: $\zeta_p(2k)=0$. Available only for the full
+      $\zeta_p$, i.e.\ after the twisted coset sum, or at $(p,r)=(2,1)$ where
+      \cite[Lemma 9]{LSZ2025} makes the single shift $\tfrac12$ already \emph{be} the full
+      $\zeta_2$. Hurwitz values at even weight are not zero --- as Lai notes, the values of
+      $\zeta_2(\cdot,1/4)$ at positive even integers are nonzero \cite{Lai2025}.
+\item \emph{reflection} \PROVED{}, and \VER{$43$ $3$-adic digits at $p=3$}:
+      $\zeta_p(s,x)=\zeta_p(s,1-x)$, from $B_n(1-x)=(-1)^nB_n(x)$ and $\omega(-1)=-1$; so
+      cosets pair up and only $\varphi(p^r)/2$ classes are independent.
+\end{enumerate}
+
+\begin{definition}[rank]\label{def:rank}
+The \emph{rank} of the form is the number of zeta values it carries:
+\begin{equation}\label{eq:rank}
+ \rk=\#\{i\in[2,A]:i+m+1\ \text{odd}\}\ \text{when (K2) applies},\qquad \rk=A-1\ \text{otherwise}.
+\end{equation}
+Only $\rk=1$ yields an irrationality \emph{measure} for an individual value; $\rk=R>1$
+yields at best ``one of $R$ values is irrational''.
+\end{definition}
+
+\begin{finding}\label{find:rankanchors}
+\VER{against the literature} LSZ's $A=4$, $m=1$ gives $\rk=1$ at weight $5$; $A=6$, $m=1$
+gives $\rk=2$ at weights $\{5,7\}$, which is Lai's ``one of $\zeta_2(5),\zeta_2(7)$''; Lai's
+$B_n$ gives $\rk=s+1$ over weights $[s+3,2s+3]$, which is his Theorem 1.3.
+\end{finding}
+
+\subsection{Which cosets must be covered}\label{ss:cosets}
+
+\begin{proposition}\label{prop:cosets}
+\PROVED{} By \eqref{eq:cosetsum}, a form in $1$ and the \emph{full} value $\zeta_p(w)$ ---
+not merely a Hurwitz value --- requires either
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.6em]
+\item $\varphi(p^r)=2$, so that a single Hurwitz value \emph{is} $\zeta_p(w)$ up to a
+      rational factor; or
+\item the full twisted sum $\Theta=\{j/p^r:p\nmid j\}$, which also switches on (K2), but
+      then the smallness is a \emph{minimum} over the $\varphi(p^r)$ cosets.
+\end{enumerate}
+\end{proposition}
+
+We refer to case (a) as \emph{regime S}, to the exceptional point $(p,r)=(2,1)$ of (K2) as
+\emph{regime S2}, and to case (b) as \emph{regime T}. Which regime one is in is not a
+modelling choice; it is determined by $(p,r)$. Case (a) is classified completely in
+\S\ref{sec:classification}.
+
+\subsection{Non-vanishing across the family}\label{ss:nonvanfam}
+
+$\Qp$ has no positivity, so non-vanishing is a real constraint and it is \emph{not} uniform
+over the family. We record the four mechanisms actually in use.
+
+\begin{itemize}[leftmargin=1.6em,itemsep=3pt]
+\item \textbf{LSZ}: the exact Casoratian
+      $\rho_{n,0}\rho_{n+1,3}-\rho_{n+1,0}\rho_{n,3}=3\cdot2^{16n+18}/(n+1)^5$
+      \cite[Lemma 15(b)]{LSZ2025}, \VER{exact, $n\le11$}. It is available only because rank
+      $1$ and the three-term recursion both exist, i.e.\ only on the very-well-poised slice.
+\item \textbf{Lai} ($A_n$, $B_n$): no Casoratian; non-vanishing is proved only along
+      $n=2^m-1$ by a dominant-term argument \cite[Lemmas 2.4, 2.5, 6.1]{Lai2025}. The cost is
+      a subsequence.
+\item \textbf{Lai--Sprang / Lai--Lupu--Sprang}: the $\ell(n)$-adic criterion
+      \cite[Lemma 4]{LaiSprang2023} replaces non-vanishing by
+      $v_{\ell(n)}(l_{0,n})<v_{\ell(n)}(l_{i,n})$ with $\ell(n)=n+1$ prime. This
+      \emph{constrains the parameters}: it requires the extra numerator factor
+      $(t+\theta_{\max})_{\theta_{\max}n-1}$ (resp.\ the factor $t^{M_0}$ of
+      \cite{LLS2025}) and $n$ in an arithmetic progression.
+\item \textbf{Group moves}: Proposition~\ref{prop:orbitnonvan}; free. The (F4) bridges are
+      not, and must be re-checked (Remark~\ref{rem:bridgenonvan}).
+\end{itemize}
+
+\subsection{The forced normalisation \texorpdfstring{$G$}{G}}\label{ss:G}
+
+\begin{proposition}\label{prop:G}
+\DERIVED{} The coefficient $r_{i,k}$ carries $\prod_c\prod_j(\theta'_c-k+j)$, of $p$-denominator
+$p^{l'_cL_c}$, over $(k!(n-k)!)^A$, of $p$-denominator $p^{An/(p-1)}$. Hence
+$p$-integrality of the coefficients forces
+\begin{equation}\label{eq:vpC}
+ v_p(C)=\sum_c l'_c\lambda_c+\frac{A}{p-1},\qquad G:=v_p(C)\log p .
+\end{equation}
+\end{proposition}
+
+\begin{finding}\label{find:Ganchors}
+\VER{every published prefactor} \eqref{eq:vpC} reproduces exactly: $2^{8n}$ for LSZ
+($4\cdot1+4$); $2^{6n}$ for Beukers' $R^{(\mathrm B)}$ ($3+3$) and for Lai's $B_n$ at $s=0$
+($2\cdot2+2$); $2^{(3s+6)n}$ and $2^{(6s+12)n}$ for Lai's two families; and
+$p^{pn}n!^{s}$ for \cite{LLS2025}, from
+$(p-1)+(p-1+s)/(p-1)=p+s/(p-1)$.
+\end{finding}
+
+\begin{proposition}[$G$ is the archimedean coefficient growth, on the co-located locus]\label{prop:Gisgrowth}
+\PROVED{} in the sources. When the bricks are \emph{balanced and co-located} --- numerator
+and pole Pochhammers on the same interval --- the hypergeometric factor is $e^{o(n)}$ and
+the archimedean growth of $\max(|\rho_0|,|\rho_w|)$ equals $G$. See
+\cite[Prop.~11.1(3)]{Beukers2008} ($|q_n|,|p_n|<e^{\varepsilon n}$, radius of convergence
+$1$) and \cite[Lemma 20]{LSZ2025} (characteristic polynomial $\lambda^2-2^9\lambda+2^{16}$,
+with a \emph{double} root $2^8$).
+\end{proposition}
+
+\begin{finding}\label{find:Gmeasured}
+\VER{exact $\rho$'s, growth measured} $\log\max|\rho|/n$ measured against $G$:
+$5.4958\to G=5.5452$ (LSZ); $4.15\to4.1589$ (Lai $B_0$); $8.21\to8.3178$ (Lai $A_0$);
+$3.276\to3.2958$ ($p=3$).
+\end{finding}
+
+Off the co-located locus the saddle contributes a positive $C_{\mathrm{sad}}=C_1>0$; this is
+measured in \S\ref{ss:unequal} and it is decisive in \S\ref{ss:tension}.
+
+\subsection{The smallness exponent \texorpdfstring{$\alpha$}{alpha}}\label{ss:alpha}
+
+\begin{proposition}\label{prop:alpha}
+\DERIVED{} from the $\triangle$-operator estimates $v_p(\int f)\ge\triangle(f)-1$ and
+$\triangle(\binom{t+j}n)\ge-\log_pn$ of \cite[Lemmas 6--7]{LSZ2025}, applied brick by brick
+to $R_n^{(m)}(t+\theta_0)$:
+\begin{equation}\label{eq:alpha}
+ \alpha=\Bigl[v_p(C)+A\,r+\sum_c\ctb_c(\theta_0)\Bigr]\log p,\quad\text{minimised over }
+ \theta_0\in\Theta,
+\end{equation}
+where
+\begin{equation}\label{eq:contrib}
+ \ctb_c(\theta_0)=
+ \begin{cases}
+   +\dfrac1{p-1}, & \theta'_c+\theta_0\in\Zp \quad\text{(\emph{aligned})},\\[2mm]
+   -\,l'', & \text{otherwise, } l''=-v_p(\theta'_c+\theta_0).
+ \end{cases}
+\end{equation}
+Equivalently, with unequal lengths (\S\ref{ss:unequal}),
+$\alpha-G=(r+\tfrac1{p-1})\log p\cdot\bigl[\sum_d\nu_d-\sum_{\mathrm{mis}}\lambda_c\bigr]$.
+\end{proposition}
+
+\begin{corollary}[the doubling]\label{cor:doubling}
+\DERIVED{} When every copy is aligned and $l'_c=r$, \eqref{eq:alpha} gives $\alpha=2G$.
+\end{corollary}
+
+Corollary~\ref{cor:doubling} is LSZ's ``totally symmetric hypergeometric'' doubling, here
+derived rather than observed. It is also the exact point at which the archimedean and
+$p$-adic worlds part company: archimedeanly one has a saddle-point value; $p$-adically one
+has a valuation sum, and the sum happens to be twice the normalisation.
+
+\subsection{The denominator cost \texorpdfstring{$E$}{E}}\label{ss:E}
+
+\begin{proposition}\label{prop:E}
+\DERIVED{} The denominator cost --- the power of $d_n\sim e^n$ that must be cleared --- is
+\begin{equation}\label{eq:E}
+ E=A+m+1-\epsilon .
+\end{equation}
+The term $A+m+1$ is the top pole order of
+$\sum_{i,k}r_{i,k}(i)_{m+1}(\nu+\theta_0)^{-(i+m+1)}$ combined with
+$d_n^{A-i}r_{i,k}\in\ZZ$ (\cite[Lemma 16]{Zudilin2004},
+\cite[Lemmas 26--29]{LaiSprang2023}); the $-\epsilon$ is the well-poised saving. When
+$\rk=1$ one has $E=w$, the top weight.
+\end{proposition}
+
+Equation \eqref{eq:E} is validated against every published anchor in
+\S\ref{ss:Emeasured} --- and \emph{corrected} there, in a range no published anchor visits.
+
+\subsection{The criterion and the margin}\label{ss:criterion}
+
+\begin{proposition}[Bel's criterion, as we use it]\label{prop:bel}
+\PROVED{} \cite[Lemme 3.2]{Bel2019}, quoted as \cite[Lemma 4]{LSZ2025}. Set
+$a_n=\Phi_n^{-1}d_n^E\rho_0$ and $b_n=\Phi_n^{-1}d_n^E\rho_w$, integers, with
+$|a_n+b_n\xi|_p\le e^{-\alpha n+o(n)}$ and $\max(|a_n|,|b_n|)\le e^{\beta n+o(n)}$,
+$\beta=G+E$. Then
+\begin{equation}\label{eq:margin}
+\begin{gathered}
+ \marg:=\alpha-\beta \;\;(=G-E\ \text{in the aligned case}),\\
+ \marg>0\ \Longrightarrow\ \xi\notin\QQ\quad\text{and}\quad
+ \mu(\xi)\le\frac{\alpha}{\alpha-\beta}=\frac{2G}{G-E}.
+\end{gathered}
+\end{equation}
+\end{proposition}
+
+\begin{remark}[the asymmetry that decides everything]\label{rem:asymmetry}
+Compare with the archimedean Rhin--Viola criterion. There the irrationality condition is
+$C_0>C_2$: the archimedean coefficient growth $C_1$ enters the \emph{measure}
+$\mu\le(C_1+C_2)/(C_0-C_2)$ but never the irrationality condition. $p$-adically the
+coefficient \emph{size} enters \eqref{eq:margin} directly through $\beta=G+E$. So the
+$p$-adic side pays for coefficient growth and the archimedean side does not. This one line
+is the whole of \S\ref{ss:tension}.
+\end{remark}
+
+At the totally symmetric point, where $\alpha=2G$ by Corollary~\ref{cor:doubling}, the
+ledger collapses to the three-line summary
+\begin{equation}\label{eq:ledgersummary}
+ \alpha=2G,\qquad \beta=G+E,\qquad \marg=G-E,\qquad \mu\le\frac{2G}{G-E}.
+\end{equation}
+
+\subsection{Unequal lengths: where the saddle switches on}\label{ss:unequal}
+
+Extending the ledger to unequal brick lengths in the manner of \cite[(2.4)]{Zudilin2004} ---
+numerator bricks $(t+b_j)_{\lambda_jn}/(\lambda_jn)!$ and pole bricks
+$(\nu_jn-1)!/(t+a_j)_{\nu_jn}$, with $\lambda_j=\alpha_j-\beta_j$ and $\nu_j=\beta_j-\alpha_j$ ---
+gives
+\begin{equation}\label{eq:unequal}
+ \alpha_p-\mathrm{growth}
+  =\Bigl(r+\frac1{p-1}\Bigr)\log p\cdot
+   \Bigl[\sum_d\nu_d-\sum_{\mathrm{mis}}\lambda_c\Bigr]-C_{\mathrm{sad}},
+ \qquad C_{\mathrm{sad}}=C_1 .
+\end{equation}
+
+\begin{finding}[the saddle term, measured]\label{find:saddle}
+\VER{$p=5$, $\theta_0=1/5$, exact, $n=6,\dots,15$} Numerator bricks $(t+4/5)_n$ and
+$(t+4/5)_{2n}$ (lengths $\lambda=1,2$) over poles $(t)_{n+1}^3$, against the co-located
+control (lengths $1,1,1$):
+\begin{center}
+\tabsmall
+\begin{tabular}{lccccc}
+\toprule
+ & predicted $\alpha/\log5$ & measured $v_5(S_n)/n$ & predicted $G$ & measured growth & $C_{\mathrm{sad}}$\\
+\midrule
+unequal $\lambda=(1,2)$ & $6.50$ & $6.33$--$6.67$ & $4.4260$ & $5.77$--$5.86$ & $+1.35$\\
+control $\lambda=(1,1,1)$ & $7.50$ & $7.33$--$7.67$ & $6.0354$ & $5.97$--$6.06$ & $\approx0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The gauge-invariant margin rate closes exactly:
+$1.25\log5\cdot3-1.35=4.69$ against the measured
+$\alpha-\mathrm{growth}=6.50\log5-5.77=4.69$.
+\end{finding}
+
+\emph{The saddle term switches on precisely when the bricks stop being co-located.} That is
+the whole content of the tension in \S\ref{ss:tension}, and it is measured, not assumed.
+
+\subsection{The free-factorial direction}\label{ss:freefact}
+
+A numerator brick $n!^S$ in the Ball--Rivoal manner \cite{BallRivoal2001} has $l'=0$,
+$p$-adic contribution $+1/(p-1)$ (since $v_p(n!)=n/(p-1)$) and archimedean cost $+\log2$ per
+copy (the binomial saddle $\max_k\binom nk=2^n$), and raises $A$, hence $E$, by one. So
+\begin{equation}\label{eq:freefact}
+ \frac{\dd\,\marg}{\dd(\text{free factorial})}=\Bigl[\frac1{p-1}+r\Bigr]\log p-\log2-1 .
+\end{equation}
+
+\begin{finding}[the ledger reproduces the structure of the $p\ge5$ theorem]\label{find:LLS}
+\DERIVED{} + \VER{structure} Feeding \cite[Def.~3.1]{LLS2025} --- $A=p-1+s$,
+$p-1$ Pochhammer bricks at the shifts $j/p$, $s$ free factorials, primitive so $E=A$ ---
+through the ledger gives
+\[
+ \marg(s)=(s+1)\,\frac{p\log p}{p-1}-s(1+\log2)-p+1,
+\]
+so a positive margin needs
+\[
+ s>\frac{p-1-\dfrac{p\log p}{p-1}}{\ \dfrac{p\log p}{p-1}-1-\log 2\ },
+\]
+and the bracketed denominator is \emph{exactly} the denominator of the constant $c_p$ in
+\cite[Thm.~1.1]{LLS2025}, namely
+\[
+ c_p=p+\frac{p-1-\varpi_p}{\dfrac{p\log p}{p-1}-1-\log2},
+ \qquad
+ \varpi_p=\psi(1/p)+2p-1+\gamma+p\Bigl(\log p-\sum_{j\le p}\tfrac1j\Bigr).
+\]
+%% REFEREE [R16]: the draft said "their numerator differs only in replacing the crude
+%% log 2 by an exact quantity varpi_p".  Wrong term: the log 2 sits in the DENOMINATOR of
+%% both and is identical there (that identity is the actual test, and it holds); what
+%% varpi_p replaces is the ledger's p log p/(p-1) in the numerator.  Checked against the
+%% fetched text of arXiv:2505.23088, from which c_p and varpi_p are quoted verbatim above.
+The two numerators differ only in that the ledger's $p\log p/(p-1)$ is replaced by the
+exact quantity $\varpi_p$; the denominators, including the crude $\log2$, agree exactly.
+\end{finding}
+
+That a first-principles ledger reproduces the denominator of a published constant, in a
+paper written independently of it, is a strong test of the $p$-adic side of the model.
+
+\subsection{The freedom map}\label{ss:freedom}
+
+Which parameter moves which component:
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lccccl}
+\toprule
+direction & $G$ & $\alpha$ & $E$ & $\rk$ & net effect on $\marg$\\
+\midrule
+$A\mathbin{+}1$ & $+(r+\tfrac1{p-1})\log p$ & $+2(r+\tfrac1{p-1})\log p$ & $+1$ & $+1$ per 2 steps
+  & $+(r+\tfrac1{p-1})\log p-1$, \emph{but rank grows}\\
+$r\mathbin{+}1$ & $+A\log p$ & $+2A\log p$ & $0$ & $0$
+  & $+A\log p$, \emph{but $\varphi(p^r)$ cosets $\Rightarrow$ regime T}\\
+$m\mathbin{+}1$ & $0$ & $0$ & $+1$ & parity flip & $-1$; raises the weight by $1$\\
+$\epsilon:0\to1$ & $0$ & $0$ & $-1$ & $0$ & $+1$ (needs $A\ge3$)\\
+misalign one copy & $0$ & $-(r+\tfrac1{p-1})\log p$ & $0$ & $0$ & $-(r+\tfrac1{p-1})\log p$\\
+free factorial $+1$ & $+\log2+\tfrac{\log p}{p-1}$ & $+(\tfrac2{p-1}+r)\log p$ & $+1$ & $+\tfrac12$
+  & \eqref{eq:freefact}\\
+unequal $\lambda_c$ & saddle on & linear in $\lambda$ & via $m_j$ & --- & \S\ref{ss:unequal}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+It is worth being explicit about where the totally symmetric slice is \emph{provably}
+optimal and where it is merely convenient, since this is the question the group was supposed
+to attack.
+
+\begin{itemize}[leftmargin=1.6em,itemsep=3pt]
+\item \textbf{Provably optimal.} (i) \emph{Alignment}: every copy aligned maximises
+      $\sum_c\ctb_c$, since $\ctb_c\le1/(p-1)$ termwise \PROVED{}; so on the single-coset
+      regimes the symmetric point maximises $\alpha-G$ at fixed $A,r$. (ii)
+      \emph{Balance and co-location}: this is exactly the locus where the hypergeometric
+      saddle vanishes, $C_{\mathrm{sad}}=0$ \PROVED{} by
+      \cite[Prop.~11.1(3)]{Beukers2008} and \cite[Lemma 20]{LSZ2025}, which is what makes
+      the growth equal $G$.
+\item \textbf{Merely convenient.} (iii) The \emph{equal exponents} $L_c=n$ are not forced;
+      unequal lengths are exactly the Rhin--Viola freedom and are what a positive $\dgr$
+      requires. (iv) $\epsilon=1$ and its $E$-saving are conveniences of the well-poised
+      shape. (v) LSZ's $(m,A)=(1,4)$ is one of two rank-$1$ routes to weight $5$ at $p=2$;
+      $(m,A)=(2,3)$ also works, with the worse margin $6\log2-5<0$.
+\item \textbf{Provably not optimal.} Nothing in the symmetric slice fixes $r$: at $p=2$ the
+      depth-$2$ point (Beukers $F=4$ / Lai $B_n$) and the depth-$1$ point (Beukers
+      $R^{(\mathrm B)}$) give the \emph{identical} measure --- a genuine one-parameter
+      degeneracy of the ledger, and, as \cite[Final remarks]{LSZ2025} observe from the other
+      side, the two forms coincide.
+\end{itemize}
+
+\subsection{The exported margin function}\label{ss:exported}
+
+For reference, the entire model is the following six lines.
+\begin{equation}\label{eq:exported}
+\begin{aligned}
+ \marg(p,r,\text{shifts},A,m,\epsilon)
+  &=\Bigl[A\,r+\min_{\theta_0\in\Theta}\sum_c\ctb_c(\theta_0)\Bigr]\log p-E,\\
+ E&=A+m+1-\epsilon,\\
+ \Theta&=\{1/p^r\}\quad\text{if }\varphi(p^r)=2\text{ or }(p,r)=(2,1)
+   \qquad\text{(regimes S, S2)},\\
+ \Theta&=\{j/p^r:p\nmid j\}\quad\text{otherwise}\qquad\text{(regime T)},\\
+ \rk&=\#\{i\in[2,A]:i+m+1\ \text{odd}\}\ \text{(S2, T)},\qquad \rk=A-1\ \text{(S)},\\
+ w&=\text{the surviving odd index};\quad \rk\ \text{must be }1\ \text{for a measure}.
+\end{aligned}
+\end{equation}
+Its inputs are the parameter tuple and nothing else. Everything in \S\ref{sec:validation},
+\S\ref{sec:scan} and \S\ref{sec:map} is computed from \eqref{eq:exported} plus the
+corrections of \S\ref{ss:Emeasured}.

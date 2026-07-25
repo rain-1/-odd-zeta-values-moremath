@@ -1,0 +1,13 @@
+p=11 N=170000 K=51056  (31.3s)
+  a=1   s<=5 v(L)=0   prec=45  relagree L:[3, 6, 9, 12, 15]  a-tower:[3, 6, 9, 12, 15]  b-tower:[3, 6, 9, 12, 15]
+  a=2   s<=4 v(L)=0   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=3   s<=4 v(L)=0   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=4   s<=4 v(L)=0   prec=45  relagree L:[4, 7, 10, 13]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=5   s<=4 v(L)=-1  prec=45  relagree L:[2, 5, 8, 11]  a-tower:[2, 5, 8, 11]  b-tower:[4, 7, 10, 13]
+  a=6   s<=4 v(L)=0   prec=45  relagree L:[4, 7, 10, 13]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=7   s<=4 v(L)=0   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=8   s<=4 v(L)=0   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=9   s<=4 v(L)=0   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=10  s<=4 v(L)=3   prec=45  relagree L:[3, 6, 9, 12]  a-tower:[3, 6, 9, 12]  b-tower:[3, 6, 9, 12]
+  a=12  s<=3 v(L)=-3  prec=45  relagree L:[6, 9, 12]  a-tower:[3, 6, 9]  b-tower:[3, 6, 9]
+written /tmp/claude-1000/-home-ubuntu-fable-episode-2-zeta-math-2/65d6d51f-5045-4f1b-98cc-77989fc30264/scratchpad/lam_p11.json

@@ -1,0 +1,82 @@
+\section{Data availability, and the exact sweeps}
+\label{sec:data}
+
+Every computation reported in this paper is exact --- rational arithmetic, or arithmetic
+in a finite field with rational reconstruction, or exact polynomial expansion. No floating
+point enters any claim, with the single exception of the PSLQ identification of the
+Ap\'ery limits (Observation~\ref{obs:limits}), which is a high-precision numerical
+identification and is labelled as such.
+
+\subsection{Scripts}
+
+The computations were carried out in the programme's working repository, and the scripts
+are archived alongside this paper:
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\toprule
+location & contents\\
+\midrule
+\texttt{work/lbw/sporadic.py} & the fifteen sequences, their recurrences and second solutions\\
+\texttt{work/lbw/t1b.py} & weights $w$, integrality, Ap\'ery limits (PSLQ)\\
+\texttt{work/lbw/t2\_final.py}, \texttt{t2\_diag.py}, \texttt{t2\_twist.py}
+   & the master sweeps, the failure diagnosis, the $\chi$-twist\\
+\texttt{work/lbw/t3\_fit.py}, \texttt{t3\_fit2.py} & harmonic-decomposition fitting and exact validation\\
+\texttt{work/lbw/t4\_proofcheck.py}, \texttt{work/lbw/deep.py} & per-layer checks of the proof of Theorem~\ref{thm:LB}; depth data\\
+\texttt{work/minform/step\_a.wl}, \texttt{step\_b.wl}, \texttt{step\_b2.wl}
+   & anchors and certificates for Theorem~\ref{thm:minimal}\\
+\texttt{work/minform/certs\_stretch.m} & full certificates for Theorems~\ref{thm:franel} and \ref{thm:s10}\\
+\texttt{lean/} & the Lean~4 development of Section~\ref{sec:lean} (eight modules)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The sweeps, with their exact parameters}
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{6.7cm}>{\raggedright\arraybackslash}p{6.3cm}@{}}
+\toprule
+claim & range, and result\\
+\midrule
+Theorem~\ref{thm:arow} (first row) & $5\le p\le31$, $n\le320$, single- and multi-digit: $0$ failures\\
+Theorem~\ref{thm:brow} (second row, single digit) & $p\in\{5,7,\dots,31\}$, all $(a,r)$: $0$ failures; independently re-implemented for $p\in\{5,7,11,13,17\}$\\
+Every lemma and case split of Section~\ref{sec:weight3} & $p\in\{5,7,11,13\}$ (some to $19$), all cells: $0$ failures; $\vp(CC)=3$ branch checked on all $14\,292$ occurrences for $p\le19$; the bound of Lemma~\ref{lem:V} has minimum exactly $1$\\
+Conjecture~\ref{conj:master3} (master, $w=3$) & $5\le p\le31$, $n\in[1,320]$: $0$ failures, floor exactly $3$\\
+Ratio-form depth on $p$-unit cells & $7\le p\le31$, single-digit: minimum exactly $3$, no cell of depth $\le2$\\
+$\vp(b_n)\ge-3\vp(d_n)$ & $5\le p\le31$, $n\le320$: $0$ failures\\
+Conjecture~\ref{conj:master} (all fifteen) & every prime $5\le p\le103$, $n\le400$; plus $p=5,7,11$ with $n\le1200$ (five base-$p$ digits): $0$ failures, floor exactly $w$ in every cell\\
+Failure of the untwisted law (Obs.~\ref{obs:naive-fail}) & $5\le p\le43$, $n\le300$\\
+The repair (Obs.~\ref{obs:repair}) & the seven twisted sequences, $5\le p\le31$ with $\chi(p)=-1$, $n<p^3$ (to $1500$): valuation exactly $w$\\
+Ramified prime (Obs.~\ref{obs:ramified}) & $\eta$, $p=5$, $n\le500$: $\min_nv_5(B_n)=0$\\
+Small primes (Obs.~\ref{obs:small-primes}) & $p=2,3$, $n\le120$\\
+Weights and their sharpness (Obs.~\ref{obs:weights}) & $n\le600$; $\vp(B_n)\ge-w\lfloor\log_pn\rfloor$ over $15\times16\times400$ cells\\
+Ap\'ery limits (Obs.~\ref{obs:limits}) & PSLQ at $400$ digits, $33$-constant basis, agreement to $31$--$401$ digits\\
+Harmonic decompositions (Table~\ref{tab:decomp}) & fitted mod $2^{61}-1$, rationally reconstructed, validated exactly over $\Q$ on held-out $n=60..72$ ($n=70..82$ for $\mathbf E$)\\
+Negative fits (Obs.~\ref{obs:negatives}) & $\mathbf C$: bases of $14$, $44$, $44$ and $152$ elements against $110$ and $220$ exact equations; $\delta$: $65$ elements, $110$ equations; $\mathbf E$: pure bases up to $44$ elements, $8$ arguments\\
+Layer-by-layer checks of Theorem~\ref{thm:LB} & $\gamma,\mathbf A,s_{10}$ at $p=5,7,11,13$: $0$ failures; $\mathbf D$ at $p=7,11,13$: $0$ failures, $11$ failing cells at $p=5$; $s_7$: $13$ failing cells at $p=7$, none at $p=5,11,13$\\
+Certificates of Table~\ref{tab:certs} & \texttt{Expand}$\to0$; pointwise $n=1..12$, $k=0..n+4$; $B_{\min}-b=0$ exactly for $n\le50$ in two independent implementations\\
+Theorems~\ref{thm:franel}, \ref{thm:s10} & certificate identities pointwise $n=1..10$ resp.\ $n=1..9$; $(LB)=0$ numerically for $n\le25$ resp.\ $n\le20$\\
+Proposition~\ref{prop:obstruction} & the Gosper linear system has no solution for any $\deg x\le8$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Provenance}
+
+The results were obtained in a sequence of exact computational campaigns, each recorded in
+a dated working memo, and each theorem in this paper was written by transcribing its
+statement from the memo that established it and re-checking it against that memo rather
+than reconstructing it from memory. Where a memo's own numerical summary disagreed with
+the underlying sweep, or where a claim was later superseded, the correction is stated
+explicitly in the text: see Section~\ref{ssec:panel} (the ``dip at the reflection centre''
+that turned out to be a pole cell), Observation~\ref{obs:false1} and
+Observation~\ref{obs:false2} (two false strengthenings), and Section~\ref{ssec:verdict}
+(the primes at which the tame proofs actually apply).
+
+\section*{Acknowledgements}
+
+% WORDING FLAGGED FOR RIVER -- please review this sentence before circulation.
+This work was carried out in a human--AI collaboration: the conjectures were found by
+large exact computational sweeps and the proofs were drafted, refereed and formalised in a
+loop between the authors and language-model agents, with every statement re-checked
+against its source computation and every proof checked by hand or by machine.

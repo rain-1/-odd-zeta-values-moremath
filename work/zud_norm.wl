@@ -1,0 +1,30 @@
+lf=OpenWrite["/home/ubuntu/fable-episode-2/zeta-math-2/work/zud_norm.log"];
+log[x__]:=(WriteString[lf,x,"\n"];Flush[lf]);
+log["START ",DateString[]];
+Get["/home/ubuntu/riscergosum/RISC/HolonomicFunctions.m"]; log["HF ok ",DateString[]];
+rZ=3; qZ=13; etZ={91,27,27,27,29,30,31,32,33,34,35,36,37,38};
+h0Z=etZ[[1]] nn+2; hjZ=Table[etZ[[j+1]] nn+1,{j,1,qZ}];
+NN=Product[(h0Z-2 hjZ[[j]])!,{j,rZ+1,qZ}]/Product[(hjZ[[j]]-1)!^2,{j,1,rZ}];
+termZ=NN (h0Z+2 tt) Gamma[h0Z+tt]^rZ Product[Gamma[hjZ[[j]]+tt],{j,1,qZ}]/
+      (Gamma[1+tt]^rZ Product[Gamma[1+h0Z-hjZ[[j]]+tt],{j,1,qZ}]);
+log["term built ",DateString[]];
+t0=AbsoluteTime[];
+annZ=Annihilator[termZ,{S[nn],S[tt]}];
+log["ann OK #",Length[annZ]," in ",Round[AbsoluteTime[]-t0],"s ",DateString[]];
+t0=AbsoluteTime[];
+ctZ=TimeConstrained[MemoryConstrained[CreativeTelescoping[annZ,S[tt]-1,{S[nn]}],12*10^9,"MEMCAP"],7000,"TIMECAP"];
+If[MatchQ[ctZ,"TIMECAP"|"MEMCAP"],
+  log["CT HIT ",ToString[ctZ]," after ",Round[AbsoluteTime[]-t0],"s MaxMem=",ToString[N[MaxMemoryUsed[]/10^9,3]],"GB"];Close[lf];Exit[]];
+log["CT done in ",Round[AbsoluteTime[]-t0],"s MaxMem=",ToString[N[MaxMemoryUsed[]/10^9,3]],"GB; #tele=",Length[ctZ[[1]]]];
+ap=ApplyOreOperator[ctZ[[1,1]],F[nn]];
+ord=Max[Cases[ap,F[nn+a_.]:>a,Infinity]];
+coeffs=Table[Coefficient[ap,F[nn+k]],{k,0,ord}];
+degs=Exponent[coeffs,nn]; D0=Max[degs];
+cp=Sum[Coefficient[coeffs[[k+1]],nn,D0]*lam^k,{k,0,ord}];
+log["ORDER=",ToString[ord]," coeff-degrees=",ToString[degs]];
+log["charpoly=",ToString[InputForm[Simplify[cp]]]];
+rts=N[lam/.Solve[cp==0,lam],12];
+log["roots=",ToString[InputForm[rts]]];
+log["log|roots|=",ToString[InputForm[Sort[N[Log[Abs[rts]],8],Greater]]]];
+Put[ctZ[[1,1]],"/home/ubuntu/fable-episode-2/zeta-math-2/work/zud_telescoper.m"];
+log["DONE ",DateString[]]; Close[lf]; Exit[];

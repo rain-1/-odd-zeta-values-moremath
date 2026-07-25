@@ -1,0 +1,7 @@
+START Sat 25 Jul 2026 01:10:52
+HF loaded
+Eletters loaded {22963, 4336, 9035, 4337, 4339, 4339}
+=== rank-1 CT for alpha === Sat 25 Jul 2026 01:10:52
+  alpha ann #3 t=6s
+  alpha ct1 #3 t=75s
+  alpha gb #3 t=15s gb===ct1? True

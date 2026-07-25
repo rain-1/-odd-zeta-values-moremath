@@ -1,0 +1,4 @@
+K=ABY C=CV N=N MODE=vt2 basis=747 cols (km=126 cm=35 nm=12) N=900 q=33554393
+condition rows: 318 x 747  (1.2 s)
+design matrix built (985.1 s)
+rank(fit)=371 rank(cond)=160 rank(joint)=453 nullity=294 INCONSISTENT=True DEFECT=1

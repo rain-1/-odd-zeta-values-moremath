@@ -1,0 +1,58 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{2}{section.1}%
+\contentsline {subsection}{\tocsubsection {}{1.1}{Frobenius constants}}{2}{subsection.1.1}%
+\contentsline {subsection}{\tocsubsection {}{1.2}{What was not known beyond rank two}}{2}{subsection.1.2}%
+\contentsline {subsection}{\tocsubsection {}{1.3}{Results}}{3}{subsection.1.3}%
+\contentsline {subsection}{\tocsubsection {}{1.4}{Evidence classes and conventions}}{4}{subsection.1.4}%
+\contentsline {section}{\tocsection {}{2}{The instrument: $\kappa $ as a ratio of Stokes constants}}{5}{section.2}%
+\contentsline {subsection}{\tocsubsection {}{2.1}{The computational form of the definition}}{5}{subsection.2.1}%
+\contentsline {subsection}{\tocsubsection {}{2.2}{The Birkhoff normal solution}}{5}{subsection.2.2}%
+\contentsline {subsection}{\tocsubsection {}{2.3}{The Stokes-ratio identity}}{6}{subsection.2.3}%
+\contentsline {subsection}{\tocsubsection {}{2.4}{Relation to the $p$-adic side, stated without overreach}}{7}{subsection.2.4}%
+\contentsline {section}{\tocsection {}{3}{Validation, and two errata}}{7}{section.3}%
+\contentsline {subsection}{\tocsubsection {}{3.1}{Controls}}{7}{subsection.3.1}%
+\contentsline {subsection}{\tocsubsection {}{3.2}{Two errata in \cite {BV}}}{8}{subsection.3.2}%
+\contentsline {subsection}{\tocsubsection {}{3.3}{New values for the Ap\'ery $\zeta (2)$ operator}}{9}{subsection.3.3}%
+\contentsline {section}{\tocsection {}{4}{The Brown--Zudilin operator}}{9}{section.4}%
+\contentsline {subsection}{\tocsubsection {}{4.1}{From the recurrence to the operator}}{9}{subsection.4.1}%
+\contentsline {subsection}{\tocsubsection {}{4.2}{Local data}}{9}{subsection.4.2}%
+\contentsline {subsection}{\tocsubsection {}{4.3}{Applicability of \cite [Def.\nonbreakingspace 22]{BV}, and one hypothesis that fails}}{10}{subsection.4.3}%
+\contentsline {section}{\tocsection {}{5}{The $\kappa $-vector, and a pure primitive $\lambda _5$}}{11}{section.5}%
+\contentsline {subsection}{\tocsubsection {}{5.1}{The computation}}{11}{subsection.5.1}%
+\contentsline {subsection}{\tocsubsection {}{5.2}{The primitive normalisation}}{11}{subsection.5.2}%
+\contentsline {subsection}{\tocsubsection {}{5.3}{Beyond $j=5$: weight inhomogeneity}}{12}{subsection.5.3}%
+\contentsline {section}{\tocsection {}{6}{What the $\kappa $-vector is not}}{12}{section.6}%
+\contentsline {subsection}{\tocsubsection {}{6.1}{Structural hypotheses}}{13}{subsection.6.1}%
+\contentsline {subsection}{\tocsubsection {}{6.2}{The gamma-deformation test}}{13}{subsection.6.2}%
+\contentsline {subsection}{\tocsubsection {}{6.3}{Reciprocal periods}}{13}{subsection.6.3}%
+\contentsline {section}{\tocsection {}{7}{The purity defect $c=-3/\pi ^2$}}{14}{section.7}%
+\contentsline {subsection}{\tocsubsection {}{7.1}{Statement and proof}}{14}{subsection.7.1}%
+\contentsline {subsection}{\tocsubsection {}{7.2}{The certificate}}{14}{subsection.7.2}%
+\contentsline {subsection}{\tocsubsection {}{7.3}{Why a 600-digit search missed it}}{15}{subsection.7.3}%
+\contentsline {subsection}{\tocsubsection {}{7.4}{The Tate reading}}{15}{subsection.7.4}%
+\contentsline {section}{\tocsection {}{8}{Rate--purity conservation}}{15}{section.8}%
+\contentsline {subsection}{\tocsubsection {}{8.1}{The exact gap}}{15}{subsection.8.1}%
+\contentsline {subsection}{\tocsubsection {}{8.2}{The law}}{16}{subsection.8.2}%
+\contentsline {subsection}{\tocsubsection {}{8.3}{Verification}}{16}{table.5}%
+\contentsline {subsection}{\tocsubsection {}{8.4}{How to falsify}}{17}{subsection.8.4}%
+\contentsline {subsection}{\tocsubsection {}{8.5}{Why this is a rate-plus-purity law}}{17}{subsection.8.5}%
+\contentsline {section}{\tocsection {}{9}{Connection constants}}{17}{section.9}%
+\contentsline {subsection}{\tocsubsection {}{9.1}{High-precision values}}{17}{subsection.9.1}%
+\contentsline {subsection}{\tocsubsection {}{9.2}{The identifications}}{18}{subsection.9.2}%
+\contentsline {subsection}{\tocsubsection {}{9.3}{The $\Gamma $-content}}{19}{subsection.9.3}%
+\contentsline {section}{\tocsection {}{10}{Application: no pair-worthiness at weight 7}}{19}{section.10}%
+\contentsline {subsection}{\tocsubsection {}{10.1}{Setup}}{19}{subsection.10.1}%
+\contentsline {subsection}{\tocsubsection {}{10.2}{The sector theorem}}{20}{subsection.10.2}%
+\contentsline {subsection}{\tocsubsection {}{10.3}{Measuring the sector}}{20}{subsection.10.3}%
+\contentsline {subsection}{\tocsubsection {}{10.4}{The honest denominator exponent}}{20}{subsection.10.4}%
+\contentsline {subsection}{\tocsubsection {}{10.5}{The worthiness numbers}}{21}{subsection.10.5}%
+\contentsline {subsection}{\tocsubsection {}{10.6}{Rhin--Viola leverage, quantified}}{21}{subsection.10.6}%
+\contentsline {subsection}{\tocsubsection {}{10.7}{Residual dependency, stated plainly}}{22}{subsection.10.7}%
+\contentsline {section}{\tocsection {}{11}{Discussion: what the middle-root obstruction means}}{22}{section.11}%
+\contentsline {subsection}{\tocsubsection {}{11.1}{What is established}}{22}{subsection.11.1}%
+\contentsline {subsection}{\tocsubsection {}{11.2}{What is not established}}{23}{subsection.11.2}%
+\contentsline {subsection}{\tocsubsection {}{11.3}{Where the leverage would have to come from}}{23}{subsection.11.3}%
+\contentsline {subsection}{\tocsubsection {}{11.4}{A remark on evidence}}{24}{subsection.11.4}%
+\contentsline {section}{\tocsection {Appendix}{A}{Two traps}}{24}{appendix.A}%
+\contentsline {section}{\tocsection {Appendix}{B}{Computational record}}{24}{appendix.B}%
+\contentsline {section}{\tocsection {Appendix}{C}{Citation discipline}}{25}{appendix.C}%
+\contentsline {section}{\tocsection {Appendix}{}{References}}{25}{section*.2}%

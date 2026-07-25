@@ -1,0 +1,123 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                                                                                                                                                                                                                                                                                                                                 
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= 
+In[7]:= 
+In[8]:=                 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= START Sat 25 Jul 2026 07:38:26  ORD=lk DMAX=4 MEMCAP=5000000000 ANNCAP=2700
+ 
+>    CT1CAP=3600 LADDERCAP=2700 FREECAP=900
+
+In[17]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[18]:= HF loaded
+
+In[19]:= In[19]:= 
+In[20]:= 
+In[21]:= 
+In[22]:= 
+In[23]:= 
+In[24]:= 
+In[25]:= 
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= rho,sigma loaded 10553 1819
+
+In[30]:= In[30]:= 
+In[31]:= 
+In[32]:= 
+In[33]:= 
+In[34]:= 
+In[35]:= 
+In[36]:= 
+In[37]:= 
+In[38]:= vtilde HarmonicNumber instances (must be 11): 11
+ 
+>      distinct symbols S (must be 10): 10
+
+In[39]:= 
+In[40]:= In[40]:= 
+In[41]:= 
+In[42]:= 
+In[43]:= 
+In[44]:= 
+In[45]:= 
+In[46]:= 
+In[47]:= 
+In[48]:= 
+In[49]:= 
+In[50]:= 
+In[51]:= In[51]:=          
+In[52]:= 
+In[53]:= TABLE CHECK dh3/da3/dX/dY (all must be 0): 
+ 
+>   {{"n1", 0, 0, 0, 0}, {"n2", 0, 0, 0, 0}, {"n3", 0, 0, 0, 0}, {"kk", 0, 0,\
+ 
+>    0, 0}, {"ll", 0, 0, 0, 0}}
+
+In[54]:= 
+In[55]:= In[55]:= 
+In[56]:= 
+In[57]:= W_tau/T LeafCounts: {77, 111, 120, 10556, 1824}
+
+In[58]:= 
+In[59]:= 
+In[60]:= 
+In[61]:= 
+In[62]:= 
+In[63]:= 
+In[64]:= 
+In[65]:= E/T coefficients  c0=57100  beta=24922  alpha=38007
+ 
+>      (E(v) for comparison: 66499 / 44011 / 22317)
+
+In[66]:= 
+In[67]:= 
+In[68]:= E(vtilde) distinct symbols E (must be 7): 7   
+ 
+>   {HarmonicNumber[k], HarmonicNumber[-k + n], HarmonicNumber[k + n],\
+ 
+>    HarmonicNumber[k, 2], HarmonicNumber[l, 2], HarmonicNumber[k + n, 2],\
+ 
+>    HarmonicNumber[l + n, 2]}
+
+In[69]:= 
+In[70]:= In[70]:= 
+In[71]:= 
+In[72]:= 
+In[73]:= 
+In[74]:= SPLIT CHECK (must all be 0): {0, 0, 0, 0, 0, 0}
+
+In[75]:= 
+In[76]:= ALL ASSERTIONS PASS.  Etil LeafCount 120100  Sat 25 Jul 2026 07:38:27
+
+In[77]:= In[77]:= 
+In[78]:= 
+In[79]:= 
+In[80]:= 
+In[81]:= In[81]:= 
+In[82]:= === R1 Annihilator[E(vtilde)] -- THE MEASUREMENT === Sat 25 Jul 2026 07:38:27
+
+In[83]:=   R1 ann : MEMORY ABORT after 478s  Sat 25 Jul 2026 07:46:25
+
+In[84]:= R1 DID NOT RETURN.  This is the verdict: the 7-symbol point on the 
+ 
+>   letter-count calibration is NOT reachable on this hardware.
+ALL DONE Sat 25 Jul 2026 07:46:25

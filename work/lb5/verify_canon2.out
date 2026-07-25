@@ -1,0 +1,18 @@
+w5_canon2.json: 126 terms
+--- (V1) exact ladder check ---
+  (V1) n=1..26 : 0 mismatches
+--- (V2) depth sweep  d5 <= 1+min(vT,2) ---
+  p= 5 cells=   54  max d5=4  violations=29  min slack=-1
+  p= 7 cells=  139  max d5=3  violations=0  min slack=0
+  p=11 cells=  505  max d5=3  violations=0  min slack=0
+  p=13 cells=  818  max d5=3  violations=0  min slack=0
+  p=17 cells= 1784  max d5=3  violations=0  min slack=0
+  p=19 cells= 2469  max d5=3  violations=0  min slack=0
+  (V2) total violations: 29
+--- (V3) (GAP-5) cell-by-cell ---
+  p= 5 cells=  270  FAILING v_p(diff)>=1+d5: 15  worst=(-1, 3, 3, (0, 2), 4, 4)
+  p= 7 cells=  707  FAILING v_p(diff)>=1+d5: 0  worst=None
+  p=11 cells= 5379  FAILING v_p(diff)>=1+d5: 0  worst=None
+  p=13 cells=10634  FAILING v_p(diff)>=1+d5: 0  worst=None
+  (V3) total violations: 15
+VERDICT: V1=0 V2=29 V3=15  ->  FAILURES

@@ -1,0 +1,26 @@
+   done p=5 n=625  (off so far 376000)
+   done p=5 n=626  (off so far 705625)
+   done p=5 n=630  (off so far 1087657)
+   done p=5 n=700  (off so far 1559177)
+   done p=5 n=1249  (off so far 3059177)
+   done p=5 n=1250  (off so far 4561177)
+   done p=5 n=1560  (off so far 6899929)
+   done p=5 n=3000  (off so far 15544729)
+   done p=5 n=3124  (off so far 24919729)
+   done p=7 n=2401  (off so far 30570997)
+   done p=7 n=2402  (off so far 35872062)
+   done p=7 n=3000  (off so far 43773817)
+   done p=11 n=1331  (off so far 45533157)
+levels = 13
+   in-regime cells   = 2801496
+   off-regime cells  = 45533157
+   B0_FAIL                0   <-- must be 0
+   B1_FAIL                0   <-- must be 0
+   B2_FAIL                0   <-- must be 0
+   K1_FAIL                0   <-- must be 0
+   K2_FAIL                0   <-- must be 0
+   K2b_FAIL               0   <-- must be 0
+   KC_FAIL                0   <-- must be 0
+   in-regime control failures of the same criterion: 675
+   exceptional (e4=1, b+c=p^L-1) hits: 3758
+   off-regime slack, 5 = >=5: {0: 0, 1: 4896, 2: 17608, 3: 25512, 4: 75606, 5: 45409535}

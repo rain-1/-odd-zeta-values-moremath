@@ -1,0 +1,83 @@
+==============================================================================
+p = 5
+
+[A] harmonic split  Lambda_a = h_p(a) + C_p(a),  h_p(a) = sum_{x in Z[1/p], 0<x<=a} x^-3
+   a=1   v(L)=-1  v(h)=0   v(C)=-1   prec(C)=27
+   a=2   v(L)=0   v(h)=0   v(C)=1    prec(C)=23
+   a=3   v(L)=-1  v(h)=0   v(C)=-1   prec(C)=24
+   a=4   v(L)=1   v(h)=1   v(C)=1    prec(C)=24
+   a=6   v(L)=-4  v(h)=0   v(C)=-4   prec(C)=21
+   a=7   v(L)=-4  v(h)=0   v(C)=-4   prec(C)=21
+   a=8   v(L)=-4  v(h)=0   v(C)=-4   prec(C)=21
+   a=9   v(L)=-4  v(h)=1   v(C)=-4   prec(C)=21
+   a=11  v(L)=-2  v(h)=0   v(C)=-2   prec(C)=21
+   a=12  v(L)=-3  v(h)=0   v(C)=-3   prec(C)=21
+   (1, zeta_p(3), h_p(1))                 m=3 K=31  best height 1.202e+07   floor 1.670e+07  noise
+   h_p(1) rational?                       m=2 K=31  best height 5.165e+10   floor 6.824e+10  noise
+   h_p(1) algebraic deg 2?                m=3 K=31  best height 5.960e+06   floor 1.670e+07  noise
+
+[B] one-generator tests
+   delta_1 / delta_2 in Q?                m=2 K=23  best height 7.228e+07   floor 1.092e+08  noise
+   delta_1 / delta_3 in Q?                m=2 K=22  best height 3.827e+07   floor 4.883e+07  noise
+   delta_1 / delta_4 in Q?                m=2 K=24  best height 2.339e+08   floor 2.441e+08  noise
+   delta_2 / delta_3 in Q?                m=2 K=22  best height 1.743e+07   floor 4.883e+07  noise
+   delta_2 / delta_4 in Q?                m=2 K=21  best height 1.908e+07   floor 2.184e+07  noise
+   delta_3 / delta_4 in Q?                m=2 K=22  best height 3.788e+07   floor 4.883e+07  noise
+   (1, Lambda_1, Lambda_2) span 2?        m=3 K=25  best height 5.794e+05   floor 6.680e+05  noise
+   (1, Lambda_1, Lambda_3) span 2?        m=3 K=24  best height 9.437e+04   floor 3.906e+05  noise
+   (1, Lambda_1, Lambda_4) span 2?        m=3 K=26  best height 5.013e+05   floor 1.142e+06  noise
+   (1, Lambda_2, Lambda_3) span 2?        m=3 K=24  best height 2.918e+05   floor 3.906e+05  noise
+   (1, Lambda_2, Lambda_4) span 2?        m=3 K=24  best height 9.287e+04   floor 3.906e+05  noise
+   (1, Lambda_3, Lambda_4) span 2?        m=3 K=24  best height 3.015e+05   floor 3.906e+05  noise
+   C_1 / C_2 in Q?                        m=2 K=25  best height 3.469e+08   floor 5.459e+08  noise
+   C_1 / C_3 in Q?                        m=2 K=24  best height 2.278e+08   floor 2.441e+08  noise
+   C_1 / C_4 in Q?                        m=2 K=26  best height 7.223e+08   floor 1.221e+09  noise
+   C_2 / C_3 in Q?                        m=2 K=24  best height 1.326e+08   floor 2.441e+08  noise
+   C_2 / C_4 in Q?                        m=2 K=23  best height 3.256e+07   floor 1.092e+08  noise
+   C_3 / C_4 in Q?                        m=2 K=24  best height 1.221e+08   floor 2.441e+08  noise
+
+[C] algebraicity of Lambda_1, Atil_1, C_1
+   Lambda_1 algebraic deg 2?              m=3 K=27  best height 9.101e+05   floor 1.953e+06  noise
+   Lambda_1 algebraic deg 3?              m=4 K=27  best height 3.130e+04   floor 5.225e+04  noise
+   Atil_1 algebraic deg 2?                m=3 K=27  best height 3.833e+05   floor 1.953e+06  noise
+   Atil_1 algebraic deg 3?                m=4 K=27  best height 2.546e+04   floor 5.225e+04  noise
+   Btil_1 algebraic deg 2?                m=3 K=27  best height 1.099e+06   floor 1.953e+06  noise
+   Btil_1 algebraic deg 3?                m=4 K=27  best height 2.847e+04   floor 5.225e+04  noise
+   C_1 algebraic deg 2?                   m=3 K=27  best height 1.193e+05   floor 1.953e+06  noise
+   C_1 algebraic deg 3?                   m=4 K=27  best height 1.831e+04   floor 5.225e+04  noise
+
+[D] the zoo
+   zoo members: ['1', 'z3', 'z5', 'log2', 'log3', 'unitroot']
+   rational zoo (mod p only): q2=3 q3=16 w1=1/12 w2=41/144 B_{p-3}=1/6
+      Lambda_1  leading digits: [1, 1, 3, 3, 4, 0, 1, 1]
+   (1, z3, Lambda_1)                      m=3 K=27  best height 9.139e+05   floor 1.953e+06  noise
+   (1, z5, Lambda_1)                      m=3 K=27  best height 9.657e+05   floor 1.953e+06  noise
+   (1, log2, Lambda_1)                    m=3 K=27  best height 6.921e+05   floor 1.953e+06  noise
+   (1, log3, Lambda_1)                    m=3 K=27  best height 9.552e+05   floor 1.953e+06  noise
+   (1, unitroot, Lambda_1)                m=3 K=27  best height 8.027e+05   floor 1.953e+06  noise
+   (1, unitroot, Lambda_1)                m=3 K=27  best height 8.027e+05   floor 1.953e+06  noise
+   (1, z3, log2, Lambda_1)                m=4 K=27  best height 3.507e+04   floor 5.225e+04  noise
+      Atil_1    leading digits: [1, 0, 2, 0, 2, 4, 3, 0]
+   (1, z3, Atil_1)                        m=3 K=27  best height 1.102e+06   floor 1.953e+06  noise
+   (1, z5, Atil_1)                        m=3 K=27  best height 1.065e+06   floor 1.953e+06  noise
+   (1, log2, Atil_1)                      m=3 K=27  best height 1.228e+06   floor 1.953e+06  noise
+   (1, log3, Atil_1)                      m=3 K=27  best height 1.201e+06   floor 1.953e+06  noise
+   (1, unitroot, Atil_1)                  m=3 K=27  best height 9.647e+05   floor 1.953e+06  noise
+   (1, unitroot, Atil_1)                  m=3 K=27  best height 9.647e+05   floor 1.953e+06  noise
+   (1, z3, log2, Atil_1)                  m=4 K=27  best height 2.103e+04   floor 5.225e+04  noise
+      C_1       leading digits: [1, 0, 3, 3, 4, 1, 2, 4]
+   (1, z3, C_1)                           m=3 K=27  best height 1.341e+06   floor 1.953e+06  noise
+   (1, z5, C_1)                           m=3 K=27  best height 1.674e+06   floor 1.953e+06  noise
+   (1, log2, C_1)                         m=3 K=27  best height 6.685e+05   floor 1.953e+06  noise
+   (1, log3, C_1)                         m=3 K=27  best height 7.416e+05   floor 1.953e+06  noise
+   (1, unitroot, C_1)                     m=3 K=27  best height 8.159e+05   floor 1.953e+06  noise
+   (1, unitroot, C_1)                     m=3 K=27  best height 8.159e+05   floor 1.953e+06  noise
+   (1, z3, log2, C_1)                     m=4 K=27  best height 2.483e+04   floor 5.225e+04  noise
+      h_p(1)    leading digits: [1, 0, 0, 0, 4, 3, 1, 0]
+   (1, z3, h_p(1))                        m=3 K=27  best height 6.250e+05   floor 1.953e+06  noise
+   (1, z5, h_p(1))                        m=3 K=27  best height 1.044e+06   floor 1.953e+06  noise
+   (1, log2, h_p(1))                      m=3 K=27  best height 1.001e+06   floor 1.953e+06  noise
+   (1, log3, h_p(1))                      m=3 K=27  best height 6.810e+05   floor 1.953e+06  noise
+   (1, unitroot, h_p(1))                  m=3 K=27  best height 1.209e+06   floor 1.953e+06  noise
+   (1, unitroot, h_p(1))                  m=3 K=27  best height 1.209e+06   floor 1.953e+06  noise
+   (1, z3, log2, h_p(1))                  m=4 K=27  best height 4.811e+04   floor 5.225e+04  noise

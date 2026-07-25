@@ -1,0 +1,4 @@
+p= 5 n=1..40 cells=23820  DEPTHgen-violations=0  vT<a+g+k count=0  min(vT-d5+5L)=-1 at (3, 0, 2, 2, 3, 0, 2)  minslack=0 at (3, 0, 2, 3, 3)
+p= 7 n=1..55 cells=60115  DEPTHgen-violations=0  vT<a+g+k count=0  min(vT-d5+5L)=-1 at (4, 0, 3, 2, 3, 0, 2)  minslack=0 at (4, 0, 3, 3, 3)
+p=11 n=1..45 cells=33510  DEPTHgen-violations=0  vT<a+g+k count=0  min(vT-d5+5L)=-1 at (6, 0, 5, 2, 3, 0, 2)  minslack=0 at (6, 0, 5, 3, 3)
+p=13 n=1..45 cells=33510  DEPTHgen-violations=0  vT<a+g+k count=0  min(vT-d5+5L)=-1 at (7, 0, 6, 2, 3, 0, 2)  minslack=0 at (7, 0, 6, 3, 3)

@@ -1,0 +1,8 @@
+basis 476 cols, N=600, primes [33554393, 33554467, 33554383], order=pref
+condition rows 68
+  q=33554393 rank=334 inconsistent=False (81.8 s)
+  q=33554467 rank=334 inconsistent=False (81.7 s)
+  q=33554383 rank=334 inconsistent=False (87.1 s)
+reconstruction failures: 0 ; nonzero terms: 70
+wrote w5_Rbase.json : 70 terms
+denominator residual factors (after removing 2,3,5,7,11,13): [1]

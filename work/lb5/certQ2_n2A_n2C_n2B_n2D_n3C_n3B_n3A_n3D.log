@@ -1,0 +1,34 @@
+START Sat 25 Jul 2026 05:49:29  JOBS=n2:A,n2:C,n2:B,n2:D,n3:C,n3:B,n3:A,n3:D DMAX=10 MEMCAP=3000000000
+HF loaded
+rho,sigma loaded 10553 1819
+=== JOB n2:A === Sat 25 Jul 2026 05:49:30
+  CHECK n2 : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 4230  obj/T 4262  lambda 1
+  n2:A ann #3 t=6s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:49:36
+  ann rank-ish: 3 generators
+  n2:A ct1 #2 t=22s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:49:58
+  ct1 telescopers: 2
+  n2:A gb #2 t=5s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:50:03
+  gb === ct1tel ? True
+  lambda = 1, no DFiniteTimes
+  ct2 FREE t=600s -> none  Sat 25 Jul 2026 06:00:03
+  ct2 third={} d=0 t=10s -> none  Sat 25 Jul 2026 06:00:14
+  ct2 third={} d=1 t=27s -> none  Sat 25 Jul 2026 06:00:41
+  ct2 third={} d=2 t=64s -> none  Sat 25 Jul 2026 06:01:45
+  ct2 third={} d=3 t=166s -> none  Sat 25 Jul 2026 06:04:30
+  ct2 third={} d=4 t=481s -> none  Sat 25 Jul 2026 06:12:31
+  ct2 third={} d=5 t=1985s -> none  Sat 25 Jul 2026 06:45:37
+  ct2 LADDERCAP 2700s exhausted at d=6 -- abandoning n2:A  Sat 25 Jul 2026 06:45:37
+  ct2 LADDERCAP 2700s exhausted at d=0 -- abandoning n2:A  Sat 25 Jul 2026 06:45:37
+  NO telescoper up to d=10
+=== JOB n2:C === Sat 25 Jul 2026 06:45:37
+  obj LeafCount 120  obj/T 151  lambda -HH[k] + 3*(-HH[k] + HH[-k + n]) + HH[k + n]
+  n2:C ann #3 t=0s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:37
+  ann rank-ish: 3 generators
+  n2:C ct1 #2 t=1s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:38
+  ct1 telescopers: 2
+  n2:C gb #2 t=0s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:45:38
+  gb === ct1tel ? True
+  ann(lambda) #3
+  n2:C annL #4 t=25s  (checkpointed)  mem=2GB  Sat 25 Jul 2026 06:46:03
+  ct2 FREE t=601s -> none  Sat 25 Jul 2026 06:56:04

@@ -1,0 +1,19 @@
+START Sat 25 Jul 2026 05:39:41  JOBS=n1:A,n1:C,n1:B,n1:D,kk:C,kk:B,kk:A,kk:D DMAX=10 MEMCAP=3000000000
+HF loaded
+rho,sigma loaded 10553 1819
+=== JOB n1:A === Sat 25 Jul 2026 05:39:41
+  CHECK n1 : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 400  obj/T 429  lambda 1
+  n1:A ann #3 t=0s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:39:41
+  ann rank-ish: 3 generators
+  n1:A ct1 #2 t=5s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:39:46
+  ct1 telescopers: 2
+  n1:A gb #2 t=1s  (checkpointed)  mem=0GB  Sat 25 Jul 2026 05:39:47
+  gb === ct1tel ? True
+  lambda = 1, no DFiniteTimes
+  ct2 third={} d=0 t=1s -> none  Sat 25 Jul 2026 05:39:48
+  ct2 third={} d=1 t=6s -> none  Sat 25 Jul 2026 05:39:54
+  ct2 third={} d=2 t=15s -> none  Sat 25 Jul 2026 05:40:09
+  ct2 third={} d=3 t=49s -> none  Sat 25 Jul 2026 05:40:58
+  ct2 third={} d=4 t=185s -> none  Sat 25 Jul 2026 05:44:04
+  ct2 third={} d=5 t=828s -> none  Sat 25 Jul 2026 05:57:52

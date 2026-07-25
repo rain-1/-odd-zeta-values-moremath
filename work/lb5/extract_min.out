@@ -1,0 +1,19 @@
+basis 721
+q=33554393 rank=489 inconsistent=False (603s)
+q=33554467 rank=489 inconsistent=False (508s)
+pivot profiles agree, rank=489
+reconstructed 130 nonzero coefficients (0 failed)
+exact check:
+  n= 1  OK
+  n= 2  OK
+  n= 3  OK
+  n= 4  OK
+  n= 5  OK
+  n= 6  OK
+  n= 7  OK
+  n= 8  OK
+  n= 9  OK
+  n=10  OK
+  n=11  OK
+  n=12  OK
+EXACT VERIFICATION: ALL OK

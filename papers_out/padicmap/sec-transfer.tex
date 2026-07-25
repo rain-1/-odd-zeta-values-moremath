@@ -1,0 +1,214 @@
+%% =====================================================================
+\section{The Transfer Principle}\label{sec:transfer}
+%% =====================================================================
+
+This section contains the load-bearing new statement of the paper. It is elementary; its
+content is entirely in what it says about the relation between two constructions that the
+literature has treated as incompatible.
+
+\subsection{The coefficient functional}\label{ss:coeff}
+
+\begin{definition}\label{def:rho}
+Let $R\in\QQ(t)$ have poles only at non-positive integers and $\deg R\le-2$, and write its
+partial-fraction decomposition as
+\begin{equation}\label{eq:pf}
+ R(t)=\sum_{i\ge1}\sum_{k\ge0}\frac{r_{i,k}}{(t+k)^i},\qquad r_{i,k}\in\QQ,
+\end{equation}
+the sums being finite. For $\theta$ in the domain of definition below, set
+\begin{equation}\label{eq:rhodef}
+ \rho_i:=\sum_k r_{i,k}\quad(i\ge1),
+ \qquad
+ \rho_{0,\theta}:=-\sum_{i,k}r_{i,k}\sum_{\nu=0}^{k-1}(\nu+\theta)^{-i},
+\end{equation}
+with the convention that the empty sum $\sum_{\nu=0}^{-1}$ is $0$. We call
+\begin{equation}\label{eq:functional}
+ \mathcal R:\ R\ \longmapsto\ (\rho_{0,\theta},\rho_2,\rho_3,\rho_4,\dots)
+\end{equation}
+the \emph{coefficient functional} of $R$ at $\theta$. It is manifestly $\QQ$-linear in the
+partial-fraction data $(r_{i,k})$, and for fixed $\theta\in\QQ$ it takes values in $\QQ$.
+\end{definition}
+
+We note at once the vanishing that both worlds use.
+
+\begin{lemma}[purity by degree]\label{lem:rho1}
+\PROVED{} If $\deg R\le-2$ then $\rho_1=\lim_{t\to\infty}tR(t)=0$.
+\end{lemma}
+
+\begin{proof}
+Multiplying \eqref{eq:pf} by $t$ and letting $t\to\infty$, every term with $i\ge2$
+contributes $0$ and the terms with $i=1$ contribute $\sum_kr_{i,k}=\rho_1$; on the other
+hand $tR(t)\to0$ because $\deg R\le-2$.
+\end{proof}
+
+\subsection{The principle}\label{ss:principle}
+
+\begin{theorem}[Transfer Principle]\label{thm:transfer}
+\PROVED{} Let $R$ be as in Definition~\ref{def:rho} and let $\widetilde R$ be a primitive of
+$R$ (any antiderivative; the two statements below are insensitive to the constant, which is
+killed by $\rho_1=0$).
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em]
+\item \textup{(archimedean)} For $\theta>0$,
+\begin{equation}\label{eq:arch}
+ \sum_{m\ge0}R(m+\theta)\;=\;\rho_{0,\theta}+\sum_{i\ge2}\rho_i\,\zeta(i,\theta).
+\end{equation}
+\item \textup{($p$-adic)} For $\theta\in\Qp$ with $|\theta|_p\ge q_p$ --- the domain on
+which $\zeta_p(s,\theta)$ is defined \cite[\S2]{LaiSprang2023} ---
+\begin{equation}\label{eq:padic}
+ -\int_{\Zp}\widetilde R(t+\theta)\,\dd t
+   \;=\;\rho_{0,\theta}+\sum_{i\ge2}\rho_i\,\omega(\theta)^{1-i}\zeta_p(i,\theta).
+\end{equation}
+\end{enumerate}
+The rational numbers $\rho_{0,\theta}$ and $\rho_i$ occurring in \eqref{eq:arch} and in
+\eqref{eq:padic} are \emph{the same}: both are the values of the single functional
+\eqref{eq:functional}.
+\end{theorem}
+
+%% REFEREE [R2]: the hypothesis |theta|_p >= q_p is faithful to Lai-Sprang \S2, but
+%% q_2 = 4 and |1/2|_2 = 2, so it EXCLUDES theta = 1/2 at p = 2 -- the integration shift
+%% of LSZ, of Beukers' R^(B), and of the whole p = 2 cone of \S\ref{sec:scan}, at which
+%% Proposition~\ref{prop:linform} nonetheless invokes "the case theta = theta_0 of
+%% Theorem~\ref{thm:transfer}(ii)".  The substitute identity (LSZ Lemma 9) was already
+%% quoted in the proof of Theorem~\ref{thm:classification}; it is now flagged here.
+\begin{remark}[the excluded point $\theta=\tfrac12$, $p=2$]\label{rem:halfexcl}
+Since $q_2=4$ and $|\tfrac12|_2=2$, the hypothesis of (ii) excludes $\theta=\tfrac12$ at
+$p=2$ --- which is exactly the shift used by every $p=2$ construction below. There
+$\zeta_2(s,\tfrac12)$ is not defined, and its role is played instead by
+\cite[Lemma 9]{LSZ2025},
+\[
+ \frac1{s-1}\int_{\ZZ_2}\frac{\dd t}{(t+\tfrac12)^{s-1}}=2^s\,\zeta_2(s)
+ \qquad(s\in\ZZ_{\ge2}),
+\]
+in which the single shift $\tfrac12$ already produces the full $\zeta_2$. Statement (i),
+the coefficient functional \eqref{eq:functional} and both corollaries of
+\S\ref{ss:corollaries} are unaffected, because they are statements about $\QQ$; what
+changes at $(p,r)=(2,1)$ is only which $p$-adic \emph{value} is attached to $\rho_i$.
+Everywhere else in the paper $|\theta_0|_p\ge q_p$ holds.
+\end{remark}
+
+\begin{proof}
+Statement (ii) is \cite[Lemma 21]{LaiSprang2023}, whose proof we recall in outline because
+it is what makes the comparison visible. Writing
+$\widetilde R(t+\theta)=\sum_kr_{1,k}\log_p\langle t+k+\theta\rangle
+ +\sum_{i\ge2}\sum_k r_{i,k}(1-i)^{-1}(t+k+\theta)^{1-i}$, one integrates termwise; the
+translation formula for the Volkenborn integral \cite[Lemma 5]{LSZ2025} moves each shift
+$k$ back to $0$ at the cost of the finite sum $\sum_{\nu<k}(\nu+\theta)^{-i}$, and the
+identity $\zeta_p(i,\theta)=\omega(\theta)^{i-1}\cdot\frac{1}{i-1}\int_{\Zp}
+ \dd t/(t+\theta)^{i-1}$ of \cite[\S2]{LaiSprang2023} converts the remaining integrals. The
+$\log_p$ terms carry the factor $\rho_1$, which vanishes by Lemma~\ref{lem:rho1}. Collecting
+the finite sums gives exactly $\rho_{0,\theta}$ of \eqref{eq:rhodef}.
+
+Statement (i) is the classical Hurwitz expansion, obtained by the identical bookkeeping.
+Summing \eqref{eq:pf} over $m\ge0$ termwise,
+$\sum_{m\ge0}(m+k+\theta)^{-i}=\zeta(i,\theta)-\sum_{\nu=0}^{k-1}(\nu+\theta)^{-i}$ for
+$i\ge2$, which produces $\sum_i\rho_i\zeta(i,\theta)$ together with precisely the finite
+correction $\rho_{0,\theta}$; the $i=1$ terms again assemble into $\rho_1$ times a divergent
+constant and vanish by Lemma~\ref{lem:rho1}, absolute convergence of the whole rearrangement
+being guaranteed by $\deg R\le-2$.
+
+The final sentence is not an additional claim but an observation about the two computations
+just performed: in each, the coefficient of $\zeta(i,\cdot)$ resp.\ $\zeta_p(i,\cdot)$ is
+$\sum_kr_{i,k}$, and the rational term is $-\sum_{i,k}r_{i,k}\sum_{\nu<k}(\nu+\theta)^{-i}$.
+Neither expression refers to the completion.
+\end{proof}
+
+\begin{remark}\label{rem:sameness}
+The two constructions differ \emph{only} in which value is attached to each $\rho_i$:
+$\zeta(i,\theta)$ on one side, $\omega(\theta)^{1-i}\zeta_p(i,\theta)$ on the other. This is
+the exact sense in which they are ``the same construction''. It is also, we note, the
+precise content of the correspondence that LSZ point out in
+\cite[Remark 13]{LSZ2025}, where the coefficients $\rho_{n,0},\rho_{n,3}$ of their $p$-adic
+form are observed to be ``exactly the same'' as those of the archimedean expansion
+$\sum_{m\ge0}R_n''(m+\tfrac12)=\rho_{n,0}+\rho_{n,3}(1-2^{-5})\zeta(5)$. What is new here is
+not the observation at one point but its use as a \emph{principle}.
+\end{remark}
+
+\subsection{The two corollaries that do the work}\label{ss:corollaries}
+
+\begin{corollary}[transfer of identities]\label{cor:transfer}
+\PROVED{} Let $\mathcal F$ be any family of rational functions as in
+Definition~\ref{def:rho}, parametrised by a set $P$, and let $g:P\to P$ be a map for which
+one knows an identity of the form
+\[
+ \mathcal R(R_{g\mathbf a})=\kappa(\mathbf a)\cdot\mathcal R(R_{\mathbf a}),
+ \qquad \kappa(\mathbf a)\in\QQ^{\times},
+\]
+i.e.\ a coefficientwise proportionality of the two coefficient vectors. Then that identity
+holds verbatim for the archimedean linear forms \eqref{eq:arch} and for the Volkenborn
+linear forms \eqref{eq:padic} at every admissible $\theta$, with the same $\kappa$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:transfer}: both forms are the images of the same vector
+$\mathcal R(R)$ under a fixed (completion-dependent) evaluation map, and the hypothesis is a
+statement about $\mathcal R(R)$ alone.
+\end{proof}
+
+\begin{corollary}[transfer of denominators]\label{cor:den}
+\PROVED{} Any statement of the form ``$\Lambda\cdot\rho_i\in\ZZ$ for all $i$'' or
+``$\Lambda\cdot\rho_{0,\theta}\in\ZZ$'', with $\Lambda\in\QQ$ depending on the parameters
+only, is a statement about rational numbers and therefore holds simultaneously for the
+archimedean and the $p$-adic construction built from the same $R$.
+\end{corollary}
+
+Corollaries~\ref{cor:transfer} and \ref{cor:den} are the answer to the second LSZ question
+of \S\ref{ss:questions}. The expected shape of an answer was a summation or transformation
+theory for Volkenborn integrals. The actual answer is that none is required: the group acts
+on $R$, the transformation identity is an identity between the rational vectors
+$\mathcal R(R)$, and the Volkenborn integral is a passive spectator. In the terminology of
+the campaign this is the $p$-adic analogue of the $\nu_p$-sharpening principle, pushed one
+level further --- not merely ``valid in every completion'' but ``the $p$-adic
+construction's coefficients \emph{are} the archimedean construction's coefficients''.
+
+\begin{remark}\label{rem:whatitdoesnotgive}
+Three things Theorem~\ref{thm:transfer} does \emph{not} give, stated here so that the reader
+is not misled by \S\ref{sec:group}. (a) It does not say that the $p$-adic \emph{smallness}
+transfers; smallness is a statement about the value, not the coefficients, and it is exactly
+where the two worlds diverge (\S\ref{sec:ledger}). (b) It does not say that admissibility
+transfers; a rational function whose numerator bricks sit at the wrong shift is a perfectly
+good archimedean object and a bad $p$-adic one (Proposition~\ref{prop:F2}). (c) It does not
+give a group where there is none: the family LSZ actually use has trivial transfer structure
+(Finding~\ref{find:F3}).
+\end{remark}
+
+\subsection{The savings function is completion-independent}\label{ss:deltainsens}
+
+For the Rhin--Viola machinery one needs to know that the denominator saving is the same
+object in both worlds. It is, and for a cheap reason.
+
+%% REFEREE [R5]: the proof as drafted did not establish o(n).  Its own ingredients give
+%% O(n/log n) primes times O(log ell) = O(log n) each = O(n) -- precisely what has to be
+%% excluded -- and the displayed chain "O(n) O(log n)/log n o(1)" is not a well-formed
+%% bound.  (The same defect is in DIG_GROUP.md \S1b, which writes the change as
+%% O(pi(m_3 n)), i.e. O(1) per prime rather than O(log ell).)  Evidence class lowered
+%% from [PROVED] to [DERIVED]; the argument replaced by the direction-perturbation one,
+%% with the crude bound stated honestly.  Nothing downstream depends on this: the
+%% proposition can only help a conclusion that is negative anyway.
+\begin{proposition}\label{prop:deltainsens}
+\DERIVED{} Let the parameters of a hypergeometric brick be integers $c\cdot n$ with $c$ a
+fixed direction vector, and let $\Phi_n=\prod_{\sqrt{m_0n}<\ell\le m_3n}\ell^{\nu_\ell}$ be
+the Rhin--Viola/Zudilin denominator saving, $\nu_\ell=\max_{g\in\Gp}\ord_\ell(\Pi(cn)/\Pi(gcn))$.
+Then, replacing each integer parameter $c\cdot n$ by a $\theta$-shifted parameter
+$c\cdot n+O(1)$ leaves
+\[
+ \dgr:=\lim_{n\to\infty}\frac{\log\Phi_n}{n}
+\]
+unchanged, so that $\dgr$ is the same function of the direction in the $p$-adic and in the
+archimedean setting.
+\end{proposition}
+
+\begin{proof}[Argument]
+An $O(1)$ shift changes $\ord_\ell$ of each factorial by at most $O(1)$ and hence each
+$\nu_\ell$ by $O(1)$. Bounding each of the $\pi(m_3n)-\pi(\sqrt{m_0n})=O(n/\log n)$ primes
+in the window by its own $O(\log\ell)=O(\log n)$ gives only $O(n)$, which is not enough; the
+point is that the shift moves $\lfloor c_in/\ell\rfloor$ only when a carry occurs, i.e.\ for
+a set of primes of relative density $O(1/\ell)$, so that the expected total displacement is
+$O\bigl(\sum_{\ell\le m_3n}\log\ell/\ell\bigr)=O(\log n)=o(n)$. Equivalently and more
+structurally: with the shift absorbed into the direction, the perturbed direction is
+$c+O(1/n)\to c$, and $\dgr$ is given by the integrals \eqref{eq:deltadef} of the piecewise
+constant $\Lambda$, whose discontinuity set is finite and $\dd\psi$-null away from $0$; the
+integrals are therefore continuous along $c+O(1/n)\to c$. We do not carry the second
+argument out in detail, and label the statement \DERIVED{} accordingly.
+\end{proof}
+
+Proposition~\ref{prop:deltainsens} is what licenses computing $\dgr$ entirely with the
+classical archimedean machinery, which is what \S\ref{sec:group} does.

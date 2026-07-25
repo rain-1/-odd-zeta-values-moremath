@@ -1,0 +1,7 @@
+START Sat 25 Jul 2026 00:53:38
+HF loaded
+TRUNCATION CHECK: #HarmonicNumber in vw = 19  (must be 19)
+rho,sigma loaded from disk
+LeafCount rho/sigma = 10553 / 1819
+*** Q-ROW SINGLE-CERTIFICATE CHECK: 0 ***
+E built, LeafCount=16067 #Harmonic=166

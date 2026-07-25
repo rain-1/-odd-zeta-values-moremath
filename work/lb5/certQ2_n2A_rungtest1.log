@@ -1,0 +1,18 @@
+START Sat 25 Jul 2026 07:19:59  JOBS=n2:A DMAX=0 MEMCAP=3000000000
+HF loaded
+rho,sigma loaded 10553 1819
+=== JOB n2:A === Sat 25 Jul 2026 07:20:00
+  CHECK n2 : letters-in-cofactors=0 symbolic=0 points={0, 0, 0, 0, 0}
+  obj LeafCount 4230  obj/T 4262  lambda 1
+  n2:A ann : loaded checkpoint
+  ann rank-ish: 3 generators
+  n2:A ct1 : loaded checkpoint
+  ct1 telescopers: 2
+  n2:A gb : loaded checkpoint
+  gb === ct1tel ? True
+  lambda = 1, no DFiniteTimes
+  ct2 FREE t=2s -> none  Sat 25 Jul 2026 07:20:02
+  ct2 third={} d=0 t=1s -> none  Sat 25 Jul 2026 07:20:03
+  ct2 third={S[n]} d=0 t=1s -> RUNGCAP TIMEOUT (1s) -- rung ABORTED  Sat 25 Jul 2026 07:20:04
+  NO telescoper up to d=0
+ALL DONE Sat 25 Jul 2026 07:20:04

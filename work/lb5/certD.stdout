@@ -1,0 +1,157 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                 
+In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= START Sat 25 Jul 2026 00:21:36
+
+In[6]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[7]:= HF loaded
+
+In[8]:= USAGE CT: CreativeTelescoping[f, delta, {op1, ..., opk}] or\
+           
+          >   CreativeTelescoping[ann, delta, {op1, ..., opk}] computes\
+           
+          >   creative telescoping relations for the given function f (resp.\
+           
+          >   the given ∂-finite ideal ann annihilating some function f).\
+           
+          >   In particular it returns {{q1, ..., qm}, {r1, ..., rm}}, two\
+           
+          >   lists of OrePolynomials such that qj + delta*rj is in the\
+           
+          >   annihilator of f for all 1 <= j <= m. The polynomials qj form a\
+           
+          >   Groebner basis in the rational Ore algebra with generators op1,\
+           
+          >   ... opk whereas the rj's live in the Ore algebra with\
+           
+          >   generators Join[OreOperators[delta], {op1, ..., opk}] (resp.\
+           
+          >   the Ore algebra of ann). For summation (w.r.t. n) set delta to\
+           
+          >   S[n]-1 or Delta[n], in the q-case QS[qn,q^n]-1; for integration\
+           
+          >   (w.r.t. x) set delta to Der[x].
+          The following options can be used:
+          Incomplete -> True: returns the first telescoping relation (q1 and\
+           
+          >   r1) that is found, without computing the remaining ones.
+          Method -> Automatic: which algorithm shall be used to compute\
+           
+          >   creative telescoping relations. Method -> "Chyzak" calls\
+           
+          >   Chyzak's algorithm where the uncoupling is done by Gaussian\
+           
+          >   elimination via Groebner bases (as in SolveCoupledSystem). To\
+           
+          >   execute Chyzak's algorithm with a different uncoupling\
+           
+          >   algorithm, the values Zuercher, AbramovZima,\
+           
+          >   IncompleteZuercher, and Gauss can be given (Stefan Gerhold's\
+           
+          >   OreSys package must be loaded, see its description for more\
+           
+          >   information about these uncoupling algorithms), or Method ->\
+           
+          >   "Barkatou" to invoke Barkatou's algorithm for directly solving\
+           
+          >   without uncoupling (but this algorithm is not completely\
+           
+          >   implemented and does not yet work in many cases). Method ->\
+           
+          >   "Hermite" executes an algorithm based on Hermite reduction\
+           
+          >   (Bostan+Chen+Chyzak+Li+Xin, ISSAC 2013), see\
+           
+          >   ?HermiteTelescoping for more information.
+          Support -> {m1, ..., mi}: if a telescoper of a certain form is\
+           
+          >   desired, then this option can be used to specify the support of\
+           
+          >   q1. The mj are power products of operators; these operators\
+           
+          >   will form the algebra in which q1 is returned. In this case the\
+           
+          >   input {op1, ..., opk} is superfluous and can be replaced by {}.
+          Return -> Automatic: this option is passed to HermiteTelescoping\
+           
+          >   when Method -> "Hermite" is used.
+
+In[9]:= USAGE OGB: OreGroebnerBasis[{p1, ..., pk}] computes a left Groebner basis for\
+            
+           >   the OrePolynomials p1, ..., pk.
+           OreGroebnerBasis[{p1, ..., pk}, algebra] computes the Groebner\
+            
+           >   basis in the given algebra.
+           The following options can be given:
+           MonomialOrder: specifies the monomial ordering; possible values\
+            
+           >   are DegreeLexicographic, Lexicographic, ReverseLexicographic,\
+            
+           >   DegreeReverseLexicographic, EliminationOrder[n],\
+            
+           >   WeightedLexicographic[w], WeightedOrder[w, order],\
+            
+           >   MatrixOrder[m], or any pure function that takes two exponent\
+            
+           >   vectors and gives True or False.
+           Extended -> False: whether to compute the cofactors that transform\
+            
+           >   the input polynomials into the Groebner basis.
+           NormalizeCoefficients -> True: whether to remove content.
+           ReduceTail -> True: controls whether also the tail of a polynomial\
+            
+           >   should be reduced completely in each reduction.
+           Reduce -> True: indicates whether autoreduction should be\
+            
+           >   performed at the end of Buchberger's algorithm.
+           Incomplete -> False: if set to True then the computation is\
+            
+           >   interrupted as soon as an element free of the elimination\
+            
+           >   variables is found (works only with elimination order).
+           ModuleBasis -> {}: give a set of indices {n1, n2, ...} to indicate\
+            
+           >   that the Groebner basis is to be computed in a module which is\
+            
+           >   generated by the variables (and their powers) that are on\
+            
+           >   positions n1, n2, ... among the generators of the algebra.
+           Method -> "sugar": pair selection strategy; other admissible\
+            
+           >   values are "normal", "elimination", or "pairsize".
+
+In[10]:= USAGE OreReduce: OreReduce[p, {g1, g2, ...}] reduces the OrePolynomial p with\
+ 
+>    the Groebner basis given by {g1, g2, ...}. NormalizeCoefficients -> True\
+ 
+>    clears denominators and removes contents during the reduction process.\
+ 
+>    Extended -> True computes also the cofactors, i.e. the output is {r, f,\
+ 
+>    {c1, c2, ...}} such that f*p = r + c1*g1 + c2*g2 + ... . The option\
+ 
+>    ReduceTail controls whether also the tail should be reduced completely.\
+ 
+>    OrePolynomialSubstitute performs the given substitutions among the\
+ 
+>    coefficients, respecting the noncommutativity.
+
+In[11]:= In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= In[15]:= 
+In[16]:= In[16]:= === Y1 (elim l then k) === Sat 25 Jul 2026 00:21:36
+Y1 ann #4 t=0s
+Y1 ct1 #4 t=81s
+Y1 gb #4 t=21s  gb===ct1tel? False

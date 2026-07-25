@@ -1,0 +1,9 @@
+START Sat 25 Jul 2026 03:43:29  TAUS=ll,n1,n2,n3 ORD=lk DMAX=12 MEMCAP=4000000000
+HF loaded
+rho,sigma loaded 10553 1819
+HarmonicNumber counts A2k/Psi/vw (must be 2/8/13): 2/8/13
+weight LeafCounts (none may be 0/atomic): {84, 86, 66, 12471, 2255}
+SPLIT CHECK (must all be 0): {0, 0, 0, 0}
+=== tau ll (ORD=lk) === Sat 25 Jul 2026 03:43:30
+  ll LeafCount 2318
+  ll ann : loaded checkpoint

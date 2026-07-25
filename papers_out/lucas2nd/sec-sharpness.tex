@@ -1,0 +1,80 @@
+\section{Sharpness of the hypothesis \texorpdfstring{$p\ge5$}{p >= 5}}
+\label{sec:sharpness}
+
+Every statement in this paper carries the hypothesis $p\ge5$. This section records where
+that hypothesis is used, where it can be removed, and what actually happens at $p=2,3$.
+
+\subsection{Where \texorpdfstring{$p\ge5$}{p >= 5} enters the proofs}
+
+In Theorem~\ref{thm:brow} the hypothesis is used twice, and only twice: the coefficient
+$1/(2m^3)$ of Ap\'ery's letter $u(n,m)$ requires $p\nmid2$, and the identity
+$(-1)^{jp-1}=(-1)^{j-1}$ in the proof of Lemma~\ref{lem:Wpart} requires $p$ odd. Nothing
+else in Section~\ref{sec:weight3} sees the size of $p$; in particular
+Theorem~\ref{thm:arow} is uniform in $p$.
+
+In Theorem~\ref{thm:LB} the hypothesis enters through (H4), in the requirement
+$c_j\in\Zp$ on the coefficients of the weight. This is not a formality: it is the only
+obstruction the mechanism ever meets in the tame cases, and it bites exactly where the
+denominators say it should. For $\mathbf D$, whose coefficients are $\frac15(1,2,-1,-1)$,
+the two-layer split has $11$ failing cells at $p=5$ and none at $p=7,11,13$ \Verified;
+for $s_7$, whose coefficients have denominator $28$, it has $13$ failing cells at $p=7$
+and none at $p=5,11,13$ \Verified. The proof is therefore unconditional for $p\ge7$ in
+those two cases, and $p=5$ (resp.\ $p=7$) is \Verified\ only. Curiously $s_{10}$, whose
+coefficients are also $\frac15(1,4,-4)$, exhibits no defect at $p=5$ --- the layer
+valuations happen to be one higher there --- but the proof as written still requires
+$p\ge7$.
+
+\subsection{Where it can be removed}
+
+%% FIXED [MINOR x2]: (i) Theorem \ref{thm:LB} is stated for $p\ge5$, so it cannot itself be
+%% FIXED "applied" at $p=2,3$; what survives there is its proof, with (H4) vacuous. (ii) the
+%% FIXED Franel $p\ge5$ / $p\ne2$ mismatch now carries its cross-reference.
+The minimal form of Theorem~\ref{thm:minimal} has coefficients $2$ and $-1$, both
+integers, so (H4)'s coefficient condition becomes vacuous. Theorem~\ref{thm:LB} is stated for
+$p\ge5$, but that hypothesis is used \emph{only} through (H4): inspecting its proof, every
+other step is uniform in $p$. So the proof --- not the theorem as stated --- yields the
+$\gamma$ instance for \emph{every} prime, including $2$ and $3$. This is
+machine-verified: the Lean statement of Section~\ref{sec:lean} carries no hypothesis
+$p\ge5$ and no hypothesis $a\ge1$. The same inspection gives the Franel instance for every
+$p\ne2$ (its coefficient denominators are $4$), so that the $p\ge5$ recorded for
+$\mathbf A$ in Section~\ref{sec:families} is not sharp: $p=3$ is fine.
+
+So the exclusion of small primes is a property of the \emph{normalisation of the weight},
+not of the congruence. In the natural normalisation $B(0)=0$, $B(1)=1$ the $\gamma$
+coefficients are $\frac13,\frac16$ and $p\ge5$ is required; in the classical
+normalisation $b_n=6B(n)$ they are $2,-1$ and it is not.
+
+\subsection{What actually happens at \texorpdfstring{$p=2$ and $p=3$}{p = 2 and p = 3}}
+
+The master law itself, however, does fail at the small primes, and not only for
+normalisation reasons.
+
+\begin{observation}\label{obs:small-primes}
+\Verified\ With the twisted law of Conjecture~\ref{conj:master} and $n\le120$, the floor
+drops below $w$ for
+\[
+ \begin{gathered}
+   \mathbf A\;(p=2,\ \text{floor }1),\quad
+   \mathbf F\;(p=2,\ 1),\quad
+   \alpha\;(p=2,\ 2;\ p=3,\ 2),\\
+   \gamma\;(p=3,\ 2),\quad
+   \delta\;(p=3,\ 1),\quad
+   \varepsilon\;(p=2,\ 2).
+ \end{gathered}
+\]
+Independently, the iterated two-digit form $p^{2w}b_n\equiv b_{n_2}a_{n_1}a_{n_0}$ holds
+at $p=5$, $w=3$, $n=25..70$ with minimum depth $1$, and fails at $p=2$ and $p=3$ with
+minimum orders $-6$ and $0$ respectively.
+\end{observation}
+
+Six of the fifteen families therefore violate the master floor at $2$ or at $3$, and the
+violations are of the same kind as the low-weight ratio failures of
+Section~\ref{ssec:panel}: the floor does not merely dip, it drops by a full unit or more.
+The boundary $p\ge5$ that this forces coincides with the boundary already familiar from
+the denominator-conjecture side of this programme, where the primes $2$ and $3$ are
+likewise excluded.
+
+We record honestly that we have \emph{no} conceptual explanation of the $p=2,3$ failures.
+The proof-side obstruction (coefficient denominators) accounts for individual cells, and
+it is removable by renormalisation; the observed collapse of the master floor at $2$ and
+$3$ for six families is a separate phenomenon, and it is \Open.

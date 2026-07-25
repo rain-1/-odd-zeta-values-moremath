@@ -1,0 +1,175 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Relation to Beukers--Vlasenko's Conjecture 7.5}
+\label{ssec:BV}
+
+The natural home for a congruence like Conjecture~\ref{conj:master} is the theory of
+Dwork crystals, and it is worth being precise about how the two fit together. We read
+\cite{BVthree} from its source; its \S7 treats \emph{completely symmetric Calabi--Yau
+families}, and its numbered items there are 7.1 (definition), 7.2 (lemma), 7.3 (theorem),
+7.4 (remark) and 7.5 (conjecture).
+
+The setting is $f(x)=1-tg(x)$ and $F(t)=\sum_nf_nt^n$ with $f_n=\ct\bigl(g(x)^n\bigr)$;
+for the sporadic families these $f_n$ are exactly our $A(n)$. Writing $F_N(t)$ for the
+truncation of $F$ at $t^N$, and $G(t)$ for the series appearing in the second solution
+$F(t)\log t+G(t)$ of the (second-order) Picard--Fuchs operator, \emph{the coefficients of
+$G$ are our $B(n)$}, up to normalisation. What \cite{BVthree} proves --- their eq.~(7.6),
+from \cite[eq.~(7)]{BVtwo} --- is that for all $m,s\ge1$,
+\begin{equation}\label{eq:BV76}
+   \frac{F(t)}{F(t^\sigma)}\;\equiv\;\frac{F_{mp^s}(t)}{F_{mp^{s-1}}(t^\sigma)}\pmod{p^s}.
+\end{equation}
+Reading off coefficients with the naive lift $t^\sigma=t^p$ and $s=1$ gives the
+Dwork--Mellit--Vlasenko congruence whose sporadic specialisation is precisely the
+first-row Lucas congruence $A(ap+r)\equiv A(a)A(r)\pmod p$ of
+Theorem~\ref{thm:arow}. Their Conjecture~7.5 asserts that \eqref{eq:BV76} holds modulo
+$p^{2s}$ --- for $m=2$ in the hypercubic and hyperoctahedral families and $m=n+1$ in the
+simplicial ones --- where $\sigma$ is the \emph{excellent} Frobenius lift, the unique lift
+with $q^\sigma=\gamma^{p-1}q^p$ for the canonical (mirror) coordinate
+$q(t)=t\exp\bigl(G(t)/F(t)\bigr)$; by their Theorem~7.3 that lift is characterised by the
+vanishing of the off-diagonal Frobenius entry. The authors state that they could not prove
+7.5 for a single $g$.
+
+Four points relate this to Conjecture~\ref{conj:master}.
+
+\begin{enumerate}[leftmargin=1.7em]
+\item \emph{They are the two rows of one $2\times2$ Frobenius matrix.} The crystal
+  $\mathrm{CY}(g)(2)$ of \cite{BVthree} is free of rank two on $1/f$, $\theta(1/f)$, and
+  its Frobenius has diagonal $(\lambda_0,\lambda_2)$ with $\lambda_0=F(t)/F(t^\sigma)$ the
+  unit root. Conjecture 7.5 is a statement about $\lambda_0$ alone, sharpened from modulo
+  $p^s$ to modulo $p^{2s}$. Conjecture~\ref{conj:master} is the statement about the
+  \emph{other} diagonal entry: that Frobenius acts on the second graded piece with
+  eigenvalue $\chi(p)p^{w}$. In coefficient form, their $\lambda_0$-congruence \emph{is}
+  the first row; ours \emph{is} the second row. Neither formally implies the other.
+\item \emph{But 7.5's standing hypothesis is a weak form of our conclusion.} The excellent
+  lift exists as a lift of $\Z_p[[t]]$ precisely because
+  $q(t)=t\exp(G/F)\in\Z_p[[t]]$ --- $p$-integrality of the mirror map, which is a
+  statement about $G$, i.e.\ about $B(n)$. Our Corollary~\ref{cor:integrality},
+  $d_n^wB_n\in\Zp$, obtained by iterating the descent over base-$p$ digits, is exactly the
+  coefficient-level shadow of that integrality, and it is sharper: it does not merely
+  assert integrality of the mirror map, it pins the depth at exactly $w$ and exhibits the
+  eigenvalue $\chi(p)$. So the implication runs
+  \[
+   \begin{gathered}
+    \text{Conjecture~\ref{conj:master}}\;\Longrightarrow\;
+    \text{(coefficient form of mirror-map integrality)}\\
+    \Longrightarrow\;
+    \text{(the excellent lift is defined over $\Z_p[[t]]$)},
+   \end{gathered}
+  \]
+  which is the standing hypothesis of Conjecture 7.5. In this precise sense our conjecture
+  is \emph{upstream} of theirs, and not equivalent to it.
+\item \emph{The character is invisible in the unit-root formulation and must be added.}
+  Beukers and Vlasenko work with $\lambda_0=F/F^\sigma$, where no character can appear:
+  the unit root of the holomorphic period is a unit, and the first-row Lucas congruence is
+  untwisted for all fifteen families --- \Verified\ here and proved in
+  \cite{MalikStraub}. The character surfaces only on the \emph{non-unit} eigenvalue. Any
+  crystal-theoretic proof of Conjecture~\ref{conj:master} must therefore carry the
+  information that, for seven of the fifteen families, the second Frobenius eigenvalue is
+  $\chi(p)p^{w}$ and not $p^{w}$ --- i.e.\ that the family is attached to a quadratically
+  twisted (CM) modular parametrisation. This is a concrete correction to make to any
+  slogan of the form ``Dwork crystals imply Lucas congruences for the second solution''.
+\item \emph{What our conjecture does not give.} Nothing towards the modulo-$p^{2s}$
+  doubling that is the actual content of 7.5. Our floor is exactly $w$ and provably not
+  more in the sense that equality is attained in every cell tested, so there is no hidden
+  supercongruence in the second row of the kind 7.5 predicts for the first.
+\end{enumerate}
+
+We note for completeness that we could not find any second-solution version of these
+congruences stated in \cite{BVthree} or in Vargas-Montoya's work
+\cite{VMcanon,VMmum}; \cite{VMmum} proves Lucas congruences explicitly and exclusively for
+the holomorphic solution, and \cite{VMcanon} proves $p$-integrality of $\exp(y_1/y_0)$
+with no congruence attached.
+
+\subsection{Frobenius, not the archimedean limit}
+\label{ssec:frobenius}
+
+Observation~\ref{obs:nolimit} deserves emphasis. Three sporadic sequences --- $\mathbf B$,
+$\delta$, $\eta$ --- have characteristic roots forming a complex-conjugate pair of equal
+modulus, so Poincar\'e--Perron gives no dominant solution and $B(n)/A(n)$ oscillates
+forever: there is no Ap\'ery limit to speak of. Nonetheless all three satisfy
+Conjecture~\ref{conj:master}, with a flat floor, and with characters $\chi_{-3}$, trivial
+and $\chi_5$ respectively.
+
+The $p$-adic Ap\'ery limit therefore exists where the archimedean one does not. This is
+the sharpest indication available to us that the descent is a statement about a Frobenius
+eigenvalue and not about an asymptotic ratio: the archimedean limit is an accident of the
+relative sizes of the characteristic roots, whereas the $p$-adic descent is insensitive to
+them. It also means that ``the character of the Ap\'ery limit'' --- which is how we
+identified $\chi$ in twelve of the fifteen cases --- cannot be the definition of $\chi$;
+for those three it must be read off from the descent itself, or from the modular
+parametrisation.
+
+\subsection{Beyond rank two}
+\label{ssec:rank3}
+
+The natural next target is the Brown--Zudilin cellular pair for $\zeta(5)$
+\cite{BrownZudilin}, where the integral row is a double binomial sum $Q_n$, the second and
+third solutions $P_n$ and $\widehat P_n$ satisfy the same order-three recurrence, and the
+expected descent has $w=5$. The obstructions are structural and were identified early in
+this programme: the local system has rank three, so the descent must be proved for a
+three-step filtration at once, with the intermediate weight-three object $\widehat P_n$
+appearing in the $P_n$ descent as a cross-term with no $\zeta(3)$ analogue; the summand is
+not a perfect square, so the per-carry valuation slack of Remark~\ref{rem:square}
+disappears; and the pole to be assembled is of order five rather than three, which roughly
+squares the case analysis of Lemma~\ref{lem:V}. The first-row Lucas congruence
+$Q_{ap+r}\equiv Q_aQ_r\pmod p$ is proved and formalised (Section~\ref{sec:lean}).
+
+The lesson of Section~\ref{sec:minimal} applies here with force: the right search is not
+``which weight-five harmonic monomials span $P_n$'', but ``which weight has an
+$n$-difference equal to a single hypergeometric term times a rational function'' --- a
+smaller, linear and decidable search, and one insensitive to the large kernel that makes
+monomial fitting degenerate. And the top-cell constant, which at weight three is the
+classical $5$ of Lemma~\ref{lem:D5}, is computable in advance from the residue at the top
+of the support, giving a necessary numerical fingerprint that any candidate weight must
+match.
+
+\subsection{Open problems}
+\label{ssec:open}
+
+\begin{problem}\label{prob:master}
+Prove Conjecture~\ref{conj:master}, in any of its three independent directions: the
+multi-digit statement, the sharpening from modulo $p$ to modulo $p^w$, and the removal of
+the tameness hypothesis. Even the weight-three case, Conjecture~\ref{conj:master3}, is
+open in all three.
+\end{problem}
+
+\begin{problem}\label{prob:eps}
+Prove Theorem~\ref{thm:brow} by an $\varepsilon$-deformation. Gessel's companion
+congruence \cite[Thm.~1.4]{Beukers2211} is structurally the first parameter-derivative of
+the first-row congruence; our $b_n$ is the weight-three companion, i.e.\ the third
+derivative. Writing $a_n=\ct[\Lambda_\varepsilon^n]$ for a deformed Laurent polynomial,
+applying the Dwork--Mellit--Vlasenko ratio congruence \cite{MellitVlasenko} to the
+deformed family and taking $\partial_\varepsilon^3|_{\varepsilon=0}$ should land the
+weight-three pole and multiply the modulus by $p^3$, since each filtration level costs one
+power of $p$ \cite[Prop.~7.7]{BVthree}.
+\end{problem}
+
+\begin{problem}\label{prob:lemmaD}
+Supply the valuation bound (``a Kummer carry in a wide binomial beats the order-one pole
+of a harmonic letter at $\lfloor2k/p\rfloor$'') that would remove the tameness hypothesis
+(H4) and put $\alpha$, $\varepsilon$, $s_7$ and $\mathbf E$ inside Theorem~\ref{thm:LB}.
+This would also produce the first \emph{proved} instance of the twisted case $e=1$, which
+at present has no tame example.
+\end{problem}
+
+\begin{problem}\label{prob:seven}
+Find harmonic decompositions for the remaining seven families. For $\mathbf C$ this
+provably requires letters that its own summand does not supply
+(Observation~\ref{obs:negatives}); a constant-term representation \cite{Gorodetsky} is
+the natural route. For $\delta$, letters attached to the $3$-section of the summand.
+\end{problem}
+
+\begin{problem}\label{prob:zeta2}
+Close the $\zeta(2)$-Ap\'ery case of Section~\ref{ssec:obstruction}: either exhibit a
+gauge (a shift by an element of the $11$-dimensional kernel of the fitting system) in
+which the correction telescopes, or run the argument in a $\Pi\Sigma$ field with nested
+sums. Proposition~\ref{prop:obstruction} shows no rational $\times$ harmonic-monomial
+ansatz can work.
+\end{problem}
+
+\begin{problem}\label{prob:chi-intrinsic}
+Give an intrinsic definition of $\chi$ --- one that does not go through the Ap\'ery limit,
+and so applies to $\mathbf B$, $\delta$, $\eta$ --- and prove that it is the character of
+the quadratic twist of the modular parametrisation attached to the family.
+\end{problem}

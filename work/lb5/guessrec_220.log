@@ -1,0 +1,9 @@
+htables 0.0s
+values 0.2s
+Q    N=221  ->  (3, 9, 1)   (0s)
+U1   N=221  ->  None   (3s)
+U2   N=221  ->  None   (3s)
+U3   N=221  ->  None   (3s)
+U4   N=221  ->  None   (3s)
+U5   N=221  ->  None   (3s)
+R    N=221  ->  (3, 9, 1)   (0s)

@@ -1,0 +1,396 @@
+%% =====================================================================
+\section{The scan}\label{sec:scan}
+%% =====================================================================
+
+With the ledger validated and the classification in hand, the remaining question is
+empirical: does anything in the family beat what is known, and if not, exactly what stops
+it? This section reports three computations --- an optimality computation, a rank-reduction
+search, and a coset-cancellation sweep --- each with its domain, its tolerance and, where
+applicable, its positive control.
+
+\subsection{Four doors that had to be re-opened}\label{ss:fourdoors}
+
+A first optimiser over \eqref{eq:exported} necessarily leaves gaps, and it is worth naming
+them, because two of the four changed the answer.
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.6em,itemsep=3pt]
+\item $m=-1$, the primitive convention, is not a valid slice: Finding~\ref{find:mminus1}.
+\item $E$ at $m\ge2$ had never been measured, every anchor having $m\le1$:
+      Finding~\ref{find:R1R2}. This changed the $\zeta_2(7)$ answer by $4$ units.
+\item The \emph{rank} axis. Reporting only rank-$1$ cells hides the fact that at $p=2$ the
+      size constraint is never binding: \S\ref{ss:parity}.
+\item The $O(1)$ \emph{inset} cone --- bounded translations of the bricks. These move no
+      asymptotic rate at all, so they are invisible to the ledger, but they move every
+      rational coefficient, and so they are exactly where a rank reduction could hide:
+      \S\ref{ss:rank}.
+\end{enumerate}
+
+Before anything else, the scan code reproduces the anchors of \S\ref{sec:validation}
+independently: LSZ's printed $\rho_{0,3}=768$, $\rho_{1,3}=73728$, $\rho_{0,0}=0$,
+$\rho_{1,0}=-1024$, the normalisations $\rho_n=1,96,14944$, and all three published measures
+to every digit \VER{exact}.
+
+\subsection{The optimisation domain}\label{ss:optdomain}
+
+We state the domain first, so that the theorem that follows is unambiguous.
+
+\begin{definition}[the cone]\label{def:cone}
+The \emph{cone} $\mathcal C$ consists of the rational functions
+\begin{equation}\label{eq:conefam}
+ R(t)=(2t+h_0)^{\epsilon}\,
+ \frac{\prod_{j\le M}(t+\theta'_j+e_j)_{h_0-2e_j}}{\prod_{j\le M}(t+f_j)_{h_0+1-2f_j}}
+\end{equation}
+obtained from Definition~\ref{def:family} by allowing, in addition to the parameter tuple
+$(p,r,\text{shifts},A,m,\epsilon)$ with
+\[
+ p\le13,\quad r\le3,\quad A\le14,\quad 0\le m\le w+2,\quad \epsilon\in\{0,1\},
+ \quad\text{all coset spreads},\quad w\le9,
+\]
+the following brick displacements:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.6em,itemsep=2pt]
+\item \emph{$O(1)$ insets}: integer $e_j,f_j\ge0$ bounded independently of $n$ ($58$, $127$
+      and $288$ admissible points at $M=3,4,5$ respectively);
+\item \emph{scaled insets}: $e_j=\eta_jn$, $f_j=\phi_jn$ with $\eta_j,\phi_j\ge0$ --- this is
+      the Rhin--Viola length cone, and it is where $\dgr>0$ lives;
+\item \emph{the group orbit}: the whole $1920$-element $\Gp$-orbit of the direction, via
+      Corollary~\ref{cor:transfer};
+\item \emph{rank reduction}: all $\QQ$-linear combinations
+      $L=\sum_{j,l,d}c_{j,l,d}\,n^d\,(n\to n+l)\,(\text{inset-form }j)$ with polynomial
+      coefficients, within the shift/degree bounds of \S\ref{ss:rank}.
+\end{enumerate}
+Negative pole insets are excluded throughout, since they put poles on the wrong side of
+$\Zp$.
+\end{definition}
+
+\begin{remark}[no calibration step]\label{rem:nocalib}
+In the computations of this section $E$ and the archimedean growth are \emph{measured}, not
+taken from \eqref{eq:E} and \eqref{eq:vpC}. Consequently any $\Phi_n$-type or Rhin--Viola
+saving that is actually present at a point of $\mathcal C$ is already counted in the number
+reported for that point. There is no fitting step anywhere in \S\ref{sec:scan}.
+\end{remark}
+
+\subsection{Optimality of the three known measures}\label{ss:optimal}
+
+\begin{theorem}\label{thm:optimal}
+\COMP{the cone $\mathcal C$ of Definition~\ref{def:cone}} Over $\mathcal C$, the three
+published $p$-adic irrationality measures are attained and cannot be improved:
+\[
+\begin{aligned}
+ \mu(\zeta_2(3))&\le7.17739889912418, &\quad
+ \mu(\zeta_3(3))&\le22.28144795149432,\\
+ \mu(\zeta_2(5))&\le20.34265173891448, &&
+\end{aligned}
+\]
+and no configuration in $\mathcal C$ yields a smaller bound for any of the three, nor a
+finite bound for any other $\zeta_p(w)$ with $p\le13$, $w\le9$.
+\end{theorem}
+
+We emphasise, as in \S\ref{ss:scope}: this is optimality \emph{over $\mathcal C$}. It is not
+a statement that these bounds are unimprovable.
+
+The evaluation is of $\mu=\alpha/(\alpha-\beta)=(G+\mathrm{gain})/(\mathrm{gain}-C_1-E)$
+with $E$ and the growth measured. The four sub-computations:
+
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.6em,itemsep=4pt]
+\item \textbf{$O(1)$ insets: asymptotically no effect, and never an improvement.} At all
+      $58/127/288$ admissible points ($M=3,4,5$) every \emph{asymptotic} quantity ---
+      $\sum\lambda=\sum\nu=M$, $G$, the gain, $C_1=0$ --- is identical to the symmetric
+      point, and the measured $E$ is identical too, so $\mu$ is asymptotically unchanged,
+      exactly. At finite $n$ the insets perturb $\sum\lambda,\sum\nu$ by $O(1/n)$, and the
+      symmetric point $e=f=0$ is the best point of the cone at every $n$ tested, at both
+      rank-$1$ points; at the rank-$2$ control $M=5$ it is the best point at $n\ge36$ but
+      not at $n=24$, for the artefactual reason recorded next.
+%% REFEREE [R15]: "the best point of the cone at every n tested" is contradicted at
+%% n = 24 by the M=5 block, where s_record.py reports BEST at e=f=(0,0,2,2,2) with E=3 --
+%% the very artefact recorded two sentences later.  Proviso moved in front of the claim.
+      \VER{$473$ points; exact; $n=24$, spot-checked at $n=36,48,60$}
+      \emph{A caveat honestly recorded}: a promising drop $E:5\to3$ at $M=5$, $n=24$ was
+      chased and is a small-$n$ artefact; at $n=36,48,60$ the exponent is back to $5$.
+      See Appendix~\ref{app:repro} for a second finite-$n$ artefact in the same printout.
+
+\item \textbf{Scaled insets: strictly downhill.} \S\ref{ss:cone}: $G$ falls and $E$ rises
+      simultaneously, so $\mu$ is worse everywhere off the symmetric point.
+
+\item \textbf{Rank reduction: blocked.} \S\ref{ss:rank}. This is the only place where a
+      \emph{record} was available on paper --- $\mu(\zeta_2(5))\le7.17740$ from the $M=5$,
+      $m=0$ family and $\mu(\zeta_2(7))\le12.62404$ from $M=6$, $m=1$ --- and both are closed.
+
+\item \textbf{The group: $\dgr\le0$ on the $p$-adic locus.} Proposition~\ref{prop:symzero}
+      gives $\dgr=0$ at the totally symmetric point \PROVED{}. The scan adds the empirical
+      half: on the whole $p$-adic locus the \emph{measured} denominator never falls below
+      its symmetric value, so $\dgr\le0$ throughout \VER{the cone of \S\ref{ss:cone}}. The
+      disjoint-support wall of \S\ref{ss:tension} is thereby confirmed at $p=2$ as well as at
+      $p\ge5$.
+\end{enumerate}
+
+Re-verified at $50$ decimal digits from $(p,r,A,m,\epsilon)$ alone:
+{\footnotesize
+\[
+\begin{array}{llll}
+ \zeta_2(3): & G=4.158883083359672, & \marg=1.158883083359672, & \mu=7.1773988991241796616,\\
+ \zeta_3(3): & G=3.295836866004329, & \marg=0.2958368660043291, & \mu=22.28144795149432156,\\
+ \zeta_2(5): & G=5.545177444479562, & \marg=0.5451774444795625, & \mu=20.34265173891448181 .
+\end{array}
+\]
+}
+
+\subsection{The parity law, and why size never binds at \texorpdfstring{$p=2$}{p=2}}
+\label{ss:parity}
+
+\begin{proposition}[parity law]\label{prop:parity}
+\PROVED{}, and \VER{$M=3,\dots,7$, exact} For the very-well-poised family
+\eqref{eq:conefam} with any integer insets $e,f\ge0$ one has
+$R(-h_0-t)=-(-1)^MR(t)$, hence $r_{i,h_0-k}=-(-1)^{M+i}r_{i,k}$ and therefore
+\[
+ \rho_i=0\qquad\text{whenever }i+M\text{ is even.}
+\]
+\end{proposition}
+
+\begin{corollary}\label{cor:collapse}
+\DERIVED{} Combining Proposition~\ref{prop:parity} with $\rho_1=0$
+(Lemma~\ref{lem:rho1}) and $\zeta_2(\text{even})=0$ (K2), the entire ledger of the $p=2$
+very-well-poised family collapses to two numbers:
+\begin{equation}\label{eq:MMlaw}
+ \marg(M,m)=2M\log2-(M+m),\qquad
+ \text{weights }\ \begin{cases}\{m+4,m+6,\dots,m+M\}, & M\ \text{even},\\
+                               \{m+3,m+5,\dots,m+M\}, & M\ \text{odd},\end{cases}
+\end{equation}
+with $\rk$ equal to the number of weights listed.
+\end{corollary}
+
+Since $\marg(M,m)=M(2\log2-1)-m\to+\infty$ as $M\to\infty$, we obtain:
+
+\begin{finding}[size is not the problem at $p=2$; rank is]\label{find:sizenotproblem}
+\COMP{$\mathcal C$ at $p=2$} There is a positive margin at \emph{every} weight at $p=2$:
+\begin{center}
+\tabsmall
+\begin{tabular}{cclcccll}
+\toprule
+$M$ & $m$ & weights & $\rk$ & $G$ & $E$ & $\marg$ & $\mu$\\
+\midrule
+$3$ & $0$ & $[3]$ & $1$ & $4.1589$ & $3$ & $+1.1589$ & $7.17740$ \ (Beukers, $\zeta_2(3)$)\\
+$4$ & $1$ & $[5]$ & $1$ & $5.5452$ & $5$ & $+0.5452$ & $20.34265$ \ (LSZ, $\zeta_2(5)$)\\
+$4$ & $3$ & $[7]$ & $1$ & $5.5452$ & $11$ & $-5.4548$ & --- \ (the rank-$1$ $\zeta_2(7)$ slice)\\
+$6$ & $1$ & $[5,7]$ & $2$ & $8.3178$ & $7$ & $+1.3178$ & $12.62404$ \ (``one of $\zeta_2(5),\zeta_2(7)$'')\\
+$7$ & $0$ & $[3,5,7]$ & $3$ & $9.7041$ & $7$ & $+2.7041$ & $7.17740$\\
+$8$ & $1$ & $[5,7,9]$ & $3$ & $11.0904$ & $9$ & $+2.0904$ & $10.61098$\\
+$9$ & $0$ & $[3,5,7,9]$ & $4$ & $12.4766$ & $9$ & $+3.4766$ & $7.17740$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\emph{The entire obstruction at $p=2$ is that the form carries $\lfloor(M-1)/2\rfloor$ zeta
+values.} If the $\zeta_2(5)$-coefficient of the $M=6$, $m=1$ family could be removed,
+$\zeta_2(7)$ would be irrational with $\mu\le12.62404$.
+\end{finding}
+
+Corollary~\ref{cor:collapse} also produces the first of the two $\zeta_2(7)$ walls. Rank $1$
+forces $M\in\{2,3\}$ ($m$ even) or $M\in\{3,4\}$ ($m$ odd), hence $M\le4$; then weight $7$
+needs $m=3$ ($M=4$) or $m=4$ ($M=3$), and in both cases $m\ge A-1$, so rule (R2) of
+Finding~\ref{find:R1R2} bites and the second prime band appears.
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Wall \#1.} Every rank-$1$ route to weight $7$ at $p=2$ must buy the weight with
+derivatives, and every such derivative order switches the second denominator band on. This
+is structural, not numerical.
+\end{minipage}}\end{center}
+
+\subsection{The rank wall}\label{ss:rank}
+
+Removing an unwanted coefficient from a rank-$R$ form requires an operator
+\begin{equation}\label{eq:operator}
+ L=\sum_{j,l,d}c_{j,l,d}\;n^d\;(n\to n+l)\;(\text{inset-form }j)
+\end{equation}
+with \emph{polynomial} coefficients. Anything of size $e^{Gn}$ doubles $\beta$ and gives
+$\alpha-2\beta=-2E<0$; this is the classical elimination tax, and it is not a modelling
+assumption: combining the $M=6$ form with the LSZ form explicitly gives margin
+$11.09-25.86=-14.78$. So the question is precisely whether
+$\ker(\rho_{w'})\subseteq\ker(\rho_w)$ inside the difference module generated by the family.
+
+\begin{finding}[five elimination searches, $0/300$]\label{find:rankwall}
+\EXCL{exact linear algebra over $\FF_q$, $q=2^{61}-1$; zero tolerance; degree and shift
+bounds as tabulated; every hit re-verified over $\QQ$}
+\begin{center}
+\tabsmall
+\begin{tabular}{llcccccccc}
+\toprule
+test & family & kill $\to$ keep & forms & $L$ & $D$ & unknowns & $\dim\ker$ & keep $\ne0$ & control\\
+\midrule
+shifts only & $M{=}6$, $m{=}1$ & $\rho_3\to\rho_5$ & $1$ & $4$ & $10$ & $55$ & $0$ & --- & ---\\
+shifts, wider & $M{=}6$, $m{=}1$ & $\rho_3\to\rho_5$ & $1$ & $6$ & $12$ & $91$ & $0$ & --- & ---\\
+inset cone & $M{=}6$, $m{=}1$ & $\rho_3\to\rho_5$ & $4$ & $3$ & $8$ & $144$ & $66$ & $\mathbf 0$ & $66/66$\\
+inset cone, wider & $M{=}6$, $m{=}1$ & $\rho_3\to\rho_5$ & $6$ & $4$ & $6$ & $210$ & $120$ & $\mathbf 0$ & $120/120$\\
+the $\zeta_2(5)$ record route & $M{=}5$, $m{=}0$ & $\rho_2\to\rho_4$ & $4$ & $3$ & $8$ & $144$ & $77$ & $\mathbf 0$ & $77/77$\\
+the rank-$3$ route & $M{=}7$, $m{=}0$ & $\rho_2,\rho_4\to\rho_6$ & $4$ & $3$ & $8$ & $144$ & $36$ & $\mathbf 0$ & $36/36$\\
+the rank-$3$ route & $M{=}8$, $m{=}1$ & $\rho_3,\rho_7\to\rho_5$ & $4$ & $3$ & $6$ & $112$ & $1$ & $\mathbf 0$ & $1/1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Totalling the five searches with a non-trivial kernel: $66+120+77+36+1=300$ kernel vectors,
+of which $\mathbf{0}$ keep the wanted coefficient, against positive controls at
+$\mathbf{300/300}$.
+\end{finding}
+
+\begin{remark}[the positive control]\label{rem:control}
+The control evaluates the \emph{same} kernel on a coefficient sequence taken from a
+\emph{different} family ($M=8$, resp.\ $M=6$). Every kernel vector gives a nonzero value
+there. So the machinery does detect survivors when survivors exist, and the negative result
+is about the mathematics and not about the search. The two ``shifts only'' rows have
+$\dim\ker=0$ and hence carry no control; they are reported for completeness.
+\end{remark}
+
+\begin{center}\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Wall \#2.} Every polynomial-coefficient operator that annihilates the $\zeta_2(5)$
+coefficient annihilates the $\zeta_2(7)$ coefficient as well --- and the same in all four
+families tested, including the $\zeta_2(5)$-record route. The coefficients generate the same
+difference module; these forms are irreducible.
+\end{minipage}}\end{center}
+
+The statement that would upgrade Wall \#2 to a theorem is Open Lemma~\ref{ol:kernel} below.
+
+\subsection{The length cone at \texorpdfstring{$p=2$}{p=2}: the tension, measured}\label{ss:cone}
+
+The remaining freedom in $\mathcal C$ is the length cone --- $e_j=\eta_jn$, $f_j=\phi_jn$,
+the Rhin--Viola direction. With $e,f\ge0$ forced,
+\[
+ \textstyle\sum\lambda=M-2\sum\eta\le M,\qquad \sum\nu=M-2\sum\phi\le M,
+ \qquad G=(\sum\lambda+\sum\nu)\log2\le2M\log2,
+\]
+with equality \emph{exactly} at the symmetric point --- where $C_1=0$ and $\dgr=0$.
+
+\begin{finding}\label{find:cone}
+\VER{$M=6$, $m=1$; $C_1$ de-biased against the symmetric control at the same $h_0$; $E$
+measured} Along the length cone:
+\begin{center}
+\tabsmall
+\begin{tabular}{lcccccc}
+\toprule
+profile $(\eta;\phi)$ & $\sum\lambda$ & $\sum\nu$ & $G$ & $C_1$ & $E$ & $\marg$\\
+\midrule
+symmetric & $6.000$ & $6.000$ & $8.3178$ & $+0.0000$ & $7$ & $+1.3178$\\
+one numerator brick shortened & $5.667$ & $6.000$ & $8.0867$ & $-0.6408$ & $9$ & $-0.9133$\\
+two numerator bricks shortened & $5.333$ & $6.000$ & $7.8557$ & $-1.1874$ & $10$ & $-2.1443$\\
+one numerator $+$ one pole & $5.667$ & $5.667$ & $7.8557$ & $-0.0260$ & $7$ & $+0.8557$\\
+stronger asymmetry & $5.000$ & $5.667$ & $7.3936$ & $-1.3089$ & $9$ & $-1.6064$\\
+\bottomrule
+\end{tabular}
+\end{center}
+$G$ falls \emph{and} $E$ rises. The symmetric point is strictly optimal.
+\end{finding}
+
+Because $E$ is measured here, this already includes whatever $\Phi_n$ saving is actually
+present. \emph{At $p=2$ the $C_1/\dgr$ tension is not a near miss: $\dgr$ is $0$ and the cone
+is strictly downhill.}
+
+\subsection{\texorpdfstring{$\zeta_2(7)$}{zeta 2(7)}: the verdict}\label{ss:z27}
+
+\begin{finding}\label{find:z27}
+\COMP{$\mathcal C$} No configuration in $\mathcal C$ pushes the $\zeta_2(7)$ margin
+positive. The best margin is $-5.4548$, at $p=2$, $r=1$, $A=4$, $m=3$, $\epsilon=1$, all
+shifts $\tfrac12$:
+\[
+ G=5.5451774444795624753=8\log2,\quad
+ \alpha=11.090354888959124951=16\log2=2G,
+\]
+\[
+ \beta=G+11=16.545177444479562475,\quad
+ \marg=-5.4548225555204375247 .
+\]
+The uncorrected ledger would report $\Eled=7$ and $\marg=-1.4548$; the four-unit gap is the
+second prime band of Finding~\ref{find:R1R2}, which no shape in the cone removes
+(Finding~\ref{find:bandshape}). Re-verified at $50$ digits, and $\Etrue$ re-verified at
+larger $n$: the bands are $(7,4)$ at $n=48,60,72$, and the measured $\log(\mathrm{denom})/n$
+is $9.72,10.18,10.21$, rising to $11$ from below.
+\end{finding}
+
+\subsection{The escape hatch, and why it is shut}\label{ss:hatch}
+
+By Proposition~\ref{prop:pge5} the $p\ge5$ deficit is $-E$ where its hypothesis holds, and
+at worst $A\,p\log p/(p-1)^2-E$ in general (Corollary~\ref{cor:noAhelp}); either way the
+single inequality in the derivation is $\alpha=\min_j v_p(S_n(j/p^r))$: a twisted sum could in principle be
+%% REFEREE [R1]: the unconditional reading of Prop.~\ref{prop:pge5} is repaired here too.
+\emph{more} $p$-adically small than its worst summand, through systematic cancellation
+between cosets. Nothing in the literature does this and the ledger has no term for it. We
+tested it.
+
+Since the partial fractions $r_{i,k}$ do not depend on the integration shift, one exact
+computation serves every coset; the $J_u$ come from the exact truncated Volkenborn series.
+Two questions were asked.
+
+\smallskip\noindent\textbf{(1) The sums the theory actually needs.} The plain sum and all
+$\varphi(p^r)$ Teichm\"uller twists $\sum_j\omega(j)^kS_n(j/p^r)$:
+\begin{center}
+\tabsmall
+\begin{tabular}{lccc}
+\toprule
+configuration & $\min_jv_p$ at the largest $n$ & best twisted sum & gain\\
+\midrule
+$p{=}5$, $A{=}2$, bricks on $1/5$, $n{=}27$ & $70$ & $71$ & $+1$\\
+$p{=}5$, $A{=}4$, bricks on $1/5$, $n{=}21$ & $109$ & $109$ & $0$\\
+$p{=}5$, $A{=}4$, spread over $4$ cosets, $n{=}21$ & $134$ & $136$ & $+2$\\
+$p{=}5$, $A{=}4$, $2{+}2$ reflection split, $n{=}21$ & $109$ & $110$ & $+1$\\
+$p{=}5$, $A{=}4$, $m{=}1$, $\epsilon{=}1$, $n{=}21$ & $109$ & $110$ & $+1$\\
+$p{=}7$, $A{=}3$, $\epsilon{=}1$, on $1/7$, $n{=}18$ & $65$ & $65$ & $0$\\
+$p{=}7$, $A{=}3$, spread, $n{=}18$ & $65$ & $66$ & $+1$\\
+$p{=}5$, $r{=}2$ ($20$ cosets), $n{=}30$ & $139$ & $140$ & $+1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Gains are $0$ to $3$ in \emph{absolute} terms and do not grow with $n$. The requirement is
+$\Omega(n)$; specifically $E\cdot n\ge3n$.
+
+\smallskip\noindent\textbf{(2) The sharp question.} Normalise
+$u_n:=(S_n(j))_j/p^{\min_jv_p}$, so that some coordinate is a unit. A \emph{fixed}
+$c\in\Zp^{\varphi}$ gains $\Omega(n)$ for all $n$ if and only if all the directions $u_n$ lie
+in one hyperplane to depth $\Omega(n)$; that depth is $H:=\max_id_i$ of the Smith normal
+form of the matrix $(u_n)$ over $\Zp$ (unit-tested on synthetic data). Measured, once the
+number of $n$-values exceeds the number of cosets:
+\begin{center}
+\tabsmall
+\begin{tabular}{ll}
+\toprule
+configuration & $H$\\
+\midrule
+$p=5$, $A=2$, on $1/5$ & $14,14,14,14$ at $n=15,18,21,24,27$ (while $\min v_p$ grows $40\to70$)\\
+$p=5$, $A=4$, on $1/5$ & $26,26,26$ at $n=15,18,21$\\
+$p=5$, $A=4$, spread & $0,0,0$ at $n=15,18,21$\\
+$p=5$, $A=4$, $2{+}2$ & $20,20,20$ at $n=15,18,21$\\
+$p=5$, $A=4$, $m=1$, $\epsilon=1$ & $28,28,28$ at $n=15,18,21$\\
+$p=7$, $A=3$, on $1/7$ & $11,11,11$ at $n=14,16,18$\\
+$p=7$, $A=3$, spread & $10,10,10$ at $n=14,16,18$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\emph{$H$ is constant in $n$} while $\min_jv_p(S_n)$ grows linearly. Hence no fixed
+$\Zp$-combination of the cosets --- twisted, plain or arbitrary --- gains more than a bounded
+number of digits.
+
+\begin{finding}[the hatch is shut]\label{find:hatch}
+\EXCL{exact $p$-adic arithmetic; tolerance zero (exact valuations); range: $p\in\{5,7\}$,
+$r\in\{1,2\}$, $A\in\{2,3,4\}$, $m\in\{0,1\}$, $\epsilon\in\{0,1\}$, bricks aligned / spread
+/ reflection-split, $n\le27$ at $p=5$, $n\le18$ at $p=7$, $n\le30$ at $p=5$, $r=2$}
+The gain over the per-coset minimum is $\le3$ absolutely, and the hyperplane depth is
+$\le28$ and constant in $n$, while the requirement grows like $E\cdot n$.
+\end{finding}
+
+\begin{remark}[what this is and is not]\label{rem:hatchcaveat}
+This is not a proof of impossibility. It is a fair sweep with a clean negative and a stated
+range. One caveat is recorded in place: the $p=5$, $r=2$ run has $20$ cosets and only $9$
+values of $n$, so its $H$ is rank-deficient and uninformative; its $\omega$-twist gain is
+$+1$, which is the informative half of that row.
+\end{remark}
+
+\subsection{Non-vanishing, for the record}\label{ss:nonvanrecord}
+
+No winner exists in $\mathcal C$, so nothing here needs a non-vanishing argument. For the
+record, the two objects that would have needed one:
+\begin{itemize}[leftmargin=1.6em,itemsep=3pt]
+\item the $M=6$, $m=1$ rank-$2$ family (margin $+1.3178$) inherits LSZ's route: the parity
+      law gives $\rho_2=\rho_4=\rho_6=0$ identically, and the surviving $\rho_3,\rho_5$ are
+      nonzero at every $n$ tested \VER{exact, $n\le60$}; a Casoratian argument in the style
+      of \cite[Lemma 15(b)]{LSZ2025} would be the natural proof. It is moot, by
+      Finding~\ref{find:rankwall};
+\item the $m=-1$ route is dead on smallness, not on vanishing --- though we note the
+      degeneracy $\rho_0\equiv0$ identically for $M$ odd with $m=-1$, and for $M$ even with
+      $m$ even.
+\end{itemize}
+Orbit moves preserve non-vanishing (Proposition~\ref{prop:orbitnonvan}); that remains
+available and, in the present cone, unused.

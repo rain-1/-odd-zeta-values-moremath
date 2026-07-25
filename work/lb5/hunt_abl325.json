@@ -1,0 +1,18 @@
+{
+ "tag": "abl325",
+ "basis": 789,
+ "N": 1200,
+ "depth2": false,
+ "mf": [
+  3,
+  2,
+  5
+ ],
+ "target": "P",
+ "W": 5,
+ "raw": false,
+ "rank_aug": 554,
+ "rank_M": 554,
+ "inconsistent": true,
+ "excess_equations": 646
+}

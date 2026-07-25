@@ -1,0 +1,11 @@
+coefficient of the pure A5(k) monomial [1|A5]x1x1 : [3830046703, 48]
+coefficient of [A5|1]-type / other weight-5 single letters present: {'[1|A5]x1x1': [3830046703, 48], '[A1|A4]x1x1': [-313725503, 12], '[A1|B4]x1x1': [-360908559, 64], '[A2|A3]x1x1': [8140271653, 1152], '[A2|B3]x1x1': [53800663, 24], '[A3|B2]x1x1': [750126175, 576], '[A4|B1]x1x1': [3964037829, 64], '[B1|B4]x1x1': [-12481095, 16]}
+
+cells with e1=1 and p | a+b+1  (so the A_5(k) mismatch has valuation -5*lambda):
+ p   n   k   l  |  a  b  lam | vT_n | naive letterwise bound  | true v_p(T*E) | target
+ 5   19   6   0  |  3  1   1 |    4 |                   -1  |             1 |      0 NAIVE FAILS
+ 5   19   6   6  |  3  1   1 |    6 |                    1  |             3 |      0 
+ 5   19   6  19  |  3  1   1 |    4 |                   -1  |             1 |      0 NAIVE FAILS
+ 7   34  20   5  |  4  2   1 |    5 |                    0  |             2 |      0 
+ 5   99  26  30  | 19  5   2 |    8 |                   -2  |             0 |     -5 
+ 7  244 100  50  | 34 14   2 |    8 |                   -2  |             0 |     -5 

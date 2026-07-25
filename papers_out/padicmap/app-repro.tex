@@ -1,0 +1,186 @@
+%% =====================================================================
+\section{Reproduction record}\label{app:repro}
+%% =====================================================================
+
+Every numerical statement in this paper comes from one of the programs listed below. They
+are plain Python~3 (\texttt{fractions}, \texttt{itertools}, with \texttt{sympy} for
+factorisation, \texttt{numpy}/\texttt{scipy} for the digamma quadrature in
+\eqref{eq:deltadef}, and \texttt{mpmath} for the $50$-digit re-verifications). All
+arithmetic reported as exact is exact; floating point appears only in the final evaluation
+of $\log p$, $\psi$ and the two integrals of \eqref{eq:deltadef}.
+
+\subsection{Programs}\label{ss:programs}
+
+\subsubsection*{The group (\S\ref{sec:group})}
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{0.60\textwidth}r}
+\toprule
+program & contents & runtime\\
+\midrule
+\texttt{g\_group.py} & the group of order $1920$ by BFS closure; the function $\Lambda$;
+  $\dgr$; the $m$-parameters; the Rhin--Viola validation
+  $\mu(\zeta(3))\le5.51389063$; $\dgr=0$ at the symmetric point & $0.3$\,s\\
+\texttt{g\_verify.py} & exact coefficientwise verification of the transfer identity
+  (Finding~\ref{find:transfer}); the Ap\'ery/Ball anchor & $4$\,s\\
+\texttt{g\_padic.py} & the same test at half-integer parameters
+  (Finding~\ref{find:halfint}) & $2$\,s\\
+\texttt{g\_forms.py} & exact $(\rho_0,\rho_i)$ for the parametrised $p$-adic family; the LSZ
+  anchors $\rho_{0,3}=768$, $\rho_{1,0}=-1024$, $\rho_{1,3}=73728$, $\rho_n=1,96,14944$ & $<1$\,s\\
+\texttt{g\_search.py}, \texttt{g\_search2.py} & the negative searches inside the LSZ shape
+  class (Finding~\ref{find:F3}) & $2$\,s, $<1$\,s\\
+\texttt{g\_full.py} & exhaustive very-well-poised half-integer proportionality
+  classification; the $13$ bridge instances (Finding~\ref{find:F4}) & $8$\,s\\
+\texttt{g\_opt.py}, \texttt{g\_cal.py}, \texttt{g\_hill.py} & maximisation of $\dgr/\bud$
+  (Finding~\ref{find:howmuch}); the archimedean calibration and hill-climb of
+  \S\ref{ss:calibrated} & $89$\,s, $<1$\,s, $31$\,s\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{The ledger (\S\ref{sec:ledger}, \S\ref{sec:validation})}
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{0.60\textwidth}r}
+\toprule
+program & contents & runtime\\
+\midrule
+\texttt{ledger.py} & the ledger \eqref{eq:exported} and the validation gate: all three
+  published measures plus the Lai cross-checks (Finding~\ref{find:gate}) & $<1$\,s\\
+\texttt{family.py} & exact partial fractions, $\rho_0$ and $\rho_i$, the Volkenborn $J_u$,
+  and $S_n$ & (library)\\
+\texttt{verify.py} & exact regeneration of the LSZ anchor (Finding~\ref{find:lszanchor});
+  measured $\alpha$, growth and $E$; the $p=3$ configuration & $2$\,s\\
+\texttt{optimize.py} & the exhaustive rank-$1$ optimiser and the freedom map of
+  \S\ref{ss:freedom} & $<1$\,s\\
+\texttt{freefact.py} & the free-factorial direction; the $p\ge5$ constant reproduced
+  (Finding~\ref{find:LLS}) & $<1$\,s\\
+\texttt{t4\_freedom.py} & the alignment law verified numerically at $p=5$
+  (Finding~\ref{find:alignvisible}); the regime table; the structural ceiling
+  (Finding~\ref{find:ceiling}) & $<1$\,s\\
+\texttt{gate\_dig2.py} & the evaluation of the calibrated crossing
+  (Finding~\ref{find:gatefail}) & $<1$\,s\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{The scan (\S\ref{sec:scan}, \S\ref{sec:map})}
+\begin{center}
+\scriptsize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lp{0.60\textwidth}r}
+\toprule
+program & contents & runtime\\
+\midrule
+\texttt{s\_vwp.py} & the $p=2$ very-well-poised cone with insets; the parity law
+  (Proposition~\ref{prop:parity}); the LSZ anchors reproduced & $<1$\,s\\
+\texttt{s\_meas.py} & exact measurement of $\alpha$ by truncated Volkenborn series, of the
+  growth, and of $E$; the $m=-1$ verdict (Finding~\ref{find:mminus1}) & $2$\,s\\
+\texttt{s\_den.py} & the true $E$, prime band by prime band; rules R1 and R2
+  (Finding~\ref{find:R1R2}) & $1$\,s\\
+\texttt{s\_elim.py} & partial fractions modulo $q=2^{61}-1$ (validated against exact $\QQ$);
+  the inset lattice & (library)\\
+\texttt{s\_recur.py}, \texttt{s\_rank.py} & the rank-reduction test and its positive control
+  (Finding~\ref{find:rankwall}) & see below\\
+\texttt{s\_cone.py} & the length cone: $G$, $C_1$ and $E$ measured off symmetry
+  (Finding~\ref{find:cone}) & $3$\,s\\
+\texttt{s\_record.py} & the record scan with $E$ and the growth measured
+  (\S\ref{ss:optimal}) & $25$\,s\\
+\texttt{s\_coset.py} & exact coset valuations, $\omega$-twists, and the Smith-form hyperplane
+  depth (Finding~\ref{find:hatch}) & long; see below\\
+\texttt{s\_map.py} & the margin map, with the ledger $E$ and with $\Etrue$
+  (\S\ref{sec:map}) & $18$\,s\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The rank-reduction searches dominate the total cost. Individual timings, taken from the run
+logs: the four inset-cone searches of Finding~\ref{find:rankwall} took $163$\,s ($144$
+unknowns), $575$\,s ($210$ unknowns), $126$\,s ($144$), $198$\,s ($144$) and $118$\,s
+($112$); the underlying $\rho$-vector construction for the widest case built $668$ vectors up
+to $n=172$ in $108$\,s. The coset sweep \texttt{s\_coset.py} runs eight configurations at
+$p\in\{5,7\}$ up to $n=30$ and is the longest single job; its output is preserved as a log.
+
+\subsection{Reproducing the headline numbers}\label{ss:reprohead}
+
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.6em,itemsep=4pt]
+\item \emph{The three published measures from the tuple alone} (Finding~\ref{find:gate}):
+      run \texttt{ledger.py}. Expected output includes
+      \texttt{mu <= 7.17739889912418}, \texttt{22.28144795149432},
+      \texttt{20.34265173891448}, each tagged \texttt{[MATCH]}.
+\item \emph{The Rhin--Viola pipeline validation} (Finding~\ref{find:rvvalidation}): run
+      \texttt{g\_group.py}. Expected: $|\Gp|=1920$; at $(18,17,16,19;0,7,31,32)$,
+      $\int_0^1\Lambda\,\dd\psi=24.18768530$, $\dgr=20.18768530$, $C_2=29.81231470$,
+      $\mu(\zeta(3))\le5.51389063$, orbit of distinct $F$-multisets $=118$; and at the
+      symmetric point $\dgr=0$ with orbit size $1$.
+\item \emph{The map} (\S\ref{sec:map}): run \texttt{s\_map.py}. Its five blocks are the
+      rank-$1$ map, the rank axis, the $p=2$ detail grid, the structural ceiling, and the
+      corrected rank-$1$ map; the last reproduces Finding~\ref{find:map2} row for row.
+\item \emph{The crossing evaluation} (Finding~\ref{find:gatefail}): run
+      \texttt{gate\_dig2.py}. Expected: at the crossing point,
+      $\alpha_p-\mathrm{growth}=-28.97$ against a requirement of $+48.46$, shortfall
+      $77.43$; and, with $C_1$ ignored and an ideal split, $42.25<48.46$.
+\item \emph{The parity law and the anchors} (Proposition~\ref{prop:parity}): run
+      \texttt{s\_vwp.py}. Expected: zero $\rho_i$ at $i\in\{1,3\}$, $\{1,2,4\}$,
+      $\{1,3,5\}$, $\{1,2,4,6\}$, $\{1,3,5,7\}$ for $M=3,\dots,7$, matching the prediction
+      in each case; and LSZ's printed $\rho_{0,3}=768$, $\rho_{1,3}=73728$,
+      $\rho_{0,0}=0$, $\rho_{1,0}=-1024$ with $\rho_n=1,96,14944$.
+\end{enumerate}
+
+\subsection{Four artefacts and one driver bug, recorded}\label{ss:artefacts}
+
+We record these because a reproducer will meet them, and because suppressing them would
+misrepresent the evidence.
+
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.6em,itemsep=4pt]
+\item \textbf{The $E:5\to3$ drop at $M=5$, $n=24$} is a small-$n$ artefact: at
+      $n=36,48,60$ the exponent is back to $5$. Reported in \S\ref{ss:optimal}.
+
+\item \textbf{\texttt{s\_record.py} prints \texttt{NEW RECORD}, and this is a finite-$n$
+      artefact of $G$, not a record.} The program evaluates $\mu=(G+\mathrm{gain})/\marg$
+      with $G$ \emph{measured at $n=24$}, where $\sum\nu$ has not yet converged to its limit
+      $M$ (e.g.\ $\sum\nu=3.125$ instead of $3$ at $M=3$). This inflates $G$ and thereby
+      deflates $\mu$, producing $6.817$ against the asymptotic $7.177$ for $\zeta_2(3)$ and
+      $17.135$ against $20.343$ for $\zeta_2(5)$; the comparison label then fires against the
+      published \emph{asymptotic} constants. The mathematically load-bearing line in that
+      output is the one immediately above it, \texttt{BEST over the cone}, which reports the
+      \emph{argmin} over the inset cone: it is $e=f=(0,\dots,0)$, the symmetric point, in
+      both cases. That is the content of sub-computation (i) of \S\ref{ss:optimal}, and it is
+      what Theorem~\ref{thm:optimal} claims. The asymptotic re-verification at $50$ digits,
+      quoted at the end of \S\ref{ss:optimal}, returns the published constants exactly.
+
+%% REFEREE [R14]: two further printed negatives a reproducer meets were not recorded.
+%% (d) g_verify.py block [C] prints a large [BROKEN] banner; (e) verify.py's "predicted E"
+%% column for Lai's A_n disagrees with the measured -- and the measured one is the one the
+%% paper uses.  Added below, since A.3 exists precisely for what a reproducer will meet.
+\item \textbf{\texttt{g\_verify.py} prints \texttt{[BROKEN]}, and this is
+      Finding~\ref{find:F3}, not a failure of Finding~\ref{find:transfer}.} Block
+      \textup{[C]} of that program shifts the \emph{numerator bricks} by $\theta$ and
+      re-tests proportionality across the orbit; it reports $10/40$ and $5/80$ at
+      $\theta=\tfrac12,\tfrac15,\tfrac25,\tfrac13$. That is the expected outcome: shifting
+      the numerator bricks leaves the very-well-poised family for the LSZ shape class, which
+      by Finding~\ref{find:F3} has no internal transfer identity. The positive
+      half-integer test is a different deformation ($h_4,h_5\in\ZZ+\tfrac12$) and is run by
+      \texttt{g\_padic.py}, which returns $120/120$, $180/180$, $480/480$.
+
+\item \textbf{\texttt{verify.py}'s ``predicted $E$'' column is wrong for Lai's $A_n$}
+      (it prints $3$ at $s=0$ and $5$ at $s=1$ against the measured $4$ and $7$). The
+      measured values are the correct ones, $E=A+m+1-\epsilon=3s+4$, and they are what
+      \S\ref{ss:lszrederiv} and the ledger use; only that one display is at fault.
+
+\item \textbf{A driver bug.} \texttt{s\_record.py} raises a \texttt{ValueError} when it
+      formats the comparison line for the two rank-$2$ control scans, which have no published
+      $\mu$ to compare against (the string \texttt{"-- (rank 2: weights \{3,5\})"} is passed
+      to \texttt{float}). The numerical content of the third scan is printed before the
+      exception; the fourth scan does not run. Neither affects any statement in this paper:
+      the rank-$2$ families are dealt with in \S\ref{ss:rank}, by \texttt{s\_rank.py}.
+\end{enumerate}
+
+\subsection{What is \emph{not} reproduced by the code}\label{ss:notreproduced}
+
+The proofs (Theorems~\ref{thm:transfer} and \ref{thm:classification},
+Lemma~\ref{lem:rho1}, and Propositions
+\ref{prop:deltainsens}, \ref{prop:symzero}, \ref{prop:F1}, \ref{prop:F2},
+\ref{prop:linform}, \ref{prop:cosets}, \ref{prop:orbitnonvan}, \ref{prop:whymminus1},
+\ref{prop:parity}) are mathematical arguments, checked by hand; the code verifies their
+instances but does not establish them. The two open lemmas of \S\ref{ss:openlemmas} are, by
+construction, not established by any computation here.

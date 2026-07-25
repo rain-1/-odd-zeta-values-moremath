@@ -1,0 +1,1 @@
+(BASE) primes 5..367, n<min(p,361): cells=11884 failures=0 min v_p(P_n)=0 at (5, 1)

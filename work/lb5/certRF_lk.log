@@ -1,0 +1,14 @@
+START Sat 25 Jul 2026 07:47:39  ORD=lk DMAX=4 MEMCAP=8500000000 ANNCAP=2700 CT1CAP=3600 LADDERCAP=2700 FREECAP=900
+HF loaded
+rho,sigma loaded 10553 1819
+vtilde HarmonicNumber instances (must be 11): 11   distinct symbols S (must be 10): 10
+TABLE CHECK dh3/da3/dX/dY (all must be 0): {{"n1", 0, 0, 0, 0}, {"n2", 0, 0, 0, 0}, {"n3", 0, 0, 0, 0}, {"kk", 0, 0, 0, 0}, {"ll", 0, 0, 0, 0}}
+W_tau/T LeafCounts: {77, 111, 120, 10556, 1824}
+E/T coefficients  c0=57100  beta=24922  alpha=38007   (E(v) for comparison: 66499 / 44011 / 22317)
+E(vtilde) distinct symbols E (must be 7): 7   {HarmonicNumber[k], HarmonicNumber[-k + n], HarmonicNumber[k + n], HarmonicNumber[k, 2], HarmonicNumber[l, 2], HarmonicNumber[k + n, 2], HarmonicNumber[l + n, 2]}
+SPLIT CHECK (must all be 0): {0, 0, 0, 0, 0, 0}
+ALL ASSERTIONS PASS.  Etil LeafCount 120100  Sat 25 Jul 2026 07:47:41
+=== R1 Annihilator[E(vtilde)] -- THE MEASUREMENT === Sat 25 Jul 2026 07:47:41
+  R1 ann : MEMORY ABORT after 536s  Sat 25 Jul 2026 07:56:37
+R1 DID NOT RETURN.  This is the verdict: the 7-symbol point on the letter-count calibration is NOT reachable on this hardware.
+ALL DONE Sat 25 Jul 2026 07:56:37
