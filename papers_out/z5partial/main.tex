@@ -1,0 +1,338 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\T}{T}
+\DeclareMathOperator{\Res}{Res}
+
+\title[A closed form for the Brown--Zudilin middle row]{A compact closed form for the
+middle companion row\\ of the Brown--Zudilin $\zeta(5)$ construction}
+\author{[Author]}
+\date{}
+
+\begin{document}
+\begin{abstract}
+Brown and Zudilin's cellular construction for $\zeta(5)$ produces three rational sequences
+$Q_n,\widehat P_n,P_n$, all annihilated by one explicit order-three operator. Only $Q_n$ was
+given by a closed binomial sum; $\widehat P_n$ and $P_n$ are defined by the recurrence. We prove
+that the middle row has the two-term closed form
+$\widehat P_n=\sum_{k,l}\T(n,k,l)\bigl(H^{(3)}_{n+k}-\Psi H^{(2)}_{n+k}\bigr)$, where $\T$ is the
+cellular summand and $\Psi$ an explicit antisymmetric weight. The proof combines a Barnes--Mellin
+descent with Zudilin's partial-fraction lemma, and uses no comparison of $\QQ$-coefficients of
+zeta values --- a point of substance, since the required linear independence is not known. We
+record what the same methods do \emph{not} give for the top row $P_n$, in the form of five
+bounded exclusions, and we state the status of an ongoing formal verification.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+Brown and Zudilin \cite{BZ} construct, from cellular integrals on $\overline{\mathcal M}_{0,8}$,
+a family of linear forms in $1,\zeta(2)\zeta(3),\zeta(5)$ whose coefficients are three rational
+sequences $Q_n,\widehat P_n,P_n$. All three satisfy a single order-three recurrence with
+polynomial coefficients, obtained in \cite{BZ} by creative telescoping on the integral. The
+sequences are then \emph{defined} by that recurrence together with initial values; the agreement
+of two order-three solutions at $n=0,1,2$ is what proves their decomposition.
+
+Of the three, only $Q_n$ is given in \cite{BZ} by a closed binomial sum. Our object here is the
+middle row.
+
+\begin{theorem}\label{thm:main}
+For every $n\ge0$,
+\[
+  \widehat P_n=\sum_{k,l=0}^{n}\T(n,k,l)\,\widehat w_3(n,k,l),
+  \qquad \widehat w_3=H^{(3)}_{n+k}-\Psi\,H^{(2)}_{n+k},
+\]
+with $\T$, $\Psi$ as in Definition \ref{def:objects}.
+\end{theorem}
+
+Two features of the proof are worth flagging at the outset.
+
+First, it is not a creative-telescoping certificate. The operator $L$ of \cite{BZ} is
+\emph{not} a telescoper of $\T\cdot\widehat w_3$; the minimal telescoper of that summand has
+order seven (\S\ref{sec:neg}). The proof instead runs through a Barnes--Mellin descent, where the
+order-three structure lives.
+
+Second, and less obviously, the proof must avoid comparing coefficients of zeta values. The
+decomposition of \cite{BZ} identifies the $\zeta(2)$-coefficient of an integral with
+$-4\widehat P_n$; a Barnes evaluation identifies it with something else; and concluding that the
+two agree requires $\QQ$-linear independence of $1,\zeta(2),\zeta(3),\zeta(4),\zeta(5),
+\zeta(2)\zeta(3)$, which is not known --- indeed the irrationality of $\zeta(5)$ is open.
+Lemma \ref{lem:norm} is what removes that step.
+
+\medskip
+\noindent\textbf{Status.} Theorem \ref{thm:main} is proved. It is \emph{not} machine-verified;
+\S\ref{sec:formal} states precisely what has been formalised and what has not. The
+corresponding statement for the top row $P_n$ is open, and \S\ref{sec:neg} records what is
+excluded.
+
+\section{The objects}
+
+\begin{definition}\label{def:objects}
+Write $H^{(r)}_m=\sum_{j=1}^m j^{-r}$ and $H_m=H^{(1)}_m$. Put
+\[
+  \T(n,k,l)=\binom{n+k}{n}\binom nk^2\binom{n+l}{n}\binom nl^2\binom{n+k+l}{n},
+  \qquad Q_n=\sum_{k,l=0}^{n}\T(n,k,l).
+\]
+For $r\ge1$ set
+\[
+  A_r(x)=H^{(r)}_{n+x}-H^{(r)}_x,\quad
+  B_r(x)=H^{(r)}_{n-x}-H^{(r)}_x,\quad
+  C_r=H^{(r)}_{n+k+l}-H^{(r)}_{k+l},
+\]
+and
+\[
+  \alpha=A_1(k)-A_1(l),\quad \beta=B_1(k)-B_1(l),\quad \Psi=\tfrac12\alpha+\beta,
+  \qquad L_k=-A_1(k)-C_1-2B_1(k),
+\]
+with $L_l$ the mirror of $L_k$ under $k\leftrightarrow l$. Let $L$ denote the order-three
+operator of \cite{BZ}, and let $\widehat P$ be the solution of $L\widehat P=0$ with
+$\widehat P_0=0$, $\widehat P_1=\frac{101}4$, $\widehat P_2=\frac{344923}{96}$.
+\end{definition}
+
+Note $\alpha,\beta,\Psi$ are antisymmetric under $k\leftrightarrow l$, while $\T$ is symmetric.
+
+\section{Two reductions}
+
+The first is free, and is used twice more below.
+
+\begin{lemma}\label{lem:sym}
+For any weight $w$, $\sum_{k,l}\T\,w=\sum_{k,l}\T\,w^{\mathrm{sym}}$, where
+$w^{\mathrm{sym}}(k,l)=\frac12\bigl(w(k,l)+w(l,k)\bigr)$. In particular every
+$k\leftrightarrow l$-antisymmetric weight is annihilated by the double sum.
+\end{lemma}
+
+\begin{proof}
+$\T(n,k,l)=\T(n,l,k)$, so relabelling gives $\sum\T\,w=\sum\T\,w^{\sigma}$ with
+$w^\sigma(k,l)=w(l,k)$; average.
+\end{proof}
+
+Explicitly, writing $X_r=H^{(r)}_{n+k}$ and $Y_r=H^{(r)}_{n+l}$,
+\begin{equation}\label{eq:w3sym}
+  \widehat w_3^{\,\mathrm{sym}}=\tfrac12(X_3+Y_3)-\tfrac12\Psi\,(X_2-Y_2),
+\end{equation}
+since $\Psi$ is antisymmetric.
+
+\begin{lemma}[the $\zeta(2)$ bridge]\label{lem:bridge}
+For every $n\ge0$,
+\[
+  \sum_{k,l=0}^{n}\T\Bigl(H^{(3)}_{k+l}+\tfrac14(L_k+L_l)H^{(2)}_{k+l}\Bigr)
+  \;=\;\sum_{k,l=0}^{n}\T\,\widehat w_3^{\,\mathrm{sym}}.
+\]
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Both sides arise as the $\zeta(2)$-coefficient of one Barnes-type double integral. Writing the
+translated rational kernel as
+$R(x,y)=P(x)P(y)P(x+y)/\bigl(Q(x)^2Q(y)^2\bigr)$ with $P(z)=\prod_{r=1}^n(z-r)$ and
+$Q(z)=\prod_{r=0}^n(z+r)$, the local data at the double pole $y=-l$ is
+$g_l(x)=c_lP(x)P(x-l)/Q(x)^2$, and $\sum_kB_{kl}=0$ for each $l$ by vanishing of the residue at
+infinity. Since $L_k-L_l=-2\Psi$, symmetry reduces the difference of the two sides to
+$-2\sum_l\sum_{j=l+1}^{n}g_l'(j)$; and on $l<j\le n$ the function $g_l$ has a \emph{double} zero,
+because $P(x)$ vanishes at $x=j$ (as $1\le j\le n$) and $P(x-l)$ vanishes at $x=j$ (as
+$1\le j-l\le n$), while $Q(j)\neq0$ for $j>0$. Hence every $g_l'(j)=0$.
+\end{proof}
+
+\begin{remark}
+The vanishing ranges here are sharp: $g_l(j)=0$ exactly on $1\le j\le n+l$, $g_l'(j)=0$ exactly
+on $l<j\le n$, and the simple-pole coefficient $q_l$ satisfies $q_l(j)=0$ exactly on
+$1\le j\le n$ with a zero of order exactly one.
+\end{remark}
+
+\section{The descent, and its normalisation}
+
+Specialising \cite[(I3)]{BZ} at $k=n+l$ writes the companion integral $I''_n$ as
+\[
+  I''_n=\sum_{l}(-1)^l\binom{n+l}{n}\binom nl^2\,J_3(n,n,n,n-l;n,n,n+l),
+\]
+and the rational part of the shifted $J_3$ is supplied by Zudilin's partial-fraction
+lemma \cite[Lemma 4]{Zu02}: for a suitable one-variable $R$ with
+$R(t)=\sum_kA_k(t+k)^{-2}+\sum_kB_k(t+k)^{-1}$, the induced quantity is
+$2A\zeta(3)-B$, where $A=\sum_kA_k$ and
+\[
+  B=2\sum_kA_k\,H^{(3)}_{k-h}+\sum_kB_k\,H^{(2)}_{k-h}.
+\]
+For the specialisation at hand one computes, at $t=-n-1-k$,
+\begin{equation}\label{eq:AB}
+  A_{kl}=\binom{n+k}{n}\binom{n+k+l}{n}\binom nk^2,
+  \qquad B_{kl}=A_{kl}\,L_k .
+\end{equation}
+
+The descent carries a normalisation, and the following lemma is what makes it harmless.
+
+\begin{lemma}[normalisation]\label{lem:norm}
+With the outer factor $(-1)^l\binom{n+l}{n}\binom nl^2$ of the specialisation,
+\[
+  \binom{n+l}{n}\binom nl^2\cdot A_{kl}=\T(n,k,l)
+\]
+identically in $n,k,l$. Consequently the $\zeta(3)$-coefficient produced by
+\cite[Lemma 4]{Zu02} equals $2Q_n$, whereas that of $I''_n$ is $Q_n$; the descent therefore
+computes $2I''_n$, and the factor is $2$ for \emph{every} $n$.
+\end{lemma}
+
+\begin{proof}
+The two products consist of the same six binomial factors, reordered. The second assertion
+follows since $Q_n\ge1$.
+\end{proof}
+
+\begin{remark}
+This is the step that avoids any independence hypothesis. Both quantities being compared are
+explicitly computed \emph{rational} coefficients inside a single derivation, not real numbers;
+no statement about $\QQ$-linear independence of zeta values is used, here or anywhere else in
+the proof.
+\end{remark}
+
+\begin{proposition}\label{prop:descent}
+For every $n\ge0$,
+$\displaystyle \widehat P_n=\sum_{k,l=0}^{n}\T\Bigl(H^{(3)}_{k+l}+\tfrac12L_kH^{(2)}_{k+l}\Bigr)$.
+\end{proposition}
+
+\begin{proof}
+Combine the specialisation with \eqref{eq:AB}, \cite[Lemma 4]{Zu02} and Lemma \ref{lem:norm};
+the outer sign cancels against the $(-1)^l$ of the $\zeta(3)$-coefficient.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+By Lemma \ref{lem:sym} the summand of Proposition \ref{prop:descent} may be replaced by its
+symmetrisation, which is $H^{(3)}_{k+l}+\frac14(L_k+L_l)H^{(2)}_{k+l}$. Lemma \ref{lem:bridge}
+identifies its double sum with $\sum\T\,\widehat w_3^{\,\mathrm{sym}}$, and Lemma \ref{lem:sym}
+again replaces that by $\sum\T\,\widehat w_3$.
+\end{proof}
+
+\section{What the same methods do not give}\label{sec:neg}
+
+The top row remains open: we do not know a closed form for $P_n$. The following exclusions
+delimit where it is not, and are all obtained by exact computation over stated ranges or by
+proof, as indicated.
+
+\begin{proposition}\label{prop:order7}
+$L$ is not a telescoper of $\T\cdot\widehat w_3$. The minimal telescoper of that summand is
+$A\cdot L$ with $A$ of order four, unique up to scalar, hence of order seven.
+\end{proposition}
+
+The corresponding certificate is far too large to be useful: its cofactors carry $1.5\cdot10^6$
+monomials with coefficients of $280$ bits and more.
+
+\begin{proposition}\label{prop:wstar}
+There is a weight $w^\star$, explicitly a $29$-monomial element of the degree-two bare alphabet,
+with $\sum\T\,w^\star=\widehat P_n$ and such that $L$ \emph{is} a telescoper of
+$\T\cdot w^\star$.
+\end{proposition}
+
+Telescoper order is thus a property of the summand, not of the sum. This is what makes
+Proposition \ref{prop:order7} compatible with the existence of an order-three certificate.
+
+\begin{proposition}\label{prop:bridge}
+No identity $\T\cdot(w^\star-\widehat w_3)=\Delta_kR_0+\Delta_lS_0$ with vanishing boundary terms
+exists. Any operator $M$ with $M\cdot\T\cdot(w^\star-\widehat w_3)$ a discrete divergence must
+annihilate $Q$; consequently the minimal such order is at least four.
+\end{proposition}
+
+\begin{proof}
+For a monomial $M_i$ maximal in the shift closure the relevant shift matrices are diagonal, so
+the $M_i$-component is a scalar equation; multiplying by $\T$ and summing over
+$0\le k,l\le n$ telescopes the right-hand side to boundary terms, giving $d_iQ_n=0$ where
+$d=w^\star-\widehat w_3$. Since $Q_n\ge1$, $d_i=0$; but $d$ has $29$ nonzero maximal components.
+The second assertion follows from the same computation applied to $M$, together with the fact
+that $Q$ has no annihilator of order one or two with polynomial coefficients of degree $\le13$.
+\end{proof}
+
+\begin{proposition}\label{prop:w5}
+$L$ is not a telescoper of $\T\cdot w$ for any weight $w$ with $\sum\T\,w=P_n$ lying in the
+nine-symbol bare weight-five span of degree at most three.
+\end{proposition}
+
+This is an exact computation: the admissible space has dimension $449$ of $1270$, and $P_n$
+misses its image under the sum map by $292$ of $501$ equations. The obstruction is sharp --- no
+single block family excludes, but two pairs do minimally --- and the same code returns the
+positive answer of Proposition \ref{prop:wstar} at weight three when run as a control.
+
+Finally, a negative about the literature route. Zudilin's higher-weight
+statement \cite[Lemma 19]{Zu02} isolates $\zeta(5)$ for a one-variable very-well-poised $R$,
+but does not specialise to the double kernel used here; and \cite{BZ} explicitly leaves the
+decomposition of the two-variable universal kernels undone, supplying a descent for $I''$ only.
+So the argument of \S4 has, at present, no weight-five analogue.
+
+\section{The $\zeta(3)$ analogue, which is machine-verified}\label{sec:z3}
+
+For contrast, and because the comparison is instructive, we record the corresponding statement
+one weight down, where the formalisation \emph{is} complete.
+
+Let $\mathcal A(n,k)=\binom nk^2\binom{n+k}k^2$, let $a_n=\sum_k\mathcal A(n,k)$ be the Ap\'ery
+numbers, and let $b$ be the solution of Ap\'ery's recurrence
+$(n+2)^3b_{n+2}=P(n+1)b_{n+1}-(n+1)^3b_n$, $P(n)=34n^3+51n^2+27n+5$, with $b_0=0$, $b_1=6$.
+
+\begin{theorem}[machine-verified]\label{thm:z3}
+For all $n\ge0$,
+\[
+  b_n=\sum_{k=0}^{n}\binom nk^2\binom{n+k}k^2\Bigl(2H^{(3)}_n-H^{(3)}_k\Bigr).
+\]
+\end{theorem}
+
+\begin{theorem}[machine-verified]\label{thm:V}
+For all $n\ge0$,
+$\displaystyle\sum_{k=0}^{n}\binom nk^2\binom{n+k}k^2\bigl(H_{n+k}+H_{n-k}-2H_k\bigr)=0 .$
+\end{theorem}
+
+Theorem \ref{thm:V} has a purely rational proof: with
+$\varphi(z)=\prod_{i=1}^n(z+i)\big/\prod_{j=0}^n(z-j)$, the simple poles of $\varphi$ have
+residues $(-1)^k\binom nk\binom{n+k}k$ by Lagrange interpolation, and
+$\Res_{z=m}\varphi^2=2\beta_m\sum_{k\ne m}\beta_k/(m-k)$ is antisymmetric in $(m,k)$, hence sums
+to zero. No contour argument and no growth estimate is required.
+
+Both are formalised in Lean 4 with no \texttt{sorry}, and depend on only the three
+standard axioms (\texttt{propext}, choice, and quotient soundness). The weight
+$2H^{(3)}_n-H^{(3)}_k$ appears to be new; we have not located it in the literature.
+
+The scope of Theorem \ref{thm:z3} deserves the same care as \S\ref{sec:formal} demands of
+Theorem \ref{thm:main}: in the formal development $b$ is pinned by the \emph{recurrence}
+together with $b_0=0,b_1=6$, not by Ap\'ery's classical double sum with its nested alternating
+inner sum. The equivalence of the two is proved on paper by six Zeilberger/Gosper certificates
+and is not formalised. The situation is thus exactly parallel to the $\zeta(5)$ case, one step
+further advanced.
+
+\section{Formal verification of the $\zeta(5)$ rows: what exists}\label{sec:formal}
+
+Theorem \ref{thm:main} is a proof on paper. A formalisation in Lean 4 (\texttt{ZetaLucas}) is in
+progress and is \emph{not} complete; we state its position precisely because the distinction is
+easy to lose.
+
+Verified, with no \texttt{sorry} and only the three standard axioms: a reflective
+polynomial-identity checker; the summand shift calculus; the harmonic letter calculus in the
+shifted base; the implication ``recurrence plus initial values implies the closed form''; and the
+initial values of the relevant double sums, computed from their definitions.
+
+Not verified: that either double sum satisfies $L$. Two hypotheses remain quarantined, and the
+$\zeta(5)$ closed forms are consequently not machine-checked. Two further points are worth
+recording. First, what the order-three certificate of Proposition \ref{prop:wstar} would give,
+once complete, is $\widehat P_n=\sum\T\,w^\star$ --- \emph{not} Theorem \ref{thm:main}, since by
+Proposition \ref{prop:bridge} the two representatives cannot be bridged at order zero. Second,
+during this work a named hypothesis carried in the development was found to be false as stated;
+every theorem depending on it was \texttt{sorry}-free with clean axioms, because
+\texttt{\#print axioms} reports what a proof depends on and not whether its hypotheses are
+inhabited. We mention it because the same trap is available to any development that reports
+conditional results.
+
+\begin{thebibliography}{9}
+\bibitem{BZ} F.~Brown and W.~Zudilin, \emph{On cellular rational approximations to $\zeta(5)$},
+arXiv:2210.03391.
+\bibitem{Zu02} W.~Zudilin, \emph{Arithmetic of linear forms involving odd zeta values},
+J.~Th\'eor.\ Nombres Bordeaux \textbf{16} (2004), 251--291.
+\end{thebibliography}
+
+\end{document}
