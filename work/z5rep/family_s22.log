@@ -1,0 +1,14 @@
+family size 17 (1 base + 16 free directions)
+n=11 m=3 F1 slack=22 nc=3042 npts=4298 ratio=1.41 rank(Msc)=2018 letter-block residuals=0  [69s]
+    () -block admissible lam-directions: 1 of 1
+    CONTROL w=1 (Q row): () -block admissible = 1   ansatz ADEQUATE
+n=11 m=3 F1 slack=22 nc=3042 npts=4298 ratio=1.41 rank(Msc)=2018 letter-block residuals=0  [131s]
+    () -block admissible lam-directions: 7 of 17
+    cumulative lam-space through n=11 : dim 7 ; with lam_0 != 0 : YES -> CERTIFICATE CANDIDATE
+    saved wgood (support 47)
+n=13 m=3 F1 slack=22 nc=3042 npts=4298 ratio=1.41 rank(Msc)=2018 letter-block residuals=0  [91s]
+    () -block admissible lam-directions: 1 of 1
+    CONTROL w=1 (Q row): () -block admissible = 1   ansatz ADEQUATE
+n=13 m=3 F1 slack=22 nc=3042 npts=4298 ratio=1.41 rank(Msc)=2018 letter-block residuals=0  [120s]
+    () -block admissible lam-directions: 7 of 17
+    cumulative lam-space through n=13 : dim 6 ; with lam_0 != 0 : NO member of the family closes ()

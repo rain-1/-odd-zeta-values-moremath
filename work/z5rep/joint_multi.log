@@ -1,0 +1,19 @@
+n=9  letters: nc=1250 rank=926 ker=324 nbad=0 ; () : nc=1458 cols=7291 rows=9664 ratio=1.33  [98s]
+   rank[Msc0|G] = 1164 of 7290 cols ; admissible lam-directions: 1 of 1
+   CONTROL w=1 : ansatz ADEQUATE
+n=9  letters: nc=1250 rank=926 ker=324 nbad=0 ; () : nc=1458 cols=7307 rows=9685 ratio=1.33  [71s]
+   rank[Msc0|G] = 1164 of 7290 cols ; admissible lam-directions: 13 of 17
+   >>> cumulative through n=9 : dim 13 ; lam_0 != 0 : YES  *** FULL CERTIFICATE EXISTS ***
+   saved wjoint, support 29
+n=11  letters: nc=1250 rank=926 ker=324 nbad=0 ; () : nc=1458 cols=7307 rows=9685 ratio=1.33  [59s]
+   rank[Msc0|G] = 1164 of 7290 cols ; admissible lam-directions: 13 of 17
+   >>> cumulative through n=11 : dim 13 ; lam_0 != 0 : YES  *** FULL CERTIFICATE EXISTS ***
+   saved wjoint, support 29
+n=13  letters: nc=1250 rank=926 ker=324 nbad=0 ; () : nc=1458 cols=7307 rows=9685 ratio=1.33  [38s]
+   rank[Msc0|G] = 1164 of 7290 cols ; admissible lam-directions: 13 of 17
+   >>> cumulative through n=13 : dim 13 ; lam_0 != 0 : YES  *** FULL CERTIFICATE EXISTS ***
+   saved wjoint, support 29
+n=17  letters: nc=1250 rank=926 ker=324 nbad=0 ; () : nc=1458 cols=7307 rows=9685 ratio=1.33  [31s]
+   rank[Msc0|G] = 1164 of 7290 cols ; admissible lam-directions: 13 of 17
+   >>> cumulative through n=17 : dim 13 ; lam_0 != 0 : YES  *** FULL CERTIFICATE EXISTS ***
+   saved wjoint, support 29

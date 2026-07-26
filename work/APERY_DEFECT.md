@@ -444,6 +444,16 @@ are `0, 11, 607/4, …`, nonzero over ℚ for `1 ≤ r ≤ 30`. So the vanishing
 mod-`p` cancellation **between region I and the borrow region `s > r`** — the same
 borrow terms that supply `X_p(r) − c_2(r)`. `[VERIFIED, 13 primes]`, **not proved:
 this is the one remaining gap between C2 and a theorem, and the sharpest open item
-here.** (Note the contrast with the first order, where the borrow region contributes
+here.**
+
+> **UPDATE 2026-07-26 — CLOSED. See `work/APERY_GAP.md`.** Two corrections/results:
+> (a) the `c²` channel above has a **sign typo** (`+H²_{r−s}` should be `−H²_{r−s}`,
+> since `[c²]Λ₂ = H²_{r+s} − 2H²_s − H²_{r−s}`); with the correct sign the `c²` sums are
+> `0, 13, 905/4, …` and `Σ_ac + 2Σ_c² = 0` **identically over ℚ** `[PROVED]`;
+> (b) with `g_r(z) = [(z+1)···(z+r)/(z(z−1)···(z−r))]²`, so that `A_Γ(r,z) = (sin²πz/π²)g_r(z)`,
+> the borrow weight is `C(r,m) = g_r(r+m)` and `Σ_c² = Σ_{s≤r} FP_{z=s} g_r`, whence
+> `Σ_c² + Ξ_p(r) ≡ 0 (mod p)` `[PROVED]` because `Σ_{w∈F_p^×} w^{-1} = Σ_{w∈F_p^×} w^{-2} = 0`.
+> Consequently the `mod p³` law of C1 and the `1, 1` of C2's rank profile are **theorems**.
+> Only C1's `mod p⁴` cross entry remains `[CONJECTURAL]`. (Note the contrast with the first order, where the borrow region contributes
 nothing at all because `A` is a square — §3.1. At second order it contributes, and its
 contribution is exactly what kills the two `c`-channels.)

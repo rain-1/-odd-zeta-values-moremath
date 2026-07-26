@@ -1,0 +1,28 @@
+--- 6 usable primes ---
+  4 fit primes (M = 88 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 7 usable primes ---
+  5 fit primes (M = 110 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 8 usable primes ---
+  6 fit primes (M = 132 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 9 usable primes ---
+  7 fit primes (M = 154 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 10 usable primes ---
+  8 fit primes (M = 176 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 11 usable primes ---
+  9 fit primes (M = 198 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 12 usable primes ---
+  10 fit primes (M = 220 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 13 usable primes ---
+  11 fit primes (M = 242 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 14 usable primes ---
+  12 fit primes (M = 264 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 15 usable primes ---
+  13 fit primes (M = 286 bits) + 2 reserved: NO LIFT (136 candidates tried; height exceeds ~M^0.9)
+--- 16 usable primes ---
+  LIFTED: 14 fit primes (M = 308 bits), 2 RESERVED primes verify.  deg = 58, max |coef| = 280 bits
+a_0 : deg 58, max |coef| 273 bits
+a_1 : deg 58, max |coef| 279 bits
+a_2 : deg 58, max |coef| 280 bits
+a_3 : deg 58, max |coef| 280 bits
+a_4 : deg 58, max |coef| 270 bits
+LIFT SUCCESS

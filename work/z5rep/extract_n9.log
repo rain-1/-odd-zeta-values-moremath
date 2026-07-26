@@ -1,0 +1,7 @@
+candidate w found;  dim of the admissible affine family = 16
+candidate support: 29 monomials
+sum T*w - Phat : 0 nonzero of 221 rows  <-- REPRESENTATIVE OK
+--- full cascade at n=9 ---
+  ansatz F1 slack=16 deg=(32,32) nc=2178 npts=3089  [64s]
+  block residuals (nbad): {'()': 1587}
+  FRESH-POINT verification: 350 points x 109 components = 38150 identities -- FAILURES {'()': 350}

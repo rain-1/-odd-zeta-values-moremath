@@ -1,0 +1,315 @@
+{
+ "object": "P-hat row of Brown-Zudilin zeta(5): new order-3 telescoping representative w*",
+ "identity": "Phat_n = sum_{k,l=0}^{n} T(n,k,l) * wstar(n,k,l)",
+ "T": "C(n+k,n) C(n,k)^2 C(n+l,n) C(n,l)^2 C(n+k+l,n)",
+ "closed_form": {
+  "U": "H_k - 1/2*( H_{n-k} + H_n + H_{n+k+l} - H_{n+l} )",
+  "V": "-1/2*( H_k + H_l - H_{n-k} - H_n + H_{n+k} - H_{n+k+l} )",
+  "wstar": "H^(3)_k + U*( H^(2)_k + H^(2)_n + H^(2)_{n+k} - H^(2)_{n-l} ) + V*( H^(2)_l - H^(2)_k )"
+ },
+ "monomials": [
+  {
+   "symbols": "H^(1)_{k}*H^(2)_{k}",
+   "coeff": "3/2"
+  },
+  {
+   "symbols": "H^(1)_{k}*H^(2)_{l}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{k}*H^(2)_{n-l}",
+   "coeff": "-1"
+  },
+  {
+   "symbols": "H^(1)_{k}*H^(2)_{n}",
+   "coeff": "1"
+  },
+  {
+   "symbols": "H^(1)_{k}*H^(2)_{n+k}",
+   "coeff": "1"
+  },
+  {
+   "symbols": "H^(1)_{l}*H^(2)_{k}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{l}*H^(2)_{l}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n-k}*H^(2)_{k}",
+   "coeff": "-1"
+  },
+  {
+   "symbols": "H^(1)_{n-k}*H^(2)_{l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n-k}*H^(2)_{n-l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n-k}*H^(2)_{n}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n-k}*H^(2)_{n+k}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n}*H^(2)_{k}",
+   "coeff": "-1"
+  },
+  {
+   "symbols": "H^(1)_{n}*H^(2)_{l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n}*H^(2)_{n-l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n}*H^(2)_{n}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n}*H^(2)_{n+k}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k}*H^(2)_{k}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k}*H^(2)_{l}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{k}",
+   "coeff": "-1"
+  },
+  {
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n-l}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n+k}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+l}*H^(2)_{k}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+l}*H^(2)_{n-l}",
+   "coeff": "-1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+l}*H^(2)_{n}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(1)_{n+l}*H^(2)_{n+k}",
+   "coeff": "1/2"
+  },
+  {
+   "symbols": "H^(3)_{k}",
+   "coeff": "1"
+  }
+ ],
+ "n_monomials": 29,
+ "n_symbols": 13,
+ "shift_closure_basis": [
+  {
+   "index": 1,
+   "symbols": "H^(1)_{k}*H^(2)_{k}"
+  },
+  {
+   "index": 2,
+   "symbols": "H^(1)_{k}*H^(2)_{l}"
+  },
+  {
+   "index": 3,
+   "symbols": "H^(1)_{k}*H^(2)_{n-l}"
+  },
+  {
+   "index": 4,
+   "symbols": "H^(1)_{k}*H^(2)_{n}"
+  },
+  {
+   "index": 5,
+   "symbols": "H^(1)_{k}*H^(2)_{n+k}"
+  },
+  {
+   "index": 6,
+   "symbols": "H^(1)_{l}*H^(2)_{k}"
+  },
+  {
+   "index": 7,
+   "symbols": "H^(1)_{l}*H^(2)_{l}"
+  },
+  {
+   "index": 8,
+   "symbols": "H^(1)_{n-k}*H^(2)_{k}"
+  },
+  {
+   "index": 9,
+   "symbols": "H^(1)_{n-k}*H^(2)_{l}"
+  },
+  {
+   "index": 10,
+   "symbols": "H^(1)_{n-k}*H^(2)_{n-l}"
+  },
+  {
+   "index": 11,
+   "symbols": "H^(1)_{n-k}*H^(2)_{n}"
+  },
+  {
+   "index": 12,
+   "symbols": "H^(1)_{n-k}*H^(2)_{n+k}"
+  },
+  {
+   "index": 13,
+   "symbols": "H^(1)_{n}*H^(2)_{k}"
+  },
+  {
+   "index": 14,
+   "symbols": "H^(1)_{n}*H^(2)_{l}"
+  },
+  {
+   "index": 15,
+   "symbols": "H^(1)_{n}*H^(2)_{n-l}"
+  },
+  {
+   "index": 16,
+   "symbols": "H^(1)_{n}*H^(2)_{n}"
+  },
+  {
+   "index": 17,
+   "symbols": "H^(1)_{n}*H^(2)_{n+k}"
+  },
+  {
+   "index": 18,
+   "symbols": "H^(1)_{n+k}*H^(2)_{k}"
+  },
+  {
+   "index": 19,
+   "symbols": "H^(1)_{n+k}*H^(2)_{l}"
+  },
+  {
+   "index": 20,
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{k}"
+  },
+  {
+   "index": 21,
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{l}"
+  },
+  {
+   "index": 22,
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n-l}"
+  },
+  {
+   "index": 23,
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n}"
+  },
+  {
+   "index": 24,
+   "symbols": "H^(1)_{n+k+l}*H^(2)_{n+k}"
+  },
+  {
+   "index": 25,
+   "symbols": "H^(1)_{n+l}*H^(2)_{k}"
+  },
+  {
+   "index": 26,
+   "symbols": "H^(1)_{n+l}*H^(2)_{n-l}"
+  },
+  {
+   "index": 27,
+   "symbols": "H^(1)_{n+l}*H^(2)_{n}"
+  },
+  {
+   "index": 28,
+   "symbols": "H^(1)_{n+l}*H^(2)_{n+k}"
+  },
+  {
+   "index": 29,
+   "symbols": "H^(1)_{k}"
+  },
+  {
+   "index": 30,
+   "symbols": "H^(1)_{l}"
+  },
+  {
+   "index": 31,
+   "symbols": "H^(1)_{n-k}"
+  },
+  {
+   "index": 32,
+   "symbols": "H^(1)_{n}"
+  },
+  {
+   "index": 33,
+   "symbols": "H^(1)_{n+k}"
+  },
+  {
+   "index": 34,
+   "symbols": "H^(1)_{n+k+l}"
+  },
+  {
+   "index": 35,
+   "symbols": "H^(1)_{n+l}"
+  },
+  {
+   "index": 36,
+   "symbols": "H^(2)_{k}"
+  },
+  {
+   "index": 37,
+   "symbols": "H^(2)_{l}"
+  },
+  {
+   "index": 38,
+   "symbols": "H^(2)_{n-l}"
+  },
+  {
+   "index": 39,
+   "symbols": "H^(2)_{n}"
+  },
+  {
+   "index": 40,
+   "symbols": "H^(2)_{n+k}"
+  },
+  {
+   "index": 41,
+   "symbols": "H^(3)_{k}"
+  },
+  {
+   "index": 42,
+   "symbols": "1"
+  }
+ ],
+ "J": 42,
+ "telescoper": "L_BZ, order 3 (cc0..cc3 of lean/ZetaLucas/BZClosedForm.lean) -- NOT a left multiple",
+ "base": "Phi_3 of LEAN_Z5_SCAFFOLD 5.2 (T(n+3,k,l) over the 12 linear factors); uses T_shift_n3 direction",
+ "mixed_base_note": "H^(r)_{n-k}, H^(r)_{n-l} normalised at n+3 in the CAS run; over Q(n,k,l) this is a change of basis only",
+ "verification": {
+  "exact_Q_sum_equals_Phat": "n = 0..20, every cell, 0 discrepancies (work/z5rep/wstar.py)",
+  "exact_Q_LBZ_residual": "n = 0..17, 0 nonzero",
+  "certificate_fresh_points": "(n,p) in {(9,4194301),(11,4194301),(13,4194301),(9,4194287),(11,4194287)}: 400 pts x 109 components = 43600 identities each, 218000 total, 0 violations",
+  "admissible_family": "13-dim lam-space, identical at n = 9,11,13,17"
+ },
+ "still_missing_for_Lean": [
+  "rho_j, sigma_j as elements of Q(n,k,l): currently solved mod p at fixed numeric n",
+  "the lift needs an n-sweep + rational reconstruction + CRT, as in work/z5la/o_areco.py",
+  "(B-bot) r_j(n,0,l)=0, s_j(n,k,0)=0 not yet imposed in the ansatz (force_k=force_l=0 was used)"
+ ]
+}

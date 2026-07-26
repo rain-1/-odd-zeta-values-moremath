@@ -1,0 +1,8 @@
+family size 17 (1 base + 16 free directions)
+n=9 m=3 F1 slack=16 nc=2178 npts=3089 ratio=1.42 rank(Msc)=1502 letter-block residuals=0  [67s]
+    () -block admissible lam-directions: 1 of 1
+    CONTROL w=1 (Q row): () -block admissible = 1   ansatz ADEQUATE
+n=9 m=3 F1 slack=16 nc=2178 npts=3089 ratio=1.41 rank(Msc)=1502 letter-block residuals=0  [109s]
+    () -block admissible lam-directions: 7 of 17
+    with lam_0 != 0 : 1 direction(s)  -> CERTIFICATE CANDIDATE
+    saved wgood (support 47)

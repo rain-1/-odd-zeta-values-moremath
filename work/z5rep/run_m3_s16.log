@@ -1,0 +1,23 @@
+n=5 m=3 F1 slack=16 deg=(32,32) nc=2178 J=109 rows=3107 ratio=1.36 rank(Msc)=1449  [72s]
+    h1_k     dim 106   w3hat:no  vtilde:YES
+    h1_kl    dim 106   w3hat:YES vtilde:YES
+    h1_l     dim 106   w3hat:no  vtilde:YES
+    h1_mk    dim 106   w3hat:no  vtilde:YES
+    h1_ml    dim 106   w3hat:no  vtilde:YES
+    h1_n     dim 106   w3hat:YES vtilde:YES
+    h1_pk    dim 106   w3hat:no  vtilde:YES
+    h1_pkl   dim 106   w3hat:YES vtilde:YES
+    h1_pl    dim 106   w3hat:no  vtilde:YES
+    h2_k     dim 105   w3hat:YES vtilde:no 
+    h2_kl    dim 105   w3hat:YES vtilde:YES
+    h2_l     dim 105   w3hat:YES vtilde:no 
+    h2_mk    dim 105   w3hat:YES vtilde:YES
+    h2_ml    dim 105   w3hat:YES vtilde:YES
+    h2_n     dim 105   w3hat:YES vtilde:YES
+    h2_pk    dim 105   w3hat:YES vtilde:no 
+    h2_pkl   dim 105   w3hat:YES vtilde:YES
+    h2_pl    dim 105   w3hat:YES vtilde:no 
+    >>> INTERSECTION over 18 blocks: dim 58   w3hat:no vtilde:no
+n=5 m=3 F1 s=16 p=4194301 : dim W_tel = 58   dim K = 58   dim(W+K) = 85   dim(W&K) = 31
+   w3hat   in W_tel: no    in W_tel+K: YES
+   vtilde  in W_tel: no    in W_tel+K: YES

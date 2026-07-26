@@ -1,0 +1,19 @@
+primes [4194301, 4194287, 4194277, 4194271, 4194247, 4194217, 4194199, 4194191, 4194187, 4194181, 4194173, 4194167, 4194143, 4194137, 4194131, 4194107]
+155 n-values, 2480 already cached, 0 jobs to run
+p=4194301 : 417 good samples, n=3..419
+p=4194287 : 197 good samples, n=3..199
+p=4194277 : 197 good samples, n=3..199
+p=4194271 : 197 good samples, n=3..199
+p=4194247 : 197 good samples, n=3..199
+p=4194217 : 197 good samples, n=3..199
+p=4194199 : 197 good samples, n=3..199
+p=4194191 : 197 good samples, n=3..199
+p=4194187 : 197 good samples, n=3..199
+p=4194181 : 197 good samples, n=3..199
+p=4194173 : 155 good samples, n=3..157
+p=4194167 : 155 good samples, n=3..157
+p=4194143 : 155 good samples, n=3..157
+p=4194137 : 155 good samples, n=3..157
+p=4194131 : 155 good samples, n=3..157
+p=4194107 : 155 good samples, n=3..157
+total [0s]

@@ -1,0 +1,33 @@
+rational weight, support 29:
+   h1_k*h2_k                    3/2
+   h1_k*h2_l                    -1/2
+   h1_k*h2_ml                   -1
+   h1_k*h2_n                    1
+   h1_k*h2_pk                   1
+   h1_l*h2_k                    1/2
+   h1_l*h2_l                    -1/2
+   h1_mk*h2_k                   -1
+   h1_mk*h2_l                   1/2
+   h1_mk*h2_ml                  1/2
+   h1_mk*h2_n                   -1/2
+   h1_mk*h2_pk                  -1/2
+   h1_n*h2_k                    -1
+   h1_n*h2_l                    1/2
+   h1_n*h2_ml                   1/2
+   h1_n*h2_n                    -1/2
+   h1_n*h2_pk                   -1/2
+   h1_pk*h2_k                   1/2
+   h1_pk*h2_l                   -1/2
+   h1_pkl*h2_k                  -1
+   h1_pkl*h2_l                  1/2
+   h1_pkl*h2_ml                 1/2
+   h1_pkl*h2_n                  -1/2
+   h1_pkl*h2_pk                 -1/2
+   h1_pl*h2_k                   1/2
+   h1_pl*h2_ml                  -1/2
+   h1_pl*h2_n                   1/2
+   h1_pl*h2_pk                  1/2
+   h3_k                         1
+denominators: [1, 2]
+EXACT Q check  sum_{k,l} T*w = Phat  for n = 0..20 : ALL EQUAL
+written wjoint_p4194301_Q.json

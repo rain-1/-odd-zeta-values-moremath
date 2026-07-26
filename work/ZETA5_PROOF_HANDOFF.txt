@@ -1,0 +1,456 @@
+ZETA5 COMPACT CLOSED FORMS — PROOF HANDOFF
+============================================
+
+Prepared for River's odd-zeta project
+Date: 2026-07-26
+Intended local repository:
+    /home/ubuntu/fable-episode-2/zeta-math-2
+Relevant code:
+    work/z5cf/
+
+
+0. ROLE AND STANDARD OF PROOF
+-----------------------------
+
+You are continuing a mathematical proof project. Do not treat extensive exact
+verification, recurrence fitting, CRT reconstruction, or agreement with a
+precomputed ladder as a proof for every n. The goal is to turn the compact
+Brown–Zudilin companion formulas below into a finite symbolic certificate that
+can be checked after clearing denominators.
+
+The preferred proof is the direct analogue of the short proof of Apéry's
+zeta(3) companion identity:
+
+  1. Apply the known recurrence operator to the weighted summand.
+  2. Express the result as a discrete divergence in the summation variables.
+  3. Sum over the finite rectangle and check that all boundary terms vanish.
+  4. Check the three initial values.
+
+If the resulting certificate is unreasonably large, pursue the Barnes-integral
+or parameter-derivative derivation described in Section 8, but do not replace a
+missing proof by more numerical verification.
+
+First inspect AGENTS.md (if present), git status, and all of work/z5cf/. Preserve
+the user's existing changes. In particular inspect:
+
+    core.py
+    final_forms.py
+    verify_compact.py
+    verify_full.py
+    all Mathematica notebooks or .wl files
+    all files defining L_BZ or the recurrence ladder
+    coefficient vectors and prescribed supports
+
+
+1. DEFINITIONS
+--------------
+
+For r >= 1, put
+
+    H_m^(r) = sum_{j=1}^m 1/j^r,       H_0^(r) = 0.
+
+For 0 <= k,l <= n, define
+
+    T(n,k,l)
+      = C(n+k,n) C(n,k)^2 C(n+l,n) C(n,l)^2 C(n+k+l,n).
+
+Equivalently,
+
+    T(n,k,l)
+      = n! (n+k)! (n+l)! (n+k+l)!
+        / [k!^3 l!^3 (k+l)! (n-k)!^2 (n-l)!^2].
+
+Define
+
+    A_r(x) = H_{n+x}^(r) - H_x^(r),
+    B_r(x) = H_{n-x}^(r) - H_x^(r),
+
+and
+
+    alpha = A_1(k) - A_1(l),
+    beta  = B_1(k) - B_1(l),
+    Psi   = alpha/2 + beta.
+
+The compact weight-3 companion is
+
+    w3hat(n,k,l)
+      = H_{n+k}^(3) - Psi H_{n+k}^(2).
+
+The compact weight-5 companion is
+
+    w5(n,k,l)
+      = H_{n+k}^(5)
+        + (alpha-beta)/2 H_{n+k}^(4)
+        + [(A_2(k)+A_2(l))/4 - alpha Psi/2] H_{n+k}^(3).
+
+The conjectured/proposed identities to prove are
+
+    Phat_n = sum_{k,l=0}^n T(n,k,l) w3hat(n,k,l),
+
+    P_n    = sum_{k,l=0}^n T(n,k,l) w5(n,k,l).
+
+The immediate priority is the second identity, for the zeta(5) numerator P_n.
+Proving the Phat_n identity in parallel is desirable because its lower weight
+may reveal the certificate architecture needed at weight 5.
+
+
+2. EXACT FACTS ALREADY ESTABLISHED
+----------------------------------
+
+The compact formulas were implemented independently of the fitted coefficient
+vectors and checked in exact rational arithmetic:
+
+  * n = 0,...,34 directly, with zero discrepancies;
+  * every exact recurrence-ladder value n = 0,...,360 at two primes;
+  * L_BZ applied to each compact sum vanishes exactly for n = 0,...,31;
+  * coefficients were reconstructed by CRT over six primes and re-derived by
+    an exact-Q solve on prescribed support with held-out levels.
+
+These are strong discovery and debugging checks, but not the desired proof.
+
+Independent exact evaluation gives:
+
+    n       sum T*w3hat                sum T*w5
+    ----------------------------------------------------------
+    0       0                          0
+    1       101/4                      87/4
+    2       344923/96                  1190161/384
+    3       3710571371/4320            7682021239/10368
+
+The first three entries agree exactly with the Brown–Zudilin initial values
+for Phat_n and P_n.
+
+
+3. THE BROWN–ZUDILIN RECURRENCE
+-------------------------------
+
+Brown and Zudilin prove/state that Q_n, Phat_n, and P_n all satisfy the same
+four-term (order-three) recurrence. For n >= 2, define
+
+    a0(n) = 41218 n^3 - 48459 n^2 + 20010 n - 2871,
+
+    a2(n) = 3874492 n^8 - 2617900 n^7 - 3144314 n^6
+            + 2947148 n^5 + 647130 n^4 - 1182926 n^3
+            + 115771 n^2 + 170716 n - 44541,
+
+    a3(n) = 41218 n^3 + 75195 n^2 + 46746 n + 9898,
+
+    B(n)  = 97604224 n^9 + 178061760 n^8 + 72005308 n^7
+            - 48634688 n^6 - 39076836 n^5 + 2622730 n^4
+            + 7581006 n^3 + 920112 n^2 - 543402 n - 120582.
+
+Then
+
+    L_BZ[u]_n
+      = 2(2n+1)a0(n)(n+1)^5 u_{n+1}
+        - B(n) u_n
+        - 2n a2(n) u_{n-1}
+        + n a3(n)(n-1)^5 u_{n-2}
+      = 0.
+
+Source:
+    Francis Brown and Wadim Zudilin,
+    "On cellular rational approximations to zeta(5)",
+    arXiv:2210.03391v3, equation in Section 2.
+
+Consequently, it is enough to prove that the compact sum S_n satisfies this
+recurrence, because S_0, S_1, S_2 already equal the three initial values of P_n.
+
+
+4. EXACT PROOF TARGET
+---------------------
+
+Set
+
+    F(n,k,l) = T(n,k,l) w5(n,k,l).
+
+Find explicit certificates U(n,k,l) and V(n,k,l) such that
+
+    L_BZ[F](n,k,l)
+      = Delta_k U(n,k,l) + Delta_l V(n,k,l),              (CT5)
+
+where
+
+    Delta_k U(n,k,l) = U(n,k+1,l) - U(n,k,l),
+    Delta_l V(n,k,l) = V(n,k,l+1) - V(n,k,l).
+
+The convention should make T(n,k,l), U, and V zero outside the natural finite
+support. Alternatively state and check the four boundary faces explicitly.
+After summing (CT5) over a rectangle large enough to contain the supports of
+the n+1,n,n-1,n-2 terms, the right side must vanish.
+
+A corresponding certificate
+
+    L_BZ[T*w3hat] = Delta_k U3 + Delta_l V3               (CT3)
+
+will prove the Phat_n formula.
+
+The final paper should not print enormous expanded numerators in the body.
+State a compact/factored certificate if possible; otherwise put it in a
+machine-readable supplementary file and explain that direct substitution,
+common-denominator multiplication, and polynomial expansion give zero.
+
+
+5. USEFUL SHIFT RATIOS
+----------------------
+
+These ratios should be used rather than expanding factorials:
+
+    T(n+1,k,l) / T(n,k,l)
+      = (n+1)(n+k+1)(n+l+1)(n+k+l+1)
+        / [(n-k+1)^2 (n-l+1)^2].
+
+    T(n-1,k,l) / T(n,k,l)
+      = (n-k)^2 (n-l)^2
+        / [n(n+k)(n+l)(n+k+l)].
+
+    T(n-2,k,l) / T(n,k,l)
+      = (n-k)^2(n-k-1)^2(n-l)^2(n-l-1)^2
+        / [n(n-1)(n+k)(n+k-1)(n+l)(n+l-1)
+           (n+k+l)(n+k+l-1)].
+
+    T(n,k+1,l) / T(n,k,l)
+      = (n+k+1)(n+k+l+1)(n-k)^2
+        / [(k+1)^3(k+l+1)].
+
+    T(n,k,l+1) / T(n,k,l)
+      = (n+l+1)(n+k+l+1)(n-l)^2
+        / [(l+1)^3(k+l+1)].
+
+All harmonic shifts should be canonicalised using
+
+    H_{m+1}^(r) = H_m^(r) + 1/(m+1)^r,
+    H_{m-1}^(r) = H_m^(r) - 1/m^r.
+
+Do not let Mathematica silently treat harmonic expressions with shifted
+arguments as algebraically independent after these relations are available.
+
+
+6. RECOMMENDED CERTIFICATE SEARCH
+---------------------------------
+
+A. Symmetrise first
+
+T is invariant under k <-> l, whereas the displayed weight chooses n+k.
+Replace w5 by
+
+    w5sym(n,k,l) = [w5(n,k,l)+w5(n,l,k)]/2.
+
+The double sum is unchanged. Explicitly, if
+
+    D = (A_2(k)+A_2(l))/4 - alpha Psi/2,
+
+then
+
+    w5sym
+      = [H_{n+k}^(5)+H_{n+l}^(5)]/2
+        + (alpha-beta)[H_{n+k}^(4)-H_{n+l}^(4)]/4
+        + D[H_{n+k}^(3)+H_{n+l}^(3)]/2.
+
+This should permit V(n,k,l)=U(n,l,k), cutting the unknown certificate size
+roughly in half. Do the analogous symmetrisation for w3hat.
+
+B. Solve by harmonic weight
+
+Expand L_BZ[T*w] using the n-shift rules and collect in a fixed harmonic
+monomial basis. Start with the highest-weight letters. Use an ansatz
+
+    U = T * sum_M R_M(n,k,l) M,
+    V = T * sum_M R_M(n,l,k) M_swapped,
+
+where M ranges over the harmonic monomials actually appearing after shifts and
+R_M are rational functions.
+
+Solve the highest harmonic layer first. Subtract its divergence, then solve
+the lower-weight residue. This is the two-variable analogue of the two-stage
+Apéry telescope in Section 7.
+
+C. Denominator and boundary design
+
+Infer denominator factors from the five shift ratios. Likely factors include
+
+    n, n-1, n+k, n+l, n+k+l,
+    n+k-1, n+l-1, n+k+l-1,
+    n-k+1, n-l+1, k+1, l+1, k+l+1.
+
+Build boundary vanishing into the numerator wherever possible, using factors
+such as k, l, n-k+1, and n-l+1 with the precise indexing dictated by Delta.
+This is safer than relying on cancellation of apparent poles at the boundary.
+
+D. Solve modulo primes, then reconstruct
+
+The existing project already uses modular solves, CRT, and rational
+reconstruction successfully. Reuse that machinery. For each proposed support:
+
+  1. evaluate the polynomial identity at many generic triples (n,k,l) modulo p;
+  2. solve the sparse linear system;
+  3. repeat over several primes;
+  4. CRT and rationally reconstruct;
+  5. verify symbolically over Q after clearing all denominators;
+  6. test boundary faces independently.
+
+Held-out numerical samples are debugging checks, not the final verification.
+
+E. Exact final checker
+
+The supplementary checker should reduce
+
+    LHS - (Delta_k U + Delta_l V)
+
+to a canonical harmonic basis, take Together[] of every rational coefficient,
+extract Numerator[], expand/factor it, and assert that every coefficient is
+identically zero in Q[n,k,l]. It should separately assert all required boundary
+values.
+
+
+7. THE ZETA(3) TEMPLATE THAT WORKED
+-----------------------------------
+
+This is the completed one-variable model for the desired argument.
+
+Let
+
+    F_{n,k} = C(n,k)^2 C(n+k,k)^2,
+    d_{n,k} = 2H_n^(3)-H_k^(3),
+    P(n) = 34n^3+51n^2+27n+5.
+
+The classical kernel certificate is
+
+    (n+1)^3 F_{n+1,k} - P(n)F_{n,k} + n^3F_{n-1,k}
+      = G_{n,k}-G_{n,k-1},
+
+where
+
+    G_{n,k}
+      = 4(2n+1)[k(2k+1)-(2n+1)^2]F_{n,k}.
+
+Since
+
+    d_{n+1,k}=d_{n,k}+2/(n+1)^3,
+    d_{n-1,k}=d_{n,k}-2/n^3,
+    d_{n,k}-d_{n,k-1}=-1/k^3,
+
+applying the recurrence to F*d gives
+
+    G_{n,k}d_{n,k}-G_{n,k-1}d_{n,k-1}
+      + G_{n,k-1}/k^3 + 2F_{n+1,k}-2F_{n-1,k}.
+
+The remaining term has a second antidifference:
+
+    G_{n,k-1}/k^3 + 2F_{n+1,k}-2F_{n-1,k}
+      = C_{n,k+1}-C_{n,k},
+
+where
+
+    C_{n,k}
+      = [4 k^4(k-1)(2n+1)(k-2n(n+1)-1)/(n^2(n+1)^2)]
+        * [(n+k-1)!^2/(k!^4(n-k+1)!^2)].
+
+Thus the weighted recurrence is one exact difference. Summation and the
+initial values 0,6 prove
+
+    b_n = sum_k C(n,k)^2 C(n+k,k)^2(2H_n^(3)-H_k^(3)).
+
+For zeta(5), expect the unweighted two-dimensional certificate to play the
+role of G and one or more lower-weight correction divergences to play the role
+of C.
+
+
+8. ALTERNATIVE: BARNES-INTEGRAL / FROBENIUS PROOF
+-------------------------------------------------
+
+If the direct recurrence certificate becomes too large to explain, look for a
+more conceptual derivation from the Brown–Zudilin Barnes double integral.
+In the totally symmetric case their integral can be written as
+
+    J_n = n!/(2pi i)^2 integral integral
+          [Gamma(n+1+s)^3 Gamma(-s)/Gamma(2n+2+s)^2]
+          [Gamma(n+1+t)^3 Gamma(-t)/Gamma(2n+2+t)^2]
+          Gamma(2n+2+s+t) Gamma(-n-1-s-t) ds dt.
+
+Using Gamma(z)Gamma(1-z)=pi/sin(pi z), the rational part is built from
+
+    prod_{j=1}^n(s+j) prod_{j=1}^n(t+j)
+    prod_{j=n+2}^{2n+1}(s+t+j)
+
+divided by
+
+    prod_{j=n+1}^{2n+1}(s+j)^2
+    prod_{j=n+1}^{2n+1}(t+j)^2,
+
+times the three sine kernels. The residues at the finite families of double
+poles produce T(n,k,l); logarithmic derivatives of these products naturally
+produce the A_r, B_r, alpha, beta, and Psi harmonic differences.
+
+A promising conceptual proof would:
+
+  1. state a precise residue/partial-fraction lemma for this Barnes kernel;
+  2. compute its weight-5 rational coefficient;
+  3. show that the Laurent coefficient is exactly w5sym;
+  4. identify the resulting rational part with P_n.
+
+This may explain why the compact formula exists rather than merely certify it.
+However, Brown–Zudilin explicitly describe the full decomposition as
+technically difficult and omit details. Do not claim this route is complete
+without carrying out the contour shifts, residue bookkeeping, and zeta-value
+extraction rigorously.
+
+
+9. EXPECTED FINAL THEOREM AND PROOF SHAPE
+-----------------------------------------
+
+The manuscript theorem should look approximately as follows.
+
+Theorem.
+For every n >= 0,
+
+    P_n = sum_{k,l=0}^n T(n,k,l) w5(n,k,l).
+
+Proof.
+Let S_n denote the sum on the right. Lemma X gives the summand-level
+certificate (CT5). Summing it over the finite support makes the two discrete
+divergences vanish at their boundary faces. Therefore L_BZ[S]_n=0 for n>=2.
+Direct calculation gives
+
+    S_0=0,  S_1=87/4,  S_2=1190161/384.
+
+These are the initial values of P_n. Uniqueness for the order-three recurrence
+therefore gives S_n=P_n for all n.
+
+The same structure proves the Phat_n formula from the initial values
+
+    0, 101/4, 344923/96.
+
+
+10. REPORTING REQUIREMENTS
+--------------------------
+
+At completion, provide:
+
+  * a human-readable derivation;
+  * exact U,V certificates, preferably factored;
+  * a standalone Mathematica or Python/SymPy verifier;
+  * boundary verification;
+  * recurrence and initial-value verification;
+  * a concise LaTeX theorem/proof suitable for insertion into the paper;
+  * an honest note if only one companion row has been fully certified.
+
+Do not suggest that finite checks alone establish the theorem. Do not alter
+unrelated parts of the repository. Keep all arithmetic exact.
+
+
+11. KEY REFERENCES
+------------------
+
+Francis Brown and Wadim Zudilin,
+"On cellular rational approximations to zeta(5)",
+arXiv:2210.03391v3.
+    https://arxiv.org/abs/2210.03391
+
+Wadim Zudilin,
+"A third-order Apéry-like recursion for zeta(5)",
+arXiv:math/0206178.
+    https://arxiv.org/abs/math/0206178
+
+
+END OF HANDOFF

@@ -1,0 +1,81 @@
+n=9 m=4 F1 slack=16 deg=(36,36) nc=2738 J=109 rows=3863 ratio=1.36 rank(Msc)=1838  [82s]
+    block      dim  w3hat       w3hat_sym   w3hat_anti  vtilde      vtilde_sym 
+    h1_k       103  .           .           .           .           .          
+    h1_kl      103  YES         YES         YES         YES         YES        
+    h1_l       103  .           .           .           YES         .          
+    h1_mk      103  .           .           .           .           .          
+    h1_ml      103  .           .           .           YES         .          
+    h1_n       103  YES         YES         YES         YES         YES        
+    h1_pk      103  .           .           .           .           .          
+    h1_pkl     103  YES         YES         YES         YES         YES        
+    h1_pl      103  .           .           .           YES         .          
+    h2_k       103  YES         YES         YES         .           YES        
+    h2_kl      103  YES         YES         YES         YES         YES        
+    h2_l       103  YES         YES         YES         .           YES        
+    h2_mk      103  YES         YES         YES         YES         YES        
+    h2_ml      103  YES         YES         YES         YES         YES        
+    h2_n       103  YES         YES         YES         YES         YES        
+    h2_pk      103  YES         YES         YES         .           YES        
+    h2_pkl     103  YES         YES         YES         YES         YES        
+    h2_pl      103  YES         YES         YES         .           YES        
+    >>> INTERSECTION over 18 blocks: dim 37  w3hat:. w3hat_sym:. w3hat_anti:. vtilde:. vtilde_sym:.
+   L-tilde cumulative through n=9 : dim W_tel = 37   dim K = 58   dim(W+K) = 79   dim(W&K) = 16
+   w3hat   in W_tel: no    in W_tel+K: YES
+   w3hat_sym in W_tel: no    in W_tel+K: YES
+   w3hat_anti in W_tel: no    in W_tel+K: YES
+   vtilde  in W_tel: no    in W_tel+K: YES
+   vtilde_sym in W_tel: no    in W_tel+K: YES
+n=11 m=4 F1 slack=16 deg=(36,36) nc=2738 J=109 rows=3863 ratio=1.36 rank(Msc)=1838  [82s]
+    block      dim  w3hat       w3hat_sym   w3hat_anti  vtilde      vtilde_sym 
+    h1_k       103  .           .           .           .           .          
+    h1_kl      103  YES         YES         YES         YES         YES        
+    h1_l       103  .           .           .           YES         .          
+    h1_mk      103  .           .           .           .           .          
+    h1_ml      103  .           .           .           YES         .          
+    h1_n       103  YES         YES         YES         YES         YES        
+    h1_pk      103  .           .           .           .           .          
+    h1_pkl     103  YES         YES         YES         YES         YES        
+    h1_pl      103  .           .           .           YES         .          
+    h2_k       103  YES         YES         YES         .           YES        
+    h2_kl      103  YES         YES         YES         YES         YES        
+    h2_l       103  YES         YES         YES         .           YES        
+    h2_mk      103  YES         YES         YES         YES         YES        
+    h2_ml      103  YES         YES         YES         YES         YES        
+    h2_n       103  YES         YES         YES         YES         YES        
+    h2_pk      103  YES         YES         YES         .           YES        
+    h2_pkl     103  YES         YES         YES         YES         YES        
+    h2_pl      103  YES         YES         YES         .           YES        
+    >>> INTERSECTION over 18 blocks: dim 37  w3hat:. w3hat_sym:. w3hat_anti:. vtilde:. vtilde_sym:.
+   L-tilde cumulative through n=11 : dim W_tel = 37   dim K = 58   dim(W+K) = 79   dim(W&K) = 16
+   w3hat   in W_tel: no    in W_tel+K: YES
+   w3hat_sym in W_tel: no    in W_tel+K: YES
+   w3hat_anti in W_tel: no    in W_tel+K: YES
+   vtilde  in W_tel: no    in W_tel+K: YES
+   vtilde_sym in W_tel: no    in W_tel+K: YES
+n=13 m=4 F1 slack=16 deg=(36,36) nc=2738 J=109 rows=3863 ratio=1.36 rank(Msc)=1838  [94s]
+    block      dim  w3hat       w3hat_sym   w3hat_anti  vtilde      vtilde_sym 
+    h1_k       103  .           .           .           .           .          
+    h1_kl      103  YES         YES         YES         YES         YES        
+    h1_l       103  .           .           .           YES         .          
+    h1_mk      103  .           .           .           .           .          
+    h1_ml      103  .           .           .           YES         .          
+    h1_n       103  YES         YES         YES         YES         YES        
+    h1_pk      103  .           .           .           .           .          
+    h1_pkl     103  YES         YES         YES         YES         YES        
+    h1_pl      103  .           .           .           YES         .          
+    h2_k       103  YES         YES         YES         .           YES        
+    h2_kl      103  YES         YES         YES         YES         YES        
+    h2_l       103  YES         YES         YES         .           YES        
+    h2_mk      103  YES         YES         YES         YES         YES        
+    h2_ml      103  YES         YES         YES         YES         YES        
+    h2_n       103  YES         YES         YES         YES         YES        
+    h2_pk      103  YES         YES         YES         .           YES        
+    h2_pkl     103  YES         YES         YES         YES         YES        
+    h2_pl      103  YES         YES         YES         .           YES        
+    >>> INTERSECTION over 18 blocks: dim 37  w3hat:. w3hat_sym:. w3hat_anti:. vtilde:. vtilde_sym:.
+   L-tilde cumulative through n=13 : dim W_tel = 37   dim K = 58   dim(W+K) = 79   dim(W&K) = 16
+   w3hat   in W_tel: no    in W_tel+K: YES
+   w3hat_sym in W_tel: no    in W_tel+K: YES
+   w3hat_anti in W_tel: no    in W_tel+K: YES
+   vtilde  in W_tel: no    in W_tel+K: YES
+   vtilde_sym in W_tel: no    in W_tel+K: YES

@@ -1,0 +1,7 @@
+130 cofactor solves
+  25/130  [357s]  distinct pivot sets: 1
+  50/130  [663s]  distinct pivot sets: 1
+  75/130  [951s]  distinct pivot sets: 1
+  100/130  [1272s]  distinct pivot sets: 1
+  125/130  [1568s]  distinct pivot sets: 1
+done 130, distinct pivot sets 1  [1626s]

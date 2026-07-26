@@ -1,6 +1,14 @@
 """The three (a,c)-channels of the p^2 term, and the fact that the ac and c^2
 channels are NOT rational identities -- they vanish only mod p, and only after the
-borrow region s > r is included.  (See APERY_DEFECT sec.9, C2.)"""
+borrow region s > r is included.  (See APERY_DEFECT sec.9, C2.)
+
+!! SIGN ERROR, left in place so that the numbers quoted in APERY_DEFECT sec.9
+!! stay reproducible.  The c^2 channel below has +H2_{r-s}; the correct
+!! coefficient is  [c^2] Lam2 = H2_{r+s} - 2 H2_s - H2_{r-s},  i.e. -H2_{r-s}.
+!! With the correct sign  cc = 0, 13, 905/4, ...  (not 0, 11, 607/4, ...)  and the
+!! rational identity  ac + 2*cc = 0  holds.  Corrected version: work/apgap/gap_core.py
+!! (sigmas); the gap is closed in work/APERY_GAP.md.
+"""
 from fractions import Fraction as F
 from core import A, Hs
 

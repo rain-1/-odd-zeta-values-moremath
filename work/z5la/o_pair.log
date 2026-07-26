@@ -1,0 +1,5 @@
+w3 n=5 order<= 4 E1 deg=(25,25) nc=1352 cols=2709 rows=3696 ratio=1.36 rank=1822 -> 0 telescoper direction(s)  [16s]
+w3 n=5 order<= 5 E1 deg=(26,26) nc=1458 cols=2922 rows=3984 ratio=1.36 rank=1948 -> 0 telescoper direction(s)  [22s]
+w3 n=5 order<= 6 E1 deg=(27,27) nc=1568 cols=3143 rows=4282 ratio=1.36 rank=2078 -> 0 telescoper direction(s)  [35s]
+w3 n=5 order<= 7 E1 deg=(28,28) nc=1682 cols=3372 rows=4592 ratio=1.36 rank=2212 -> 1 telescoper direction(s)  ***  [46s]
+w3 n=5 order<= 8 E1 deg=(29,29) nc=1800 cols=3609 rows=4912 ratio=1.36 rank=2350 -> 2 telescoper direction(s)  ***  [67s]

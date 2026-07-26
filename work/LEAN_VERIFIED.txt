@@ -1,6 +1,6 @@
 COMPLETELY FORMALLY VERIFIED IN LEAN 4 — odd-zeta programme
 Repository: lean/ZetaLucas/   ·   Lean v4.33.0-rc1, Mathlib cd580e54
-Compiled: 2026-07-26.  `lake build` clean, 8673 jobs.  Total 3570 lines, 12 modules.
+Compiled: 2026-07-26.  `lake build` clean, 8675 jobs.  Total 4800 lines, 14 modules.
 
 INCLUSION CRITERION for this file: the statement is a theorem in the development,
 proved with NO `sorry` and NO `native_decide`, and `#print axioms` returns exactly
@@ -135,7 +135,112 @@ NOTATION
   is formalised. The theorems are arithmetic consequences of that number.
 
 --------------------------------------------------------------------------------
-8. INFRASTRUCTURE (verified, used by the above)
+8. THE BROWN-ZUDILIN Q ROW AND L_BZ                                [ZetaLucas/BZQRow.lean]
+
+  L_BZ is the certified order-3 operator of BZClosedForm.lean section 3 (all four
+  coefficients of degree 9 in n, transcribed from work/lb5/core.py):
+    c_0(n) = (n+1)^5 (n+2) a_0(n+1)      c_1(n) = -2 (n+2) B_8(n)
+    c_2(n) = -2 B_9(n)                   c_3(n) = 2 (n+3)^5 (2n+5) a_0(n)
+  QSum n = sum_{k,l<=n} T(n,k,l) over Q;  QSum_eq_Q : QSum n = Q n  (the integer row).
+
+  READ THE SCOPE NOTE BELOW BEFORE QUOTING ANYTHING FROM THIS SECTION.
+
+  KeyPoly              a NAMED PROPOSITION (a `def ... : Prop`), not a theorem: the single
+                       cleared polynomial identity in Z[n,k,l] of the Q-row WZ certificate,
+                         D* * sum_i c_i(n) P_i(n,k,l)
+                           = U_1 A(n,k+1,l) - U_2 A(n,k,l)
+                             + U_3 B(n,k,l+1) - U_4 B(n,k,l),
+                       degrees (deg_n,deg_k,deg_l) = (27,11,13), 3798 monomials in normal
+                       form, integer coefficients to 76 bits. IT IS NOT PROVED IN LEAN.
+
+  Verified with clean axioms, each taking KeyPoly as an explicit hypothesis:
+  star                 the telescoping identity, for ALL n,k,l >= 0, no range hypothesis:
+                         sum_{i=0}^{3} c_i(n) T(n+i,k,l)
+                           = (R(n,k+1,l) - R(n,k,l)) + (S(n,k,l+1) - S(n,k,l)),
+                       R = T(n+3,k,l) A(n,k,l)/(P_3 D_r), S = T(n+3,k,l) B(n,k,l)/(P_3 D_s),
+                       over the pole-free base Phi = T(n+3,.,.)/P_3 of LEAN_Z5_SCAFFOLD 5.2.
+  QSum_bzrec           KeyPoly -> BZRec QSum, i.e. the double sum is annihilated by L_BZ.
+  Q_bzrec, Q_rec       the same statement about the INTEGER row Q of BrownZudilin.lean.
+  QBZ                  Q defined instead by L_BZ with Q_0 = 1, Q_1 = 21, Q_2 = 2989.
+  QSum_eq_QBZ,
+  Q_eq_QBZ             KeyPoly -> the double sum equals that sequence, for all n.
+
+  Unconditionally verified in the same file (no KeyPoly needed), and reusable:
+  QSum_eq_sum_range    range extension for the weight-1 sum.
+  F0, F1, F2, Fk, Fl   T(n+i,k,l) P_3 = T(n+3,k,l) P_i (i=0,1,2) and the k- and l-steps of
+                       the base, from T_shift_n/n2/n3/k/l of BZClosedForm section 2.1.
+  PP3_pos, Dr_pos, Ds_pos, Dstar_pos
+                       every denominator of the certificate is strictly POSITIVE on the
+                       whole range n,k,l >= 0 -- there is no interior pole and no 0/0.
+  Rq_bot, Rq_top, Sq_bot, Sq_top
+                       the four boundary conditions (B-bot-k/l), (B-top-k/l), proved:
+                       A carries a factor k^3, B a factor l^3, and T(n+3,n+4,l) = 0.
+  E_eq, Rq_here, Rq_next, Sq_here, Sq_next
+                       the five terms of (star) over the common denominator P_3 D*.
+  QSum_zero/one/two    QSum 0,1,2 = 1, 21, 2989 from the double sum.
+  QBZ_bzrec            the recurrence-defined sequence satisfies L_BZ.
+  Kernel-checked in-file: QBZ 0..5 = 1, 21, 2989, 714549, 217515501, 76157194521 from the
+  recurrence, against QSum 0..3 = 1, 21, 2989, 714549 from the double sum.
+
+  SCOPE, stated because it is the whole point: BZRec QSum is NOT proved outright. What is
+  proved is the IMPLICATION KeyPoly -> BZRec QSum, with clean axioms, plus every other
+  ingredient. KeyPoly is a polynomial identity that has been verified exactly in integer
+  arithmetic OUTSIDE Lean (three independent ways, and pointwise over Q under Lean's own
+  truncation conventions for n <= 6, 0 <= k,l <= n+7), but Mathlib's `ring` cannot check it:
+  measured, every attempt exceeds this machine's 15 GB. See work/LEAN_QROW.md.
+
+--------------------------------------------------------------------------------
+9. THE ORDER-3 REPRESENTATIVE w-star OF THE P-hat ROW              [ZetaLucas/BZStar.lean]
+
+  work/Z5CF_REP.md found a representative w-star of the SAME row P-hat for which L_BZ
+  (order 3, already in the file) IS a telescoper, where it is not for w3hat. Written in
+  the BARE alphabet H^(r)_x:
+    U      = H_k - (1/2)( H_{n-k} + H_n + H_{n+k+l} - H_{n+l} )
+    V      = -(1/2)( H_k + H_l - H_{n-k} - H_n + H_{n+k} - H_{n+k+l} )
+    w-star = H^(3)_k + U ( H^(2)_k + H^(2)_n + H^(2)_{n+k} - H^(2)_{n-l} )
+                     + V ( H^(2)_l - H^(2)_k )
+    PStarSum n = sum_{k,l<=n} T(n,k,l) w-star(n,k,l)
+
+  READ THE SCOPE NOTE BELOW.
+
+  Verified with clean axioms:
+  Harm_sub_succ_n,
+  Harm_sub_succ_arg    H^(r)_{(n+1)-x} = H^(r)_{n-x} + 1/(n+1-x)^r  and
+                       H^(r)_{n-(x+1)} = H^(r)_{n-x} - 1/(n-x)^r,
+                       for EVERY x with NO x <= n hypothesis (truncated N subtraction and
+                       1/0 = 0 make both sides collapse together past the range). This is
+                       the property a telescope running past k = n needs.
+  Harm_nk_succ_n/k, Harm_nl_succ_n/l, Harm_nkl_succ_n/k/l, Harm_succ_self
+                       the rest of the bare-letter shift table: H^(r) at each of the eight
+                       arguments k, l, n, n-k, n-l, n+k, n+l, n+k+l, differenced in k, l
+                       and n. The twelve vanishing differences are definitional.
+  PStarSum_eq_sum_range   range extension at the weight w-star.
+  PStarSum_zero/one/two   PStarSum 0,1,2 = 0, 101/4, 344923/96 COMPUTED FROM THE
+                       DEFINITIONS (no recurrence), i.e. the transcription of w-star is
+                       kernel-checked against the exact P-hat ladder.
+  PStarSum_eq_Phat_of_rec  BZRec PStarSum -> for all n, PStarSum n = Phat n.
+  sum_antisym_zero     a k<->l ANTISYMMETRIC weight is annihilated by the double sum
+                       (from T n k l = T n l k). This is the proved half of Z5CF_REP's
+                       58-dimensional kernel K: 45 of the 58 dimensions are exactly this.
+  PhatSum_eq_PStarSum_of_antisym
+                       IF w-star - w3hat is k<->l antisymmetric THEN PhatSum = PStarSum.
+                       The hypothesis is a stated DEPENDENCY on which family member is
+                       finally delivered, not a claim about the w-star printed above.
+
+  Kernel-checked in-file: #eval PStarSum 0..3 = 0, 101/4, 344923/96, 3710571371/4320.
+  The fourth value is NOT an initial condition and is not used by any proof; it agrees
+  with the exact ladder P-hat_3, so the whole weight is pinned, not just three points.
+
+  SCOPE: BZRec PStarSum is NOT proved. It is a `sorry`, quarantined in its own section as
+  star_creative_telescoping, exactly as bz_creative_telescoping is in BZClosedForm.lean;
+  PStarSum_eq_Phat is downstream of it and carries sorryAx. What is verified is everything
+  else, including the implication PStarSum_eq_Phat_of_rec. The 42-block order-3 certificate
+  exists mod p (Z5CF_REP.md, 218 000 fresh-point identities, 0 violations) but has not been
+  lifted to Z[n,k,l], and — see work/LEAN_QROW.md sections 4 and 6 — even when it is,
+  Mathlib's `ring` will not check blocks of that size.
+
+--------------------------------------------------------------------------------
+10. INFRASTRUCTURE (verified, used by the above)
 
   [PadicBridge.lean]  PInt / PDvd / PCong on Q via padicNorm; PCong.of_zmod, which
                       imports any ZMod p congruence from Core.lean. Limitation on
@@ -147,8 +252,11 @@ NOTATION
                       a future Lemma-D-style upgrade.
 
 --------------------------------------------------------------------------------
-9. NOT VERIFIED — explicitly excluded from every claim above
+11. NOT VERIFIED — explicitly excluded from every claim above
 
+  * star_creative_telescoping (BZStar.lean, line 255) — a `sorry`. It asserts BZRec
+    PStarSum, i.e. that the w-star double sum satisfies L_BZ. Everything else in
+    BZStar.lean is sorry-free; PStarSum_eq_Phat is downstream of it and carries sorryAx.
   * bz_creative_telescoping  (BZClosedForm.lean, line 661) — a `sorry`. It asserts that
     the two Brown-Zudilin double sums satisfy the order-3 recurrence L_BZ. Everything in
     BZClosedForm.lean outside that one lemma is sorry-free, INCLUDING the implication
@@ -167,14 +275,23 @@ NOTATION
     Phase-2 / p-adic / Frobenius-constant material. Proved on paper or verified
     computationally; none of it has been through the kernel.
   * The equivalence of bApery with Apery's classical double-sum expression (see 5).
-  * That Q_n satisfies L_BZ for all n. Checked at n = 0 only, by `decide`.
+  * That Q_n satisfies L_BZ for all n. Section 8 reduces it to ONE named polynomial
+    identity, KeyPoly, and proves everything else with clean axioms; KeyPoly itself is
+    not proved in Lean. Previously this line read "checked at n = 0 only, by `decide`";
+    the gap is now a single explicit identity in Z[n,k,l] rather than the whole claim,
+    and the obstruction is measured and understood (Mathlib's `ring` exhausts 15 GB on a
+    3798-monomial degree-27 three-variable identity, in every arrangement tried:
+    monolithic, Horner, chain-split, over Q and over an abstract CommRing).
+    See work/LEAN_QROW.md for the measurements and for what would discharge it.
 
 --------------------------------------------------------------------------------
-10. HOW TO CHECK THIS FILE
+12. HOW TO CHECK THIS FILE
 
   cd lean && lake exe cache get && lake build
   then, for any name X above:   #print axioms ZetaLucas.X
   expecting exactly [propext, Classical.choice, Quot.sound].
   A single grep confirms the sorry inventory:
     grep -rn "sorry\|native_decide" ZetaLucas/*.lean
-  which returns exactly one live occurrence, BZClosedForm.lean line 661, plus comments.
+  which returns exactly TWO live occurrences, BZClosedForm.lean line 661 and
+  BZStar.lean line 255, both quarantined in their own clearly-marked sections and both
+  listed in section 11, plus comment matches.

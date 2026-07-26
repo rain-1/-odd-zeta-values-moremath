@@ -3,3 +3,13 @@ work/z7ss/*.txt
 work/z7ss/*.growth
 work/z7ss/hits*
 log6b.err
+
+# agent scratch artifacts (2026-07-26 zeta5 campaign)
+__pycache__/
+*.pyc
+work/lb5/RFD_ann.m
+work/z5la/*.npz
+work/z5la/*.pkl
+work/z5w5/*.npz
+work/z5w5/*.pkl
+scan_H*.log
