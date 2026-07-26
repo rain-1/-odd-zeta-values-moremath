@@ -37,8 +37,18 @@
    All **2416** nonzero cofactor coefficients reconstruct as rational functions of `n` from a
    116-point sweep, with 0 failures. §5.
 
-4. **Size table** `[MEASURED]`: 26 cofactor polynomials (13 blocks × `ρ,σ`), each
-   `deg_n ≤ 50`, `deg_k ≤ 12`, `deg_l ≤ 12`, **≤ 94 595 monomials of `ℤ[n,k,l]` in total**. §6.
+4. **Size table, and it is better than `LEAN_QROW` predicted** `[MEASURED]`. 26 cofactor
+   polynomials (13 blocks × `ρ,σ`), each `deg_n ≤ 50`, `deg_k ≤ 12`, `deg_l ≤ 12`, totalling
+   **93 073 monomials of `ℤ[n,k,l]`** with **≤ 122-bit** numerators and **≤ 14-bit** denominators.
+   The 24-prime lift is **complete — 0 of 96 813 coefficients unliftable**, held-out check
+   **0 mismatches in 889 728 identities**. Delivered as
+   `work/z5star/CERT_wstar_sparse.json` (7.7 MB). `LEAN_QROW` §9 forecast ~4·10⁵ monomials and
+   coefficients well above the `Q` row's 76 bits; the truth is a quarter of the monomials at
+   1.6× the height. §6.
+
+   The delivered file is **re-verified from scratch in exact ℚ** by `work/z5star/check6.py`,
+   which shares no code with the mod-`p` machinery: **6636 identities at `n,k,l ≤ 6`,
+   0 mismatches**. §8.1a.
 
 5. **(B-bot) reduces to one rational single-sum identity, and that identity is verified to hold.**
    The sharp form of (B-bot) is a *collapse-class* condition, not the per-block `k | N_ρ` of the
@@ -475,35 +485,43 @@ the 29 maximal blocks turn out to be free rather than 29× the Q row.** That is 
 bad news is that this is still ~130× the single `Q`-row identity that killed `ring`, so §6.3
 confirms rather than softens `LEAN_QROW`'s verdict: **the reflective checker is not optional.**
 
-### 6.4 ⚠ The coefficient HEIGHT is the problem, not the monomial count
+### 6.4 Coefficient heights `[MEASURED]` — small, after all
 
-`[MEASURED]` The delivered solution is the **pivot-canonical** one (free unknowns set to zero),
-and its rational coefficients are **large**: see the `Qnum`/`Qden`/`colscale` columns printed by
-`work/z5star/emit2.py`. That is not surprising in hindsight — the canonical solution of a
-≈ 340-column system over ℚ(n) is a ratio of determinants — but it is decision-relevant, because the
-`Q` row's hand-shaped certificate has coefficients of only **76 bits**.
+| quantity | value |
+|---|---|
+| primes used | **24** (`4194301 … 4193957`), modulus ≈ 2⁵²⁸ |
+| sweep | `n = 4…153`, **2700 jobs, 0 failures**, 1892 s on 11 cores |
+| held-out check of every interpolant | **0 mismatches in 889 728 identities** (8 unseen `n` × 4634 coefficients × 24 primes) |
+| degree of the interpolant, agreement across primes | **0 mismatches** |
+| **coefficients that failed to lift to ℚ** | **0 of 96 813** |
+| max bit-length, ℚ **numerator** | **122** |
+| max bit-length, ℚ **denominator** | **14** |
+| max bit-length after per-`(k,l)`-column integer clearing | **123**, with column scales ≤ **14** bits |
+| total live monomials of `ℤ[n,k,l]` | **93 073** |
+| emitted file | `work/z5star/CERT_wstar_sparse.json`, **7.7 MB** |
 
-Two consequences:
+**This is the good news of the whole report.** `LEAN_QROW` §9 predicted the `w★` certificate would
+need "~4·10⁵ monomials of normal form" with coefficients well above the `Q` row's 76 bits. The
+measured cofactor data is **93 073 monomials with 122-bit coefficients** — a quarter of the
+predicted monomial count and only 1.6× the `Q` row's coefficient height, on a certificate that is
+42 blocks rather than one.
 
-* a **single integer scale per block is useless**: the lcm of ~5000 coefficient denominators runs
-  to tens of thousands of digits (measured). The delivered file therefore clears
-  **per `(k,l)`-column** — one integer scale per `(e_k, e_l)` — which is the finest grouping that
-  still gives integer coefficient lists;
-* **but clearing to ℤ at all is expensive here**, and this is a recommendation for the checker:
-  the individual ℚ coefficients are *far* smaller than any cleared integer form, because the
-  denominators of neighbouring coefficients are largely coprime, so every lcm inflates. The
-  emitted file therefore carries **both** — `columns` (integer lists, one scale per `(k,l)`) and
-  `terms_Q` (one ℚ per monomial, keyed on the same exponent triple). Compare the `Qnum`/`Qden`
-  columns of the size table with `colcoef`/`colscale`. **If the reflective checker is built over
-  `ℚ` rather than `ℤ`, every number it touches is an order of magnitude shorter**; that is a
-  cheaper fix than height-reducing the certificate, and the two compose;
-* **height minimisation over the WZ gauge is now the dominant size lever**, ahead of degree
-  minimisation. There are 64 gauge dimensions per letter block plus the `()` block's own kernel,
-  and `LEAN_QROW` §7.3 already proposes exactly this for the `Q` row. An LLL/Hermite reduction of
-  the solution against the kernel basis is the standard tool and is **untried here**. `deg_n = 50`
-  against a `dn` of degree 19 suggests degree slack as well.
+⚠ **A methodological warning worth recording.** A 6-prime run (modulus ≈ 2¹³², rational-lift bound
+≈ 2⁶⁵) left **30 588** coefficients unliftable *and* returned spurious "successful" lifts for
+others, whose per-column lcms ran to **2085 bits** — five hundred times the truth. Every conclusion
+drawn from an incomplete rational lift is worthless, and an incomplete lift does not announce
+itself. `emit2.py` now writes `unliftable_coefficients` and a `WARNING` field into the JSON for
+exactly this reason. **Check that field before transcribing anything.**
 
-**This is the single most important thing a successor should do before anything is transcribed.**
+**Delivery.** Both forms are in the file, keyed on the same exponent triples: `columns` (integer
+lists, one 14-bit scale per `(e_k,e_l)`) and `terms_Q` (one ℚ per monomial). Either is small; a
+single integer scale per *block* is not (the lcm of ~5000 denominators has tens of thousands of
+digits) and is deliberately not delivered.
+
+**Remaining size lever.** The solution is still the *pivot-canonical* one, not a
+minimal one, and there are 64 gauge dimensions per letter block plus the `()` block's own kernel.
+`LEAN_QROW` §7.3 proposes minimising `deg(A)+deg(B)` over the gauge; `deg_n = 50` against a `dn` of
+degree 19 suggests visible slack. That is now an optimisation, not a necessity.
 
 ---
 
@@ -567,9 +585,9 @@ directly through `eq_of_BZRec` and its three kernel-checked initial values; it n
 | common `n`-denominator | **done**, fully factored |
 | size table (degrees, monomial counts) | **done** — §6.1 |
 | 24-prime sweep, `n = 4…153` | **done** — 2700 jobs, **0 failures**, 1892 s on 11 cores |
-| **CRT lift → ℚ, sparse JSON emitted** | **launched and running unattended** (`work/z5star/finish.sh`, log `finish.log`); it writes `CERT_wstar_sparse.{json,txt}` carrying **both** the ℤ-per-`(k,l)`-column form and the ℚ-per-monomial form, plus a self-describing `WARNING` field and `unliftable_coefficients` count. **Check that field before transcribing anything** — §8.2 |
-| **coefficient bit-lengths** | **`[MEASURED]` and LARGE** — §6.4; height minimisation is now the dominant lever |
-| exact-ℚ residual spot check at small `n,k,l` | **tool delivered** (`work/z5star/check6.py`, independent of all mod-`p` machinery); run status in §8.2 |
+| **CRT lift → ℚ, sparse JSON emitted** | **done** — `work/z5star/CERT_wstar_sparse.{json,txt}`, 7.7 MB, **0 unliftable of 96 813**; carries both the ℤ-per-`(k,l)`-column form and the ℚ-per-monomial form, plus `unliftable_coefficients` and a `WARNING` field |
+| **coefficient bit-lengths** | **done** — ≤ 122-bit ℚ numerators, ≤ 14-bit denominators; §6.4 |
+| **exact-ℚ residual check OF THE DELIVERED FILE** | **done** — `work/z5star/check6.py`, no mod-`p` machinery, **6636 identities at `n,k,l ≤ 6`, 0 mismatches** |
 | gauge / degree minimisation of the cofactors | **not attempted** — the single biggest remaining size lever |
 | the ≥ order-4 bridge to `ŵ₃` | **not attempted**; §7 gives the lower bound and the shape |
 | weight 5 | untouched |
@@ -577,6 +595,26 @@ directly through `eq_of_BZRec` and its three kernel-checked initial values; it n
 Everything claimed as `[MEASURED]` or `[VERIFIED]` above was checked at fresh points never used in
 any fit, and the ansatz-adequacy calibration (`ŵ₃`'s `h2_pk` must close, its `h1_k` must not, plus
 the `w = 1` control) passed in every run reported.
+
+### 8.1a The independent exact-ℚ check of the delivered file
+
+`work/z5star/check6.py` reads `CERT_wstar_sparse.json` and rebuilds **everything else from its
+definition** in exact ℚ — the shift matrices, the base cofactors `P_i`, `g_k`, `g_l`, the operator
+coefficients `c_u(n)` and the `Q`-row cofactors — sharing no code with the mod-`p` machinery that
+produced the certificate. For every monomial `M_i` of the 42-element closure it checks
+
+```
+   Σ_j [ g_k (S_k)_{ij} ρ_j(n,k+1,l) + g_l (S_l)_{ij} σ_j(n,k,l+1) ] − ρ_i − σ_i  =  (E_w/Φ)_i .
+```
+
+`[VERIFIED exact ℚ]` **`n,k,l ≤ 6`: 158 cells × 42 components = 6636 identities, 0 mismatches**
+(`work/z5star/check6_n6.log`; the `n ≤ 3` run gave 1218 identities, 0 mismatches).
+
+The points `k, l ∈ {n+1, n+2, n+3}` are **skipped by this checker**, not because the identity fails
+there but because the individual shift coefficients have *removable* poles there and a naive
+rational evaluation is `0/0`. Those are exactly the points (P-int) is about, and they are covered
+instead by the limit test of `work/z5star/pint.py` (§2.4), which is calibrated against a
+pole-carrying control.
 
 ### 8.2 The prime budget — read this before trusting the emitted integers
 
@@ -587,8 +625,8 @@ their height, and here the heights are large (§6.4):
 
 | primes | modulus | rational-lift bound | unliftable coefficients |
 |---|---|---|---|
-| 6 | ≈ 2¹³² | ≈ 2⁶⁵ | **30 588** — far too few |
-| 24 | ≈ 2⁵²⁸ | ≈ 2²⁶⁴ | see the run log `work/z5star/emit.log` / `nsweep18.log` |
+| 6 | ≈ 2¹³² | ≈ 2⁶⁵ | **30 588** — far too few, *and* it returned spurious lifts for others |
+| **24** | ≈ 2⁵²⁸ | ≈ 2²⁶⁴ | **0 of 96 813** — complete |
 
 **If `emit2.py` prints a nonzero "unliftable" count, the emitted JSON is incomplete and must not
 be transcribed.** The fix is purely mechanical — add primes to `nsweep.PRIMES` and re-run — and

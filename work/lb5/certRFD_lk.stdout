@@ -55,4 +55,14 @@ In[37]:=
 In[38]:= In[38]:= 
 In[39]:= === D1 Annihilator[T*vtilde] === Sat 25 Jul 2026 09:54:30
 
-In[40]:= 
+In[40]:=   D1 ann #12 t=5801s  (checkpointed)  mem=4GB  Sat 25 Jul 2026 11:31:11
+
+In[41]:= 
+In[42]:=   ann: 12 generators
+
+In[43]:= In[43]:= === D2 ct1 (eliminate l) === Sat 25 Jul 2026 11:31:11
+
+In[44]:=   D2 ct1 : MEMORY ABORT after 1554s  Sat 25 Jul 2026 11:57:05
+
+In[45]:= D2 DID NOT RETURN.
+ALL DONE Sat 25 Jul 2026 11:57:05

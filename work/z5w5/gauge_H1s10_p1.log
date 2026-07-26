@@ -1,0 +1,13 @@
+n=13 p=4194301 H1 slack=10 nc=2738 rank(Msc)=2113 ker=625 ; gauge cols/blk=5625 ; rows=11255  [45s]
+   complementary weight 1 : 135 blocks, gauge 5625 cols, rank[Msc|G] = 2163 (was 2113, +50) ; codim histogram {5: 135}  [336s]
+   complementary weight 2 : 81 blocks, gauge 5625 cols, rank[Msc|G] = 2213 (was 2113, +100) ; codim histogram {6: 81}  [421s]
+   complementary weight 3 : 45 blocks, gauge 5625 cols, rank[Msc|G] = 2263 (was 2113, +150) ; codim histogram {8: 45}  [614s]
+   >>> dim W_tel^gauge(n=13) = 449  (of J = 1270)
+   cumulative dim W_tel^gauge through n=13 : 449
+n=17 p=4194301 H1 slack=10 nc=2738 rank(Msc)=2113 ker=625 ; gauge cols/blk=5625 ; rows=11255  [66s]
+   complementary weight 1 : 135 blocks, gauge 5625 cols, rank[Msc|G] = 2163 (was 2113, +50) ; codim histogram {5: 135}  [336s]
+   complementary weight 2 : 81 blocks, gauge 5625 cols, rank[Msc|G] = 2213 (was 2113, +100) ; codim histogram {6: 81}  [571s]
+   complementary weight 3 : 45 blocks, gauge 5625 cols, rank[Msc|G] = 2263 (was 2113, +150) ; codim histogram {8: 45}  [501s]
+   >>> dim W_tel^gauge(n=17) = 449  (of J = 1270)
+   cumulative dim W_tel^gauge through n=17 : 449
+saved Wgauge_W5_H1_s10_p4194301_H1.pkl (dim 449)

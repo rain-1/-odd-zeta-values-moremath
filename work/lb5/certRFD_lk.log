@@ -4,3 +4,9 @@ vtilde HarmonicNumber instances (must be 11): 11   distinct symbols S (must be 1
 vtilde has a C letter ? False   (must be False)
 obj = T*vtilde  LeafCount 91  distinct symbols 10
 === D1 Annihilator[T*vtilde] === Sat 25 Jul 2026 09:54:30
+  D1 ann #12 t=5801s  (checkpointed)  mem=4GB  Sat 25 Jul 2026 11:31:11
+  ann: 12 generators
+=== D2 ct1 (eliminate l) === Sat 25 Jul 2026 11:31:11
+  D2 ct1 : MEMORY ABORT after 1554s  Sat 25 Jul 2026 11:57:05
+D2 DID NOT RETURN.
+ALL DONE Sat 25 Jul 2026 11:57:05

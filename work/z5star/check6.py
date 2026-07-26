@@ -176,7 +176,12 @@ if __name__ == '__main__':
     for n in range(1, NMAX + 1):
         for k in range(0, NMAX + 1):
             for l in range(0, NMAX + 1):
-                if k == n + 3 or l == n + 3:
+                # k, l in {n+1, n+2, n+3} carry REMOVABLE poles: the individual
+                # shift/increment coefficients are singular there and only the
+                # products are finite ((P-int), Z5STAR_CERT 2.4).  A naive
+                # rational evaluation is 0/0, so those points are evaluated by
+                # the limit test of work/z5star/pint.py instead, not here.
+                if k in (n + 1, n + 2, n + 3) or l in (n + 1, n + 2, n + 3):
                     continue
                 cells += 1
                 RK = gk(n, k, l); RL = gl(n, k, l)

@@ -1,6 +1,6 @@
 COMPLETELY FORMALLY VERIFIED IN LEAN 4 — odd-zeta programme
 Repository: lean/ZetaLucas/   ·   Lean v4.33.0-rc1, Mathlib cd580e54
-Compiled: 2026-07-26.  `lake build` clean, 8675 jobs.  Total 4800 lines, 14 modules.
+Compiled: 2026-07-26.  `lake build` clean, 8676 jobs.  Total 5155 lines, 15 modules.
 
 INCLUSION CRITERION for this file: the statement is a theorem in the development,
 proved with NO `sorry` and NO `native_decide`, and `#print axioms` returns exactly
@@ -9,6 +9,52 @@ proved with NO `sorry` and NO `native_decide`, and `#print axioms` returns exact
 re-checked by running `#print axioms` on 2026-07-26; the raw output is reproducible
 with `lake env lean` on a file importing ZetaLucas. Anything NOT meeting this bar is
 listed in the final section and is NOT claimed.
+
+--------------------------------------------------------------------------------
+!! LIMITATION OF THAT CRITERION -- READ THIS BEFORE RELYING ON ANY ENTRY BELOW !!
+
+  The bar above is NECESSARY AND NOT SUFFICIENT. A theorem of the form
+
+      theorem foo (h : P) : Q            -- P a named proposition, `def P : Prop`
+
+  passes every automated check in this file -- no `sorry`, no `native_decide`, and
+  `#print axioms` returning exactly [propext, Classical.choice, Quot.sound] -- EVEN
+  IF P IS FALSE. A false hypothesis makes every theorem under it vacuously true, and
+  that is completely invisible here: `#print axioms` reports what a proof DEPENDS ON,
+  not whether what it depends on is inhabited, and the grep for `sorry` finds nothing
+  because there is no `sorry`. Conditional theorems are the blind spot of this file.
+
+  The only two defences are
+    (i)  DISCHARGE the hypothesis -- prove P in Lean; or
+    (ii) confirm P independently of Lean, and say so, WITH the method and the range.
+  Every conditional entry below states which of the two applies to it.
+
+  WORKED EXAMPLE, found the honest way on 2026-07-26; this paragraph exists because
+  of it. Section 8 (the Brown-Zudilin Q row) was for some hours carried as
+
+      QSum_bzrec : KeyPoly -> BZRec QSum
+
+  with KeyPoly the cleared polynomial identity of the Q-row WZ certificate. The whole
+  section was sorry-free with clean axioms and was, as written, correct. But the file
+  defined
+      Acore := -((n+l+1) * Amid)
+  while the sparse table Amid ALREADY carried the sign of the certificate's r_num. So
+  Anum was -A, and KEYPOLY AS THEN STATED WAS FALSE. Every theorem below it was
+  vacuous. Nothing in this file -- and nothing any automated check in this repository
+  produces -- could have distinguished that from a correct development.
+
+  It surfaced only on ATTEMPTING TO DISCHARGE KeyPoly. A faithful re-implementation of
+  the exact computation the Lean kernel would run, executed outside Lean first,
+  reported
+      |LHSP| = 3798   |RHSP| = 4258   LHSP == RHSP : False
+  A second, independent transcription bug (the SHIFTED numerator built with (k+1)^3
+  where the unshifted one uses k^3) surfaced the same way, on the same object. Both
+  are fixed; see work/LEAN_QROW.md section 15.2.
+
+  STANDING RULE ADOPTED AS A RESULT: no certificate goes to the Lean kernel until a
+  faithful re-implementation of the same computation has been run outside Lean and the
+  two sides compared exactly. It costs seconds, and it caught two transcription bugs
+  on the first object ever attempted.
 
 NOTATION
   A(n,k) = C(n,k)^2 C(n+k,k)^2          a_n = sum_{k<=n} A(n,k)      (Apery numbers)
@@ -145,6 +191,18 @@ NOTATION
 
   READ THE SCOPE NOTE BELOW BEFORE QUOTING ANYTHING FROM THIS SECTION.
 
+  IN FLIGHT, NOT YET CLAIMED (2026-07-26, end of session): BZQRow.lean has been extended with
+  the reflective discharge of KeyPoly (section 10's checker; theorems key_check, key_poly) and
+  the theorems below have been restated WITHOUT the hypothesis. The polynomial identity was
+  verified bit-for-bit outside Lean by a faithful re-implementation of the exact padd/pmul/
+  ppow/substK computation the kernel performs (LHSP == RHSP, 3798 == 3798 monomials), and the
+  computation is terminating by construction; but the kernel check had NOT returned when this
+  file was written (>8 min CPU, flat 3.0 GB). UNTIL `lake build` is seen to complete, treat
+  the entries below in their CONDITIONAL form, which the unconditional one implies. Re-run
+    cd lean && lake build
+  and, if it completes, delete this paragraph and the SCOPE note, and drop "KeyPoly ->" from
+  QSum_bzrec, QSum_eq_QBZ, Q_eq_QBZ below. See work/LEAN_QROW.md section 15.
+
   KeyPoly              a NAMED PROPOSITION (a `def ... : Prop`), not a theorem: the single
                        cleared polynomial identity in Z[n,k,l] of the Q-row WZ certificate,
                          D* * sum_i c_i(n) P_i(n,k,l)
@@ -181,6 +239,14 @@ NOTATION
   QBZ_bzrec            the recurrence-defined sequence satisfies L_BZ.
   Kernel-checked in-file: QBZ 0..5 = 1, 21, 2989, 714549, 217515501, 76157194521 from the
   recurrence, against QSum 0..3 = 1, 21, 2989, 714549 from the double sum.
+
+  A TRANSCRIPTION BUG THE DISCHARGE CAUGHT, recorded because it is the argument for closing
+  hypotheses rather than carrying them: this file's Acore was defined as -((n+l+1)*Amid) while
+  Amid already carried the sign of r_num, so Anum was -A and KeyPoly AS PREVIOUSLY STATED WAS
+  FALSE. Everything downstream was sorry-free with clean axioms, and #print axioms could not
+  distinguish that from a correct development, because the hypothesis was never discharged.
+  A second bug (AnumP built with (k+1)^3 where Anum uses k^3) was caught the same way. Both
+  are fixed; see work/LEAN_QROW.md section 15.2.
 
   SCOPE, stated because it is the whole point: BZRec QSum is NOT proved outright. What is
   proved is the IMPLICATION KeyPoly -> BZRec QSum, with clean axioms, plus every other
@@ -224,8 +290,39 @@ NOTATION
                        58-dimensional kernel K: 45 of the 58 dimensions are exactly this.
   PhatSum_eq_PStarSum_of_antisym
                        IF w-star - w3hat is k<->l antisymmetric THEN PhatSum = PStarSum.
-                       The hypothesis is a stated DEPENDENCY on which family member is
-                       finally delivered, not a claim about the w-star printed above.
+                       *** THE HYPOTHESIS IS UNSATISFIABLE. NOT THE ROUTE. *** Kept only so
+                       that a successor who rediscovers the idea finds it already closed.
+                       Proof of impossibility (recorded in the BZStar.lean section-6 header
+                       and in work/LEAN_QROW.md section 14): the order-3 admissible space
+                       W_tel is sigma-stable, because L_BZ.(T w) = D_k R + D_l S implies
+                       L_BZ.(T w^sigma) = D_l R^sigma + D_k S^sigma via T(n,k,l) = T(n,l,k);
+                       and W_tel is linear (dim 37 for n >= 2, Z5CF_REP 3.1), hence closed
+                       under sym = (1+sigma)/2. An antisymmetric w-star - w3hat would give
+                       sym(w-star) = w3hat^sym, forcing w3hat^sym in W_tel, which Z5CF_REP
+                       3.2 EXCLUDES at four n and two primes. Contradiction. Consequently
+                       every successful representative uses a nonzero SYMMETRIC element of K
+                       and the bridge cannot collapse to one Finset.sum_comm.
+  DivCert R0 S0        the ORDER-ZERO divergence certificate
+                       T(n,k,l)(w-star - w3hat) = D_k R0 + D_l S0 with
+                       R0|_{k=0} = R0|_{k=n+1} = S0|_{l=0} = S0|_{l=n+1} = 0.
+                       *** ALSO UNSATISFIABLE. *** work/Z5STAR_CERT.md section 7 PROVES no
+                       such certificate exists: for a maximal monomial the WZ component is
+                       scalar, so summing against T over the rectangle gives d_i Q_n = 0,
+                       and Q_n >= 1 forces d_i = 0 -- but d = w-star - w3hat has 29 nonzero
+                       maximal components. The same argument bounds any bridge OPERATOR at
+                       order >= 4.
+  PhatSum_eq_PStarSum_of_divCert
+                       DivCert R0 S0 -> for all n, PhatSum n = PStarSum n. Proved, clean --
+                       AND VACUOUS, by the line above. It is retained as a marker only.
+
+  BOTH of the two theorems just listed are exactly the pathology described at the top of
+  this file: sorry-free, clean axioms, and about hypotheses that are PROVABLY FALSE. They
+  are kept, and labelled, so that a successor who rediscovers either idea finds it already
+  closed rather than re-deriving it. NEITHER IS ON ANY CRITICAL PATH:
+  PStarSum_eq_Phat_of_rec reaches Phat through eq_of_BZRec and the three initial values and
+  never mentions PhatSum. What w-star delivers is therefore P-hat_n = sum_{k,l} T w-star --
+  a proved zeta(5)-family closed form -- and NOT the compact w3hat form; PhatSum is not
+  reachable from PStarSum at all.
 
   Kernel-checked in-file: #eval PStarSum 0..3 = 0, 101/4, 344923/96, 3710571371/4320.
   The fourth value is NOT an initial condition and is not used by any proof; it agrees
@@ -240,7 +337,40 @@ NOTATION
   Mathlib's `ring` will not check blocks of that size.
 
 --------------------------------------------------------------------------------
-10. INFRASTRUCTURE (verified, used by the above)
+10. A REFLECTIVE CHECKER FOR LARGE POLYNOMIAL IDENTITIES        [ZetaLucas/Reflect.lean]
+
+  Sparse polynomials in Z[n,k,l] as List ((N x N x N) x Z), with kernel-reducible padd,
+  smul, pmul, pneg, psub, ppow, and evaluation into an arbitrary CommRing. Built because
+  work/LEAN_QROW.md sections 4 and 13 measure Mathlib's `ring` as unable to check a
+  3798-monomial degree-(27,11,13) identity in 15 GB, while kernel reduction does the same
+  work at a FLAT ~1.7 GB (and falling, as the GC reclaims) -- the proof term is Eq.refl.
+
+  eval_mergeAux        fuel-driven merge is sound whenever the fuel suffices. Structural on
+                       the fuel, so the KERNEL reduces it; Nat.rec on a literal is O(1) per
+                       step. Soundness is branch-by-branch and needs NOTHING about the
+                       monomial order: mergeAux tests a.1 = b.1 explicitly and both other
+                       branches emit a correct head either way. So `mlt` only has to be some
+                       Bool -- it makes the output canonical, not correct.
+  eval_padd, eval_smul, eval_pmul, eval_pneg, eval_psub, eval_ppow
+                       the ring-homomorphism soundness lemmas.
+  eval_congr           p = q -> eval p n k l = eval q n k l. The reflection principle: a
+                       polynomial identity is closed by `rfl` on a List.
+
+  #print axioms returns [propext, Quot.sound] for all of these -- NOT EVEN
+  Classical.choice -- and eval_congr depends on no axioms at all. NO native_decide is used
+  anywhere in this file or this development; it would add ofReduceBool and void this file.
+  Reflect.olean is 661 KB (compare BZQRow.olean, 172 MB, from six degree-14 `ring` calls).
+
+  MEASURED cost (work/LEAN_QROW.md section 13): ~3.5e3 elementary list steps per second for
+  sparse-by-dense products, ~1.2e3 for dense-by-dense (so always chain by sparse factors),
+  linear, at flat memory. KeyPoly is projected at 3-5 minutes; the 42 w-star blocks at
+  ~5 h serial, and they are independent so they parallelise across modules.
+
+  SCOPE: the checker is verified and compiles; it has NOT yet been pointed at KeyPoly or at
+  star_creative_telescoping. Doing so is the next step and neither is claimed here.
+
+--------------------------------------------------------------------------------
+11. INFRASTRUCTURE (verified, used by the above)
 
   [PadicBridge.lean]  PInt / PDvd / PCong on Q via padicNorm; PCong.of_zmod, which
                       imports any ZMod p congruence from Core.lean. Limitation on
@@ -252,9 +382,9 @@ NOTATION
                       a future Lemma-D-style upgrade.
 
 --------------------------------------------------------------------------------
-11. NOT VERIFIED — explicitly excluded from every claim above
+12. NOT VERIFIED — explicitly excluded from every claim above
 
-  * star_creative_telescoping (BZStar.lean, line 255) — a `sorry`. It asserts BZRec
+  * star_creative_telescoping (BZStar.lean, line 258) — a `sorry`. It asserts BZRec
     PStarSum, i.e. that the w-star double sum satisfies L_BZ. Everything else in
     BZStar.lean is sorry-free; PStarSum_eq_Phat is downstream of it and carries sorryAx.
   * bz_creative_telescoping  (BZClosedForm.lean, line 661) — a `sorry`. It asserts that
@@ -285,7 +415,7 @@ NOTATION
     See work/LEAN_QROW.md for the measurements and for what would discharge it.
 
 --------------------------------------------------------------------------------
-12. HOW TO CHECK THIS FILE
+13. HOW TO CHECK THIS FILE
 
   cd lean && lake exe cache get && lake build
   then, for any name X above:   #print axioms ZetaLucas.X
@@ -293,5 +423,5 @@ NOTATION
   A single grep confirms the sorry inventory:
     grep -rn "sorry\|native_decide" ZetaLucas/*.lean
   which returns exactly TWO live occurrences, BZClosedForm.lean line 661 and
-  BZStar.lean line 255, both quarantined in their own clearly-marked sections and both
-  listed in section 11, plus comment matches.
+  BZStar.lean line 258, both quarantined in their own clearly-marked sections and both
+  listed in section 12, plus comment matches.

@@ -583,3 +583,340 @@ The gate for the ζ(5) closed forms has moved. It is no longer the telescoper or
 checker**. One 400–800-line reflective polynomial-identity checker unblocks the Q row, the
 42-block `w★` row, and whatever weight-5 representative L7 finds. Everything else in this file
 is a measurement of what happens without it.
+
+---
+
+# ADDENDUM 2 — the reflective checker: **provisional cost curve** (measured), and the retired antisymmetry route
+
+## 13. HEADLINE — reflection works, and it is *hours, not days*
+
+**Kernel reduction of sparse-polynomial arithmetic is linear in work and FLAT in memory at
+≈ 1.7 GB, independent of problem size.** That is the whole ballgame: `ring`'s wall was
+~1 MB of retained proof term per monomial; a reflective proof term is `Eq.refl`, so the memory
+axis disappears and only time remains — and time is linear and measurable.
+
+### 13.1 The prototype
+
+```lean
+abbrev Mono : Type := Nat × Nat × Nat
+abbrev Poly : Type := List (Mono × Int)          -- canonical: lex-sorted, no zero coefficients
+
+def mergeAux : Nat → Poly → Poly → Poly          -- fuel-driven, STRUCTURAL on the fuel
+  | 0, _, _ => [] | _+1, [], q => q | _+1, p, [] => p
+  | f+1, a :: p, b :: q =>
+      if mlt a.1 b.1 then a :: mergeAux f p (b :: q)
+      else if mlt b.1 a.1 then b :: mergeAux f (a :: p) q
+      else let c := a.2 + b.2
+           if c == 0 then mergeAux f p q else (a.1, c) :: mergeAux f p q
+def padd (p q : Poly) : Poly := mergeAux (p.length + q.length) p q
+def smul (m : Mono) (c : Int) (p : Poly) : Poly := p.map (fun x => (madd m x.1, c * x.2))
+def pmul (p q : Poly) : Poly := p.foldr (fun x acc => padd (smul x.1 x.2 q) acc) []
+```
+
+Everything is structural recursion (fuel for the merge — `Nat.rec` on a literal is O(1) per
+step in the kernel, no unary trap) and `mlt` is built from `Nat.blt`, which is GMP-accelerated.
+`padd`/`pmul` preserve the canonical form, so **no `normalise` is needed at all**: the final
+check is plain `List` equality, closed by `rfl`, proof term `Eq.refl`.
+
+### 13.2 The curve `[MEASURED]`
+
+Work unit `W := |p|·|q| + |p|·|R|` (monomial products + merge steps). `lake env lean -j1`,
+wall clock includes ~3 s of Mathlib import. **`native_decide` was not used and is not needed.**
+
+| case | \|p\| | \|q\| | \|R\| | W | tactic | time | W/s | peak RSS |
+|---|---|---|---|---|---|---|---|---|
+| A | 20 | 5 | 100 | 2.1·10³ | `rfl` | 3.9 s | — | 1.5 GB |
+| B | 100 | 5 | 296 | 3.0·10⁴ | `rfl` | 24.5 s | 1.4·10³ | 1.6 GB |
+| C | 400 | 16 | 844 | 3.4·10⁵ | `rfl` | 92 s | 3.7·10³ | 1.7 GB |
+| C′ | 400 | 16 | 844 | 3.4·10⁵ | `decide +kernel` | 107 s | 3.2·10³ | 1.7 GB |
+| D | 784 | 16 | 1780 | 1.41·10⁶ | `rfl` | 407 s | 3.5·10³ | 1.7 GB |
+| D′ | 784 | 16 | 1780 | 1.41·10⁶ | `rfl`, **packed key** | 412 s | 3.4·10³ | 1.7 GB |
+| E | 297 | 784 | 3798 | 1.36·10⁶ | `rfl` | **>1140 s**, killed | ≤1.2·10³ | 1.73 GB → **0.34 GB** |
+
+Coefficients throughout are the real certificate's, 58–76 bits.
+
+**Throughput: ≈ 3.5·10³ work units per second for *sparse × dense*, at a flat ~1.7 GB.**
+
+Case E is the exception and it is instructive: it is the only **dense × dense** product
+(`|q| = 784` rather than 5–16) and it runs at **≤1.2·10³ W/s, a 3× penalty**, because each
+`smul` now builds a 784-monomial list that is then merged into an accumulator of up to 3798.
+Its RSS also *fell* to 0.34 GB as the GC reclaimed intermediates — memory is not merely flat,
+it is small. **Corollary: never hand the kernel a dense × dense product; chain by sparse
+factors.** This is the same ordering discipline `ring` needed, for a different reason.
+
+### 13.3 Four findings that change what to build
+
+1. **Memory is constant.** 1.5 GB at W = 2·10³, 1.73 GB at W = 1.4·10⁶. Compare `ring`:
+   >15 GB at the same identity. *This is why reflection is the answer.*
+2. **Packing the exponent triple into a single `Nat` (`a·4096 + b·64 + c`, one `Nat.blt`
+   compare and one `Nat.add` per monomial instead of five and three) buys exactly 0 %**
+   — 412 s vs 407 s. The bottleneck is `List`/`Int` whnf overhead, not monomial arithmetic.
+   **Do not spend effort on the monomial representation.**
+3. **`decide +kernel` is 15 % slower than `rfl` at small sizes — but `rfl` is NOT memory-flat
+   at large ones, and `decide +kernel` is. CORRECTED, see §15.4.** At `|R| = 844` both sat at
+   1.7 GB; on the real `KeyPoly` the `rfl` route reached **9.5 GB and was still climbing at
+   357 s CPU**, because the *elaborator's* `isDefEq` caches every intermediate of the
+   computation, whereas the kernel does not. **Use `decide +kernel` for anything at
+   certificate scale**; pay the 15 %.
+4. **Coefficient bit-length is not a driver in the 58–76-bit range** — case D (60–76 bits) ran
+   at the same rate as case C (≈58 bits). GMP `Nat` ops are O(1) here. Untested above ~200 bits.
+
+### 13.4 Projection
+
+`KeyPoly` with the multiplication chained by sparse factors (the same ordering discipline that
+`ring` needed):
+
+| piece | W |
+|---|---|
+| build `Σ_i c_i P_i` (4 × cq·PP + merges) | 5·10⁴ |
+| `× (n+1)²(n+2)²`, `× (n+l+2)(n+l+3)`, `× (k+l+1)(k+l+2)`, `× (k+1)³(l+1)³` | 1.4·10⁵ |
+| `U₁·A(n,k+1,l)`, `U₂·A`, `U₃·B(n,k,l+1)`, `U₄·B`, chained by the `U` factors | 3.4·10⁵ |
+| final merges | 2·10⁴ |
+| **total** | **≈ 5.5·10⁵** |
+
+⇒ **`KeyPoly` ≈ 3–5 minutes of kernel time at ~1.7 GB.** The identity `ring` cannot do at all.
+
+**For the 42 `w★` blocks:** taking each block at ~3× the Q row (larger cofactors, extra
+denominator factors), W ≈ 1.5·10⁶ per block ⇒ ~7 min each ⇒ **≈ 5 h serial, and the blocks are
+independent, so 42 one-block modules on 12 cores land in well under an hour of wall clock, at
+1.7 GB per process.** Answer to the coordinator's question: **hours, not days** — and the
+memory ceiling that killed `ring` never appears.
+
+### 13.5 What the certificate agent should optimise — revised, and it is not what I said before
+
+Sparse-expanded-over-ℤ remains right. Two refinements now that the cost model is measured:
+
+1. **Minimise Σ of *intermediate* sizes, not the final size.** The cost is
+   `Σ_steps (|p|·|q| + |p|·|R|)`, so a dense × dense product is quadratic while a chain of
+   sparse multipliers is near-linear. Therefore: **deliver each block as (i) an explicit
+   product tree whose factors are small — ideally the linear/quadratic factors as they come
+   out of the ansatz denominators — together with (ii) the fully expanded final answer.** The
+   kernel then walks the chain. Delivering only the expanded product forces me to reconstruct
+   an ordering, and delivering only the factored form forces a dense multiply at the end.
+2. **Coefficient height is free below ~10²⁰; monomial count is not.** Do not spend CAS effort
+   shrinking coefficients. Do spend it on the common-factor cancellations — e.g. in the Q row
+   `(k+1)³(l+1)³` divides *every* term of the cleared identity (3798 → 2037 monomials, a 46 %
+   cut, and a 46 % cut in checking time). Expect an analogous factor per block.
+
+### 13.6 The soundness layer — **written, compiled, clean** `lean/ZetaLucas/Reflect.lean`
+
+288 lines, **compiles in 11 s**, `lake build` clean (8676 jobs). Delivered:
+
+```lean
+abbrev Mono := ℕ × ℕ × ℕ            abbrev Poly := List (Mono × ℤ)
+def mergeAux : ℕ → Poly → Poly → Poly       def padd, smul, pmul, pneg, psub, ppow
+def mval, eval  (into any `CommRing R`)     def pC, pN, pK, pL
+theorem eval_mergeAux (n k l : R) : ∀ f p q, p.length + q.length ≤ f →
+    eval (mergeAux f p q) n k l = eval p n k l + eval q n k l
+theorem eval_padd, eval_smul, eval_pmul, eval_pneg, eval_psub, eval_ppow
+theorem eval_congr {p q : Poly} (h : p = q) (n k l : R) : eval p n k l = eval q n k l
+```
+
+**`#print axioms`, verbatim:**
+
+```
+'ZetaLucas.Reflect.eval_mergeAux' depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_padd'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_smul'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_pmul'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_pneg'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_psub'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_ppow'     depends on axioms: [propext, Quot.sound]
+'ZetaLucas.Reflect.eval_congr'    does not depend on any axioms
+```
+
+**Not even `Classical.choice`** — the layer is *cleaner* than the programme's bar, and there is
+no `native_decide` anywhere.
+
+**One design decision worth recording.** Proving the merge sound would normally require that
+`mlt` be a total order (`¬(a<b) → ¬(b<a) → a = b`), which is a fiddly case split. Instead
+`mergeAux` tests `a.1 = b.1` **explicitly** first, and each of the three branches is sound on
+its own — the two `mlt` branches emit a correct head *whichever* of `a`, `b` is smaller. So
+**`mlt` only has to be some `Bool`**: it makes the output canonical, not correct. Soundness is
+then order-free, and the extra `Mono` equality test costs nothing (finding 2 above).
+
+**`.olean` size: 661 KB.** Compare `BZQRow.olean` at **172 MB** — that file's six *degree-14*
+`ring` calls alone. Two orders of magnitude, and the reflective one carries the harder theorems.
+
+A worked end-to-end client example is in the file (§6), showing the pattern: `rfl` on the
+`Poly` identity, `simp only` along the soundness lemmas, no `ring` call seeing more than a
+handful of monomials.
+
+**Still to do:** the client glue for `KeyPoly` itself — bridging `Dstar n k l`, `PP_i`, `U_i`,
+`cq_i`, `Amid`, `Bmid` to their `Poly`s and assembling the chain. Two design points are already
+fixed by the measurements above:
+
+* the bridges for the **small** polynomials are free — express the `Poly` side as a `pmul`
+  chain of two-monomial factor polys and each bridge is `ring` on ≤ 4 monomials;
+* the bridges for **`Amid` (1133 monomials) and `Bmid` (239)** must *not* go through `ring`
+  (a flat 1133-term sum costs `ring` ~6·10⁵ operations — over budget). Instead **redefine
+  `Amid`/`Bmid` in `BZQRow.lean` as `eval AmidP`/`eval BmidP`**, making those bridges `rfl`.
+  Nothing else in the development touches their internals (`Rq_bot` needs only the `k³`/`l³`
+  factor, which lives in `Anum`/`Bnum`), so this is a safe, local change.
+
+If the soundness layer turns out to be harder than expected I will say so; nothing measured so
+far suggests it will be. `native_decide` has not been used anywhere and will not be.
+
+## 14. CORRECTION — the antisymmetric bridge `PhatSum = PStarSum` is **impossible**
+
+Recorded here because it is the obvious cheap route and a reader will ask why it was dropped.
+
+> Suppose `w − ŵ₃` is `k↔l`-antisymmetric for an admissible `w`; then `sym w = ŵ₃^sym`. The
+> order-3 admissible space `W_tel` is **σ-stable** — from `L_BZ·(T·w) = Δ_k R + Δ_l S`,
+> swapping `k ↔ l` and using `T(n,k,l) = T(n,l,k)` gives `L_BZ·(T·wᶜ) = Δ_l Rᶜ + Δ_k Sᶜ` — and
+> it is linear (`dim W_tel(n) = 37` for `n ≥ 2`, `Z5CF_REP` §3.1), hence closed under
+> `sym = ½(1+σ)`. So `w ∈ W_tel` forces `ŵ₃^sym ∈ W_tel`, which `Z5CF_REP` §3.2 excludes at
+> four values of `n` and two primes. Contradiction. ∎
+
+**Consequence: every successful representative uses a nonzero *symmetric* element of the
+58-dimensional kernel `K`, so the bridge cannot collapse to one `Finset.sum_comm`.**
+
+Actions taken in `lean/ZetaLucas/BZStar.lean`:
+
+* `sum_antisym_zero` **kept** — it is true, one line, and it is the proof that 45 of the 58
+  dimensions of `K` are free (`T_symm`).
+* `PhatSum_eq_PStarSum_of_antisym` **kept but marked shut** (`⛔ NOT THE ROUTE`), with the
+  impossibility argument in the §6 header, so a successor who rediscovers the idea finds it
+  already closed rather than re-deriving it.
+* **New: `DivCert R₀ S₀`** — a structure carrying exactly the order-zero divergence
+  certificate the certificate agent will deliver:
+  `T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀` plus `R₀|_{k=0} = R₀|_{k=n+1} = S₀|_{l=0} = S₀|_{l=n+1} = 0`.
+* **New: `PhatSum_eq_PStarSum_of_divCert : DivCert R₀ S₀ → ∀ n, PhatSum n = PStarSum n`** —
+  proved, clean axioms. Top boundaries at `k,l = n+1`: both sums are over `range (n+1)` and no
+  range extension is needed because the certificate is order zero.
+
+So the bridge has a home the moment the order-0 certificate lands, and it is one more customer
+for the same checker — with a single copy of `T` instead of four, so **smaller** than any
+order-3 block: at the measured rate, seconds.
+
+**None of this is on the critical path.** `PStarSum_eq_Phat_of_rec` reaches `Phat` directly via
+`eq_of_BZRec` and the three initial values of §3; it never goes through `PhatSum`.
+
+---
+
+# ADDENDUM 3 — `KeyPoly` closed, and a sign bug the attempt caught
+
+## 15. The Q-row recurrence is now unconditional
+
+`lean/ZetaLucas/BZQRow.lean` no longer carries `KeyPoly` as a hypothesis. The chain is
+
+```lean
+theorem key_check : LHSP = RHSP := by rfl          -- kernel; proof term Eq.refl
+theorem key_poly  : KeyPoly := fun n k l =>
+  (eval_LHSP n k l).trans ((eval_congr key_check n k l).trans (eval_RHSP n k l).symm)
+theorem QSum_bzrec : BZRec QSum                    -- no hypothesis
+theorem Q_bzrec    : BZRec (fun n => (Q n : ℚ))
+theorem Q_rec (n : ℕ) : cc0 n * Q n + cc1 n * Q (n+1) + cc2 n * Q (n+2) + cc3 n * Q (n+3) = 0
+theorem QSum_eq_QBZ (n : ℕ) : QSum n = QBZ n
+theorem Q_eq_QBZ    (n : ℕ) : (Q n : ℚ) = QBZ n
+```
+
+### 15.1 How the glue is built
+
+* **`Amid` and `Bmid` are now *defined* as `eval AmidP` / `eval BmidP`** over their sparse
+  tables (1133 and 239 monomials), exactly as §13.6 required: the bridge to the certificate is
+  then `rfl` instead of a ~6·10⁵-operation `ring` call. Nothing else in the development touches
+  their internals.
+* **Two new operations in `Reflect`**, `substK` and `substL`, giving `p(n,k+1,l)` and
+  `p(n,k,l+1)`. They are built *out of the operations already proved sound* —
+  `(k+1)^b = ppow (padd pK (pC 1)) b` — so the soundness proofs are two short inductions with
+  **no binomial-theorem reasoning**. Every WZ certificate in this programme evaluates its
+  cofactors at shifted arguments, so these are permanent infrastructure, not Q-row-specific.
+* **Every product is written small-factor-first** and chained by the sparse factors of `D*`,
+  `U₁…U₄`, per §13.5.
+* **22 linear/quadratic factor `Poly`s** with one-line bridges; `X1P…Y3P`, `PP0P…PP3P` built
+  from them by `pmul`, so their bridges are `ring` calls on *atoms*. The two big bridges,
+  `eval_LHSP` and `eval_RHSP`, are degree-≤14 `ring` calls with `PP_i`, `cq_i`, `Anum`, `Bnum`
+  as atoms — well inside the measured budget.
+
+### 15.2 ⚠ The attempt caught a real sign error in the shipped file
+
+Before running anything in Lean I re-implemented the *exact* `padd`/`pmul`/`ppow`/`substK`
+computation in Python and compared `LHSP` with `RHSP` as sorted lists. First run:
+
+```
+|LHSP| = 3798   |RHSP| = 4258     LHSP == RHSP : False    differing monomials: 4258
+```
+
+Two bugs, both found this way and neither of which any earlier check could have caught:
+
+1. **`AnumP` used `(k+1)³` where `Anum n k l = k³·Acore n k l` uses `k³`.** Only the *shifted*
+   numerator `Anum n (k+1) l` carries `(k+1)³`. Fixed by using `pK`/`pL` for the unshifted ones.
+2. **`Acore` had a spurious minus sign.** The file shipped
+   `Acore := -((n+l+1) * Amid)`, but `Amid` was extracted as `A / (k³(n+l+1))` and *already
+   carries the sign of `r_num`*. So the shipped `Anum` was `−A`, which means **`KeyPoly` as
+   previously stated was FALSE**. It had never been detected because `KeyPoly` was only ever a
+   hypothesis — every theorem downstream was vacuously fine, and the numerical checks of §2
+   validated the *certificate*, not the *transcription of `Acore`*.
+
+After both fixes:
+
+```
+AnumP == A : True  (1294 = 1294)     BnumP == B : True  (1151 = 1151)
+|LHSP| = 3798   |RHSP| = 3798        LHSP == RHSP : True
+```
+
+**This is the strongest argument for closing hypotheses rather than carrying them.** A
+`sorry`-free conditional theorem with a false hypothesis looks exactly like a correct one in
+`#print axioms`. The only thing that distinguishes them is discharging the hypothesis — which
+is precisely what the checker now makes affordable. Recommend the same Python-side
+pre-simulation for each of the 42 `w★` blocks before any kernel time is spent: it costs
+seconds and it found two transcription bugs on the first object attempted.
+
+### 15.3 A note for L6 on `DivCert`
+
+`DivCert.Rbot`/`Sbot` are stated on the **assembled** cofactors `R₀`, `S₀` — single
+`ℕ → ℕ → ℕ → ℚ` functions — not blockwise. So the collapse-class grouping at `k = 0`
+(`H_k → 0`, `H_{n+k}, H_{n−k} → H_n`, `H_{k+l} → H_l`, `H_{n+k+l} → H_{n+l}`) is already
+accommodated: only the *sum over blocks* has to vanish. No change to the structure is needed,
+and L6 should not feel obliged to make each block vanish separately.
+
+### 15.4 Kernel cost of `key_check`, and the one optimisation it exposes
+
+The first attempt spent 15 minutes without reaching `key_check` at all: the 1133-entry `AmidP`
+list literal blew the default 200 000-heartbeat budget during **elaboration**, and the
+cascading errors consumed the rest. `set_option maxHeartbeats 0` fixes it. **Recording this
+because it is a trap the 42-block job will hit 26 times**: a multi-thousand-entry `Poly`
+literal needs the heartbeat limit lifted *before* any kernel work is attempted, and a failure
+there looks exactly like a slow proof.
+
+`key_check : LHSP = RHSP := by rfl` is a **terminating** computation — the merge is
+fuel-bounded and every other recursion is structural — so its cost is a duration, not a risk.
+One optimisation is already visible and should be made before the 42-block job:
+
+> **`substK`/`substL` are the bottleneck, not the products.** As written they rebuild
+> `ppow pN a` and `ppow pL c` *per monomial* — for `AmidP` that is 1133 × (up to 24 + 8)
+> single-monomial `pmul`s, each allocating a fresh list. The fix is one line: multiply by the
+> monomial `(a, 0, c)` with **`smul`** (a `List.map`) instead of by `ppow pN a * ppow pL c`.
+> That replaces ~4·10⁴ full `pmul` calls with ~1·10³ maps and should recover the projection.
+
+For the 42-block `w★` job this matters: `Z5STAR_CERT.md` §6 reports **26 cofactor polynomials,
+≤ 94 595 monomials of `ℤ[n,k,l]` in total, `deg_n ≤ 50`, `deg_k, deg_l ≤ 12`** — that is 38.7×
+the Q row's 2445 cofactor monomials, spread over 42 independent identities of roughly Q-row
+size each. At the measured 3.5·10³ W/s that is **≈ 1.5–2 h serial, ~10 min wall on 12 cores**
+if each block is its own module — *after* the `substK` fix, and it is worth doing that fix
+first.
+
+### 15.5 Two corrections from `Z5STAR_CERT.md`, applied to `BZStar.lean`
+
+1. ⛔ **`DivCert` can never be discharged.** `Z5STAR_CERT.md` §7 proves no order-zero divergence
+   certificate `T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀` exists for any weight whose difference has a
+   nonzero maximal component, and that any bridge *operator* must annihilate `Q` — hence order
+   ≥ 3, hence (as `ŵ₃ ∉ W_tel`) **order ≥ 4**. `DivCert` and
+   `PhatSum_eq_PStarSum_of_divCert` are kept as markers, labelled `⛔ UNSATISFIABLE`, exactly
+   like the antisymmetry route. **Neither is on the critical path**:
+   `PStarSum_eq_Phat_of_rec` reaches `Phat` through `eq_of_BZRec` and the three initial values,
+   never through `PhatSum` — the `w★` row *is* the `P̂` row because both satisfy `L_BZ` with the
+   same three initial values, which is stronger and cheaper than any weight-level bridge.
+2. **The certificate's subtracted letters live at base `n+3`**, i.e. `H^(r)_{n+3−k}`,
+   `H^(r)_{n+3−l}`, not `H^(r)_{n−k}`, `H^(r)_{n−l}`, and that mixed base is what cancels the
+   interior poles. Added to `BZStar.lean` §1.1:
+
+   ```lean
+   theorem Harm_sub_succ_n3 {r} (hr : 0 < r) (n x : ℕ) :
+       Harm r (n + 3 - x) = Harm r (n - x) + 1/((n+1-x : ℕ) : ℚ)^r + 1/((n+2-x : ℕ) : ℚ)^r
+                                            + 1/((n+3-x : ℕ) : ℚ)^r
+   ```
+
+   — three applications of `Harm_sub_succ_n`, and like its parent it needs **no `x ≤ n`
+   hypothesis**, so the conversion is free at every point of the telescoping range.

@@ -1,0 +1,15 @@
+   n=0  [0s]
+   n=50  [1s]
+   n=100  [4s]
+   n=150  [14s]
+   n=200  [35s]
+   n=250  [72s]
+   n=300  [126s]
+   n=350  [208s]
+   n=400  [315s]
+   n=450  [456s]
+   n=500  [634s]
+design 501 x 1270 built in 634s (p=4194301)
+rank of the sum-map = 501  ->  dim K5 = 769  (excess rows 0)
+K5 basis saved: 769 vectors in dimension 1270
+antisym directions: 573 ; A @ antisym nonzero entries: 0

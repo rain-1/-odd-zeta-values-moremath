@@ -1,0 +1,139 @@
+% A Lean-oriented proof of the single-sum formula for Apéry's companion.
+% Convention: binomial coefficients are zero outside their natural range.
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\newcommand{\Hthree}[1]{H_{#1}^{(3)}}
+\newcommand{\Kern}{F}
+\newcommand{\Ppoly}{P}
+\newcommand{\dd}{\mathop{}\!d}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\section*{A telescoping proof of Apéry's companion formula}
+
+For $m\geq 0$, put
+\[
+  \Hthree m:=\sum_{j=1}^{m}\frac1{j^3},\qquad \Hthree0=0,
+\]
+and, for $n,k\in\mathbb Z$, put
+\[
+ \Kern_{n,k}:=
+ \begin{cases}
+ \displaystyle\binom nk^2\binom{n+k}{k}^2,&0\leq k\leq n,\\[1ex]
+ 0,&\text{otherwise}.
+ \end{cases}
+\]
+Define
+\[
+ \widetilde b_n:=\sum_{k\in\mathbb Z}\Kern_{n,k}
+       \bigl(2\Hthree n-\Hthree k\bigr)\qquad(n\geq0).
+\]
+The sum is finite by definition.  We prove that it is the usual Apéry
+companion sequence, i.e.
+\[
+ \boxed{\quad b_n=\sum_{k=0}^n\binom nk^2\binom{n+k}{k}^2
+       \bigl(2H_n^{(3)}-H_k^{(3)}\bigr).\quad}                 \tag{A}\label{eq:A}
+\]
+
+Let
+\[
+ \Ppoly(n):=34n^3+51n^2+27n+5,
+ \qquad
+ d_{n,k}:=2\Hthree n-\Hthree k.
+\]
+We use the following two rational identities.  They are the only
+non-formal algebraic input in the proof.
+
+\begin{lemma}[Apéry kernel certificate]\label{lem:kernel}
+For $n\geq1$ and $k\in\mathbb Z$,
+\[
+ (n+1)^3\Kern_{n+1,k}-\Ppoly(n)\Kern_{n,k}+n^3\Kern_{n-1,k}
+ =G_{n,k}-G_{n,k-1},                                          \tag{B}\label{eq:B}
+\]
+where
+\[
+ G_{n,k}:=4(2n+1)\bigl(k(2k+1)-(2n+1)^2\bigr)\Kern_{n,k}.
+\]
+\end{lemma}
+
+\begin{lemma}[Residual certificate]\label{lem:residual}
+For $n\geq1$ and $k\in\mathbb Z$, the expression
+\[
+ \frac{G_{n,k-1}}{k^3}+2\Kern_{n+1,k}-2\Kern_{n-1,k}          \tag{C}
+\]
+is understood as $0$ when $k=0$, and otherwise equals
+\[
+ C_{n,k+1}-C_{n,k},                                           \tag{D}
+\]
+where
+\[
+ C_{n,k}:=
+ \frac{4k^4(k-1)(2n+1)\bigl(k-2n(n+1)-1\bigr)}{n^2(n+1)^2}
+ \frac{(n+k-1)!^2}{k!^4(n-k+1)!^2}.
+\]
+Here $C_{n,k}$ is set to $0$ whenever one of the displayed factorials
+is outside its natural range.
+\end{lemma}
+
+\begin{proof}[Proof of \eqref{eq:A} from Lemmas \ref{lem:kernel}--\ref{lem:residual}]
+The elementary harmonic identities are
+\[
+ d_{n+1,k}-d_{n,k}=\frac{2}{(n+1)^3},\qquad
+ d_{n,k}-d_{n-1,k}=\frac{2}{n^3},\qquad
+ d_{n,k}-d_{n,k-1}=-\frac1{k^3}.                              \tag{E}\label{eq:E}
+\]
+For the last formula we only use $k\geq1$.
+
+Multiply \eqref{eq:B} by $d_{n,k}$ and use the first two identities in
+\eqref{eq:E}.  This gives
+\begin{align*}
+ &(n+1)^3\Kern_{n+1,k}d_{n+1,k}
+       -\Ppoly(n)\Kern_{n,k}d_{n,k}
+       +n^3\Kern_{n-1,k}d_{n-1,k}\\
+ &\quad=(G_{n,k}-G_{n,k-1})d_{n,k}
+       +2\Kern_{n+1,k}-2\Kern_{n-1,k}\\
+ &\quad=G_{n,k}d_{n,k}-G_{n,k-1}d_{n,k-1}
+       +\frac{G_{n,k-1}}{k^3}
+       +2\Kern_{n+1,k}-2\Kern_{n-1,k}.
+                                                                    \tag{F}\label{eq:F}
+\end{align*}
+At $k=0$ the $G_{n,-1}/k^3$ term is omitted, and the same formula holds.
+By Lemma~\ref{lem:residual}, \eqref{eq:F} becomes
+\begin{align*}
+ &(n+1)^3\Kern_{n+1,k}d_{n+1,k}
+       -\Ppoly(n)\Kern_{n,k}d_{n,k}
+       +n^3\Kern_{n-1,k}d_{n-1,k}\\
+ &\qquad=
+ \bigl(G_{n,k}d_{n,k}+C_{n,k+1}\bigr)
+ -\bigl(G_{n,k-1}d_{n,k-1}+C_{n,k}\bigr).                    \tag{G}\label{eq:G}
+\end{align*}
+Summing \eqref{eq:G} over $k\in\mathbb Z$ is legitimate because every
+term has finite support.  The right-hand side telescopes to zero, hence
+\[
+ (n+1)^3\widetilde b_{n+1}-\Ppoly(n)\widetilde b_n
+       +n^3\widetilde b_{n-1}=0\qquad(n\geq1).                \tag{H}\label{eq:H}
+\]
+Finally,
+\[
+ \widetilde b_0=0,
+ \qquad
+ \widetilde b_1=\Kern_{1,0}(2\Hthree1-\Hthree0)
+          +\Kern_{1,1}(2\Hthree1-\Hthree1)=2+4=6.
+\]
+Thus $(\widetilde b_n)$ has Apéry's companion recurrence and its two
+defining initial values $(0,6)$.  Uniqueness of a second-order recurrence
+therefore gives $\widetilde b_n=b_n$ for every $n\geq0$.
+\end{proof}
+
+\paragraph{Formalisation split.}
+The Lean development naturally separates into: (i) proving the two
+certificates \eqref{eq:B} and \eqref{D} by field normalisation after
+expanding the binomial/factorial ratios; (ii) the finite-support telescoping
+argument \eqref{eq:G}$\Rightarrow$\eqref{eq:H}; and (iii) recurrence uniqueness
+from the initial values.  It is usually easiest to formalise the certificates
+on the finite index interval $0\leq k\leq n+1$, avoiding a globally defined
+factorial quotient for $C_{n,k}$.
+
+\end{document}

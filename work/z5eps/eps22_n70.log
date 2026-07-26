@@ -1,0 +1,13 @@
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+distinct var-parts: 787
+  rows through n = 0
+  rows through n = 10
+  rows through n = 20
+  rows through n = 30
+  rows through n = 40
+  rows through n = 50
+  rows through n = 60
+  rows through n = 70
+Phi5: (2556, 3753) 16.6s
