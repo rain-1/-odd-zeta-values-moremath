@@ -1,0 +1,180 @@
+COMPLETELY FORMALLY VERIFIED IN LEAN 4 — odd-zeta programme
+Repository: lean/ZetaLucas/   ·   Lean v4.33.0-rc1, Mathlib cd580e54
+Compiled: 2026-07-26.  `lake build` clean, 8673 jobs.  Total 3570 lines, 12 modules.
+
+INCLUSION CRITERION for this file: the statement is a theorem in the development,
+proved with NO `sorry` and NO `native_decide`, and `#print axioms` returns exactly
+  [propext, Classical.choice, Quot.sound]
+(the three standard Lean axioms — no additional assumptions). Every entry below was
+re-checked by running `#print axioms` on 2026-07-26; the raw output is reproducible
+with `lake env lean` on a file importing ZetaLucas. Anything NOT meeting this bar is
+listed in the final section and is NOT claimed.
+
+NOTATION
+  A(n,k) = C(n,k)^2 C(n+k,k)^2          a_n = sum_{k<=n} A(n,k)      (Apery numbers)
+  T(n,k,l) = C(n+k,n)C(n,k)^2 C(n+l,n)C(n,l)^2 C(n+k+l,n)
+  Q_n = sum_{k,l<=n} T(n,k,l)                                        (Brown-Zudilin)
+  H^(r)_m = sum_{j<=m} j^-r                    H_m = H^(1)_m
+  For x,y in Q:  x = y (mod p^m)  means  v_p(x-y) >= m.
+  p is prime throughout; hypotheses on a, r are stated per theorem and are load-bearing.
+
+--------------------------------------------------------------------------------
+1. FIRST SOLUTIONS — Lucas congruences                        [ZetaLucas/Apery.lean,
+                                                               ZetaLucas/BrownZudilin.lean]
+
+  apery_lucas          a_{ap+r} = a_a * a_r  (mod p)
+                       for EVERY prime p, every a >= 0, and r < p.
+  apery_lucas_digits   a_n = prod_i a_{n_i} (mod p) over the base-p digits of n.
+  Q_lucas              Q_{ap+r} = Q_a * Q_r  (mod p), same generality.
+  Q_lucas_digits       the base-p digit-product form for Q.
+
+  Supporting, also verified [ZetaLucas/Core.lean]: choose_digits (Lucas' theorem in
+  two-digit form), choose_digits_zero, choose_carry_zero (carry annihilation),
+  Finset.sum_range_mul (range(m*n) reindexing), padicValNat_choose_lt_sq.
+  NOTE: apery_lucas is Gessel's classical theorem (J. Number Theory 14 (1982)); it is
+  formalised here, not discovered here. The Q form is its analogue for the BZ sum.
+
+--------------------------------------------------------------------------------
+2. DESCENT FOR TWISTED TRUNCATED ZETA VALUES                   [ZetaLucas/Letters.lean]
+
+  K_descent (LEMMA K)  For chi : N -> Z completely multiplicative and r >= 1,
+                       p^r * K_chi^(r)(y) = chi(p) * K_chi^(r)(floor(y/p))  (mod p),
+                       where K_chi^(r)(y) = sum_{m<=y} chi(m)/m^r.
+                       This is the mechanism that produces the character factor.
+  mon_descent          the same for a monomial in several such letters: the p-power is
+                       the total degree and the character value is the product.
+
+--------------------------------------------------------------------------------
+3. THE ABSTRACT SECOND-SOLUTION THEOREM                      [ZetaLucas/TheoremLB.lean]
+
+  theorem_LB           Let S : N^2 -> Z, J finite, c : J -> Q, mon : J -> List Letter,
+                       w in N, chi_p in Z. Under seven explicit hypotheses
+                       (H1) digit factorisation of S mod p,
+                       (H2) S(n,k) = 0 for k > n,
+                       (H3) digit compatibility of every letter argument,
+                       (H4) tameness: every letter argument <= n for k <= n,
+                       (H4c) every coefficient c_j is p-integral,
+                       (Hw) every monomial has total degree w,
+                       (H5) every monomial has character value chi_p at p,
+                       one has, for a, r < p,
+                            p^w * B(ap+r) = chi_p * B(a) * A(r)   (mod p),
+                       where A(n) = sum_k S(n,k) and B(n) = sum_k S(n,k) w(n,k).
+                       chi is carried as a hypothesis-bearing function; Mathlib's
+                       DirichletCharacter is not used.
+
+--------------------------------------------------------------------------------
+4. TWO INSTANCES OF IT                                        [ZetaLucas/Instances.lean]
+
+  bMin_lucas           p^3 * bMin(ap+r) = bMin(a) * a_r  (mod p),  a, r < p, all primes,
+                       for bMin(n) = sum_k A(n,k) (2 H^(3)_n - H^(3)_k).
+  bFranel_lucas        p^2 * beta(ap+r) = beta(a) * f_r  (mod p),  a, r < p, p /= 2,
+                       f_n = sum_k C(n,k)^3 (Franel), beta its harmonic companion.
+
+  BOTH instantiate chi_p := 1.  NO instance with a nontrivial character is verified,
+  and none is claimed anywhere in this development.
+
+--------------------------------------------------------------------------------
+5. APERY'S COMPANION: CLOSED FORM AND CONGRUENCE            [ZetaLucas/MinimalForm.lean]
+
+  bApery               defined by Apery's recurrence:
+                       b_0 = 0, b_1 = 6,
+                       (n+2)^3 b_{n+2} = P(n+1) b_{n+1} - (n+1)^3 b_n,
+                       P(n) = 34n^3 + 51n^2 + 27n + 5.
+  bMin_rec             the sum bMin satisfies that same recurrence (the certificate work;
+                       CERT-1/CERT-2 close by `ring` after the Lemma-0 absorptions).
+  bMin_eq_bApery       bMin(n) = bApery(n) for all n.
+  apery_b_harmonic_closed_form
+                       sum_{k<=n} C(n,k)^2 C(n+k,k)^2 (2 H^(3)_n - H^(3)_k) = bApery(n).
+  bApery_lucas         p^3 * bApery(ap+r) = bApery(a) * a_r  (mod p), a, r < p, all primes.
+
+  SCOPE, stated because it matters: in Lean b_n is pinned by the RECURRENCE together
+  with b_0 = 0, b_1 = 6 — the sequence-theoretic characterisation — NOT by the classical
+  double-sum expression with the nested alternating inner sum. Their equivalence is
+  proved on paper (six Zeilberger/Gosper certificates, work/MINIMAL_FORM_PROOF.md) and
+  is NOT formalised.
+  Kernel-checked sanity values in-file: bApery 2 = 351/4, bApery 3 = 62531/36.
+
+--------------------------------------------------------------------------------
+6. THE DEFECT MODULE                                             [ZetaLucas/Defect.lean]
+
+  apery_defect_V_eq_zero
+                       sum_{k<=n} C(n,k)^2 C(n+k,k)^2 (H_{n+k} + H_{n-k} - 2 H_k) = 0,
+                       for all n >= 0.
+                       Proof is purely rational — no contour integration, no growth
+                       estimate: g = phi^2 with phi(z) = prod_{i=1..n}(z+i)/prod_{j=0..n}(z-j),
+                       whose simple poles have residues (-1)^k C(n,k) C(n+k,k) by Lagrange
+                       interpolation; Res_m(phi^2) = 2 beta_m sum_{k/=m} beta_k/(m-k) is
+                       antisymmetric and sums to zero.
+                       (Supporting: Vsum_eq_zero, star_identity, key_poly.)
+  wolstenholme_weak    H_{p-1} = 0 (mod p) for p > 2, by the l <-> p-l pairing.
+                       Recorded gap: Mathlib contains NO Wolstenholme congruence in any
+                       form; this had to be proved from scratch.
+  borrow_left / borrow_right / borrow_congr
+                       outside the region r+s < p both sides of the digit expansion are
+                       = 0 (mod p^2), because A is a SQUARE. (The squareness step is
+                       load-bearing for the first-order law.)
+  V_restricted_dvd, U_restricted_cong, U_pInt
+                       the restricted-to-unrestricted comparison, and p-integrality of
+                       U_r for r < p. This is the lemma that was MISSING from the paper
+                       draft and from the working notes: the digit expansion holds only
+                       on r+s < p, so summing it gives restricted functionals; and U_r
+                       genuinely carries p in its denominator (U_5 = 13276637/10,
+                       U_7 = 67890874657/70), so its p-integrality is a consequence of
+                       r < p and of this lemma, not of anything stated earlier.
+
+--------------------------------------------------------------------------------
+7. A DENOMINATOR DEFECT IN THE LITERATURE                      [ZetaLucas/BZFactor12.lean]
+
+  dlcm, dlcm_two_pow_five      d_n = lcm(1..n) by recursion; d_2^5 = 32 by `decide`.
+  BZ_P2_not_integral           d_2^5 * P_2 not in Z, where P_2 = 1190161/384.
+  BZ_P2_factor_twelve          12 * d_2^5 * P_2 = 1190161 in Z.
+  BZ_twelve_minimal            any c in N with c * d_2^5 * P_2 in Z satisfies 12 | c.
+
+  SCOPE: P_2 = 1190161/384 is Brown-Zudilin's OWN PRINTED VALUE (arXiv:2210.03391),
+  taken here as a quoted hypothesis. Nothing about the cellular-integral construction
+  is formalised. The theorems are arithmetic consequences of that number.
+
+--------------------------------------------------------------------------------
+8. INFRASTRUCTURE (verified, used by the above)
+
+  [PadicBridge.lean]  PInt / PDvd / PCong on Q via padicNorm; PCong.of_zmod, which
+                      imports any ZMod p congruence from Core.lean. Limitation on
+                      record: this layer is mod p ONLY. A graded v_p >= m layer does
+                      not exist, and everything above first order in this programme is
+                      blocked on building one (estimated 400-600 lines).
+  [Kummer.lean]       K1-K4, two- and three-digit Kummer carry counting. Present and
+                      verified, NOT consumed by any headline result above; retained for
+                      a future Lemma-D-style upgrade.
+
+--------------------------------------------------------------------------------
+9. NOT VERIFIED — explicitly excluded from every claim above
+
+  * bz_creative_telescoping  (BZClosedForm.lean, line 661) — a `sorry`. It asserts that
+    the two Brown-Zudilin double sums satisfy the order-3 recurrence L_BZ. Everything in
+    BZClosedForm.lean outside that one lemma is sorry-free, INCLUDING the implication
+    "recurrence + initial values => closed form"; but the three theorems downstream of
+    the sorry — PhatSum_eq_Phat, PSum_eq_PBZ, BZ_Phat_closed_form_explicit — carry
+    sorryAx and are NOT verified results.
+  * The compact zeta(5)-family closed forms. Verified computationally to n = 360; the
+    certificate is not obtained. (As of 2026-07-26 the obstruction is understood: L_BZ
+    is not a telescoper of T*w — the minimal telescoper is a strict left multiple.)
+  * p^5 P_{ap+r} = P_a Q_r (mod p) for the BZ weight-5 row. Verified, never proved.
+  * The chi-twisted congruence for any family with chi /= 1. Verified across 15 families
+    x 28 primes with zero failures; no instance is proved, and Theorem LB provably does
+    not apply (tameness fails, exhaustively for E).
+  * The master depth laws (mod p^w forms), the two-level matrix law at orders p^2/p^3,
+    the rank profile, the Gamma-deformation origin of the weight, and all of the
+    Phase-2 / p-adic / Frobenius-constant material. Proved on paper or verified
+    computationally; none of it has been through the kernel.
+  * The equivalence of bApery with Apery's classical double-sum expression (see 5).
+  * That Q_n satisfies L_BZ for all n. Checked at n = 0 only, by `decide`.
+
+--------------------------------------------------------------------------------
+10. HOW TO CHECK THIS FILE
+
+  cd lean && lake exe cache get && lake build
+  then, for any name X above:   #print axioms ZetaLucas.X
+  expecting exactly [propext, Classical.choice, Quot.sound].
+  A single grep confirms the sorry inventory:
+    grep -rn "sorry\|native_decide" ZetaLucas/*.lean
+  which returns exactly one live occurrence, BZClosedForm.lean line 661, plus comments.
