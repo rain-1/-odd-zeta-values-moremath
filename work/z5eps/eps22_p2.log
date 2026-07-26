@@ -9,9 +9,8 @@ distinct var-parts: 787
   rows through n = 40
   rows through n = 50
   rows through n = 60
-  rows through n = 70
-Phi5: (2556, 3753) 16.6s
+Phi5: (2145, 3753) 33.6s
 calibration Ll*H4_n in ker(Phi5): PASS
 antisym dim: 1776
-rank(A) = 1673, rank([A|rhs]) = 1673  (187.4s)
+rank(A) = 1673, rank([A|rhs]) = 1673  (75.7s)
 VERDICT: sym(Delta5) IN sym(ker Phi5)

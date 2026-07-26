@@ -191,17 +191,15 @@ NOTATION
 
   READ THE SCOPE NOTE BELOW BEFORE QUOTING ANYTHING FROM THIS SECTION.
 
-  IN FLIGHT, NOT YET CLAIMED (2026-07-26, end of session): BZQRow.lean has been extended with
-  the reflective discharge of KeyPoly (section 10's checker; theorems key_check, key_poly) and
-  the theorems below have been restated WITHOUT the hypothesis. The polynomial identity was
-  verified bit-for-bit outside Lean by a faithful re-implementation of the exact padd/pmul/
-  ppow/substK computation the kernel performs (LHSP == RHSP, 3798 == 3798 monomials), and the
-  computation is terminating by construction; but the kernel check had NOT returned when this
-  file was written (>8 min CPU, flat 3.0 GB). UNTIL `lake build` is seen to complete, treat
-  the entries below in their CONDITIONAL form, which the unconditional one implies. Re-run
-    cd lean && lake build
-  and, if it completes, delete this paragraph and the SCOPE note, and drop "KeyPoly ->" from
-  QSum_bzrec, QSum_eq_QBZ, Q_eq_QBZ below. See work/LEAN_QROW.md section 15.
+  STATUS OF THE DISCHARGE (2026-07-26): the reflective checker of section 10 was pointed at
+  KeyPoly. The client glue was written and the identity CONFIRMED CORRECT outside Lean
+  (LHSP == RHSP, 3798 == 3798 monomials, by a faithful re-implementation of the exact kernel
+  computation) -- and in doing so it exposed the false-Acore bug described at the top of this
+  file. But the check does NOT fit in one kernel evaluation: `decide +kernel` reached 12.7 GB
+  and was killed. It needs the same chain-split that the `ring` route needed, with explicit
+  intermediate Poly constants; see work/LEAN_QROW.md section 16. So the entries below remain
+  CONDITIONAL, and BZQRow.lean has been restored to its conditional form (with the Acore sign
+  FIXED, so KeyPoly as now stated is true and simply undischarged).
 
   KeyPoly              a NAMED PROPOSITION (a `def ... : Prop`), not a theorem: the single
                        cleared polynomial identity in Z[n,k,l] of the Q-row WZ certificate,

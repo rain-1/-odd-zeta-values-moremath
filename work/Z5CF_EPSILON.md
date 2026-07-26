@@ -282,3 +282,114 @@ variable at a time); (ii) measure the telescoper order across the §2.3 pencil �
 member below order 7 immediately cheapens the P̂ certificate; (iii) push the tensor sweep
 to ε⁶/ε⁷ to see whether `[ε⁶]` carries `Q`-multiples (ζ(3)²-flavour) as `C(ε)`'s shape
 predicts, and whether a second modulus appears.
+
+---
+
+# ADDENDUM (same session, coordinator resume) — §12. THE DEFECTS REDUCE TO THE ONE-VARIABLE RESIDUE LEMMA: **YES**
+
+**Task:** do the cellwise defects `Δ₃ := B₃ − ŵ₃^sym` and `Δ₅ := B₅ − (33/4)·w₅^sym`
+(null by §3, not cellwise-zero) reduce to the one-variable rational residue lemma /
+the proved `Z5CF_BARNES` §7 + `Z5_ORDER0` §3.3 functionals?  Code `work/z5eps/eps20–23.py`.
+
+## 12.0 HEADLINE
+
+* **Weight 3: YES, fully constructive and exact.** `sym(Δ₃)` equals an explicit
+  **20-term integer-coefficient combination of proved residue-lemma generators** —
+  an identity in the letter-monomial ring (0 mismatches over all 255 monomial
+  coefficients, exact ℚ), hence `Σ T·B₃ = Σ T·ŵ₃^sym` is **[PROVED modulo the
+  §12.2 generator derivations, each a one-line residue-lemma instance]**. The
+  combination needs the **pole-raising jets** (§12.2 J2, J3) — the fixed-pole
+  facts `g_l(j)=0, g_l'(j)=0, q_l(j)=0` alone span only 29 of the 66 symmetric
+  kernel dimensions and **miss `sym(Δ₃)` by exactly one dimension** `[MEASURED]`.
+* **Weight 5: YES in shape.** `sym(Δ₅) ∈ sym(ker Φ₅)`: there exist `u, u′` with
+  `Σ_l T·u = 0 per fixed (n,k)`, `Σ_k T·u′ = 0 per fixed (n,l)` and
+  `Δ₅ = u + u′ + antisymmetric` — `[VERIFIED: rank(A) = rank([A|rhs]) = 1673,
+  saturated (identical at 1770, 2145 and 2556 rows), 2 primes]`. So the weight-5
+  bridge defect **also never needs a genuinely two-variable cancellation**; the
+  constructive assembly over the §12.2 jet families at weight 5 is a mechanical
+  next step (same calculus, jets to order 5), not attempted here.
+* **The dictionary that makes this work:** the Barnes local data IS deformation
+  data — `C12/C22 = L_k = −∂_k log T`, `C21/C22 = −∂_l log T`,
+  `C11/C22 = L_kL_l − C₂` with `C₂ = ∂_k∂_l log T`-type; and my family-1
+  deformation has `L₁ = 2·L_l`. The ε-machinery and the Barnes kernel are 2-jets
+  of the same object `R_n(x,y)`.
+
+## 12.1 The membership test (the decisive instrument)
+
+`Δ ∈ U + σU + antisym ⟺ sym(Δ) ∈ sym(ker Φ)`, where `Φ` rows are the per-`(n,k)`
+sums `u ↦ Σ_l T(n,k,l)·u`. Equivalent linear form used at weight 5: `Φ·a = −Φ·sym(Δ)`
+solvable over the antisymmetric subspace. `ker Φ` from finite rows *over*-estimates
+`U`, so NO would have been decisive; YES was then hardened by rank saturation.
+
+| space | monomials | rank Φ | saturation | dim sym(ker) | sym(Δ) member? |
+|---|---|---|---|---|---|
+| weight 3, deg ≤ 3 | 255 | 181 | stable n ≤ 26 → 32 | 66 | **YES** (2 primes) |
+| weight 5, deg ≤ 5 | 3753 | — | rank(A) = 1673 at 1770/2145/2556 rows | — | **YES** (2 primes) |
+
+## 12.2 The proved generator families (all per fixed `(n,k)`, mirrors by k↔l)
+
+With `R_k(z) := ∏_{i=1}^n(z+i)·∏_{i=1}^n(z+k+i)/∏_{j=0}^n(z−j)²` (residue data at
+`z = l` proportional to `T(n,k,l)`, l-independent prefactor), all of these are
+`Σ_{l} Res_{z=l}[R_k·ρ] = 0` for rational `ρ` (residue lemma; `R_kρ = O(z^{-2})`;
+off-lattice poles of `ρ` are killed or regularised by the numerator factor
+`∏(z+i)` — the same P-factor mechanism as the ζ(3) proof):
+
+* `G1[φ] = L_l·φ`, `G2[φ] = (L_kL_l−C₂)·φ` (φ any k-side weight-≤2 monomial) — §7.1/7.2 facts;
+* `G3[range,φ]`, `G4a`, `G5[range]` — range-sums of `g_k(j) = 0` (1 ≤ j ≤ n+k),
+  `g_k'(j) = 0` (k < j ≤ n), `q_k(j) = 0` (1 ≤ j ≤ n);
+* `G4b` — range-sum of the new `q_k(j) = g_k'(j)` on `n < j ≤ n+k`;
+* `G6` — the `(L5)` anti-diagonal residue at `x = −k`, m-range [1,n];
+* **`J1[φ], J2, J6`** — jets of `R_k·ρQ`, `R_k·ρQ²`, `R_k·ρQ2` with
+  `ρQ = Σ_{j=0}^n 1/(z−j)`, `ρQ2 = Σ_j 1/(z−j)²` (pole-raising: residues carry the
+  2nd/3rd Taylor jets `e₂ = Γ₁²/2 − Γ₂/2`, `e₃ = Γ₁³/6 − Γ₁Γ₂/2 + Γ₃/3` of
+  `log[(z−l)²R_k]` — this is where the pure-l quadratic/cubic content lives, and
+  what the fixed-pole list can never produce);
+* **`J3[m]`** — jets of `R_k·ρQ·ρ_m`, `ρ_m = Σ_{i=1}^m 1/(z+i)`, m ∈ {k, n, n+k}.
+
+**Two candidate families are NOT identities and were caught by calibration**
+`[EXCLUDED]`: `Res[R_k·ρ_mρ_{m'}]` and `Res[R_k·Σ1/(z+i)²]` — their shared
+**double** poles at `z = −i` meet only a *simple* zero of `R_k`, so the off-lattice
+residues survive (`R_k'(−i) ≠ 0`). Every generator actually used passes
+`Φ·g = 0` at both primes (57 of 66 candidates; 435+ rows each).
+
+## 12.3 The weight-3 decomposition, exact
+
+> `sym(Δ₃) = −8·G1[H²_n] − 8·G1[H²_k] − 16·G1[H²_{n+k}] + 36·G1[H_k²]`
+> `− 24·G1[H_kH_{n+k}] − 48·G1[H_kH_{n−k}] + 4·G1[H_{n+k}²] + 16·G1[H_{n+k}H_{n−k}]`
+> `+ 16·G1[H_{n−k}²] − 4·G2[H_k] − 4·G2[H_{n+k}] + 8·G2[H_{n−k}]`
+> `+ 12·G3[(l→n+l),H_k] − 4·G3[(l→n+l),H_{n+k}] − 8·G3[(l→n+l),H_{n−k}]`
+> `− 4·G4a − 4·G4b + 4·G5[(l→k+l)] + 16·J2 − 8·J3[n]`
+>
+> `[PROVED as a monomial-ring identity, exact ℚ, 0 mismatches in 255 coefficients]`
+
+Consequently `Δ₃ = (that combination) + (k↔l-antisymmetric part)`, and
+`Σ T·Δ₃ = 0` follows from `Finset.sum_comm` + the listed residue facts. Note which
+generators are load-bearing: `G4b` (the new `q = g′` fact), `G5`, and the two
+pole-raising jets `J2, J3[n]`. `G6`/(L5) is *in* the span but not needed at
+weight 3.
+
+## 12.4 Verification record (this addendum)
+
+| # | statement | method/range | failures |
+|---|---|---|---|
+| A1 | Δ₃/Δ₅ monomial expansions == direct Bell defects | exact ℚ, all cells n ≤ 6 / n ≤ 4 | 0 |
+| A2 | `Σ T·Δ₃ = 0`, `Σ T·Δ₅ = 0` | exact ℚ, n ≤ 6 / n ≤ 5 | 0 |
+| A3 | rank(Φ₃) = 181 saturated; `sym(Δ₃) ∈ sym(ker Φ₃)` | 2 primes, 435 rows | 0 |
+| A4 | 57 generators ∈ ker Φ₃ (incl. G4b, G6, J1–J3, J6) | 2 primes | 0 |
+| A5 | J4/J5-type NOT null (shared double poles) | calibration | caught |
+| A6 | weight-3 combination identity | **exact ℚ, coefficient-wise** | 0 |
+| A7 | `sym(Δ₅) ∈ sym(ker Φ₅)`, rank 1673 saturated | p₁ at 1770 & 2556 rows; p₂ at 2145 | 0 |
+| A8 | fixed-pole-only span misses sym(Δ₃) (rank 29 vs 30) | 2 primes | — |
+
+## 12.5 What this hands the Barnes session
+
+1. The stuck weight-5 bridge's *shape* is settled: its defect (in the bare-letter
+   basis; basis-explicit per the shuffle caveat) needs **no two-variable
+   cancellation** — per-fixed-variable identities suffice `[VERIFIED, saturated,
+   2 primes]`.
+2. The generator calculus to use is the **pole-raising jet family** of §12.2 —
+   `Res[R_k·(Σ1/(z−j))^a·(Σ1/(z+i))^b]` with jets `e₂, e₃` (and at weight 5,
+   `e₄, e₅`) — not further fixed-pole evaluations.
+3. The weight-3 bridge (`Σ T·B₃ = Σ T·ŵ₃^sym`) is done constructively; combined
+   with `Z5CF_BARNES` §7.3 this makes the ζ(2)-row identification independent of
+   any fitted input.

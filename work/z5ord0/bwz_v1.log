@@ -1,0 +1,31 @@
+JOINT (B-bot) WZ certificate, family V1 = (j+1)(n+j+1)(n+j+2)(n+j+3)
+  n= 1 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 1 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 2 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 2 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 3 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 3 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 4 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 4 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 5 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 5 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 6 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 6 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 7 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 7 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 8 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 8 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 9 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n= 9 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=10 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=10 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=11 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=11 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=12 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=12 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=13 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=13 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=14 p=4194301  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+  n=14 p=4194287  deg(Nu)=12  rows=49/13 ratio=3.8 | C1 fresh 0/60 bad | C2 u(0)=0 | C3 Du(n+4)=nonzero | C4 Phi_top=0 | C5 interior poles 0 | C6 0 bad | C7 sum=0 G_top=0 G_bot=0 -> PASS
+28/28 (n,p) pairs fully verified
+minimal numerator degrees: [(1, 12), (2, 12), (3, 12), (4, 12), (5, 12), (6, 12), (7, 12), (8, 12), (9, 12), (10, 12), (11, 12), (12, 12), (13, 12), (14, 12)]

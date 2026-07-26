@@ -251,6 +251,34 @@ only of maximal blocks.
 | **(B-bot), the 16 non-trivial collapse classes** | **each individually FEASIBLE** `[MEASURED]` — one augmented solve per class, `work/z5star/bbotdiag3.py` |
 | **(B-bot), the `()` class** | ⚠ **INFEASIBLE** — see §3.3 |
 
+### 3.4 How the 16 (B-bot) rows are imposed — exactly, and for free
+
+The point-sampled version (`work/z5star/gosper.py`) cost ≈ 40 s per `(n,p)`, which would have made
+the re-lift a 15-hour job. It is not needed. **At `k = 0` the ansatz numerator collapses:**
+
+```
+   ρ_j(n,0,l) = ( Σ_{a,b} c_{ab}·0^a·l^b ) / D(n,0,l) = ( Σ_b c_{0b}·l^b ) / D(n,0,l),
+```
+
+so only the `a = 0` row of the `(k,l)` grid survives — **13 of 169** coefficients for a letter
+block, **17 of 289** for the `()` block — and since every ansatz block carries the *same*
+denominator `D`, a collapse class `c` imposes
+
+```
+   Σ_{j ∈ c} c^{(j)}_{0b} = 0      for every power b,
+```
+
+an **exact** linear condition with **no sample points at all**. The maximal blocks drop out
+identically (`r_Q` has a factor `k³`, `s_Q` an `l³`). That is **195 dense rows** assembled by
+numpy indexing in microseconds, and the constrained solve costs **3.6 s per `(n,p)`** — the same
+as the unconstrained one, not 40 s.
+
+`[VERIFIED]` at `n = 9, 11`: `nbad0 = 0` with the 195 rows appended; **fresh-point check of all
+109 components at 400 unseen points ALL ZERO** (43 600 identities each); and a *direct*
+verification that every one of the 16 classes sums to zero at 40 random boundary points —
+**0 violations**. At `n = 1,2,3,5,7,9,11,13` the residual `()` boundary sum is **0**
+(`work/z5star/bsum2.py`).
+
 ### 3.3 The one open obligation, stated exactly
 
 ```
@@ -366,28 +394,10 @@ same for generic `n` and `p`, so every coefficient of the canonical solution is 
 rational function of `n`. Sweep `n`, reconstruct by Cauchy interpolation mod `p`, CRT over several
 primes, rational-lift.
 
-> ⚠ **Which gauge is lifted.** The lift is of the **pivot-canonical** solution, i.e. the one that
-> satisfies (★) and (B-top) but **not** the 16 (B-bot) collapse-class rows of §3.2. The
-> (B-bot)-satisfying solution lies in the *same* ansatz, with the *same* denominator `D` and the
-> *same* bidegree — it is a different point of the same affine solution space, reachable by adding
-> the 360 rows to the solve (`work/z5star/gosper.py` does exactly that, `nbad = 0`, at every `n`
-> tested). Re-lifting in that gauge is a mechanical re-run of `nsweep.py` with the extra rows;
-> **measured cost ≈ 40 s per `(n, p)` against 3 s**, i.e. ≈ 15 h on this machine for 150 `n` × 24
-> primes unless `class_rows` is vectorised (a ~10× win is available and easy). That re-run is
-> **not done here.** The bidegrees and the denominator `D` are gauge-independent and carry over;
-> `deg_n`, the common `dn(n)` and the coefficient heights are **not** guaranteed to, and are the
-> numbers that would need re-measuring.
-
-| step | result |
-|---|---|
-| sweep `n = 4…119`, `p = 4194301`, 116 points | **0 failures**, 113 s on 10 cores |
-| coefficients, total / identically zero / live | 4634 / 2218 / **2416** |
-| rational reconstruction of all 2416 | **0 failures** |
-| `max deg_n(numerator)` before clearing | **44** |
-| `max deg_n(denominator)` | **19** |
-| **held-out check of the interpolants** (fit on 142 points, test on 8 unseen `n`, every coefficient, every prime) | **0 mismatches** `[VERIFIED]` |
-| degree of the interpolant, agreement across primes | **0 mismatches** |
-| **common `n`-denominator `dn(n)`** | `n·(n+1)⁴(n+2)⁴(n+3)²(n+4)²(n+5)²(n+6)²(n+7)²`, **degree 19, entirely split into linear factors** `[MEASURED]` — every root is a small negative integer, with all 19 accounted for |
+> **Which gauge is lifted.** The delivered certificate is in the **(B-bot)-satisfying gauge**:
+> the 16 collapse-class conditions of §3.2 are imposed as exact rows inside the joint solve
+> (`work/z5star/cert5.py`), so `R_w(n,0,l)` and `S_w(n,k,0)` reduce to the `()` class alone, whose
+> boundary sum is zero (§3.3). See §3.4 for how those rows are assembled.
 
 `[VERIFIED]` The certificate closes and passes fresh-point verification at **`n = 1, 2, 3, 4, 5`**
 as well as at `n = 9, 11, 13` (`work/z5star/smalln.py`; 200 unseen points × 109 components each,
@@ -463,11 +473,29 @@ Coefficient bit-lengths require the multi-prime lift; see §8.
 
 ### 6.3 What this predicts for the reflective checker
 
-The checker's cost is roughly linear in total monomials. The **cofactor data** is ≤ 94 595
-monomials `[MEASURED]`. The **left-hand side** — the 42 components of `E_{w★}/Φ` — is *not*
-measured here; the analogous `ŵ₃` numbers in `LEAN_QROW` §6 are 784–2771 monomials per component
-at degrees up to `(30,13,9)`, and `w★`'s components have the same shape, so **≈ 4·10⁴ monomials
-in total for the LHS** is the right order. That measurement is cheap and should be made.
+The checker's cost is roughly linear in total monomials.
+
+**The left-hand side, now measured** `[MEASURED]` (`work/z5star/lhs.py`, cleared per component
+and interpolated mod `p`):
+
+| component | clearing exponents | monomials | `(deg_n, deg_k, deg_l)` |
+|---|---|---|---|
+| `()` | `n³ (n+k+j)² (n+k+l+j) (n+l+j)` | **5 337** | (39,15,12) |
+| `H⁽¹⁾_k, H⁽¹⁾_{n−k}, H⁽¹⁾_n, H⁽¹⁾_{n+k+l}, H⁽¹⁾_{n+l}` (×5) | `n² (n+k+j)²` | 2 079 each | (31,12,6) |
+| **`H⁽¹⁾_l`, `H⁽¹⁾_{n+k}`** | — | **0 — identically zero** | — |
+| `H⁽²⁾_k` | `n (n+k+j)(n+k+l+j)(n+l+j)` | 3 439 | (32,12,12) |
+| `H⁽²⁾_l` | `n (n+k+j)(n+k+l+j)` | 2 425 | (29,12,9) |
+| `H⁽²⁾_{n−l}, H⁽²⁾_n, H⁽²⁾_{n+k}` (×3) | `n (n+k+l+j)(n+l+j)` | 2 404 each | (29,9,12) |
+| the **29 maximal** components | — | **784 each** | (21,6,6) |
+| **TOTAL, 42 components** | | **51 544** | |
+
+Two things worth flagging. **The 29 maximal components are 784 monomials at degrees (21,6,6) —
+exactly the `Q`-row left-hand side `Σ_i c_i P_i`** (`LEAN_QROW` §2: 784, (21,6,6), 58 bits). They
+*are* `w_j ×` that one object, so they carry **no new data**. And **two components vanish
+identically** (`H⁽¹⁾_l` and `H⁽¹⁾_{n+k}`: every quotient monomial above them is an `H^(r)_k` or
+`H^(r)_l`, whose `n`-increment is zero), so those two block equations are homogeneous.
+
+Genuinely new LHS data: **51 544 − 29×784 = 28 808 monomials**.
 
 The **cleared per-block identities** are larger: each is the cofactor times the
 clearing multipliers (`D(n,k+1,l)`, `D(n,k,l+1)`, `gk`, `gl`, `dn`), pushing degrees to roughly
