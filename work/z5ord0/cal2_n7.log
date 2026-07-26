@@ -1,0 +1,12 @@
+CALIBRATION  w = L_k + L_l   supp=8   n=7   grouped bottom boundary, force_k=0
+  md1/F1/d4        n=7 J=9 nc=25 cols=225 rows=675(+60 bnd) ratio=3.27 rank=225 null=0 resid=510 -> no
+  md1/F1/d6        n=7 J=9 nc=49 cols=441 rows=1323(+80 bnd) ratio=3.18 rank=422 null=19 resid=981 -> no
+  md1/F2/d4        n=7 J=9 nc=25 cols=225 rows=675(+60 bnd) ratio=3.27 rank=225 null=0 resid=510 -> no
+  md1/F2/d6        n=7 J=9 nc=49 cols=441 rows=1323(+80 bnd) ratio=3.18 rank=435 null=6 resid=968 -> no
+  md1/F3/d4        n=7 J=9 nc=25 cols=225 rows=675(+60 bnd) ratio=3.27 rank=225 null=0 resid=510 -> no
+  md1/F3/d6        n=7 J=9 nc=49 cols=441 rows=1323(+80 bnd) ratio=3.18 rank=441 null=0 resid=962 -> no
+  md1/F4/d4        n=7 J=9 nc=25 cols=225 rows=675(+60 bnd) ratio=3.27 rank=225 null=0 resid=510 -> no
+  md1/F4/d6        n=7 J=9 nc=49 cols=441 rows=1323(+80 bnd) ratio=3.18 rank=441 null=0 resid=962 -> no
+  md2/F1/d4        n=7 J=43 nc=25 cols=1075 rows=3225(+168 bnd) ratio=3.16 rank=1075 null=0 resid=548 -> no
+  md2/F1/d6        n=7 J=43 nc=49 cols=2107 rows=6321(+224 bnd) ratio=3.11 rank=2012 null=95 resid=991 -> no
+  md2/F2/d4        n=7 J=43 nc=25 cols=1075 rows=3225(+168 bnd) ratio=3.16 rank=1075 null=0 resid=510 -> no

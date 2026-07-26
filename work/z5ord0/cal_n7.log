@@ -1,0 +1,17 @@
+CALIBRATION  w = L_k + L_l   supp=8   n=7
+  md1/E1/d4  n=7 J=9 nc=20 cols=180 rows=666 (ratio 3.70) rank=180 nullity=0 residual=486 -> no
+  md1/E1/d6  n=7 J=9 nc=42 cols=378 rows=1197 (ratio 3.17) rank=364 nullity=14 residual=833 -> no
+  md1/E1/d8  n=7 J=9 nc=72 cols=648 rows=1926 (ratio 2.97) rank=585 nullity=63 residual=1341 -> no
+  md1/E2/d4  n=7 J=9 nc=20 cols=180 rows=666 (ratio 3.70) rank=180 nullity=0 residual=486 -> no
+  md1/E2/d6  n=7 J=9 nc=42 cols=378 rows=1197 (ratio 3.17) rank=378 nullity=0 residual=819 -> no
+  md1/E2/d8  n=7 J=9 nc=72 cols=648 rows=1926 (ratio 2.97) rank=635 nullity=13 residual=1291 -> no
+  md1/E3/d4  n=7 J=9 nc=20 cols=180 rows=666 (ratio 3.70) rank=180 nullity=0 residual=486 -> no
+  md1/E3/d6  n=7 J=9 nc=42 cols=378 rows=1197 (ratio 3.17) rank=378 nullity=0 residual=819 -> no
+  md1/E3/d8  n=7 J=9 nc=72 cols=648 rows=1926 (ratio 2.97) rank=648 nullity=0 residual=1278 -> no
+  md1/E4/d4  n=7 J=9 nc=20 cols=180 rows=666 (ratio 3.70) rank=180 nullity=0 residual=486 -> no
+  md1/E4/d6  n=7 J=9 nc=42 cols=378 rows=1197 (ratio 3.17) rank=378 nullity=0 residual=819 -> no
+  md1/E4/d8  n=7 J=9 nc=72 cols=648 rows=1926 (ratio 2.97) rank=646 nullity=2 residual=1280 -> no
+  md2/E1/d4  n=7 J=43 nc=20 cols=860 rows=3182 (ratio 3.70) rank=860 nullity=0 residual=486 -> no
+  md2/E1/d6  n=7 J=43 nc=42 cols=1806 rows=5719 (ratio 3.17) rank=1744 nullity=62 residual=819 -> no
+  md2/E1/d8  n=7 J=43 nc=72 cols=3096 rows=9202 (ratio 2.97) rank=2807 nullity=289 residual=1307 -> no
+  md2/E2/d4  n=7 J=43 nc=20 cols=860 rows=3182 (ratio 3.70) rank=860 nullity=0 residual=486 -> no

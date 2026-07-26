@@ -1,0 +1,2 @@
+CALIBRATION  w = L_k + L_l   supp=8   n=7   grouped bottom boundary, force_k=0
+  md2/F2/d8        n=7 J=43 nc=81 cols=3483 rows=10449(+280 bnd) ratio=3.08 rank=3253 null=230 resid=1595 -> no
