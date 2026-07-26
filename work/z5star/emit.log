@@ -1,0 +1,10 @@
+primes 6, fit points 142, held out 8
+   prime 4194301 done [55s]
+   prime 4194287 done [100s]
+   prime 4194277 done [143s]
+   prime 4194271 done [181s]
+   prime 4194247 done [230s]
+   prime 4194217 done [311s]
+HELD-OUT check: 0 mismatches over 8 points x 4634 coefficients x 6 primes
+degree mismatch across primes for 0 coefficients
+unliftable coefficients: 30588  [315s]

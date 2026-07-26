@@ -12,7 +12,7 @@ Everything below is exact (`fractions.Fraction`, ints, or mod-p with
 |---|---|
 | T1 — unwanted ζ(3) | `[PROVED]` by Codex §7.2 — **dropped**, not re-derived here |
 | T2 — ζ(2)/compact-weight-3 bridge | `[PROVED, structural]` — **independently verified here, every step, including sensitivity** |
-| T3 — rational/compact-weight-5 bridge | **open**. Route-deciding fact established: *the Euler/coupled sums do NOT cancel*. Sharp ranges for `g_l, g_l', q_l` pinned with edge witnesses; `[1]I^{p,q}` DERIVED from §8 |
+| T3 — rational/compact-weight-5 bridge | **open**. Sharp ranges for `g_l, g_l', q_l` pinned with edge witnesses; `[1]I^{p,q}` DERIVED from §8; **combined-object tools (L1)–(L5) delivered (§3.3), incl. the anti-diagonal family** |
 | order-0 certificates | **no `[EXCLUDED]` verdict issued** — the ζ(4) calibration does not pass, so per discipline 2 nothing is reported as a negative |
 
 Two results are new and independent of everything else in the programme:
@@ -272,6 +272,11 @@ and, split further into the univariate and bivariate halves:
 **not** reducible to a pure rational-product identity by discarding the Euler
 content, so the shape that closed ζ(4), T1 and T2 does not extend as-is.
 
+> **Read §3.3 before acting on this.** The correct reading of the non-cancellation
+> is not "chase the Euler sums harder" but "the split is the problem": these are
+> triangular residue sums of one two-variable object, and separating them destroys
+> the cancellation. §3.3 supersedes the recommendation that followed.
+
 Two further structural obstructions to the direct analogue, both established
 in §1.1:
 
@@ -383,11 +388,75 @@ drops out of the weighted sum.* The `U_{r,m}(k,l)` terms, which couple both
 indices, are exactly what survives — and `N != 0`, so they must be balanced
 against the product/compact contribution rather than among themselves.
 
-**Recommendation.** The new ingredient target 3 needs is a summation rule for
-`sum_{k,l} A_kl U_{r,m}(k,l)` and `sum_{k,l} B_kl U_{r,m}(k,l)`. Abel summation in
-`t` turns these into `sum_t (H^(m)_{t+l}/t^r) * (tail sum of A or B over k >= t)`,
-and for `B` the tail equals minus the head because `sum_k B_kl = 0`. That is the
-natural next handle and is where I would spend the next block of effort.
+### 3.3 SUPERSEDES the above — the combined object, and why the split was wrong
+
+The `[MEASURED]` non-cancellation in §3 and the term table in §3.2 are correct
+but they are **the wrong question**. The `U`/`S` objects are triangular residue
+sums of one and the same two-variable function, and separating them destroys the
+cancellation — the same lesson as `Sigma_ac + 2 Sigma_{c^2} = 0` in
+`work/APERY_GAP.md`, where the combination vanishes and no summand does. The
+recommendation that stood here (Abel-summing the `U`-sums individually) is
+withdrawn.
+
+The right object is `R_n` itself, whose **full bivariate partial fractions** are
+
+```
+R_n(x,y) = sum_{k,l} [ A_kl/((x+k)^2(y+l)^2) + B_kl/((x+k)(y+l)^2)
+                     + C_kl/((x+k)^2(y+l)) + D_kl/((x+k)(y+l)) ]      (PF2)
+```
+
+and which collapses one variable at a time to
+
+```
+R_n(x,y) = sum_{l=0}^{n} [ g_l(x)/(y+l)^2 + q_l(x)/(y+l) ]            (L2)
+```
+
+**(L2) is the identity that expresses a whole row of the residue sum in terms of
+`g` and `q` without touching the individual terms** — the thing the ε route asked
+for. All tools below are verified exactly over ℚ, `n = 0..8`
+(`work/z5ord0/t_lattice.py`).
+
+| tool | statement | cells | failures |
+|---|---|---|---|
+| (PF2) | full bivariate partial fractions `== R_n`, generic rational `(x,y)` | 225 | 0 |
+| **(L2)** | `R_n(x,y) = sum_l [g_l(x)/(y+l)^2 + q_l(x)/(y+l)]` | 225 | 0 |
+| **(L1)** | for positive integers, `R_n(i,j) = 0` **⟺** `min(i,j) <= n` | 420 | 0 |
+| (L1 sharp) | `R_n(i,j) != 0` when `min(i,j) > n` | 81 | 0 |
+| **(L3)** | for `1 <= j <= n`: `sum_l [g_l(x)/(j+l)^2 + q_l(x)/(j+l)] = 0` for **every** `x` | 288 | 0 |
+| **(L4)** | same with `g_l'`, `q_l'` — for every `x` | 288 | 0 |
+| **(L5)** | **anti-diagonal**: for `1 <= m <= n`, `sum_l [g_l(x)/(m-x+l)^2 + q_l(x)/(m-x+l)] = 0` | 180 | 0 |
+
+Why each matters:
+
+* **(L1)** is the cleanest evaluation rule available: the criterion is just
+  `min(i,j) <= n`, because `prod(x-i')` kills `i<=n`, `prod(y-i')` kills `j<=n`,
+  and `prod(x+y-i')` kills `i+j<=n` which already implies `min<=n`. Sharp
+  witnesses at the corner: `R_5(6,6) = 1/15336002626560`,
+  `R_6(7,7) = 1/8735273496069120`, `R_7(8,8) = 1/5500930248253440000`, while
+  `R_n(n, 99) = 0` for every `n`.
+
+* **(L3)/(L4)** hold *identically in `x`* because `R_n(x,j) ≡ 0` in `x` whenever
+  `1 <= j <= n`. Taking `x > 2n` makes every summand nonzero. At `n=6, j=3,
+  x=13`: 13 of the 14 summands are nonzero (`q_3(13)` alone vanishes) —
+  `g_0/(j)^2 = 121/114252774480`, `q_0/(j) = -408397/19194466112640`, … — and the
+  sum is exactly `0`. **This is a cancellation that exists only in the
+  combination**, invisible to (V1)/(V3) term by term.
+
+* **(L5) is the genuinely new tool.** It comes from the third numerator product
+  `prod_{i=1}^n (x+y-i)`, which does **not** appear in `g_l` or `q_l`
+  individually — it is precisely the structure destroyed by splitting. Because
+  the pole locations `m-x+l` move with `x`, (L5) is *not* a consequence of the
+  one-variable facts by partial fractions in `x`. At `n=6, m=2, x=17/6`: **all 14
+  summands nonzero, sum exactly `0`.**
+
+**For the ε route:** (L2) is the requested "triangular residue sum in terms of
+`g`, `g'`, `q`", and (L5) is the anti-diagonal relation that the `B3`/`B5` Bell
+coefficients would meet as residue-null directions. (L1)'s criterion `min(i,j)<=n`
+is the form to use when evaluating against lattice sums, and (L3)/(L4) give
+`2n` linear relations among `{g_l, q_l}` and `{g_l', q_l'}` valid at every `x`,
+including outside all the individual vanishing ranges.
+
+The order-zero product-span search for target 3 is dropped, per instruction.
 
 ---
 
@@ -562,4 +631,5 @@ work/z5ord0/
   t_target3.py   target-3 triage scaffolding
   t_sharp.py     SHARP index ranges for g_l, g_l', q_l + edge witnesses
   t_nested.py    the combined nested (Euler/coupled) contribution, term by term
+  t_lattice.py   COMBINED-OBJECT tools (PF2),(L1)-(L5)  <-- for the epsilon route
 ```

@@ -1,0 +1,31 @@
+wstar          support 29  J=42  N_hard=13  letters=13 (h1/h2: 12)  deg2=28  sym=False
+   G0  slack=0   force=1 deg=(9,9) nc=180   npts=291   rank=171   ker=9     : 12/12 letter blocks FAIL  [0s]
+   G0  slack=2   force=1 deg=(11,11) nc=264   npts=409   rank=239   ker=25    : 12/12 letter blocks FAIL  [0s]
+   G0  slack=4   force=1 deg=(13,13) nc=364   npts=549   rank=315   ker=49    : 12/12 letter blocks FAIL  [0s]
+   G0  slack=6   force=1 deg=(15,15) nc=480   npts=712   rank=399   ker=81    : 12/12 letter blocks FAIL  [1s]
+   G0  slack=8   force=1 deg=(17,17) nc=612   npts=896   rank=491   ker=121   : 0/12 letter blocks FAIL  [1s]
+        CALIB w3hat: h2_pk nbad=0 (want 0), h1_k nbad=405 (want >0)
+   G3  slack=0   force=1 deg=(12,12) nc=312   npts=476   rank=276   ker=36    : 12/12 letter blocks FAIL  [0s]
+   G3  slack=2   force=1 deg=(14,14) nc=420   npts=628   rank=356   ker=64    : 12/12 letter blocks FAIL  [0s]
+   G3  slack=4   force=1 deg=(16,16) nc=544   npts=801   rank=444   ker=100   : 12/12 letter blocks FAIL  [1s]
+   G3  slack=6   force=1 deg=(18,18) nc=684   npts=997   rank=540   ker=144   : 12/12 letter blocks FAIL  [1s]
+   G3  slack=8   force=1 deg=(20,20) nc=840   npts=1216  rank=644   ker=196   : 0/12 letter blocks FAIL  [2s]
+        CALIB w3hat: h2_pk nbad=0 (want 0), h1_k nbad=572 (want >0)
+   G1  slack=0   force=1 deg=(15,15) nc=480   npts=712   rank=416   ker=64    : 12/12 letter blocks FAIL  [1s]
+   G1  slack=2   force=1 deg=(17,17) nc=612   npts=896   rank=512   ker=100   : 12/12 letter blocks FAIL  [1s]
+   G1  slack=4   force=1 deg=(19,19) nc=760   npts=1104  rank=616   ker=144   : 12/12 letter blocks FAIL  [1s]
+   G1  slack=6   force=1 deg=(21,21) nc=924   npts=1333  rank=728   ker=196   : 12/12 letter blocks FAIL  [2s]
+   G1  slack=8   force=1 deg=(23,23) nc=1104  npts=1585  rank=848   ker=256   : 0/12 letter blocks FAIL  [3s]
+        CALIB w3hat: h2_pk nbad=0 (want 0), h1_k nbad=737 (want >0)
+   G2  slack=0   force=1 deg=(18,18) nc=684   npts=997   rank=603   ker=81    : 12/12 letter blocks FAIL  [1s]
+   G2  slack=2   force=1 deg=(20,20) nc=840   npts=1216  rank=719   ker=121   : 12/12 letter blocks FAIL  [2s]
+   G2  slack=4   force=1 deg=(22,22) nc=1012  npts=1456  rank=843   ker=169   : 12/12 letter blocks FAIL  [2s]
+   G2  slack=6   force=1 deg=(24,24) nc=1200  npts=1720  rank=975   ker=225   : 12/12 letter blocks FAIL  [3s]
+   G2  slack=8   force=1 deg=(26,26) nc=1404  npts=2005  rank=1115  ker=289   : 0/12 letter blocks FAIL  [4s]
+        CALIB w3hat: h2_pk nbad=0 (want 0), h1_k nbad=890 (want >0)
+   F1  slack=0   force=1 deg=(16,16) nc=544   npts=801   rank=444   ker=100   : 12/12 letter blocks FAIL  [1s]
+   F1  slack=2   force=1 deg=(18,18) nc=684   npts=997   rank=540   ker=144   : 12/12 letter blocks FAIL  [1s]
+   F1  slack=4   force=1 deg=(20,20) nc=840   npts=1216  rank=644   ker=196   : 12/12 letter blocks FAIL  [2s]
+   F1  slack=6   force=1 deg=(22,22) nc=1012  npts=1456  rank=756   ker=256   : 12/12 letter blocks FAIL  [2s]
+   F1  slack=8   force=1 deg=(24,24) nc=1200  npts=1720  rank=876   ker=324   : 0/12 letter blocks FAIL  [3s]
+        CALIB w3hat: h2_pk nbad=0 (want 0), h1_k nbad=844 (want >0)

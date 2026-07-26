@@ -1,0 +1,41 @@
+=== emit2 ===
+unliftable coefficients: 0 
+block          part    deg_n deg_k deg_l  monomials    Qnum    Qden    Zcoef   Zscale  colcoef  colscale
+1              rho        50    12    10       5356     122      14        0        0      123        14
+1              sigma      50    10    12       3214     120      14        0        0      120        14
+h1_k           rho        49    12    10       4774     121      14        0        0      123        14
+h1_k           sigma      49    10    12       2753     119      14        0        0      120        14
+h1_l           rho        49    12    10       4774     119      14        0        0      119        14
+h1_l           sigma      49    10    12       2753     117      14        0        0      118        14
+h1_mk          rho        49    12    10       4774     121      14        0        0      122        14
+h1_mk          sigma      49    10    12       2753     118      14        0        0      118        14
+h1_n           rho        49    12    10       4774     121      14        0        0      122        14
+h1_n           sigma      49    10    12       2753     118      14        0        0      118        14
+h1_pk          rho        49    12    10       4774     119      14        0        0      119        14
+h1_pk          sigma      49    10    12       2753     117      14        0        0      118        14
+h1_pkl         rho        49    12    10       4774     121      14        0        0      122        14
+h1_pkl         sigma      49    10    12       2753     118      14        0        0      118        14
+h1_pl          rho        49    12    10       4774     119      14        0        0      122        14
+h1_pl          sigma      49     3    12       1661     118      14        0        0      119        14
+h2_k           rho        50    12    10       4573     122      14        0        0      123        14
+h2_k           sigma      50    10    12       2416     119      14        0        0      119        14
+h2_l           rho        50    12    10       4574     122      14        0        0      122        14
+h2_l           sigma      50    10    12       2416     119      14        0        0      119        14
+h2_ml          rho        50    12    10       4574     119      14        0        0      121        14
+h2_ml          sigma      50     3    12       1735     115      14        0        0      117        14
+h2_n           rho        50    12    10       4574     119      14        0        0      121        14
+h2_n           sigma      50     3    12       1735     115      14        0        0      117        14
+h2_pk          rho        50    12    10       4574     119      14        0        0      121        14
+h2_pk          sigma      50     3    12       1735     115      14        0        0      117        14
+MAX/TOTAL                                     93073     122      14        0        0      123        14
+written /home/ubuntu/fable-episode-2/zeta-math-2/work/z5star/CERT_wstar_sparse.json (7.7 MB)
+written CERT_wstar_sparse.txt
+=== check6 (exact Q residual, n,k,l small) ===
+    pr *= incn(L, n, k, l, u)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5star/check6.py", line 102, in incn
+    tot -= Fr(1, (cn * (n + ii) + ck * k + cl * l + 1) ** r)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/fractions.py", line 281, in __new__
+    raise ZeroDivisionError('Fraction(%s, 0)' % numerator)
+ZeroDivisionError: Fraction(1, 0)
