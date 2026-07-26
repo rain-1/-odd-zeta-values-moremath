@@ -1,0 +1,11 @@
+fam    p    | TERMWISE on vanishing layer  | AGGREGATED layer       | surviving        | total
+------------------------------------------------------------------------------------------------------------------------------------
+s7     29   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [170696 van, 6320 surv, 9s]
+        worst termwise cell: n=30=1*29+1, k=29=1*29+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=58, 2k/p^2=0.07]
+s7     31   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [222915 van, 8190 surv, 15s]
+        worst termwise cell: n=32=1*31+1, k=31=1*31+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=62, 2k/p^2=0.06]
+s7     37   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [452862 van, 16002 surv, 53s]
+        worst termwise cell: n=38=1*37+1, k=37=1*37+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=74, 2k/p^2=0.05]
+s7     41   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [683278 van, 23562 surv, 115s]
+        worst termwise cell: n=42=1*41+1, k=41=1*41+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=82, 2k/p^2=0.05]
+------------------------------------------------------------------------------------------------------------------------------------

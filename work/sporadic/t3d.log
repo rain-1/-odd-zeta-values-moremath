@@ -1,0 +1,8 @@
+F/COMPLETE tame7 hom1 w=2 args=n,k,n-k,l,k-l,n-l,n-k+l deg<=None disc=(-3,) hom=1 cols=56   rank=34   excess=82   INCONSISTENT
+F/COMPLETE tame7 pure w=2 args=n,k,n-k,l,k-l,n-l,n-k+l deg<=None disc=() hom=None cols=35   rank=23   excess=72   INCONSISTENT
+F/COMPLETE tame7 all w=2 args=n,k,n-k,l,k-l,n-l,n-k+l deg<=2 disc=(-3,) hom=None cols=119  rank=75   excess=104  INCONSISTENT
+eta/COMPLETE tame11 d2 hom1 w=3 args=n,k,2k,3k,4k,5k,n-k,n-2k,n-3k,n-4k,n-5k deg<=2 disc=(5,) hom=1 cols=253  rank=253  excess=60   INCONSISTENT
+eta/COMPLETE tame11 pure w=3 args=n,k,2k,3k,4k,5k,n-k,n-2k,n-3k,n-4k,n-5k deg<=3 disc=() hom=None cols=418  rank=418  excess=60   INCONSISTENT
+zeta/COMPLETE tame7 d2 hom1 w=3 args=n,k,n-k,l,n-l,k-l,k+l-n deg<=2 disc=(-3,) hom=1 cols=105  rank=102  excess=63   INCONSISTENT
+zeta/COMPLETE tame7 pure w=3 args=n,k,n-k,l,n-l,k-l,k+l-n deg<=3 disc=() hom=None cols=140  rank=125  excess=75   INCONSISTENT
+eta/tame6 all w=3 args=n,k,n-k,tb,2k,n-5k deg<=None disc=(5,) hom=None cols=520  rank=493  excess=87   INCONSISTENT

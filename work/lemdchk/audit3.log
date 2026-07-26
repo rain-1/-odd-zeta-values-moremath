@@ -1,0 +1,20 @@
+alpha  p=5   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 4/34 fail;  p|S(a,b) digits 16/30 fail
+alpha  p=7   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 12/93 fail;  p|S(a,b) digits 66/84 fail
+alpha  p=11  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 24/355 fail;  p|S(a,b) digits 220/330 fail
+alpha  p=13  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 60/582 fail;  p|S(a,b) digits 466/546 fail
+--------------------------------------------------------------------------------------------------------------------------------
+eps    p=5   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/31 fail;  p|S(a,b) digits 0/15 fail
+eps    p=7   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/78 fail;  p|S(a,b) digits 0/42 fail
+eps    p=11  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/265 fail;  p|S(a,b) digits 0/165 fail
+eps    p=13  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/417 fail;  p|S(a,b) digits 0/273 fail
+--------------------------------------------------------------------------------------------------------------------------------
+s7     p=5   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=6   | LOCAL: p!|S(a,b) digits 0/21 fail;  p|S(a,b) digits 0/25 fail
+s7     p=7   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=10  | LOCAL: p!|S(a,b) digits 19/57 fail;  p|S(a,b) digits 0/63 fail
+s7     p=11  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=24  | LOCAL: p!|S(a,b) digits 0/188 fail;  p|S(a,b) digits 0/242 fail
+s7     p=13  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=36  | LOCAL: p!|S(a,b) digits 0/300 fail;  p|S(a,b) digits 0/390 fail
+--------------------------------------------------------------------------------------------------------------------------------
+E      p=5   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/34 fail;  p|S(a,b) digits 0/30 fail
+E      p=7   | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/93 fail;  p|S(a,b) digits 0/84 fail
+E      p=11  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/355 fail;  p|S(a,b) digits 0/330 fail
+E      p=13  | (H1) fails=0    | (H2) non-product cells=0     b-set != {0..a} cells=0     Sigma_r sum fails=0   | LOCAL: p!|S(a,b) digits 0/582 fail;  p|S(a,b) digits 0/546 fail
+--------------------------------------------------------------------------------------------------------------------------------

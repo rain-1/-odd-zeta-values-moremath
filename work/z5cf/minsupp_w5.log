@@ -1,0 +1,8 @@
+165 columns, 201 rows
+   none at size 2 (1 prefixes, 0.0s)
+   none at size 3 (165 prefixes, 0.2s)
+   none at size 4 (13530 prefixes, 12.9s)
+   none at size 5 (735130 prefixes, 708.0s)
+
+no support of size <= 5
+708.0s

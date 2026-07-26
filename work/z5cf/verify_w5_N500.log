@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5cf/probe.py", line 13, in <module>
+    b = np.array([lad_mod(KEY, n, q) for n in range(N + 1)], dtype=np.int64)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5cf/bare.py", line 38, in lad_mod
+    a, b = ladders()[key][n]
+           ~~~~~~~~~~~~~~^^^
+KeyError: 361

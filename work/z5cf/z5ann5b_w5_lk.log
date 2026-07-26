@@ -1,0 +1,12 @@
+START Sun 26 Jul 2026 13:00:55 TAG=w5_lk MEMCAP=4000000000 PCAP=1200
+HF loaded.  closure-property symbols available: {DFinite, DFiniteDE2RE, DFiniteOreAction, DFinitePlus, DFiniteQSubstitute, DFiniteRE2DE, DFiniteSubstitute, DFiniteTimes, DFiniteTimesHyper}
+self-test Sum T*w5 n=0..3 : True
+  ann H5[n+k] : loaded checkpoint (3 gens)
+  ann H4[n+k] : loaded checkpoint (3 gens)
+  ann H3[n+k] : loaded checkpoint (3 gens)
+  ann (alpha-beta) : loaded checkpoint (6 gens)
+  ann S2 : loaded checkpoint (6 gens)
+  ann alpha #6 rank=5 t=0s leaf=639 maxmem=0GB Sun 26 Jul 2026 13:00:56
+  ann Psi #6 rank=7 t=1s leaf=6582 maxmem=0GB Sun 26 Jul 2026 13:00:56
+  aAP = DFiniteTimes[alpha, Psi] : TIME ABORT after 1200s maxmem=0GB Sun 26 Jul 2026 13:20:57
+AP DID NOT RETURN. ALL DONE Sun 26 Jul 2026 13:20:57

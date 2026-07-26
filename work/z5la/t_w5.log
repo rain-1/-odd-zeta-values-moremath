@@ -1,0 +1,10 @@
+n=5  J=58  |supp(w5)|=24 fixed blocks, 34 free
+   degrees of basis: {3: 18, 2: 29, 1: 10, 0: 1}
+   components with NONZERO residual when all free blocks = 0: 34
+   of those, any in supp(w5)? []
+   -> closed-form top cofactors r_j=w_j*r_Q, s_j=w_j*s_Q verified EXACT on all 24 supp(w5) components
+n=9  J=58  |supp(w5)|=24 fixed blocks, 34 free
+   degrees of basis: {3: 18, 2: 29, 1: 10, 0: 1}
+   components with NONZERO residual when all free blocks = 0: 34
+   of those, any in supp(w5)? []
+   -> closed-form top cofactors r_j=w_j*r_Q, s_j=w_j*s_Q verified EXACT on all 24 supp(w5) components

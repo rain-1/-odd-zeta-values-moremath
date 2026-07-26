@@ -1,1 +1,5 @@
 lean/.lake/
+work/z7ss/*.txt
+work/z7ss/*.growth
+work/z7ss/hits*
+log6b.err

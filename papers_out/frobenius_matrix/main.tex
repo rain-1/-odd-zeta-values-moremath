@@ -1,0 +1,262 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\vp}{v_p}
+\newcommand{\A}{A}
+\DeclareMathOperator{\Res}{Res}
+
+\title{A two-level digit law for Ap\'ery's pair}
+\author{[Author]}
+\date{}
+
+\begin{document}
+\begin{abstract}
+Let $a_n$ be the Ap\'ery numbers for $\zeta(3)$ and $b_n$ their companion. We show that
+the pair $(a_n,\,p^3b_n)$ transforms under base-$p$ digit splitting by a single
+upper-triangular matrix whose diagonal is one explicit scalar and whose off-diagonal
+entry is the low digit's own companion value, scaled by exactly $p^{3}$. The scalar is
+the second-order truncation of a $\Gamma$-deformation of the summand, summed over the
+full digit range. The first-order part of the law is proved; it is rank one, and we
+prove the identity that makes it so.
+\end{abstract}
+\maketitle
+
+Throughout $p$ is a prime $\ge5$, and for $x,y\in\QQ$ we write $x\equiv y\pmod{p^m}$ to
+mean $\vp(x-y)\ge m$. Evidence is labelled: statements called Theorem, Lemma or
+Proposition are proved; those called Observation are exact computations over the stated
+range; Conjectures are neither.
+
+\section{The pair, and the two functionals}
+
+\begin{definition}
+$\A(n,k)=\binom nk^2\binom{n+k}k^2$, \ $a_n=\sum_{k=0}^n \A(n,k)$, \ $H^{(r)}_m=\sum_{j=1}^m j^{-r}$,
+$H_m=H^{(1)}_m$, and $b_n=\sum_{k=0}^n \A(n,k)\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)$, the solution of
+\[
+  (n+2)^3b_{n+2}=(34n^3+153n^2+231n+117)\,b_{n+1}-(n+1)^3b_n,\qquad b_0=0,\ b_1=6 .
+\]
+\end{definition}
+
+\begin{definition}\label{def:uv}
+$u(r,s)=H_{r+s}-H_{r-s}$ and $v(r,s)=H_{r+s}+H_{r-s}-2H_s$; these are
+$\tfrac12\partial_n\log \A$ and $\tfrac12\partial_k\log \A$. Put
+\[
+  U_r=\sum_{s} \A(r,s)\,u(r,s),\qquad V_r=\sum_{s} \A(r,s)\,v(r,s).
+\]
+\end{definition}
+
+$U_0,\dots,U_8=0,\;6,\;105,\;2219,\;\tfrac{104825}2,\;\tfrac{13276637}{10},\;
+\tfrac{70543291}2,\;\tfrac{67890874657}{70},\;\tfrac{766399019471}{28}$.
+Note $U_r=\tfrac12\,\mathrm{d}a_n/\mathrm{d}n$ in the $\Gamma$-form.
+
+\section{The expansion, and why the defect is rank one}
+
+\begin{lemma}[digit expansion]\label{lem:exp}
+For $0\le s\le r<p$, $0\le c\le a<p$ and $r+s<p$,
+\[
+  \A(ap+r,\,cp+s)\;\equiv\;\A(a,c)\,\A(r,s)\,\bigl(1+2p[\,a\,u(r,s)+c\,v(r,s)\,]\bigr)\pmod{p^2}.
+\]
+Outside that region the relevant binomial is $\equiv0\pmod p$; since $\A$ is a square,
+both $\A(ap+r,cp+s)$ and $\A(r,s)$ are then $\equiv0\pmod{p^2}$, so those regions do not
+contribute at first order at all.
+\end{lemma}
+
+\begin{proof}
+Only the weak Wolstenholme congruence $H_{p-1}\equiv0\pmod p$ is needed (the $(ip)^{2}$
+terms die of their own accord), and it follows from pairing $l\leftrightarrow p-l$. It
+makes the $(ap)!/(p^aa!)\equiv((p-1)!)^a$ factors cancel, giving
+$\binom{ap+r}{cp+s}\equiv\binom ac\binom rs(1+p[aH_r-cH_s-(a-c)H_{r-s}])$ and
+$\binom{(a+c)p+(r+s)}{cp+s}\equiv\binom{a+c}c\binom{r+s}s(1+p[(a+c)H_{r+s}-cH_s-aH_r])$
+modulo $p^2$. In the product $\A$ the two $aH_r$ terms cancel.
+\end{proof}
+
+Lemma \ref{lem:exp} is available only on $r+s<p$, so summing it produces the
+\emph{restricted} functionals $\widetilde U_r=\sum_{s\le r,\ r+s<p}\A(r,s)u(r,s)$ and
+$\widetilde V_r$, not $U_r$ and $V_r$. The two agree:
+
+\begin{lemma}\label{lem:restrict}
+For $r<p$, \ $\widetilde U_r\equiv U_r$ and $\widetilde V_r\equiv V_r \pmod p$.
+\end{lemma}
+
+\begin{proof}
+For $r+s\ge p$ the carried binomial satisfies $\binom{r+s}s\equiv0\pmod p$, and $\A$ is a
+square, so $p^2\mid \A(r,s)$; while $u(r,s),v(r,s)$ have arguments $<2p$ and hence
+$\vp\ge-1$. Every dropped term therefore has $\vp\ge1$.
+\end{proof}
+
+This is not a formality: $U_r$ is a $p$-independent rational which \emph{does} carry $p$ in
+its denominator for small $r$ — $U_5=13276637/10$ and $U_7=67890874657/70$, so
+$v_5(U_5)=v_7(U_7)=-1$. It is $p$-integral precisely because $r<p$, which is a consequence
+of Lemma \ref{lem:restrict} rather than of anything stated before it.
+
+Since $H^{(3)}_{ap+r}=p^{-3}H^{(3)}_a+G_{ap+r}$ with $G_m=\sum_{j\le m,\ p\nmid j}j^{-3}$
+$p$-integral, the weight contributes nothing below order $p^3$. Lemma \ref{lem:exp}
+therefore gives, with $a'_a=\sum_c c\,\A(a,c)$ and $b'_a=\sum_c c\,\A(a,c)(2H^{(3)}_a-H^{(3)}_c)$,
+\[
+  \tfrac1p\bigl(a_{ap+r}-a_aa_r\bigr)\equiv 2\bigl[a\,a_aU_r+a'_aV_r\bigr],
+  \qquad
+  \tfrac1p\bigl(p^3b_{ap+r}-b_aa_r\bigr)\equiv 2\bigl[a\,b_aU_r+b'_aV_r\bigr]
+  \pmod p,
+\]
+a form of rank at most two. One channel degenerates identically:
+
+\begin{theorem}\label{thm:V}
+$V_n=\displaystyle\sum_{k=0}^{n}\binom nk^2\binom{n+k}k^2\bigl(H_{n+k}+H_{n-k}-2H_k\bigr)=0$
+for all $n\ge0$.
+\end{theorem}
+
+\begin{proof}
+$V_n=\tfrac12\sum_k\partial_k \A_\Gamma(n,k)$ with
+$\A_\Gamma(n,z)=[\Gamma(n+z+1)/(\Gamma(z+1)^2\Gamma(n-z+1))]^2$, and reflection gives
+$\A_\Gamma(n,z)=(\sin^2\pi z/\pi^2)\,g(z)$ with
+$g(z)=\Gamma(n+z+1)^2\Gamma(z-n)^2/\Gamma(z+1)^4$. No analysis is required, because $g$ is
+\emph{rational}:
+\[
+  g=\varphi^2,\qquad
+  \varphi(z)=\frac{\prod_{i=1}^{n}(z+i)}{\prod_{j=0}^{n}(z-j)} .
+\]
+At an integer $z=k$ the double poles of $\A_\Gamma$ cancel and
+$\partial_z \A_\Gamma|_{z=k}=\Res_{z=k}g$. Now $\varphi$ has simple poles with residues
+$\beta_k=(-1)^k\binom nk\binom{n+k}k$ — this is Lagrange interpolation of
+$\prod_{i=1}^n(X+i)$ at the nodes $0,\dots,n$ — so
+\[
+  \Res_{z=m}\varphi^2=2\beta_m\sum_{k\neq m}\frac{\beta_k}{m-k},
+\]
+which is antisymmetric in $(m,k)$ and therefore sums to zero over $m$.
+\end{proof}
+
+\begin{remark}
+No telescoping proof of Theorem \ref{thm:V} of the shape used for the closed form exists:
+any $\Psi=\A\cdot(\alpha H_{n+k}+\beta H_{n-k}+\gamma H_k+\delta)$ forces
+$r(k)\alpha(k+1)-\alpha(k)=1$, which is Gosper's equation for the Ap\'ery summand.
+\end{remark}
+
+\begin{corollary}\label{cor:first}
+For $a,r<p$,
+\[
+  \tfrac1p\bigl(a_{ap+r}-a_aa_r\bigr)\equiv 2a\,a_a\,U_r,
+  \qquad
+  \tfrac1p\bigl(p^3b_{ap+r}-b_aa_r\bigr)\equiv 2a\,b_a\,U_r \pmod p .
+\]
+Both rows carry the same functional $U_r$ and differ only by their own value at level $a$.
+Equivalently
+\[
+  (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot\bigl(a_r+2p\,a\,U_r\bigr)\pmod{p^2},
+  \qquad n=ap+r .
+\]
+\end{corollary}
+
+\begin{remark}
+$U_r$ is not $a_r$, nor $b_r$, nor divisible by $a_r$: at $p=5$, $U_r\not\equiv0$ exactly
+where $a_r\equiv0$. It is the exact analogue, for this pair, of the functional appearing
+in the corresponding law for the Brown--Zudilin $\zeta(5)$ family, and has the same
+origin, $\partial_n\log$ of the summand.
+\end{remark}
+
+\section{The scalar, and the matrix}
+
+\begin{definition}\label{def:adig}
+With $\Pi(t)=\prod_{i\le t}(1+\varepsilon/i)$ and $\bar\Pi(t)=\prod_{i\le t}(1-\varepsilon/i)$,
+\[
+  \A_\Gamma(r+\varepsilon,s)=\A(r,s)\frac{\Pi(r+s)^2}{\Pi(r-s)^2}\quad(s\le r),
+  \qquad
+  \A_\Gamma(r+\varepsilon,r+m)=\varepsilon^2\Bigl(\tfrac{(2r+m)!\,(m-1)!}{((r+m)!)^2}\Bigr)^{2}
+  \Pi(2r+m)^2\bar\Pi(m-1)^2 ,
+\]
+and $\operatorname{Adig}(p,r;\varepsilon)=\sum_{s=0}^{p-1}\A_\Gamma(r+\varepsilon,s)$, the sum
+being over the \emph{full} digit range. Write $X_p(r)=[\varepsilon^2]\operatorname{Adig}(p,r)$.
+\end{definition}
+
+Then $[\varepsilon^0]=a_r$ and $[\varepsilon^1]=2U_r$. The terms with digit $s>r$ — the
+borrow region — are present and are exactly of order $\varepsilon^2$.
+
+\begin{observation}[$p=5,\dots,23$]\label{obs:scalar}
+With $u(a,r)=a_r+2p\,a\,U_r+p^2a^2X_p(r)$,
+\[
+  (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot u(a,r) \pmod{p^3},
+\]
+with floor exactly $3$. Truncating $\operatorname{Adig}$ at orders $m=0,1,2$ gives floors
+$1,2,3$, and floor $3$ for every $m\ge3$: the scalar picture saturates at depth three.
+The same test with the restricted deformation $\sum_{s\le r}$ saturates at depth two, so
+the borrow region is exactly the second-order correction.
+\end{observation}
+
+\begin{observation}[13 primes, $5\le p\le47$]\label{obs:rank}
+The defect of Corollary \ref{cor:first} has rank $1$ at first order and rank $1$ at
+second order, for both rows, and the two rows have the same $r$-side row space at every
+prime. The second-order correction is scalar with $a$-side factor exactly $a^2$.
+\end{observation}
+
+\begin{proposition}[the cross term]\label{prop:cross}
+Modulo $p$ a full block satisfies $\sum_{t=1}^{p-1}t^{-3}\equiv0$, so $G_{ap+r}\equiv H^{(3)}_r$
+and $G_{cp+s}\equiv H^{(3)}_s$. Hence the piece of $p^3b_n$ neglected above is
+$p^3\sum_k \A(n,k)(2G_n-G_k)\equiv p^3\,a_a\,b_r \pmod {p^4}$.
+\end{proposition}
+
+That is, the low digit acts on the pair by
+
+\begin{conjecture}\label{conj:matrix}
+For every prime $p\ge5$ and $n=ap+r$ with $a,r<p$,
+\[
+  (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot
+  \begin{pmatrix} u(a,r) & p^3\,b_r\\[2pt] 0 & u(a,r)\end{pmatrix}
+  \pmod{p^4},
+  \qquad u(a,r)=a_r+2p\,a\,U_r+p^2a^2X_p(r).
+\]
+\end{conjecture}
+
+The $\bmod\ p^2$ truncation is Corollary \ref{cor:first}, proved. The $\bmod\ p^3$
+truncation is Observation \ref{obs:scalar}. The off-diagonal entry is derived in
+Proposition \ref{prop:cross}, and is verified at 13 primes in the sharp form: at order
+$p^3$ the $b$-row defect has rank $3$, subtracting $p^3a_ab_r$ drops it to rank $2$, and
+its $r$-side row space then coincides with the $a$-row's. The residual scalar defect at
+$p^3$ has rank $2$ and is not yet named; that is why the full statement is conjectural.
+
+\begin{remark}
+The cross entry is the low digit's own companion value, scaled by exactly $p^{3}=p^{w}$
+where $w=3$ is the weight of $\zeta(3)$. So the weight is precisely the order at which
+the off-diagonal switches on. For the rank-three Brown--Zudilin $\zeta(5)$ family the
+corresponding statement is that a cross term cannot appear before order $p^3$; here it
+is derived rather than bounded, and the entry is named.
+\end{remark}
+
+\section{The remaining gap}
+
+Writing $\A(ap+r,cp+s)\equiv \A(a,c)\A(r,s)\exp(2p\Lambda_1-p^2\Lambda_2)$ with
+$\Lambda_1=a\,u+c\,v$ and
+$\Lambda_2=(a+c)^2H^{(2)}_{r+s}-2c^2H^{(2)}_s-(a-c)^2H^{(2)}_{r-s}$, the bracket
+$2\Lambda_1^2-\Lambda_2$ has three channels:
+\[
+  a^2:\ 2u^2-\bigl(H^{(2)}_{r+s}-H^{(2)}_{r-s}\bigr),\qquad
+  ac:\ 4uv-2\bigl(H^{(2)}_{r+s}+H^{(2)}_{r-s}\bigr),\qquad
+  c^2:\ 2v^2-\bigl(H^{(2)}_{r+s}-2H^{(2)}_s+H^{(2)}_{r-s}\bigr).
+\]
+The measured $a$-side factor $a^2$ of Observation \ref{obs:rank} says the last two die
+modulo $p$. They are not identities: $\sum_s \A(r,s)\cdot(ac\text{-channel})
+=0,\,-26,\,-\tfrac{905}2,\,-\tfrac{167965}{18},\dots$ and the $c^2$ sums are
+$0,\,11,\,\tfrac{607}4,\dots$, nonzero over $\QQ$ for $1\le r\le30$. The vanishing is
+therefore a genuine modulo-$p$ cancellation between the region $s\le r$ and the borrow
+region $s>r$ — the same borrow terms that supply the second-order scalar. Proving it is
+the one gap between Observation \ref{obs:rank} and a theorem, and the sharpest open
+question here.
+
+The contrast with the first order is worth recording: there the borrow region
+contributes nothing at all, because $\A$ is a square (Lemma \ref{lem:exp}). At second
+order it contributes, and its contribution is exactly what kills the two $c$-channels.
+
+\end{document}

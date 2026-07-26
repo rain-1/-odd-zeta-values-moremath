@@ -1,0 +1,93 @@
+===== E1 slack=10 =====
+w3 n=5 m= 3 E1 deg=(16,16) nc=578 rows=801 ratio=1.38  [1s]
+    ('u2',):rk434,dim1  ('xk',):rk434,dim0  ('xl',):rk434,dim0  ('yk',):rk434,dim0  ('yl',):rk434,dim0  ('zk',):rk434,dim0  ('zl',):rk434,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 4 E1 deg=(17,17) nc=648 rows=897 ratio=1.38  [1s]
+    ('u2',):rk479,dim2  ('xk',):rk479,dim0  ('xl',):rk479,dim0  ('yk',):rk479,dim0  ('yl',):rk479,dim0  ('zk',):rk479,dim0  ('zl',):rk479,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 5 E1 deg=(18,18) nc=722 rows=998 ratio=1.38  [2s]
+    ('u2',):rk526,dim0  ('xk',):rk526,dim0  ('xl',):rk526,dim0  ('yk',):rk526,dim0  ('yl',):rk526,dim0  ('zk',):rk526,dim0  ('zl',):rk526,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 6 E1 deg=(19,19) nc=800 rows=1105 ratio=1.37  [2s]
+    ('u2',):rk575,dim0  ('xk',):rk575,dim0  ('xl',):rk575,dim0  ('yk',):rk575,dim0  ('yl',):rk575,dim0  ('zk',):rk575,dim0  ('zl',):rk575,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 7 E1 deg=(20,20) nc=882 rows=1217 ratio=1.37  [3s]
+    ('u2',):rk626,dim0  ('xk',):rk626,dim0  ('xl',):rk626,dim0  ('yk',):rk626,dim0  ('yl',):rk626,dim0  ('zk',):rk626,dim0  ('zl',):rk626,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 8 E1 deg=(21,21) nc=968 rows=1334 ratio=1.37  [4s]
+    ('u2',):rk679,dim0  ('xk',):rk679,dim0  ('xl',):rk679,dim0  ('yk',):rk679,dim0  ('yl',):rk679,dim0  ('zk',):rk679,dim0  ('zl',):rk679,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 9 E1 deg=(22,22) nc=1058 rows=1457 ratio=1.37  [6s]
+    ('u2',):rk734,dim0  ('xk',):rk734,dim0  ('xl',):rk734,dim0  ('yk',):rk734,dim0  ('yl',):rk734,dim0  ('zk',):rk734,dim0  ('zl',):rk734,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=10 E1 deg=(23,23) nc=1152 rows=1586 ratio=1.37  [7s]
+    ('u2',):rk791,dim0  ('xk',):rk791,dim0  ('xl',):rk791,dim0  ('yk',):rk791,dim0  ('yl',):rk791,dim0  ('zk',):rk791,dim0  ('zl',):rk791,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=11 E1 deg=(24,24) nc=1250 rows=1719 ratio=1.37  [11s]
+    ('u2',):rk850,dim0  ('xk',):rk850,dim0  ('xl',):rk850,dim0  ('yk',):rk850,dim0  ('yl',):rk850,dim0  ('zk',):rk850,dim0  ('zl',):rk850,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=12 E1 deg=(25,25) nc=1352 rows=1858 ratio=1.36  [12s]
+    ('u2',):rk911,dim0  ('xk',):rk911,dim0  ('xl',):rk911,dim0  ('yk',):rk911,dim0  ('yl',):rk911,dim0  ('zk',):rk911,dim0  ('zl',):rk911,dim0
+    >>> COMMON a-directions: 0 
+===== E1 slack=18 =====
+w3 n=5 m= 3 E1 deg=(24,24) nc=1250 rows=1708 ratio=1.37  [2s]
+    ('u2',):rk850,dim1  ('xk',):rk850,dim0  ('xl',):rk850,dim0  ('yk',):rk850,dim0  ('yl',):rk850,dim0  ('zk',):rk850,dim0  ('zl',):rk850,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 4 E1 deg=(25,25) nc=1352 rows=1847 ratio=1.36  [3s]
+    ('u2',):rk911,dim2  ('xk',):rk911,dim0  ('xl',):rk911,dim0  ('yk',):rk911,dim0  ('yl',):rk911,dim0  ('zk',):rk911,dim0  ('zl',):rk911,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 5 E1 deg=(26,26) nc=1458 rows=1992 ratio=1.36  [5s]
+    ('u2',):rk974,dim3  ('xk',):rk974,dim0  ('xl',):rk974,dim0  ('yk',):rk974,dim0  ('yl',):rk974,dim0  ('zk',):rk974,dim0  ('zl',):rk974,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 6 E1 deg=(27,27) nc=1568 rows=2142 ratio=1.36  [6s]
+    ('u2',):rk1039,dim4  ('xk',):rk1039,dim0  ('xl',):rk1039,dim0  ('yk',):rk1039,dim0  ('yl',):rk1039,dim0  ('zk',):rk1039,dim0  ('zl',):rk1039,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 7 E1 deg=(28,28) nc=1682 rows=2297 ratio=1.36  [8s]
+    ('u2',):rk1106,dim5  ('xk',):rk1106,dim1  ('xl',):rk1106,dim1  ('yk',):rk1106,dim1  ('yl',):rk1106,dim1  ('zk',):rk1106,dim1  ('zl',):rk1106,dim1
+    >>> COMMON a-directions: 1   *** TELESCOPER CANDIDATE ***
+w3 n=5 m= 8 E1 deg=(29,29) nc=1800 rows=2458 ratio=1.36  [10s]
+    ('u2',):rk1175,dim6  ('xk',):rk1175,dim2  ('xl',):rk1175,dim2  ('yk',):rk1175,dim2  ('yl',):rk1175,dim2  ('zk',):rk1175,dim2  ('zl',):rk1175,dim2
+    >>> COMMON a-directions: 2   *** TELESCOPER CANDIDATE ***
+w3 n=5 m= 9 E1 deg=(30,30) nc=1922 rows=2624 ratio=1.36  [13s]
+    ('u2',):rk1246,dim0  ('xk',):rk1246,dim0  ('xl',):rk1246,dim0  ('yk',):rk1246,dim0  ('yl',):rk1246,dim0  ('zk',):rk1246,dim0  ('zl',):rk1246,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=10 E1 deg=(31,31) nc=2048 rows=2795 ratio=1.36  [16s]
+    ('u2',):rk1319,dim0  ('xk',):rk1319,dim0  ('xl',):rk1319,dim0  ('yk',):rk1319,dim0  ('yl',):rk1319,dim0  ('zk',):rk1319,dim0  ('zl',):rk1319,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=11 E1 deg=(32,32) nc=2178 rows=2972 ratio=1.36  [21s]
+    ('u2',):rk1394,dim0  ('xk',):rk1394,dim0  ('xl',):rk1394,dim0  ('yk',):rk1394,dim0  ('yl',):rk1394,dim0  ('zk',):rk1394,dim0  ('zl',):rk1394,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m=12 E1 deg=(33,33) nc=2312 rows=3154 ratio=1.36  [24s]
+    ('u2',):rk1471,dim0  ('xk',):rk1471,dim0  ('xl',):rk1471,dim0  ('yk',):rk1471,dim0  ('yl',):rk1471,dim0  ('zk',):rk1471,dim0  ('zl',):rk1471,dim0
+    >>> COMMON a-directions: 0 
+===== E1 slack=26 =====
+w3 n=5 m= 3 E1 deg=(32,32) nc=2178 rows=2961 ratio=1.36  [8s]
+    ('u2',):rk1394,dim1  ('xk',):rk1394,dim0  ('xl',):rk1394,dim0  ('yk',):rk1394,dim0  ('yl',):rk1394,dim0  ('zk',):rk1394,dim0  ('zl',):rk1394,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 4 E1 deg=(33,33) nc=2312 rows=3143 ratio=1.36  [10s]
+    ('u2',):rk1471,dim2  ('xk',):rk1471,dim0  ('xl',):rk1471,dim0  ('yk',):rk1471,dim0  ('yl',):rk1471,dim0  ('zk',):rk1471,dim0  ('zl',):rk1471,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 5 E1 deg=(34,34) nc=2450 rows=3331 ratio=1.36  [13s]
+    ('u2',):rk1550,dim3  ('xk',):rk1550,dim0  ('xl',):rk1550,dim0  ('yk',):rk1550,dim0  ('yl',):rk1550,dim0  ('zk',):rk1550,dim0  ('zl',):rk1550,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 6 E1 deg=(35,35) nc=2592 rows=3524 ratio=1.36  [16s]
+    ('u2',):rk1631,dim4  ('xk',):rk1631,dim0  ('xl',):rk1631,dim0  ('yk',):rk1631,dim0  ('yl',):rk1631,dim0  ('zk',):rk1631,dim0  ('zl',):rk1631,dim0
+    >>> COMMON a-directions: 0 
+w3 n=5 m= 7 E1 deg=(36,36) nc=2738 rows=3723 ratio=1.36  [19s]
+    ('u2',):rk1714,dim5  ('xk',):rk1714,dim1  ('xl',):rk1714,dim1  ('yk',):rk1714,dim1  ('yl',):rk1714,dim1  ('zk',):rk1714,dim1  ('zl',):rk1714,dim1
+    >>> COMMON a-directions: 1   *** TELESCOPER CANDIDATE ***
+w3 n=5 m= 8 E1 deg=(37,37) nc=2888 rows=3926 ratio=1.36  [26s]
+    ('u2',):rk1799,dim6  ('xk',):rk1799,dim2  ('xl',):rk1799,dim2  ('yk',):rk1799,dim2  ('yl',):rk1799,dim2  ('zk',):rk1799,dim2  ('zl',):rk1799,dim2
+    >>> COMMON a-directions: 2   *** TELESCOPER CANDIDATE ***
+w3 n=5 m= 9 E1 deg=(38,38) nc=3042 rows=4136 ratio=1.36  [27s]
+    ('u2',):rk1886,dim7  ('xk',):rk1886,dim3  ('xl',):rk1886,dim3  ('yk',):rk1886,dim3  ('yl',):rk1886,dim3  ('zk',):rk1886,dim3  ('zl',):rk1886,dim3
+    >>> COMMON a-directions: 3   *** TELESCOPER CANDIDATE ***
+w3 n=5 m=10 E1 deg=(39,39) nc=3200 rows=4350 ratio=1.36  [35s]
+    ('u2',):rk1975,dim8  ('xk',):rk1975,dim4  ('xl',):rk1975,dim4  ('yk',):rk1975,dim4  ('yl',):rk1975,dim4  ('zk',):rk1975,dim4  ('zl',):rk1975,dim4
+    >>> COMMON a-directions: 4   *** TELESCOPER CANDIDATE ***
+w3 n=5 m=11 E1 deg=(40,40) nc=3362 rows=4570 ratio=1.36  [40s]
+    ('u2',):rk2066,dim9  ('xk',):rk2066,dim5  ('xl',):rk2066,dim5  ('yk',):rk2066,dim5  ('yl',):rk2066,dim5  ('zk',):rk2066,dim5  ('zl',):rk2066,dim5
+    >>> COMMON a-directions: 5   *** TELESCOPER CANDIDATE ***
+w3 n=5 m=12 E1 deg=(41,41) nc=3528 rows=4796 ratio=1.36  [47s]
+    ('u2',):rk2159,dim10  ('xk',):rk2159,dim6  ('xl',):rk2159,dim6  ('yk',):rk2159,dim6  ('yl',):rk2159,dim6  ('zk',):rk2159,dim6  ('zl',):rk2159,dim6
+    >>> COMMON a-directions: 6   *** TELESCOPER CANDIDATE ***

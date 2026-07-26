@@ -1,0 +1,13 @@
+START Sun 26 Jul 2026 09:24:25 WT=5 ORD=lk TAG=w5_lk MEMCAP=2800000000 SPLITCAP=1800 ANNCAP=7200 CT1CAP=5400 DIRECT=2
+HF loaded Sun 26 Jul 2026 09:24:25
+weight 5: HarmonicNumber instances 23   DISTINCT symbols 13  (must be 13)
+  symbols: {HarmonicNumber[k], HarmonicNumber[l], HarmonicNumber[-k + n], HarmonicNumber[k + n], HarmonicNumber[-l + n], HarmonicNumber[l + n], HarmonicNumber[k, 2], HarmonicNumber[l, 2], HarmonicNumber[k + n, 2], HarmonicNumber[k + n, 3], HarmonicNumber[k + n, 4], HarmonicNumber[k + n, 5], HarmonicNumber[l + n, 2]}
+  self-test Sum_{k,l} T*w, n=0..3 : {0, 87/4, 1190161/384, 7682021239/10368}
+  expected                        : {0, 87/4, 1190161/384, 7682021239/10368}
+  Q self-test True   weight self-test True
+obj LeafCount 162  distinct symbols 13
+=== A0 Annihilator[T] === Sun 26 Jul 2026 09:24:25
+  A0 annT #3 t=0s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:24:25
+=== A0b Annihilator[w] (harmonic part alone) === Sun 26 Jul 2026 09:24:25
+  A0b annW : TIME ABORT after 1800s  peakRSSproxy=0GB  Sun 26 Jul 2026 09:54:26
+=== A1d Annihilator[T*w]  (monolithic, the calibration measurement) === Sun 26 Jul 2026 09:54:26

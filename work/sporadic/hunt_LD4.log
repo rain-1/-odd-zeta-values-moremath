@@ -1,0 +1,72 @@
+==== E (b=4, A(1)=4)
+   E m=2: 11074 templates scanned
+   E m=3: 279054 templates scanned
+   E m=4: 602888 templates scanned
+   E m=5: 3529500 templates scanned
+   m=2  2^(2(n-2k)) C(2k,1k)^2 C(n,2k)
+   m=2  4^((n-2k)) C(2k,1k)^2 C(n,2k)
+   m=2  2^(2(n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=2  4^((n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=2  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=2  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=2  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=2  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=2  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=2  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=2  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=2  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=3  2^(2(n-2k)) C(2k,1k)^2 C(n,2k)
+   m=3  4^((n-2k)) C(2k,1k)^2 C(n,2k)
+   m=3  2^(2(n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=3  4^((n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=3  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=3  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=3  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=3  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=3  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=3  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=3  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=3  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=4  2^(2(n-2k)) C(2k,1k)^2 C(n,2k)
+   m=4  4^((n-2k)) C(2k,1k)^2 C(n,2k)
+   m=4  2^(2(n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=4  4^((n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=4  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=4  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=4  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=4  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=4  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=4  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=4  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=4  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=5  2^(2(n-2k)) C(2k,1k)^2 C(n,2k)
+   m=5  4^((n-2k)) C(2k,1k)^2 C(n,2k)
+   m=5  2^(2(n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=5  4^((n-2k)) C(2k,1k)^2 C(n,n-2k)
+   m=5  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=5  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,1k)
+   m=5  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=5  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,1k)
+   m=5  2^(2(n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=5  4^((n-2k)) C(2k,1k) C(n-1k,1k) C(n,n-1k)
+   m=5  2^(2(n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+   m=5  4^((n-2k)) C(2k,1k) C(n-1k,n-2k) C(n,n-1k)
+==== alpha (b=4, A(1)=4)
+   alpha m=2: 11074 templates scanned
+   alpha m=3: 279054 templates scanned
+   alpha m=4: 602888 templates scanned
+   alpha m=5: 3529500 templates scanned
+   NO tame representation found
+==== eps (b=4, A(1)=4)
+   eps m=2: 11074 templates scanned
+   eps m=3: 279054 templates scanned
+   eps m=4: 602888 templates scanned
+   eps m=5: 3529500 templates scanned
+   NO tame representation found
+==== s7 (b=4, A(1)=4)
+   s7 m=2: 11074 templates scanned
+   s7 m=3: 279054 templates scanned
+   s7 m=4: 602888 templates scanned
+   s7 m=5: 3529500 templates scanned
+   NO tame representation found
+EXIT 0

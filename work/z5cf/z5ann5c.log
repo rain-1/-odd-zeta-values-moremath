@@ -1,0 +1,13 @@
+START Sun 26 Jul 2026 13:22:17 MEMCAP=4000000000 SMALLCAP=900 BIGCAP=7200
+HF loaded
+  ann alpha : loaded checkpoint
+  ann beta #6 rank=5 t=0s leaf=1815 maxmem=0GB Sun 26 Jul 2026 13:22:17
+  ann Psi : loaded checkpoint
+=== 1-var probes: is the cost the 3-variable Ore algebra? === Sun 26 Jul 2026 13:22:17
+  ann alpha, {S[k]} only #1 rank=3 t=0s leaf=100 maxmem=0GB Sun 26 Jul 2026 13:22:17
+  ann Psi, {S[k]} only #1 rank=4 t=0s leaf=196 maxmem=0GB Sun 26 Jul 2026 13:22:18
+  DFiniteTimes[alpha,Psi] in {S[k]} only #1 rank=9 t=6s leaf=44922 maxmem=0GB Sun 26 Jul 2026 13:22:24
+=== bisection: smallest stalling product === Sun 26 Jul 2026 13:22:24
+  alpha^2  = DFiniteTimes[alpha,alpha] #11 rank=15 t=31s leaf=513408 maxmem=0GB Sun 26 Jul 2026 13:22:55
+  alpha*beta = DFiniteTimes[alpha,beta] : TIME ABORT after 900s maxmem=0GB Sun 26 Jul 2026 13:37:55
+=== the real target, long clock === Sun 26 Jul 2026 13:37:55

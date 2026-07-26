@@ -1,0 +1,6 @@
+Qrow     slack= 6 nc= 420 rank= 339 nbad=2061 
+Qrow     slack=10 nc= 684 rank= 515 nbad=1885 
+mirror   slack= 6 nc= 420 rank= 339 nbad=2061 
+mirror   slack=10 nc= 684 rank= 515 nbad=1885 
+joint2   slack= 6 nc= 420 cols=840 rank=  678 nbad=4122 bad(xk)=2061 
+joint2   slack=10 nc= 684 cols=1368 rank= 1030 nbad=1885 bad(xk)=1885 

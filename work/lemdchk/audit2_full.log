@@ -1,0 +1,32 @@
+alpha  p=5   | (V2) termwise min=-1   viol=3    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 0/20 fail
+alpha  p=7   | (V2) termwise min=-1   viol=8    | Delta(a) min v_p=0    a with Delta!=0 mod p: 1   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 0/42 fail
+alpha  p=11  | (V2) termwise min=-1   viol=23   | Delta(a) min v_p=0    a with Delta!=0 mod p: 4   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 0/110 fail
+alpha  p=13  | (V2) termwise min=-1   viol=35   | Delta(a) min v_p=0    a with Delta!=0 mod p: 5   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 0/156 fail
+alpha  p=17  | (V2) termwise min=-1   viol=63   | Delta(a) min v_p=0    a with Delta!=0 mod p: 8   | B-set != {0..a} for a in [9, 10, 11, 12, 13, 14] | cancellation V: 0/272 fail, U: 0/272 fail
+alpha  p=19  | (V2) termwise min=-1   viol=79   | Delta(a) min v_p=0    a with Delta!=0 mod p: 9   | B-set != {0..a} for a in [10, 11, 12, 13, 14, 15] | cancellation V: 0/342 fail, U: 0/342 fail
+alpha  p=23  | (V2) termwise min=-1   viol=119  | Delta(a) min v_p=0    a with Delta!=0 mod p: 11  | B-set != {0..a} for a in [12, 13, 14, 15, 16, 17] | cancellation V: 0/506 fail, U: 0/506 fail
+--------------------------------------------------------------------------------------------------------------------------------
+eps    p=5   | (V2) termwise min=0    viol=3    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 0/20 fail
+eps    p=7   | (V2) termwise min=0    viol=6    | Delta(a) min v_p=0    a with Delta!=0 mod p: 3   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 0/42 fail
+eps    p=11  | (V2) termwise min=0    viol=13   | Delta(a) min v_p=0    a with Delta!=0 mod p: 3   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 0/110 fail
+eps    p=13  | (V2) termwise min=0    viol=20   | Delta(a) min v_p=0    a with Delta!=0 mod p: 6   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 0/156 fail
+eps    p=17  | (V2) termwise min=0    viol=34   | Delta(a) min v_p=0    a with Delta!=0 mod p: 6   | B-set != {0..a} for a in [9, 10, 11, 12, 13, 14] | cancellation V: 0/272 fail, U: 0/272 fail
+eps    p=19  | (V2) termwise min=0    viol=44   | Delta(a) min v_p=0    a with Delta!=0 mod p: 9   | B-set != {0..a} for a in [10, 11, 12, 13, 14, 15] | cancellation V: 0/342 fail, U: 0/342 fail
+eps    p=23  | (V2) termwise min=0    viol=63   | Delta(a) min v_p=0    a with Delta!=0 mod p: 10  | B-set != {0..a} for a in [12, 13, 14, 15, 16, 17] | cancellation V: 0/506 fail, U: 0/506 fail
+--------------------------------------------------------------------------------------------------------------------------------
+s7     p=5   | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 0/20 fail
+s7     p=7   | (V2) termwise min=0    viol=5    | Delta(a) min v_p=0    a with Delta!=0 mod p: 1   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 8/42 fail, U: 8/42 fail
+s7     p=11  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 0/110 fail
+s7     p=13  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 0/156 fail
+s7     p=17  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [9, 10, 11, 12, 13, 14] | cancellation V: 0/272 fail, U: 0/272 fail
+s7     p=19  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [10, 11, 12, 13, 14, 15] | cancellation V: 0/342 fail, U: 0/342 fail
+s7     p=23  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [12, 13, 14, 15, 16, 17] | cancellation V: 0/506 fail, U: 0/506 fail
+--------------------------------------------------------------------------------------------------------------------------------
+E      p=5   | (V2) termwise min=0    viol=2    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 0/20 fail
+E      p=7   | (V2) termwise min=0    viol=6    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 0/42 fail
+E      p=11  | (V2) termwise min=0    viol=19   | Delta(a) min v_p=0    a with Delta!=0 mod p: 4   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 0/110 fail
+E      p=13  | (V2) termwise min=0    viol=29   | Delta(a) min v_p=0    a with Delta!=0 mod p: 6   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 0/156 fail
+E      p=17  | (V2) termwise min=0    viol=53   | Delta(a) min v_p=0    a with Delta!=0 mod p: 8   | B-set != {0..a} for a in [9, 10, 11, 12, 13, 14] | cancellation V: 0/272 fail, U: 0/272 fail
+E      p=19  | (V2) termwise min=0    viol=64   | Delta(a) min v_p=0    a with Delta!=0 mod p: 9   | B-set != {0..a} for a in [10, 11, 12, 13, 14, 15] | cancellation V: 0/342 fail, U: 0/342 fail
+E      p=23  | (V2) termwise min=0    viol=108  | Delta(a) min v_p=0    a with Delta!=0 mod p: 10  | B-set != {0..a} for a in [12, 13, 14, 15, 16, 17] | cancellation V: 0/506 fail, U: 0/506 fail
+--------------------------------------------------------------------------------------------------------------------------------

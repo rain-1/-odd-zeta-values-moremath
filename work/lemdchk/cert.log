@@ -1,0 +1,89 @@
+alpha  p=5   n = 20 = 4*5 + 0 ,  k = 5 = 1*5 + 0
+   S(n,k) = 9396127751058800640   (v_p = 1, so p | S : VANISHING layer)
+   binomials [(20, 5), (20, 5), (10, 5), (30, 15)]  ->  valuations [0, 0, 0, 1]
+      arg 2k     = 10      floor(x/p) = 2    
+      arg 2n-2k  = 30      floor(x/p) = 6    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg k      = 5       floor(x/p) = 1    
+      arg n-k    = 15      floor(x/p) = 3    
+   w(n,k) = 3863945253740937645295558061/9113425761793743841651200000
+   v_p(w) = -5 ,  v_p(p^w w) = -2 ,  v_p(S) + v_p(p^w w) = -1   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=4) = 37259/54 ,  chi(p)^e Delta(a) A(r) = 37259/54
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 3   <-- >= 1 : the cancellation identity HOLDS
+
+alpha  p=7   n = 35 = 5*7 + 0 ,  k = 7 = 1*7 + 0
+   S(n,k) = 1187017035776307207321788370432000   (v_p = 1, so p | S : VANISHING layer)
+   binomials [(35, 7), (35, 7), (14, 7), (56, 28)]  ->  valuations [0, 0, 0, 1]
+      arg 2k     = 14      floor(x/p) = 2    
+      arg 2n-2k  = 56      floor(x/p) = 8    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg k      = 7       floor(x/p) = 1    
+      arg n-k    = 28      floor(x/p) = 4    
+   w(n,k) = 5118977339512379916386195243949414865633423015803443/6481159126422658894349537656605277085...
+   v_p(w) = -5 ,  v_p(p^w w) = -2 ,  v_p(S) + v_p(p^w w) = -1   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 1  (>= 1)
+   Delta(a=5) = 16860277/3375 ,  chi(p)^e Delta(a) A(r) = 16860277/3375
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 3   <-- >= 1 : the cancellation identity HOLDS
+
+eps  p=5   n = 15 = 3*5 + 0 ,  k = 15 = 3*5 + 0
+   S(n,k) = 24061445010950400   (v_p = 2, so p | S : VANISHING layer)
+   binomials [(15, 15), (15, 15), (30, 15), (30, 15)]  ->  valuations [0, 0, 1, 1]
+      arg 2k     = 30      floor(x/p) = 6    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg 2k-n   = 15      floor(x/p) = 3    
+      arg k      = 15      floor(x/p) = 3    
+      arg n-k    = 0       floor(x/p) = 0    
+   w(n,k) = 5719631876963594667170338313/10181405343253948198094700000
+   v_p(w) = -5 ,  v_p(p^w w) = -2 ,  v_p(S) + v_p(p^w w) = 0   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=3) = 3754/27 ,  chi(p)^e Delta(a) A(r) = 3754/27
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 3   <-- >= 1 : the cancellation identity HOLDS
+
+eps  p=7   n = 28 = 4*7 + 0 ,  k = 28 = 4*7 + 0
+   S(n,k) = 58502467906161100560306268993600   (v_p = 2, so p | S : VANISHING layer)
+   binomials [(28, 28), (28, 28), (56, 28), (56, 28)]  ->  valuations [0, 0, 1, 1]
+      arg 2k     = 56      floor(x/p) = 8    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg 2k-n   = 28      floor(x/p) = 4    
+      arg k      = 28      floor(x/p) = 4    
+      arg n-k    = 0       floor(x/p) = 0    
+   w(n,k) = 1385152358853939303784184423123308539608509754136737597/2115902247811256818042502135050221...
+   v_p(w) = -5 ,  v_p(p^w w) = -2 ,  v_p(S) + v_p(p^w w) = 0   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=4) = 50437/27 ,  chi(p)^e Delta(a) A(r) = 50437/27
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 4   <-- >= 1 : the cancellation identity HOLDS
+
+E  p=5   n = 15 = 3*5 + 0 ,  k = 15 = 3*5 + 0
+   S(n,k) = 155117520   (v_p = 1, so p | S : VANISHING layer)
+   binomials [(15, 15), (30, 15), (0, 0)]  ->  valuations [0, 1, 0]
+      arg 2k     = 30      floor(x/p) = 6    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg 2n-2k  = 0       floor(x/p) = 0    
+      arg k      = 15      floor(x/p) = 3    
+   w(n,k) = 89408345474585521/104913839356326000
+   v_p(w) = -3 ,  v_p(p^w w) = -1 ,  v_p(S) + v_p(p^w w) = 0   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=3) = 107/9 ,  chi(p)^e Delta(a) A(r) = 107/9
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 3   <-- >= 1 : the cancellation identity HOLDS
+
+E  p=7   n = 28 = 4*7 + 0 ,  k = 28 = 4*7 + 0
+   S(n,k) = 7648690600760440   (v_p = 1, so p | S : VANISHING layer)
+   binomials [(28, 28), (56, 28), (0, 0)]  ->  valuations [0, 1, 0]
+      arg 2k     = 56      floor(x/p) = 8    <-- WIDE: floor(x/p) >= p, letter has a pole
+      arg 2n-2k  = 0       floor(x/p) = 0    
+      arg k      = 28      floor(x/p) = 4    
+   w(n,k) = 5317621252890207940295132303969/5570705194301588919292419705000
+   v_p(w) = -3 ,  v_p(p^w w) = -1 ,  v_p(S) + v_p(p^w w) = 0   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=4) = 379/9 ,  chi(p)^e Delta(a) A(r) = -379/9
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 2   <-- >= 1 : the cancellation identity HOLDS
+
+s7  p=7   n = 15 = 2*7 + 1 ,  k = 14 = 2*7 + 0
+   S(n,k) = 653392687797360000   (v_p = 1, so p | S : VANISHING layer)
+   binomials [(15, 14), (15, 14), (29, 14), (28, 15)]  ->  valuations [0, 0, 0, 1]
+      arg 2k     = 28      floor(x/p) = 4    
+      arg k      = 14      floor(x/p) = 2    
+      arg n      = 15      floor(x/p) = 2    
+      arg n-k    = 1       floor(x/p) = 0    
+   w(n,k) = 3150328291167163/45020498114592000
+   v_p(w) = -3 ,  v_p(p^w w) = -1 ,  v_p(S) + v_p(p^w w) = 0   ***  < 1 : SPORADIC_BARE inequality FAILS  ***
+   AGGREGATED vanishing layer  V(n) = sum_{p|S} S p^w w :  v_p(V) = 0  ***  < 1 : the aggregated bound FAILS too  ***
+   Delta(a=2) = 0 ,  chi(p)^e Delta(a) A(r) = 0
+   IDENTITY  v_p( V(n) - chi^e Delta(a) A(r) ) = 0   <-- FAILS
+

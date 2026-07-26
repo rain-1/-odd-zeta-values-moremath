@@ -1,0 +1,84 @@
+fam    p    | TERMWISE on vanishing layer  | AGGREGATED layer       | surviving        | total
+------------------------------------------------------------------------------------------------------------------------------------
+alpha  5    | min=-1   viol=69     cells=10   | min=0    viol=10   | min=0    viol=10   | min=1   viol=0   [238 van, 72 surv, 0s]
+        worst termwise cell: n=20=4*5+0, k=5=1*5+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=10, 2k/p^2=0.40]
+        worst aggregate cell: n=15=3*5+0  v_p(V)=0
+alpha  7    | min=-1   viol=284    cells=21   | min=0    viol=5    | min=0    viol=5    | min=1   viol=0   [957 van, 240 surv, 0s]
+        worst termwise cell: n=35=5*7+0, k=7=1*7+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=14, 2k/p^2=0.29]
+        worst aggregate cell: n=28=4*7+0  v_p(V)=0
+alpha  11   | min=-1   viol=1596   cells=54   | min=0    viol=40   | min=0    viol=40   | min=1   viol=0   [6055 van, 1260 surv, 0s]
+        worst termwise cell: n=77=7*11+0, k=11=1*11+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=22, 2k/p^2=0.18]
+        worst aggregate cell: n=77=7*11+0  v_p(V)=0
+alpha  13   | min=-1   viol=3500   cells=78   | min=0    viol=65   | min=0    viol=65   | min=1   viol=0   [11922 van, 2352 surv, 0s]
+        worst termwise cell: n=104=8*13+0, k=13=1*13+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=26, 2k/p^2=0.15]
+        worst aggregate cell: n=91=7*13+0  v_p(V)=0
+alpha  17   | min=-1   viol=10323  cells=136  | min=0    viol=136  | min=0    viol=136  | min=1   viol=0   [35272 van, 6480 surv, 1s]
+        worst termwise cell: n=170=10*17+0, k=17=1*17+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=34, 2k/p^2=0.12]
+        worst aggregate cell: n=153=9*17+0  v_p(V)=0
+alpha  19   | min=-1   viol=16150  cells=171  | min=0    viol=153  | min=0    viol=153  | min=1   viol=0   [55251 van, 9900 surv, 1s]
+        worst termwise cell: n=209=11*19+0, k=19=1*19+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=38, 2k/p^2=0.11]
+        worst aggregate cell: n=190=10*19+0  v_p(V)=0
+alpha  23   | min=-1   viol=34788  cells=253  | min=0    viol=231  | min=0    viol=231  | min=1   viol=0   [119317 van, 20592 surv, 4s]
+        worst termwise cell: n=299=13*23+0, k=23=1*23+0, v_p(S)=1, v_p(p^w w)=-2, sum=-1   [2k=46, 2k/p^2=0.09]
+        worst aggregate cell: n=276=12*23+0  v_p(V)=0
+------------------------------------------------------------------------------------------------------------------------------------
+eps    5    | min=0    viol=18     cells=10   | min=0    viol=8    | min=0    viol=8    | min=1   viol=0   [130 van, 30 surv, 0s]
+        worst termwise cell: n=15=3*5+0, k=15=3*5+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=30, 2k/p^2=1.20]
+        worst aggregate cell: n=15=3*5+0  v_p(V)=0
+eps    7    | min=0    viol=60     cells=21   | min=0    viol=21   | min=0    viol=21   | min=1   viol=0   [519 van, 90 surv, 0s]
+        worst termwise cell: n=28=4*7+0, k=28=4*7+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=56, 2k/p^2=1.14]
+        worst aggregate cell: n=28=4*7+0  v_p(V)=0
+eps    11   | min=0    viol=273    cells=55   | min=0    viol=27   | min=0    viol=27   | min=1   viol=0   [3265 van, 420 surv, 0s]
+        worst termwise cell: n=66=6*11+0, k=66=6*11+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=132, 2k/p^2=1.09]
+        worst aggregate cell: n=66=6*11+0  v_p(V)=0
+eps    13   | min=0    viol=560    cells=78   | min=0    viol=78   | min=0    viol=78   | min=1   viol=0   [6420 van, 756 surv, 0s]
+        worst termwise cell: n=91=7*13+0, k=91=7*13+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=182, 2k/p^2=1.08]
+        worst aggregate cell: n=91=7*13+0  v_p(V)=0
+eps    17   | min=0    viol=1530   cells=136  | min=0    viol=90   | min=0    viol=90   | min=1   viol=0   [18964 van, 1980 surv, 0s]
+        worst termwise cell: n=153=9*17+0, k=153=9*17+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=306, 2k/p^2=1.06]
+        worst aggregate cell: n=153=9*17+0  v_p(V)=0
+eps    19   | min=0    viol=2420   cells=171  | min=0    viol=171  | min=0    viol=171  | min=1   viol=0   [29691 van, 2970 surv, 0s]
+        worst termwise cell: n=190=10*19+0, k=190=10*19+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=380, 2k/p^2=1.05]
+        worst aggregate cell: n=190=10*19+0  v_p(V)=0
+eps    23   | min=0    viol=4914   cells=253  | min=0    viol=230  | min=0    viol=230  | min=1   viol=0   [64075 van, 6006 surv, 1s]
+        worst termwise cell: n=276=12*23+0, k=276=12*23+0, v_p(S)=2, v_p(p^w w)=-2, sum=0   [2k=552, 2k/p^2=1.04]
+        worst aggregate cell: n=276=12*23+0  v_p(V)=0
+------------------------------------------------------------------------------------------------------------------------------------
+s7     5    | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [148 van, 12 surv, 0s]
+        worst termwise cell: n=6=1*5+1, k=5=1*5+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=10, 2k/p^2=0.40]
+s7     7    | min=0    viol=71     cells=22   | min=0    viol=13   | min=0    viol=13   | min=1   viol=0   [567 van, 42 surv, 0s]
+        worst termwise cell: n=15=2*7+1, k=14=2*7+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=28, 2k/p^2=0.57]
+        worst aggregate cell: n=15=2*7+1  v_p(V)=0
+s7     11   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [3503 van, 182 surv, 0s]
+        worst termwise cell: n=12=1*11+1, k=11=1*11+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=22, 2k/p^2=0.18]
+s7     13   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [6834 van, 342 surv, 0s]
+        worst termwise cell: n=14=1*13+1, k=13=1*13+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=26, 2k/p^2=0.15]
+s7     17   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [20074 van, 870 surv, 0s]
+        worst termwise cell: n=18=1*17+1, k=17=1*17+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=34, 2k/p^2=0.12]
+s7     19   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [31329 van, 1332 surv, 1s]
+        worst termwise cell: n=20=1*19+1, k=19=1*19+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=38, 2k/p^2=0.11]
+s7     23   | min=1    viol=0      cells=0    | min=1    viol=0    | min=1    viol=0    | min=1   viol=0   [67429 van, 2652 surv, 2s]
+        worst termwise cell: n=24=1*23+1, k=23=1*23+0, v_p(S)=1, v_p(p^w w)=0, sum=1   [2k=46, 2k/p^2=0.09]
+------------------------------------------------------------------------------------------------------------------------------------
+E      5    | min=0    viol=18     cells=10   | min=0    viol=8    | min=0    viol=8    | min=1   viol=0   [238 van, 72 surv, 0s]
+        worst termwise cell: n=15=3*5+0, k=15=3*5+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=30, 2k/p^2=1.20]
+        worst aggregate cell: n=15=3*5+0  v_p(V)=0
+E      7    | min=0    viol=96     cells=21   | min=0    viol=12   | min=0    viol=12   | min=1   viol=0   [957 van, 240 surv, 0s]
+        worst termwise cell: n=28=4*7+0, k=28=4*7+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=56, 2k/p^2=1.14]
+        worst aggregate cell: n=28=4*7+0  v_p(V)=0
+E      11   | min=0    viol=684    cells=55   | min=0    viol=44   | min=0    viol=44   | min=1   viol=0   [6055 van, 1260 surv, 0s]
+        worst termwise cell: n=66=6*11+0, k=66=6*11+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=132, 2k/p^2=1.09]
+        worst aggregate cell: n=66=6*11+0  v_p(V)=0
+E      13   | min=0    viol=1421   cells=78   | min=0    viol=60   | min=0    viol=60   | min=1   viol=0   [11922 van, 2352 surv, 0s]
+        worst termwise cell: n=91=7*13+0, k=91=7*13+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=182, 2k/p^2=1.08]
+        worst aggregate cell: n=91=7*13+0  v_p(V)=0
+E      17   | min=0    viol=4293   cells=136  | min=0    viol=136  | min=0    viol=136  | min=1   viol=0   [35272 van, 6480 surv, 0s]
+        worst termwise cell: n=153=9*17+0, k=153=9*17+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=306, 2k/p^2=1.06]
+        worst aggregate cell: n=153=9*17+0  v_p(V)=0
+E      19   | min=0    viol=6400   cells=171  | min=0    viol=171  | min=0    viol=171  | min=1   viol=0   [55251 van, 9900 surv, 1s]
+        worst termwise cell: n=190=10*19+0, k=190=10*19+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=380, 2k/p^2=1.05]
+        worst aggregate cell: n=190=10*19+0  v_p(V)=0
+E      23   | min=0    viol=15552  cells=230  | min=0    viol=220  | min=0    viol=220  | min=1   viol=0   [119317 van, 20592 surv, 3s]
+        worst termwise cell: n=299=13*23+0, k=276=12*23+0, v_p(S)=1, v_p(p^w w)=-1, sum=0   [2k=552, 2k/p^2=1.04]
+        worst aggregate cell: n=299=13*23+0  v_p(V)=0
+------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+L_BZ inhomogeneous: nc=312 cols=4680 rows=6000 rank=3760 nbad=1176 INCONSISTENT
+   free-d order<=3 : rank=3764 -> 0 telescoper direction(s)
+   free-d order<=4 : rank=3765 -> 0 telescoper direction(s)
+   free-d order<=5 : rank=3766 -> 0 telescoper direction(s)
+   free-d order<=6 : rank=3767 -> 0 telescoper direction(s)
+L_BZ inhomogeneous: nc=684 cols=10260 rows=11400 rank=7390 nbad=2106 INCONSISTENT
+   free-d order<=3 : rank=7394 -> 0 telescoper direction(s)

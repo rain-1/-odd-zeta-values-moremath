@@ -1,0 +1,25 @@
+--- () ansatz Z3 slack 8 ---
+  a = [1, 1856591, 741434, 2946388, 1875359]   [7s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz Z3 deg=(27,27) nc0=1568 + 0 kernel cols = 1568 cols, 2136 rows (ratio 1.36) -> rank=1084 nbad=1052 
+  () fresh-point check on 461 unused points: 461 violations  [13s]
+--- () ansatz Z3 slack 16 ---
+  a = [1, 1856591, 741434, 2946388, 1875359]   [10s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz Z3 deg=(35,35) nc0=2592 + 0 kernel cols = 2592 cols, 3519 rows (ratio 1.36) -> rank=1692 nbad=0 *** SOLVED ***
+  () fresh-point check on 300 unused points: 0 violations  [24s]
+--- () ansatz Z3 slack 24 ---
+  a = [1, 1856591, 741434, 2946388, 1875359]   [16s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz Z3 deg=(43,43) nc0=3872 + 0 kernel cols = 3872 cols, 5247 rows (ratio 1.36) -> rank=2428 nbad=0 *** SOLVED ***
+  () fresh-point check on 300 unused points: 0 violations  [50s]
+--- () ansatz Z4 slack 8 ---
+  a = [1, 1856591, 741434, 2946388, 1875359]   [10s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz Z4 deg=(34,34) nc0=2450 + 0 kernel cols = 2450 cols, 3327 rows (ratio 1.36) -> rank=1666 nbad=1661 
+  () fresh-point check on 300 unused points: 300 violations  [23s]
+--- () ansatz Z4 slack 16 ---
+  a = [1, 1856591, 741434, 2946388, 1875359]   [15s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz Z4 deg=(42,42) nc0=3698 + 0 kernel cols = 3698 cols, 5012 rows (ratio 1.36) -> rank=2402 nbad=0 *** SOLVED ***
+  () fresh-point check on 300 unused points: 0 violations  [43s]

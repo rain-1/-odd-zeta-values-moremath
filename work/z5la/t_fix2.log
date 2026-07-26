@@ -1,0 +1,20 @@
+per-component residual with ALL free blocks = 0 (i.e. is r_j = w_j r_Q exact on supp(w)?):
+   ('u2', 'xk')     FIXED  bad=0
+   ('u2', 'xl')     FIXED  bad=0
+   ('u2', 'yk')     FIXED  bad=0
+   ('u2', 'yl')     FIXED  bad=0
+   ('u2', 'zk')     FIXED  bad=0
+   ('u2', 'zl')     FIXED  bad=0
+   ('u2',)          free   bad=760
+   ('u3',)          FIXED  bad=0
+   ('xk',)          free   bad=760
+   ('xl',)          free   bad=760
+   ('yk',)          free   bad=760
+   ('yl',)          free   bad=760
+   ('zk',)          free   bad=760
+   ('zl',)          free   bad=760
+   ()               free   bad=760
+D deg=(8,8)
+slack= 6 nc= 420 cols= 3360 rank= 2730 nbad= 3350 per-comp bad: {"('u2',)": 421, "('xk',)": 421, "('xl',)": 421, "('yk',)": 421, "('yl',)": 421, "('zk',)": 421, "('zl',)": 421, '()': 403}
+slack= 8 nc= 544 cols= 4352 rank= 3406 nbad= 2337 per-comp bad: {"('xk',)": 337, "('xl',)": 337, "('yk',)": 337, "('yl',)": 337, "('zk',)": 337, "('zl',)": 337, '()': 315}
+slack=10 nc= 684 cols= 5472 rank= 4146 nbad= 1689 per-comp bad: {"('xk',)": 245, "('xl',)": 245, "('yk',)": 245, "('yl',)": 245, "('zk',)": 245, "('zl',)": 245, '()': 760}

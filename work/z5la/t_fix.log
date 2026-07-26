@@ -1,0 +1,17 @@
+fixed blocks: ["('u3',)", "('u2', 'zk')", "('u2', 'zl')", "('u2', 'yk')", "('u2', 'yl')", "('u2', 'xk')", "('u2', 'xl')"]
+free blocks (8): ["('u2',)", "('xk',)", "('xl',)", "('yk',)", "('yl',)", "('zk',)", "('zl',)", '()']
+poly       slack= 8 nc= 144 cols= 1152 rows=13500 rank=  967 nbad= 6232 
+poly       slack=10 nc= 220 cols= 1760 rows=13500 rank= 1389 nbad= 5811 
+poly       slack=12 nc= 312 cols= 2496 rows=13500 rank= 1875 nbad= 5325 
+kl         slack= 8 nc= 180 cols= 1440 rows=13500 rank= 1170 nbad= 6030 
+kl         slack=10 nc= 264 cols= 2112 rows=13500 rank= 1624 nbad= 5576 
+kl         slack=12 nc= 364 cols= 2912 rows=13500 rank= 2142 nbad= 5058 
+kl+nl23    slack= 8 nc= 218 cols= 1744 rows=13500 rank= 1428 nbad= 5772 
+kl+nl23    slack=10 nc= 310 cols= 2480 rows=13500 rank= 1930 nbad= 5270 
+kl+nl23    slack=12 nc= 418 cols= 3344 rows=13500 rank= 2496 nbad= 4704 
+kl+nk+nl   slack= 8 nc= 312 cols= 2496 rows=13500 rank= 2000 nbad= 5200 
+kl+nk+nl   slack=10 nc= 420 cols= 3360 rows=13500 rank= 2580 nbad= 4620 
+kl+nk+nl   slack=12 nc= 544 cols= 4352 rows=13500 rank= 3224 nbad= 3976 
+kl+mk+ml   slack= 8 nc= 312 cols= 2496 rows=13500 rank= 1992 nbad= 5208 
+kl+mk+ml   slack=10 nc= 420 cols= 3360 rows=13500 rank= 2570 nbad= 4630 
+kl+mk+ml   slack=12 nc= 544 cols= 4352 rows=13500 rank= 3212 nbad= 3988 

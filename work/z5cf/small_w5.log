@@ -1,0 +1,7 @@
+W=5 target=P N=320 q=33554393  (guard: excess >= 40)
+alphabet                        deg   cols    rkA   rkAb   excess  verdict
+k/l+n+k/n+l+n-k/n-l               3    165    164    164      157  CONSISTENT
+n+k/l+n+k/n+l+n-k/n-l             3    254    243    243       78  CONSISTENT
+k/l+n+k/n+l+n-k/n-l+k+l           3    254    253    253       68  CONSISTENT
+k/l+n+k/n+l+n-k/n-l+n+k+l         3    254    253    253       68  CONSISTENT
+done 2221.8s

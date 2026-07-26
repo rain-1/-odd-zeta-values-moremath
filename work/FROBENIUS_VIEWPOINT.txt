@@ -1,0 +1,110 @@
+UNIFIED FROBENIUS VIEWPOINT — odd-zeta programme, 2026-07-25
+Terse. [P]=proved  [V]=verified, exact, range stated  [C]=conjectural  [X]=excluded
+
+0. OBJECT
+   One motive M_w per weight: relative cohomology of a family degenerating at a MUM
+   point; limiting class in Ext^1(Q(0), Q(-w)); period = zeta(w).
+   rank 2  : w = 1,2,3   Apery-type          (Beukers-Peters pencil at w=3)
+   rank 3  : w = 5       M_{0,8} cellular    (Brown-Zudilin)
+   rank 4  : w = 7       M_{0,10} cellular
+   Graded pieces: Q(0), Q(-w1), ..., with w_i the weights of the filtration.
+
+1. THE CLAIM
+   Frobenius acts on the graded pieces with eigenvalues
+        1,  chi(p) p^{w1},  chi(p) p^{w2},  ...
+   Every arithmetic phenomenon the programme measured is one realization of this.
+   chi = Dirichlet character of the Apery limit (nebentypus). Trivial iff the limit
+   is a rational multiple of zeta(w); quadratic of conductor 3,4,5 otherwise.
+
+2. ELEMENTARY SHADOW (Betti realization)
+   Rows A(n) = sum_k S(n,k),  B(n) = sum_k S(n,k) w(n,k), w a harmonic weight of
+   total degree w.
+        eigenvalue 1          <->  A(ap+r) = A(a)A(r)                     mod p   [P]
+        eigenvalue chi(p)p^w  <->  p^w B(ap+r) = chi(p) B(a) A(r)         mod p   [P for 4/15
+                                                                sporadic families; [V] for 15]
+   Mechanism of the character: Lemma K [P]. For chi completely multiplicative,
+        p^r K_chi^(r)(y) = chi(p) K_chi^(r)(floor(y/p))  mod p,   K = sum_{m<=y} chi(m)/m^r.
+   The p-divisible layer of the harmonic sum emits exactly chi(p). Nothing else does.
+
+3. WHY B(a)A(r) AND NOT B(a)B(r)
+   Not an asymmetry of the sequences; a consequence of matrix position.
+   Phi_n lower-triangular with rows at distinct graded levels. For r < p the p-power
+   scalings annihilate the low-digit off-diagonal entries, so the low digit acts through
+   the unit part only. Hence bare A(r) on the right.
+   Corollary: pure product forms are impossible at r = 0 (B(0)=0, A(0)=1).            [P]
+   Naive Phi_{ap+r} = Phi_a Phi_r is DEAD: residual v_p = -1 at every prime, no
+   placement of p-powers repairs it (LHS keeps its pole).                             [X]
+   What closes: split form, scalar low-digit action,
+        (Q_n, p^3 Wh_n, p^5 W_n) = (Q_a, Wh_a, W_a) . u(a,r),  u = Q_r + p a Psi_r
+   floors 2 / 1 / 2. First-order defects all exactly rank 1; second-order rank 2.      [V]
+   Cross term cannot appear before order p^3 (low digit is scalar mod p^2).            [V]
+
+4. THE GRADING, MEASURED NOT ASSUMED
+   Scan v_p(p^s Y_n Q_q - Y_q Q_n) over s = 0..7, q = floor(n/p), for Y in {Ph, P}:
+   result is a SPIKE at s = 3 (Ph) and s = 5 (P), not a step.                          [V]
+   diag(1, p^3, p^5) read directly off congruence data for the rank-3 crystal.
+   Master depth law: v_p(p^w B_n A_q - chi(p) B_q A_n) >= w, floor exactly w.
+   Flat at w = 1,2,3; at w = 5 graded piecewise as above.                              [V]
+
+5. THE SAME NUMBER, FIVE PLACES
+   w = weight of zeta(w)
+     = exponent in the denominator budget d_n^w
+     = p-power in the congruence
+     = Frobenius eigenvalue exponent
+     = unipotency multiplicity m in the conservation law (w=7: m=7 computed, r=4)
+   Conservation law r = 1 + floor(m/2), r = recurrence order.  [V, 4 families incl. a
+   successful blind prediction at w = 7]
+
+6. de RHAM REALIZATION (same Frobenius, other clothes)
+   phi = (k^p - k)^2 has jets = (k+j)^2 mod (k+j)^6 at every pole simultaneously,
+   because k^p - k is invariant under k -> k+c for all c in F_p. Poles collide mod p
+   into residue classes = base-p digits. So the certificate method and the Lucas-Kummer
+   ledgers are one operator in two realizations.                                       [P]
+   Cost asymmetry: de Rham pays degree ~2p per arithmetic digit (budget 2p <= 4n+3,
+   the threshold law); Betti splits all digits at once for free. Level-2 certificate
+   NOT FORCED (L2SPAN) — a mod-p multiplier cannot see divided-power depth.            [X]
+
+7. LATTICES
+   Denominators are integral structures. 12 = 2^2 . 3 for the BZ zeta(5) numerators;
+   2^2 traced to an index-2 refinement of the Betti lattice (zeta(2) = -(2 pi i)^2/24,
+   Bernoulli 24); the 3 has NO derivation — the geometric mechanism provably cannot
+   produce it. Minimality of 12 at n=2 machine-checked; universality conjectural.  [P/C]
+   p in {2,3} is exactly where every congruence law fails: the primes of the Q(-2)
+   lattice (von Staudt-Clausen). Stated as observation; no proof.                      [C]
+
+8. PERIODS, BOTH COMPLETIONS
+   archimedean: Frobenius constants kappa_j (Bloch-Vlasenko) = values of a Gamma-
+   generating series. BZ operator: kappa_2 = -4 z2, kappa_3 = (550/87) z3,
+   kappa_4 = (365/29) z4, kappa_5 = (514/87) z5 - (2200/87) z2 z3.
+   PRIMITIVE lambda_5 = (514/87) z5 is PURE; the impurity is the decomposable
+   lambda_2 lambda_3.                                                                  [V 434 digits]
+   p-adic: tower limits Lambda_a are VALUES of Gamma_p(x) exp(-Gamma_p'(0) x)
+        = exp(-sum_{m>=2} zeta_p(m) x^m / m)
+   at p-power arguments; BV's structure constants are its TAYLOR COEFFICIENTS at 0.
+   For an order-3 operator alpha_1 = alpha_2 = 0, which is why Lambda is NOT
+   zeta_p(3) and no finite Q-affine relation can exist.                                [P/V]
+   Asymmetry: archimedean side knows zeta(3) alone; p-adic side carries the ENTIRE
+   odd zeta_p tower in one exponential.
+
+9. THE TAX (one phenomenon, three realizations)
+   archimedean: the minimal ray exists and is fast enough (lambda_1 = 0.0050 < e^-5)
+     but carries an impure class; purification costs exactly one Tate twist,
+     c = -3/pi^2 = 12/(2 pi i)^2 — the minimal ray IS the un-purified integral.        [P]
+   p-adic: rank wall — every operator eliminating the unwanted zeta eliminates the
+     wanted one (0/300 elimination searches, controls 300/300).                        [V]
+   certificates: cheap structure lives only in the COMBINATION; every decomposition
+     destroys the order-3 collapse. E(w) coefficients are Theta(rho,sigma) for every
+     non-constant w, hence no refold escapes.                                          [P/V]
+   Apery 1978 = the unique known point where the tax vanishes: rank 2 has no middle
+   ray, so purity is free.
+
+10. WHAT WOULD UNIFY THE TWO SIDES
+    Open lemmas R2 and ker rho_{w'} subset ker rho_w. Proved, they turn the p-adic
+    rank wall into a theorem that is the exact p-adic analogue of why
+    "one of zeta(5),...,zeta(11)" has never been sharpened. One statement, both
+    completions. Highest-value open item in the programme.
+
+11. FRONTIER, STATED AS AN INEQUALITY
+    Local structure yields O(1) per prime (Lemma F sharp; Kazandzidis p^3; the chi
+    twist). Irrationality needs e^{delta n}. Every live approach in the field is a
+    partial bridge. Not a task; the question the tasks orbit.

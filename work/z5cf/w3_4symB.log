@@ -1,0 +1,1 @@
+W=3 Ph deg<=2 syms=(1, 2, 5, 6) N=200 q=33554393 : cols=10 rank(A)=10 rank(A|b)=11 excess=191 -> INCONSISTENT (0.7s)

@@ -1,0 +1,67 @@
+165 symmetric monomials
+  q=33554393 ok (rank 164, 1 free cols)
+  q=33554467 ok (rank 164, 1 free cols)
+  q=33554371 ok (rank 164, 1 free cols)
+  q=33554383 ok (rank 164, 1 free cols)
+  q=33554429 INCONSISTENT
+  q=16777259 ok (rank 164, 1 free cols)
+  q=16777213 ok (rank 164, 1 free cols)
+rational reconstruction: OK
+
+27 nonzero coefficients:
+   H5[n+k]                            1
+   H1[n+k]*H4[n+k]                    1/2
+   H1[n+l]*H4[n+k]                    -1/2
+   H1[n-k]*H4[n+k]                    -1/2
+   H1[n-l]*H4[n+k]                    1/2
+   H2[k]*H3[n+k]                      -1/4
+   H2[l]*H3[n+k]                      -1/4
+   H2[n+k]*H3[n+k]                    1/4
+   H2[n+l]*H3[n+k]                    1/4
+   H1[k]^2*H3[n+k]                    -3/4
+   H1[k]*H1[l]*H3[n+k]                3/2
+   H1[k]*H1[n+k]*H3[n+k]              1
+   H1[k]*H1[n+l]*H3[n+k]              -1
+   H1[k]*H1[n-k]*H3[n+k]              1/2
+   H1[k]*H1[n-l]*H3[n+k]              -1/2
+   H1[l]^2*H3[n+k]                    -3/4
+   H1[l]*H1[n+k]*H3[n+k]              -1
+   H1[l]*H1[n+l]*H3[n+k]              1
+   H1[l]*H1[n-k]*H3[n+k]              -1/2
+   H1[l]*H1[n-l]*H3[n+k]              1/2
+   H1[n+k]^2*H3[n+k]                  -1/4
+   H1[n+k]*H1[n+l]*H3[n+k]            1/2
+   H1[n+k]*H1[n-k]*H3[n+k]            -1/2
+   H1[n+k]*H1[n-l]*H3[n+k]            1/2
+   H1[n+l]^2*H3[n+k]                  -1/4
+   H1[n+l]*H1[n-k]*H3[n+k]            1/2
+   H1[n+l]*H1[n-l]*H3[n+k]            -1/2
+
+EXACT verification (Fraction arithmetic):
+   n=0   OK
+   n=1   OK
+   n=2   OK
+   n=3   OK
+   n=4   OK
+   n=5   OK
+   n=6   OK
+   n=7   OK
+   n=8   OK
+   n=9   OK
+   n=10  OK
+   n=11  OK
+   n=12  OK
+   n=13  OK
+   n=14  OK
+   n=15  OK
+   n=16  OK
+   n=17  OK
+   n=18  OK
+   n=19  OK
+   n=20  OK
+   n=24  OK
+   n=28  OK
+   n=30  OK
+   n=34  OK
+EXACT: ALL PASS
+wrote /home/ubuntu/fable-episode-2/zeta-math-2/work/z5cf/w5_bare.json

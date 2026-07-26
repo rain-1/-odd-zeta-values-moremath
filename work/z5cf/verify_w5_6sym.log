@@ -1,0 +1,1 @@
+W=5 P deg<=3 syms=(1, 2, 3, 4, 5, 6) N=320 q=33554467 : cols=165 rank(A)=164 rank(A|b)=164 excess=157 -> CONSISTENT (24.4s)

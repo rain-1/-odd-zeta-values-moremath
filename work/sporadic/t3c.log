@@ -1,0 +1,14 @@
+C/conductor-3 args w=2 args=n,k,n-k,2k,3k,3n-3k deg<=None disc=(-3,) hom=None cols=90   rank=86   excess=64   INCONSISTENT
+C/wide hom1 w=2 args=n,k,n-k,2k,3k,3n-3k,n+k,2n-2k deg<=None disc=(-3,) hom=1 cols=72   rank=71   excess=61   INCONSISTENT
+C/all11 hom1 w=2 args=n,k,n-k,2k,n+k,2n-2k,2n,2n-k,3k,3n-3k,3n deg<=None disc=(-3,) hom=1 cols=132  rank=129  excess=63   INCONSISTENT
+B/wide10 hom1 w=2 args=n,k,3k,n-3k,2k,n-k,n-2k,n+k,2n,4k deg<=None disc=(-3,) hom=1 cols=110  rank=110  excess=60   INCONSISTENT
+B/tame7 all w=2 args=n,k,3k,n-3k,2k,n-k,n-2k deg<=None disc=(-3,) hom=None cols=119  rank=119  excess=60   INCONSISTENT
+s18/wide10 hom1 w=2 args=n,k,n-k,2k,2n-2k,t,tb,n-3k,3k,n-2k deg<=None disc=(-3,) hom=1 cols=110  rank=107  excess=63   INCONSISTENT
+s18/tame8 all w=2 args=n,k,n-k,2k,tb,n-3k,3k,n-2k deg<=None disc=(-3,) hom=None cols=152  rank=150  excess=62   INCONSISTENT
+F/wide8 all w=2 args=n,k,n-k,l,k-l,2l,2k-2l,n+k deg<=None disc=(-3,) hom=None cols=152  rank=100  excess=112  INCONSISTENT
+delta/full7 w=3 args=n,k,3k,n-3k,2k,n-k,n+k deg<=3 disc=() hom=None cols=140  rank=140  excess=60   INCONSISTENT
+delta/tame6 d2 hom1 w=3 args=n,k,3k,n-3k,2k,n-k deg<=2 disc=(-3,) hom=1 cols=78   rank=78   excess=60   INCONSISTENT
+eta/tame6 d2 all w=3 args=n,k,n-k,tb,2k,n-5k deg<=2 disc=(5,) hom=None cols=156  rank=153  excess=63   INCONSISTENT
+eta/wide8 d2 hom1 w=3 args=n,k,n-k,3n,t,tb,2k,n-5k deg<=2 disc=(5,) hom=1 cols=136  rank=134  excess=62   INCONSISTENT
+zeta/wide8 d2 hom1 w=3 args=n,k,n-k,l,n-l,k-l,k+l,k+l-n deg<=2 disc=(-3,) hom=1 cols=136  rank=130  excess=66   INCONSISTENT
+zeta/tame5 hom1 w=3 args=n,k,n-k,l,k-l deg<=None disc=(-3,) hom=1 cols=130  rank=130  excess=60   INCONSISTENT

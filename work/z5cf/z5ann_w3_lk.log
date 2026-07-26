@@ -1,0 +1,19 @@
+START Sun 26 Jul 2026 09:24:22 WT=3 ORD=lk TAG=w3_lk MEMCAP=2800000000 SPLITCAP=1200 ANNCAP=5400 CT1CAP=5400 DIRECT=2
+HF loaded Sun 26 Jul 2026 09:24:22
+weight 3: HarmonicNumber instances 10   DISTINCT symbols 8  (must be 8)
+  symbols: {HarmonicNumber[k], HarmonicNumber[l], HarmonicNumber[-k + n], HarmonicNumber[k + n], HarmonicNumber[-l + n], HarmonicNumber[l + n], HarmonicNumber[k + n, 2], HarmonicNumber[k + n, 3]}
+  self-test Sum_{k,l} T*w, n=0..3 : {0, 101/4, 344923/96, 3710571371/4320}
+  expected                        : {0, 101/4, 344923/96, 3710571371/4320}
+  Q self-test True   weight self-test True
+obj LeafCount 82  distinct symbols 8
+=== A0 Annihilator[T] === Sun 26 Jul 2026 09:24:23
+  A0 annT #3 t=0s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:24:23
+=== A0b Annihilator[w] (harmonic part alone) === Sun 26 Jul 2026 09:24:23
+  A0b annW #10 t=64s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:25:27
+=== A1s DFiniteTimes[annT, annW] === Sun 26 Jul 2026 09:25:27
+  A1s annS #10 t=30s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:25:57
+USING annS (split route), 10 generators
+  ann generators 10  LeafCount 5596298  rank(under staircase) 15
+=== A2 ct1 (eliminate l) === Sun 26 Jul 2026 09:25:58
+  A2 ct1 : TIME ABORT after 5402s  peakRSSproxy=2GB  Sun 26 Jul 2026 10:55:59
+A2 DID NOT RETURN. ALL DONE Sun 26 Jul 2026 10:55:59

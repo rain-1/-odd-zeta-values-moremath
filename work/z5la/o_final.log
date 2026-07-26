@@ -1,0 +1,20 @@
+=== n=5 p=4194301 ===
+  n=5 p=4194301  a=[1, 1856591, 741434, 2946388, 1875359]
+  fits: 7 standalone (nc=1624, 2219 rows) nbad=0 | () (nc=2520, 3422 rows) nbad=0
+  INDEPENDENT check, 350 fresh points x 15 blocks = 5250 identities: ALL SATISFIED
+  (B-bot) r_j(n,0,l)=0 and s_j(n,k,0)=0 for all 15 blocks: HOLD  [26s]
+=== n=9 p=4194301 ===
+  n=9 p=4194301  a=[1, 2075491, 1873383, 116205, 160122]
+  fits: 7 standalone (nc=1624, 2219 rows) nbad=0 | () (nc=2520, 3422 rows) nbad=0
+  INDEPENDENT check, 350 fresh points x 15 blocks = 5250 identities: ALL SATISFIED
+  (B-bot) r_j(n,0,l)=0 and s_j(n,k,0)=0 for all 15 blocks: HOLD  [26s]
+=== n=5 p=4194287 ===
+  n=5 p=4194287  a=[1, 2717894, 3145189, 406102, 2604232]
+  fits: 7 standalone (nc=1624, 2219 rows) nbad=0 | () (nc=2520, 3422 rows) nbad=0
+  INDEPENDENT check, 350 fresh points x 15 blocks = 5250 identities: ALL SATISFIED
+  (B-bot) r_j(n,0,l)=0 and s_j(n,k,0)=0 for all 15 blocks: HOLD  [26s]
+=== n=11 p=4194287 ===
+  n=11 p=4194287  a=[1, 2649700, 3191048, 1190269, 18512]
+  fits: 7 standalone (nc=1624, 2219 rows) nbad=0 | () (nc=2520, 3422 rows) nbad=0
+  INDEPENDENT check, 350 fresh points x 15 blocks = 5250 identities: ALL SATISFIED
+  (B-bot) r_j(n,0,l)=0 and s_j(n,k,0)=0 for all 15 blocks: HOLD  [27s]

@@ -1,0 +1,12 @@
+START Sun 26 Jul 2026 13:00:48 TAG=w3_lk MEMCAP=5000000000 CTCAP=3000 DMAX=5
+HF loaded
+ann loaded from z5_w3_lk_annS.m : 10 generators, LeafCount 5596298, rank 15
+ct ladder order: {3, 4, 5, 0, 1, 2}
+  2-delta CT d=3 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:51
+  2-delta CT d=4 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:52
+  2-delta CT d=5 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:53
+  2-delta CT d=0 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:54
+  2-delta CT d=1 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:55
+  2-delta CT d=2 t=1s -> error  maxmem=0GB  Sun 26 Jul 2026 13:00:56
+  NO 2-delta telescoper up to d=5.
+ALL DONE Sun 26 Jul 2026 13:00:56

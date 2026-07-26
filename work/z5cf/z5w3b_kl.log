@@ -1,0 +1,11 @@
+START Sun 26 Jul 2026 13:02:42 ORD=kl MEMCAP=5000000000 GBCAP=2400 CT1CAP=12000
+HF loaded
+ann: 10 generators, LeafCount 5596298, rank 15
+=== B0 OreGroebnerBasis over the full 3-variable algebra === Sun 26 Jul 2026 13:02:44
+  B0 gb3 OK t=2119s LeafCount 5596298 maxmem=2GB Sun 26 Jul 2026 13:38:02
+  reduction factor on LeafCount: 1.000x   #gens 10  rank 15
+=== B1 multi-delta CreativeTelescoping signature probe === Sun 26 Jul 2026 13:38:03
+  probe result head: String  -> CHECK-FAILED
+=== B2 ct1 (eliminate k) on the reduced basis === Sun 26 Jul 2026 13:38:04
+  B2 ct1 : MEMORY ABORT after 1683s maxmem=6GB Sun 26 Jul 2026 14:06:07
+B2 DID NOT RETURN. ALL DONE Sun 26 Jul 2026 14:06:07

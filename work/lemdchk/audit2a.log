@@ -1,0 +1,36 @@
+alpha  p=5   | (V2) termwise min=-1   viol=3    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 20/20 fail
+        worst (V2) term: a=4 b=1  v_p(S(a,b))=1 v_p(w(a,b))=-2 sum=-1   [2b=2, p=5]
+alpha  p=7   | (V2) termwise min=-1   viol=8    | Delta(a) min v_p=0    a with Delta!=0 mod p: 1   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 42/42 fail
+        worst (V2) term: a=5 b=1  v_p(S(a,b))=1 v_p(w(a,b))=-2 sum=-1   [2b=2, p=7]
+alpha  p=11  | (V2) termwise min=-1   viol=23   | Delta(a) min v_p=0    a with Delta!=0 mod p: 4   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 110/110 fail
+        worst (V2) term: a=7 b=1  v_p(S(a,b))=1 v_p(w(a,b))=-2 sum=-1   [2b=2, p=11]
+alpha  p=13  | (V2) termwise min=-1   viol=35   | Delta(a) min v_p=0    a with Delta!=0 mod p: 5   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 156/156 fail
+        worst (V2) term: a=8 b=1  v_p(S(a,b))=1 v_p(w(a,b))=-2 sum=-1   [2b=2, p=13]
+--------------------------------------------------------------------------------------------------------------------------------
+eps    p=5   | (V2) termwise min=0    viol=3    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 20/20 fail
+        worst (V2) term: a=3 b=3  v_p(S(a,b))=2 v_p(w(a,b))=-2 sum=0   [2b=6, p=5]
+eps    p=7   | (V2) termwise min=0    viol=6    | Delta(a) min v_p=0    a with Delta!=0 mod p: 3   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 42/42 fail
+        worst (V2) term: a=4 b=4  v_p(S(a,b))=2 v_p(w(a,b))=-2 sum=0   [2b=8, p=7]
+eps    p=11  | (V2) termwise min=0    viol=13   | Delta(a) min v_p=0    a with Delta!=0 mod p: 3   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 110/110 fail
+        worst (V2) term: a=6 b=6  v_p(S(a,b))=2 v_p(w(a,b))=-2 sum=0   [2b=12, p=11]
+eps    p=13  | (V2) termwise min=0    viol=20   | Delta(a) min v_p=0    a with Delta!=0 mod p: 6   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 156/156 fail
+        worst (V2) term: a=7 b=7  v_p(S(a,b))=2 v_p(w(a,b))=-2 sum=0   [2b=14, p=13]
+--------------------------------------------------------------------------------------------------------------------------------
+s7     p=5   | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 10/20 fail
+        worst (V2) term: a=3 b=2  v_p(S(a,b))=1 v_p(w(a,b))=0 sum=1   [2b=4, p=5]
+s7     p=7   | (V2) termwise min=0    viol=5    | Delta(a) min v_p=0    a with Delta!=0 mod p: 1   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 8/42 fail, U: 28/42 fail
+        worst (V2) term: a=4 b=3  v_p(S(a,b))=1 v_p(w(a,b))=-1 sum=0   [2b=6, p=7]
+s7     p=11  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 66/110 fail
+        worst (V2) term: a=6 b=5  v_p(S(a,b))=1 v_p(w(a,b))=0 sum=1   [2b=10, p=11]
+s7     p=13  | (V2) termwise min=1    viol=0    | Delta(a) min v_p=1    a with Delta!=0 mod p: 0   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 104/156 fail
+        worst (V2) term: a=7 b=6  v_p(S(a,b))=1 v_p(w(a,b))=0 sum=1   [2b=12, p=13]
+--------------------------------------------------------------------------------------------------------------------------------
+E      p=5   | (V2) termwise min=0    viol=2    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [3, 4] | cancellation V: 0/20 fail, U: 20/20 fail
+        worst (V2) term: a=3 b=3  v_p(S(a,b))=1 v_p(w(a,b))=-1 sum=0   [2b=6, p=5]
+E      p=7   | (V2) termwise min=0    viol=6    | Delta(a) min v_p=0    a with Delta!=0 mod p: 2   | B-set != {0..a} for a in [4, 5, 6] | cancellation V: 0/42 fail, U: 42/42 fail
+        worst (V2) term: a=4 b=4  v_p(S(a,b))=1 v_p(w(a,b))=-1 sum=0   [2b=8, p=7]
+E      p=11  | (V2) termwise min=0    viol=19   | Delta(a) min v_p=0    a with Delta!=0 mod p: 4   | B-set != {0..a} for a in [6, 7, 8, 9, 10] | cancellation V: 0/110 fail, U: 110/110 fail
+        worst (V2) term: a=6 b=6  v_p(S(a,b))=1 v_p(w(a,b))=-1 sum=0   [2b=12, p=11]
+E      p=13  | (V2) termwise min=0    viol=29   | Delta(a) min v_p=0    a with Delta!=0 mod p: 6   | B-set != {0..a} for a in [7, 8, 9, 10, 11, 12] | cancellation V: 0/156 fail, U: 156/156 fail
+        worst (V2) term: a=7 b=7  v_p(S(a,b))=1 v_p(w(a,b))=-1 sum=0   [2b=14, p=13]
+--------------------------------------------------------------------------------------------------------------------------------

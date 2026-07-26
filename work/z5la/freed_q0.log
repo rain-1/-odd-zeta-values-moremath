@@ -1,0 +1,4 @@
+CONTROL: Q-row
+  q0 J=1 nc=312 cols=312 rows=400 rank(M)=231 nullity=81
+     order<=3 : rank=234  -> 1 telescoper direction(s)
+     order<=4 : rank=235  -> 1 telescoper direction(s)

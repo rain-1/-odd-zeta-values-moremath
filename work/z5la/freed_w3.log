@@ -1,0 +1,19 @@
+WEIGHT w3
+  w3 J=15 nc=220 cols=3300 rows=3900 rank(M)=2621 nullity=679
+     order<=3 : rank=2625  -> 0 telescoper direction(s)
+     order<=4 : rank=2626  -> 0 telescoper direction(s)
+     order<=5 : rank=2627  -> 0 telescoper direction(s)
+     order<=6 : rank=2628  -> 0 telescoper direction(s)
+     order<=8 : rank=2630  -> 0 telescoper direction(s)
+  w3 J=15 nc=220 cols=3300 rows=3900 rank(M)=2621 nullity=679
+     order<=3 : rank=2625  -> 0 telescoper direction(s)
+     order<=4 : rank=2626  -> 0 telescoper direction(s)
+     order<=5 : rank=2627  -> 0 telescoper direction(s)
+     order<=6 : rank=2628  -> 0 telescoper direction(s)
+     order<=8 : rank=2630  -> 0 telescoper direction(s)
+  w3 J=15 nc=312 cols=4680 rows=3900 rank(M)=3728 nullity=952
+     order<=3 : rank=3732  -> 0 telescoper direction(s)
+     order<=4 : rank=3733  -> 0 telescoper direction(s)
+     order<=5 : rank=3734  -> 0 telescoper direction(s)
+     order<=6 : rank=3735  -> 0 telescoper direction(s)
+     order<=8 : rank=3737  -> 0 telescoper direction(s)

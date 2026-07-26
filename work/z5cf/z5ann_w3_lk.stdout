@@ -1,0 +1,99 @@
+Wolfram 15.0.0 Kernel for Linux x86 (64-bit)
+Copyright 1988-2026 Wolfram Research, Inc.
+
+In[1]:=                                                 
+In[2]:= In[2]:= 
+In[3]:= 
+In[4]:= 
+In[5]:= 
+In[6]:= 
+In[7]:= 
+In[8]:= 
+In[9]:= 
+In[10]:= 
+In[11]:= 
+In[12]:= 
+In[13]:= 
+In[14]:= 
+In[15]:= 
+In[16]:= 
+In[17]:= 
+In[18]:= START Sun 26 Jul 2026 09:24:22 WT=3 ORD=lk TAG=w3_lk MEMCAP=2800000000
+ 
+>    SPLITCAP=1200 ANNCAP=5400 CT1CAP=5400 DIRECT=2
+
+In[19]:= In[19]:= HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria
+--> Type  ?HolonomicFunctions  for help.
+
+In[20]:= HF loaded Sun 26 Jul 2026 09:24:22
+
+In[21]:= In[21]:= 
+In[22]:= 
+In[23]:= 
+In[24]:= 
+In[25]:= 
+In[26]:= 
+In[27]:= 
+In[28]:= 
+In[29]:= 
+In[30]:= 
+In[31]:= 
+In[32]:= 
+In[33]:= weight 3: HarmonicNumber instances 10   DISTINCT symbols 8  (must be 8)
+
+In[34]:= 
+In[35]:=   symbols: {HarmonicNumber[k], HarmonicNumber[l], HarmonicNumber[-k + n],\
+ 
+>    HarmonicNumber[k + n], HarmonicNumber[-l + n], HarmonicNumber[l + n],\
+ 
+>    HarmonicNumber[k + n, 2], HarmonicNumber[k + n, 3]}
+
+In[36]:= In[36]:= 
+In[37]:= 
+In[38]:= 
+In[39]:= 
+In[40]:= 
+In[41]:= 
+In[42]:=   self-test Sum_{k,l} T*w, n=0..3 : {0, 101/4, 344923/96, 3710571371/4320}
+
+In[43]:=   expected                        : {0, 101/4, 344923/96, 3710571371/4320}
+
+In[44]:=   Q self-test True   weight self-test True
+
+In[45]:= 
+In[46]:= In[46]:= 
+In[47]:= obj LeafCount 82  distinct symbols 8
+
+In[48]:= In[48]:= 
+In[49]:= 
+In[50]:= 
+In[51]:= In[51]:= 
+In[52]:= === A0 Annihilator[T] === Sun 26 Jul 2026 09:24:23
+
+In[53]:=   A0 annT #3 t=0s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:24:23
+
+In[54]:= === A0b Annihilator[w] (harmonic part alone) === Sun 26 Jul 2026 09:24:23
+
+In[55]:=   A0b annW #10 t=64s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:25:27
+
+In[56]:= 
+In[57]:= === A1s DFiniteTimes[annT, annW] === Sun 26 Jul 2026 09:25:27
+  A1s annS #10 t=30s  (checkpointed)  maxmem=0GB  Sun 26 Jul 2026 09:25:57
+
+In[58]:= In[58]:=                   
+In[59]:= 
+In[60]:= 
+In[61]:= In[61]:= USING annS (split route), 10 generators
+
+In[62]:= 
+In[63]:=   ann generators 10  LeafCount 5596298  rank(under staircase) 15
+
+In[64]:= In[64]:= 
+In[65]:= === A2 ct1 (eliminate l) === Sun 26 Jul 2026 09:25:58
+
+In[66]:=   A2 ct1 : TIME ABORT after 5402s  peakRSSproxy=2GB  Sun 26 Jul 2026 10:55:59
+
+In[67]:= A2 DID NOT RETURN. ALL DONE Sun 26 Jul 2026 10:55:59

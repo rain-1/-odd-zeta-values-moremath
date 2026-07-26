@@ -1,0 +1,16 @@
+21 columns, 201 rows
+   none at size 2 (1 prefixes, 0.0s)
+   none at size 3 (21 prefixes, 0.0s)
+   none at size 4 (210 prefixes, 0.1s)
+   none at size 5 (1330 prefixes, 0.3s)
+   none at size 6 (5985 prefixes, 2.3s)
+
+MINIMUM SUPPORT = 7
+    H3[n+k]
+    H1[k]*H2[n+k]
+    H1[l]*H2[n+k]
+    H1[n+k]*H2[n+k]
+    H1[n+l]*H2[n+k]
+    H1[n-k]*H2[n+k]
+    H1[n-l]*H2[n+k]
+5.4s

@@ -339,6 +339,22 @@ reach 2n (letters at 2k / 2n−2k / 2k−n), so `p^w w(n,k)` acquires a pole in 
   valuation bound showing that a Kummer carry in the wide binomial (`C(2k,k)`, `C(2k,n)`) beats the
   order-1 pole of `H^{(r)}(⌊2k/p⌋)`. (s₇ additionally excludes p = 7: its coefficients have
   denominator 28. **[VERIFIED]** 13 failing cells at p = 7 and none at p = 5,11,13.)
+
+  > **CLARIFICATION + SHARPENING (2026-07-26, `work/LEMMAD_CHECK.md`).** "*Invalid termwise*"
+  > here means **layer by layer** — each of `V(n) = Σ_{p|S}` and `U(n) = Σ_{p∤S}` separately
+  > misses its intended value — **not** index-by-index in `k`. (`SPORADIC_BARE` §2.5 read it the
+  > second way and drew a false conclusion; that file now carries a correction.) The "equal
+  > numbers" is not independent evidence: given the verified conclusion, `V` fails iff `U` does.
+  > The defects have a **closed form**, `[VERIFIED, 0 failures, p = 5…23, all n < p²]`:
+  > `V(n) ≡ χ(p)^e·Δ(a)·A(r)` and `U(n) ≡ χ(p)^e·(B(a) − Δ(a))·A(r) (mod p)`, where
+  > `Δ(a) := Σ_{b : p | S(a,b)} S(a,b)·w(a,b)` is a **base-level** defect. Correspondingly
+  > **(H2) above needs amending**: the surviving set is `B_a × Σ_r` with `B_a = {b : p ∤ S(a,b)}`,
+  > a *proper* subset of `{0..a}` once `a ≥ (p+1)/2`, and the extra clause `Δ(a) ≡ 0 (mod p)` is
+  > required. That clause is automatic for the tame four; it **fails** for α, ε, E — and no
+  > admissible weight repairs it (exact ℚ-kernel + `𝔽_p` solvability test; for E the kernel
+  > cannot move `Δ(a) mod p` at all). It **holds** for s₇ at `p ≠ 7`, and so does the termwise
+  > Kummer-vs-pole bound `[VERIFIED, 0 violations, p ≤ 41]` — so **s₇ is the one of the four
+  > reachable by a Lemma-D-style valuation bound**; α, ε, E need the descent congruence.
 * Notably **E is the only known instance of the twisted theorem (e = 1)**, and it is non-tame.
   Attempts to find a *tame* χ_{−4}-decomposition for E (arguments {n,k,n−k}, and {n,k,n−k,2k})
   were **[VERIFIED inconsistent]** — the wide arguments are essential. So the twisted case of

@@ -1,0 +1,4 @@
+  a = [1, 1856591, 741434, 2946388, 1875359]   [23s setup]
+  seven standalone blocks: rank=1106 nbad=0
+  () block: ansatz E2 deg=(27,27) nc0=1568 + 4032 kernel cols = 5600 cols, 7542 rows (ratio 1.35) -> rank=1572 nbad=5970 
+  () fresh-point check on 300 unused points: 300 violations  [86s]

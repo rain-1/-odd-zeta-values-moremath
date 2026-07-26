@@ -1,0 +1,16 @@
+528 monomials (W=5, deg<=3), 251 rows, 24.3s
+
+  alphabet                            deg  cols   rkA  rkAb excess  verdict
+  k/l+n+k/n+l+n-k/n-l                   3   165   164   164     87  CONSISTENT
+  n+k/l+n+k/n+l+n-k/n-l                 3   254   243   243      8  CONSISTENT
+  k/l+n+k/n+l+n-k/n-l+k+l               3   254   250   250      1  CONSISTENT
+  n+k/l+n+k/n+l+n-k/n-l+k+l             3   373   250   250      1  CONSISTENT
+  k/l+n+k/n+l+n-k/n-l+n+k+l             3   254   250   250      1  CONSISTENT
+  n+k/l+n+k/n+l+n-k/n-l+n+k+l           3   373   250   250      1  CONSISTENT
+  n+k/l+n+k/n+l+k+l+n+k+l               3   283   250   250      1  CONSISTENT
+  n+k/l+n-k/n-l+k+l+n+k+l               3   283   250   250      1  CONSISTENT
+  n+n+k/n+l+n-k/n-l+k+l+n+k+l           3   283   250   250      1  CONSISTENT
+  k/l+n+k/n+l+n-k/n-l+k+l+n+k+l         3   373   250   250      1  CONSISTENT
+  n+k/l+n+k/n+l+n-k/n-l+k+l+n+k+l       3   528   250   250      1  CONSISTENT
+
+done 28.1s
