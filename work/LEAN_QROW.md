@@ -1011,3 +1011,71 @@ above is the only new thing needed.
   needs no `x ≤ n` hypothesis. (P-int) retires "Lemma N".
 * `dn(n)` carries a factor `n`, so the certificate covers `n ≥ 1`; `n = 0` is already
   kernel-checked in `BZClosedForm` §3.1. The induction base is in hand.
+
+---
+
+# ADDENDUM 5 — the per-declaration architecture, and the corrected 42-block number
+
+## 17.1 The architecture, and why it is **three** declarations and not forty-eight
+
+My first split emitted every intermediate as its own literal — 48 declarations, 90 482 monomials
+of generated Lean. That is unnecessary. The cost model says peak memory is
+
+```
+   peak ≈ 1.5 GB (Mathlib baseline)  +  3.5 KB × (cells produced inside ONE declaration)
+```
+
+where a *cell* is one monomial-multiply or one merge step, `cells(pmul p q) = |p|·|q| + |p|·|R|`.
+The whole certificate is ≈1.9·10⁶ cells, hence ≈8 GB by the model — and 12.7 GB observed, so the
+model is right to within 1.5×. The split therefore only has to break the computation at the two
+or three places where the running total would cross ≈8·10⁵ cells. Measured cell counts:
+
+| declaration | contents | cells | predicted peak |
+|---|---|---|---|
+| `hAK` | `substK AmidP = AKP` — the `k`-shift of the 1133-monomial `A`-table | ≈7.5·10⁵ | ≈4.1 GB |
+| `hL` | the four `c_i·P_i`, three merges, and `D*` applied as **eight** sparse factors | ≈1.8·10⁵ | ≈2.1 GB |
+| `hR` | the four `U_i`-chains (incl. `substL BmidP`) and their three merges | ≈4.3·10⁵ | ≈3.0 GB |
+
+**Total generated: 7 776 monomials** (`AmidP`, `BmidP`, `AKP`, `WP`, `PP0P…PP3P`, `cq0P…cq3P`,
+`KfacP`, 22 factor tables) — 12× less than the naive split, because intermediates that are never
+re-used need not be named. The `substK` step is isolated precisely because it is the single most
+expensive operation in the certificate; that is the one place the model *forces* a break.
+
+Pre-simulated in Python before any kernel time, per the standing rule: the chain reproduces
+`|WP| = 3798` on both sides and `LHS == RHS` exactly.
+
+## 17.2 ⭑ Corrected 42-block projection ⭑ — please replace the old one
+
+The old figure ("under an hour across 12 cores") assumed flat memory. It is wrong in the way
+that matters: **the job is RAM-bound, not core-bound.**
+
+Calibration: 3.5·10³ cells/s throughput; 3.5 KB of kernel cache per cell; the Q row's
+2 445 cofactor monomials cost ≈1.36·10⁶ cells, i.e. **≈560 cells per cofactor monomial**.
+
+`Z5STAR_CERT.md` gives 93 073 cofactor monomials, and **29 of the 42 blocks are free**
+(`linear_combination (w_j) * KeyPoly`), so the work is **13 blocks**, ≈7 160 cofactor monomials
+each:
+
+| quantity | value |
+|---|---|
+| cells per block | ≈4.0·10⁶ |
+| **kernel time per block** | ≈**19 min** |
+| declarations per block | 3–5 (break whenever the running total nears 8·10⁵ cells) |
+| **peak RSS per block** | ≈**4.5 GB** (1.5 GB baseline + the largest step) |
+| 13 blocks, serial | ≈**4.1 h** |
+| max concurrent processes on 15 GB | **3** (not 12 — memory, not cores, is binding) |
+| **13 blocks, parallel** | ≈**1.4 h wall** |
+
+Add ~10 min for the `DivCert`-free bridge work and the (B-bot) single-sum certificate when it
+exists. **So: ~1.5 h of wall clock on this machine, or ~25 min on anything with 64 GB.** The
+scaling lever that matters is RAM per process, and the lever that does *not* matter is
+coefficient height (§16.1) — so if a bigger machine is available, use it for the memory, not the
+cores.
+
+Two caveats worth stating with the number:
+
+* This assumes each block is split by the same rule. **A block handed to a single `decide` will
+  fail**, exactly as `KeyPoly` did at 12.7 GB. The split rule is mechanical — accumulate cells,
+  break at 8·10⁵ — and should be automated in the emitter, not done by hand 13 times.
+* Elaborating the literal tables is itself slow and needs `set_option maxHeartbeats 0`; at
+  7 776 monomials for the Q row it is minutes. The `w★` blocks carry ~12× that.

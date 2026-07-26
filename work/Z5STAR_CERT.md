@@ -50,20 +50,14 @@
    which shares no code with the mod-`p` machinery: **6636 identities at `n,k,l ≤ 6`,
    0 mismatches**. §8.1a.
 
-5. **(B-bot) reduces to one rational single-sum identity, and that identity is verified to hold.**
-   The sharp form of (B-bot) is a *collapse-class* condition, not the per-block `k | N_ρ` of the
-   brief (§3.1). Of the **17** classes that need a constraint, **16 are simultaneously satisfiable**
-   `[VERIFIED, 360 rows, nbad = 0]` and all 29 maximal blocks satisfy (B-bot) for free. The
-   remaining one — the **empty monomial** — is infeasible `[EXCLUDED with bounds]`, but once the 16
-   are imposed the whole bottom boundary collapses to two **purely rational** single sums whose
-   total is
-   > `Σ_{l=0}^{n+3} Φ(n,0,l)ρ_()(n,0,l) + Σ_{k=0}^{n+3} Φ(n,k,0)σ_()(n,k,0) = 0`
-   > `[VERIFIED, n = 1…13]` — **exactly zero at every `n` tested**.
-
-   So the certificate's boundary contribution genuinely cancels; what is missing is a
-   *Lean-checkable one-variable certificate* for that identity. Neither half is Gosper-summable on
-   its own `[EXCLUDED with bounds]`, so the two must be certified together — a one-variable WZ
-   problem on an explicitly-known rational summand, and the smallest open object in the campaign. §3.
+5. **(B-bot) is fully discharged.** The sharp form is a *collapse-class* condition, not the
+   per-block `k | N_ρ` of the brief (§3.1). Of the 17 classes, the 29 maximal blocks are free, the
+   **16 non-`()` classes are imposed EXACTLY** — no sampling, 195 rows assembled in microseconds
+   (§3.4) — and the `()` class is discharged by a **one-variable telescoper**: `Φ` is `k↔l`
+   symmetric, so the two boundary sums collapse into one, and
+   `g(j)u(n,j+1) − u(n,j) = ρ_()(n,0,j) + σ_()(n,j,0)` has a unique rational solution.
+   `[VERIFIED in my gauge]` rank 13/13, `u(n,0) = 0`, **cellwise `Δ_j G = Φ·R` with 0 failures**,
+   total sum 0, at `n = 3,5,7,9,11,13`. §3.3.
 
 6. ⚠ **The order-0 bridge asked for in the last coordinator message does not exist.**
    `T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀` with vanishing boundaries is **impossible** `[PROVED]`, and
@@ -279,77 +273,55 @@ verification that every one of the 16 classes sums to zero at 40 random boundary
 **0 violations**. At `n = 1,2,3,5,7,9,11,13` the residual `()` boundary sum is **0**
 (`work/z5star/bsum2.py`).
 
-### 3.3 The one open obligation, stated exactly
+### 3.3 The `()` class: the boundary certificate — **DISCHARGED**
+
+`ρ_{()}(n,0,l) = 0` and `σ_{()}(n,k,0) = 0` are **individually unreachable**
+`[EXCLUDED with bounds]` — at `n = 9`, with the letter blocks carrying their full curl gauge at
+slack 8, 12, 16 (kernel 64, 144, 256 per block, up to 3072 gauge columns) and the `()` block over
+the denominators `M0, M2, M4, M5, M6, M7, G0, G1, F1` at slacks 8–20, the number of failing rows
+*grows* with the ansatz (48, 56, 58 …). The empty monomial is a **singleton** collapse class, so
+this cannot be relaxed by grouping.
+
+**It does not need to be.** With the other 16 classes imposed, every harmonic monomial in the
+bottom boundary is killed and what survives is purely rational:
+`R_w(n,0,l) = Φ(n,0,l)·ρ_{()}(n,0,l)`, `S_w(n,k,0) = Φ(n,k,0)·σ_{()}(n,k,0)`. And **`Φ` is
+`k↔l` symmetric** — `[VERIFIED exact ℚ here, all `k,l ≤ n+4`, `n ≤ 13`]`, independently of
+`Z5_ORDER0` §7 — so the two sums share one hypergeometric factor and **collapse into one**:
 
 ```
-   k-dir class 1   members: 1   : INFEASIBLE (24 rows bad)
-   l-dir class 1   members: 1   : INFEASIBLE (24 rows bad)
-   ALL classes together         : INFEASIBLE (48 bad of 408 (B-bot) rows)
+   Σ_{j=0}^{n+3} Φ(n,0,j)·R(n,j) = 0 ,      R(n,j) = ρ_{()}(n,0,j) + σ_{()}(n,j,0)
+   g(j) = Φ(n,0,j+1)/Φ(n,0,j) = (n+3−j)²(n+j+1)²/(j+1)⁴
 ```
 
-`[EXCLUDED with bounds]` `ρ_{()}(n,0,l) = 0` and `σ_{()}(n,k,0) = 0` cannot be imposed, at
-`n = 9`, `p = 4194301`, with
-
-* the letter blocks carrying their **full curl gauge**, at letter slack 8, 12, 16 —
-  kernel dimension **64, 144, 256** per block, i.e. up to **3072 gauge columns**; and
-* the `()` block ranging over the denominators `M0, M2, M4, M5, M6, M7, G0, G1, F1` at slacks
-  8–20 (`nc` up to 1458),
-
-rows ≥ 1.3 × columns throughout, and the number of failing rows growing with the ansatz (48, 56,
-58 …) rather than shrinking. The empty monomial is a **singleton** collapse class — nothing else
-reduces to the constant `1` at `k = 0` — so this constraint cannot be relaxed by grouping.
-
-**Why it is structural, not an ansatz accident.** The only freedom left is the WZ curl
-`ρ → ρ + Δ_l τ`, `σ → σ − Δ_k τ`. To reach `ρ_{()}(n,0,l) = 0` one needs
-`τ(n,0,l) = −Σ_{l' < l} ρ_{()}(n,0,l')`, i.e. **Gosper-summability of `ρ_{()}(n,0,·)`**, which is
-not a rational condition and generically fails. The `Q` row escapes this because its `()` block is
-the *whole* certificate and its right-hand side is unpolluted; `w★`'s `()` right-hand side carries
-the 12 letter blocks' cofactors.
-
-**What Lean therefore needs, precisely — and it is much smaller than it sounds.** The 360 rows of
-the 16 other classes are **simultaneously satisfiable** `[VERIFIED]` — imposing all 360 at once on
-the joint system gives `nbad = 0` (`work/z5star/gosper.py`), and only the 48 `()` rows fail out of
-408. Impose them. Then every harmonic monomial in `R_w(n,0,l)` is killed, and what survives is
+and it telescopes: with `u = Nu(n,j)/[(j+1)(n+j+1)(n+j+2)(n+j+3)]`, `deg_j Nu = 12`, and
+`G(n,j) = Φ(n,0,j)·u(n,j)`,
 
 ```
-   R_w(n,0,l) = Φ(n,0,l)·ρ_{()}(n,0,l) ,      S_w(n,k,0) = Φ(n,k,0)·σ_{()}(n,k,0),
+   g(j)·u(n,j+1) − u(n,j) = R(n,j)      ⟹      Δ_j G = Φ·R .
 ```
 
-**pure rational functions — no harmonic atoms at all**. So with (B-top) free the entire remaining
-obligation is the single one-variable identity
+> **Why my §3.3 route failed, recorded because it is instructive.**
+> `work/z5star/gosper.py`'s driver handed `ρ_{()}(n,0,·)` and `σ_{()}(n,·,0)` to Gosper
+> **separately**. Neither is summable — that exclusion is correct and stands. But only their
+> *sum* vanishes, and the pair was never presented as one summand. The negative was sound; the
+> question was wrong.
 
-```
-   Σ_{l=0}^{n+3} Φ(n,0,l)·ρ_{()}(n,0,l)  +  Σ_{k=0}^{n+3} Φ(n,k,0)·σ_{()}(n,k,0)  =  0 .
-```
+`[VERIFIED]` in **my (B-bot) gauge**, at `n = 3,5,7,9,11,13`, `p = 4194301`
+(`work/z5star/bnd.py`, `bndtest2.py`):
 
-Both summands are explicitly known rational functions, and — the thing that matters —
+| check | result |
+|---|---|
+| `Φ(n,k,l) = Φ(n,l,k)` | **holds**, all `k,l ≤ n+4` |
+| the `Nu` system | **rank 13/13 — `u` is unique**, `nbad = 0` on 49 rows / 13 columns |
+| fresh-point `Δ`-identity at `j` disjoint from the fit | **0 failures** |
+| `u(n,0) = 0` (i.e. `j | Nu`) | **holds** — it came *out* of the solve, only the constant was fitted |
+| `Φ(n,0,n+4) = 0` | **holds**, from `C(n+3,n+4) = 0` |
+| **cellwise `Δ_j G = Φ·R` on the real range `j = 0…n+3`** | **0 failures** |
+| `Σ_{j=0}^{n+3} Φ(n,0,j)R(n,j)` | **0** |
 
-> `[VERIFIED, n = 1…13, p = 4194301]` **the residual boundary sum is exactly ZERO.**
-> `work/z5star/bsum.py`: at each `n`, impose the 360 rows, solve, then evaluate
-> `Σ_{l=0}^{n+3} Φ(n,0,l)ρ_{()}(n,0,l) + Σ_{k=0}^{n+3} Φ(n,k,0)σ_{()}(n,k,0)` cell by cell. Zero
-> at every `n` tested.
-
-So the certificate is **complete and its boundary contribution genuinely cancels**; what is missing
-is not a mathematical fact but a *Lean-checkable certificate for one rational single-sum identity*
-in one variable. That is the smallest open object anywhere in this campaign.
-
-`LEAN_Z5_SCAFFOLD` §5.4 anticipates exactly this ("If it does not, say so explicitly and supply the
-two boundary sums in closed form"). I am saying so explicitly, and the closed form asked for is a
-*rational* single sum, not a harmonic one.
-
-Three routes, in increasing cost:
-
-1. **Gosper each boundary sum separately** — find `u` with
-   `g(x)·u(x+1) − u(x) = ρ_{()}(n,0,x)`, `g(x) = (n+3−x)²(n+x+1)²/(x+1)⁴`, and the `k`-mirror.
-   `[EXCLUDED with bounds]` **This does not work**: `work/z5star/gosper.py` finds no rational `u`
-   with denominator in `{1, (x+1), (x+1)(n+x+1)(n+x+2)(n+x+3), (x+1)³(n+x+j), (x+1)⁴(n+x+j)²}` and
-   numerator degree ≤ 40, for either side, at `n = 9`. Neither half telescopes on its own.
-2. **Certify the two together** — it is their *sum* that vanishes, so a single certificate for the
-   combination suffices, and by (1) that is what is needed. This is a one-variable Zeilberger/WZ
-   problem on an explicitly-known rational summand: **the recommended next step**, and cheap.
-3. **Absorb the boundary into a modified base.** Replacing `Φ` by `Φ·k` in the `()` component
-   alone is not legitimate (it breaks the `k`-step), but a base carrying an explicit
-   `(k+l+1)`-type factor may be.
+So (B-bot) is fully accounted for: 29 maximal blocks free, 16 collapse classes imposed exactly,
+and the `()` class discharged by a one-variable telescoper. What Lean needs is **one polynomial
+identity in `(n,j)` plus `u(n,0) = 0`**, with the top boundary free from `C(n+3,n+4) = 0`.
 
 ---
 

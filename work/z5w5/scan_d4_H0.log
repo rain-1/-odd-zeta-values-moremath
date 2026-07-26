@@ -1,0 +1,6 @@
+n=13 p=4194301 W=5 H0 slack=10 bideg=(21,21) nc=968 J=3325 blocks=705 rows=1755 ratio=1.79 rank(Msc)=743  [pd 3s sys 3s elim 23s ns 12s]
+   per-block codim histogram {5: 540, 6: 165}   (|up| = 10; codim == |up| means NOTHING admissible)
+   blocks with codim == |up| : 0 of 705  --> ansatz responds
+   >>> dim W_tel(n=13) = 1315   (of J = 3325)
+   cumulative dim W_tel through n=13 : 1315
+saved Wcum_W5_H0_s10_p4194301_d4H0.pkl  (dim 1315)

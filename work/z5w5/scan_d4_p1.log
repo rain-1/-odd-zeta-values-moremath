@@ -3,3 +3,14 @@ n=13 p=4194301 W=5 H1 slack=10 bideg=(36,36) nc=2738 J=3325 blocks=705 rows=4233
    blocks with codim == |up| : 0 of 705  --> ansatz responds
    >>> dim W_tel(n=13) = 1315   (of J = 3325)
    cumulative dim W_tel through n=13 : 1315
+n=17 p=4194301 W=5 H1 slack=10 bideg=(36,36) nc=2738 J=3325 blocks=705 rows=4233 ratio=1.54 rank(Msc)=2113  [pd 3s sys 10s elim 130s ns 10s]
+   per-block codim histogram {5: 540, 6: 165}   (|up| = 10; codim == |up| means NOTHING admissible)
+   blocks with codim == |up| : 0 of 705  --> ansatz responds
+   >>> dim W_tel(n=17) = 1315   (of J = 3325)
+   cumulative dim W_tel through n=17 : 1315
+n=23 p=4194301 W=5 H1 slack=10 bideg=(36,36) nc=2738 J=3325 blocks=705 rows=4233 ratio=1.54 rank(Msc)=2113  [pd 6s sys 14s elim 161s ns 11s]
+   per-block codim histogram {5: 540, 6: 165}   (|up| = 10; codim == |up| means NOTHING admissible)
+   blocks with codim == |up| : 0 of 705  --> ansatz responds
+   >>> dim W_tel(n=23) = 1315   (of J = 3325)
+   cumulative dim W_tel through n=23 : 1315
+saved Wcum_W5_H1_s10_p4194301_d4b.pkl  (dim 1315)
