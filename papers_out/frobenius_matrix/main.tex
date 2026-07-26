@@ -17,6 +17,8 @@
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\CC}{\mathbb{C}}
 \newcommand{\vp}{v_p}
 \newcommand{\A}{A}
 \DeclareMathOperator{\Res}{Res}
@@ -32,15 +34,18 @@ the pair $(a_n,\,p^3b_n)$ transforms under base-$p$ digit splitting by a single
 upper-triangular matrix whose diagonal is one explicit scalar and whose off-diagonal
 entry is the low digit's own companion value, scaled by exactly $p^{3}$. The scalar is
 the second-order truncation of a $\Gamma$-deformation of the summand, summed over the
-full digit range. The first-order part of the law is proved; it is rank one, and we
-prove the identity that makes it so.
+full digit range. We prove the diagonal of the law to second order, for both rows, and
+with it the rank-one profile of the digit defect. Everything reduces to the residue
+theorem for one explicit rational function, applied twice: once over $\CC$, giving an
+identity over $\QQ$, and once over $\FF_p$, where the carry region is exactly the
+complement of the pole divisor. Only the order-$p^4$ off-diagonal remains conjectural.
 \end{abstract}
 \maketitle
 
 Throughout $p$ is a prime $\ge5$, and for $x,y\in\QQ$ we write $x\equiv y\pmod{p^m}$ to
-mean $\vp(x-y)\ge m$. Evidence is labelled: statements called Theorem, Lemma or
-Proposition are proved; those called Observation are exact computations over the stated
-range; Conjectures are neither.
+mean $\vp(x-y)\ge m$. Evidence is labelled: statements called Theorem, Lemma,
+Proposition or Corollary are proved; Conjectures are not, and the single Conjecture
+below records exactly what is not.
 
 \section{The pair, and the two functionals}
 
@@ -174,10 +179,12 @@ origin, $\partial_n\log$ of the summand.
 With $\Pi(t)=\prod_{i\le t}(1+\varepsilon/i)$ and $\bar\Pi(t)=\prod_{i\le t}(1-\varepsilon/i)$,
 \[
   \A_\Gamma(r+\varepsilon,s)=\A(r,s)\frac{\Pi(r+s)^2}{\Pi(r-s)^2}\quad(s\le r),
-  \qquad
-  \A_\Gamma(r+\varepsilon,r+m)=\varepsilon^2\Bigl(\tfrac{(2r+m)!\,(m-1)!}{((r+m)!)^2}\Bigr)^{2}
-  \Pi(2r+m)^2\bar\Pi(m-1)^2 ,
 \]
+\[
+  \A_\Gamma(r+\varepsilon,r+m)=\varepsilon^2 C(r,m)\,\Pi(2r+m)^2\bar\Pi(m-1)^2
+  \quad(m\ge1),
+\]
+where $C(r,m):=\bigl((2r+m)!\,(m-1)!/((r+m)!)^2\bigr)^{2}$,
 and $\operatorname{Adig}(p,r;\varepsilon)=\sum_{s=0}^{p-1}\A_\Gamma(r+\varepsilon,s)$, the sum
 being over the \emph{full} digit range. Write $X_p(r)=[\varepsilon^2]\operatorname{Adig}(p,r)$.
 \end{definition}
@@ -185,27 +192,36 @@ being over the \emph{full} digit range. Write $X_p(r)=[\varepsilon^2]\operatorna
 Then $[\varepsilon^0]=a_r$ and $[\varepsilon^1]=2U_r$. The terms with digit $s>r$ — the
 borrow region — are present and are exactly of order $\varepsilon^2$.
 
-\begin{observation}[$p=5,\dots,23$]\label{obs:scalar}
-With $u(a,r)=a_r+2p\,a\,U_r+p^2a^2X_p(r)$,
+\begin{theorem}[the two-level digit law]\label{thm:scalar}
+Let $p\ge5$ be prime and $n=ap+r$ with $0\le a,r<p$. With
+$u(a,r)=a_r+2p\,a\,U_r+p^2a^2X_p(r)$,
 \[
-  (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot u(a,r) \pmod{p^3},
+  (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot u(a,r) \pmod{p^3};
 \]
-with floor exactly $3$. Truncating $\operatorname{Adig}$ at orders $m=0,1,2$ gives floors
-$1,2,3$, and floor $3$ for every $m\ge3$: the scalar picture saturates at depth three.
-The same test with the restricted deformation $\sum_{s\le r}$ saturates at depth two, so
-the borrow region is exactly the second-order correction.
-\end{observation}
+equivalently $u(a,r)=\bigl[\sum_{s=0}^{p-1}\A_\Gamma(r+\varepsilon,s)\bigr]_{\varepsilon=pa}$
+truncated at order $\varepsilon^2$. The floor is exactly $3$.
+\end{theorem}
 
-\begin{observation}[13 primes, $5\le p\le47$]\label{obs:rank}
-The defect of Corollary \ref{cor:first} has rank $1$ at first order and rank $1$ at
-second order, for both rows, and the two rows have the same $r$-side row space at every
-prime. The second-order correction is scalar with $a$-side factor exactly $a^2$.
-\end{observation}
+The proof is \S\ref{sec:second}. Truncating $\operatorname{Adig}$ at orders $m=0,1,2$
+gives floors $1,2,3$, and floor $3$ for every $m\ge3$: the scalar picture saturates at
+depth three. The restricted deformation $\sum_{s\le r}$ saturates at depth two, so the
+borrow region is exactly the second-order correction.
+
+\begin{corollary}\label{cor:rank}
+The digit defect has rank $\le1$ at first order and rank $\le1$ at second order, for both
+rows, with $a$-side factor exactly $a\cdot(a_a\mid b_a)$ respectively
+$a^2\cdot(a_a\mid b_a)$, and with the \emph{same} $r$-side vector for both rows:
+$(U_r)_r$ at first order, $(X_p(r))_r$ at second. The rank is exactly $1$ iff the
+respective $r$-vector is $\not\equiv0$, which holds at all 13 primes $5\le p\le47$.
+\end{corollary}
 
 \begin{proposition}[the cross term]\label{prop:cross}
-Modulo $p$ a full block satisfies $\sum_{t=1}^{p-1}t^{-3}\equiv0$, so $G_{ap+r}\equiv H^{(3)}_r$
-and $G_{cp+s}\equiv H^{(3)}_s$. Hence the piece of $p^3b_n$ neglected above is
-$p^3\sum_k \A(n,k)(2G_n-G_k)\equiv p^3\,a_a\,b_r \pmod {p^4}$.
+Modulo $p$ a full block satisfies $\sum_{t=1}^{p-1}t^{-3}\equiv0$, so
+$G_{ap+r}\equiv H^{(3)}_r$ and $G_{cp+s}\equiv H^{(3)}_s$. Hence the piece of $p^3b_n$
+neglected above is
+\[
+  p^3\sum_k \A(n,k)\bigl(2G_n-G_k\bigr)\;\equiv\;p^3\,a_a\,b_r \pmod {p^4}.
+\]
 \end{proposition}
 
 That is, the low digit acts on the pair by
@@ -216,16 +232,17 @@ For every prime $p\ge5$ and $n=ap+r$ with $a,r<p$,
   (a_n,\;p^3b_n)\;\equiv\;(a_a,\;b_a)\cdot
   \begin{pmatrix} u(a,r) & p^3\,b_r\\[2pt] 0 & u(a,r)\end{pmatrix}
   \pmod{p^4},
-  \qquad u(a,r)=a_r+2p\,a\,U_r+p^2a^2X_p(r).
 \]
+with $u(a,r)$ as in Theorem \ref{thm:scalar}.
 \end{conjecture}
 
-The $\bmod\ p^2$ truncation is Corollary \ref{cor:first}, proved. The $\bmod\ p^3$
-truncation is Observation \ref{obs:scalar}. The off-diagonal entry is derived in
-Proposition \ref{prop:cross}, and is verified at 13 primes in the sharp form: at order
-$p^3$ the $b$-row defect has rank $3$, subtracting $p^3a_ab_r$ drops it to rank $2$, and
-its $r$-side row space then coincides with the $a$-row's. The residual scalar defect at
-$p^3$ has rank $2$ and is not yet named; that is why the full statement is conjectural.
+Its diagonal is now proved: the $\bmod\ p^2$ truncation is Corollary \ref{cor:first} and
+the $\bmod\ p^3$ truncation is Theorem \ref{thm:scalar}. What remains conjectural is only
+the off-diagonal entry at order $p^4$. That entry is derived in Proposition
+\ref{prop:cross} and verified at 13 primes in the sharp form: at order $p^3$ the $b$-row
+defect has rank $3$, subtracting $p^3a_ab_r$ drops it to rank $2$, and its $r$-side row
+space then coincides with the $a$-row's. The residual scalar defect at $p^3$ has rank $2$
+and is not yet named; that alone is why the statement is still a conjecture.
 
 \begin{remark}
 The cross entry is the low digit's own companion value, scaled by exactly $p^{3}=p^{w}$
@@ -235,28 +252,120 @@ corresponding statement is that a cross term cannot appear before order $p^3$; h
 is derived rather than bounded, and the entry is named.
 \end{remark}
 
-\section{The remaining gap}
+\section{The second order}\label{sec:second}
 
 Writing $\A(ap+r,cp+s)\equiv \A(a,c)\A(r,s)\exp(2p\Lambda_1-p^2\Lambda_2)$ with
 $\Lambda_1=a\,u+c\,v$ and
 $\Lambda_2=(a+c)^2H^{(2)}_{r+s}-2c^2H^{(2)}_s-(a-c)^2H^{(2)}_{r-s}$, the bracket
-$2\Lambda_1^2-\Lambda_2$ has three channels:
+$2\Lambda_1^2-\Lambda_2$ has three channels, and we write $\Sigma_{a^2},\Sigma_{ac},
+\Sigma_{c^2}$ for their $\A(r,s)$-weighted sums over $s\le r$:
 \[
   a^2:\ 2u^2-\bigl(H^{(2)}_{r+s}-H^{(2)}_{r-s}\bigr),\qquad
-  ac:\ 4uv-2\bigl(H^{(2)}_{r+s}+H^{(2)}_{r-s}\bigr),\qquad
-  c^2:\ 2v^2-\bigl(H^{(2)}_{r+s}-2H^{(2)}_s+H^{(2)}_{r-s}\bigr).
+  ac:\ 4uv-2\bigl(H^{(2)}_{r+s}+H^{(2)}_{r-s}\bigr),
 \]
-The measured $a$-side factor $a^2$ of Observation \ref{obs:rank} says the last two die
-modulo $p$. They are not identities: $\sum_s \A(r,s)\cdot(ac\text{-channel})
-=0,\,-26,\,-\tfrac{905}2,\,-\tfrac{167965}{18},\dots$ and the $c^2$ sums are
-$0,\,11,\,\tfrac{607}4,\dots$, nonzero over $\QQ$ for $1\le r\le30$. The vanishing is
-therefore a genuine modulo-$p$ cancellation between the region $s\le r$ and the borrow
-region $s>r$ — the same borrow terms that supply the second-order scalar. Proving it is
-the one gap between Observation \ref{obs:rank} and a theorem, and the sharpest open
-question here.
+\[
+  c^2:\ 2v^2-\bigl(H^{(2)}_{r+s}-2H^{(2)}_s-H^{(2)}_{r-s}\bigr).
+\]
+Theorem \ref{thm:scalar} is equivalent to the vanishing of the last two modulo $p$. They
+are \emph{not} rational identities: $\Sigma_{ac}=0,\,-26,\,-\tfrac{905}2,\,
+-\tfrac{167965}{18},\dots$ and $\Sigma_{c^2}=0,\,13,\,\tfrac{905}4,\,
+\tfrac{167965}{36},\dots$, nonzero over $\QQ$ for $1\le r\le30$. Both statements follow
+from one rational function.
 
-The contrast with the first order is worth recording: there the borrow region
-contributes nothing at all, because $\A$ is a square (Lemma \ref{lem:exp}). At second
-order it contributes, and its contribution is exactly what kills the two $c$-channels.
+\begin{lemma}[reflection, rational form]\label{lem:grat}
+$\A_\Gamma(r,z)=\dfrac{\sin^2\pi z}{\pi^2}\,g_r(z)$ with
+$g_r(z)=\Bigl[\prod_{i=1}^{r}(z+i)\big/\prod_{j=0}^{r}(z-j)\Bigr]^2$, a rational
+function of degree $-2$ whose only poles are double poles at $z=0,1,\dots,r$.
+\end{lemma}
+
+This replaces the $\Gamma$-asymptotics of Theorem \ref{thm:V} by an identity. Since
+$\sin^2\pi z/\pi^2=(z-s)^2-\tfrac{\pi^2}3(z-s)^4+O((z-s)^6)$ at an integer $s$, a
+function $f=\alpha/(z-s)^2+\beta/(z-s)+\gamma+O(z-s)$ gives
+$\Phi=(\sin^2\pi z/\pi^2)f$ regular at $s$ with $\Phi(s)=\alpha$, $\Phi'(s)=\beta$ and
+$\tfrac12\Phi''(s)=\gamma-\tfrac{\pi^2}3\alpha$. For $f=g_r$ this reads
+\[
+  \alpha_s=\A(r,s),\qquad \beta_s=2\A(r,s)\,v(r,s),\qquad
+  \gamma_s=\A(r,s)\bigl(2v^2-(H^{(2)}_{r+s}-2H^{(2)}_s-H^{(2)}_{r-s})\bigr),
+\]
+so $\sum_s\beta_s=2V_r$ and $\sum_s\gamma_s=\Sigma_{c^2}(r)$; and for $m\ge1$,
+\[
+  g_r(r+m)=C(r,m),
+\]
+which is exactly the $\varepsilon^2$ weight of the borrow digit $s=r+m$. The $\pi^2/3$
+of the dictionary cancels the $\zeta(2)$ of $\partial_k^2\log\A_\Gamma$, which is why
+$\gamma_s$ is the clean $c^2$ channel.
+
+\begin{theorem}\label{thm:R1}
+$\Sigma_{ac}(r)+2\,\Sigma_{c^2}(r)=0$ for every $r\ge0$, as an identity over $\QQ$.
+\end{theorem}
+
+\begin{proof}
+$\Sigma_{ac}+2\Sigma_{c^2}=\sum_{s\le r}\partial_k\bigl[(\partial_n+\partial_k)
+\A_\Gamma\bigr](r,s)$; the $\zeta(2)$ terms enter with weights $4$ and $2\cdot(-2)$ and
+cancel, so this is the unique $\zeta(2)$-free combination. Now $\sin^2\pi(z-n)$ is
+invariant along $(n,z)\mapsto(n+t,z+t)$, and in that direction
+$(\partial_n+\partial_z)\log g_n=4[\psi(n+z+1)-\psi(z+1)]$ — the $\psi(z-n)$ cancels.
+Hence at $n=r\in\ZZ_{\ge0}$
+\[
+  h_r(z):=(\partial_n+\partial_z)g_n(z)\big|_{n=r}=4\,g_r(z)\sum_{i=1}^{r}\frac1{z+i}
+\]
+is rational, with poles only the double poles at $z=0,\dots,r$ (at $z=-i$ the simple
+pole meets the double zero of $g_r$), and $h_r=O(z^{-3})$. A rational function that is
+$O(z^{-2})$ at infinity has vanishing residue sum, and by the dictionary
+$\partial_z[(\partial_n+\partial_z)\A_\Gamma](r,z)|_{z=s}=\operatorname*{Res}_{z=s}h_r$.
+\end{proof}
+
+\begin{lemma}\label{lem:fp}
+Let $p\ge5$, $0\le r<p$, and let $f\in\QQ(z)$ have poles only at $0,\dots,r$, of order
+$\le2$, with $p$-integral principal parts and $\deg f\le-2$. Then
+$\sum_{s=0}^{r}\operatorname{FP}_{z=s}f+\sum_{t=r+1}^{p-1}f(t)\equiv0\pmod p$.
+\end{lemma}
+
+\begin{proof}
+Both sums are sums of $\alpha_{s'}/(y-s')^2+\beta_{s'}/(y-s')$ over $y\ne s'$ with
+$0\le y\le p-1$, all terms $p$-integral. Interchanging, for fixed $s'$ the difference
+$y-s'$ runs over all nonzero residues, and $\sum_{w\in\FF_p^\times}w^{-1}
+=\sum_{w\in\FF_p^\times}w^{-2}\equiv0$; the second needs $p\ge5$.
+\end{proof}
+
+\begin{theorem}\label{thm:R2}
+For $p\ge5$ and $0\le r<p$, $\ \Sigma_{c^2}(r)+\Xi_p(r)\equiv0\pmod p$, where
+$\Xi_p(r)=\sum_{m=1}^{p-1-r}C(r,m)$.
+\end{theorem}
+
+\begin{proof}
+Take $f=g_r$ in Lemma \ref{lem:fp}: $\deg g_r=-2$, the principal parts are $p$-integral
+($\alpha_s=\A(r,s)\in\ZZ$, and the only $p$ in a denominator of $\beta_s$ is the $1/p$ of
+$H_{r+s}$ when $r+s\ge p$, where $v_p(\A(r,s))=2$), $\sum_s\gamma_s=\Sigma_{c^2}(r)$, and
+$\sum_{t=r+1}^{p-1}g_r(t)=\Xi_p(r)$.
+\end{proof}
+
+Theorem \ref{thm:scalar} follows, with $X_p(r)=\Sigma_{a^2}(r)+\Xi_p(r)$.
+
+\begin{remark}
+The pole set of $g_r$ is $\{0,\dots,r\}$ — the region-I digit range — and its complement
+in $\FF_p$ is $\{r+1,\dots,p-1\}$, the borrow range. So Theorem \ref{thm:R2} says the
+finite parts on the pole divisor cancel the values off it, over $\FF_p$: it is the
+residue theorem read over $\FF_p$ rather than over $\CC$. That is why the vanishing
+cannot be a rational identity, and indeed cannot be: $\Sigma_{c^2}(r)$ is a fixed nonzero
+rational for $r\ge1$ while $\Xi_p(r)$ depends on $p$. Dropping the borrow region
+($\Xi=0$) breaks Theorem \ref{thm:R2} at every $p$ and every $r$ with
+$\Sigma_{c^2}(r)\not\equiv0$. The contrast with the first order is that there the borrow
+region contributes nothing at all, because $\A$ is a square (Lemma \ref{lem:exp}).
+\end{remark}
+
+\begin{remark}[$p=2,3$]
+Both hypotheses $p\ge5$ are used: Lemma \ref{lem:fp} needs
+$\sum_{\FF_p^\times}w^{-2}\equiv0$, and the digit expansion needs
+$W(M)\equiv((p-1)!)^M \bmod p^3$, i.e.\ Wolstenholme. At $p=2,3$ both fail, as do the
+regional formulas and Theorem \ref{thm:R2} at every $r$; only Theorem \ref{thm:R1},
+being $p$-free, survives. The conclusion of Theorem \ref{thm:scalar} nevertheless holds
+at $p=2$ and $p=3$ over all $4$ and $12$ admissible cells. This is a resolution artefact
+rather than a theorem: the statement is equivalent to
+$a\,m_1(\Sigma_{ac}-2\Xi)+m_2(\Sigma_{c^2}+\Xi)\equiv0$, whose necessity requires the
+vectors $(a\,m_1(a),m_2(a))_{1\le a<p}$ to span $\FF_p^2$, and their rank is $0$ at
+$p=2$ and $1$ at $p=3$ against $2$ at every $p\ge5$. With one usable digit, and two, the
+obstruction cannot be seen.
+\end{remark}
 
 \end{document}
