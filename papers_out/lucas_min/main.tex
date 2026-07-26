@@ -68,11 +68,8 @@ for every $n$ we state only as Conjecture \ref{conj:twelve}: it is supported by
 computation and by a proof for the primes $p\ge5$ given elsewhere, and it is not
 formalised.
 
-A second, benign slip in the same author's earlier work is worth recording, though we do
-not formalise it: equation~(8.7) of \cite{Zu04}, defining the rational function $R(t)$,
-omits the factor $(h_0+2t)$ present in (8.2). That factor is the only one antisymmetric
-under $t\mapsto -t-h_0$, and it is what forces the coefficients of the even zeta values
-to vanish; without it the parity structure of the linear forms is reversed.
+Finally we record a transcription slip in the same author's earlier work
+(Section \ref{sec:errata}); it is benign, and we do not formalise it.
 
 Throughout, $p$ is prime, and for $x,y\in\QQ$ we write $x\equiv y\pmod p$ to mean
 $\vp(x-y)\ge1$.
@@ -173,6 +170,44 @@ Theorem \ref{thm:twelve} shows that no smaller constant can serve. Conjecture
 \ref{conj:twelve} itself is \emph{not} formalised: it is supported by exact computation,
 and its restriction to the primes $p\ge5$ is proved elsewhere, conditionally on two
 finite identities verified but not machine-checked.
+
+\section{An erratum}\label{sec:errata}
+
+This section is expository and is not formalised.
+
+Section~8 of \cite{Zu04} proves that one of $\zeta(5),\zeta(7),\zeta(9),\zeta(11)$ is
+irrational. Its linear forms are built from a very-well-poised rational function, defined
+at (8.2) by
+\[
+  \widetilde R(t)=(h_0+2t)\,
+  \frac{\Gamma(h_0+t)^r\prod_{j=1}^{q}\Gamma(h_j+t)}
+       {\Gamma(1+t)^r\prod_{j=1}^{q}\Gamma(1+h_0-h_j+t)},
+\]
+and then normalised arithmetically as $R=N\widetilde R$ with
+$N=\prod_{j=r+1}^{q}(h_0-2h_j)!\big/\prod_{j=1}^{r}(h_j-1)!^2$. Equation~(8.7), which
+restates $R(t)$ as an explicit product, omits the factor $(h_0+2t)$. The omission is in
+the published text and in the arXiv source, not in a transcription of it.
+
+The factor is needed. It is the unique factor of $\widetilde R$ that is antisymmetric
+under $t\mapsto -t-h_0$, so it is what makes the well-poised symmetry (8.5),
+\[
+  \widetilde R(-t-h_0)=-\widetilde R(t),
+\]
+hold; and that symmetry is what forces $B_{jk}=(-1)^jB_{j,h_0-k}$ for the partial-fraction
+coefficients, hence the vanishing of the coefficients of the \emph{even} zeta values in
+$F(h)=\sum_j A_{j-1}\zeta(j-1)-A_0$, which is the content of Lemma~19 there.
+
+The effect of the omission is not a loss of precision but a reversal of parity. Taking the
+paper's own parameters $r=3$, $q=13$, $\eta=(91;27,27,27,29,30,\dots,38)$, $h_0=91n+2$,
+$h_j=\eta_jn+1$, and computing the expansion of $F$ at $n=1$ in exact arithmetic: with
+$(h_0+2t)$ present, the coefficients of $\zeta(3)$ and of $\zeta(4),\zeta(6),\zeta(8),
+\zeta(10),\zeta(12)$ are all exactly zero and only $\zeta(5),\zeta(7),\zeta(9),\zeta(11)$
+survive, as Theorem~3 of \cite{Zu04} requires; reading (8.7) literally, the even zeta
+values survive instead and the odd ones vanish.
+
+So (8.7) should read $R(t)=(h_0+2t)\cdot[\text{the printed product}]$. Equations (8.2),
+(8.5) and (8.6) are consistent with the factor present, and the results of \S8 are
+unaffected.
 
 \section{The development}
 
