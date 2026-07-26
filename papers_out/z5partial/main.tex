@@ -36,7 +36,10 @@ cellular summand and $\Psi$ an explicit antisymmetric weight. The proof combines
 descent with Zudilin's partial-fraction lemma, and uses no comparison of $\QQ$-coefficients of
 zeta values --- a point of substance, since the required linear independence is not known. We
 record what the same methods do \emph{not} give for the top row $P_n$, in the form of five
-bounded exclusions, and we state the status of an ongoing formal verification.
+bounded exclusions. Two companion results are included for contrast: the corresponding
+$\zeta(3)$ closed form, which is machine-verified; and the $\zeta(2)$ case, where the closed
+form is known numerically but the method \emph{provably} fails, by an obstruction that is the
+smallest instance of the one still blocking the top row.
 \end{abstract}
 \maketitle
 
@@ -305,6 +308,66 @@ together with $b_0=0,b_1=6$, not by Ap\'ery's classical double sum with its nest
 inner sum. The equivalence of the two is proved on paper by six Zeilberger/Gosper certificates
 and is not formalised. The situation is thus exactly parallel to the $\zeta(5)$ case, one step
 further advanced.
+
+\section{The $\zeta(2)$ case: where the method provably stops}\label{sec:z2}
+
+The same template applied to the Ap\'ery-$\zeta(2)$ pair produces the closed form but
+\emph{cannot} prove it, and the failure is sharp enough to locate exactly. We record it because
+it is the smallest instance of the obstruction that also blocks the top row of
+\S\ref{sec:neg}.
+
+Let $S(n,k)=\binom nk^2\binom{n+k}k$, $A(n)=\sum_kS(n,k)$ (the sequence
+$1,3,19,147,1251,\dots$), annihilated by $(n+1)^2u_{n+1}=(11n^2+11n+3)u_n+n^2u_{n-1}$, and put
+\begin{equation}\label{eq:z2}
+  B(n)=\sum_{k}S(n,k)\cdot\tfrac15\Bigl[H^{(2)}_n+H_k\bigl(2H_k-H_{n-k}-H_n\bigr)\Bigr].
+\end{equation}
+Then $L[B]=0$ holds for $n\le25$ by exact computation. We do not know a proof.
+
+Everything in the argument of \S\ref{sec:z3} survives as far as the certificate. With
+\[
+  \rho(n,k)=k^2+k(1+6n)-4-15n-11n^2
+\]
+--- degree two, the smallest certificate we have met anywhere --- the Wilf--Zeilberger step
+closes, and the structural boundary identity holds \emph{exactly}:
+$\rho(n,n+1)=-2(n+1)(2n+1)=-(n+1)^2\binom{2n+2}{n+1}\big/\binom{2n}{n}$. The correction
+decomposes as $A+B_1H_k+B_2(H_{n-k}+H_n)$ with $B_2=\rho(n,k+1)/\bigl(5(k+1)\bigr)$. Then it
+stops.
+
+\begin{proposition}\label{prop:z2}
+The $H_{n-k}$ component of \eqref{eq:z2} is not Gosper-summable.
+\end{proposition}
+
+\begin{proof}
+Write $T(k)=S(n,k)B_2(n,k)$. Then $T(k+1)/T(k)=\frac{a(k)}{b(k)}\cdot\frac{c(k+1)}{c(k)}$ with
+$a(k)=(n-k)^2(n+k+1)$, $b(k)=(k+1)^2(k+2)$, $c(k)=\rho(n,k+1)$, and
+$\gcd\bigl(a(k),b(k+j)\bigr)=1$ for all $j\ge0$, the roots being $n,-n-1$ against $-j-1,-j-2$
+with $n$ generic. Gosper's equation is $a(k)x(k+1)-b(k-1)x(k)=c(k)$. Since
+\[
+  a(k)-b(k-1)=-n\bigl(k^2+(n+2)k-n(n+1)\bigr)
+\]
+has degree two with leading coefficient $-n\ne0$, the degree bound gives $\deg x=0$. Writing
+$x=x_0$, the coefficient of $k^2$ forces $x_0=-1/n$, and the coefficient of $k$ then reads
+$n+2$ against the required $3+6n$. Contradiction.
+\end{proof}
+
+Independently, the corresponding linear system has no solution for any $\deg x\le8$.
+
+\begin{remark}\label{rem:z2}
+The diagnosis is structural, not accidental. In the cases where the template does close --- the
+$\zeta(3)$ pair of \S\ref{sec:z3}, and likewise Franel's numbers and $s_{10}$ --- the weight is
+$k\leftrightarrow n-k$ symmetric, the certificate module has rank two, and each component
+telescopes on its own. Here the weight is genuinely three-lettered in $H_k$, $H_{n-k}$, $H_n$;
+the components do not telescope separately, and the weight-two part of any enlarged ansatz is
+forced to vanish, since $\Delta(Sz)=0$ implies $z=0$. Closing this case therefore requires
+either a different gauge for the weight --- the harmonic-monomial fit has a large kernel, and a
+kernel shift changes the correction --- or a genuine $\Pi\Sigma$-ansatz admitting nested sums
+rather than rational $\times$ harmonic monomials.
+
+This is the same shape of obstruction as at weight five, where the top period
+$\zeta(5)+2\zeta(2)\zeta(3)$ is impure in exactly the sense of carrying two independent letters.
+The $\zeta(2)$ case is a miniature of it, small enough to be computed in full, and the two
+available fixes are the same two.
+\end{remark}
 
 \section{Formal verification of the $\zeta(5)$ rows: what exists}\label{sec:formal}
 
