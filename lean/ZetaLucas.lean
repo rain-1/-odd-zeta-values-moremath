@@ -6,3 +6,7 @@ import ZetaLucas.Letters
 import ZetaLucas.TheoremLB
 import ZetaLucas.Instances
 import ZetaLucas.Kummer
+import ZetaLucas.BZFactor12
+import ZetaLucas.MinimalForm
+import ZetaLucas.BZClosedForm
+import ZetaLucas.Defect
