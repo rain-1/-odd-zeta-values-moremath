@@ -1,0 +1,6 @@
+n=13 p=4194301 H0 slack=10 nc=968 rank(Msc)=743 ker=225 ; gauge cols/blk=2025 ; rows=4166  [11s]
+   complementary weight 1 : 540 blocks, gauge 2025 cols, rank[Msc|G] = 743 (was 743, +0) ; codim histogram {5: 540}  [66s]
+   complementary weight 2 : 165 blocks, gauge 2025 cols, rank[Msc|G] = 802 (was 743, +59) ; codim histogram {6: 165}  [40s]
+   >>> dim W_tel^gauge(n=13) = 1315  (of J = 3325)
+   cumulative dim W_tel^gauge through n=13 : 1315
+saved Wgauge_W5_H0_s10_p4194301_d4_d4.pkl (dim 1315)

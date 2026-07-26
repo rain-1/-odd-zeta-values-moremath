@@ -382,7 +382,7 @@ NOTATION
 --------------------------------------------------------------------------------
 12. NOT VERIFIED — explicitly excluded from every claim above
 
-  * star_creative_telescoping (BZStar.lean, line 258) — a `sorry`. It asserts BZRec
+  * star_creative_telescoping (BZStar.lean, line 276) — a `sorry`. It asserts BZRec
     PStarSum, i.e. that the w-star double sum satisfies L_BZ. Everything else in
     BZStar.lean is sorry-free; PStarSum_eq_Phat is downstream of it and carries sorryAx.
   * bz_creative_telescoping  (BZClosedForm.lean, line 661) — a `sorry`. It asserts that
@@ -421,5 +421,5 @@ NOTATION
   A single grep confirms the sorry inventory:
     grep -rn "sorry\|native_decide" ZetaLucas/*.lean
   which returns exactly TWO live occurrences, BZClosedForm.lean line 661 and
-  BZStar.lean line 258, both quarantined in their own clearly-marked sections and both
+  BZStar.lean line 276, both quarantined in their own clearly-marked sections and both
   listed in section 12, plus comment matches.

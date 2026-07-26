@@ -497,21 +497,25 @@ identically** (`H⁽¹⁾_l` and `H⁽¹⁾_{n+k}`: every quotient monomial abov
 
 Genuinely new LHS data: **51 544 − 29×784 = 28 808 monomials**.
 
-The **cleared per-block identities** are larger: each is the cofactor times the
-clearing multipliers (`D(n,k+1,l)`, `D(n,k,l+1)`, `gk`, `gl`, `dn`), pushing degrees to roughly
-`(60, 25, 25)`. A degree-bound estimate — **not a measured expansion**, and it should be measured
-before anyone budgets on it — gives ~4·10⁴ monomials per new block identity, so
+**Totals, and what the checker must chew.** The two measured halves are
 
 ```
-   13 new block identities × ~4·10^4  ≈  5·10^5 monomials of normal form,
-   + 1 Q-row identity (3798, already transcribed in BZQRow.lean) reused 29 times.
+   left-hand side   :  51 544 monomials  (of which 29 x 784 = 22 736 are w_j x the Q-row LHS)
+   cofactor data    :  see 6.4           (13 blocks x rho,sigma)
 ```
 
-against `LEAN_QROW` §9's estimate of `~4·10^5` for the whole thing — i.e. **the minimal-ansatz
-measurement of §4 has brought the certificate in at roughly the size that report predicted, and
-the 29 maximal blocks turn out to be free rather than 29× the Q row.** That is the good news. The
-bad news is that this is still ~130× the single `Q`-row identity that killed `ring`, so §6.3
-confirms rather than softens `LEAN_QROW`'s verdict: **the reflective checker is not optional.**
+The **cleared per-block identities** are larger again: each is the cofactor times the clearing
+multipliers `D(n,k+1,l)`, `D(n,k,l+1)`, `g_k`, `g_l`, `dn`, pushing degrees to roughly
+`(60, 25, 25)`. That expansion is a **degree-bound estimate, not a measurement**, and it should be
+measured before anyone budgets on it: it gives ~4·10⁴ monomials per new block identity, so
+**13 new block identities ≈ 5·10⁵ monomials of normal form**, plus the one `Q`-row identity
+(3798, already transcribed in `BZQRow.lean`) reused 29 times.
+
+`LEAN_QROW` §9 forecast `~4·10⁵` for the whole thing, and its per-`ring` ceiling is `~6·10³`. So
+this **confirms rather than softens** that verdict: **the reflective checker is not optional.**
+What the measurements do change is the *shape* of the bill — 29 of the 42 blocks are free on both
+sides, two more have a vanishing left-hand side, and the coefficients are 122-bit rather than
+"well above 76" (§6.4).
 
 ### 6.4 Coefficient heights `[MEASURED]` — small, after all
 
@@ -605,7 +609,8 @@ directly through `eq_of_BZRec` and its three kernel-checked initial values; it n
 | minimal ansatz, denominator measured | **done** — `M0`, bidegree (12,12)/(16,16); §4 |
 | full certificate at the minimal ansatz, fresh-point verified | **done** — 43 600 identities, 0 failures |
 | (B-top) | **`[PROVED]` free** |
-| (B-bot), maximal + 12 letter blocks + 16 of 17 classes, all 360 rows at once | **done, `[VERIFIED]`** |
+| (B-bot), maximal blocks + all 16 non-`()` collapse classes | **done, `[VERIFIED]`** — imposed EXACTLY (195 rows, no sampling), §3.4 |
+| **the delivered certificate is in the (B-bot)-satisfying gauge** | **done** — `work/z5star/cert5.py`; 3.6 s per `(n,p)`, same as unconstrained |
 | the residual boundary sum is zero | **`[VERIFIED, n = 1…13]`** |
 | **a Lean-checkable certificate for that single rational identity** | ⚠ **OPEN** — one-variable WZ, §3.3 route 2 |
 | `n`-sweep + rational reconstruction, 1 prime (116 pts) and 6 primes (150 pts) | **done**, 0 failures |
@@ -616,7 +621,9 @@ directly through `eq_of_BZRec` and its three kernel-checked initial values; it n
 | **CRT lift → ℚ, sparse JSON emitted** | **done** — `work/z5star/CERT_wstar_sparse.{json,txt}`, 7.7 MB, **0 unliftable of 96 813**; carries both the ℤ-per-`(k,l)`-column form and the ℚ-per-monomial form, plus `unliftable_coefficients` and a `WARNING` field |
 | **coefficient bit-lengths** | **done** — ≤ 122-bit ℚ numerators, ≤ 14-bit denominators; §6.4 |
 | **exact-ℚ residual check OF THE DELIVERED FILE** | **done** — `work/z5star/check6.py`, no mod-`p` machinery, **6636 identities at `n,k,l ≤ 6`, 0 mismatches** |
-| gauge / degree minimisation of the cofactors | **not attempted** — the single biggest remaining size lever |
+| **LHS monomial count** (for the Lean client glue) | **done** — 51 544 over 42 components, of which 22 736 are `w_j ×` the `Q`-row LHS and 2 components vanish; §6.3 |
+| height / degree minimisation of the cofactors | **not attempted, and per the coordinator not wanted** — at 1.6× the `Q` row's height it is no longer binding |
+| the one-variable WZ certificate for the `()` boundary sum | **assigned elsewhere** — not duplicated here |
 | the ≥ order-4 bridge to `ŵ₃` | **not attempted**; §7 gives the lower bound and the shape |
 | weight 5 | untouched |
 

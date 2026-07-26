@@ -61,13 +61,21 @@ REGIONS = {
     'sumgt': lambda n: ((t, m) for t in range(n + 1)
                         for m in range(1, n + 1) if t + m > n),
 }
-for _c in (-2, -1, 0, 1, 2):
+for _c in range(-4, 5):
     REGIONS[f'sumle{_c:+d}'] = (
         lambda n, c=_c: ((t, m) for t in range(n + 1)
                          for m in range(1, n + 1) if t + m <= n + c))
     REGIONS[f'sumeq{_c:+d}'] = (
         lambda n, c=_c: ((t, m) for t in range(n + 1)
                          for m in range(1, n + 1) if t + m == n + c))
+    REGIONS[f'tle_sumle{_c:+d}'] = (
+        lambda n, c=_c: ((t, m) for t in range(n + 1)
+                         for m in range(1, n + 1)
+                         if t <= m and t + m <= n + c))
+    REGIONS[f'tge_sumle{_c:+d}'] = (
+        lambda n, c=_c: ((t, m) for t in range(n + 1)
+                         for m in range(1, n + 1)
+                         if t >= m and t + m <= n + c))
 
 WEIGHTS = [
     ('one', lambda n, t, m: F(1)),
@@ -195,7 +203,7 @@ if __name__ == '__main__':
     cols += [(f'Vertical1/{rg}',
               column_vertical(rg, lambda n, t, j: F(1), 1))
              for rg in REGIONS]
-    cells = [(n, k, l) for n in range(1, 8)
+    cells = [(n, k, l) for n in range(1, 9)
              for k in range(n + 1) for l in range(n + 1)]
     rows, rhs = [], []
     for n, k, l in cells:

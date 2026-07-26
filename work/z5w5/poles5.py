@@ -34,8 +34,8 @@ def lroots(n, k, m=pd5.M):
 
 
 def measure(n=9, p=pd5.P1, nsamp=260, maxdeg=60, k0=100003, l0=200003,
-            which=None, verbose=True):
-    B, T = W.span_w5()
+            which=None, verbose=True, spandeg=3):
+    B, T = W.span_w5(None, 5, spandeg)
     maxi, stand, coup, us = W.blocks(B)
     # one representative standalone block per structural type
     types = {}
@@ -99,4 +99,7 @@ def measure(n=9, p=pd5.P1, nsamp=260, maxdeg=60, k0=100003, l0=200003,
 
 if __name__ == '__main__':
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 9
-    measure(n=n)
+    sd = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+    only = sys.argv[3] if len(sys.argv) > 3 else None
+    wk = tuple(int(x) for x in only.split(',')) if only else None
+    measure(n=n, spandeg=sd, which=wk)

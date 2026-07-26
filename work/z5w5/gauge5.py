@@ -151,15 +151,16 @@ if __name__ == '__main__':
     dname = sys.argv[2]; slack = int(sys.argv[3])
     p = int(sys.argv[4]) if len(sys.argv) > 4 else pd5.P1
     tag = sys.argv[5] if len(sys.argv) > 5 else ''
+    md = int(sys.argv[6]) if len(sys.argv) > 6 else 3
     grps = None
-    if len(sys.argv) > 6:
-        grps = [int(x) for x in sys.argv[6].split(',')]
+    if len(sys.argv) > 7:
+        grps = [int(x) for x in sys.argv[7].split(',')]
     cur = None
     for n in ns_:
-        r = run(n, dname, slack, p=p, groups=grps)
+        r = run(n, dname, slack, p=p, maxdeg=md, groups=grps)
         cur = scan5.intersect(cur, r['ns'], len(r['B']), p)
         print('   cumulative dim W_tel^gauge through n=%d : %d' % (n, len(cur)),
               flush=True)
-    fn = 'Wgauge_W5_%s_s%d_p%d%s.pkl' % (dname, slack, p, tag)
+    fn = 'Wgauge_W5_%s_s%d_p%d_d%d%s.pkl' % (dname, slack, p, md, tag)
     pickle.dump([np.array(x) for x in cur], open(fn, 'wb'))
     print('saved %s (dim %d)' % (fn, len(cur)))

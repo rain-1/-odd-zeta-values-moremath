@@ -920,3 +920,94 @@ first.
 
    — three applications of `Harm_sub_succ_n`, and like its parent it needs **no `x ≤ n`
    hypothesis**, so the conversion is free at every point of the telescoping range.
+
+---
+
+# ADDENDUM 4 — coefficient height is free; `KeyPoly` needs the same chain-split as `ring`
+
+## 16.1 Height axis `[MEASURED]` — the warning can stay withdrawn
+
+Same product throughout (`|p| = 400`, `|q| = 16`, `|R| = 844`, the §13 case C), coefficients
+scaled by `2^b` so that **only** the height changes. `decide +kernel`:
+
+| max coefficient | digits | wall | max RSS |
+|---|---|---|---|
+| 63 bits | 19 | 82 s | 2.67 GB |
+| 575 bits | 174 | **74 s** | 2.68 GB |
+| 4 159 bits | 1 252 | 97 s | 2.69 GB |
+
+**Flat to within noise across a 66× range in height, and RSS moves by 20 MB.** GMP does the
+arithmetic and the cost is dominated by list-cell traffic, not by the integers. The delivered
+`CERT_wstar_sparse.json` at ≤122 bits is comfortably inside the free regime — 1.6× the Q row,
+not a change of regime. **L6 should not spend its gauge lever on height.** It should spend it
+on (B-bot).
+
+One caveat worth stating: *source size* is not free even when arithmetic is. At 9 884 digits the
+same 400-monomial table is a 12 MB Lean file and at 39 476 digits it is 48 MB. Height is free to
+*compute with*, not to *ship*.
+
+## 16.2 `KeyPoly` in one kernel evaluation: **12.7 GB, killed** — and the fix
+
+| route | outcome |
+|---|---|
+| `by rfl` | 9.5 GB at 357 s CPU, still climbing, killed. The *elaborator's* `isDefEq` caches every intermediate. |
+| `by decide +kernel` (+ `Dstar_group` to keep the one degree-14 `ring` out of `eval_LHSP`) | **12.7 GB at 229 s CPU, still climbing, killed.** |
+
+So §13.3 finding 1 — "memory is constant" — **holds only up to about `|R| ≈ 1 800`**. Measured
+scaling of the *computation's* memory (RSS minus the ~1.5 GB Mathlib baseline):
+
+```
+|R| =  844  ->  1.2 GB          |R| = 1780  ->  ~1.5 GB       |R| = 3798 (+ substK over 1133)  ->  >11 GB
+```
+
+The kernel's `whnf` cache grows with the total number of cells produced *inside a single
+declaration*, and is released only when the declaration closes. **This is the same wall as
+`ring`'s, an order of magnitude further out.** `ring` died at ~4·10³ monomials of normal form;
+the checker dies at ~4·10³ monomials *plus* a 1133-monomial `substK`, i.e. after roughly 10×
+the work — but it does die.
+
+**The fix is the fix that already worked twice: one operation per declaration.** Emit the
+intermediate `Poly`s explicitly and chain
+
+```lean
+theorem s1 : pmul G1P SP  = S1P := by decide +kernel     -- |R| =  980
+theorem s2 : pmul G2P S1P = S2P := by decide +kernel     -- |R| = 1323
+theorem s3 : pmul G3P S2P = S3P := by decide +kernel     -- |R| = 2037
+theorem s4 : pmul G4P S3P = WP  := by decide +kernel     -- |R| = 3798
+…
+theorem key_check : LHSP = RHSP := by rw [s1, s2, s3, s4, …]
+```
+
+Each declaration's cache is freed when it closes, so peak memory is that of the *largest single
+step*, not of the whole computation. At the measured 1.4 MB per produced monomial that is
+≈ 5 GB for the 3798-monomial step and under 3 GB for every other — it fits, and every step is
+independently checkable by the Python pre-simulation. Cost: ~9 k monomials of extra emitted
+text for the LHS chain and ~17 k for the RHS, exactly as §4 row 3 described for `ring`.
+
+**This is bounded, mechanical work that I did not have time to finish.** Nothing about it is
+uncertain: the identity is confirmed (`LHSP == RHSP`, 3798 = 3798), the checker is proved sound,
+and the only change is where the declaration boundaries go.
+
+## 16.3 State of the tree
+
+`lake build` clean, 8676 jobs, 7 m 27 s. `BZQRow.lean` is back in its **conditional** form —
+`QSum_bzrec (hkey : KeyPoly) : BZRec QSum` — with **the `Acore` sign bug fixed**, so `KeyPoly`
+as now stated is *true* and simply undischarged, which is the honest state. The generated glue
+(22 factor `Poly`s, `X1P…PP3P`, `cq0P…cq3P`, `AmidP`, `BmidP`, `LHSP`, `RHSP`, the bridges) is
+reproducible from §15.1 and the certificate; regenerating it is minutes, and the chain-split
+above is the only new thing needed.
+
+## 16.4 For the 42 blocks
+
+* **29 of 42 are free** once `KeyPoly` closes (`linear_combination (w_j) * KeyPoly`), so the
+  real work is **13 blocks**.
+* Sizes are final and inside the model: 93 073 monomials, `deg_n ≤ 50`, `deg_k, deg_l ≤ 12`,
+  ≤122-bit numerators.
+* **Hold the `star_creative_telescoping` discharge** until the (B-bot)-satisfying re-lift lands.
+  The delivered gauge satisfies (★) and (B-top) but not the 16 collapse-class rows, so the
+  rectangle sum does not collapse and `BZRec PStarSum` does not follow. Building the glue
+  against the current file is not wasted — a gauge change moves coefficients, not structure.
+* Atoms are `Harm r (n+3−k)` / `Harm r (n+3−l)`; `BZStar.Harm_sub_succ_n3` is the conversion and
+  needs no `x ≤ n` hypothesis. (P-int) retires "Lemma N".
+* `dn(n)` carries a factor `n`, so the certificate covers `n ≥ 1`; `n = 0` is already
+  kernel-checked in `BZClosedForm` §3.1. The induction base is in hand.

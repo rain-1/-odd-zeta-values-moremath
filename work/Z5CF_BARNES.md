@@ -531,6 +531,47 @@ q_l(x)=sum_k [C_{kl}/(x+k)^2+D_{kl}/(x+k)].
 Thus (2), together with the sharp ranges for `g_l` and `g_l'` in §§7.2–7.3,
 is available for the remaining combined weight-5 reduction.
 
+### 7.5 Barnes coefficients and the epsilon jets are the same local object
+
+The residue and epsilon-deformation descriptions have an exact dictionary.
+For the local double-pole coefficient `A=C22` of §2,
+
+```text
+C12/C22 = L_k = -partial_k log T,
+C21/C22 = L_l = -partial_l log T,
+C11/C22 = L_k L_l-C_2.
+```
+
+Here the derivatives mean logarithmic derivatives of the gamma continuation,
+evaluated at the integer lattice point.  In the deformation normalisation of
+`Z5CF_EPSILON`, its first logarithmic jet is
+
+```text
+L_1^epsilon = 2 L_l^Barnes.
+```
+
+Thus the Barnes local table is the two-variable logarithmic 2-jet of the same
+gamma product whose higher Bell coefficients produce the compact weights.
+This also explains a limitation of §§7.1–7.4: fixed-pole evaluations see the
+value and first derivative jets, but not every quadratic or cubic expression
+in `L_l`.
+
+The missing identities are supplied by *pole-raising jets*.  If `R_k(z)` is a
+one-variable residue function and `rho(z)` has a pole at the same lattice
+points, the global residue theorem applied to `R_k(z)rho(z)` extracts the
+second and third logarithmic jets of `R_k`.  The useful choices include
+
+```text
+rho(z) = (sum_j 1/(z-j))^2,
+rho(z) = (sum_j 1/(z-j)) (sum_{i=0}^n 1/(z+i)).
+```
+
+Off-lattice residues vanish by the same numerator-`P` mechanism used in
+§§7.2–7.4.  One must not use arbitrary products of pole sums: when a shared
+double pole meets only a simple zero of `R_k`, an extra residue remains.  Each
+jet family therefore requires the same direct product/zero-order check as the
+fixed-pole identities.
+
 ## 8. Uniform evaluation lemma for the universal integrals `[DERIVED]`
 
 This section records the formula implemented by `universal.py`, so the
@@ -644,5 +685,5 @@ the logarithmic factors occurring for `p,q in {1,2}`; equivalently, one may
 integrate first over `[delta,1-delta]^2` away from the diagonal and then let
 `delta -> 0`.  The two triangle formulas have matching integrable boundary
 limits.  This supplies the cutoff justification behind `universal.py`; it does
-not by itself discharge the three remaining all-`n` weighted kernel
-identities from §7.
+not by itself discharge the remaining all-`n` rational/weight-5 bridge from
+§7.
