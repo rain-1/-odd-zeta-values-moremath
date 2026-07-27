@@ -1,0 +1,52 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+columns: OLD 148 SAL 1530 TX2 875 EXTW2 1523 EPS 1557 = 5633
+  cell 0/3135 7s
+  cell 100/3135 19s
+  cell 200/3135 29s
+  cell 300/3135 41s
+  cell 400/3135 53s
+  cell 500/3135 65s
+  cell 600/3135 78s
+  cell 700/3135 89s
+  cell 800/3135 102s
+  cell 900/3135 115s
+  cell 1000/3135 127s
+  cell 1100/3135 141s
+  cell 1200/3135 153s
+  cell 1300/3135 166s
+  cell 1400/3135 179s
+  cell 1500/3135 192s
+  cell 1600/3135 205s
+  cell 1700/3135 219s
+  cell 1800/3135 233s
+  cell 1900/3135 245s
+  cell 2000/3135 259s
+  cell 2100/3135 274s
+  cell 2200/3135 287s
+  cell 2300/3135 302s
+  cell 2400/3135 315s
+  cell 2500/3135 329s
+  cell 2600/3135 343s
+  cell 2700/3135 357s
+  cell 2800/3135 371s
+  cell 2900/3135 385s
+  cell 3000/3135 400s
+  cell 3100/3135 414s
+built 22..26 blocks 434s
+base folded system (6929, 5633) 436s
+  MT cell 0/6929 436s
+  MT cell 1000/6929 438s
+  MT cell 2000/6929 440s
+  MT cell 3000/6929 442s
+  MT cell 4000/6929 444s
+  MT cell 5000/6929 446s
+  MT cell 6000/6929 448s
+MT+cost built 451s
+[solve n<=25] (6225, 6341) rank=3504 nbad=2707 deprows=2721 (45s)
+[solve n<=26] (6955, 6341) rank=3504 nbad=3437 deprows=3451 (53s)

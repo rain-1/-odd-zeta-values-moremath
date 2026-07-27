@@ -126,6 +126,53 @@ can carry l-free content:
    (e.g. m=1: Σ_l[g_l(x) − l·q_l(x)] = −P(x)/Q(x)²) — NOT built this session;
 2. coefficients rational in n (needs a properly-determined system, n≈26+).
 
+## 4b. THE MOMENT TOWERS (continuation session, same day) — **the deficit closes**
+
+The identified mechanism (1) implemented as `z5t3/momtow.py` — **inhomogeneous
+moment towers**: for ρ a Q-block monomial, keep the residue at infinity:
+
+> `Σ_{l=0}^n Res_{z=l}[z^m R_k(z)ρ(z)] = [z^{−m−1}](R_kρ)|_∞ = e(n,k)` (explicit
+> power-sum data; sanity-verified exactly mod p at (n,k,ρ,m) samples).
+
+Locally `Res_{z=l}[z^m R_kρ] = γ_kT·Σ_i C(m,i) l^{m−i} [w^{1−i}](E·ρser)` — the
+densities carry **polynomial l-weights** (weight-0 letters) and the lower jet
+coefficients `[w^{≤0}]`, exactly the content no homogeneous null functional has.
+Each fact is inhomogeneous; the explicit costs get their own constraint rows
+(`Σ_j y_j·Σ_k φ_j(n,k)e_j(n,k) = 0` per n), so any solution still proves
+`Σ T·(target) = 0`.
+
+**Effect: folded n≤20 nbad 514 → 0** (708 MT columns, 4 ρ's × m ∈ {1,2,3} ×
+59 k-side letter fills; rank 2778 → 3310 = full cell rank).  BUT the
+properly-determined deep test (full n≤26 build, 6225 rows vs 6341 columns,
+solve n≤25) is **INCONSISTENT: rank saturates at 3504, nbad = 2707** —
+the n≤20 closure was again row-limited.  The moment towers are real content
+(+726 rank over the previous 2778 plateau) but the deficit now grows linearly
+with rows.
+
+**CONCLUSION — the hypothesis class is refuted, not a family**: across every
+calculus implemented (fixed-pole/derivative evaluations with arbitrary letter
+weights, bands, jets to order 5, weighted value/derivative towers with k-side
+fills, two-variable iterated-residue jets, inhomogeneous moment towers with
+cost rows), rank saturates ≈ 3500 on these grids while the target needs the
+full row space.  **No cellwise certificate with FIXED letter coefficients over
+the local/residue calculus expresses T3.**  Consistent with the formal l-free
+obstruction (§4).
+
+**PIVOT (the mapped next campaign): the Δ-certificate / creative-telescoping
+class** — coefficients rational in (n,k,l), the class every proved identity of
+this kind actually lives in:
+> find R, S with  `T·([1]W_B + 2w5sym) = Δ_k R + Δ_l S`,
+or two-stage 1-variable CT: stage 1 = l-telescoper for the fiber sums
+`V(n,k) = Σ_l T·defect` (fiberprobe.py has exact values; V has no per-fiber
+vanishing, no k↔n−k symmetry, partial sums unstructured — genuine content);
+stage 2 = k-telescoper for `Σ_k V = 0`.  KEY feasibility fact (verified):
+**the U-letters have rational l-shift closure over the bare alphabet**
+(`U_{r,m}(k,l+1) − U_{r,m}(k,l) = Σ_{t≤k} 1/(t^r (t+l+1)^m)` partial-fractions
+into rationals × bare H-differences), so the defect's l-shift module is
+finite-rank over ℚ(n,k,l) and the Z5CF_LINALG doctrine applies (telescoper =
+kernel of a finite matrix over ℚ(n,k,l); fastZeil/Wolfram verified working in
+this repo).  This is a bounded multi-hour campaign, not attempted tonight.
+
 ## 5. Open at the time of writing
 
 * T3 open.  Next session: build the marginal-null family from the moment ladder

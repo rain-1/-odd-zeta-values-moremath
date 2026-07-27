@@ -1,0 +1,19 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+moment-tower columns: 708
+moment identity sanity: PASS
+  cell 0/3310 1s
+  cell 400/3310 2s
+  cell 800/3310 3s
+  cell 1200/3310 4s
+  cell 1600/3310 4s
+  cell 2000/3310 5s
+  cell 2400/3310 6s
+  cell 2800/3310 7s
+  cell 3200/3310 7s
+cost rows built 8s
+[folded+MT] system (3330, 6341) rank=3310 nbad=0  (was 514 without MT)

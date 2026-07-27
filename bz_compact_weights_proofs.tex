@@ -857,18 +857,38 @@ about $5{,}600$ null functionals in all, each individually proved and
 machine-calibrated --- the three-component system is consistent through
 $n\le14$ (with over a thousand dependent rows) but \emph{inconsistent} at
 $n\le17$, and the folded system is inconsistent at $n\le20$ (514 of 3310
-rows).  Thus \eqref{eq:T3} is \emph{not} a fixed-coefficient combination of
-these families, a bounded negative that sharpens the earlier
-codimension-one measurements.  Two structural upgrades are identified and
-left open: coefficients rational in $n$ (the certificate shape of every
-creative-telescoping identity in this area; the first augmentation test was
-row-limited and inconclusive), and \emph{marginal} null weights
-$v(n,k)+v(n,l)$ with $\sum_kv(n,k)S_k(n)=0$ for the fibre marginal
-$S_k(n)=\sum_lT(n,k,l)$, whose own residue calculus comes from the moment
-identities $\sum_l\Res_{y=-l}[y^mR(x,y)]=-[$explicit rational$]$ --- these
-are the only mechanisms that can carry the $l$-free nested content
-($S_{1,4}(k)$, $S_{2,3}(k)$, \dots) that the target provably contains and
-that no per-fibre or iterated-residue functional can produce monomially.
+rows).  A further family of \emph{inhomogeneous moment towers} --- keeping
+the residue at infinity,
+$\sum_{l}\Res_{z=l}[z^mR_k\rho]=[z^{-m-1}](R_k\rho)\big|_\infty$, whose
+densities carry polynomial $l$-weights and lower jet coefficients, with the
+explicit right-hand sides constrained by their own cost rows --- adds
+$726$ further independent directions and closes the folded system through
+$n\le20$, but the properly determined test (all cells $n\le25$, more rows
+than columns) is again inconsistent, with the rank of the entire calculus
+saturating near $3500$ while the deficit grows linearly in the number of
+rows.
+
+The conclusion is a structural negative rather than a missing family:
+\emph{no cellwise certificate with fixed letter coefficients over the
+local/residue calculus expresses \eqref{eq:T3}}.  This matches a formal
+obstruction: the folded target contains $l$-free nested monomials
+($S_{1,4}(k)$, $S_{2,3}(k)$, \dots) which no per-fibre or iterated-residue
+functional can produce monomially.  The certificate for \eqref{eq:T3} must
+therefore live where every proved identity of this type lives: in the
+creative-telescoping class, with coefficients \emph{rational} in $(n,k,l)$,
+\[
+ T\cdot\bigl[W^{(1)}+2w_5^{\mathrm{sym}}\bigr]
+ =\Delta_k R+\Delta_l S,
+\]
+or its two-stage one-variable form (an $l$-telescoper for the fibre sums
+$V(n,k)=\sum_lT\cdot[\,\cdot\,]$, then a $k$-telescoper for $\sum_kV=0$).
+This is well-founded: the $U$-letters have rational $l$-shift closure over
+the bare alphabet
+($U_{r,m}(k,l{+}1)-U_{r,m}(k,l)=\sum_{t\le k}t^{-r}(t{+}l{+}1)^{-m}$
+partial-fractions into rationals times bare harmonic differences), so the
+defect's shift module is finite-rank over $\QQ(n,k,l)$ and the telescoper
+is the kernel of a finite matrix.  That computation is bounded and is the
+remaining step.
 
 \subsection{Why the compact weight is expected}
 The companion note \emph{The Laurent--jet origin of the compact
