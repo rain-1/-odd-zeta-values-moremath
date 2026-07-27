@@ -1,0 +1,13 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+XY columns: 22
+n=3: global bad 0/22 ; fibers with nonzero sums: 0/4
+n=4: global bad 0/22 ; fibers with nonzero sums: 0/5
+n=5: global bad 0/22 ; fibers with nonzero sums: 0/6
+n=6: global bad 0/22 ; fibers with nonzero sums: 0/7
+n=7: global bad 0/22 ; fibers with nonzero sums: 0/8
+[folded+XY] rank=2778 nbad=514 (was rank 2778 nbad 514)

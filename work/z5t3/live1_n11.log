@@ -1,0 +1,25 @@
+P = 4194301 solve cells: 649 holdout cells: 169
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+eps forms: 1557
+  cells 0/649  30s
+  cells 50/649  31s
+  cells 100/649  32s
+  cells 150/649  33s
+  cells 200/649  34s
+  cells 250/649  35s
+  cells 300/649  36s
+  cells 350/649  37s
+  cells 400/649  38s
+  cells 450/649  38s
+  cells 500/649  40s
+  cells 550/649  41s
+  cells 600/649  42s
+system: (1947, 3235)
+rank=1231 nbad=163 (3s)
+INCONSISTENT: 163 bad rows

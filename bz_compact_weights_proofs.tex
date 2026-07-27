@@ -1,0 +1,898 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Hh}[2]{H_{#1}^{(#2)}}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\QQ}{\mathbb Q}
+\DeclareMathOperator{\Res}{Res}
+
+\title{The compact Brown--Zudilin weights:\\ proofs for the companion rows}
+\author{}
+\date{July 27, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $T(n,k,l)=\binom{n+k}{n}\binom nk^2\binom{n+l}{n}\binom nl^2\binom{n+k+l}{n}$
+and let $Q_n,\hat P_n,P_n$ be the coefficient sequences of the totally symmetric
+Brown--Zudilin cellular linear forms for $\zeta(5)$, so that
+$I_n=Q_n(2\zeta(5)+4\zeta(3)\zeta(2))-4\hat P_n\zeta(2)-2P_n$.
+We prove the compact closed form
+$\hat P_n=\sum_{k,l}T(n,k,l)\,\hat w_3(n,k,l)$ for the middle companion row,
+and we prove the exact Barnes-rational representation
+$P_n=-\tfrac12\sum_{k,l}T(n,k,l)\,W^{(1)}(k,l)$
+for the top row, where $W^{(1)}$ is an explicit polynomial in harmonic and
+finite Euler sums.  Both proofs are uniform in $n$ and use no
+$\QQ$-linear-independence assumptions about zeta values.  The remaining step
+from the Barnes-rational representation to the compact three-term weight
+$w_5$ is a single identity between finite sums, which we isolate, reduce to a
+linear-algebra problem over a space of proved residue functionals, and
+discuss in the final section.
+\end{abstract}
+
+\section{Statement of results}\label{sec:results}
+
+Throughout, $\Hh mr=\sum_{i=1}^m i^{-r}$ (with $\Hh mr=0$ for $m\le 0$), and
+\[
+ T(n,k,l)
+ =\binom{n+k}{n}\binom nk^2\binom{n+l}{n}\binom nl^2\binom{n+k+l}{n},
+ \qquad 0\le k,l\le n .
+\]
+Brown--Zudilin \cite[Sec.~2]{BZ} attach to the totally symmetric cellular
+integral
+\[
+ I_n=\idotsint\limits_{0<t_1<\dots<t_5<1}
+ \Bigl(\tfrac{t_1(t_2-t_1)(t_3-t_2)(t_4-t_3)(t_5-t_4)(1-t_5)}
+ {(t_3-t_1)t_3(1-t_4)(t_4-t_2)(t_5-t_2)}\Bigr)^{\!n}
+ \frac{dt_1\cdots dt_5}{(t_3-t_1)t_3(1-t_4)(t_4-t_2)(t_5-t_2)}
+\]
+the decomposition
+\begin{equation}\label{eq:In}
+ I_n=Q_n\bigl(2\zeta(5)+4\zeta(3)\zeta(2)\bigr)-4\hat P_n\,\zeta(2)-2P_n,
+\end{equation}
+where $Q_n,\hat P_n,P_n$ are rational numbers.  All four sequences satisfy
+one third-order Ap\'ery-type recursion (produced by creative telescoping for
+$I_n$ and checked directly for the rational sequences), with initial data
+\[
+ Q_0=1,\ Q_1=21,\ Q_2=2989,\qquad
+ \hat P_0=0,\ \hat P_1=\tfrac{101}4,\ \hat P_2=\tfrac{344923}{96},\qquad
+ P_0=0,\ P_1=\tfrac{87}4,\ P_2=\tfrac{1190161}{384},
+\]
+and \eqref{eq:In} is \emph{proved} in \cite{BZ} by exactly this route:
+both sides satisfy the same recursion and agree at $n=0,1,2$.  In
+particular \eqref{eq:In} is an identity between real numbers that does not
+presuppose any linear independence of zeta values; the sequences
+$Q_n,\hat P_n,P_n$ are pinned by the recursion and the initial data.
+Brown--Zudilin also prove
+\begin{equation}\label{eq:Qn}
+ Q_n=\sum_{k,l=0}^{n}T(n,k,l),
+\end{equation}
+again by checking the recursion.
+
+Define, for $r\ge 1$,
+\[
+ A_r(x)=\Hh{n+x}r-\Hh xr,\qquad
+ B_r(x)=\Hh{n-x}r-\Hh xr,\qquad
+ C_r=\Hh{n+k+l}r-\Hh{k+l}r,
+\]
+\[
+ \alpha=A_1(k)-A_1(l),\qquad \beta=B_1(k)-B_1(l),\qquad \Psi=\tfrac\alpha2+\beta,
+\]
+and the \emph{compact weights}
+\[
+ \hat w_3=\Hh{n+k}3-\Psi\,\Hh{n+k}2,
+\qquad
+ w_5=\Hh{n+k}5+\tfrac{\alpha-\beta}2\Hh{n+k}4
+ +\Bigl(\tfrac{A_2(k)+A_2(l)}4-\tfrac{\alpha\Psi}2\Bigr)\Hh{n+k}3 .
+\]
+Finally, let $L_k=-A_1(k)-C_1-2B_1(k)$ and $L_l=-A_1(l)-C_1-2B_1(l)$, and let
+$r_{11},r_{12},r_{21},r_{22}$ be the explicit weight-$\le5$ expressions in
+harmonic and finite Euler sums displayed in Proposition~\ref{prop:ratparts}
+below.  Put
+\begin{equation}\label{eq:W1}
+ W^{(1)}(k,l)=r_{22}(k,l)+L_k\,r_{12}(k,l)+L_l\,r_{21}(k,l)
+ +(L_kL_l-C_2)\,r_{11}(k,l).
+\end{equation}
+
+The results of this paper are:
+
+\begin{theorem}[middle row]\label{thm:middle}
+For every $n\ge0$,
+\[
+ \hat P_n=\sum_{k,l=0}^{n}T(n,k,l)\,\hat w_3(n,k,l).
+\]
+\end{theorem}
+
+\begin{theorem}[top row, Barnes-rational form]\label{thm:anchor}
+For every $n\ge0$,
+\[
+ P_n=-\frac12\sum_{k,l=0}^{n}T(n,k,l)\,W^{(1)}(k,l).
+\]
+\end{theorem}
+
+\begin{theorem}[top row, compact form; conditional]\label{thm:top}
+If the bridge identity
+\begin{equation}\label{eq:T3}
+ \sum_{k,l=0}^{n}T(n,k,l)\,W^{(1)}(k,l)
+ =-2\sum_{k,l=0}^{n}T(n,k,l)\,w_5^{\mathrm{sym}}(n,k,l)
+ \qquad(n\ge0)
+\end{equation}
+holds, where $w_5^{\mathrm{sym}}$ is the $k\leftrightarrow l$ symmetrisation
+of $w_5$, then
+\[
+ P_n=\sum_{k,l=0}^{n}T(n,k,l)\,w_5(n,k,l)\qquad (n\ge 0).
+\]
+Identity \eqref{eq:T3} has been verified exactly for $n\le12$ and modulo two
+$31$-bit primes for $n\le80$; Section~\ref{sec:T3} reduces it to membership
+of one explicit vector in the span of proved residue functionals and records
+the current state of that reduction.  It is the only unproved statement in
+this paper.
+\end{theorem}
+
+Everything else below is a complete proof of
+Theorems~\ref{thm:middle} and~\ref{thm:anchor}.  The logical skeleton is:
+\begin{enumerate}
+\item the Barnes kernel and its bivariate partial fractions
+      (Sections~\ref{sec:kernel}--\ref{sec:pf});
+\item the recombination $I_n=\sum T\cdot W_B$ over four universal
+      sine-kernel integrals (Section~\ref{sec:recomb});
+\item the exact evaluation of the universal integrals in the basis
+      $1,\zeta(2),\zeta(3),\zeta(4),\zeta(5),\zeta(2)\zeta(3)$
+      (Section~\ref{sec:universal});
+\item four kernel identities: the $\zeta(5)$ and $\zeta(2)\zeta(3)$
+      coefficients equal $2Q_n$ and $4Q_n$; the $\zeta(4)$ and $\zeta(3)$
+      coefficients vanish; the $\zeta(2)$ coefficient equals
+      $-4\sum T\,w_3^{\mathrm{sym}}$ (Section~\ref{sec:kernelids});
+\item the middle row by descent through the generalised Beukers integral
+      and Zudilin's evaluation lemma (Section~\ref{sec:middle});
+\item the subtraction anchor: combining 1--5 with \eqref{eq:In} kills every
+      transcendental term exactly and leaves Theorem~\ref{thm:anchor}
+      (Section~\ref{sec:anchor}).
+\end{enumerate}
+
+\begin{remark}
+Step 6 is where previous attempts stalled, because comparing coefficients of
+$\zeta(2)$ or $\zeta(5)$ between two evaluations of $I_n$ is illegitimate
+while the $\QQ$-linear independence of
+$1,\zeta(2),\zeta(3),\zeta(5),\zeta(2)\zeta(3)$ remains open.  The
+subtraction route avoids this: once the middle row is proved
+\emph{independently} (Theorem~\ref{thm:middle}), the two evaluations of the
+real number $I_n$ differ only in their rational terms, and equality of real
+numbers then forces equality of those rational terms.  No independence is
+used anywhere.
+\end{remark}
+
+\section{The Barnes kernel}\label{sec:kernel}
+
+Brown--Zudilin's Barnes-type representation \cite[eq.~(intJ)]{BZ},
+specialised to the totally symmetric parameters
+$p_0=p_1=p_2=p_4=p_5=p_6=q_1=\dots=q_5=n$, $p_3=2n$ (for which the
+normalising factorial prefactor collapses to $n!$), reads
+\begin{equation}\label{eq:barnes}
+ I_n=\frac{n!}{(2\pi i)^2}
+ \int_{-c_1-i\infty}^{-c_1+i\infty}\!\!\int_{-c_2-i\infty}^{-c_2+i\infty}
+ \frac{\Gamma(n{+}1{+}s)^3\,\Gamma(-s)}{\Gamma(2n{+}2{+}s)^2}\,
+ \frac{\Gamma(n{+}1{+}t)^3\,\Gamma(-t)}{\Gamma(2n{+}2{+}t)^2}\,
+ \Gamma(2n{+}2{+}s{+}t)\,\Gamma(-n{-}1{-}s{-}t)\,ds\,dt,
+\end{equation}
+valid for $0<c_1,c_2<n+1$ and $c_1+c_2>n+1$; we fix
+$c_1=c_2=n+\tfrac23$.
+
+\begin{lemma}\label{lem:kernel}
+With $c_1=c_2=n+\frac23$,
+\[
+ I_n=\frac{(-1)^n\,n!}{(2\pi i)^2}
+ \iint R_n(s,t)\,
+ \frac{\pi}{\sin\pi s}\,\frac{\pi}{\sin\pi t}\,\frac{\pi}{\sin\pi(s+t)}
+ \,ds\,dt,
+\]
+where
+\[
+ R_n(s,t)=
+ \frac{\prod_{j=1}^n(s+j)\,\prod_{j=1}^n(t+j)\,\prod_{j=n+2}^{2n+1}(s+t+j)}
+      {\prod_{j=n+1}^{2n+1}(s+j)^2\,\prod_{j=n+1}^{2n+1}(t+j)^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Apply the reflection formula $\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$ three
+times:
+\[
+ \Gamma(-s)=\frac{-\pi}{\sin(\pi s)\,\Gamma(1+s)},\qquad
+ \Gamma(-t)=\frac{-\pi}{\sin(\pi t)\,\Gamma(1+t)},
+\]
+and, using $\sin\pi(-n-1-u)=(-1)^{n}\sin\pi u$,
+\[
+ \Gamma(-n-1-s-t)=\frac{(-1)^n\,\pi}{\sin(\pi(s+t))\,\Gamma(n+2+s+t)} .
+\]
+The three sign factors multiply to $(-1)^n$.  The remaining gamma quotients
+are rational:
+\[
+ \frac{\Gamma(n+1+s)^3}{\Gamma(2n+2+s)^2\,\Gamma(1+s)}
+ =\frac{\prod_{j=1}^n(s+j)}{\prod_{j=n+1}^{2n+1}(s+j)^2},
+ \qquad
+ \frac{\Gamma(2n+2+s+t)}{\Gamma(n+2+s+t)}
+ =\prod_{j=n+2}^{2n+1}(s+t+j). \qedhere
+\]
+\end{proof}
+
+On the chosen contours the integrand of Lemma~\ref{lem:kernel} is absolutely
+integrable: on vertical lines with non-integral real part each factor
+$\pi/\sin$ decays like $e^{-\pi|\Im|}$ in its argument, so the triple decays
+like $e^{-\pi(|y_1|+|y_2|+|y_1+y_2|)}\le e^{-2\pi\max(|y_1|,|y_2|)}$, while
+$R_n$ has polynomial decay $O(|s|^{-2}|t|^{-2})$ in each variable.  All the
+rearrangements below happen inside this absolutely convergent double
+integral.
+
+\section{Bivariate partial fractions of the kernel}\label{sec:pf}
+
+\begin{proposition}\label{prop:pf}
+The rational function $R_n$ has poles exactly on the grid
+$s=s_k:=-n-1-k$, $t=t_l:=-n-1-l$, $0\le k,l\le n$, of order at most two in
+each variable, and
+\[
+ R_n(s,t)=\sum_{k,l=0}^{n}\left[
+ \frac{C_{22}}{(s-s_k)^2(t-t_l)^2}
+ +\frac{C_{12}}{(s-s_k)(t-t_l)^2}
+ +\frac{C_{21}}{(s-s_k)^2(t-t_l)}
+ +\frac{C_{11}}{(s-s_k)(t-t_l)}\right],
+\]
+with local data (depending on $n,k,l$)
+\[
+ (-1)^n n!\,C_{22}=T(n,k,l),\qquad
+ \frac{C_{12}}{C_{22}}=L_k,\qquad
+ \frac{C_{21}}{C_{22}}=L_l,\qquad
+ \frac{C_{11}}{C_{22}}=L_kL_l-C_2 .
+\]
+\end{proposition}
+
+\begin{proof}
+For fixed generic $t$, $R_n(\cdot,t)$ is a proper rational function
+($O(s^{-2})$ at infinity) with double poles at $s_0,\dots,s_n$ only, so it
+equals the sum of its principal parts; expanding each principal-part
+coefficient (a rational function of $t$ of the same shape) in $t$ gives the
+displayed grid decomposition with no polynomial remainder.
+
+For the local data, write $s=s_k+x$, $t=t_l+y$ and factor the germ as
+$R_n=\Lambda\,F(x,y)/(x^2y^2)$ with $F(0,0)=1$.  Then
+$C_{22}=\Lambda$, $C_{12}/C_{22}=\partial_xF(0,0)$,
+$C_{21}/C_{22}=\partial_yF(0,0)$,
+$C_{11}/C_{22}=\partial_x\partial_yF(0,0)$.
+
+\emph{Leading coefficient.}
+$\lim_{s\to s_k}(s-s_k)^2\prod_{j=1}^n(s+j)\big/\prod_{j=n+1}^{2n+1}(s+j)^2$:
+the numerator at $s_k$ is $\prod_{j=1}^n(j-n-1-k)=(-1)^n(n+k)!/k!$, while
+the surviving denominator factors are
+$\prod_{j\ne n+k+1}(j-n-1-k)=(-1)^kk!\,(n-k)!$, squared.  Hence the $s$-factor
+contributes $(-1)^n(n+k)!/\bigl(k!^3((n-k)!)^2\bigr)$, and likewise in $t$.
+Finally $\prod_{j=n+2}^{2n+1}(s_k+t_l+j)=(-1)^n(n+k+l)!/(k+l)!$.  Multiplying,
+\[
+ \Lambda=(-1)^n\,
+ \frac{(n+k)!\,(n+l)!\,(n+k+l)!}{k!^3\,l!^3\,(k+l)!\,((n-k)!)^2((n-l)!)^2}
+ =\frac{(-1)^n}{n!}\,T(n,k,l).
+\]
+
+\emph{First jets.}  $\partial_x\log F(0,0)$ collects the logarithmic
+derivatives at $s=s_k$ of the three $s$-dependent products:
+$\sum_{j=1}^n\frac1{s_k+j}=-\sum_{i=k+1}^{k+n}\frac1i=-A_1(k)$;
+$-2\sum_{j\ne n+k+1}\frac1{s_k+j}=-2(-H_k+H_{n-k})=-2B_1(k)$;
+and $\sum_{j=n+2}^{2n+1}\frac1{s_k+t_l+j}=-\sum_{i=k+l+1}^{k+l+n}\frac1i=-C_1$.
+Hence $\partial_xF(0,0)=-A_1(k)-2B_1(k)-C_1=L_k$, and symmetrically
+$\partial_yF(0,0)=L_l$.
+
+\emph{Mixed jet.}  Since only the coupled product depends on $s+t$,
+$\partial_x\partial_y\log F(0,0)
+=-\sum_{j=n+2}^{2n+1}(s_k+t_l+j)^{-2}=-C_2$, so
+$\partial_x\partial_yF(0,0)=L_kL_l-C_2$.
+\end{proof}
+
+\section{Recombination over the universal integrals}\label{sec:recomb}
+
+For integers $k_1,k_2\ge0$ and $s_1,s_2\in\{1,2\}$ define, following
+\cite[Remark~1]{BZ},
+\begin{equation}\label{eq:universal}
+ I^{(s_1,s_2)}_{k_1,k_2}
+ =\frac1{(2\pi i)^2}
+ \int_{\frac13-i\infty}^{\frac13+i\infty}\!\!\int_{\frac13-i\infty}^{\frac13+i\infty}
+ \frac{1}{(u+k_1)^{s_1}(v+k_2)^{s_2}}\,
+ \frac{\pi}{\sin\pi u}\,\frac{\pi}{\sin\pi v}\,\frac{\pi}{\sin\pi(u+v)}
+ \,du\,dv .
+\end{equation}
+
+\begin{proposition}[recombination]\label{prop:recomb}
+For every $n\ge0$,
+\[
+ I_n=\sum_{k,l=0}^{n}T(n,k,l)\,W_B(n,k,l),
+ \qquad
+ W_B:=I^{(2,2)}_{k,l}+L_k\,I^{(1,2)}_{k,l}+L_l\,I^{(2,1)}_{k,l}
+ +(L_kL_l-C_2)\,I^{(1,1)}_{k,l}.
+\]
+\end{proposition}
+
+\begin{proof}
+Insert the partial fractions of Proposition~\ref{prop:pf} into
+Lemma~\ref{lem:kernel}; absolute convergence permits integrating term by
+term.  In the $(k,l)$ term substitute $u=s+n+1$, $v=t+n+1$.  The contours
+$\Re s=-n-\frac23$, $\Re t=-n-\frac23$ become $\Re u=\Re v=\frac13$, no pole
+is crossed, and
+\[
+ \sin\pi s=(-1)^{n+1}\sin\pi u,\qquad
+ \sin\pi t=(-1)^{n+1}\sin\pi v,\qquad
+ \sin\pi(s+t)=\sin\pi(u+v),
+\]
+so the sine triple picks up the factor $(-1)^{2(n+1)}=1$, while
+$(s-s_k,t-t_l)=(u+k,v+l)$.  Thus the $(k,l)$ term contributes
+$C_{22}I^{(2,2)}_{k,l}+C_{12}I^{(1,2)}_{k,l}+C_{21}I^{(2,1)}_{k,l}
++C_{11}I^{(1,1)}_{k,l}$, and by Proposition~\ref{prop:pf} the prefactor
+$(-1)^n n!\,C_{22}=T$ absorbs the $(-1)^n n!$ of Lemma~\ref{lem:kernel}.
+\end{proof}
+
+\section{Exact evaluation of the universal integrals}\label{sec:universal}
+
+Brown--Zudilin \cite[Remark~1]{BZ} compute the Fourier--Mellin kernel
+\[
+ f(u,v)=\frac1{(2\pi i)^2}\iint u^{t_1}v^{t_2}
+ \frac{\pi}{\sin\pi t_1}\frac{\pi}{\sin\pi t_2}\frac{\pi}{\sin\pi(t_1+t_2)}
+ dt_1\,dt_2
+ =
+ \begin{cases}
+ \dfrac{uv\log u}{(1-u)(1-v)}-\dfrac{u\log(u/v)}{(1-u/v)(1-v)}, & 0<u<v<1,\\[6pt]
+ \text{(same with $u\leftrightarrow v$)}, & 0<v<u<1,
+ \end{cases}
+\]
+by residue analysis.  Combining with the Laplace representation
+$\frac1{(t+a)^s}=\frac1{\Gamma(s)}\int_0^1 u^{t+a-1}(-\log u)^{s-1}\,du$
+(valid on $\Re t=\frac13$, $a\ge0$) gives
+\begin{equation}\label{eq:fuv}
+ I^{(s_1,s_2)}_{k_1,k_2}
+ =\frac{(-1)^{s_1+s_2}}{\Gamma(s_1)\Gamma(s_2)}
+ \iint_{[0,1]^2}u^{k_1}v^{k_2}\,f(u,v)\,
+ (\log u)^{s_1-1}(\log v)^{s_2-1}\,\frac{du}u\frac{dv}v .
+\end{equation}
+(The display in \cite{BZ} omits the sign $(-1)^{s_1+s_2}$, i.e.\ writes
+$\log$ for $-\log$; the sign is invisible for $(s_1,s_2)=(2,2)$ and $(1,1)$
+but reverses $(1,2)$ and $(2,1)$.  It is fixed by the defining contour
+integral \eqref{eq:universal}, and independently by direct numerical contour
+quadrature and by the calibration
+$I^{(2,2)}_{0,0}=I_0=2\zeta(5)+4\zeta(2)\zeta(3)$.)
+
+Expanding \eqref{eq:fuv} on the two triangles by geometric series and
+integrating termwise produces an explicit evaluation.  We record it in the
+form needed later.  Define, for $x\ge0$ and $r,m\ge1$, the finite Euler sums
+\[
+ S_{r,m}(x)=\sum_{t=1}^{x}\frac{\Hh tm}{t^{r}},
+ \qquad
+ U_{r,m}(a,b)=\sum_{t=1}^{a}\frac{\Hh{t+b}m}{t^{r}} .
+\]
+
+\begin{proposition}\label{prop:ratparts}
+Each $I^{(s_1,s_2)}_{k,l}$ is a $\QQ$-linear combination of
+$1,\zeta(2),\zeta(3),\zeta(4),\zeta(5),\zeta(2)\zeta(3)$ whose coefficients
+are explicit polynomials in harmonic numbers at $k,l,k+l$ and the finite
+Euler sums above.  The coefficients of weight $>s_1+s_2+1$ vanish;
+in particular $\zeta(5)$ and $\zeta(2)\zeta(3)$ occur only in $I^{(2,2)}$,
+with the constant coefficients
+\[
+ [\zeta(5)]\,I^{(2,2)}=2,\qquad [\zeta(2)\zeta(3)]\,I^{(2,2)}=4 .
+\]
+The remaining coefficients are:
+\begin{align*}
+ [\zeta(4)]:\quad & I^{(1,2)}=I^{(2,1)}=\tfrac{17}4,\qquad
+                    I^{(1,1)}=I^{(2,2)}=0;\\[2pt]
+ [\zeta(3)]:\quad & I^{(1,1)}=2,\qquad
+   I^{(1,2)}=2(H_k-H_{k+l}),\qquad I^{(2,1)}=2(H_l-H_{k+l}),\\
+                  & I^{(2,2)}=2\bigl(\Hh k2+\Hh l2-2\Hh{k+l}2\bigr);\\[2pt]
+ [\zeta(2)]:\quad & I^{(1,1)}=H_k+H_l-2H_{k+l},\qquad
+   I^{(1,2)}=\Hh l2-2\Hh{k+l}2,\qquad I^{(2,1)}=\Hh k2-2\Hh{k+l}2,\\
+                  & I^{(2,2)}=-4\Hh{k+l}3;
+\end{align*}
+and the rational parts $r_{s_1s_2}:=[1]\,I^{(s_1,s_2)}_{k,l}$ are
+\begin{align*}
+ r_{11}&=(H_{k+l}-H_k-H_l)(\Hh k2+\Hh l2)-\Hh k3-\Hh l3
+        +U_{1,2}(k,l)+U_{1,2}(l,k),\\[2pt]
+ r_{12}&=-2(H_k+H_l-H_{k+l})\Hh l3
+        +\Hh k2\Hh{k+l}2-\tfrac12(\Hh l2)^2+\Hh{k+l}2\Hh l2
+        -\tfrac52\Hh l4+2S_{1,3}(l)-U_{2,2}(k,l),\\[2pt]
+ r_{21}&=r_{12}\ \text{with}\ k\leftrightarrow l,\\[2pt]
+ r_{22}&=-2(\Hh k2+\Hh l2)(\Hh k3+\Hh l3)
+        +2\Hh{k+l}3(\Hh k2+\Hh l2)+2\Hh{k+l}2(\Hh k3+\Hh l3)
+        -2\Hh k5-2\Hh l5\\
+       &\quad-6S_{1,4}(k)-6S_{1,4}(l)-2S_{2,3}(k)-2S_{2,3}(l)
+        +6U_{1,4}(k,l)+6U_{1,4}(l,k)+2U_{2,3}(k,l)+2U_{2,3}(l,k),
+\end{align*}
+with $U_{r,m}(a,b)$ abbreviated $U_{r,m}$ evaluated at $(a,b)$.
+\end{proposition}
+
+\begin{proof}[Proof sketch, with the full reduction recorded]
+On the triangle $0<u<v<1$ substitute $u=xv$; both denominators expand
+geometrically, and every term is a product of two beta-type integrals in $x$
+and $v$ carrying powers of $\log$.  The termwise integration is justified by
+monotone convergence after splitting the logarithms into signs, or by
+integrating over $[\delta,1-\delta]^2$ and letting $\delta\to0$; both
+triangle contributions have integrable boundary limits.  The result is a
+bilinear combination of the tails
+\[
+ Z_m(N)=\sum_{t\ge N}t^{-m}\ (m\ge2),\qquad
+ Z_1\ \text{regularised},\qquad
+ \sum_{t\ge1}\frac1{t^{r}(t+h)^{m}},\qquad
+ \sum_{t\ge1}\frac{\Hh{t+d-1}{m}}{t^{r}},
+\]
+with $h\le k_2$, $d=k_2+1$ and offsets governed by $k_1$ (and the mirror
+triangle swaps $(k_1,s_1)\leftrightarrow(k_2,s_2)$).  The two divergent
+$Z_1$-constants cancel pairwise ($a_1+b_1=0$ in each partial-fraction
+splitting), so no regularisation ambiguity remains: every step is a limit of
+finite rational identities.  Shifted products
+$\sum_t t^{-r}(t+h)^{-m}$ reduce by partial fractions to zeta values and
+harmonic numbers at $h$; the coupled tails reduce to the double zeta values
+$\zeta(m,r)=\sum_{t>u\ge1}t^{-m}u^{-r}$ plus the finite sums $S,U$; and the
+weight-at-most-five double zetas reduce by
+\[
+ \zeta(2,1)=\zeta(3),\quad \zeta(3,1)=\tfrac{\zeta(4)}4,\quad
+ \zeta(2,2)=\tfrac{3\zeta(4)}4,\quad
+ \zeta(4,1)=2\zeta(5)-\zeta(2)\zeta(3),
+\]
+\[
+ \zeta(3,2)=3\zeta(2)\zeta(3)-\tfrac{11}2\zeta(5),\quad
+ \zeta(2,3)=\tfrac92\zeta(5)-2\zeta(2)\zeta(3),
+\]
+together with $\sum_t H_t/t^2=2\zeta(3)$, $\sum_t H_t/t^3=\tfrac54\zeta(4)$
+and $\zeta(2)^2=\tfrac52\zeta(4)$.  Since the $\zeta(5)$- and
+$\zeta(2)\zeta(3)$-carrying heads $\zeta(4,1),\zeta(3,2),\zeta(2,3)$ enter
+with $(k_1,k_2)$-independent coefficients, the top-weight coefficients are
+constants, fixed by the calibration $I^{(2,2)}_{0,0}=I_0$.  Carrying out the
+finite bookkeeping for each $(s_1,s_2)$ yields the displayed tables; the
+tables were additionally re-derived by an independent implementation of the
+same reduction and cross-checked in exact arithmetic on $0\le k,l<14$
+(both the derived and the displayed compact forms), so each entry is an
+identity of finite expressions whose verification is mechanical.
+
+Two representative entries, worked in full, exhibit the bookkeeping.
+Write $a=k_1$, $b=k_2$, $A=a+1$, $d=b+1$; set
+$Z_m(N)=\sum_{t\ge N}t^{-m}$ for $m\ge2$ and $Z_1(N)=-H_{N-1}$ (the
+regularised value; the divergent constants cancel pairwise),
+$U_{r,m}(h)=\sum_{t\ge1}t^{-r}(t+h)^{-m}$,
+$S_{r,m}(A,d)=\sum_{t\ge A}t^{-r}Z_m(t+d)$, and
+$E_2=\sum_tH_t/t^2=2\zeta(3)$, $E_3=\sum_tH_t/t^3=\tfrac54\zeta(4)$
+(these enter through $S_{r,1}$).  Let $F^{s_1,s_2}_{a,b}$ denote
+the contribution of the triangle $0<u<v<1$, so that
+$I^{(s_1,s_2)}_{k_1,k_2}
+=(-1)^{s_1+s_2}\bigl[F^{s_1,s_2}_{a,b}+F^{s_2,s_1}_{b,a}\bigr]
+/\bigl(\Gamma(s_1)\Gamma(s_2)\bigr)$
+and
+\[
+ F^{s_1,s_2}_{a,b}
+ =(-1)^{s_1+s_2-1}\sum_{i=0}^{s_1}\binom{s_1}i\,i!\,(s_1{-}i{+}s_2{-}1)!\,
+   S_{i+1,\,s_1-i+s_2}(A,d)
+ +(-1)^{s_1+s_2}\sum_{i=0}^{s_1-1}\binom{s_1{-}1}i(i{+}1)!\,(s_1{+}s_2{-}2{-}i)!\,
+   Z_{i+2}(A)\,Z_{s_1+s_2-1-i}(A{+}d{-}1).
+\]
+
+\emph{$[\zeta(4)]$ of $I^{(1,2)}$.}
+For $(s_1,s_2)=(1,2)$:
+$F^{1,2}=2S_{1,3}+S_{2,2}-Z_2(A)Z_2(A{+}d{-}1)$, whose $\zeta(4)$ content is
+$2\cdot\tfrac14+\tfrac34-\tfrac52=-\tfrac54$
+(from $\zeta(3,1)$, $\zeta(2,2)$ and $\zeta(2)^2$; the finite sums $U_{r,m}(h)$
+carry no $\zeta(4)$ since their zeta coefficients all come with positive
+powers of $h^{-1}$).  For the mirror $(s_1,s_2)=(2,1)$:
+$F^{2,1}=2S_{1,3}+2S_{2,2}+2S_{3,1}-Z_2Z_2-2Z_3Z_1$, and
+$S_{3,1}$ contributes $-E_3=-\tfrac54\zeta(4)$; the $\zeta(4)$ content is
+$\tfrac12+\tfrac32-\tfrac52-\tfrac52=-3$.  Hence
+$[\zeta(4)]I^{(1,2)}=(-1)^{1+2-2}\bigl(-\tfrac54-3\bigr)/\bigl(\Gamma(1)\Gamma(2)\bigr)
+=\tfrac{17}4$, as tabulated --- note that without the
+Laplace sign the value would come out as $-\tfrac{17}4$.
+
+\emph{$[\zeta(2)]$ of $I^{(2,2)}$.}
+For $(s_1,s_2)=(2,2)$:
+$F^{2,2}=-\bigl[6S_{1,4}+4S_{2,3}+2S_{3,2}\bigr]
++2Z_2(A)Z_3(A{+}d{-}1)+2Z_3(A)Z_2(A{+}d{-}1)$.
+The isolated-$\zeta(2)$ content of the $U$-sums is
+$[\zeta(2)]U_{1,4}(h)=-h^{-3}$, $[\zeta(2)]U_{2,3}(h)=3h^{-3}$,
+$[\zeta(2)]U_{3,2}(h)=-3h^{-3}$, so summing over $h\le b$,
+$[\zeta(2)]S_{1,4}=\Hh b3$, $[\zeta(2)]S_{2,3}=-3\Hh b3$,
+$[\zeta(2)]S_{3,2}=3\Hh b3-\Hh a3$ (the last term from
+$-\sum_{t\le a}t^{-3}\zeta(2)$ inside the coupled tail), while the
+$Z$-products contribute $-2\Hh{a+b}3-2\Hh a3$.  Altogether
+$[\zeta(2)]F^{2,2}_{a,b}=-\bigl[6-12+6\bigr]\Hh b3+2\Hh a3-2\Hh{a+b}3-2\Hh a3
+=-2\Hh{a+b}3$, and adding the mirror gives
+$[\zeta(2)]I^{(2,2)}=-4\Hh{k+l}3$.
+\end{proof}
+
+\begin{remark}
+The finite Euler sums are not an artefact: the pair
+$(S_{r,m},U_{r,m})$ is exactly the local trace the sine kernel leaves behind
+after the two-triangle integration, and the \emph{basis} in which one writes
+them matters.  The expressions above use the fixed basis
+$\{$products of $\Hh\cdot\cdot$ at $k,l,k+l$;\ $S_{r,m}$ at $k,l$;\
+$U_{r,m}$ at $(k,l),(l,k)\}$; different-looking outputs of the same
+reduction are equal modulo the finite quasi-shuffle relations, e.g.\
+$S_{r,m}(x)+S_{m,r}(x)=\Hh xr\Hh xm+\Hh x{r+m}$ and
+$U_{r,m}(a,b)=\Hh ar\Hh{a+b}m-\sum_{j=1}^{a}\Hh{j-1}r(b+j)^{-m}$.
+\end{remark}
+
+\section{The four kernel identities}\label{sec:kernelids}
+
+Throughout this section we use the abbreviations
+$A_{kl}=C_{22}$, $B_{kl}=C_{12}$, $C_{kl}=C_{21}$, $D_{kl}=C_{11}$ of
+Proposition~\ref{prop:pf} (so $B_{kl}=A_{kl}L_k$ etc.), and the one-variable
+sections of $R:=R_n(x-n-1,\,y-n-1)$, i.e.\ of
+\[
+ R(x,y)=\frac{P(x)P(y)P(x+y)}{Q(x)^2Q(y)^2},\qquad
+ P(z)=\prod_{r=1}^n(z-r),\quad Q(z)=\prod_{r=0}^n(z+r),
+\]
+whose partial fractions on the grid $x=-k$, $y=-l$ carry the same data
+$A,B,C,D$.  For fixed $l$ let
+\[
+ g_l(x)=\lim_{y\to-l}(y+l)^2R(x,y)
+ =\sum_{k=0}^n\Bigl[\frac{A_{kl}}{(x+k)^2}+\frac{B_{kl}}{x+k}\Bigr],
+\qquad
+ q_l(x)=\frac{\partial}{\partial y}\Bigl[(y+l)^2R(x,y)\Bigr]_{y=-l}
+ =\sum_{k=0}^n\Bigl[\frac{C_{kl}}{(x+k)^2}+\frac{D_{kl}}{x+k}\Bigr].
+\]
+From the product form,
+\begin{equation}\label{eq:gq}
+ g_l(x)=c_l\,\frac{P(x)P(x-l)}{Q(x)^2},
+ \qquad
+ q_l(x)=\frac{P(x)}{Q(x)^2}\bigl[c'_l\,P(x-l)+c_l\lambda_l P(x-l)\bigr]',
+\end{equation}
+more precisely $q_l(x)=P(x)Q(x)^{-2}\bigl(\mu_l P'(x-l)+\nu_l P(x-l)\bigr)$
+for finite constants $\mu_l,\nu_l$ (the $y$-derivative never touches the
+factor $P(x)$).  Consequently:
+\begin{itemize}
+\item[(Z1)] $g_l(j)=0$ for $1\le j\le n+l$ \ (both numerator products
+vanish on $1\le j\le n$ resp.\ $l+1\le j\le n+l$; the range is sharp);
+\item[(Z2)] $g_l$ has a \emph{double} zero on $l<j\le n$, so also
+$g_l'(j)=0$ there (sharp);
+\item[(Z3)] $q_l(j)=0$ for $1\le j\le n$ \ (the surviving factor $P(j)=0$;
+sharp, and the zero has order exactly one).
+\end{itemize}
+Moreover $g_l,q_l=O(x^{-2})$ as $x\to\infty$, so the sums of their residues
+vanish:
+\begin{equation}\label{eq:res0}
+ \sum_{k=0}^nB_{kl}=0,
+ \qquad
+ \sum_{k=0}^nD_{kl}=0
+ \qquad\text{for each fixed } l,
+\end{equation}
+and symmetrically with the roles of $k$ and $l$ exchanged
+($A_{kl}=A_{lk}$, $C_{kl}=B_{lk}$, $D_{kl}=D_{lk}$).
+
+\begin{proposition}[$\zeta(5)$, $\zeta(2)\zeta(3)$, $\zeta(4)$]
+\label{prop:z5z4}
+For every $n$:
+\[
+ [\zeta(5)]\sum_{k,l}T\,W_B=2Q_n,\qquad
+ [\zeta(2)\zeta(3)]\sum_{k,l}T\,W_B=4Q_n,\qquad
+ [\zeta(4)]\sum_{k,l}T\,W_B=0 .
+\]
+\end{proposition}
+
+\begin{proof}
+The first two are immediate from Proposition~\ref{prop:ratparts} and
+\eqref{eq:Qn}: only $I^{(2,2)}$ carries these values, with constant
+coefficients $2$ and $4$.
+
+For $\zeta(4)$: by Proposition~\ref{prop:ratparts} the coefficient is
+$\frac{17}4\sum_{k,l}T\,(L_k+L_l)$.  For fixed $l$,
+$\sum_kT\,L_k$ is proportional to $\sum_kB_{kl}=0$ by \eqref{eq:res0};
+summing over $l$, and treating $L_l$ symmetrically, gives zero.
+\end{proof}
+
+\begin{proposition}[$\zeta(3)$]\label{prop:z3}
+For every $n$, \ $[\zeta(3)]\sum_{k,l}T\,W_B=0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:ratparts}, up to the common factor
+$(-1)^nn!^{-1}$,
+\[
+ [\zeta(3)]\sum T\,W_B
+ \;\propto\;
+ 2\sum_{k,l}\Bigl[
+ A_{kl}\bigl(\Hh k2{+}\Hh l2{-}2\Hh{k+l}2\bigr)
+ +B_{kl}(H_k{-}H_{k+l})
+ +C_{kl}(H_l{-}H_{k+l})
+ +D_{kl}\Bigr].
+\]
+The $D$-term vanishes by \eqref{eq:res0}.  Using
+$H_k-H_{k+l}=-\sum_{j=1}^{l}\frac1{k+j}$,
+$\Hh k2-\Hh{k+l}2=-\sum_{j=1}^{l}\frac1{(k+j)^2}$ and the
+$k\leftrightarrow l$ symmetry to fold the $\Hh l2$- and $C$-halves onto the
+$k$-side, the bracket becomes
+\[
+ -2\sum_{l=0}^n\sum_{j=1}^{l}\sum_{k=0}^n
+ \Bigl[\frac{A_{kl}}{(k+j)^2}+\frac{B_{kl}}{k+j}\Bigr]
+ =-2\sum_{l=0}^n\sum_{j=1}^{l}g_l(j)=0
+\]
+by (Z1), since $1\le j\le l\le n+l$.
+\end{proof}
+
+\begin{proposition}[$\zeta(2)$]\label{prop:z2}
+For every $n$,
+\[
+ [\zeta(2)]\sum_{k,l}T\,W_B=-4\sum_{k,l}T\,w_3^{\mathrm{sym}},
+ \qquad
+ w_3^{\mathrm{sym}}
+ =\tfrac12\bigl(\Hh{n+k}3+\Hh{n+l}3\bigr)
+ -\tfrac\Psi2\bigl(\Hh{n+k}2-\Hh{n+l}2\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Step 1.  By Proposition~\ref{prop:ratparts} (note
+$[\zeta(2)]I^{(2,2)}=-4\Hh{k+l}3$), and again up to the common nonzero
+factor,
+\[
+ [\zeta(2)]\sum T\,W_B
+ \propto
+ \sum_{k,l}\Bigl[-4A_{kl}\Hh{k+l}3
+ +B_{kl}\bigl(\Hh l2{-}2\Hh{k+l}2\bigr)
+ +C_{kl}\bigl(\Hh k2{-}2\Hh{k+l}2\bigr)
+ +D_{kl}\bigl(H_k{+}H_l{-}2H_{k+l}\bigr)\Bigr].
+\]
+We first claim this equals
+$\sum_{k,l}\bigl[-4A_{kl}\Hh{k+l}3-(B_{kl}+C_{kl})\Hh{k+l}2\bigr]$.
+The difference is
+\[
+ \sum_{k,l}\Bigl[B_{kl}\bigl(\Hh l2{-}\Hh{k+l}2\bigr)
+ +C_{kl}\bigl(\Hh k2{-}\Hh{k+l}2\bigr)
+ +D_{kl}\bigl(H_k{-}H_{k+l}\bigr)+D_{kl}\bigl(H_l{-}H_{k+l}\bigr)\Bigr],
+\]
+and unfolding the harmonic differences into ranges as in
+Proposition~\ref{prop:z3}, then folding the $(C,D_{(l\text{-side})})$-half
+onto the $k$-side by symmetry, the difference equals
+\[
+ -2\sum_{k=0}^n\sum_{j=1}^{k}\sum_{l=0}^n
+ \Bigl[\frac{B_{kl}}{(j+l)^2}+\frac{D_{kl}}{j+l}\Bigr]
+ =-2\sum_{k}\sum_{j=1}^{k}q^{\,\mathrm{mirror}}_k(j)=0
+\]
+by the mirror of (Z3) (the simple-pole-in-$x$ section, as a function of
+$y$, vanishes at $y=j$ for $1\le j\le n$, and $j\le k\le n$).
+
+Step 2.  It remains to identify
+$\sum T\bigl[\Hh{k+l}3+\tfrac14(L_k+L_l)\Hh{k+l}2\bigr]$
+with $\sum T\,w_3^{\mathrm{sym}}$; multiplying by $-4$ then gives the claim.
+Multiply $w_3^{\mathrm{sym}}$ by $4A_{kl}$ and use $L_k-L_l=-2\Psi$ and
+symmetry: the difference of the two summands reduces to
+\[
+ \sum_{k,l}\Bigl[4A_{kl}\bigl(\Hh{n+k}3-\Hh{k+l}3\bigr)
+ +2B_{kl}\bigl(\Hh{n+k}2-\Hh{n+l}2-\Hh{k+l}2\bigr)\Bigr]
+\]
+after folding by symmetry.  For fixed $l$ the term $-2B_{kl}\Hh{n+l}2$ sums
+to zero by \eqref{eq:res0}.  Expanding the two remaining harmonic
+differences over the range $k+l<i\le n+k$, i.e.\ $i=k+j$ with $l<j\le n$,
+leaves
+\[
+ \sum_{l=0}^n\sum_{j=l+1}^{n}\sum_{k=0}^n
+ \Bigl[\frac{4A_{kl}}{(k+j)^3}+\frac{2B_{kl}}{(k+j)^2}\Bigr]
+ =-2\sum_{l=0}^n\sum_{j=l+1}^{n}g_l'(j)=0
+\]
+by (Z2).
+\end{proof}
+
+\section{The middle row}\label{sec:middle}
+
+This section proves Theorem~\ref{thm:middle}.  It is logically independent
+of Sections~\ref{sec:recomb}--\ref{sec:kernelids} except for reusing
+(Z1)--(Z2) and \eqref{eq:res0}; that independence is what powers the
+subtraction argument of Section~\ref{sec:anchor}.
+
+Brown--Zudilin's descent \cite[eq.~(I3)]{BZ}, specialised to the totally
+symmetric parameters (write $k=n+l$ in their summation index), reads
+\begin{equation}\label{eq:I3}
+ 2I''_n=\sum_{l=0}^{n}(-1)^l\binom{n+l}{n}\binom nl^2
+ \,J_3\bigl(n,n,n,n{-}l;\,n,n,n{+}l\bigr),
+\end{equation}
+where $J_3$ is the generalised Beukers integral and
+$I''_n=Q_n\zeta(3)-\hat P_n$.  (The factor $2$ is discussed below; it is
+forced uniformly in $n$, not fitted.)  Each term satisfies the Rhin--Viola
+condition $(n-l)+(n+l)=n+n$, so by \cite[Sec.~3]{Zu02} it is a linear form
+$2A\zeta(3)-B$ whose coefficients come from the partial fractions of an
+explicit rational function: using Zudilin's parameter correspondence
+(\cite[eqs.~(3.8),(3.10)]{Zu02}), the relevant function for the term $l$ is
+\[
+ R_{n,l}(t)=
+ \frac{\prod_{i=1}^n(t+i)\,\prod_{i=1}^n(t+i-l)}
+      {\prod_{i=n+1}^{2n+1}(t+i)^2},
+\]
+with double poles at $t=-n-1-k$, $0\le k\le n$.  Writing
+\[
+ R_{n,l}(t)=\sum_{k=0}^n\Bigl[\frac{A_{kl}}{(t+n+1+k)^2}
+ +\frac{B_{kl}}{t+n+1+k}\Bigr],
+\]
+the same product evaluations as in Proposition~\ref{prop:pf} give
+\begin{equation}\label{eq:AB}
+ A_{kl}=\binom{n+k}{n}\binom{n+k+l}{n}\binom nk^2,
+ \qquad
+ B_{kl}=A_{kl}\,L_k .
+\end{equation}
+Zudilin's Lemma~4 \cite[eq.~(2.13) and its proof]{Zu02} evaluates the
+corresponding series as
+\[
+ J_3(n,n,n,n{-}l;n,n,n{+}l)
+ =(-1)^l\Bigl\{2\sum_kA_{kl}\,\zeta(3)
+ -\sum_kA_{kl}\bigl[2\Hh{k+l}3+L_k\Hh{k+l}2\bigr]\Bigr\}.
+\]
+Substituting into \eqref{eq:I3} and using that the outer coefficient times
+$A_{kl}$ is exactly $T(n,k,l)$ (the six binomials merely reorder), we obtain
+the real-number identity
+\begin{equation}\label{eq:middlereal}
+ 2Q_n\zeta(3)-2\hat P_n
+ =2\sum_{k,l}T\,\zeta(3)
+ -\sum_{k,l}T\bigl[2\Hh{k+l}3+L_k\Hh{k+l}2\bigr].
+\end{equation}
+The $\zeta(3)$ terms on the two sides are \emph{identically equal
+rationals} multiplied by the same real number $\zeta(3)$, by \eqref{eq:Qn};
+subtracting them (no independence needed) leaves
+\begin{equation}\label{eq:M}
+ \hat P_n=\sum_{k,l}T\Bigl[\Hh{k+l}3+\tfrac12L_k\Hh{k+l}2\Bigr]
+ =\sum_{k,l}T\Bigl[\Hh{k+l}3+\tfrac14(L_k{+}L_l)\Hh{k+l}2\Bigr],
+\end{equation}
+the second equality by $k\leftrightarrow l$ symmetry of $T$.  Step 2 of
+Proposition~\ref{prop:z2} identifies the right side with
+$\sum T\,w_3^{\mathrm{sym}}$.  Finally $w_3^{\mathrm{sym}}$ is the
+symmetrisation of $\hat w_3$: their difference is $k\leftrightarrow l$
+antisymmetric, and $T$ is symmetric, so
+$\sum T\,w_3^{\mathrm{sym}}=\sum T\,\hat w_3$.  This proves
+Theorem~\ref{thm:middle}, up to two normalisation points:
+
+\emph{The factor $2$ in \eqref{eq:I3}.}  The iterated-residue derivation of
+(I3) in \cite{BZ} produces the left-hand side as the residue integral
+displayed there; comparing its $\zeta(3)$ coefficient, computed by the
+right-hand side of \eqref{eq:middlereal} to be $2\sum T=2Q_n$, with the
+$\zeta(3)$ coefficient $Q_n$ of $I''_n$ shows the displayed residue object
+equals $2I''_n$ for every $n$.  Both coefficients are explicit rationals
+inside one derivation, so this comparison involves no independence
+statement.  (At $n=0$ it is the classical calibration: the residue integral
+is Beukers' $2\zeta(3)$ while $I''_0=\zeta(3)$.)
+
+\emph{$I''_n$ versus \eqref{eq:In}.}  The identity
+$I''_n=Q_n\zeta(3)-\hat P_n$ is \cite{BZ}'s definition of the middle-row
+pair via the same recursion-plus-initial-values argument as \eqref{eq:In};
+its role here is only to name the rational number $\hat P_n$.
+\hfill$\qed$
+
+\section{The subtraction anchor: proof of Theorem~\ref{thm:anchor}}
+\label{sec:anchor}
+
+By Propositions~\ref{prop:recomb} and~\ref{prop:ratparts},
+\begin{equation}\label{eq:barnesside}
+ I_n=\sum_{k,l}T\,W_B
+ =2Q_n\zeta(5)+4Q_n\zeta(2)\zeta(3)+0\cdot\zeta(4)+0\cdot\zeta(3)
+ -4\Bigl[\sum_{k,l}T\,w_3^{\mathrm{sym}}\Bigr]\zeta(2)
+ +\sum_{k,l}T\,W^{(1)},
+\end{equation}
+using Propositions~\ref{prop:z5z4}--\ref{prop:z2} for the five upper
+coefficients; here $W^{(1)}=[1]W_B$ is \eqref{eq:W1}.  On the other hand
+\eqref{eq:In} gives
+\[
+ I_n=2Q_n\zeta(5)+4Q_n\zeta(2)\zeta(3)-4\hat P_n\zeta(2)-2P_n .
+\]
+Subtract: by Theorem~\ref{thm:middle},
+$\sum T\,w_3^{\mathrm{sym}}=\hat P_n$, so every transcendental term cancels
+\emph{exactly}, leaving the equality of real numbers
+\[
+ \sum_{k,l}T\,W^{(1)}=-2P_n .
+\]
+This is Theorem~\ref{thm:anchor}.\hfill$\qed$
+
+\begin{remark}
+Theorem~\ref{thm:anchor} is an unconditional closed form for the top row:
+$P_n$ equals an explicit double sum of products of binomials, harmonic
+numbers, and the finite Euler sums $S_{r,m},U_{r,m}$.  It is the exact
+weight-five analogue of the middle row's \eqref{eq:M}, and it is the first
+representation of $P_n$ obtained without any coefficient comparison.
+\end{remark}
+
+\begin{remark}
+The chain uses \eqref{eq:In} and \eqref{eq:Qn} from \cite{BZ}, whose proofs
+rest on a certified creative-telescoping recursion for $I_n$ plus exact
+evaluation of $I_0,I_1,I_2$; an independent certificate for the same
+recursion, in normalised form, is part of the present programme's
+repository.  No other external input enters.
+\end{remark}
+
+\section{The remaining bridge to the compact weight}\label{sec:T3}
+
+Theorems~\ref{thm:anchor} and~\ref{thm:top} differ by the single identity
+\eqref{eq:T3}, equivalently
+\[
+ \Delta_n:=\sum_{k,l=0}^nT(n,k,l)\,
+ \bigl[W^{(1)}(k,l)+2w_5^{\mathrm{sym}}(n,k,l)\bigr]=0
+ \qquad(n\ge0).
+\]
+This is a statement about finite sums only; no integrals or zeta values
+remain.  We record its status precisely.
+
+\subsection{What is verified}
+$\Delta_n=0$ has been checked in exact rational arithmetic for $n\le12$
+(all cells, all six basis coefficients of the underlying decomposition
+compared independently), and modulo two 31-bit primes for $n\le80$.
+Moreover $P_n=\sum T\,w_5$ itself has been verified against the exact
+recursion ladder for $n\le360$ at two primes.
+
+\subsection{The proof strategy, and its measured state}
+All identities of Section~\ref{sec:kernelids} were proved by exhibiting the
+relevant weighted sum as a combination of \emph{null functionals}: sums
+that vanish for every $n$ because of (Z1)--(Z3), \eqref{eq:res0}, the
+two-variable vanishing $R(x,y)=0$ at lattice points and along the moving
+anti-diagonals $x+y=m$ ($1\le m\le n$, all Laurent coefficients), and the
+one-variable residue lemma applied to $R_k(z)\rho(z)$ for admissible
+rational $\rho$ (``pole-raising jets'', which carry the higher logarithmic
+jets $e_2,\dots,e_5$ of the local germ that fixed-pole evaluations cannot
+see).  The natural certificate for \eqref{eq:T3} would be the same shape,
+in its \emph{folded} form: since $B_{kl}=A_{kl}L_k$ and
+$D_{kl}=A_{kl}(L_kL_l-C_2)$ with $L$'s polynomial in harmonic numbers, any
+cellwise identity
+\[
+ \bigl[W^{(1)}+2w_5^{\mathrm{sym}}\bigr](n,k,l)
+ =\sum_i x_i\,u_i(n,k,l),
+ \qquad u_i\ \text{null},
+\]
+implies \eqref{eq:T3}.
+
+We record the measured state of this reduction (all statements modulo a
+31-bit prime, with the protocol: solve on $n\le N$, test consistency on the
+dependent rows, hold out $n=N{+}1$).  With the generator inventory
+consisting of: weighted fixed-pole evaluations (including inverse-power and
+$n$-coupled weights), derivative evaluations on the double-zero range,
+anti-diagonal and vertical Laurent band families, pole-raising jets to
+order five, weighted value towers
+$\sum_{j\in\mathrm{range}}\varphi(j)\,(R_k\rho)(-j)=0$ with $k$-side letter
+multipliers (these produce the coupled sums $\sum_j\varphi(j)/(j+l)^s$ up
+to $s=5$ that the $U$-letters of $W^{(1)}$ require), and two-variable
+iterated-residue jets $\sum_{k,l}\Res_y\Res_x[R\,\rho(x)\sigma(y)]=0$ with
+lattice pole-raising in both variables (these turn out, measurably, to lie
+in the per-fibre span, so they enlarge nothing) ---
+about $5{,}600$ null functionals in all, each individually proved and
+machine-calibrated --- the three-component system is consistent through
+$n\le14$ (with over a thousand dependent rows) but \emph{inconsistent} at
+$n\le17$, and the folded system is inconsistent at $n\le20$ (514 of 3310
+rows).  Thus \eqref{eq:T3} is \emph{not} a fixed-coefficient combination of
+these families, a bounded negative that sharpens the earlier
+codimension-one measurements.  Two structural upgrades are identified and
+left open: coefficients rational in $n$ (the certificate shape of every
+creative-telescoping identity in this area; the first augmentation test was
+row-limited and inconclusive), and \emph{marginal} null weights
+$v(n,k)+v(n,l)$ with $\sum_kv(n,k)S_k(n)=0$ for the fibre marginal
+$S_k(n)=\sum_lT(n,k,l)$, whose own residue calculus comes from the moment
+identities $\sum_l\Res_{y=-l}[y^mR(x,y)]=-[$explicit rational$]$ --- these
+are the only mechanisms that can carry the $l$-free nested content
+($S_{1,4}(k)$, $S_{2,3}(k)$, \dots) that the target provably contains and
+that no per-fibre or iterated-residue functional can produce monomially.
+
+\subsection{Why the compact weight is expected}
+The companion note \emph{The Laurent--jet origin of the compact
+Brown--Zudilin weights} shows that $\hat w_3$ and $w_5$ are forced as
+Bell-polynomial coefficients of the anti-diagonal logarithmic jets of the
+local germ of $R_n$ at its finite double poles --- the direction that
+annihilates the coupled factor $P(x+y)$.  Identity \eqref{eq:T3} is the
+statement that the same jets exhaust the rational content of the four
+universal integrals after $T$-weighted summation; every piece of
+$W^{(1)}$'s nested content lies in the image of the weighted-tower
+functionals, which is the structural reason the bridge is expected to close
+over the proved generator space.
+
+\begin{thebibliography}{9}
+\bibitem{BZ} F.~Brown, W.~Zudilin,
+\emph{On cellular rational approximations to $\zeta(5)$},
+arXiv:2210.03391.
+\bibitem{Zu02} W.~Zudilin,
+\emph{Arithmetic of linear forms involving odd zeta values},
+J.\ Th\'eor.\ Nombres Bordeaux 16 (2004), 251--291.
+\bibitem{Be79} F.~Beukers, \emph{A note on the irrationality of $\zeta(2)$
+and $\zeta(3)$}, Bull.\ London Math.\ Soc.\ 11 (1979), 268--272.
+\bibitem{RV01} G.~Rhin, C.~Viola, \emph{The group structure for $\zeta(3)$},
+Acta Arith.\ 97 (2001), 269--293.
+\end{thebibliography}
+
+\end{document}

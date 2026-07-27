@@ -1,0 +1,330 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newcommand{\Hh}[2]{H_{#1}^{(#2)}}
+
+\title{The Laurent--Jet Origin of the Compact Brown--Zudilin Weights}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{The compact weights}
+
+Put
+\[
+ T_{n,k,\ell}
+ =
+ \binom{n+k}{n}\binom nk^2
+ \binom{n+\ell}{n}\binom n\ell^2
+ \binom{n+k+\ell}{n}.
+\]
+For \(r\geq1\), write
+\[
+ A_r(x)=\Hh{n+x}{r}-\Hh{x}{r},
+ \qquad
+ B_r(x)=\Hh{n-x}{r}-\Hh{x}{r},
+\]
+and define
+\[
+ \alpha=A_1(k)-A_1(\ell),\qquad
+ \beta=B_1(k)-B_1(\ell),\qquad
+ \Psi=\frac{\alpha}{2}+\beta.
+\]
+The experimentally discovered weights are
+\[
+ \widehat w_3
+ =\Hh{n+k}{3}-\Psi\Hh{n+k}{2}
+\]
+and
+\[
+\begin{split}
+ w_5={}&\Hh{n+k}{5}
+ +\frac{\alpha-\beta}{2}\Hh{n+k}{4}\\
+ &+
+ \left\{
+ \frac{A_2(k)+A_2(\ell)}4
+ -\frac{\alpha\Psi}{2}
+ \right\}\Hh{n+k}{3}.
+\end{split}
+\]
+We explain why precisely these combinations occur.
+
+\section{The rational Barnes kernel}
+
+In the totally symmetric Brown--Zudilin Barnes integral, application of
+\(\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)\) separates the integrand into three
+sine factors and the rational function
+\[
+ \mathcal R_n(s,t)=R_n(s)R_n(t)C_n(s+t),
+\]
+where
+\[
+ R_n(s)=
+ \frac{\prod_{i=1}^{n}(s+i)}
+      {\prod_{j=n+1}^{2n+1}(s+j)^2},
+ \qquad
+ C_n(u)=\prod_{j=n+2}^{2n+1}(u+j).
+\]
+The finite double poles are
+\[
+ s_k=-n-k-1,\qquad t_\ell=-n-\ell-1,
+ \qquad 0\leq k,\ell\leq n.
+\]
+
+\begin{proposition}[Leading Laurent coefficient]
+\label{prop:leading}
+At \((s_k,t_\ell)\),
+\[
+ \lim_{s\to s_k,\ t\to t_\ell}
+ (s-s_k)^2(t-t_\ell)^2\mathcal R_n(s,t)
+ =
+ \frac{(-1)^n}{n!}\,T_{n,k,\ell}.
+\]
+\end{proposition}
+
+\begin{proof}
+First,
+\[
+ \lim_{s\to s_k}(s-s_k)^2R_n(s)
+ =
+ (-1)^n\frac{(n+k)!}{k!^3(n-k)!^2}.
+\]
+Indeed, the numerator at \(s_k\) is
+\((-1)^n(n+k)!/k!\), whereas the product of the remaining denominator
+factors, before squaring, is
+\((-1)^k k!(n-k)!\).
+Similarly for \(t_\ell\).  Finally,
+\[
+ C_n(s_k+t_\ell)
+ =
+ (-1)^n\frac{(n+k+\ell)!}{(k+\ell)!}.
+\]
+Multiplication gives
+\[
+ (-1)^n
+ \frac{(n+k)!(n+\ell)!(n+k+\ell)!}
+ {k!^3\ell!^3(k+\ell)!(n-k)!^2(n-\ell)!^2}
+ =\frac{(-1)^n}{n!}T_{n,k,\ell}.
+\qedhere
+\]
+\end{proof}
+
+Thus the binomial kernel itself is forced: it is the leading coefficient of
+the finite double-pole Laurent expansion.
+
+\section{The anti-diagonal jet}
+
+Let
+\[
+ \Lambda_{k,\ell}
+ =
+ \frac{(-1)^n}{n!}T_{n,k,\ell}
+\]
+and normalize the local germ by
+\[
+ E_{k,\ell}(x,y)=
+ \frac{x^2y^2
+ \mathcal R_n(s_k+x,t_\ell+y)}
+ {\Lambda_{k,\ell}}.
+\]
+Then \(E_{k,\ell}(0,0)=1\).
+The decisive direction is the anti-diagonal derivative
+\[
+ \nabla=\partial_x-\partial_y.
+\]
+Since \(C_n\) depends only upon \(s+t\), it is constant on
+\((s,t)=(s_k+x,t_\ell-x)\).  Consequently \(\nabla\) annihilates the entire
+coupling factor \(C_n(s+t)\).
+
+To separate the two elementary pieces of \(R_n\), put
+\[
+ N_n(s)=\prod_{i=1}^n(s+i)
+\]
+and, locally at \(s_k\),
+\[
+ D_{n,k}(s)=
+ \prod_{\substack{j=n+1\\j\neq n+k+1}}^{2n+1}(s+j).
+\]
+Define the normalized anti-diagonal germs
+\[
+ \mathcal N_{k,\ell}(x)=
+ \frac{N_n(s_k+x)N_n(t_\ell-x)}
+      {N_n(s_k)N_n(t_\ell)}
+\]
+and
+\[
+ \mathcal D_{k,\ell}(x)=
+ \frac{D_{n,k}(s_k+x)D_{n,\ell}(t_\ell-x)}
+      {D_{n,k}(s_k)D_{n,\ell}(t_\ell)}.
+\]
+Finally set
+\[
+ e_1=\left.\frac{d}{dx}
+ \log E_{k,\ell}(x,-x)\right|_{x=0},
+\quad
+ \nu_j=\left.\frac{d^j}{dx^j}
+ \log\mathcal N_{k,\ell}(x)\right|_{x=0},
+\quad
+ \delta_1=\left.\frac{d}{dx}
+ \log\mathcal D_{k,\ell}(x)\right|_{x=0}.
+\]
+
+\begin{proposition}[Harmonic coordinates are Laurent jets]
+\label{prop:jets}
+One has
+\[
+ \nu_1=-\alpha,\qquad
+ \delta_1=\beta,\qquad
+ e_1=-2\Psi,\qquad
+ \nu_2=-\bigl(A_2(k)+A_2(\ell)\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+At \(s=s_k\),
+\[
+ \frac{d}{ds}\log N_n(s)
+ =
+ \sum_{i=1}^n\frac1{s+i}
+ =
+ -A_1(k).
+\]
+The sign of the \(\ell\)-term is reversed by \(t=t_\ell-x\); hence
+\(\nu_1=-A_1(k)+A_1(\ell)=-\alpha\).
+
+The nonvanishing denominator differences at \(s_k\) are
+\[
+ -k,\ldots,-1,1,\ldots,n-k,
+\]
+and therefore
+\[
+ \left.\frac{d}{ds}\log D_{n,k}(s)\right|_{s=s_k}
+ =-H_k+H_{n-k}=B_1(k).
+\]
+The anti-diagonal difference gives
+\(\delta_1=B_1(k)-B_1(\ell)=\beta\).
+
+Locally, apart from the double-pole monomials,
+\[
+ \log E=
+ \log N_n(s)+\log N_n(t)
+ -2\log D_{n,k}(s)-2\log D_{n,\ell}(t)
+ +\log C_n(s+t)+\text{constant}.
+\]
+The last term is killed in the anti-diagonal direction.  Thus
+\[
+ e_1=-\alpha-2\beta=-2\Psi.
+\]
+
+Finally,
+\[
+ \left.\frac{d^2}{ds^2}\log N_n(s)\right|_{s=s_k}
+ =
+ -\sum_{i=1}^n\frac1{(s_k+i)^2}
+ =-A_2(k).
+\]
+The second derivative is unchanged by replacing \(x\) with \(-x\), so
+\(\nu_2=-A_2(k)-A_2(\ell)\).
+\end{proof}
+
+\section{Reconstruction of the two compact weights}
+
+Put \(h_r=\Hh{n+k}{r}\).  Proposition~\ref{prop:jets} gives the identities
+\[
+ \boxed{\quad
+ \widehat w_3=h_3+\frac{e_1}{2}h_2
+ \quad}
+\]
+and
+\[
+ \boxed{\quad
+ w_5
+ =h_5-\frac{\nu_1+\delta_1}{2}h_4
+ -\frac{\nu_2+\nu_1e_1}{4}h_3.
+ \quad}
+\]
+Indeed,
+\[
+ \frac{e_1}{2}=-\Psi,\qquad
+ -\frac{\nu_1+\delta_1}{2}
+ =\frac{\alpha-\beta}{2},
+\]
+and
+\[
+ -\frac{\nu_2+\nu_1e_1}{4}
+ =
+ \frac{A_2(k)+A_2(\ell)}4-\frac{\alpha\Psi}{2}.
+\]
+
+This proves that every ingredient of the compact weights has a canonical
+local meaning:
+\[
+\begin{array}{c|c}
+\text{quantity}&\text{Laurent--jet origin}\\ \hline
+T_{n,k,\ell}&\text{leading double-pole coefficient}\\
+\alpha&-\nabla\log(\text{numerator})\\
+\beta&\nabla\log(\text{regular denominator})\\
+\Psi&-\frac12\nabla\log(\text{whole local germ})\\
+A_2(k)+A_2(\ell)&-\nabla^2\log(\text{numerator}).
+\end{array}
+\]
+Most importantly, the direction \(\partial_s-\partial_t\) removes the coupled
+factor \(C_n(s+t)\).  This explains the otherwise surprising absence of
+harmonic numbers at the argument \(n+k+\ell\) from the final formulas.
+
+\section{What remains for a complete proof of the companion identities}
+
+The preceding propositions rigorously explain the kernel and the compact
+weights, but one further analytic lemma is required to identify their sums
+with the Brown--Zudilin coefficients \(P_n\) and \(\widehat P_n\).
+One must carry the partial-fraction decomposition of \(\mathcal R_n(s,t)\)
+through the universal sine-kernel integrals
+\[
+ I_{a,b}^{(r,s)}
+ =
+ \frac1{(2\pi i)^2}
+ \iint
+ \frac{1}{(u+a)^r(v+b)^s}
+ \frac{\pi}{\sin\pi u}
+ \frac{\pi}{\sin\pi v}
+ \frac{\pi}{\sin\pi(u+v)}
+ \,du\,dv,
+\qquad r,s\in\{1,2\}.
+\]
+The required universal coefficient-extraction statement is that the
+\(\zeta(2)\)-rational and rational weight-five projections of these four
+integrals pair with the local Laurent coefficients exactly as
+\[
+ h_3+\frac{e_1}{2}h_2
+\]
+and
+\[
+ h_5-\frac{\nu_1+\delta_1}{2}h_4
+ -\frac{\nu_2+\nu_1e_1}{4}h_3.
+\]
+Once this universal lemma is written and proved, summing
+Proposition~\ref{prop:leading} over the finite double poles gives immediately
+\[
+ \widehat P_n=\sum_{k,\ell=0}^nT_{n,k,\ell}\widehat w_3(n,k,\ell),
+\qquad
+ P_n=\sum_{k,\ell=0}^nT_{n,k,\ell}w_5(n,k,\ell).
+\]
+
+\begin{remark}
+Brown and Zudilin explicitly describe this route: rewrite the Barnes
+integrand as a rational function times reciprocal sine factors, decompose the
+rational part into partial fractions, and evaluate the resulting universal
+double integrals.  The calculation above identifies the previously missing
+local structure of that decomposition.  It also gives a systematic discovery
+method for higher cellular families: compute finite-pole Laurent coefficients,
+then take jets in directions tangent to the level sets of the coupled Gamma
+arguments.
+\end{remark}
+
+\end{document}

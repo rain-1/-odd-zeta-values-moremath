@@ -1,0 +1,81 @@
+P = 4194301 solve cells: 384 holdout cells: 265
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+eps forms: 1557
+  cells 0/384  30s
+  cells 50/384  30s
+  cells 100/384  31s
+  cells 150/384  32s
+  cells 200/384  33s
+  cells 250/384  34s
+  cells 300/384  36s
+  cells 350/384  37s
+system: (1152, 3235)
+rank=813 nbad=0 (1s)
+HOLDOUT rows nonzero: 795 of 795
+support size: 813
+   g/prefix/H3_j                                3120820
+   g/prefix/H3_l                                2847237
+   g/prefix/H3_jl                               1100784
+   g/prefix/H1_j*H2_j                           3845975
+   g/prefix/H1_j*H2_l                           3371013
+   g/prefix/H1_j*H2_jl                          1575326
+   g/prefix/H1_l*H2_j                           469322
+   g/prefix/H1_l*H2_l                           2342257
+   g/prefix/H1_l*H2_jl                          1699917
+   g/prefix/H1_jl*H2_j                          1275160
+   g/prefix/H1_jl*H2_l                          947423
+   g/prefix/H1_jl*H2_jl                         3277388
+   g/prefix/H1_j*H1_j*H1_j                      925000
+   g/prefix/H1_j*H1_j*H1_l                      70119
+   g/prefix/H1_j*H1_j*H1_jl                     544065
+   g/prefix/H1_j*H1_l*H1_l                      3873213
+   g/prefix/H1_j*H1_l*H1_jl                     2135045
+   g/prefix/H1_j*H1_jl*H1_jl                    283368
+   g/prefix/H1_l*H1_l*H1_l                      2856970
+   g/prefix/H1_l*H1_l*H1_jl                     1918933
+   g/prefix/H1_l*H1_jl*H1_jl                    211878
+   g/prefix/H1_jl*H1_jl*H1_jl                   519542
+   g/overlap/H3_j                               3023725
+   g/overlap/H3_l                               1856417
+   g/overlap/H3_jl                              4100298
+   g/overlap/H3_jml                             357286
+   g/overlap/H1_j*H2_j                          764411
+   g/overlap/H1_j*H2_l                          1979264
+   g/overlap/H1_j*H2_jl                         3924194
+   g/overlap/H1_j*H2_jml                        4052156
+   g/overlap/H1_l*H2_j                          2110967
+   g/overlap/H1_l*H2_l                          1599203
+   g/overlap/H1_l*H2_jl                         2189125
+   g/overlap/H1_l*H2_jml                        3677703
+   g/overlap/H1_jl*H2_j                         3971978
+   g/overlap/H1_jl*H2_l                         826635
+   g/overlap/H1_jl*H2_jl                        887354
+   g/overlap/H1_jl*H2_jml                       460383
+   g/overlap/H1_jml*H2_j                        4003604
+   g/overlap/H1_jml*H2_l                        3604928
+   g/overlap/H1_jml*H2_jl                       1275368
+   g/overlap/H1_jml*H2_jml                      651183
+   g/overlap/H1_j*H1_j*H1_j                     685615
+   g/overlap/H1_j*H1_j*H1_l                     3492775
+   g/overlap/H1_j*H1_j*H1_jl                    412453
+   g/overlap/H1_j*H1_j*H1_jml                   3446998
+   g/overlap/H1_j*H1_l*H1_l                     2544391
+   g/overlap/H1_j*H1_l*H1_jl                    754310
+   g/overlap/H1_j*H1_l*H1_jml                   819060
+   g/overlap/H1_j*H1_jl*H1_jl                   142551
+   g/overlap/H1_j*H1_jl*H1_jml                  838454
+   g/overlap/H1_j*H1_jml*H1_jml                 2868398
+   g/overlap/H1_l*H1_l*H1_l                     4060136
+   g/overlap/H1_l*H1_l*H1_jl                    2711274
+   g/overlap/H1_l*H1_l*H1_jml                   3573919
+   g/overlap/H1_l*H1_jl*H1_jl                   22003
+   g/overlap/H1_l*H1_jl*H1_jml                  3268061
+   g/overlap/H1_l*H1_jml*H1_jml                 266709
+   g/overlap/H1_jl*H1_jl*H1_jl                  3785096
+   g/overlap/H1_jl*H1_jl*H1_jml                 2477267

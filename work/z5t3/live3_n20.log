@@ -1,0 +1,45 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+P=4194301 solve 3310 cells, holdout 484 cells
+new generators (towers + V5): 735
+columns: OLD 148 SAL 1530 TX2 875 EXTW2 1523 EPS 1557 = 5633
+  cell 0/3310 8s
+  cell 100/3310 12s
+  cell 200/3310 16s
+  cell 300/3310 22s
+  cell 400/3310 28s
+  cell 500/3310 34s
+  cell 600/3310 41s
+  cell 700/3310 47s
+  cell 800/3310 54s
+  cell 900/3310 62s
+  cell 1000/3310 70s
+  cell 1100/3310 77s
+  cell 1200/3310 85s
+  cell 1300/3310 93s
+  cell 1400/3310 102s
+  cell 1500/3310 109s
+  cell 1600/3310 118s
+  cell 1700/3310 127s
+  cell 1800/3310 136s
+  cell 1900/3310 144s
+  cell 2000/3310 153s
+  cell 2100/3310 162s
+  cell 2200/3310 171s
+  cell 2300/3310 180s
+  cell 2400/3310 189s
+  cell 2500/3310 199s
+  cell 2600/3310 208s
+  cell 2700/3310 219s
+  cell 2800/3310 231s
+  cell 2900/3310 241s
+  cell 3000/3310 253s
+  cell 3100/3310 264s
+  cell 3200/3310 275s
+  cell 3300/3310 287s
+columns: OLD 148 SAL 1530 TX2 875 EXTW2 1523 EPS 1557 = 5633
+[folded=True] system (3310, 5633) rank=2778 nbad=514 (deprows=532)
