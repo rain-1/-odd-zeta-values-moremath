@@ -94,6 +94,24 @@ theorem Harm_sub_succ_arg {r : ℕ} (hr : 0 < r) (n x : ℕ) :
     simp only [Nat.cast_zero, zero_pow hr.ne', div_zero]
     ring
 
+/-- **Three steps at once**, the conversion the `w★` certificate actually needs:
+`H^(r)_{n+3−x} = H^(r)_{n−x} + 1/(n+1−x)ʳ + 1/(n+2−x)ʳ + 1/(n+3−x)ʳ`, for **every** `x`.
+
+`work/Z5STAR_CERT.md` §0.7: the certificate's atoms for the two subtracted letters are at the
+**base `n+3`**, not at `n`, and that mixed base is *not* cosmetic — it is what makes the
+interior poles at `k = n+1, n+2, n+3` cancel, which the bare-at-`n` normalisation does not do.
+This lemma is the conversion, and like its one-step parent it needs **no** `x ≤ n` hypothesis. -/
+theorem Harm_sub_succ_n3 {r : ℕ} (hr : 0 < r) (n x : ℕ) :
+    Harm r (n + 3 - x)
+      = Harm r (n - x) + 1 / (((n + 1 - x : ℕ) : ℚ)) ^ r + 1 / (((n + 2 - x : ℕ) : ℚ)) ^ r
+        + 1 / (((n + 3 - x : ℕ) : ℚ)) ^ r := by
+  have h1 := Harm_sub_succ_n hr n x
+  have h2 := Harm_sub_succ_n hr (n + 1) x
+  have h3 := Harm_sub_succ_n hr (n + 2) x
+  rw [show n + 1 + 1 = n + 2 from rfl] at h2
+  rw [show n + 2 + 1 = n + 3 from rfl] at h3
+  rw [h3, h2, h1]
+
 /-! ### 1.2  The additive letters -/
 
 /-- `Δ_k H^(r)_k`  (and `= Δ_n H^(r)_n`, `= Δ_l H^(r)_l` after renaming). -/
@@ -286,10 +304,19 @@ unknown.**  Recorded here because a reader will otherwise ask why it was not tak
 kept — it is true, cheap and genuinely used to explain 45 of the 58 dimensions of `K` — but
 `PhatSum_eq_PStarSum_of_antisym` is **not the route** and is marked so.
 
-The bridge will instead arrive as an **order-zero divergence certificate**
-`T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀` with both boundary conditions; `DivCert` below is exactly its
-shape, and `PhatSum_eq_PStarSum_of_divCert` consumes it.  One copy of `T` instead of four, so
-it should be *smaller* than any order-3 block. -/
+⛔ **And the order-zero bridge is impossible too** — `work/Z5STAR_CERT.md` §7, proved there:
+no `T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀` with vanishing boundaries exists, for any weight whose
+difference has a nonzero maximal component; the same argument forces any bridge *operator* to
+annihilate `Q`, hence to have order ≥ 3, and since `ŵ₃ ∉ W_tel` in fact **order ≥ 4**.
+
+So `DivCert` below **can never be discharged** and is retained only as a marker, for the same
+reason as `PhatSum_eq_PStarSum_of_antisym`: so that the next reader finds the idea already
+closed.  `PhatSum_eq_PStarSum_of_divCert` is a true theorem about an empty hypothesis.
+
+**None of this is on the critical path.**  `PStarSum_eq_Phat_of_rec` reaches `Phat` directly
+via `eq_of_BZRec` and the three initial values of §3, and never mentions `PhatSum`.  The `w★`
+row *is* the `P̂` row because both satisfy `L_BZ` with the same three initial values — which is
+a stronger and cheaper argument than any weight-level bridge. -/
 
 /-- A `k↔l`-antisymmetric weight is annihilated by the `T`-weighted double sum. -/
 theorem sum_antisym_zero (n : ℕ) (w : ℕ → ℕ → ℕ → ℚ) (hw : ∀ k l, w n k l = -w n l k) :
@@ -320,13 +347,9 @@ theorem PhatSum_eq_PStarSum_of_antisym
   simp only [PhatSum, PStarSum]
   linarith
 
-/-- **The order-zero divergence certificate for `w★ − ŵ₃`**, in the shape the certificate agent
-will deliver it (sparse, expanded over `ℤ`).  `R₀`, `S₀` are the two cofactors; the summand
-carries a *single* copy of `T`, so this object is smaller than any order-3 block.
-
-The top boundaries are taken at `k = n+1` and `l = n+1`: `PhatSum` and `PStarSum` are both
-summed over `range (n+1)`, and no range extension is needed because the certificate is
-order zero. -/
+/-- ⛔ **UNSATISFIABLE — `work/Z5STAR_CERT.md` §7 proves no such certificate exists.**  Kept as
+a marker only.  An order-zero divergence certificate for `w★ − ŵ₃`; the bridge, if anyone wants
+one, needs an operator of order ≥ 4, not this. -/
 structure DivCert (R0 S0 : ℕ → ℕ → ℕ → ℚ) : Prop where
   /-- `T·(w★ − ŵ₃) = Δ_k R₀ + Δ_l S₀`, for all `n,k,l`. -/
   div : ∀ n k l : ℕ, (T n k l : ℚ) * (wstar n k l - w3h n k l)
@@ -340,10 +363,8 @@ structure DivCert (R0 S0 : ℕ → ℕ → ℕ → ℚ) : Prop where
   /-- `S₀|_{l=n+1} = 0`. -/
   Stop : ∀ n k : ℕ, S0 n k (n + 1) = 0
 
-/-- **The bridge to the published compact form.**  An order-zero divergence certificate for
-`w★ − ŵ₃` collapses, over the square `0 ≤ k,l ≤ n`, to `PhatSum = PStarSum` — so the `w★` row
-*is* the `ŵ₃` row and `BZClosedForm.PhatSum_eq_Phat` follows without
-`bz_creative_telescoping`. -/
+/-- A true theorem about an **empty** hypothesis (see `DivCert`).  Retained so that the shape
+of the argument is on record should a higher-order bridge ever be built. -/
 theorem PhatSum_eq_PStarSum_of_divCert {R0 S0 : ℕ → ℕ → ℕ → ℚ} (h : DivCert R0 S0) (n : ℕ) :
     PhatSum n = PStarSum n := by
   have hz : ∑ k ∈ range (n + 1), ∑ l ∈ range (n + 1),
@@ -378,6 +399,7 @@ section AxiomAudit
 -- are clean: `[propext, Classical.choice, Quot.sound]` only.
 #print axioms Harm_sub_succ_n
 #print axioms Harm_sub_succ_arg
+#print axioms Harm_sub_succ_n3
 #print axioms Harm_nk_succ_n
 #print axioms Harm_nk_succ_k
 #print axioms Harm_nkl_succ_n

@@ -1,0 +1,7 @@
+import Zeta3Irrational.Basic
+import Zeta3Irrational.Bound
+import Zeta3Irrational.Equality
+import Zeta3Irrational.Integral
+import Zeta3Irrational.LegendrePoly
+import Zeta3Irrational.LinearForm
+import Zeta3Irrational.d

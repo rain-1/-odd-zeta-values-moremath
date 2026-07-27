@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=31mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue,
+            citecolor=MidnightBlue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\HH}[2]{H_{#1}^{(#2)}}
+\newcommand{\zetaThree}{\zeta(3)}
+\newcommand{\lcm}{\operatorname{lcm}}
+
+\title{\textbf{Apéry's Companion in One Harmonic Sum}\\
+\large A short route through the irrationality proof for \(\zeta(3)\)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Apéry's two sequences are usually presented asymmetrically: the integer
+sequence \(a_n\) has a short binomial sum, whereas its rational companion
+\(b_n\) is given by a nested sum.  We explain how the unexpectedly short
+formula
+\[
+ b_n=\sum_{k=0}^n
+ \binom nk^2\binom{n+k}{k}^2
+ \bigl(2\HH n3-\HH k3\bigr)
+\]
+makes two parts of Apéry's proof nearly immediate: the convergence
+\(b_n/a_n\to\zetaThree\) and the denominator bound
+\(d_n^3b_n\in\mathbb Z\), where \(d_n=\lcm(1,\ldots,n)\).
+The Apéry recurrence and a one-line discrete Wronskian calculation then
+recover the exponentially small linear forms and complete the irrationality
+proof.
+\end{abstract}
+
+\section{The short formula and the proof map}
+
+Write
+\[
+ K_{n,k}:=\binom nk^2\binom{n+k}{k}^2,
+ \qquad
+ \HH m3:=\sum_{j=1}^m\frac1{j^3},
+ \qquad \HH 03:=0.
+\]
+The two Apéry sequences take the parallel form
+\begin{equation}\label{eq:ab}
+ a_n=\sum_{k=0}^nK_{n,k},
+ \qquad
+ b_n=\sum_{k=0}^nK_{n,k}
+       \bigl(2\HH n3-\HH k3\bigr).
+\end{equation}
+
+The closed form does not by itself create the exponential approximation.
+Its role is more precise and, for exposition, especially useful:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item the binomial kernel concentrates at \(k\sim n/\sqrt2\), so
+       \eqref{eq:ab} makes \(b_n/a_n\to\zetaThree\) transparent;
+ \item the harmonic numbers make \(d_n^3b_n\in\mathbb Z\) termwise;
+ \item the recurrence and its discrete Wronskian then force the error
+       \(a_n\zetaThree-b_n\) to be exponentially small.
+\end{enumerate}
+
+We take as our one recurrence input the classical fact that both sequences in
+\eqref{eq:ab} satisfy
+\begin{equation}\label{eq:recurrence}
+ (n+1)^3u_{n+1}
+ =
+ (34n^3+51n^2+27n+5)u_n-n^3u_{n-1},
+\end{equation}
+with
+\[
+ a_0=1,\quad a_1=5,
+ \qquad
+ b_0=0,\quad b_1=6.
+\]
+Thus the only identity not proved in this short note is the recurrence itself;
+it may be established independently, for example by creative telescoping.
+
+\section{Where the binomial kernel lives}
+
+For \(0<x<1\), Stirling's formula gives
+\begin{equation}\label{eq:phi-limit}
+ \frac1n\log K_{n,\lfloor xn\rfloor}\longrightarrow\Phi(x),
+\end{equation}
+where
+\begin{equation}\label{eq:phi}
+ \Phi(x)
+ =
+ 2\bigl((1+x)\log(1+x)-2x\log x-(1-x)\log(1-x)\bigr).
+\end{equation}
+Its derivative is
+\[
+ \Phi'(x)=2\log\left(\frac{1-x^2}{x^2}\right).
+\]
+Consequently \(\Phi\) has a unique maximum at
+\[
+ x_*=\frac1{\sqrt2}.
+\]
+At this point
+\[
+ \exp\bigl(\Phi(x_*)\bigr)
+ =(1+\sqrt2)^4
+ =17+12\sqrt2.
+\]
+We abbreviate
+\begin{equation}\label{eq:lambda}
+ \lambda:=17+12\sqrt2.
+\end{equation}
+
+The elementary discrete Laplace principle now gives two facts that we shall
+use.  First,
+\begin{equation}\label{eq:a-growth}
+ \lim_{n\to\infty}a_n^{1/n}=\lambda.
+\end{equation}
+Second, if
+\[
+ p_{n,k}:=\frac{K_{n,k}}{a_n},
+\]
+then \(p_{n,k}\) is a probability distribution which concentrates
+exponentially near \(k=n/\sqrt2\).  More explicitly, for every
+\(\delta>0\),
+\begin{equation}\label{eq:concentration}
+ \sum_{\left|k/n-1/\sqrt2\right|\geq\delta}p_{n,k}
+ \longrightarrow0.
+\end{equation}
+Indeed, on the compact set separated by \(\delta\) from \(x_*\), the
+continuous function \(\Phi\) is smaller than \(\Phi(x_*)\) by a fixed positive
+amount.  Equation \eqref{eq:phi-limit}, together with the fact that there are
+only \(n+1\) summands, proves both assertions.
+
+\section{The ratio tends to \texorpdfstring{\(\zeta(3)\)}{zeta(3)}}
+
+\begin{proposition}\label{prop:ratio}
+The closed forms \eqref{eq:ab} satisfy
+\[
+ \lim_{n\to\infty}\frac{b_n}{a_n}=\zetaThree.
+\]
+\end{proposition}
+
+\begin{proof}
+The ratio is a weighted average:
+\begin{equation}\label{eq:average}
+ \frac{b_n}{a_n}
+ =
+ \sum_{k=0}^np_{n,k}
+ \bigl(2\HH n3-\HH k3\bigr).
+\end{equation}
+Fix a sufficiently small \(\delta>0\).  In the central region
+\[
+ \left|\frac{k}{n}-\frac1{\sqrt2}\right|<\delta
+\]
+we have \(k\geq cn\) for some \(c>0\).  Uniformly throughout this region,
+\[
+ \HH n3\longrightarrow\zetaThree,
+ \qquad
+ \HH k3\longrightarrow\zetaThree,
+\]
+and hence
+\[
+ 2\HH n3-\HH k3\longrightarrow\zetaThree.
+\]
+The complementary region has total \(p_{n,k}\)-mass tending to zero by
+\eqref{eq:concentration}, while all the harmonic expressions are uniformly
+bounded.  Taking the weighted average in \eqref{eq:average} proves the claim.
+\end{proof}
+
+\begin{remark}
+Writing \(T_m=\zetaThree-\HH m3\), the summandwise error is
+\[
+ \zetaThree-\bigl(2\HH n3-\HH k3\bigr)=2T_n-T_k.
+\]
+Since \(T_m=\frac1{2m^2}+O(m^{-3})\), its leading term vanishes exactly when
+\(k\sim n/\sqrt2\), the maximum of the binomial kernel.  This explains the
+visible first-order alignment.  The much stronger exponential cancellation
+will come from the recurrence.
+\end{remark}
+
+\section{The denominator bound is termwise}
+
+Let
+\[
+ d_n:=\lcm(1,2,\ldots,n).
+\]
+For every \(k\leq n\),
+\[
+ d_n^3\HH k3
+ =
+ \sum_{j=1}^k\frac{d_n^3}{j^3}
+ =
+ \sum_{j=1}^k\left(\frac{d_n}{j}\right)^3
+ \in\mathbb Z.
+\]
+Because every \(K_{n,k}\) is an integer, the closed form immediately gives
+\begin{equation}\label{eq:denominator}
+ \boxed{d_n^3b_n\in\mathbb Z.}
+\end{equation}
+Of course \(a_n\in\mathbb Z\) as well.  This is the arithmetic advantage of
+the short harmonic formula: no cancellation between different values of
+\(k\) is needed to see the required denominator.
+
+\section{The recurrence reveals the exponential cancellation}
+
+The following calculation is the hinge of the proof.  Define the discrete
+Wronskian
+\[
+ D_n:=b_na_{n-1}-b_{n-1}a_n.
+\]
+Solving \eqref{eq:recurrence} for \(u_{n+1}\) and applying it once to \(a_n\)
+and once to \(b_n\) gives
+\[
+ D_{n+1}
+ =\left(\frac{n}{n+1}\right)^3D_n.
+\]
+Since \(D_1=b_1a_0-b_0a_1=6\), induction yields the exact identity
+\begin{equation}\label{eq:wronskian}
+ \boxed{D_n=\frac6{n^3}.}
+\end{equation}
+It follows that
+\begin{equation}\label{eq:increment}
+ \frac{b_n}{a_n}-\frac{b_{n-1}}{a_{n-1}}
+ =
+ \frac6{n^3a_na_{n-1}}.
+\end{equation}
+Proposition~\ref{prop:ratio} identifies the limit of these increasing ratios.
+Summing \eqref{eq:increment} from \(n+1\) to infinity therefore gives
+\begin{equation}\label{eq:positive-tail}
+ \boxed{
+ \zetaThree-\frac{b_n}{a_n}
+ =
+ 6\sum_{m=n+1}^{\infty}
+ \frac1{m^3a_ma_{m-1}}.
+ }
+\end{equation}
+In particular, the error is strictly positive.
+
+Equation \eqref{eq:a-growth} shows that the \(m\)-th summand on the
+right-hand side of \eqref{eq:positive-tail} has \(m\)-th root tending to
+\(\lambda^{-2}\).  A positive tail of a sequence with exponential rate
+\(\rho<1\) has the same exponential rate \(\rho\); hence
+\[
+ \lim_{n\to\infty}
+ \left(\zetaThree-\frac{b_n}{a_n}\right)^{1/n}
+ =\lambda^{-2}.
+\]
+For the linear form
+\[
+ L_n:=a_n\zetaThree-b_n
+\]
+we conclude that
+\begin{equation}\label{eq:L-rate}
+ \boxed{
+ \lim_{n\to\infty}L_n^{1/n}
+ =\lambda^{-1}
+ =17-12\sqrt2
+ \approx0.0294373.
+ }
+\end{equation}
+Thus the recurrence has converted the signed cancellation inside the harmonic
+sum into the manifestly positive tail \eqref{eq:positive-tail}.
+
+\section{Irrationality}
+
+\begin{theorem}
+The number \(\zeta(3)\) is irrational.
+\end{theorem}
+
+\begin{proof}
+The standard least-common-multiple estimate
+\begin{equation}\label{eq:lcm-growth}
+ \log d_n=n+o(n)
+\end{equation}
+is equivalent to the prime number theorem in its Chebyshev-function form.
+Combining \eqref{eq:L-rate} and \eqref{eq:lcm-growth} gives
+\[
+ \lim_{n\to\infty}(d_n^3L_n)^{1/n}
+ =
+ \frac{e^3}{17+12\sqrt2}
+ \approx0.591263<1.
+\]
+Consequently
+\begin{equation}\label{eq:small}
+ d_n^3L_n\longrightarrow0.
+\end{equation}
+
+Suppose, for a contradiction, that \(\zetaThree=p/q\) with integers
+\(p,q>0\).  By \eqref{eq:denominator},
+\[
+ qd_n^3L_n
+ =
+ pd_n^3a_n-qd_n^3b_n
+ \in\mathbb Z.
+\]
+The positive-tail formula \eqref{eq:positive-tail} says this integer is
+strictly positive, whereas \eqref{eq:small} says it tends to zero.  For all
+sufficiently large \(n\) it would therefore be an integer strictly between
+\(0\) and \(1\), an impossibility.
+\end{proof}
+
+\begin{remark}
+The full prime number theorem is more than is needed.  Any eventual estimate
+\[
+ d_n\leq C^n
+ \qquad\text{with}\qquad
+ C<(17+12\sqrt2)^{1/3}\approx3.23868
+\]
+is sufficient.
+\end{remark}
+
+\section{What the closed form contributes}
+
+The irrationality mechanism is still Apéry's: a recurrence produces a large
+integer solution and a very small companion solution.  The new formula does
+not replace that mechanism.  Rather, it makes two of its least transparent
+inputs almost effortless:
+\[
+ \frac{b_n}{a_n}\longrightarrow\zetaThree
+ \quad\text{by concentration},\qquad
+ d_n^3b_n\in\mathbb Z
+ \quad\text{termwise}.
+\]
+Once those facts are visible, the discrete Wronskian completes the analytic
+part in a few lines.  The result is a proof in which the arithmetic, the
+limiting value, and the exponential cancellation each have a distinct and
+simple explanation.
+
+\end{document}

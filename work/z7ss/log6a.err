@@ -1,2 +1,3 @@
 A=3 B=3 W=12 Z=1 SE=-8 shard 0/1: leaves=39558 valid=39536 pruned=7257354 q1hits=0 q1q2hits=0 growthcand=0
 A=3 B=3 W=14 Z=1 SE=-8 shard 0/1: leaves=4232251 valid=4228619 pruned=157128810 q1hits=0 q1q2hits=0 growthcand=4
+Terminated

@@ -9,6 +9,7 @@ import ZetaLucas.Kummer
 import ZetaLucas.BZFactor12
 import ZetaLucas.MinimalForm
 import ZetaLucas.BZClosedForm
+import ZetaLucas.Reflect
 import ZetaLucas.BZQRow
 import ZetaLucas.BZStar
 import ZetaLucas.Defect

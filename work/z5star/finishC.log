@@ -1,0 +1,12 @@
+=== boundary solve over the whole sweep ===
+boundary solve: 3600 (n,p) jobs, 13 unknowns
+boundary solve: 0 failures, ranks seen [13]  [6s]
+=== boundary lift ===
+boundary lift: 150 sample n, 24 primes, 13 coefficients
+   deg(num)/deg(den) per coefficient: [(None, None), (None, None), (None, None), (18, 0), (18, 0), (17, 0), (18, 2), (17, 2), (16, 2), (15, 2), (14, 2), (13, 2), (12, 2)]
+   common n-denominator degree = 2
+   integer roots (n = r, multiplicity): [(-2, 1), (-1, 1)] -> accounted 2 of 2
+   HELD-OUT: 0 mismatches over 6 x 13 x 24 identities
+   unliftable: 0 of 273
+   Nu: 174 monomials, bidegree (n,j) = (20,12), 10 distinct j-powers, max coefficient 65 bits, scale 2
+   written CERT_boundary_sparse.json

@@ -1,0 +1,64 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+columns: OLD 148 SAL 1530 TX2 875 EXTW2 1523 EPS 1557 = 5633
+  cell 0/6929 7s
+  cell 100/6929 11s
+  cell 200/6929 16s
+  cell 300/6929 21s
+  cell 400/6929 27s
+  cell 500/6929 34s
+  cell 600/6929 41s
+  cell 700/6929 48s
+  cell 800/6929 55s
+  cell 900/6929 63s
+  cell 1000/6929 71s
+  cell 1100/6929 79s
+  cell 1200/6929 86s
+  cell 1300/6929 95s
+  cell 1400/6929 104s
+  cell 1500/6929 113s
+  cell 1600/6929 121s
+  cell 1700/6929 130s
+  cell 1800/6929 140s
+  cell 1900/6929 149s
+  cell 2000/6929 159s
+  cell 2100/6929 169s
+  cell 2200/6929 178s
+  cell 2300/6929 188s
+  cell 2400/6929 199s
+  cell 2500/6929 209s
+  cell 2600/6929 220s
+  cell 2700/6929 231s
+  cell 2800/6929 241s
+  cell 2900/6929 252s
+  cell 3000/6929 263s
+  cell 3100/6929 274s
+  cell 3200/6929 285s
+  cell 3300/6929 297s
+  cell 3400/6929 308s
+  cell 3500/6929 319s
+  cell 3600/6929 331s
+  cell 3700/6929 343s
+  cell 3800/6929 355s
+  cell 3900/6929 366s
+  cell 4000/6929 378s
+  cell 4100/6929 390s
+  cell 4200/6929 402s
+  cell 4300/6929 415s
+  cell 4400/6929 428s
+  cell 4500/6929 440s
+  cell 4600/6929 453s
+  cell 4700/6929 465s
+  cell 4800/6929 478s
+  cell 4900/6929 491s
+  cell 5000/6929 503s
+  cell 5100/6929 515s
+  cell 5200/6929 527s
+  cell 5300/6929 540s
+  cell 5400/6929 553s
+  cell 5500/6929 565s
