@@ -6,6 +6,22 @@
 Scripts: scratchpad `sporadic.py`, `t1b.py`, `t2_final.py`, `t2_diag.py`, `t2_twist.py`,
 `t3_fit.py`, `t3_fit2.py`, `t4_proofcheck.py`, `deep.py`.
 
+
+> **CORRECTION NOTE (2026-07-29, from the sporadics-paper referee pass —
+> `papers_out/sporadics/REFEREE.md`).** (1) "28 primes 5 ≤ p ≤ 103" is an
+> arithmetic slip: there are 25 such primes. (2) **Straub–Zudilin
+> arXiv:2112.09576 (IMRN 2023) was missing from this ledger**: their Thm 1.3
+> proves the ΣC(n,k)^d Apéry limits ζ(2)/(d+1) for ALL d, and the symmetric
+> closed form α_dσ + β_dδ² is the t²-coefficient of their deformation
+> (verified exactly s = 3..6, n ≤ 12) — so T3's novelty claims for A/s₁₀
+> weights are void; what remains ours is the finite-certificate proof for
+> every n ≥ 1 and the Theorem-LB consumption. (3) The ζ-vs-L(χ,w) dichotomy
+> of T3 is heuristic, not provable as stated (Catalan irrationality open).
+> (4) The T4 integrality corollary does NOT follow from Theorem LB as claimed
+> (single-digit only). Also: ASvSZ (Fields Inst. Commun. 54) tabulates the six
+> weight-2 limits + B's non-convergence; Shvets arXiv:2604.06239 proves the
+> Domb limit 7ζ(3)/24 — "computed here" claims downgraded accordingly.
+
 ---
 
 ## EXECUTIVE SUMMARY — the headline
