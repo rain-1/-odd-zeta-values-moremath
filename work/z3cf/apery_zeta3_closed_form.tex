@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\DeclareMathOperator{\Lop}{L}
+
+\title{A depth-one closed form for Ap\'ery's $\zeta(3)$ numerators}
+\author{}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove the closed form
+$b_n=\sum_{k=0}^n\binom{n}{k}^2\binom{n+k}{k}^2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)$
+for the second solution of Ap\'ery's $\zeta(3)$ recurrence, where
+$H^{(3)}_m=\sum_{j=1}^m j^{-3}$. The weight $2H^{(3)}_n-H^{(3)}_k$ is of
+harmonic depth one and is the unique such weight; it arises as the third
+Taylor coefficient of an explicit $\Gamma$-deformation of the Ap\'ery summand.
+The proof consists of two rational certificates and a two-term induction, and
+has been formalized in Lean~4.
+\end{abstract}
+
+\section{Statement}
+
+For $n,k\in\NN$ put
+\[
+A(n,k)=\binom{n}{k}^{2}\binom{n+k}{k}^{2},\qquad
+a_n=\sum_{k=0}^{n}A(n,k),\qquad
+H^{(3)}_m=\sum_{j=1}^{m}\frac{1}{j^{3}} .
+\]
+Let $\Lop$ denote Ap\'ery's difference operator,
+\[
+(\Lop u)_n=(n+1)^{3}u_{n+1}-(2n+1)(17n^{2}+17n+5)\,u_n+n^{3}u_{n-1},
+\]
+so that $\Lop a=0$, and let $(b_n)$ be the second solution:
+$\Lop b=0$, $b_0=0$, $b_1=6$; classically $b_n/a_n\to\zeta(3)$.
+
+\begin{theorem}\label{thm:main}
+For all $n\ge 0$,
+\[
+b_n=\sum_{k=0}^{n}\binom{n}{k}^{2}\binom{n+k}{k}^{2}
+\bigl(2H^{(3)}_{n}-H^{(3)}_{k}\bigr).
+\]
+\end{theorem}
+
+\begin{remark}\label{rem:unique}
+The representation is canonical. Writing
+$S_{L}(n)=\sum_k A(n,k)H^{(3)}_{L(n,k)}$ for a linear form $L$, the four
+sequences $S_n,S_k,S_{n-k},S_{n+k}$ are $\QQ$-linearly independent (a rank
+computation on $n\le 15$ witnesses this), and Theorem~\ref{thm:main} says
+$b=2S_n-S_k$. Thus the weight~$3$, the depth~$1$, and the coefficients
+$(2,-1)$ are invariants of $b_n$, not choices. By contrast, Ap\'ery's
+classical representation carries the weight
+$H^{(3)}_n+\sum_{m=1}^{k}\frac{(-1)^{m-1}}{2m^{3}\binom{n}{m}\binom{n+m}{m}}$,
+whose second term is not a harmonic form.
+\end{remark}
+
+\begin{remark}\label{rem:origin}
+The weight is produced, not guessed, by a deformation. With
+$\Pi_j(t)=\prod_{i=1}^{t}(1+j\varepsilon/i)$ set
+\[
+A_\varepsilon(n,k)
+= A(n,k)\,\Pi_1(n)^{6}\Pi_2(n)^{-6}\Pi_3(n)^{2}\,
+          \Pi_1(k)^{-3}\Pi_2(k)^{3}\Pi_3(k)^{-1}.
+\]
+The exponent vectors $u=(6,-6,2)$, $v=(-3,3,-1)$ are the unique (up to scale)
+solutions of $e_1=e_2=0$ for the power sums $e_m(c)=\sum_j c_j j^m$ over the
+three shift points $j=1,2,3$; consequently
+$\log(A_\varepsilon/A)=\varepsilon^{3}L_3+O(\varepsilon^{4})$ with
+$L_3=\tfrac13\bigl(e_3(u)H^{(3)}_n+e_3(v)H^{(3)}_k\bigr)
+    =2\bigl(2H^{(3)}_n-H^{(3)}_k\bigr)$,
+and the first two Taylor coefficients of $\sum_kA_\varepsilon$ vanish
+\emph{termwise}. Theorem~\ref{thm:main} is then the statement
+$b_n=\tfrac12[\varepsilon^{3}]\sum_kA_\varepsilon(n,k)$: the closed form is
+the primitive third-order coefficient of one deformed hypergeometric family.
+\end{remark}
+
+\section{The certificates}
+
+All identities below are between rational numbers; $n\ge1$ throughout.
+Define the polynomials
+\begin{align*}
+N(n,k)&=4k^{4}(2n+1)\bigl(2k^{2}-3k-4n(n+1)\bigr),\\
+P(n,k)&=k^{5}-2(n^{2}+n+1)k^{4}+(2n^{2}+2n+1)k^{3}
+        +2n^{2}(n+1)^{2}k^{2}\\
+      &\qquad-3n^{2}(n+1)^{2}k-4n^{3}(n+1)^{3},\\
+M(n,k)&=4k(2n+1)\,P(n,k),
+\end{align*}
+the binomial shell
+\[
+X(n,k)=\binom{n+1}{k}^{2}\binom{n+k-1}{k}^{2},
+\]
+and the two certificate sequences
+\[
+G(n,k)=\frac{N(n,k)\,X(n,k)}{n^{2}(n+1)^{2}},\qquad
+Y(n,k)=\frac{M(n,k)\,X(n,k)}{n^{4}(n+1)^{4}} .
+\]
+Note that $X(n,k)=0$ for $k\ge n+2$, and $k\mid N$, $k\mid M$, so
+\begin{equation}\label{eq:bdry}
+G(n,0)=Y(n,0)=0,\qquad G(n,k)=Y(n,k)=0\quad(k\ge n+2).
+\end{equation}
+
+\begin{lemma}\label{lem:P1}
+For $n\ge1$ and all $k\ge0$,
+\[
+(n+1)^{3}A(n+1,k)-(2n+1)(17n^{2}+17n+5)A(n,k)+n^{3}A(n-1,k)
+= G(n,k+1)-G(n,k).
+\]
+\end{lemma}
+
+\begin{lemma}\label{lem:P2}
+For $n\ge1$ and all $k\ge0$,
+\[
+\frac{G(n,k+1)}{(k+1)^{3}}+2A(n+1,k)-2A(n-1,k)
+= Y(n,k+1)-Y(n,k).
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemmas \ref{lem:P1} and \ref{lem:P2}]
+For $k\ge n+2$ every term vanishes, by \eqref{eq:bdry} and
+$A(n\pm1,k)=A(n,k)=0$. Let $0\le k\le n+1$, so $X(n,k)>0$. From
+$\binom{m}{k}\big/\binom{m-1}{k}=\frac{m}{m-k}$ and
+$\binom{m}{k+1}\big/\binom{m}{k}=\frac{m-k}{k+1}$ one obtains the four ratio
+identities
+\[
+\frac{A(n,k)}{X(n,k)}=\frac{(n{+}1{-}k)^{2}(n{+}k)^{2}}{n^{2}(n{+}1)^{2}},\quad
+\frac{A(n{+}1,k)}{X(n,k)}=\frac{(n{+}k)^{2}(n{+}k{+}1)^{2}}{n^{2}(n{+}1)^{2}},\quad
+\frac{A(n{-}1,k)}{X(n,k)}=\frac{(n{-}k)^{2}(n{+}1{-}k)^{2}}{n^{2}(n{+}1)^{2}},
+\]
+\[
+\frac{X(n,k+1)}{X(n,k)}=\frac{(n{+}1{-}k)^{2}(n{+}k)^{2}}{(k+1)^{4}}
+\]
+(valid as stated for $0\le k\le n+1$: whenever a numerator binomial
+vanishes, so does the corresponding polynomial factor). Substituting these
+and multiplying by $n^{2}(n+1)^{2}(k+1)^{4}/X(n,k)$
+(resp.\ $n^{4}(n+1)^{4}(k+1)^{4}/X(n,k)$), the two lemmas become the
+polynomial identities in $\ZZ[n,k]$
+\begin{multline}\label{eq:poly1}
+(k{+}1)^{4}\Bigl[(n{+}1)^{3}(n{+}k)^{2}(n{+}k{+}1)^{2}
+-(2n{+}1)(17n^{2}{+}17n{+}5)(n{+}1{-}k)^{2}(n{+}k)^{2}\\
++n^{3}(n{-}k)^{2}(n{+}1{-}k)^{2}\Bigr]
+= N(n,k{+}1)(n{+}1{-}k)^{2}(n{+}k)^{2}-N(n,k)(k{+}1)^{4},
+\end{multline}
+\begin{multline}\label{eq:poly2}
+n^{2}(n{+}1)^{2}\Bigl[\widetilde N(n,k)(n{+}1{-}k)^{2}(n{+}k)^{2}
++2(k{+}1)^{4}\bigl((n{+}k)^{2}(n{+}k{+}1)^{2}-(n{-}k)^{2}(n{+}1{-}k)^{2}\bigr)\Bigr]\\
+= M(n,k{+}1)(n{+}1{-}k)^{2}(n{+}k)^{2}-M(n,k)(k{+}1)^{4},
+\end{multline}
+where $\widetilde N(n,k)=N(n,k+1)/(k+1)^{3}
+=4(k{+}1)(2n{+}1)\bigl(2(k{+}1)^{2}-3(k{+}1)-4n(n{+}1)\bigr)$.
+Both are verified by expansion.
+\end{proof}
+
+\section{Proof of the theorem}
+
+Write $W(n,k)=2H^{(3)}_n-H^{(3)}_k$ and
+$c_n=\sum_{k=0}^{n}A(n,k)W(n,k)$; since $A(n,k)=0$ for $k>n$, all sums below
+may be taken over $0\le k\le n+1$.
+
+\begin{proposition}\label{prop:rec}
+$\Lop c=0$ for $n\ge1$.
+\end{proposition}
+
+\begin{proof}
+From $W(n\pm1,k)-W(n,k)=\pm2/(n{+}\tfrac12\pm\tfrac12)^{3}$, i.e.
+$W(n{+}1,k)=W(n,k)+2(n{+}1)^{-3}$ and $W(n{-}1,k)=W(n,k)-2n^{-3}$,
+\[
+(\Lop c)_n=\sum_{k=0}^{n+1}
+\Bigl[\bigl(\Lop A(\,\cdot\,,k)\bigr)_n\,W(n,k)
++2A(n{+}1,k)-2A(n{-}1,k)\Bigr].
+\]
+By Lemma~\ref{lem:P1} and summation by parts --- using
+$W(n,k)-W(n,k+1)=(k+1)^{-3}$ and the boundary values \eqref{eq:bdry} ---
+\[
+\sum_{k=0}^{n+1}\bigl(G(n,k{+}1)-G(n,k)\bigr)W(n,k)
+=\sum_{k=0}^{n+1}\frac{G(n,k{+}1)}{(k+1)^{3}} .
+\]
+Hence, by Lemma~\ref{lem:P2} and telescoping,
+\[
+(\Lop c)_n=\sum_{k=0}^{n+1}\bigl(Y(n,k{+}1)-Y(n,k)\bigr)
+=Y(n,n{+}2)-Y(n,0)=0. \qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+$c_0=0=b_0$ and $c_1=A(1,0)\cdot2+A(1,1)\cdot1=2+4=6=b_1$. Since
+$(n+1)^{3}\neq0$, the relation $\Lop u=0$ determines $u_{n+1}$ from
+$(u_{n-1},u_n)$; by Proposition~\ref{prop:rec} and induction, $c_n=b_n$ for
+all $n$.
+\end{proof}
+
+\begin{remark}
+Only the telescoped value $Y(n,n+2)-Y(n,0)=0$ is used, but the certificate
+$Y$ encodes finer information: its rational continuation satisfies
+$Y(n,n+1)=-2\binom{2n+2}{n+1}^{2}$, from
+$M(n,n{+}1)=-8(2n{+}1)^{2}n^{2}(n{+}1)^{4}$, which is precisely the
+$k=n{+}1$ term of $2a_{n+1}$ --- the summand the range $k\le n$ cannot see.
+\end{remark}
+
+\begin{remark}
+The proof is a template. Whenever a sequence $B_n=\sum_kS(n,k)w(n,k)$ has a
+summand $S$ with a first-order (Zeilberger) certificate for its own row
+$\sum_kS$, and a weight $w$ whose letters have arguments among $\{n,k\}$
+only, the shifts $w(n\pm1,k)-w(n,k)$, $w(n,k+1)-w(n,k)$ are explicit
+rationals, the operator splits as above, and the recurrence for $B$ reduces
+to a single Gosper problem. The Franel case
+($S=\binom{n}{k}^{3}$, $w=\tfrac14H^{(2)}_k+\tfrac34H_k(H_k-H_{n-k})$) and
+its $\sum\binom{n}{k}^{4}$ analogue are within immediate reach of the same
+argument.
+\end{remark}
+
+\begin{remark}
+A complete, sorry-free Lean~4 formalization of Theorem~\ref{thm:main}
+(definitions over $\QQ$, the two certificate identities, and the induction)
+accompanies this note in the \texttt{ZetaLucas} library, file
+\texttt{AperyClosedForm.lean}. The polynomial identities
+\eqref{eq:poly1}--\eqref{eq:poly2} were additionally verified cellwise in
+exact rational arithmetic for $n\le14$, all $k\le n+3$.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{Apery} R.~Ap\'ery, \emph{Irrationalit\'e de $\zeta(2)$ et
+$\zeta(3)$}, Ast\'erisque \textbf{61} (1979), 11--13.
+\bibitem{vdP} A.~van der Poorten, \emph{A proof that Euler missed\ldots\
+Ap\'ery's proof of the irrationality of $\zeta(3)$}, Math.\ Intelligencer
+\textbf{1} (1979), 195--203.
+\bibitem{Zeilberger} D.~Zeilberger, \emph{The method of creative
+telescoping}, J.~Symbolic Comput.\ \textbf{11} (1991), 195--204.
+\end{thebibliography}
+
+\end{document}
