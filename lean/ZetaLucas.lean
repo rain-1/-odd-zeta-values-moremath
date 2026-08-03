@@ -13,3 +13,7 @@ import ZetaLucas.Reflect
 import ZetaLucas.BZQRow
 import ZetaLucas.BZStar
 import ZetaLucas.Defect
+import ZetaLucas.FranelClosedForm
+import ZetaLucas.Z2Shell
+import ZetaLucas.Z2Minimal
+import ZetaLucas.CatalanEndpoint

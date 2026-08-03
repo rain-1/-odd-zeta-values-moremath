@@ -1,0 +1,14 @@
+==========================================================================
+p=5   a=1   Atil = 1 0 2 0 2 4 3 0   (v=1, per-level agreement [3, 6, 9, 12])
+      blocks i<=0 : first discrepancy at v_p = 3   (theory: >= 2)
+      blocks i<=1 : first discrepancy at v_p = 6   (theory: >= 4)
+p=5   a=2   Atil = 3 4 2 4 4 3 3 4   (v=0, per-level agreement [3, 6, 9, 12])
+      blocks i<=0 : first discrepancy at v_p = 4   (theory: >= 2)
+      blocks i<=1 : first discrepancy at v_p = 7   (theory: >= 4)
+==========================================================================
+p=7   a=1   Atil = 5 0 0 0 5 3 3 0   (v=0, per-level agreement [4, 7, 10])
+      blocks i<=0 : first discrepancy at v_p = 3   (theory: >= 2)
+      blocks i<=1 : first discrepancy at v_p = 6   (theory: >= 4)
+p=7   a=2   Atil = 3 3 1 4 0 5 1 5   (v=0, per-level agreement [3, 6, 9])
+      blocks i<=0 : first discrepancy at v_p = 3   (theory: >= 2)
+      blocks i<=1 : first discrepancy at v_p = 6   (theory: >= 4)

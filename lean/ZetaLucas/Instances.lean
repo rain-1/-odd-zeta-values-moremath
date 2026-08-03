@@ -18,8 +18,9 @@
   What remains *not* formalized is the equivalence with the classical **double-sum** form
   `Σ_k C(n,k)²C(n+k,k)²(H⁽³⁾_n + Σ_{m≤k}(−1)^{m−1}/(2m³C(n,m)C(n+m,m)))`, which is
   **PROVED ON PAPER** in `work/MINIMAL_FORM_PROOF.md` §5 (Step D, CERT-3…CERT-6).
-* That `bFranel` is the second solution of the Franel recurrence is **[VERIFIED numerically
-  upstream, NOT formalized]**.
+* That `bFranel` is the second solution of the Franel recurrence is formalized downstream in
+  `ZetaLucas.FranelClosedForm` (`bFranel_eq_franelB`), together with the symmetric harmonic
+  formula and the recurrence-level Lucas theorem `franelB_lucas`.
 The `#eval` blocks at the end pin both normalisations against the literature values.
 -/
 import ZetaLucas.TheoremLB

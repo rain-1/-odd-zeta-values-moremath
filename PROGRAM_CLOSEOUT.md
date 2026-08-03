@@ -9,6 +9,16 @@ Labels (the program's own discipline):
 computation over a range, *never* treated as proof · **[EXCLUDED]** proved
 negative · **[OPEN]** open, with its sharpest known formulation.
 
+## Addendum — August 2, 2026
+
+* **Franel and s10 companion closed forms [LEAN].** The symmetric harmonic formulas for the
+  canonical recurrence solutions are now proved with explicit all-boundary telescoping
+  certificates in `lean/ZetaLucas/FranelClosedForm.lean`. The same file proves that the old
+  Franel sum used by `bFranel_lucas` is exactly the recurrence-defined companion and adds the
+  missing s10 instance of `theorem_LB`. Consequently both canonical solutions satisfy their
+  weight-two Lucas laws (Franel for odd primes; s10 for primes not dividing 10). Proof and
+  provenance ledger: `work/FRANEL_S10_LEAN.md`.
+
 The two repositories:
 
 | repo | campaign | contents |

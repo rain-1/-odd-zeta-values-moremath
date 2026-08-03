@@ -1,0 +1,40 @@
+==============================================================================
+p = 11,  K = 12 certified digits
+   zeta_p(3) = 5 4 1 0 5 8 5 2 6 8 3 1
+  -- Theorem (closed form, beta packaging):  c_p(A,B) = E_p(A,B) beta_p(B,A-B)
+     c_p( 2, 1)  v=0   direct 2 0 0 2 4 4   MATCH all 12
+     c_p( 3, 1)  v=0   direct 3 0 0 9 7 2   MATCH all 12
+     c_p( 3, 2)  v=0   direct 3 0 0 9 7 2   MATCH all 12
+     c_p( 4, 1)  v=0   direct 4 0 0 2 6 1   MATCH all 12
+     c_p( 5, 2)  v=0   direct 10 0 0 7 5 5   MATCH all 12
+     c_p( 7, 3)  v=0   direct 2 3 0 7 4 4   MATCH all 12
+     c_p(11, 1)  v=1   direct 1 0 0 0 5 10   MATCH all 12
+     c_p(11, 2)  v=1   direct 5 0 0 0 1 6   MATCH all 12
+     c_p(12, 1)  v=0   direct 1 1 0 0 6 7   MATCH all 12
+     c_p(12,11)  v=0   direct 1 1 0 0 6 7   MATCH all 12
+     c_p(22,11)  v=0   direct 2 0 0 2 4 4   MATCH all 12
+   closed form, 11 pairs                                      OK
+  -- Relations among Kazandzidis limits (verified on the direct limits)
+   symmetry  c_p(A,B) = c_p(A,A-B)   [66 cells]               OK []
+   p-homogeneity  c_p(pA,pB) = c_p(A,B)   [21 cells]          OK []
+   trinomial revision   [120 cells]                           OK []
+==============================================================================
+p = 13,  K = 12 certified digits
+   zeta_p(3) = 6 6 5 2 11 12 5 1 5 2 7 5
+  -- Theorem (closed form, beta packaging):  c_p(A,B) = E_p(A,B) beta_p(B,A-B)
+     c_p( 2, 1)  v=0   direct 2 0 0 2 0 2   MATCH all 12
+     c_p( 3, 1)  v=0   direct 3 0 0 9 0 10   MATCH all 12
+     c_p( 3, 2)  v=0   direct 3 0 0 9 0 10   MATCH all 12
+     c_p( 4, 1)  v=0   direct 4 0 0 11 1 9   MATCH all 12
+     c_p( 5, 2)  v=0   direct 10 0 0 7 11 0   MATCH all 12
+     c_p( 7, 3)  v=0   direct 9 2 0 1 9 2   MATCH all 12
+     c_p(13, 1)  v=1   direct 1 0 0 0 6 0   MATCH all 12
+     c_p(13, 2)  v=1   direct 6 0 0 0 1 5   MATCH all 12
+     c_p(14, 1)  v=0   direct 1 1 0 0 7 7   MATCH all 12
+     c_p(14,13)  v=0   direct 1 1 0 0 7 7   MATCH all 12
+     c_p(26,13)  v=0   direct 2 0 0 2 0 2   MATCH all 12
+   closed form, 11 pairs                                      OK
+  -- Relations among Kazandzidis limits (verified on the direct limits)
+   symmetry  c_p(A,B) = c_p(A,A-B)   [66 cells]               OK []
+   p-homogeneity  c_p(pA,pB) = c_p(A,B)   [21 cells]          OK []
+   trinomial revision   [120 cells]                           OK []

@@ -1,0 +1,20 @@
+/* Machine-readable Taylor data for the pure-v deformation. */
+display2d:false$
+linel:1000000$
+load("zeilberger")$
+Xf(m,t):=m!*(-t)!/(m-t)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S*Xf(k,5*v/3)/Xf(k,14*v/3)*Xf(n-k,v)*Xf(2*k,2*v)*Xf(n,2*v)/Xf(n,v)^2$
+z:first(parGosper(F,k,n,4))$
+cert:first(z)$ C:second(z)$
+rn:shiftQuo(F,n)$ rk:shiftQuo(F,k)$
+lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1)$
+rhs:subst(k=k+1,cert)*rk-cert$
+print("V_CHECK",ratsimp(lhs-rhs))$
+print("V_C0",makelist(ratsimp(subst(v=0,C[i])),i,1,length(C)))$
+print("V_C1",makelist(ratsimp(subst(v=0,diff(C[i],v))),i,1,length(C)))$
+print("V_C2",makelist(ratsimp(subst(v=0,diff(C[i],v,2))),i,1,length(C)))$
+print("V_R0",ratsimp(subst(v=0,cert)))$
+print("V_R1",ratsimp(subst(v=0,diff(cert,v))))$
+print("V_R2",ratsimp(subst(v=0,diff(cert,v,2)))$
+quit();

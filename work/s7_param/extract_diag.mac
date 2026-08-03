@@ -1,0 +1,20 @@
+/* Machine-readable Taylor data for the diagonal u=v=t deformation. */
+display2d:false$
+linel:1000000$
+load("zeilberger")$
+Xf(m,t):=m!*(-t)!/(m-t)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S*Xf(n-k,-2*t)*Xf(2*k,2*t)*Xf(n,4*t)/Xf(n,2*t)^2$
+z:first(parGosper(F,k,n,3))$
+cert:first(z)$ C:second(z)$
+rn:shiftQuo(F,n)$ rk:shiftQuo(F,k)$
+lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1)$
+rhs:subst(k=k+1,cert)*rk-cert$
+print("D_CHECK",ratsimp(lhs-rhs))$
+print("D_C0",makelist(ratsimp(subst(t=0,C[i])),i,1,length(C)))$
+print("D_C1",makelist(ratsimp(subst(t=0,diff(C[i],t))),i,1,length(C)))$
+print("D_C2",makelist(ratsimp(subst(t=0,diff(C[i],t,2))),i,1,length(C)))$
+print("D_R0",ratsimp(subst(t=0,cert)))$
+print("D_R1",ratsimp(subst(t=0,diff(cert,t))))$
+print("D_R2",ratsimp(subst(t=0,diff(cert,t,2)))$
+quit();

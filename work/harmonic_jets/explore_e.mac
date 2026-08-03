@@ -1,0 +1,53 @@
+/* Explore parity-split telescopers for the Catalan harmonic jet. */
+display2d:false$
+linel:1000000$
+load("zeilberger")$
+/* Work around Maxima 5.46's recursive `dependent' bug on fractional
+   factorials (the built-in freeof predicate handles them correctly). */
+dependent(expr,var):=not freeof(var,expr)$
+
+Xf(q,t):=q!*(-t)!/(q-t)!$
+/* Parameter-only gamma factors are suppressed: they do not change a
+   telescoper in m, and removing them avoids a Maxima 5.46 dependency bug. */
+P0(j,t):=(j-3/4)!/(j+(1-t)/4-1)!
+         *(j+(3-t)/4-1)!/(j-1/4)!$
+P(q,t):=block([j:floor(q/2)],
+  if evenp(q) then P0(j,t)
+  else P0(j,t)*(4*j+1)/(4*j+1-t))$
+
+/* n=2m+eps, k=2j+del; expressions are installed explicitly below
+   because parGosper must see rational shift quotients. */
+P00(j,t):=P0(j,t)$
+P01(j,t):=P0(j,t)*(4*j+1)/(4*j+1-t)$
+
+cell(nn,kk):=nn!*(2*kk)!*(2*(nn-kk))!
+             /(kk!^3*(nn-kk)!^3)$
+base(e,d):=block([nn:2*m+e,kk:2*j+d],cell(nn,kk))$
+pp(d,jj,t):=if d=0 then P00(jj,t) else P01(jj,t)$
+
+/* q=n-k has parity e-d modulo two and quotient m-j plus the indicated shift. */
+qlift(e,d):=if e-d=0 then [0,m-j]
+             elseif e-d=1 then [1,m-j]
+             else [1,m-j-1]$
+
+Fv(e,d):=block([q:qlift(e,d)],
+  base(e,d)*pp(d,j,v)/pp(first(q),second(q),v))$
+
+Fu(e,d):=block([nn:2*m+e,kk:2*j+d],
+  base(e,d)*Xf(kk,3*u/4)/Xf(2*kk,u/2))$
+
+Fd(e,d):=block([q:qlift(e,d),kk:2*j+d],
+  base(e,d)*Xf(kk,3*t/4)/Xf(2*kk,t/2)
+  *pp(d,j,3*t/2)/(pp(d,j,t/2)*pp(first(q),second(q),t)))$
+
+tryone(tag,F,ord):=block([z],
+  print("START",tag,"ORDER",ord),
+  z:parGosper(F,j,m,ord),
+  if z=[] then print("NONE",tag,ord)
+  else print("FOUND",tag,ord,"LEN",length(second(first(z)))) )$
+
+/* Start with one representative of each deformation. */
+/* U00 at order 3 triggers a known ptptquotient bug in Maxima 5.46. */
+tryone("V00",Fv(0,0),4)$
+/* Higher diagonal searches are run separately because certificates grow quickly. */
+quit();

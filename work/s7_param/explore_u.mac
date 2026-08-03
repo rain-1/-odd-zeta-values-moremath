@@ -1,0 +1,22 @@
+/* One-parameter deformation with first derivative 3(H_k-H_(n-k)). */
+display2d:false$
+load("zeilberger")$
+Xf(m,t):=m!*(-t)!/(m-t)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S*Xf(k,3*u)*Xf(n-k,-3*u)*Xf(n,2*u)/Xf(n,u)^2$
+for ord:2 thru 5 do (
+ print("START order",ord),
+ zz:parGosper(F,k,n,ord),
+ print("COUNT order",ord,"=",length(zz)),
+ if length(zz)>0 then (
+  z:first(zz),cert:first(z),C:second(z),
+  rn:shiftQuo(F,n),rk:shiftQuo(F,k),
+  lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1),
+  rhs:subst(k=k+1,cert)*rk-cert,
+  print("CHECK =",ratsimp(lhs-rhs)),
+  print("FOUND ORDER =",ord),
+  print("C0 =",makelist(factor(subst(u=0,C[i])),i,1,length(C))),
+  print("Cu =",makelist(factor(subst(u=0,diff(C[i],u))),i,1,length(C))),
+  quit()
+ ))$
+quit();

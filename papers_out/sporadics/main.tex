@@ -91,7 +91,10 @@ additional clause. The clause is automatic for tame weights, fails for $\alpha$
 $\mathbf E$, the only known instance with $\chi\ne1$, the defect is independent of the
 choice of decomposition. Four instances are theorems ($\gamma$, $\mathbf A$, $\mathbf D$,
 $s_{10}$), one ($s_7$) is one bounded local lemma away, three are blocked as above, and
-seven remain conjectural. On the closed-form side we record a proof, formalised in Lean~4,
+seven remain conjectural. Separately, a step-three endpoint transform proves the previously computational
+denominator bound $d_n^2B(n)\in\Z$ for Zagier's $\mathbf B$, shows the exponent two is
+optimal, and classifies its full dilation family by the exact condition $3\mid h$.
+On the closed-form side we record a proof, formalised in Lean~4,
 of $b_n=\sum_k\bin nk^2\bin{n+k}k^2(2\HH3n-\HH3k)$ for Ap\'ery's $\zeta(3)$ numerators;
 finite-certificate proofs, valid for every $n$, of the symmetric closed forms for the Franel
 numbers and for $\sum_k\bin nk^4$ --- these sums are the $t^2$-coefficients of
@@ -578,10 +581,84 @@ $\KK r\chi{\lfloor x/p\rfloor}$ are no longer $p$-integral. Even granting
 Conjecture~\ref{conj:master}, passing to the ratio form
 $p^{w}B(n)/A(n)\equiv\chi(p)B(q)/A(q)$ requires $A(n)$ and $A(q)$ to be $p$-units, which is
 a separate matter (see \cite{MalikStraub} for the primes that never divide a given
-sporadic sequence). We therefore record Observation~\ref{obs:integrality} as computed, and
+sporadic sequence). Apart from the $\mathbf B$ case proved in
+Theorem~\ref{thm:Bden} below, we therefore record
+Observation~\ref{obs:integrality} as computed, and
 in \S\ref{sec:BV} treat the implication from \eqref{eq:master} to mirror-map integrality as
 a heuristic and not as a proof.
 \end{remark}
+
+\begin{theorem}[sharp denominator for $\mathbf B$]\label{thm:Bden}
+For $h\in\Z$, let $B_h(0)=0$, $B_h(1)=1$, and
+\[
+ (n+1)^2B_h(n+1)
+ =h(3n^2+3n+1)B_h(n)-3h^2n^2B_h(n-1).
+\]
+Then
+\[
+ \bigl(\forall n\ge0,\ d_n^2B_h(n)\in\Z\bigr)
+ \quad\Longleftrightarrow\quad 3\mid h.
+\]
+At $h=3$ this is Zagier's sporadic pair $\mathbf B$.  Hence the $\mathbf B$ row of
+Observation~\ref{obs:integrality} is a theorem, and its exponent $2$ is optimal.
+\end{theorem}
+
+\begin{proof}
+Set
+\[
+ T_h(n)=\sum_{k=0}^n\binom nk(-h)^{n-k}B_h(k),
+ \qquad T_h(m)=0\quad(m\le0).
+\]
+Conjugating the recurrence by this binomial transform gives the step-three endpoint
+recurrence
+\[
+ n^2T_h(n)+h^3(n-2)(n-1)T_h(n-3)=(-h)^{n-1}.
+\]
+Indeed, at the generating-function level the original operator
+\[
+ \theta^2-hz(3\theta^2+3\theta+1)+3h^2z^2(\theta+1)^2
+\]
+is conjugated to
+\[
+ \theta^2+h^3z^3(\theta+1)(\theta+2).
+\]
+Iteration yields
+\[
+ (-1)^{n-1}T_h(n)=h^{n-1}
+ \sum_{\substack{0\le j<n\\n-j\equiv1\ (3)}}
+ \frac{\prod_{t=0}^{r-1}(j+2+3t)(j+3+3t)}
+      {\prod_{t=0}^{r}(j+1+3t)^2},
+ \qquad r=\frac{n-j-1}{3}.
+\tag{B-end}\label{eq:Bend}
+\]
+All propagation signs agree because $j+r\equiv n-1\pmod2$.
+
+Let $R(n,j)$ denote the quotient in \eqref{eq:Bend}.  If $p\ne3$, counting multiples of
+each $p^a$ in the three arithmetic progressions shows
+\[
+ v_p(R(n,j))\ge-2v_p(d_n):
+\]
+the doubled denominator progression has length $r+1$, the two numerator progressions
+have length $r$, and the deficit for each $p^a$ is at most $2$.  For $p=3$, choose a
+factor of maximal $3$-adic valuation in $D=\prod_{t=0}^r(j+1+3t)$.  The difference of any
+other factor from it is $3$ times an index difference, whence
+\[
+ v_3(D)\le v_3(d_n)+r+v_3(r!),
+ \qquad
+ v_3(R(n,j))\ge-2v_3(d_n)-2r-2v_3(r!).
+\]
+If $3\mid h$, then $n-1=j+3r\ge3r$ and $v_3(r!)\le r/2$, so every summand of
+$d_n^2T_h(n)$ in \eqref{eq:Bend} is integral.  Binomial inversion and $d_k\mid d_n$
+transfer the result to $B_h(n)$.
+
+Conversely, direct recurrence propagation gives
+\[
+ B_h(6)=-\frac{39521h^5}{32400},\qquad
+ d_6^2B_h(6)=-\frac{39521h^5}{9}.
+\]
+Since $3\nmid39521$, integrality at $n=6$ forces $3\mid h$.  Finally
+$B_3(2)=21/4$, so $d_2B_3(2)=21/2\notin\Z$; the exponent $2$ is sharp.
+\end{proof}
 
 %======================================================================
 \section{Status of the fifteen}\label{sec:status}

@@ -9,9 +9,9 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \DeclareMathOperator{\Lop}{L}
 
-\title{A closed form for the Ap\'ery $\zeta(2)$ companion,\\ and a reduction for its minimal form}
+\title{Two closed forms for the Ap\'ery $\zeta(2)$ companion}
 \author{}
-\date{July 2026}
+\date{August 2026}
 \begin{document}
 \maketitle
 
@@ -22,9 +22,11 @@ $5B_n=\sum_k S(n,k)\bigl(2\sum_{m\le n}\frac{(-1)^{m-1}}{m^2}
 +\sum_{m\le k}\frac{(-1)^{n+m-1}}{m^2\binom nm\binom{n+m}m}\bigr)$
 by an explicit certificate chain whose last step degenerates, remarkably, to the
 identity $W(n,k)=3-\frac{3(n+1)}{n+1-k}$ together with the binomial theorem.
-The depth-one harmonic (``minimal'') form of the companion is shown to be
-equivalent to a single inhomogeneous telescoping identity, which we leave open
-with a precise record of the certificate classes that provably cannot settle it.
+We also prove the depth-one harmonic (``minimal'') form by lifting its harmonic
+letters to a two-parameter proper hypergeometric sum.  An order-three creative
+telescope and an exact Ore-operator elimination reduce its mixed derivative to
+Ap\'ery's order-two recurrence.  Every cell, boundary term, factorization, and
+right remainder is checked in exact rational arithmetic.
 \end{abstract}
 
 \section{Statement}
@@ -144,11 +146,9 @@ $(\Lop v)_n=-3-2(n+1)^{2}+2(n+1)^{2}+3=0$ for $n\ge1$.
 
 With $v_0=0$, $v_1=5=5B_1$ and $(n+1)^{2}\neq0$, induction gives $v_n=5B_n$. \qed
 
-\section{The minimal form: an exact reduction}
+\section{The minimal form}
 
-Let $w_{\min}=\tfrac15\bigl[H^{(2)}_n+H_k(2H_k-H_{n-k}-H_n)\bigr]$, the
-depth-one harmonic weight fitted in the program's ledger, with
-$\sum_kS\,w_{\min}=B_n$ verified for $n\le25$.
+Let $w_{\min}=\tfrac15\bigl[H^{(2)}_n+H_k(2H_k-H_{n-k}-H_n)\bigr]$.
 
 \begin{proposition}
 $\sum_kS(n,k)w_{\min}(n,k)=B_n$ for all $n$ \emph{if and only if}
@@ -165,22 +165,73 @@ $\Lop(\sum_kSw_{\min})=\tfrac15[(a_{n+1}+a_{n-1})+(\Lop A)_n]$; initial values
 $A_0=0$, $A_1=2$ match. \qed
 \end{proof}
 
-Identity \eqref{eq:L2} is true (verified exactly for $n\le25$) and open. Three
-certificate classes provably fail to establish it: the decoupled Gosper
-template (a sharp degree obstruction), one-shot coupled telescopes over the
-harmonic letter algebra on $\{k,n-k,n,n+k\}$ in two generous
-denominator/degree regimes, and the same augmented by a proved residue-null
-library at levels $n-1,n,n+1$. The obstruction has a structural face: the
-telescoping image of the summand's shell never leaves that shell, while the
-alternating shell $(-1)^{n+k}\binom nk$ --- exactly what powers the proof of
-Theorem~\ref{thm:cl} --- can enter only through a tail in the weight, and
-$w_{\min}$ has none.
+\begin{theorem}\label{thm:minimal}
+For every $n\geq0$,
+\[
+ B_n=\frac15\sum_{k=0}^nS(n,k)
+ \left[H_n^{(2)}+H_k(2H_k-H_{n-k}-H_n)\right].
+\]
+\end{theorem}
+
+\begin{proof}
+Put $X_m(t)=m!/(1-t)_m$ and
+\[
+ \Phi_n(u,v)=\sum_{k=0}^nS(n,k)X_k(u)
+ \frac{X_k(v)^2}{X_{n-k}(v)X_n(v)}.
+\]
+At $(u,v)=(0,0)$ its coefficients $1,u,v,uv$ are respectively
+$a_n,U_n,V_n,A_n$, where
+\[
+ U_n=\sum_kS(n,k)H_k,qquad
+ V_n=\sum_kS(n,k)(2H_k-H_{n-k}-H_n).
+\]
+Let $E$ shift $n$ forward and set
+\[
+ \mathcal L=-(n+1)^2-(11n^2+33n+25)E+(n+2)^2E^2;
+\]
+thus $(\mathcal Lu)_n=(\Lop u)_{n+1}$.  Direct creative telescoping of the
+proper hypergeometric summand produces an order-three operator
+$\mathcal C(u,v)$ and a rational certificate.  Its denominator in $k$ is
+$(n-k+1)^3(n-k+2)^3(n-k+3)^3$; the two endpoints and all ten top cells vanish
+at the four Taylor coefficients above.
+
+At the origin exact right factorizations give
+\[
+ \mathcal C(0,0)=Q_0\mathcal L,qquad
+ \partial_v\mathcal C(0,0)=Q_v\mathcal L,
+\]
+where
+\[
+ Q_0=-2(2n+3)(29n+69)+(n+3)(29n+40)E
+\]
+and
+\[
+ Q_v=\frac{204n^3+1221n^2+2320n+1383}{(n+1)(n+3)}
+ -\frac{138n^2+523n+468}{n+2}E.
+\]
+The $v$-derivative therefore gives $Q_0\mathcal LV=0$.  Since
+$V_0=V_1=V_2=0$ and its leading coefficient never vanishes, $V=0$.
+
+Write $C_u=\partial_u\mathcal C(0,0)$ and
+$C_{uv}=\partial_u\partial_v\mathcal C(0,0)$.  Exact first-order operators
+$X,Y$ satisfy $XQ_v=YQ_0$, and exact right division yields
+\[
+ YC_u-XC_{uv}-(XQ_0)J=H\mathcal L,qquad J=-(1+E^2),
+\]
+with zero remainder.  Differentiating the recurrence in $u$ and in $u,v$,
+then eliminating $U$, gives
+$XQ_0(\mathcal LA-Ja)=0$.  The leading coefficient of $XQ_0$ is
+$(n+4)(29n+69)$; the first two values of $\mathcal LA-Ja$ vanish.  Hence
+$\mathcal LA=Ja$, which is \eqref{eq:L2} after shifting.  The proposition now
+proves the formula.
+\end{proof}
 
 \begin{remark}
-All certificates and every step above were verified in exact rational
-arithmetic (all cells, $n\le25$--$30$), and Steps 1 and 4 additionally as
-symbolic rational identities. Scripts: \texttt{work/z2cf/} in the program
-repository.
+The complete independently rerunnable audit is
+\texttt{work/z2cf/parameter\_proof.mac}.  It prints the generic certificate
+check, the four boundary cancellations, both factorizations, the common-left-
+multiple identity, the zero Ore remainder, the nonzero leading coefficient,
+and the two initial values.  No floating-point computation is used.
 \end{remark}
 
 \end{document}

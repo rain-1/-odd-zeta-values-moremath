@@ -1,0 +1,432 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\vp}{v_p}
+
+\title{A Sharp Endpoint-Denominator Theorem\\
+for Residue-Class Recurrences}
+\author{}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We determine the exact uniform denominator of a family of inhomogeneous
+recurrences which decouple into residue classes modulo an arbitrary step
+$q$.  For endpoint weight $w$, the residual modulus is
+\[
+ M(q,w)=\prod_{p\mid q}p^{\left\lceil
+  \frac{w}{q}\left(v_p(q)+\frac1{p-1}\right)\right\rceil}.
+\]
+The proof combines an elementary arithmetic-progression product bound with a
+unique-lowest-valuation endpoint argument.  Binomial inversion transports the
+classification to the original companion basis.  The parity-square theorem,
+whose sharp modulus is $4$, is the case $(q,w)=(2,2)$.  A mixed step-three
+specialization proves $L_n^2$-integrality, with optimal exponent, for the
+second solution of Zagier's sporadic sequence $\mathbf B$; more generally its
+parameter family is integral in this sense exactly when $3$ divides the
+parameter.
+\end{abstract}
+
+\section{The endpoint sequence}
+
+Write
+\[
+ L_n=\operatorname{lcm}(1,2,\ldots,n),\qquad L_0=1.
+\]
+Fix integers $q\ge2$, $w\ge1$, and $b\in\Z$.  For every prime $p\mid q$ put
+\begin{equation}\label{eq:mu}
+ \mu_p(q,w)=
+ \left\lceil\frac{w}{q}
+ \left(v_p(q)+\frac1{p-1}\right)\right\rceil,
+ \qquad
+ M(q,w)=\prod_{p\mid q}p^{\mu_p(q,w)}.
+\end{equation}
+Let $T_m=0$ for $m\le0$, and define $T_n\in\Q$ for $n\ge1$ by
+\begin{equation}\label{eq:rec}
+ n^wT_n=b^q(n-q+1)^wT_{n-q}+(-b)^{n-1}.
+\end{equation}
+Here $(-b)^0=1$, including when $b=0$.
+Equivalently, for $T(z)=\sum_{n\ge0}T_nz^n$ and
+$\theta=z\,d/dz$, recurrence \eqref{eq:rec} is the endpoint operator equation
+\begin{equation}\label{eq:operator}
+ \{\theta^w-b^qz^q(\theta+1)^w\}T(z)=\frac{z}{1+bz}.
+\end{equation}
+
+For $0\le j<n$ such that $n-j\equiv1\pmod q$, set
+\begin{equation}\label{eq:root}
+ Q_q(n,j)=
+ \frac{\prod_{t=0}^{r-1}(j+2+tq)}
+      {\prod_{t=0}^{r}(j+1+tq)},
+ \qquad r=\frac{n-j-1}{q}.
+\end{equation}
+An empty numerator product is $1$.
+
+\begin{theorem}[sharp step-$q$ endpoint denominator]\label{thm:main}
+For every $n\ge1$,
+\begin{equation}\label{eq:finite}
+ T_n=b^{n-1}
+ \sum_{\substack{0\le j<n\\n-j\equiv1\pmod q}}
+ (-1)^jQ_q(n,j)^w.
+\end{equation}
+Moreover, the following are equivalent:
+\begin{enumerate}
+ \item $M(q,w)\mid b$;
+ \item $L_n^wb^{n-1}Q_q(n,j)^w\in\Z$ for every admissible $(n,j)$;
+ \item $L_n^wT_n\in\Z$ for every $n\ge0$.
+\end{enumerate}
+\end{theorem}
+
+The modulus in \eqref{eq:mu} is therefore both termwise sufficient and
+globally necessary.  In particular, summation cannot lower it.
+
+\section{The finite endpoint expansion}
+
+\begin{proof}[Proof of \eqref{eq:finite}]
+The forcing at index $j+1$ contributes $(-b)^j/(j+1)^w$.  If
+$n=j+1+rq$, its propagation to $n$ multiplies this by
+\[
+ \prod_{t=0}^{r-1}
+ \frac{b^q(j+2+tq)^w}{(j+1+(t+1)q)^w}.
+\]
+The total power of $b$ is $j+rq=n-1$, and the remaining quotient is
+$Q_q(n,j)^w$.  Summing over the admissible source indices proves the formula.
+\end{proof}
+
+\section{The arithmetic-progression bound}
+
+\begin{lemma}\label{lem:valuation}
+Let $(n,j)$ be admissible and put $r=(n-j-1)/q$.
+\begin{enumerate}
+ \item If $p\nmid q$, then
+ \begin{equation}\label{eq:outside}
+  v_p(Q_q(n,j))\ge-v_p(L_n).
+ \end{equation}
+ \item If $p\mid q$ and $s=v_p(q)$, then
+ \begin{equation}\label{eq:inside}
+  v_p(Q_q(n,j))\ge-v_p(L_n)-rs-v_p(r!).
+ \end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Suppose first that $p\nmid q$.  For any fixed $p^a$, the denominator of
+$Q_q(n,j)$ contains $r+1$ terms in one invertible residue progression, while
+the numerator contains $r$ terms in another.  The former residue occurs at
+most $\lceil(r+1)/p^a\rceil$ times and the latter at least
+$\lfloor r/p^a\rfloor$ times.  Their difference is at most one.  Only powers
+$p^a\le n$ occur, so summing over $a$ proves \eqref{eq:outside}.
+
+Now suppose $p\mid q$.  Write the denominator factors as
+$d_t=j+1+tq$, $0\le t\le r$, and choose $t_*$ so that $v_p(d_{t_*})$
+is maximal.  Since $d_{t_*}\le n$,
+$v_p(d_{t_*})\le v_p(L_n)$.  For $t\ne t_*$, maximality and
+$d_t-d_{t_*}=q(t-t_*)$ imply
+\[
+ v_p(d_t)\le s+v_p(|t-t_*|).
+\]
+Consequently
+\begin{align*}
+ v_p\left(\prod_{t=0}^r d_t\right)
+ &\le v_p(L_n)+rs+v_p\bigl(t_*!\,(r-t_*)!\bigr)\\
+ &\le v_p(L_n)+rs+v_p(r!),
+\end{align*}
+because $r!/[t_*!\,(r-t_*)!]$ is an integer.  Discarding the numerator only
+weakens the estimate and proves \eqref{eq:inside}.
+\end{proof}
+
+\section{Sufficiency and sharpness}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+We have proved the finite formula.  Assume first that $M(q,w)\mid b$.
+For $p\nmid q$, \eqref{eq:outside} makes
+$L_n^wQ_q(n,j)^w$ $p$-integral.  For $p\mid q$, write
+$s=v_p(q)$ and $e=v_p(b)$.  Definition \eqref{eq:mu} gives
+\begin{equation}\label{eq:density}
+ eq\ge w\left(s+\frac1{p-1}\right).
+\end{equation}
+Because $n-1=j+rq\ge rq$ and
+$v_p(r!)\le r/(p-1)$,
+\[
+ e(n-1)\ge erq
+ \ge wr\left(s+\frac1{p-1}\right)
+ \ge w\bigl(rs+v_p(r!)\bigr).
+\]
+Together with \eqref{eq:inside}, this proves the termwise assertion, and
+\eqref{eq:finite} proves $L_n^wT_n\in\Z$.
+
+It remains to prove necessity.  The case $b=0$ is immediate, so assume
+$b\ne0$.  Suppose that $p\mid q$ and
+$e=v_p(b)<\mu_p(q,w)$; put $s=v_p(q)$.  At $n=qR$, the admissible source
+indices are $j=q\ell-1$, $1\le\ell\le R$.  Every numerator factor of
+$Q_q(qR,q\ell-1)$ is $1$ modulo $p$, while its denominator is
+\[
+ q^{R-\ell+1}\frac{R!}{(\ell-1)!}.
+\]
+The valuation of this contribution to \eqref{eq:finite} is therefore
+\begin{equation}\label{eq:ellval}
+ e(qR-1)-w\left((R-\ell+1)s
+ +v_p\left(\frac{R!}{(\ell-1)!}\right)\right).
+\end{equation}
+The $\ell=1$ term is uniquely of least valuation: the difference between
+\eqref{eq:ellval} and its value at $\ell=1$ is
+\[
+ w\bigl((\ell-1)s+v_p((\ell-1)!)\bigr)>0
+ \qquad(\ell>1).
+\]
+Hence no cancellation is possible and
+\begin{equation}\label{eq:exactval}
+ v_p(T_{qR})=e(qR-1)-w\bigl(Rs+v_p(R!)\bigr).
+\end{equation}
+Adding $wv_p(L_{qR})$, dividing by $R$, and letting $R\to\infty$ gives
+the limit
+\[
+ eq-w\left(s+\frac1{p-1}\right)<0.
+\]
+Thus $L_{qR}^wT_{qR}$ is nonintegral for all sufficiently large $R$.
+Condition (3) in the theorem forces $v_p(b)\ge\mu_p(q,w)$ for every
+$p\mid q$, which is exactly $M(q,w)\mid b$.
+\end{proof}
+
+\section{Binomial transport}
+
+\begin{corollary}\label{cor:transport}
+Define
+\begin{equation}\label{eq:B}
+ B_n=\sum_{k=0}^n\binom nk b^{n-k}T_k.
+\end{equation}
+Then
+\[
+ \boxed{\quad
+ L_n^wB_n\in\Z\text{ for every }n
+ \quad\Longleftrightarrow\quad M(q,w)\mid b.
+ \quad}
+\]
+\end{corollary}
+
+\begin{proof}
+Binomial inversion gives
+\[
+ T_n=\sum_{k=0}^n\binom nk(-b)^{n-k}B_k.
+\]
+Since $L_k\mid L_n$ for $k\le n$, either transform preserves uniform
+$L_n^w$-integrality.  Apply Theorem~\ref{thm:main}.
+\end{proof}
+
+At the generating-function level, \eqref{eq:B} and its inverse are exactly
+\[
+ B(z)=\frac1{1-bz}T\!\left(\frac{z}{1-bz}\right),
+ \qquad
+ T(z)=\frac1{1+bz}B\!\left(\frac{z}{1+bz}\right).
+\]
+Thus Corollary~\ref{cor:transport} transports the sharp arithmetic result from
+the decoupled operator \eqref{eq:operator} back to its binomially conjugate
+companion.
+
+For $(q,w)=(2,2)$, one obtains $M(2,2)=4$, recovering the parity-square
+endpoint theorem.  If $q=\ell$ is prime, the answer simplifies markedly:
+\begin{equation}\label{eq:prime}
+ M(\ell,w)=\ell^{\lceil w/(\ell-1)\rceil}.
+\end{equation}
+Thus $M(3,2)=3$ and $M(5,4)=5$, rather than the naive sufficient moduli
+$3^2$ and $5^4$.  The parity step is exceptional in that
+$M(2,w)=2^w$.
+
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+$q$ & $w$ & $M(q,w)$\\
+\midrule
+$2$ & $1,\ldots,8$ & $2,4,8,16,32,64,128,256$\\
+$3$ & $1,\ldots,8$ & $3,3,9,9,27,27,81,81$\\
+$4$ & $1,\ldots,8$ & $2,4,8,8,16,32,64,64$\\
+$5$ & $1,\ldots,8$ & $5,5,5,5,25,25,25,25$\\
+$6$ & $1,\ldots,8$ & $6,6,6,12,36,36,72,72$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{A natural realization: Zagier's sporadic sequence
+\texorpdfstring{$\mathbf B$}{B}}
+
+The pure-power endpoint recurrence of Theorem~\ref{thm:main} is not the only
+normal form with the same valuation density.  A binomial conjugation of
+Zagier's quadratic recurrence~\cite{Zagier} produces a mixed step-three endpoint in which
+the two missing residue classes occur once and the denominator class occurs
+twice.
+
+For $h\in\Z$, let $C^{(h)}_0=0$, $C^{(h)}_1=1$, and
+\begin{equation}\label{eq:zagrec}
+ (n+1)^2C^{(h)}_{n+1}
+ =h(3n^2+3n+1)C^{(h)}_n-3h^2n^2C^{(h)}_{n-1}.
+\end{equation}
+Define
+\begin{equation}\label{eq:zagtransform}
+ S^{(h)}_n=\sum_{k=0}^n\binom nk(-h)^{n-k}C^{(h)}_k.
+\end{equation}
+
+\begin{theorem}[sharp step-three companion theorem]\label{thm:zagB}
+For every integer $h$,
+\begin{equation}\label{eq:zagclass}
+ \left(\forall n\ge0,\ L_n^2C^{(h)}_n\in\Z\right)
+ \quad\Longleftrightarrow\quad 3\mid h.
+\end{equation}
+If $h=3$, then \eqref{eq:zagrec} is the recurrence for the second solution of
+Zagier's sporadic sequence $\mathbf B$.  Consequently its companion satisfies
+\[
+ L_n^2C^{(3)}_n\in\Z\qquad(n\ge0),
+\]
+and the exponent $2$ is optimal.
+\end{theorem}
+
+\begin{proof}
+Let $C(x)=\sum_{n\ge0}C^{(h)}_nx^n$.  Including the initial residual,
+\eqref{eq:zagrec} is equivalent to
+\[
+ \{\theta^2-hx(3\theta^2+3\theta+1)
+        +3h^2x^2(\theta+1)^2\}C(x)=x.
+\]
+The generating function of \eqref{eq:zagtransform} is
+\[
+ S(z)=\frac1{1+hz}C\!\left(\frac{z}{1+hz}\right).
+\]
+Direct conjugation cancels the terms of degrees one and two and gives
+\begin{equation}\label{eq:zagoperator}
+ \{\theta^2+h^3z^3(\theta+1)(\theta+2)\}S(z)
+ =\frac{z}{1+hz}.
+\end{equation}
+Thus
+\begin{equation}\label{eq:zagTrec}
+ n^2S^{(h)}_n+h^3(n-2)(n-1)S^{(h)}_{n-3}=(-h)^{n-1}.
+\end{equation}
+
+For $0\le j<n$ with $n-j\equiv1\pmod3$, put
+\[
+ r=\frac{n-j-1}{3},\qquad
+ R(n,j)=
+ \frac{\prod_{t=0}^{r-1}(j+2+3t)(j+3+3t)}
+      {\prod_{t=0}^{r}(j+1+3t)^2}.
+\]
+Iteration of \eqref{eq:zagTrec} yields
+\begin{equation}\label{eq:zagfinite}
+ (-1)^{n-1}S^{(h)}_n
+ =h^{n-1}\!
+ \sum_{\substack{0\le j<n\\n-j\equiv1\pmod3}}R(n,j).
+\end{equation}
+Indeed, a source at $j+1$ acquires $r$ propagation signs, and
+$j+r\equiv n-1\pmod2$.  In particular, for $h>0$ the right-hand side of
+\eqref{eq:zagfinite} is a sum of positive rational numbers.
+
+We prove termwise integrality when $3\mid h$.  If $p\ne3$, then for every
+power $p^a$ the doubled denominator progression contains at most
+$2\lceil(r+1)/p^a\rceil$ multiples of $p^a$, while the two numerator
+progressions contain at least $2\lfloor r/p^a\rfloor$ in total.  The deficit
+is at most two.  Hence
+\begin{equation}\label{eq:zagoutside}
+ v_p(R(n,j))\ge-2v_p(L_n).
+\end{equation}
+
+For $p=3$, apply the maximal-factor argument of
+Lemma~\ref{lem:valuation} to
+$D=\prod_{t=0}^r(j+1+3t)$.  It gives
+\[
+ v_3(D)\le v_3(L_n)+r+v_3(r!),
+\]
+and therefore
+\begin{equation}\label{eq:zaginside}
+ v_3(R(n,j))\ge-2v_3(L_n)-2r-2v_3(r!).
+\end{equation}
+If $3\mid h$, then $n-1=j+3r\ge3r$ and
+$v_3(r!)\le r/2$, so
+\[
+ v_3\bigl(L_n^2h^{n-1}R(n,j)\bigr)
+ \ge3r-2r-2v_3(r!)\ge0.
+\]
+Together with \eqref{eq:zagoutside}, this proves every summand of
+\eqref{eq:zagfinite} integral after multiplication by $L_n^2$.  Binomial
+inversion and $L_k\mid L_n$ transfer the result to $C^{(h)}_n$.
+
+For necessity, exact propagation of \eqref{eq:zagrec} gives
+\begin{equation}\label{eq:zagwitness}
+ C^{(h)}_6=-\frac{39521h^5}{32400},
+ \qquad
+ L_6^2C^{(h)}_6=-\frac{39521h^5}{9}.
+\end{equation}
+Since $3\nmid39521$, integrality at $n=6$ forces $3\mid h$.  This proves
+\eqref{eq:zagclass}.
+
+For $h=3$, the first solution of \eqref{eq:zagrec} is the named sporadic row
+\cite{Zagier,Gorodetsky}
+\[
+ A_{\mathbf B}(n)=
+ \sum_{k=0}^{\lfloor n/3\rfloor}(-1)^k3^{n-3k}
+ \binom n{3k}\frac{(3k)!}{k!^3},
+\]
+with $A_{\mathbf B}(0)=1$, $A_{\mathbf B}(1)=3$.  Hence $C^{(3)}$ is its
+normalized companion.  Finally,
+$C^{(3)}_2=21/4$, so $L_2C^{(3)}_2=21/2\notin\Z$; the exponent two cannot be
+lowered.
+\end{proof}
+
+\section{Interpretation and reproducibility}
+
+The exponent in \eqref{eq:mu} is a density balance.  The contribution
+$v_p(q)$ is built into every step of the denominator progression, while
+$1/(p-1)$ is the asymptotic valuation density of a factorial.  The factor
+$1/q$ records that only one in every $q$ indices lies in a given endpoint
+chain.  The unique minimum in \eqref{eq:exactval} proves that this density
+cannot be improved by cancellations between endpoints.
+
+The closest classical arithmetic-progression literature studies least common
+multiples or products of consecutive progression terms; see, for example,
+Hong and Qian~\cite{HongQian}.  The present statement instead determines the
+sharp parameter modulus for a ratio of interlaced progressions arising from
+an inhomogeneous recurrence.
+
+The exact audit
+\begin{center}
+\nolinkurl{work/harmonic_jets/verify_step_q_endpoint.py}
+\end{center}
+checks the recurrence against \eqref{eq:finite}, the termwise bound over a
+grid of $(q,w,n)$, and deficient-prime witnesses for the necessity argument.
+The independent application audit
+\begin{center}
+\nolinkurl{work/harmonic_jets/verify_zagier_B_endpoint.py}
+\end{center}
+checks the operator conjugation for arbitrary $h$, the positive endpoint
+formula, termwise integrality, the named binomial first row, and the two exact
+sharpness witnesses in Theorem~\ref{thm:zagB}.
+
+\begin{thebibliography}{9}
+\bibitem{Gorodetsky}
+O.~Gorodetsky,
+\emph{New representations for all sporadic Ap\'ery-like sequences, with applications to
+congruences},
+Experimental Mathematics \textbf{32} (2023), no.~4, 641--656;
+arXiv:2102.11839.
+
+\bibitem{HongQian}
+S.~Hong and G.~Qian,
+\emph{The least common multiple of consecutive arithmetic progression terms},
+arXiv:0903.0530.
+
+\bibitem{Zagier}
+D.~Zagier,
+\emph{Integral solutions of Ap\'ery-like recurrence equations},
+in J.~Harnad and P.~Winternitz (eds.), \emph{Groups and Symmetries: From Neolithic Scots
+to John McKay}, CRM Proceedings and Lecture Notes \textbf{47}, American Mathematical
+Society, 2009, 349--366.
+\end{thebibliography}
+
+\end{document}

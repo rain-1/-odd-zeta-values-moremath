@@ -1,0 +1,157 @@
+/*
+  Exact parameter-certificate proof of the minimal Apéry zeta(2) companion.
+
+  Requires Maxima's open-source Zeilberger package.  Run with:
+
+      maxima --very-quiet -b work/z2cf/parameter_proof.mac
+
+  Every displayed CHECK must be zero.  No floating-point calculation is used.
+*/
+
+display2d:false$
+load("zeilberger")$
+
+/* X_m(t) = m! Gamma(1-t) / Gamma(m+1-t). */
+Xf(m,t):=m!*(-t)!/(m-t)!$
+
+/* The proper hypergeometric two-parameter summand. */
+F:binomial(n,k)^2*binomial(n+k,k)
+   *Xf(k,u)*Xf(k,v)^2/(Xf(n-k,v)*Xf(n,v))$
+
+/* Generic order-three creative telescope. */
+zz:first(parGosper(F,k,n,3))$
+cert:first(zz)$
+C:second(zz)$
+
+/* A harmless parameter-independent normalization. */
+gnorm:5*(n+1)^4*(n+2)^4*(n+3)^3$
+cert:ratsimp(cert/gnorm)$
+for i:1 thru 4 do C[i]:ratsimp(C[i]/gnorm)$
+
+/* Independent check of the generic rational certificate identity. */
+rn:shiftQuo(F,n)$
+rk:shiftQuo(F,k)$
+lhs:C[1]+C[2]*rn+C[3]*rn*subst(n=n+1,rn)
+       +C[4]*rn*subst(n=n+1,rn)*subst(n=n+2,rn)$
+rhs:subst(k=k+1,cert)*rk-cert$
+print("CHECK generic certificate =",ratsimp(lhs-rhs))$
+
+/* Coefficient operators and their derivatives at u=v=0. */
+cb:makelist(subst([u=0,v=0],C[i]),i,1,4)$
+cu:makelist(subst([u=0,v=0],diff(C[i],u)),i,1,4)$
+cv:makelist(subst([u=0,v=0],diff(C[i],v)),i,1,4)$
+cuv:makelist(subst([u=0,v=0],diff(diff(C[i],u),v)),i,1,4)$
+
+/* Forward Apéry operator: this is the original L at index n+1. */
+L:[-(n+1)^2,-(11*n^2+33*n+25),(n+2)^2]$
+
+/* Ore multiplication: E*f(n)=f(n+1)*E. */
+opmul(A,B):=block([la:length(A)-1,lb:length(B)-1],
+  makelist(
+    ratsimp(sum(A[j+1]*subst(n=n+j,B[i-j+1]),
+                 j,max(0,i-lb),min(la,i))),
+    i,0,la+lb))$
+
+/* Factor C(0,0)=Q0*L and C_v(0,0)=Qv*L. */
+q0:[ratsimp(cb[1]/L[1]),ratsimp(cb[4]/subst(n=n+1,L[3]))]$
+qv:[ratsimp(cv[1]/L[1]),ratsimp(cv[4]/subst(n=n+1,L[3]))]$
+q0check:opmul(q0,L)$
+qvcheck:opmul(qv,L)$
+print("CHECK C0-Q0*L =",
+      makelist(ratsimp(cb[i]-q0check[i]),i,1,4))$
+print("CHECK Cv-Qv*L =",
+      makelist(ratsimp(cv[i]-qvcheck[i]),i,1,4))$
+print("Q0 =",factor(q0[1]),factor(q0[2]))$
+print("Qv =",factor(qv[1]),factor(qv[2]))$
+
+/*
+  Boundary audit.  Summing the cell identity from k=0 to n leaves
+
+    cert(n,n)F(n,n)-cert(n,0)F(n,0)
+      + sum_{i=0}^3 C_i sum_{j=0}^i F(n+i,n+j).
+
+  Z denotes binomial(2n,n), h denotes H_n.  All shifted harmonic numbers
+  and all top-cell ratios are reduced to rational functions of n.
+*/
+rb(K):=subst([u=0,v=0,k=K],cert)$
+ru(K):=subst([u=0,v=0,k=K],diff(cert,u))$
+rv(K):=subst([u=0,v=0,k=K],diff(cert,v))$
+ruv(K):=subst([u=0,v=0,k=K],diff(diff(cert,u),v))$
+hs(c):=h+sum(1/(n+r),r,1,c)$
+hh(c):=sum(1/r,r,1,c)$
+tr(i,j):=minfactorial(makefact(
+  binomial(n+i,n+j)^2*binomial(2*n+i+j,n+j)/binomial(2*n,n)))$
+vl(i,j):=2*hs(j)-hh(i-j)-hs(i)$
+
+b0:Z*rb(n)-rb(0)$
+bv:Z*(rv(n)+rb(n)*h)-rv(0)+2*h*rb(0)$
+bu:Z*(ru(n)+rb(n)*h)-ru(0)$
+buv0:Z*(ruv(n)+(ru(n)+rv(n))*h+rb(n)*h^2)-ruv(0)+2*h*ru(0)$
+
+for i:0 thru 3 do for j:0 thru i do (
+  b0:b0+cb[i+1]*Z*tr(i,j),
+  bv:bv+Z*tr(i,j)*(cv[i+1]+cb[i+1]*vl(i,j)),
+  bu:bu+Z*tr(i,j)*(cu[i+1]+cb[i+1]*hs(j)),
+  buv0:buv0+Z*tr(i,j)*(cuv[i+1]+cu[i+1]*vl(i,j)
+                        +cv[i+1]*hs(j)+cb[i+1]*hs(j)*vl(i,j)))$
+
+print("CHECK boundary base =",factor(ratsimp(b0)))$
+print("CHECK boundary v =",factor(ratsimp(bv)))$
+print("CHECK boundary u =",factor(ratsimp(bu)))$
+print("CHECK boundary uv =",factor(ratsimp(buv0)))$
+
+/*
+  Eliminate the u-derivative sequence.  Find first-order X,Y with
+  X*Qv=Y*Q0, then differentiate the recurrence in u and v.
+*/
+x1:1$
+x0:ratsimp(
+  (subst(n=n+1,qv[2])*subst(n=n+1,q0[1])/subst(n=n+1,q0[2])
+    -subst(n=n+1,qv[1]))
+  /(qv[2]-qv[1]*q0[2]/q0[1]))$
+XX:[x0,x1]$
+YY:[ratsimp(x0*qv[1]/q0[1]),
+    ratsimp(subst(n=n+1,qv[2])/subst(n=n+1,q0[2]))]$
+lc1:opmul(XX,qv)$
+lc2:opmul(YY,q0)$
+print("CHECK X*Qv-Y*Q0 =",
+      makelist(ratsimp(lc1[i]-lc2[i]),i,1,3))$
+
+/*
+  J=-(1+E^2), so J*a at index n is -a_n-a_{n+2}.
+  Verify that
+
+    YY*Cu - XX*Cuv - (XX*Q0)*J
+
+  is a right multiple of L.  This is the decisive Ore remainder.
+*/
+xq0:opmul(XX,q0)$
+ycu:opmul(YY,cu)$
+xcuv:opmul(XX,cuv)$
+xqj:opmul(xq0,[-1,0,-1])$
+dd:makelist(ratsimp(ycu[i]-xcuv[i]-xqj[i]),i,1,5)$
+
+h2:ratsimp(dd[5]/subst(n=n+2,L[3]))$
+tmp1:opmul([0,0,h2],L)$
+rem1:makelist(ratsimp(dd[i]-tmp1[i]),i,1,5)$
+h1:ratsimp(rem1[4]/subst(n=n+1,L[3]))$
+tmp2:opmul([0,h1],L)$
+rem2:makelist(ratsimp(rem1[i]-tmp2[i]),i,1,4)$
+h0:ratsimp(rem2[3]/L[3])$
+tmp3:opmul([h0],L)$
+rem3:makelist(ratsimp(rem2[i]-tmp3[i]),i,1,3)$
+
+print("CHECK decisive right remainder =",rem3)$
+print("leading coefficient of X*Q0 =",factor(xq0[3]))$
+
+/* Initial data for Z=L*Astar+a_n+a_(n+2). */
+aseq:[1,3,19,147,1251]$
+astar:[0,2,15/2,751/18,2215/8]$
+z0:ratsimp(-(1)^2*astar[1]-25*astar[2]+4*astar[3]
+           +aseq[1]+aseq[3])$
+z1:ratsimp(-4*astar[2]-(11+33+25)*astar[3]+9*astar[4]
+           +aseq[2]+aseq[4])$
+print("CHECK final initial values =",z0,z1)$
+
+print("PARAMETER PROOF COMPLETE")$
+quit();

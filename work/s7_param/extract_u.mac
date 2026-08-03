@@ -1,0 +1,20 @@
+/* Machine-readable Taylor data for the pure-u deformation. */
+display2d:false$
+linel:1000000$
+load("zeilberger")$
+Xf(m,t):=m!*(-t)!/(m-t)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S*Xf(k,3*u)*Xf(n-k,-3*u)*Xf(n,2*u)/Xf(n,u)^2$
+z:first(parGosper(F,k,n,2))$
+cert:first(z)$ C:second(z)$
+rn:shiftQuo(F,n)$ rk:shiftQuo(F,k)$
+lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1)$
+rhs:subst(k=k+1,cert)*rk-cert$
+print("U_CHECK",ratsimp(lhs-rhs))$
+print("U_C0",makelist(ratsimp(subst(u=0,C[i])),i,1,length(C)))$
+print("U_C1",makelist(ratsimp(subst(u=0,diff(C[i],u))),i,1,length(C)))$
+print("U_C2",makelist(ratsimp(subst(u=0,diff(C[i],u,2))),i,1,length(C)))$
+print("U_R0",ratsimp(subst(u=0,cert)))$
+print("U_R1",ratsimp(subst(u=0,diff(cert,u))))$
+print("U_R2",ratsimp(subst(u=0,diff(cert,u,2)))$
+quit();

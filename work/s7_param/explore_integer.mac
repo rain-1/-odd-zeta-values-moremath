@@ -1,0 +1,24 @@
+/* Integer-rescaled six-factor deformation: v in the note equals 3*t here. */
+display2d:false$
+load("zeilberger")$
+Xf(m,z):=m!*(-z)!/(m-z)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S
+ *Xf(k,3*u+5*t)/Xf(k,14*t)
+ *Xf(n-k,-3*u+3*t)
+ *Xf(2*k,6*t)
+ *Xf(n,2*u+6*t)/Xf(n,u+3*t)^2$
+ord:4$
+print("START integer-rescaled order",ord)$
+zz:parGosper(F,k,n,ord)$
+print("COUNT =",length(zz))$
+if length(zz)>0 then (
+ z:first(zz),cert:first(z),C:second(z),
+ rn:shiftQuo(F,n),rk:shiftQuo(F,k),
+ lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1),
+ rhs:subst(k=k+1,cert)*rk-cert,
+ print("CHECK =",ratsimp(lhs-rhs)),
+ print("FOUND ORDER =",ord),
+ print("C0 =",makelist(factor(subst([u=0,t=0],C[i])),i,1,length(C)))
+)$
+quit();

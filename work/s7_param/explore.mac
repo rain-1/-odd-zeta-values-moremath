@@ -1,0 +1,39 @@
+/* Generic two-parameter telescope for the Cooper s_7 companion. */
+display2d:false$
+load("zeilberger")$
+
+Xf(m,t):=m!*(-t)!/(m-t)!$
+
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+
+/*
+  At u=v=0 this is S.  Its mixed derivative divided by 28 is S times
+
+    [3(H_k-H_{n-k})(2H_{2k}-3H_k+H_{n-k})
+       +5H_k^(2)+2H_n^(2)-3H_{n-k}^(2)]/28,
+
+  the compact s_7 companion weight.
+*/
+F:S
+  *Xf(k,5*u+v)/(Xf(k,u)^2*Xf(k,v)^4)
+  *Xf(n-k,-3*u+v)
+  *Xf(n,u+2*v)/(Xf(n,u)*Xf(n,v)^2)
+  *Xf(2*k,v)^2$
+
+ord:6$
+print("START parGosper order",ord)$
+zz:parGosper(F,k,n,ord)$
+print("RESULT COUNT =",length(zz))$
+if length(zz)>0 then (
+  z:first(zz),
+  cert:first(z),
+  C:second(z),
+  print("ORDER =",length(C)-1),
+  rn:shiftQuo(F,n),
+  rk:shiftQuo(F,k),
+  lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1),
+  rhs:subst(k=k+1,cert)*rk-cert,
+  print("CHECK =",ratsimp(lhs-rhs)),
+  print("C0 =",makelist(factor(subst([u=0,v=0],C[i])),i,1,length(C)))
+)$
+quit();

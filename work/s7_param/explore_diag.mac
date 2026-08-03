@@ -1,0 +1,31 @@
+/*
+  Diagonal u=v=t of the compact Cooper s_7 deformation.
+  The X_k factors cancel:
+    F(t,t)=S X_(n-k)(-2t) X_(2k)(2t) X_n(4t) / X_n(2t)^2.
+  Its second Taylor coefficient, together with the pure-u and pure-v
+  coefficients, recovers the desired mixed derivative by polarization.
+*/
+display2d:false$
+load("zeilberger")$
+Xf(m,t):=m!*(-t)!/(m-t)!$
+S:binomial(n,k)^2*binomial(n+k,k)*binomial(2*k,n)$
+F:S*Xf(n-k,-2*t)*Xf(2*k,2*t)*Xf(n,4*t)/Xf(n,2*t)^2$
+for ord:2 thru 6 do (
+  print("START diagonal order",ord),
+  zz:parGosper(F,k,n,ord),
+  print("COUNT diagonal order",ord,"=",length(zz)),
+  if length(zz)>0 then (
+    z:first(zz),cert:first(z),C:second(z),
+    rn:shiftQuo(F,n),rk:shiftQuo(F,k),
+    lhs:sum(C[i+1]*product(subst(n=n+j,rn),j,0,i-1),i,0,length(C)-1),
+    rhs:subst(k=k+1,cert)*rk-cert,
+    print("CHECK =",ratsimp(lhs-rhs)),
+    print("FOUND DIAGONAL ORDER =",ord),
+    print("C0 =",makelist(factor(subst(t=0,C[i])),i,1,length(C))),
+    print("Ct =",makelist(factor(subst(t=0,diff(C[i],t))),i,1,length(C))),
+    print("Ctt =",makelist(factor(subst(t=0,diff(C[i],t,2))),i,1,length(C))),
+    print("CERT =",cert),
+    quit()
+  )
+)$
+quit();
