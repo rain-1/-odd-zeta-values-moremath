@@ -17,3 +17,4 @@ import ZetaLucas.FranelClosedForm
 import ZetaLucas.Z2Shell
 import ZetaLucas.Z2Minimal
 import ZetaLucas.CatalanEndpoint
+import ZetaLucas.ZagierBEndpoint

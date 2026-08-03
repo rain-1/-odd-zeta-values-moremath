@@ -56,7 +56,7 @@
 \contentsline {subsection}{\tocsubsection {}{14.2}{(T1-top)}}{39}{subsection.14.2}%
 \contentsline {subsection}{\tocsubsection {}{14.3}{Theorem B}}{40}{subsection.14.3}%
 \contentsline {section}{\tocsection {}{15}{The primes 2 and 3}}{41}{section.15}%
-\contentsline {section}{\tocsection {}{16}{Summary of the dependency structure}}{43}{section.16}%
-\contentsline {section}{\tocsection {Appendix}{A}{Reproduction}}{43}{appendix.A}%
-\contentsline {section}{\tocsection {Appendix}{}{Acknowledgments}}{44}{section*.2}%
-\contentsline {section}{\tocsection {Appendix}{}{References}}{44}{section*.3}%
+\contentsline {section}{\tocsection {}{16}{Summary of the dependency structure}}{44}{section.16}%
+\contentsline {section}{\tocsection {Appendix}{A}{Reproduction}}{44}{appendix.A}%
+\contentsline {section}{\tocsection {Appendix}{}{Acknowledgments}}{45}{section*.2}%
+\contentsline {section}{\tocsection {Appendix}{}{References}}{45}{section*.3}%
