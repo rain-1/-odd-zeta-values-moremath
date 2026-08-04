@@ -1,0 +1,54 @@
+utilde integral to n=200: True
+utilde[0:8] = [1, 10, 534, 40900, 3672550, 360764460, 37546578300, 4068324634440]
+recurrence n^2 ut_n = (136n^2-204n+78)ut_{n-1} - 4(2n-3)^2 ut_{n-2}: PASS
+v2(utilde_n), n=0..40: [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2]
+v2 == v2(n)+1 (n>=1)? False
+  first mismatches: [(2, 1, 2), (3, 2, 1), (4, 1, 3), (5, 2, 1), (7, 3, 1), (8, 1, 4), (9, 2, 1), (11, 3, 1), (12, 2, 3), (13, 3, 1)]
+sharp rescale exponent c* (u(2^c t) integral iff c>=c*): 2
+Lucas mod 3: PASS (198 cells)
+Lucas mod 5: PASS (196 cells)
+Lucas mod 7: PASS (194 cells)
+Lucas mod 11: PASS (190 cells)
+Lucas mod 13: FAIL 135 e.g. [(1, 0), (1, 1), (1, 2), (1, 3)] (188 cells)
+u(t(q)) == sqrt(F(q)) to q^45: True
+sqrt(F)(q) coefficients v2: [0, -1, -3, -4, -7, -8, -10, -11, -15, -16, -18, -19, -22, -23, -25, -26, -31, -32, -34, -35, -38, -39, -41, -42, -46]
+sqrt(F)(q) first coeffs: ['1', '5/2', '27/8', '49/16', '147/128', '459/256', '2511/1024', '8809/2048', '174339/32768', '72967/65536']
+theta A: [1, 2, 0, 0, 2, 0, 2, 4, 0, 2, 4, 0, 0]
+theta B: [1, 0, 2, 2, 0, 4, 0, 0, 2, 0, 0, 4, 2]
+sqrtF = 1*(A+B)/2 + 3/2*(A-B)/2 ? False
+   first mismatch at q^ [2, 3, 4, 5, 6]
+BZ: sqrt(Q(4t)) integral to n=60: True
+BZ: Q(8t)^{1/4} integral to n=60: True
+quarter-BZ sequence w[0:8]: [1, 42, 45178, 85695756, 208636770342, 585262794258636, 1799250737485285284, 5898016343094919581720]
+v2(w_n) n=0..30: [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4]
+quarter-BZ Lucas mod 3: FAIL 7 e.g. [(2, 0), (2, 2), (6, 0), (6, 2)]
+quarter-BZ Lucas mod 5: FAIL 41 e.g. [(1, 0), (1, 2), (1, 3), (2, 1)]
+quarter-BZ Lucas mod 7: FAIL 19 e.g. [(1, 1), (1, 2), (1, 3), (1, 4)]
+sqrt(Q) denominator v2 per n (first 20): [1, 3, 4, 7, 8, 10, 11, 15, 16, 18, 19, 22, 23, 25, 26, 31, 32, 34, 35, 38]
+universal lemma sanity (random f): sqrt(f(4t)) integral: True
+
+--- PART 2 ---
+v2(ut_n) == s2(n), 1<=n<=200: True
+split-prime Lucas law (predict PASS iff (-6/p)=1 or p=3):
+  p= 3 split=ram  PASS
+  p= 5 split=True  PASS
+  p= 7 split=True  PASS
+  p=11 split=True  PASS
+  p=13 split=False  FAIL(135)
+  p=17 split=False  FAIL(172)
+  p=19 split=False  FAIL(165)
+  p=23 split=False  FAIL(154)
+  p=29 split=True  PASS
+  p=31 split=True  PASS
+  p=37 split=False  FAIL(154)
+  p=41 split=False  FAIL(159)
+  p=43 split=False  FAIL(155)
+  p=47 split=False  FAIL(145)
+half-BZ r2[0:6]: [1, 42, 23030, 21898308, 26657064742, 37368568842348]
+v2(r2_n) == s2(n), n<=60: True
+  half-BZ Lucas p=3: FAIL(14)
+  half-BZ Lucas p=5: FAIL(41)
+  half-BZ Lucas p=7: FAIL(28)
+  half-BZ Lucas p=11: FAIL(44)
+  half-BZ Lucas p=13: FAIL(45)
+random odd-a1 series with v2==s2 profile: 5/5

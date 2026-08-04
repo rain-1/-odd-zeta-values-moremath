@@ -1,0 +1,25 @@
+
+================ FAMILY alpha (dim 2, ('R3', 10, 4, 64, 0), target eps^3) ========
+  A(n) direct sum == binomial table AND satisfies recurrence, n<=12: PASS
+  validation alpha atom ((0, 1), (0, 1)) at (n,cell)=(7,(2,)): PASS
+[alpha linear target eps^3 p=4194301] system (174, 32) (6 blocks) rank=12 null=20 b!=0 possible: False  zeta-comp B: {'r3.z2': False, 'r3.z3': False}
+[alpha quadratic target eps^3 p=4194301] system (174, 232) (6 blocks) rank=14 null=218 b!=0 possible: False  zeta-comp B: {'r3.z2': False, 'r3.z3': False}
+[alpha linear target eps^2 p=4194301] system (87, 28) (3 blocks) rank=6 null=22 b!=0 possible: False  zeta-comp B: {'r2.z2': False}
+[alpha quadratic target eps^2 p=4194301] system (87, 228) (3 blocks) rank=7 null=221 b!=0 possible: False  zeta-comp B: {'r2.z2': False}
+  family alpha verdicts: {3: (False, 'linear+quadratic'), 2: (False, 'linear+quadratic')}  (1s)
+
+================ FAMILY epsF (dim 2, ('R3', 12, 4, 16, 0), target eps^3) ========
+  A(n) direct sum == binomial table AND satisfies recurrence, n<=12: PASS
+  validation epsF atom ((0, 1), (0, 1)) at (n,cell)=(7,(6,)): PASS
+[epsF linear target eps^3 p=4194301] system (174, 32) (6 blocks) rank=16 null=16 b!=0 possible: False  zeta-comp B: {'r3.z2': False, 'r3.z3': False}
+[epsF quadratic target eps^3 p=4194301] system (174, 232) (6 blocks) rank=20 null=212 b!=0 possible: False  zeta-comp B: {'r3.z2': False, 'r3.z3': False}
+[epsF linear target eps^2 p=4194301] system (87, 28) (3 blocks) rank=8 null=20 b!=0 possible: False  zeta-comp B: {'r2.z2': False}
+[epsF quadratic target eps^2 p=4194301] system (87, 228) (3 blocks) rank=9 null=219 b!=0 possible: False  zeta-comp B: {'r2.z2': False}
+  family epsF verdicts: {3: (False, 'linear+quadratic'), 2: (False, 'linear+quadratic')}  (1s)
+
+================ DISCRIMINATING SUMMARY ================
+  alpha  eps^2: b forced 0 (linear+quadratic)
+  alpha  eps^3: b forced 0 (linear+quadratic)
+  epsF   eps^2: b forced 0 (linear+quadratic)
+  epsF   eps^3: b forced 0 (linear+quadratic)
+H-char+limit predicts REACHABLE; H-level predicts UNREACHABLE.

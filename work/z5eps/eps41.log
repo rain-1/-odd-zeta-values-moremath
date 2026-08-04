@@ -1,0 +1,25 @@
+=== VALIDATION STEP 1: atom (0,0,1), n=3,k=1,l=2 ===
+  eps^0: bell=64800.0000000000000000000000000  sympy=64800.0000000000000000000000000  AGREE
+  eps^1: bell=25920.0000000000000000000000000  sympy=25920.0000000000000000000000000  AGREE
+  eps^2: bell=-73341.4550635301461668250055973  sympy=-73341.4550635301461668250055973  AGREE
+  eps^3: bell=-34198.3820254120584667300022389  sympy=-34198.3820254120584667300022389  AGREE
+VALIDATION 1: PASS
+
+=== SCAN, N = 24, prime 4194301 ===
+row sanity (exact vs mod-p, atom (0,0,1), r=1, n=2): PASS
+atoms: 124  build 18.1s
+[A: eps4 pinned to span{Q,Phat,P}] p=4194301: system (301, 152), rank=53, nullspace dim=99, b (tau=1 P-coeff of eps^5) nonzero possible: False
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z3': False, 'r5.z4': False, 'r5.z2^2': False}
+[B: eps4 unconstrained] p=4194301: system (226, 143), rank=36, nullspace dim=107, b (tau=1 P-coeff of eps^5) nonzero possible: False
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z3': False, 'r5.z4': False, 'r5.z2^2': False}
+
+total 18.1s
+=== confirmation of NEGATIIVE at second prime 4194247, N=24 ===
+[A: eps4 pinned] p=4194247: system (301, 152), rank=53, nullspace dim=99, b (tau=1 P-coeff of eps^5) nonzero possible: False
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z3': False, 'r5.z4': False, 'r5.z2^2': False}
+[B: eps4 unconstrained] p=4194247: system (226, 143), rank=36, nullspace dim=107, b (tau=1 P-coeff of eps^5) nonzero possible: False
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z3': False, 'r5.z4': False, 'r5.z2^2': False}
+0.2s
+=== diagnostic: which aux coefficients are free (p=4194301, N=24) ===
+A {'r3:Ph': True, 'r3:Q': False, 'r3.z2:Ph': False, 'r3.z2:Q': False, 'r4:Q': False, 'r4:Ph': False, 'r4:P': False, 'r4.z2:Q': False, 'r4.z2:Ph': False, 'r4.z2:P': False, 'r4.z3:Q': False, 'r4.z3:Ph': False, 'r4.z3:P': False, 'r5:P': False, 'r5:Q': False, 'r5:Ph': False, 'r5.z2:P': False, 'r5.z2:Q': False, 'r5.z2:Ph': False, 'r5.z3:P': False, 'r5.z3:Q': False, 'r5.z3:Ph': False, 'r5.z4:P': False, 'r5.z4:Q': False, 'r5.z4:Ph': False, 'r5.z2^2:P': False, 'r5.z2^2:Q': False, 'r5.z2^2:Ph': False}
+B {'r3:Ph': True, 'r3:Q': False, 'r3.z2:Ph': False, 'r3.z2:Q': False, 'r5:P': False, 'r5:Q': False, 'r5:Ph': False, 'r5.z2:P': False, 'r5.z2:Q': False, 'r5.z2:Ph': False, 'r5.z3:P': False, 'r5.z3:Q': False, 'r5.z3:Ph': False, 'r5.z4:P': False, 'r5.z4:Q': False, 'r5.z4:Ph': False, 'r5.z2^2:P': False, 'r5.z2^2:Q': False, 'r5.z2^2:Ph': False}

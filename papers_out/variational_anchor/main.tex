@@ -1,0 +1,599 @@
+% !TeX program = pdflatex
+%
+% "Variational anchors for Apery-like families: curve-blindness and the jet
+%  calculus of cellular integrals" -- working paper of River's odd-zeta programme.
+%
+% Provenance: work/CURVE_BLINDNESS.md, work/EPS_DISCOVERY.md,
+% work/sharp12_lowprimes/BRIDGE_CAMPAIGN_2026-08-03.md,
+% scripts work/z5eps/eps41.py--eps46_variation.py with logs.
+%
+% Evidence labels are load-bearing and are never silently upgraded.
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+\newcommand{\HH}[2]{H^{(#1)}_{#2}}
+\newcommand{\Lbz}{L_{\mathrm{BZ}}}
+
+% evidence-class markers
+\newcommand{\Thm}{\textup{\textsf{[THM]}}}
+\newcommand{\Proved}{\textup{\textsf{[PROVED]}}}
+\newcommand{\Verified}{\textup{\textsf{[VERIFIED]}}}
+\newcommand{\VerifiedR}[1]{\textup{\textsf{[VERIFIED: #1]}}}
+\newcommand{\Excluded}{\textup{\textsf{[EXCLUDED]}}}
+\newcommand{\Open}{\textup{\textsf{[OPEN]}}}
+
+\begin{document}
+
+\title[Variational anchors for Ap\'ery-like families]
+      {Variational anchors for Ap\'ery-like families:\\
+       curve-blindness and the jet calculus of cellular integrals}
+
+\author{}
+\date{\today}
+
+\begin{abstract}
+For the Brown--Zudilin cellular family for $\zeta(5)$, with cell
+$T(n,k,l)=\bin{n+k}{n}\bin nk^2\bin{n+l}{n}\bin nl^2\bin{n+k+l}{n}$ and rows
+$(Q_n,\hat P_n,P_n)$, we study $\varepsilon$-deformations of the double sum
+$\sum_{k,l}T$ along polynomial curves in the argument space and prove a
+structural dichotomy. A short \emph{coupling lemma} shows that the top-graded
+harmonic content of the $\varepsilon^{r}$ coefficient of any polynomial-curve
+deformation is a function of the curve's first-order direction alone, through
+its pure $r$-th powers; combined with a finite two-prime rank computation this
+yields \emph{curve-blindness}: pinned curve deformations of any degree have
+their $\varepsilon^{5}$ row confined to $\Q Q\oplus\Q\hat P$ --- the top row
+$P_n$ is unreachable --- although the same deformations generate the full
+$\zeta(3)$-level structure. The proof identifies the escape: objects whose
+fifth-order jet is decoupled from their lower jets, analytically the mixed
+fifth parameter-derivatives of the cellular integral. We then verify the
+first rung of the resulting \emph{variational tower}: the $n$-direction first
+variation $\dot Q(n)=\sum_{k,l}T\cdot\Lambda_1$ satisfies exactly the
+$n$-differentiated Brown--Zudilin recurrence
+$\Lbz(\dot Q)(n)=-\sum_i c_i'(n)\,Q(n+i)$, while the $k$- and $l$-direction
+variations vanish identically (they are gauge). We describe the resulting
+programme for a certificate-free proof of the weight-five attachment
+$\sum T\cdot B_5=\tfrac{33}4P_n$, and three further applications of the same
+instrument: a validated companion-discovery scanner that rediscovers the
+Franel and $\mathbf D$ companions from first principles; a two-prime
+reachability dichotomy across the fifteen sporadic Ap\'ery-like pairs aligned
+with character and convergence; and per-summand annihilation laws that show
+the fitting alphabets of the ``formula-less'' families are degenerate.
+Every statement carries its evidence label; no finite computation is reported
+as a proof.
+\end{abstract}
+
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+%======================================================================
+\section{Introduction}\label{sec:intro}
+
+\subsection{Context}
+The Brown--Zudilin cellular integrals \cite{BZ22} produce the best-known
+simultaneous rational approximations to $\zeta(3)$ and $\zeta(5)$: an integral
+family $I_n$ with
+\begin{equation}\label{eq:In}
+I_n \;=\; Q_n\,(2\zeta(5)+4\zeta(3)\zeta(2)) \;-\; 4\hat P_n\,\zeta(2)
+\;-\;2P_n,
+\end{equation}
+whose coefficient rows $(Q_n,\hat P_n,P_n)$ satisfy one certified third-order
+recurrence $\Lbz$. The programme surrounding this paper studies the
+\emph{companion problem}: closed harmonic-weight formulas
+$\sum_{k,l}T(n,k,l)\,\mathfrak w(n,k,l)$ for the rows, where
+$T(n,k,l)=\bin{n+k}{n}\bin nk^2\bin{n+l}{n}\bin nl^2\bin{n+k+l}{n}$ and
+$\mathfrak w$ is a polynomial in the harmonic letters
+$\HH r{x}$, $x\in\{n,k,l,n\pm k,n\pm l,k+l,n+k+l\}$. The middle row is a
+theorem ($\hat P_n=\sum T\,\hat w_3$, by the descent of \cite{BZ22} together
+with a constructive residue calculus); the top row
+\begin{equation}\label{eq:bridge}
+P_n\;=\;\sum_{k,l=0}^{n}T(n,k,l)\,\omega_5(n,k,l)
+\end{equation}
+is verified far beyond doubt and is \Open\ --- it is the single identity
+(``the bridge'') carrying the sharp low-prime denominator bound
+$2^2\cdot3$ for $P_n$.
+
+An $\varepsilon$-deformation machinery discovered the compact weights as
+Taylor coefficients: there is an explicit formal deformation (``family 1'')
+of the summand with
+\begin{equation}\label{eq:fam1}
+\textstyle\sum_{k,l}T\cdot B_3=\hat P_n,\qquad
+\sum_{k,l}T\cdot B_5=\tfrac{33}4\,P_n
+\qquad\VerifiedR{exact $\Q$, $n\le16$; mod two primes, $n\le80$},
+\end{equation}
+where $B_m$ are Bell coefficients of the deformation. Neither identity in
+\eqref{eq:fam1} is proved; the present paper is about \emph{why} they have
+resisted proof, and what instrument the resistance itself identifies.
+
+\subsection{What this paper does}
+\begin{enumerate}[leftmargin=2em]
+\item We define \emph{curve atoms}: deformations
+$T(n+\alpha(\varepsilon),k+\beta(\varepsilon),l+\gamma(\varepsilon))$ along
+polynomial curves. These are the meromorphically honest deformations --- each
+is the Brown--Zudilin parametric integrand at shifted parameters.
+\item We prove the \emph{coupling lemma} (Lemma~\ref{lem:coupling}): the
+top-graded content of $[\varepsilon^r]$ of a curve atom depends only on the
+first-order direction, through its pure $r$-th powers, and the polarization
+identity is blocked for mixtures (Lemma~\ref{lem:polar}).
+\item Combining with finite two-prime rank computations we obtain
+\emph{curve-blindness} (Theorem~\ref{thm:blind}): pinned curve combinations
+of degree $\le3$ have $\varepsilon^5$ row confined to $\Q Q\oplus\Q\hat P$.
+The graded structure of the phenomenon --- weight $\le3$ reachable, weight
+$5$ not --- matches the motive's weight spike $\{0,3,5\}$.
+\item The proof mechanism identifies the escape (§\ref{sec:tool}): decoupled
+fifth jets, i.e.\ mixed fifth parameter-derivatives of the family. We verify
+the first rung of the corresponding \emph{variational tower}
+(Theorem~\ref{thm:anchor}, \VerifiedR{exact $\Q$, $n\le18$}, with an
+identified proof route): the $n$-direction first variation satisfies exactly
+the differentiated recurrence, while the $k$-, $l$-directions are gauge.
+\item Applications (§\ref{sec:apps}): the same jet calculus, run as a
+discovery instrument, (i) rediscovers the Franel and $\mathbf D$ companions
+from linear atoms with exact held-out validation, producing new
+null-equivalent representations; (ii) establishes a two-prime reachability
+dichotomy across the fifteen sporadic pairs aligned with character and
+convergence; (iii) closes, as completed negatives, the three full-degree
+fits left unrun by the sporadic-pairs status paper; and (iv) exhibits
+per-summand annihilation laws (for the double-sum family $\zeta$) showing
+that fitting alphabets can be degenerate.
+\end{enumerate}
+
+\subsection{Evidence discipline}
+\Thm/\Proved\ mean complete mathematical proof (here: short and human-readable);
+\Verified\ means exact rational or two-prime modular computation over a stated
+range; \Excluded\ means a proved or two-prime-computational negative;
+\Open\ is open. Finite computations are never reported as proofs. Scripts and
+logs for every \Verified/\Excluded\ statement are listed in
+§\ref{sec:provenance}.
+
+%======================================================================
+\section{Curve atoms and the graded expansion}\label{sec:atoms}
+
+\subsection{Letters and cells}
+Write the cell as a ratio of factorials
+$T=\prod_{L}(x_L!)^{p_L}$ over the nine letters
+\[
+(x_L)\;=\;(n,\;k,\;l,\;n{+}k,\;n{+}l,\;n{-}k,\;n{-}l,\;k{+}l,\;n{+}k{+}l),
+\qquad
+(p_L)\;=\;(1,\,-3,\,-3,\,1,\,1,\,-2,\,-2,\,-1,\,1).
+\]
+
+\begin{definition}[curve atom]\label{def:atom}
+A \emph{curve atom of degree $D$} is a tuple $u=(u_1,\dots,u_D)$,
+$u_i\in\Z^3$; it denotes the deformed cell
+$T\bigl(n+\alpha(\varepsilon),\,k+\beta(\varepsilon),\,l+\gamma(\varepsilon)\bigr)$
+with $(\alpha,\beta,\gamma)(\varepsilon)=\sum_i u_i\varepsilon^i$, each
+factorial replaced by the corresponding $\Gamma$-value. Per letter the shift
+series is $s_L(\varepsilon)=\sum_i d_{i,L}\,\varepsilon^i$ where $d_{i,L}$ is
+the letter's linear form evaluated on $u_i$.
+\end{definition}
+
+Expanding $\log\Gamma$, the cell equals
+$T\cdot\exp\bigl(\sum_{m\ge1}\varepsilon^m\Lambda_m\bigr)$ with
+\begin{equation}\label{eq:Lam}
+\Lambda_m\;=\;\sum_L p_L\sum_{j\ge1}\frac{(-1)^{j-1}}{j}
+\Bigl(\HH j{x_L}-\zeta(j)\mathbf 1_{j\ge2}\Bigr)\,[\varepsilon^m]\,s_L^j .
+\end{equation}
+The $\zeta$-constants organise into graded blocks; the linear forms
+$S_i=\sum_Lp_Ld_{i,L}$ vanish identically for every atom (a two-line check on
+the letter table), so no Euler constant enters. The
+$[\varepsilon^r]$ coefficient of the atom is $T$ times a polynomial in
+harmonic letters and $\zeta$-values; its \emph{harmonic weight} grading
+assigns $\HH jx$ weight $j$ and $\zeta(j)$ weight $j$.
+
+\subsection{The coupling lemma}
+
+\begin{lemma}[coupling; Veronese structure of the top grade]\label{lem:coupling}
+\Proved\
+Fix a curve atom and $r\ge1$. Every harmonic monomial of weight $w$ occurring
+in $[\varepsilon^r]$ arises from letter factors with data
+$[\varepsilon^{m_i}]s_L^{j_i}$, $\sum j_i=w$, $\sum m_i=r$, and always
+$m_i\ge j_i$. In the top-graded case $w=r$ each factor has $m_i=j_i$, and
+$[\varepsilon^{j}]s_L^{j}=d_{1,L}^{\,j}$. Consequently the weight-$r$
+component of $[\varepsilon^r]$ of a curve atom depends only on the
+first-order direction $u_1$, through the pure powers $d_1^{\otimes r}$;
+higher curve coefficients $u_2,u_3,\dots$ contribute only to weights $<r$.
+\end{lemma}
+
+\begin{proof}
+$s_L=d_{1,L}\varepsilon+O(\varepsilon^2)$, so
+$[\varepsilon^m]s_L^j=0$ for $m<j$ and $=d_{1,L}^j$ for $m=j$. Summing the
+constraints $m_i\ge j_i$ against $\sum m_i=r=\sum j_i=w$ forces equality
+factorwise.
+\end{proof}
+
+\begin{lemma}[polarization is blocked for mixtures]\label{lem:polar}
+\Proved\
+Let a $\Q$-combination of curve atoms have aggregate moments
+$\mu_m=\sum_vc_v\,d_{1,v}^{\otimes m}$. Then any motion of $\mu_5$ achievable
+by perturbing directions and coefficients moves $\mu_4$ at the same order:
+for $d,\delta$ directions and $c\in\Q$,
+$c\bigl[(d+\delta)^{\otimes5}-d^{\otimes5}\bigr]
+=5c\,\delta\!\odot\!d^{\otimes4}+O(c\delta^2)$ while the same perturbation
+moves $\mu_4$ by $4c\,\delta\!\odot\!d^{\otimes3}+O(c\delta^2)$. In
+particular the fifth-symmetric slot cannot be steered within the Veronese
+mixture class while all lower moment aggregates are held fixed, in contrast
+to the free symmetric algebra where polarization decouples the slots.
+\end{lemma}
+
+\begin{proof}
+Immediate from the binomial expansion; the point is only that both leading
+corrections are linear in $c\,\delta$, so no scaling regime separates them.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:polar} is where curves differ from formal deformations. The
+formal $\varepsilon$-machinery assigns each letter an independent data vector
+$(e_1,\dots,e_5)$ --- the free symmetric algebra --- and the known
+$P$-emitting deformation (family 1) uses that freedom essentially: its letter
+$l$ has $e_1=6$ while $e_5\ne 6^5\cdot(\text{const})$; it is not
+curve-consistent. The same fact appears on the analytic side as a
+non-realizability statement: the family-1 letter table admits no
+$\Gamma$-product realization with shift scale $\varepsilon/N$ for any
+$N<120$, and at $N=120$ only with multiplicities of order $10^{11}$
+\VerifiedR{integer moment-lattice computation; \texttt{eps40\_gate.py}}.
+Decoupled jets have no polynomial-curve realization; that is one fact seen
+from two sides.
+\end{remark}
+
+%======================================================================
+\section{Curve-blindness}\label{sec:blind}
+
+Fix the pinning conditions on a $\Q$-combination $F(\varepsilon)$ of curve
+atoms: $[\varepsilon^1]F=[\varepsilon^2]F=0$ and
+$[\varepsilon^3]F\in\Q Q\oplus\Q\hat P$, imposed separately on every
+$\zeta$-graded component (with or without a corresponding condition at
+$\varepsilon^4$).
+
+\begin{theorem}[curve-blindness]\label{thm:blind}
+For curve atoms of degree $\le3$ with directions in the boxes
+$u_1\in\{-2..2\}^3$, $u_2\in\{-1,0,1\}^3$, $u_3\in\{0,\pm e_i\}$, every
+pinned $\Q$-combination has
+\[
+[\varepsilon^5]F\;\in\;\Q\,Q\;\oplus\;\Q\,\hat P ,
+\]
+i.e.\ the $P_n$-component vanishes, in the rational part and in every
+$\zeta$-graded component. The $\varepsilon^3$ coefficient meanwhile realises
+$\hat P$ with a free coefficient, and quadratic/cubic curves realise $\hat P$
+at $\varepsilon^5$ as well. Structure of the proof: Lemmas
+\ref{lem:coupling}--\ref{lem:polar} reduce the statement to the finite claim
+that the pinned Veronese moment fibre's weight-five row image lies in
+$\Q Q\oplus\Q\hat P$; that finite claim is
+\VerifiedR{two primes $4194301,4194247$, identical ranks; $n\le24$;
+\texttt{eps41.py}, \texttt{eps42.py}} at ranks
+$53/36$ (linear), $88/59$ (quadratic), $80/54$ (cubic) with nullspace
+dimensions $99$--$5075$.
+\end{theorem}
+
+\begin{remark}[reading]
+The pinning enslaves the top-weight data to the low-order null sector
+(Lemma~\ref{lem:coupling}: only $u_1$ feeds weight five; the graded pinning
+constrains precisely the $u_1$-moment aggregates; Lemma~\ref{lem:polar}: no
+escape by polarization), and the null sector's fifth powers are row-blind to
+$P$. The graded visibility --- curves see the $\zeta(3)$-level structure at
+every order, never the $\zeta(5)$ level --- matches the family's weight
+spike $\{0,3,5\}$: tangential (curve) data computes the subtop graded
+pieces; the top piece requires a decoupled jet. We regard the theorem's
+finite part as of the same epistemic kind as a certified rank computation;
+the conceptual content is the coupling mechanism.
+\end{remark}
+
+%======================================================================
+\section{The tool: variational anchors}\label{sec:tool}
+
+Lemma~\ref{lem:coupling} does not merely forbid; it prescribes. To reach the
+top row one needs objects whose fifth-order data is \emph{decoupled} from
+their lower jets. Analytically such objects exist and are classical: mixed
+parameter-derivatives
+$\partial_{v_1}\!\cdots\partial_{v_5}\,I(a)$ of the cellular integral ---
+contour integrals with logarithmic insertions, with no
+$\varepsilon^{1..4}$ content, spanning the full polarized letter algebra.
+What they need is an \emph{anchor}: an evaluation principle replacing
+\eqref{eq:In}, which is an arithmetic statement at integer parameters only.
+The anchor is the variation of the family along its parameter space; its
+first rung can be tested exactly.
+
+\begin{theorem}[first-variation anchor]\label{thm:anchor}
+Let $\Lambda_1^{(n)}=\HH1n+\HH1{n+k}+\HH1{n+l}-2\HH1{n-k}-2\HH1{n-l}
++\HH1{n+k+l}$ (the $n$-direction letter form) and
+$\dot Q(n)=\sum_{k,l=0}^nT(n,k,l)\,\Lambda_1^{(n)}(n,k,l)$. Let
+$c_0,\dots,c_3$ be the certified Brown--Zudilin recurrence coefficients and
+$c_i'$ their literal polynomial derivatives. Then:
+\begin{enumerate}[leftmargin=2em]
+\item \VerifiedR{exact $\Q$, $n\le18$; \texttt{eps46\_variation.py}}
+\begin{equation}\label{eq:anchor}
+\Lbz(\dot Q)(n)\;=\;-\sum_{i=0}^{3}c_i'(n)\,Q(n+i).
+\end{equation}
+\item \VerifiedR{exact $\Q$, $n\le34$} The $k$- and $l$-direction first
+variations vanish identically:
+$\sum_{k,l}T\cdot\Lambda_1^{(k)}=\sum_{k,l}T\cdot\Lambda_1^{(l)}=0$; these
+are the gauge directions (summation relabelings; the $N_1$ residue
+identities).
+\item \Open\ (proof route, identified) The certificate proving
+$\Lbz(Q)=0$ is a rational-function identity in $n$; it therefore holds for
+the $\Gamma$-continued family in continuous $n$, and \eqref{eq:anchor} is
+its $n$-derivative, the summation-range variation contributing only at
+second order because continuation cells vanish doubly. Writing this out
+against an explicit certificate upgrades (1) to \Proved.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[the variational tower, with its rung-two obstruction]
+\label{rem:tower}
+Iterating, $j$-th variations should satisfy the $j$-fold differentiated
+inhomogeneous tower over the same recurrence, and family-1's Bell weight
+$B_5$ is a polynomial in decoupled letter jets, i.e.\ a $\Q$-combination of
+mixed fifth partials of the multi-parameter cellular family. Two facts
+sharpen this proposal, one positive and one an obstruction
+(\texttt{work/VARIATIONAL\_TOWER.md}):
+\begin{enumerate}[leftmargin=2em]
+\item Rung one has a \emph{purely discrete} proof route: differentiate the
+rational certificate identity for $\Lbz(Q)=0$ and sum over the integer
+lattice; at first order the continuation cells (double zeros of the cell in
+the $n{-}k$, $n{-}l$ letters) stay dead, so no analytic continuation enters
+at all. Moreover Brown--Zudilin's own transfer principle (integrand-level
+$\Q$-relations descend to the rows separately) licenses the integral-level
+version of every rung.
+\item \VerifiedR{exact $\Q$, $n\le15$; \texttt{eps47\_tower2.py}} The
+\emph{sum-level} tower fails at rung two in the $n$-direction: second
+derivatives revive the continuation cells (a double zero contributes to a
+second derivative), and the revived layer diverges. Seven of the nine
+letter directions are safe at all jet orders; the $n{-}k$, $n{-}l$
+directions are unsafe at order $\ge2$. As tabulated, $B_5$ requires
+order-$4$ jets in the unsafe directions, so the \emph{sum-level} tower
+cannot reach it; whether the four-dimensional $L_4/L_5$ null freedom
+admits a representative with unsafe order $\le1$ is \Open, and the proper
+home of the higher rungs is in any case the \emph{integral-level} tower
+$\partial_{v_1\cdots v_j}I(a)$, where no support issues exist and the
+transfer principle applies.
+\end{enumerate}
+If either escape closes the tower, five differentiations plus initial
+values prove the weight-five attachment
+$\sum_{k,l}T\cdot B_5=\tfrac{33}4P_n$ with no certificate search. The
+compact-versus-Bell comparison ($\Delta_5$) would remain \Open; the sharp
+low-prime denominator bound would transfer to the $B_5$ weight by
+re-running the proved endpoint-residue analysis on it (the programme's
+``alternate route'' completion standard).
+\end{remark}
+
+%======================================================================
+\section{Applications of the jet calculus}\label{sec:apps}
+
+The same machinery, run in reverse (scan $\to$ rational reconstruction $\to$
+exact validation), is a discovery instrument for companion formulas. We
+report four applications; all scans at two unrelated $22$-bit primes with
+identical ranks and verdicts.
+
+\subsection{Rediscovery with controls}\label{sec:app1}
+For the Franel family $S=\bin nk^3$ and the family
+$\mathbf D$: $S=\bin nk^2\bin{n+k}n$, whose companions are known, the pinned
+linear-atom scan rediscovers reachability and the extracted, rationally
+reconstructed weights verify exactly over $\Q$ on held-out ranges
+\VerifiedR{exact $\Q$, $n\le25$; \texttt{eps43.py}}. The discovered weights
+differ from the published ones by null weights
+($\sum_kS\cdot(\text{difference})=0$, exact, $n\le20$) --- new equivalent
+representations. This validates the loop end-to-end on ground truth; a
+harness defect (an int64 overflow) was caught by the control, illustrating
+why controls are mandatory.
+
+\subsection{A reachability dichotomy across the fifteen sporadic
+pairs}\label{sec:app2}
+Running the identical protocol on the three sporadic families for which the
+status paper proves no harmonic-weight fit exists ($\mathbf B$, $\delta$,
+$\zeta$) yields: companion \emph{unreachable} by linear and quadratic curve
+atoms, at $\varepsilon^2$ and $\varepsilon^3$, in every $\zeta$-graded
+component \Excluded. With the two reachable controls this aligns exactly
+with arithmetic type: reachable $=$ principal character with real
+$\zeta(2)$-limit; unreachable $=$ non-principal character or no
+Ap\'ery limit. We state the induced expectation as a conjecture.
+
+\begin{conjecture}\label{conj:dichotomy}
+The $\varepsilon$-jet mechanism on a sporadic cell generates the second
+solution if and only if the level of the family's modular uniformization
+is squarefree. (An earlier character-and-limit form of this conjecture
+was refuted by its discriminating experiment --- the Domb family and
+$\varepsilon$, principal character with real limits and possessing
+harmonic companions, are jet-unreachable; see the companion paper
+\texttt{papers\_out/modular\_anchors} and \texttt{eps54\_domb.py}.)
+\end{conjecture}
+
+\subsection{Closing the unrun fits}\label{sec:app3}
+The sporadic status paper listed three full-degree fits as not made
+($424$--$1088$ columns). All were run
+(\texttt{eps44.py}): families $\zeta$ and $\eta$ over their complete tame
+alphabets at degree three, and $\mathbf F$ at its seven tame arguments, pure
+and with conductor-matched twisted letters ($\chi_{-3}$, $\chi_5$):
+\emph{all six inconsistent}, excess $90$--$173$ \Excluded. Together with the
+earlier exclusions, the $\sum_kS\cdot\mathfrak w$ harmonic ansatz over
+complete tame alphabets is exhausted for all seven conjectural families.
+Two diagnostic corrections: $\zeta$ \emph{does} possess summand--letter
+$\Q$-relations at full degree ($15$-dimensional pure kernel,
+$36$-dimensional twisted), contradicting the earlier ``rank $=$ columns''
+report for $\zeta$; $\eta$ has rank $=$ columns even at $2530$ columns.
+
+\subsection{Annihilation laws: alphabets are quotients}\label{sec:app4}
+Extraction of $\zeta$'s kernel produces per-cell annihilation identities,
+e.g.
+\begin{equation}\label{eq:ann}
+\sum_{l}S_\zeta(n,k,l)\,\bigl(\HH1k-2\HH1l+\HH1{n-l}\bigr)\;=\;0
+\qquad\text{for all }0\le k\le n
+\end{equation}
+and a weight-two companion law
+\VerifiedR{exact $\Q$, all cells $n\le25$}; together they generate $12$ of
+the $15$ kernel dimensions. Under the inner sum the letters
+$\HH1l,\HH1{n-l}$ are not free --- every previous fit for $\zeta$ was
+conducted in a degenerate alphabet. Both laws are single-variable
+hypergeometric-weighted sums, hence candidates for Gosper/WZ certification;
+certificates would make them the first \Proved\ structural facts about the
+letters of a conjectural-seven family. \Open\ at the time of writing
+(certificate search in progress).
+
+\subsection{Modular anchors exactly where jets fail}\label{sec:app5}
+The dichotomy of §\ref{sec:app2} predicts that the unreachable families
+carry structure invisible to binomial letters. A nome computation
+(recurrence $\to$ MUM Frobenius pair $\to$ $q=t\exp(g/y_0)$; instrument
+validated on the Ap\'ery $\zeta(3)$ control, which reproduces the classical
+$\Gamma_0(6)$ eta-quotient parametrization exactly to $q^{26}$;
+\texttt{eps48\_modular\_nome.py}) shows that \emph{all three} unreachable
+families $\mathbf B,\delta,\zeta$ possess integer nome expansions --- they
+are modular-parametrized --- and identifies $\zeta$'s weight-two form
+exactly:
+\[
+F_\zeta(q)\;=\;\tfrac18\bigl(9E_2(q^9)-E_2(q)\bigr)\in
+M_2(\Gamma_0(9))
+\qquad\VerifiedR{coefficientwise to $q^{26}$}.
+\]
+$\mathbf B$'s weight-one form is identified as well:
+$F_{\mathbf B}(q)=b(-q)$, the Borwein cubic theta
+$\eta(q)^3/\eta(q^3)$ at $-q$ \VerifiedR{all $27$ computed coefficients}.
+Thus the anchor exists precisely where every binomial-world instrument
+provably fails, and its letters are $q$-side objects.
+
+The anchor delivers. Exact boundary bookkeeping shows the second solution
+of $\zeta$'s recurrence satisfies $L(y_B)=t$, and the operator factors
+through the nome as $L=(P_3(t)/\sigma^3)\cdot F\cdot\theta_q^3\circ(1/F)$;
+inverting,
+\begin{equation}\label{eq:zetacomp}
+B_\zeta(n)\;=\;[t^n]\;F\cdot\theta_q^{-3}\!\Bigl(\frac{t\,\sigma^3}{P_3\,F}\Bigr),
+\end{equation}
+an Eichler-type integral in the identified modular data
+\VerifiedR{coefficientwise exact $\Q$, $n\le22$, for $\zeta$ and for the
+Ap\'ery $\zeta(3)$ control}. Equation~\eqref{eq:zetacomp} is a companion
+formula for a family whose complete tame harmonic ansatz is provably empty
+(§\ref{sec:app3}) --- the first for any of the conjectural seven, in
+modular letters. Further, the $\chi_{-3}$-twisted Lucas law for $\zeta$
+holds with twist exponent $e=1$ exactly (discriminating primes $5,11$),
+consistent with the mod-$p$ shadow of Atkin--Swinnerton-Dyer for the
+identified $\Gamma_0(9)$ parametrization; the descent problems of the
+sporadic status paper thus acquire a modular route for $\zeta$. Details
+and honest limits (nome integrality checked, not proved) in
+\texttt{work/MODULAR\_COACTION\_PROBE.md}.
+
+%======================================================================
+\section{Limits, falsifiers, and outlook}\label{sec:limits}
+
+\subsection{Limits of the negatives}
+Curve degrees $\le3$; direction boxes as stated; $n\le28$; two $22$-bit
+primes. Deeper curves cannot change Theorem~\ref{thm:blind}'s top-grade
+mechanism (Lemma~\ref{lem:coupling} is degree-independent), but the finite
+rank statements are box-dependent as labelled. The sporadic negatives do not
+exclude constant-term (Gorodetsky-type) representations or
+rational-function coefficients; those are the recommended next ans\"atze.
+
+\subsection{Falsifiers}
+(i) A pinned curve combination reaching $P$ at any degree would refute the
+finite part of Theorem~\ref{thm:blind} (the lemmas cannot break).
+(ii) A weight-three form whose row equals $P_n$ would break the graded-spike
+input. (iii) First variations failing to anchor in derivative-ladder data
+would break Remark~\ref{rem:tower}'s proposal; Theorem~\ref{thm:anchor}(1)
+is the surviving first test, and it passed.
+
+\subsection{The mirror side of the $\zeta(5)$ family}
+The nome instrument applied to the Brown--Zudilin operator itself
+(\texttt{eps50\_z5\_nome.py}, \texttt{work/Z5\_MODULARITY\_PROBE.md})
+finds: the order-nine operator's indicial structure carries a
+five-dimensional unipotent block (exponent $0$ with multiplicity five ---
+the $(1,1,1,1,1)$ Calabi--Yau-fourfold-type signature, matching weight
+five), and the \textbf{mirror map is integral with no rescaling}:
+$t(q)=q-94q^2-591q^3-454656q^4-\cdots$ and $F(q)=1+21q+1015q^2+\cdots$
+lie in $\Z[[q]]$ \VerifiedR{$q^{26}$}. Root-integrality
+$Q(4t)^{1/2},Q(8t)^{1/4}\in\Z[[t]]$ holds with pure $2$-power
+denominators (a Dwork-type $2$-adic signal); whether the block is
+operator-level $\mathrm{Sym}^4$ is \Open. Thus the $\zeta(5)$ family
+passes the Golyshev-style arithmeticity test outright --- it lives in the
+Calabi--Yau/mirror world rather than the elliptic-modular world of the
+weight-$2,3$ sporadics --- consonant with the measured Frobenius spike
+$\operatorname{diag}(1,p^3,p^5)$. We record the induced expectation as the
+\emph{mirror form of the bridge}: in the block's $q$-coordinate the
+companion rows should be coefficient sequences of $q$-side Eichler-type
+objects (as \eqref{eq:zetacomp} realises for the sporadic $\zeta$), and
+\eqref{eq:bridge} the $t$-shadow of a $q$-side identity; together with
+Theorem~\ref{thm:blind} this says the weight-five-seeing instrument
+should be built from the block's own coordinates rather than binomial
+letters.
+
+\subsection{Outlook}
+The natural home of the tower is the moduli-space family: parameter
+derivatives are the Gauss--Manin connection, the recurrence is the
+contiguity direction, and \eqref{eq:anchor} is their compatibility. The
+jet-coaction dictionary (jets as de Rham shadows of the motivic coaction,
+with the sporadic dichotomy as Galois equivariance) is conjectural but has
+paid rent: it retrodicts the one-step (unipotent) shape of
+\eqref{eq:anchor} --- the inhomogeneity couples to $Q$ alone --- and it
+makes the falsifiable prediction that second variations anchor in
+$\operatorname{span}\{Q,\dot Q\}$ only, which the tower's second rung will
+test. The immediate mathematical targets are: a parametric certificate for
+the cellular family; the second rung of the tower; and WZ certificates for
+\eqref{eq:ann}. On the first target, Brown's recent Mellin-transform
+framework \cite{Br26} provides, in its appendix for the
+$\zeta(2)$/$\mathcal M_{0,5}$ case, exactly the required object in a toy:
+explicit contiguity matrices $M_i(s)$, \emph{rational in continuous
+parameters}, transporting an anchored period vector across the parameter
+lattice; differentiating the rational transport chain anchors
+parameter-derivatives in closed form. Constructing the analogous matrices
+for the $\zeta(5)$/$\mathcal M_{0,8}$ family is the identified one-time
+cost of the tower programme (see \texttt{work/BROWN26\_MINING.md}).
+
+%======================================================================
+\section{Provenance and data}\label{sec:provenance}
+
+All scripts in \texttt{work/z5eps/} of the programme repository, with logs:
+\texttt{eps40\_gate.py} (realizability obstruction);
+\texttt{eps41.py}, \texttt{eps42.py} (curve scans, Theorem~\ref{thm:blind}
+finite part); \texttt{eps43.py} (+\,\texttt{eps43\_*.pkl}: controls and
+dichotomy); \texttt{eps44.py} (the unrun fits, §\ref{sec:app3});
+\texttt{eps46\_variation.py} (Theorem~\ref{thm:anchor});
+memos \texttt{work/CURVE\_BLINDNESS.md}, \texttt{work/EPS\_DISCOVERY.md},
+\texttt{work/sharp12\_lowprimes/BRIDGE\_CAMPAIGN\_2026-08-03.md}. All exact
+arithmetic is \texttt{Fraction}-based; every modular verdict was recomputed
+at a second, unrelated prime with identical rank and verdict.
+
+\begin{thebibliography}{9}
+\bibitem{BZ22} F.~Brown and W.~Zudilin,
+\emph{On cellular rational approximations to $\zeta(5)$}, 2022--2026.
+\bibitem{Br14} F.~Brown,
+\emph{Irrationality proofs for zeta values, moduli spaces and dinner
+parties}, Mosc.\ J.\ Comb.\ Number Theory (2016).
+\bibitem{Zu02} W.~Zudilin,
+\emph{Arithmetic of linear forms involving odd zeta values},
+J.\ Th\'eor.\ Nombres Bordeaux (2004).
+\bibitem{Sporadics} River's programme,
+\emph{The fifteen sporadic Ap\'ery-like pairs: second solutions, the
+$\chi$-twisted Lucas law, and the closed forms}, working paper
+(\texttt{papers\_out/sporadics}).
+\bibitem{Br26} F.~Brown,
+\emph{Mellin transforms, the transfinite diameter, and rational
+approximation}, preprint, 2026.
+\bibitem{Gor21} O.~Gorodetsky,
+\emph{New representations for all sporadic Ap\'ery-like sequences, with
+applications to congruences}, 2021.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,90 @@
+=== VALIDATION CONTROL: franel pure, args {k,n-k} ===
+  franel: A(n) direct summation satisfies recurrence, n<=12: PASS
+[franel pure] p=4194301 cols=5 rows=128(fit n=13..140) rank=3 excess=125 -> CONSISTENT (0s)
+  second prime 4194247: rank=3 -> CONSISTENT  (agree: True)
+  mod-p check on all rows n=1..140 incl held-out: PASS
+  reconstructed weight: 3 nonzero terms
+    3/4 * H1[k]*H1[k]
+    -3/4 * H1[k]*H1[n-k]
+    1/4 * H2[k]
+  EXACT-Q held-out verification n=1..12: PASS
+  reconstructed solution verifies at second prime on all rows: PASS
+  saved -> eps44_franel.pkl
+control OK
+
+  F: A(n) direct summation satisfies recurrence, n<=12: PASS
+[F pure] p=4194301 cols=35 rows=128(fit n=13..140) rank=23 excess=105 -> INCONSISTENT (0s)
+  second prime 4194247: rank=23 -> INCONSISTENT  (agree: True)
+
+    design rows through n=200 (0s)
+[F harm+chi-3] p=4194301 cols=119 rows=248(fit n=13..260) rank=75 excess=173 -> INCONSISTENT (1s)
+  second prime 4194247: rank=75 -> INCONSISTENT  (agree: True)
+
+  zeta: A(n) direct summation satisfies recurrence, n<=12: PASS
+    design rows through n=200 (0s)
+[zeta pure] p=4194301 cols=140 rows=248(fit n=13..260) rank=125 excess=123 -> INCONSISTENT (0s)
+  second prime 4194247: rank=125 -> INCONSISTENT  (agree: True)
+
+    design rows through n=200 (1s)
+    design rows through n=400 (5s)
+    design rows through n=600 (15s)
+    design rows through n=800 (37s)
+[zeta harm+chi-3] p=4194301 cols=770 rows=868(fit n=13..880) rank=734 excess=134 -> INCONSISTENT (52s)
+  second prime 4194247: rank=734 -> INCONSISTENT  (agree: True)
+
+Traceback (most recent call last):
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5eps/eps44.py", line 405, in <module>
+    rec_check(fam)
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5eps/eps44.py", line 96, in rec_check
+    Av = [A_of(fam, n) for n in range(NCH + 2)]
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5eps/eps44.py", line 92, in A_of
+    return sum(fam.Sx(n, c) for c in fam.cells(n))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5eps/eps44.py", line 92, in <genexpr>
+    return sum(fam.Sx(n, c) for c in fam.cells(n))
+               ^^^^^^^^^^^^
+  File "/home/ubuntu/fable-episode-2/zeta-math-2/work/z5eps/eps44.py", line 67, in <lambda>
+    * comb(4 * n - 5 * c[0] - 1 + c[1], 3 * n))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: n must be a non-negative integer
+=== VALIDATION CONTROL: franel pure, args {k,n-k} ===
+  franel: A(n) direct summation satisfies recurrence, n<=12: PASS
+[franel pure] p=4194301 cols=5 rows=128(fit n=13..140) rank=3 excess=125 -> CONSISTENT (0s)
+  second prime 4194247: rank=3 -> CONSISTENT  (agree: True)
+  mod-p check on all rows n=1..140 incl held-out: PASS
+  reconstructed weight: 3 nonzero terms
+    3/4 * H1[k]*H1[k]
+    -3/4 * H1[k]*H1[n-k]
+    1/4 * H2[k]
+  EXACT-Q held-out verification n=1..12: PASS
+  reconstructed solution verifies at second prime on all rows: PASS
+  saved -> eps44_franel.pkl
+control OK
+
+  eta: A(n) direct summation satisfies recurrence, n<=12: PASS
+    design rows through n=200 (0s)
+    design rows through n=400 (0s)
+[eta pure] p=4194301 cols=418 rows=508(fit n=13..520) rank=418 excess=90 -> INCONSISTENT (1s)
+  second prime 4194247: rank=418 -> INCONSISTENT  (agree: True)
+
+    design rows through n=200 (1s)
+    design rows through n=400 (1s)
+    design rows through n=600 (2s)
+    design rows through n=800 (3s)
+    design rows through n=1000 (3s)
+    design rows through n=1200 (4s)
+    design rows through n=1400 (5s)
+    design rows through n=1600 (5s)
+    design rows through n=1800 (6s)
+    design rows through n=2000 (7s)
+    design rows through n=2200 (8s)
+    design rows through n=2400 (9s)
+    design rows through n=2600 (10s)
+[eta harm+chi5] p=4194301 cols=2530 rows=2638(fit n=13..2650) rank=2530 excess=108 -> INCONSISTENT (195s)
+  second prime 4194247: rank=2530 -> INCONSISTENT  (agree: True)
+
+=== VERDICT TABLE ===
+  eta pure               cols= 418 rank= 418 excess= 90 INCONSISTENT (2nd prime agrees: True)
+  eta harm+chi5          cols=2530 rank=2530 excess=108 INCONSISTENT (2nd prime agrees: True)
+total 394s

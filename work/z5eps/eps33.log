@@ -1,0 +1,24 @@
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+distinct var-parts: 787
+  rows through n = 0
+  rows through n = 10
+  rows through n = 20
+  rows through n = 30
+  rows through n = 40
+  rows through n = 50
+  rows through n = 60
+  rows through n = 70
+rows: (2926, 3753) 15s
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+new generators (towers + V5): 735
+elementary endpoint generators: 118
+new endpoint-elementary monomials: 48
+eps27 new generators: 174
+weighted rho-monomials: 299
+z-weighted generators (cached): 2030
+extended monomials in play: 24624
+p=4194301 NROWS=75: rank(A)=1673, with b: 1673 -> membership HOLDS (312s)

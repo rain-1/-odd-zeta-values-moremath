@@ -1,0 +1,49 @@
+=== CONTROLS (exact, order 46) ===
+  gamma   -> R3 (17, 5, 1, 0) MATCH
+  A       -> R2 (7, 2, -8) MATCH
+  zeta    -> R3 (9, 3, -27, 0) MATCH
+  delta   -> R3 (7, 3, 81, 0) MATCH
+  alpha   -> R3 (10, 4, 64, 0) MATCH
+  eps     -> R3 (12, 4, 16, 0) MATCH
+  C       -> R2 (10, 3, 9) MATCH
+  E       -> R2 (12, 4, 32) MATCH
+  F       -> R2 (17, 6, 72) MATCH
+  eta     -> R3 (11, 5, 125, 0) MATCH
+all 10 controls MATCH (0s)
+
+=== SWEEP mod 4194301, order 30 ===
+  level 2  :     0 pairs,   0 new distinct hits  (0s)
+  level 3  :    14 pairs,   4 new distinct hits  (0s)
+  level 4  :   378 pairs,  14 new distinct hits  (1s)
+  level 5  :    12 pairs,   1 new distinct hits  (1s)
+  level 6  :  1488 pairs,   7 new distinct hits  (2s)
+  level 7  :    10 pairs,   0 new distinct hits  (2s)
+  level 8  :  1488 pairs,   5 new distinct hits  (3s)
+  level 9  :   308 pairs,   6 new distinct hits  (3s)
+  level 10 :  1488 pairs,   0 new distinct hits  (4s)
+  level 12 :  1800 pairs,   0 new distinct hits  (6s)
+  level 13 :    10 pairs,   0 new distinct hits  (6s)
+  level 16 :  1632 pairs,   5 new distinct hits  (7s)
+  level 18 :  1800 pairs,   6 new distinct hits  (9s)
+  level 20 :  1800 pairs,   0 new distinct hits  (10s)
+  level 25 :   130 pairs,   0 new distinct hits  (11s)
+
+=== CLASSIFY (exact, order 46) ===
+rediscovered: 5
+  known=eta level=5 twist=1 R3(-11, -5, 125, 0)
+  known=F level=6 twist=1 R2(-17, -6, 72)
+  known=E level=8 twist=1 R2(-12, -4, 32)
+  known=B level=9 twist=1 R2(-9, -3, 27)
+  known=zeta level=9 twist=1 R3(9, 3, -27, 0)
+NEW 3-term integral pairs: 4
+  NEW level=4 twist=1 R2(-16, -4, 0) a=[1, -4, 36, -400, 4900, -63504, 853776] comp_w=1
+       t={1: -8, 4: 8} f=eta[(1, 4), (2, -2)]
+  NEW level=4 twist=1 R3(-16, -8, 256, 0) a=[1, -8, 88, -1088, 14296, -195008, 2728384] comp_w=3
+       t={1: -8, 4: 8} f=eta[(1, 8), (2, -4)]
+  NEW level=4 twist=1 R3(0, 0, 64, 0) a=[1, 0, -8, 0, 216, 0, -8000] comp_w=3
+       t={2: -12, 4: 12} f=eta[(2, 8), (4, -4)]
+  NEW level=8 twist=1 R2(0, 0, 16) a=[1, 0, -4, 0, 36, 0, -400] comp_w=2
+       t={2: -4, 8: 4} f=eta[(2, 4), (4, -2)]
+other (degenerate/rational/no-3-term-shape): 39
+
+saved eps55_catalog.json  (15s total)

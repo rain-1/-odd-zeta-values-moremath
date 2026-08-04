@@ -1,0 +1,18 @@
+rho1 = Sfull-ratio                                               PASS
+rho2 = Sfull-ratio                                               PASS
+(C1) r d(l+1)-d = 1 + a1 rho1 + a2 rho2 [letter blocks]          PASS
+(C2) r u(l+1)-u = f [constant block]                             PASS
+binomial shift identities (Gamma level)                          PASS
+S*d pole-free binomial form                                      PASS
+C(k+2,l) = C(k+1,l)(k+2)/(k+2-l)                                 PASS
+S*u pole-free binomial form                                      PASS
+G(0) = 0 (explicit factor l in both numerators)                  PASS
+  [G(k+3) = 0 via C(k+2, k+3) = 0 in both binomial forms]
+base case even n, k = n/2+1                                      PASS
+base case odd n, k = (n+1)/2                                     PASS
+base case odd n, k = (n+1)/2 + 1                                 PASS
+  [a2 > 0 for n/2 <= k <= n-2: 2k-n+3 >= 3 -- inspection]
+telescoped recurrence (R) exact, n<=22 all k [231 checks]        PASS
+P(n,k) = 0 exact, n <= 30, all k                                 PASS
+
+TOTAL: ALL PASS -- identity 1 PROVED  (24s)

@@ -1,0 +1,955 @@
+% !TeX program = pdflatex
+%
+% "The companion by the nome: Apery's zeta(3) numbers and the modular route
+%  to second solutions."  Expository.
+%
+% Every displayed expansion in this paper was computed exactly (Fraction
+% arithmetic) by papers_out/expository_apery/verify.py; the check labels
+% CHECK1..CHECK11 in section 8 are that script's output.
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Ver}[1]{\textup{\textsf{[verified: #1]}}}
+\newcommand{\ta}{\theta_t}
+\newcommand{\tq}{\theta_q}
+\DeclareMathOperator{\ord}{ord}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\title[The companion by the nome]
+      {The companion by the nome:\\
+       Ap\'ery's $\zeta(3)$ numbers and the\\ modular route to second solutions}
+
+\author{}
+\date{\today}
+
+\subjclass[2020]{11F11, 11J72, 11B37, 33C20, 14J32}
+\keywords{Ap\'ery numbers, second solution, mirror map, nome, hauptmodul,
+eta quotient, Eichler integral, maximal unipotent monodromy}
+
+\begin{abstract}
+Ap\'ery's proof that $\zeta(3)\notin\Q$ runs on a three-term recurrence with
+two solutions: the integers $a_n$, and a companion $b_n$ with
+$b_n/a_n\to\zeta(3)$. The companion is classically described by a harmonic-sum
+formula. This paper explains a different route to it --- the \emph{modular}
+route --- in which the companion is read off from the nome of the associated
+differential operator rather than from any sum over binomial cells. We work the
+Ap\'ery case in full, because there everything is classical and checkable: the
+mirror map $t(q)$ is Beukers' level-$6$ eta quotient, the operator factors as
+$L=(P_3/\sigma^3)\,F\,\tq^3\,F^{-1}$, and the second solution becomes a single
+Eichler-type integral,
+$b_n=6\,[t^n]\,F(q)\,\tq^{-3}\bigl(t\sigma^3/(P_3F)\bigr)$.
+All expansions are exact and were verified by machine over $\Q$; the ranges are
+stated. A closing section explains why this detour is worth learning: in the
+surrounding programme it produces companions for sporadic families where
+harmonic-sum formulas provably do not exist.
+\end{abstract}
+
+\maketitle
+
+\section{Two solutions and one miracle}
+
+In 1978 Ap\'ery announced that
+\[
+  \zeta(3)=\sum_{n\ge1}\frac{1}{n^3}
+\]
+is irrational, and the proof --- as relayed by van der Poorten's celebrated
+report \cite{vdP} --- was so compressed that the audience largely did not
+believe it. The engine is one recurrence:
+\begin{equation}\label{eq:rec}
+  (n+1)^3u_{n+1}=(34n^3+51n^2+27n+5)\,u_n-n^3u_{n-1},
+  \qquad n\ge1 .
+\end{equation}
+It is convenient to notice that the middle polynomial factors,
+$34n^3+51n^2+27n+5=(2n+1)(17n^2+17n+5)$; the pair $(17,5)$ and the trailing
+$n^3$ are the only data.
+
+Equation~\eqref{eq:rec} has a two-dimensional solution space, and the whole
+proof is the interplay of two particular members of it.
+
+The first is
+\begin{equation}\label{eq:an}
+  a_n=\sum_{k=0}^{n}\binom{n}{k}^{2}\binom{n+k}{k}^{2},
+  \qquad a_0=1,\ a_1=5,\ a_2=73,\ a_3=1445,\dots
+\end{equation}
+That these integers satisfy \eqref{eq:rec} is the first surprise (they are a
+sum over $n+1$ cells, and the recurrence knows nothing about cells); it is
+nowadays a two-line consequence of Zeilberger's algorithm, and we take it as
+known. \Ver{$n\le 25$, exactly}
+
+The second solution is the companion $b_n$, pinned down by
+\begin{equation}\label{eq:bn}
+  b_n=\sum_{k=0}^{n}\binom{n}{k}^{2}\binom{n+k}{k}^{2}
+      \Biggl(\sum_{m=1}^{n}\frac{1}{m^3}
+      +\sum_{m=1}^{k}\frac{(-1)^{m-1}}
+        {2m^3\binom{n}{m}\binom{n+m}{m}}\Biggr),
+\end{equation}
+so that $b_0=0$ and $b_1=6$. We use this normalisation throughout; it is the
+one in \cite{vdP}. \Ver{\eqref{eq:bn} satisfies \eqref{eq:rec} for
+$1\le n\le 24$, exactly}
+
+The miracle is that these two sequences approach each other's quotient
+extremely fast. The two roots of $t^2-34t+1$ are $\alpha^{\pm1}$ with
+\begin{equation}\label{eq:limit}
+  \alpha=(1+\sqrt2)^4=17+12\sqrt2=33.97\ldots,
+\end{equation}
+these are the reciprocal singularities of \eqref{eq:rec}, and the classical
+asymptotics (see \cite{vdP,Beukers79}) are
+\begin{equation}\label{eq:limit2}
+  a_n\sim C\,\alpha^{n}n^{-3/2},
+  \qquad
+  \bigl|b_n-a_n\zeta(3)\bigr|=O\bigl(\alpha^{-n}\bigr),
+  \qquad\text{so}\qquad
+  \lim_{n\to\infty}\frac{b_n}{a_n}=\zeta(3).
+\end{equation}
+Let $d_n=\mathrm{lcm}(1,\dots,n)$, so $d_n=e^{n(1+o(1))}$ by the prime number
+theorem. Three inputs finish the proof.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.4em]
+\item $a_n\in\Z$ (clear from \eqref{eq:an}) and $d_n^{3}b_n\in\Z$. The second
+  is \emph{not} clear from \eqref{eq:bn} --- the inner sum there carries
+  binomial coefficients in its denominators --- and is a genuine arithmetic
+  theorem; see \cite[\S3]{vdP} and \cite{Beukers79}.
+\item $b_n-a_n\zeta(3)\ne0$ for all large $n$. This too needs an argument; the
+  cleanest is Beukers' integral representation \cite{Beukers79}, in which
+  $b_n-a_n\zeta(3)$ is (up to sign) a triple integral of a strictly positive
+  integrand, hence nonzero.
+\item $e^{3}<\alpha$, i.e.\ $20.08\ldots<33.97\ldots$
+\end{enumerate}
+Now suppose $\zeta(3)=p/q$ with $p,q\in\Z$, $q\ge1$. Then
+$q\,d_n^{3}\bigl(b_n-a_n\zeta(3)\bigr)$ is an integer by (i); it is nonzero by
+(ii); and by \eqref{eq:limit2} and (iii) its absolute value is
+$O\bigl(q\,(e^{3}/\alpha)^{n(1+o(1))}\bigr)\to0$. A nonzero integer cannot tend
+to $0$. Hence $\zeta(3)\notin\Q$; that is the whole proof.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}rrl@{}}
+\toprule
+$n$ & $a_n$ & $b_n$\\
+\midrule
+0 & $1$ & $0$\\
+1 & $5$ & $6$\\
+2 & $73$ & $351/4$\\
+3 & $1445$ & $62531/36$\\
+4 & $33001$ & $11424695/288$\\
+5 & $819005$ & $35441662103/36000$\\
+6 & $21460825$ & $20637706271/800$\\
+\bottomrule
+\end{tabular}
+\qquad
+\begin{tabular}{@{}rl@{}}
+\toprule
+$n$ & $b_n/a_n$\\
+\midrule
+1 & $1.2$\\
+2 & $1.20205479452$\\
+3 & $1.20205690119$\\
+4 & $1.20205690316$\\
+5 & $1.20205690316$\\
+6 & $1.20205690316$\\
+$\infty$ & $\zeta(3)=1.20205690316$\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{The two solutions, and the convergence.  Both columns are exact
+rationals; the quotients are shown to $12$ digits. \Ver{computed}}
+\label{tab:ab}
+\end{table}
+
+Table~\ref{tab:ab} is the whole story in numbers, and the reader who has never
+seen it should stop and admire the right-hand column: six terms of a recurrence
+give ten digits of $\zeta(3)$.
+
+\medskip
+\noindent\textbf{The question this paper answers.} Formula~\eqref{eq:bn} is a
+\emph{harmonic-sum} formula: same binomial cells as $a_n$, weighted by
+harmonic-type numbers. It is a beautiful thing, and for a long time it was the
+only known way to write a companion down. But it is a formula of a very
+particular shape, and that shape is not always available: in the surrounding
+research programme (\S\ref{sec:why}) there are Ap\'ery-like families for which
+one can \emph{prove} that no formula of type \eqref{eq:bn} exists, and yet the
+companion is a perfectly concrete sequence with a perfectly concrete
+arithmetic. We want a construction of the second solution that does not go
+through cells at all.
+
+There is one, and it is modular. The route is:
+\begin{center}
+recurrence $\rightsquigarrow$ differential operator $\rightsquigarrow$
+Frobenius basis $\rightsquigarrow$ nome $q$ $\rightsquigarrow$ modular
+parametrisation $\rightsquigarrow$ companion.
+\end{center}
+Every arrow is classical for Ap\'ery; only the last one is recent, and it is
+the one we will derive in \S\ref{sec:punchline}. The Ap\'ery case is our worked
+example precisely because the answer is already known: it lets us check every
+step.
+
+\section{From recurrence to operator}\label{sec:op}
+
+Set $\ta=t\frac{d}{dt}$, so that $\ta t^n=nt^n$. Any three-term recurrence
+whose coefficients are polynomial in $n$ becomes a differential operator by the
+substitution $n\mapsto\ta$, $\text{shift}\mapsto\text{multiplication by }t$.
+For \eqref{eq:rec}, with $(a,b,c,d)=(17,5,1,0)$:
+
+\begin{definition}\label{def:L}
+\[
+  L \;=\; \ta^{3}\;-\;t\,(2\ta+1)(a\ta^{2}+a\ta+b)
+        \;+\;t^{2}(\ta+1)\bigl(c(\ta+1)^{2}+d\bigr).
+\]
+\end{definition}
+
+Expanding $L$ on a formal series $y=\sum_n u_nt^n$ and reading the coefficient
+of $t^n$ gives exactly
+\[
+  [t^n]\,L(y)=n^3u_n-(2n-1)\bigl(a(n-1)^2+a(n-1)+b\bigr)u_{n-1}
+              +(n-1)^3u_{n-2},
+\]
+which is \eqref{eq:rec} with $n$ replaced by $n-1$. So:
+
+\begin{observation}\label{obs:dict}
+$L(y)=0$ if and only if the coefficients of $y$ satisfy \eqref{eq:rec}
+\emph{for every} $n\ge0$, including $n=0$. The $n=0$ instance reads
+$1^3u_1=5u_0$, and it is the one piece of bookkeeping that will later earn its
+keep: see \S\ref{sec:punchline}.
+\end{observation}
+
+Thus $y_0(t):=\sum_{n\ge0}a_nt^n$ satisfies $L(y_0)=0$
+(\Ver{to $t^{26}$, exactly}), while $y_b:=\sum_n b_nt^n$ does \emph{not}:
+$b$ satisfies \eqref{eq:rec} only for $n\ge1$, and the $n=0$ defect is
+$1^3b_1-5b_0=6$. Hence
+\begin{equation}\label{eq:inhom}
+  L(y_b)=6t .
+\end{equation}
+This is not a blemish. It is the entire mechanism by which the second solution
+is \emph{selected}: $y_0$ is the kernel, $y_b$ is the solution of an
+inhomogeneous problem whose right-hand side is one monomial.
+
+\medskip
+The indicial polynomial of $L$ at $t=0$ is the $\ta$-part with $t=0$, namely
+$\ta^3$: a triple root at $0$. In the language of Picard--Fuchs equations, $L$
+has \emph{maximal unipotent monodromy} (MUM) at the origin. This is the
+structural fact everything below rests on. It says the local solution space is
+spanned by
+\begin{equation}\label{eq:frob}
+  y_0,\qquad
+  y_1=y_0\log t+g,\qquad
+  y_2=\tfrac12y_0\log^2t+g\log t+h,
+\end{equation}
+with $g,h\in t\Q[[t]]$ --- one holomorphic solution and two logarithmic ones,
+with no fractional exponents anywhere.
+
+Computing $g$ is elementary. Write $L=\sum_{j=0}^{2}t^jP_j(\ta)$ as in
+Definition~\ref{def:L}. Because $\ta(f\log t)=(\ta f)\log t+f$ we get
+$P(\ta)(f\log t)=(P(\ta)f)\log t+P'(\ta)f$, and $t^j$ commutes with all of
+this, so \eqref{eq:frob} forces
+\begin{equation}\label{eq:geq}
+  L(g)=-\sum_{j=0}^{2}t^jP_j'(\ta)\,y_0 .
+\end{equation}
+Since $P_0(\ta)=\ta^3$ is invertible on $t^n$ for $n\ge1$, \eqref{eq:geq}
+determines $g$ coefficientwise with no free constant beyond $g_0=0$. One turn
+of the crank gives \Ver{exact}
+\begin{equation}\label{eq:g}
+  g(t)=12t+210t^2+4438t^3+104825t^4+\tfrac{13276637}{5}t^5+70543291\,t^6
+       +\tfrac{67890874657}{35}t^7+\cdots
+\end{equation}
+
+\begin{remark}
+$g$ is not $b$ and is not close to it: $g_1=12$ while $b_1=6$. The relation
+between $g$ and the companion is exactly the boundary bookkeeping of
+\eqref{eq:inhom}, and getting it right is the content of
+\S\ref{sec:punchline}. It is worth flagging early because the naive guess
+``$b_n=g_n+\lambda a_n$'' is false, and was tried.
+\end{remark}
+
+\section{The nome, and why one would invent it}
+
+Under MUM there is a canonical coordinate. Consider the quotient $y_1/y_0$; by
+\eqref{eq:frob} it is $\log t+g/y_0$, a well-defined element of
+$\log t+t\Q[[t]]$. Exponentiate:
+
+\begin{definition}[the nome]\label{def:q}
+\[
+  q(t)\;:=\;\exp\bigl(y_1/y_0\bigr)\;=\;t\exp\bigl(g(t)/y_0(t)\bigr)
+  \;\in\; t+t^2\Q[[t]].
+\]
+Its compositional inverse $t(q)\in q+q^2\Q[[t]]$ is the \emph{mirror map}.
+\end{definition}
+
+Why is this the right thing to do? Two answers, one formal and one geometric.
+
+Formally: the monodromy of $L$ around $t=0$ is $y_1\mapsto y_1+2\pi i\,y_0$,
+i.e.\ $y_1/y_0\mapsto y_1/y_0+2\pi i$, i.e.\ $q\mapsto q$. The nome is the
+invariant coordinate --- the coordinate in which the local monodromy has been
+divided out. Whatever transcendental object is hiding behind $L$, it is a
+function of $q$, not of $t$.
+
+Geometrically: for Picard--Fuchs equations of families of Calabi--Yau type,
+$y_1/y_0$ is a period ratio, so $q=e^{2\pi i\tau}$ with $\tau$ the point in the
+upper half plane classifying the fibre. Then $t(q)$ is a modular function and
+$y_0(t(q))$ a modular form --- \emph{if} the family is of the sort where
+$\tau$ actually lives on a modular curve. For $L$ of order $3$ this is the
+symmetric-square situation and it happens genuinely often; Ap\'ery is the
+prototype.
+
+Cranking out Definition~\ref{def:q} from \eqref{eq:g} \Ver{exact, to $q^{26}$}:
+\begin{align}
+  q(t)&=t+12t^2+222t^3+4900t^4+119133t^5+3079152t^6+\cdots,
+    \label{eq:qt}\\
+  t(q)&=q-12q^2+66q^3-220q^4+495q^5-804q^6+1068q^7+\cdots
+    \label{eq:tq}
+\end{align}
+
+Two things should now make the reader sit up. First, $t(q)$ has \emph{integer}
+coefficients --- there is no reason on earth for that in
+Definition~\ref{def:q}, which involves dividing by $y_0$, exponentiating and
+reverting a series, all operations that manufacture denominators freely (and
+indeed $g$ itself has a $5$ and a $35$ in its denominators, \eqref{eq:g}).
+Integrality of the mirror map is the fingerprint of modularity --- with the
+caveat, which we will not need but which should be stated once and loudly, that
+integral mirror maps are known well outside the modular-curve setting (the
+quintic threefold's is integral, and no modular curve is in sight). Integrality
+is \emph{evidence that prompts an identification}; the identification is what
+proves something, and it is Theorem~\ref{thm:beukers} that does the work below.
+Second, the
+initial coefficients $1,-12,66,-220,495$ are $\binom{12}{0},-\binom{12}{1},
+\binom{12}{2},-\binom{12}{3},\binom{12}{4}$: the series is trying to tell us it
+is a twelfth power of something starting $1-q$.
+
+\section{Beukers' parametrisation}\label{sec:beukers}
+
+It is. With the Dedekind eta function
+$\eta(q)=q^{1/24}\prod_{n\ge1}(1-q^n)$ (we write $q$ rather than $\tau$ in the
+argument, $q=e^{2\pi i\tau}$), define
+\begin{equation}\label{eq:etaquots}
+  \mathbf{t}(q)=\left(\frac{\eta(q)\,\eta(q^{6})}
+                           {\eta(q^{2})\,\eta(q^{3})}\right)^{\!12},
+  \qquad
+  \mathbf{F}(q)=\frac{\bigl(\eta(q^{2})\,\eta(q^{3})\bigr)^{7}}
+                     {\bigl(\eta(q)\,\eta(q^{6})\bigr)^{5}} .
+\end{equation}
+The fractional powers of $q$ in the eta prefactors work out to
+$q^{12(1+6-2-3)/24}=q^{1}$ for $\mathbf t$ and $q^{(5\cdot7-7\cdot5)/24}=q^{0}$
+for $\mathbf F$, so $\mathbf t\in q+q^2\Z[[q]]$ and $\mathbf F\in1+q\Z[[q]]$,
+as they must be. (This prefactor bookkeeping is worth doing once by hand: a
+stray $q$ in front of $\mathbf t$ is the most common way to misquote
+\eqref{eq:etaquots}.)
+
+\begin{theorem}[Beukers \cite{Beukers87}]\label{thm:beukers}
+$t(q)=\mathbf t(q)$ and $F(q):=y_0(t(q))=\mathbf F(q)$. Equivalently: $t$ is a
+hauptmodul for the group $\Gamma_0(6)+6$ (i.e.\ $\Gamma_0(6)$ extended by the
+Fricke involution $\tau\mapsto-1/6\tau$), the mirror map is the corresponding
+uniformisation, and $y_0$ pulls back to a weight-$2$ modular form on
+$\Gamma_0(6)$.
+\end{theorem}
+
+We do not reprove this --- it is Beukers' theorem, and the modern statement of
+the surrounding picture is Zagier's \cite{Zagier09} together with
+\cite{ASZ,Golyshev} --- but we do check it, because checking it is ten lines of
+code and it is the identity everything else rests on.
+
+\begin{proposition}[machine check]\label{prop:check}
+With $t(q)$, $F(q)$ computed from Definition~\ref{def:q} out of the recurrence
+\eqref{eq:rec} alone, and $\mathbf t,\mathbf F$ expanded from
+\eqref{eq:etaquots} by the product formula, one has
+$t(q)=\mathbf t(q)$ and $F(q)=\mathbf F(q)$ coefficientwise over $\Q$.
+\Ver{to $q^{26}$, exact}
+\end{proposition}
+
+The first coefficients, for the reader's own ten lines:
+\begin{align}
+  t(q)&=q-12q^2+66q^3-220q^4+495q^5-804q^6+\cdots,\label{eq:tq2}\\
+  F(q)&=1+5q+13q^2+23q^3+29q^4+30q^5+31q^6+40q^7+\cdots\label{eq:Fq}
+\end{align}
+Note $F$'s coefficients are small --- a weight-$2$ form has coefficients
+$O(n^{1+\epsilon})$ --- whereas $a_n$ grows like $\alpha^n$. All of the growth
+of the Ap\'ery numbers has been absorbed into the change of variable. That is
+the practical reason this coordinate is worth the trouble: in $q$, the problem
+is bounded.
+
+\begin{remark}[the Ap\'ery numbers, recovered]
+Reading Theorem~\ref{thm:beukers} backwards, $\sum a_nt^n=\mathbf F(q)$ where
+$q$ is the inverse of $\mathbf t$: the Ap\'ery numbers are the Taylor
+coefficients of a weight-$2$ eta quotient in the coordinate given by a weight-$0$
+one. Their integrality --- obvious from \eqref{eq:an}, mysterious from
+\eqref{eq:rec} --- becomes, from this side, the statement that both eta
+quotients in \eqref{eq:etaquots} are integral $q$-series. Every ``$\!$Ap\'ery-like''
+integrality phenomenon in the literature has, conjecturally or provably, this
+shape.
+\end{remark}
+
+\section{The operator, factored through the nome}\label{sec:factor}
+
+Now we exploit the coordinate. Write $\tq=q\frac{d}{dq}$ and
+\begin{equation}\label{eq:sigma}
+  \sigma\;:=\;\tq\log t\;=\;\frac{q\,t'(q)}{t(q)}\;\in\;1+q\Z[[q]],
+  \qquad\text{so}\qquad \tq=\sigma\,\ta
+\end{equation}
+as operators on functions of $t$ (chain rule). Concretely \Ver{exact, $q^{26}$}
+\begin{equation}\label{eq:sigmaexp}
+  \sigma=1-12q-12q^2-12q^3-12q^4-72q^5-12q^6-96q^7-\cdots
+\end{equation}
+and, pleasantly, taking $\tq\log$ of \eqref{eq:etaquots} and using
+$\tq\log\eta(q^m)=\tfrac{m}{24}E_2(q^m)$, where
+$E_2=1-24\sum_{n\ge1}\bigl(\sum_{d\mid n}d\bigr)q^n$
+is the quasimodular Eisenstein series of weight $2$, gives the closed form
+\begin{equation}\label{eq:sigmaeis}
+  \sigma=\tfrac12\bigl(E_2(q)+6E_2(q^{6})-2E_2(q^{2})-3E_2(q^{3})\bigr),
+\end{equation}
+a weight-$2$ Eisenstein series on $\Gamma_0(6)$. \Ver{to $q^{25}$, exact}
+So $\sigma$ is modular data too, of the same weight as $F$.
+
+Let $P_3(t)$ be the coefficient of $\ta^3$ in $L$, i.e.\ the leading symbol:
+from Definition~\ref{def:L},
+\begin{equation}\label{eq:P3}
+  P_3(t)=1-2at+ct^2=1-34t+t^2,
+\end{equation}
+whose roots $17\pm12\sqrt2$ are (inverses of) the singular points of $L$, and
+whose larger root is precisely the $\alpha$ governing the convergence rate in
+\eqref{eq:limit}. Everything in Ap\'ery's proof is in this quadratic.
+
+\subsection*{An interlude that cannot be skipped: the symmetric square}
+
+It is tempting --- and it is wrong --- to think that the factorisation below
+follows from MUM alone. Let us be exact about where the extra hypothesis
+enters.
+
+MUM gives the Frobenius shape \eqref{eq:frob}, in which $h$ is uniquely
+determined; it does \emph{not} say what $h$ is. The factorisation we are after
+requires the specific value
+\begin{equation}\label{eq:sqcond}
+  h=\frac{g^{2}}{2y_0},
+  \qquad\text{equivalently}\qquad
+  y_2=\frac{y_1^{2}}{2y_0},
+  \qquad\text{equivalently}\qquad
+  2y_0h-g^{2}=0 .
+\end{equation}
+For a general order-$3$ MUM operator \eqref{eq:sqcond} is false. The condition
+that makes it true is that $L$ be a \emph{symmetric square}: if $u,v$ span the
+solution space of a second-order operator $D$, then $u^2,uv,v^2$ span a
+three-dimensional space, and the order-$3$ operator annihilating it is
+$\mathrm{Sym}^2(D)$. On such an operator, $y_0=u^2$, $y_1=uv$, $y_2=v^2/2$, and
+\eqref{eq:sqcond} is the identity $2\cdot u^2\cdot\tfrac{v^2}{2}=(uv)^2$ ---
+trivially true, and a real restriction.
+
+Ap\'ery's operator does satisfy it, and we prove it rather than cite it.
+Normalise $L$ to be monic in $\partial=d/dt$:
+\[
+  \frac{1}{t^3P_3(t)}\,L=\partial^3+A_2\partial^2+A_1\partial+A_0 .
+\]
+The classical formula for the symmetric square of $D=\partial^2+p\partial+r$ is
+\begin{equation}\label{eq:sym2}
+  \mathrm{Sym}^2(D)=\partial^3+3p\,\partial^2+(2p^2+p'+4r)\,\partial
+                    +(4pr+2r') .
+\end{equation}
+So $L$ is a symmetric square iff, setting $p:=A_2/3$ and
+$r:=\tfrac14(A_1-2p^2-p')$ --- forced by matching the $\partial^2$ and
+$\partial$ coefficients --- the remaining equation $A_0=4pr+2r'$ holds
+identically in $\Q(t)$.
+
+\begin{lemma}[$L$ is a symmetric square]\label{lem:sym2}
+With $P_3=1-34t+t^2$, put
+\[
+  p=\frac{2t^2-51t+1}{t\,P_3(t)},\qquad
+  r=\frac{t-10}{4t\,P_3(t)},\qquad D=\partial^2+p\,\partial+r .
+\]
+Then $L=t^3P_3(t)\cdot\mathrm{Sym}^2(D)$, exactly, as operators over $\Q(t)$.
+Equivalently, in $\ta$-form,
+\begin{equation}\label{eq:Dtheta}
+  \widetilde D\;=\;\ta^{2}-t\bigl(34\ta^{2}+17\ta+\tfrac52\bigr)
+                   +t^{2}\bigl(\ta+\tfrac12\bigr)^{2},
+\end{equation}
+which is again MUM (indicial polynomial $\ta^2$).
+\end{lemma}
+
+\begin{proof}
+Expand $L$ in $\partial$: from Definition~\ref{def:L},
+\[
+  L=t^3(t^2-34t+1)\partial^3+3t^2(2t^2-51t+1)\partial^2
+    +t(7t^2-112t+1)\partial+t(t-5).
+\]
+Divide by $t^3P_3$, read off $p=A_2/3$ and $r=\tfrac14(A_1-2p^2-p')$ --- these
+are the values in the statement --- and verify $A_0-(4pr+2r')=0$ by clearing
+denominators. This is a finite rational-function identity; it was checked
+symbolically over $\Q(t)$ and the residual is identically $0$.
+\Ver{exact, symbolic over $\Q(t)$; check \textup{(C12a)}}
+\end{proof}
+
+\begin{corollary}\label{cor:sq}
+$y_2=y_1^2/(2y_0)$, i.e.\ \eqref{eq:sqcond} holds.
+\end{corollary}
+
+\begin{proof}
+$\widetilde D$ is MUM of order $2$, so its local solutions at $0$ are
+$u\in1+t\Q[[t]]$ and $v=u\log t+w$ with $w\in t\Q[[t]]$, both unique. By
+Lemma~\ref{lem:sym2}, $u^2$ is a holomorphic solution of $L$ with value $1$ at
+$t=0$; under MUM the holomorphic solution space of $L$ is one-dimensional, so
+$u^2=y_0$. Then $uv=u^2\log t+uw=y_0\log t+uw$ is a solution of $L$ of the
+Frobenius shape \eqref{eq:frob}, so by uniqueness $y_1=uv$ and $g=uw$;
+and $v^2/2=\tfrac12y_0\log^2t+g\log t+\tfrac12w^2$ likewise gives $y_2=v^2/2$
+and $h=w^2/2$. Hence $2y_0h-g^2=u^2w^2-(uw)^2=0$.
+\end{proof}
+
+\noindent For the reader who wants to see them,
+$u=1+\tfrac52t+\tfrac{267}{8}t^2+\tfrac{10225}{16}t^3+\cdots$, and
+$u^2=y_0$, $uw=g$ hold coefficientwise. \Ver{to $t^{26}$, exact; checks
+\textup{(C12b--c)}}
+
+\subsection*{The factorisation}
+
+\begin{proposition}[the factorisation]\label{prop:factor}
+Let $L$ be an order-$3$ MUM operator satisfying the symmetric-square condition
+\eqref{eq:sqcond} --- for Ap\'ery's $L$ this is Corollary~\ref{cor:sq}. Then,
+as operators on functions of $t$ near $t=0$,
+\begin{equation}\label{eq:factor}
+  L\;=\;\frac{P_3(t)}{\sigma^{3}}\;\cdot\;F\;\cdot\;\tq^{3}\;\cdot\;F^{-1},
+\end{equation}
+where $P_3$ is the leading symbol of $L$ in $\ta$, and $F=F(q)$, $\sigma$, $q$
+are as above; $F^{\pm1}$ denote multiplication operators.
+\end{proposition}
+
+\begin{proof}
+Both sides are linear differential operators of order $3$ in $t$; we show they
+have the same kernel and the same leading symbol.
+
+\emph{Kernel.} $\tq^3$ kills exactly $1,\log q,\tfrac12\log^2q$. Hence
+$M:=F\tq^3F^{-1}$ kills exactly $F,\,F\log q,\,\tfrac12F\log^2q$. Now
+$\log q=y_1/y_0$ by Definition~\ref{def:q}, and $F=y_0$ as functions
+(Theorem~\ref{thm:beukers} is not needed here: $F$ is \emph{defined} as
+$y_0\circ t$). So
+\[
+  F=y_0,\quad F\log q=y_0\cdot\frac{y_1}{y_0}=y_1,\quad
+  \tfrac12F\log^2q=\frac{y_1^2}{2y_0}=y_2,
+\]
+the last step being exactly the symmetric-square condition \eqref{eq:sqcond}.
+So $\ker M=\ker L$, both being the span of $y_0,y_1,y_2$. (Equivalently, and
+more transparently: with $u,v$ as in Corollary~\ref{cor:sq}, $\log q=v/u$ and
+$F=u^2$, so $F\cdot\{1,\log q,\tfrac12\log^2q\}=\{u^2,uv,\tfrac12v^2\}$, which
+is $\ker\mathrm{Sym}^2(D)=\ker L$.)
+
+\emph{Leading symbol.} Two order-$3$ operators with the same kernel differ by a
+left multiplier, so $L=\lambda(t)\,M$ for some function $\lambda$. By
+\eqref{eq:sigma}, $\tq^3=(\sigma\ta)^3=\sigma^3\ta^3+(\text{order}\le2)$, and
+conjugating by the multiplication operator $F$ does not change the leading
+symbol. Hence the $\ta^3$-coefficient of $M$ is $\sigma^3$, while that of $L$
+is $P_3(t)$. Therefore $\lambda=P_3/\sigma^3$.
+\end{proof}
+
+The content of \eqref{eq:factor} is worth saying in words. \emph{In the nome
+coordinate, and after dividing out the modular form $F$, Ap\'ery's operator is
+just $\tq^3$.} All the arithmetic --- the $34n^3+51n^2+27n+5$, the $\sqrt2$,
+the growth rate --- has been pushed into the change of variable $t\leftrightarrow
+q$ and into the prefactor. What remains is the simplest operator of order $3$
+there is.
+
+\begin{remark}[the Yukawa coupling, and what happens without \eqref{eq:sqcond}]
+\label{rem:yukawa}
+It is worth knowing what \eqref{eq:factor} looks like when the symmetric-square
+hypothesis fails, because the failure is not catastrophic --- it is
+\emph{measured}. For a general order-$3$ MUM operator, passing to the canonical
+coordinate still normalises the operator, but the normal form is
+$F\,\tq\,K^{-1}\,\tq\,\tq\,F^{-1}$ (up to a left multiplier), where the extra
+function $K$ is the \emph{Yukawa coupling} --- in mirror-symmetry language, the
+generating series of instanton numbers, and in ours simply the obstruction
+$2y_0h-g^2$ repackaged. Condition \eqref{eq:sqcond} is exactly $K$ constant, in
+which case $K$ can be absorbed and the bare $\tq^3$ survives. So
+Theorem~\ref{thm:companion} below is a statement about the symmetric-square
+class, and the general statement carries one more datum.
+
+This is not idle. The programme surrounding this paper finds precisely that
+dichotomy empirically: all fifteen sporadic Ap\'ery-like families of
+\cite{Zagier09,ASZ,Cooper} satisfy the bare formula, while the order-$5$
+$\zeta(5)$ block studied in \cite{RepoZ5} does not --- it is $\mathrm{Sym}^4$-like
+rather than $\mathrm{Sym}^2$-like, bare $\ta$-powers are excluded there, and it
+carries a nontrivial integral Yukawa-type invariant. I thank the referee for
+insisting on this distinction, which the first draft elided.
+\end{remark}
+
+And $\tq^3$ can be inverted on $q\Q[[q]]$ by inspection:
+\begin{equation}\label{eq:thetainv}
+  \tq^{-3}\Bigl(\sum_{m\ge1}\Psi_mq^m\Bigr)=\sum_{m\ge1}\frac{\Psi_m}{m^3}q^m .
+\end{equation}
+The reader will recognise the right-hand side as an \emph{Eichler integral}: a
+formal $q$-series obtained from a weight-$k$ object by dividing the $m$-th
+coefficient by $m^{k-1}$. Here $k-1=3$. We come back to this in \S\ref{sec:why};
+for now, note that $\zeta(3)=\sum m^{-3}$ has just walked into the room by
+itself.
+
+\section{The companion, derived}\label{sec:punchline}
+
+We can now do the thing the harmonic formula \eqref{eq:bn} does, without cells.
+
+Recall Observation~\ref{obs:dict} and \eqref{eq:inhom}. It is cleaner to use
+the \emph{unit-normalised} second solution
+\[
+  B(0)=0,\qquad B(1)=1,\qquad B\text{ satisfies }\eqref{eq:rec}\ (n\ge1),
+\]
+so that $b_n=6B(n)$ \Ver{$n\le25$, exact} and, by the same one-line defect
+computation, $y_B:=\sum_nB(n)t^n$ satisfies
+\begin{equation}\label{eq:LB}
+  L(y_B)=t .
+\end{equation}
+\Ver{$L(y_B)=t$ exactly, all coefficients to $t^{26}$}
+
+\begin{theorem}[the companion by the nome]\label{thm:companion}
+Let $L$ be an order-$3$ MUM operator satisfying the symmetric-square condition
+\eqref{eq:sqcond}, so that Proposition~\ref{prop:factor} applies; for Ap\'ery's
+$L$ this is Lemma~\ref{lem:sym2} and Corollary~\ref{cor:sq}. Let
+$F,\sigma,P_3,t(q)$ be as above and set
+\begin{equation}\label{eq:Psi}
+  \Psi(q)\;:=\;\frac{t(q)\,\sigma(q)^{3}}{P_3\bigl(t(q)\bigr)\,F(q)}
+  \;\in\;q\Q[[q]],
+  \qquad
+  \Theta(q):=\tq^{-3}\Psi=\sum_{m\ge1}\frac{\Psi_m}{m^{3}}\,q^{m}.
+\end{equation}
+Then the second solution of \textup{\eqref{eq:rec}} is
+\begin{equation}\label{eq:companion}
+  B(n)=[t^{n}]\;F(q)\,\Theta(q)
+  \qquad\bigl(\text{expanded in }t\text{ via }q=q(t)\bigr),
+  \qquad b_n=6B(n).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Substitute \eqref{eq:factor} into \eqref{eq:LB}:
+$\frac{P_3}{\sigma^3}F\,\tq^3(y_B/F)=t$, i.e.\
+$\tq^3(y_B/F)=t\sigma^3/(P_3F)=\Psi$. The right-hand side lies in $q\Q[[q]]$
+(it has a simple zero at $q=0$ since $t=q+O(q^2)$ and
+$\sigma,P_3^{-1},F^{-1}\in1+q\Q[[q]]$), so $\tq^{-3}$ applies by
+\eqref{eq:thetainv} and returns the unique solution in $q\Q[[q]]$; the three
+constants of integration are exactly the kernel $\{F,F\log q,\tfrac12F\log^2q\}$
+of $\tq^3$ after multiplying back by $F$, and they are fixed by
+$y_B\in t\Q[[t]]$ (no logarithms, no constant term). Hence $y_B=F\cdot\tq^{-3}\Psi$.
+\end{proof}
+
+That is the whole construction. It is worth restating what has been used: the
+recurrence (to build $L$), MUM (to get the Frobenius basis and hence $q$), the
+factorisation (Proposition~\ref{prop:factor}), and the boundary defect
+\eqref{eq:LB} --- \emph{the $n=0$ instance of the recurrence, which the second
+solution is precisely the one to violate}. Nothing about binomial coefficients;
+nothing about harmonic numbers. If the family is modular, this runs.
+
+\subsection*{The numbers}
+
+Here is the computation in full, so that a reader can reproduce it.
+From \eqref{eq:tq2}, \eqref{eq:Fq}, \eqref{eq:sigmaexp} and $P_3=1-34t+t^2$:
+\begin{align}
+  \Psi(q)&=q-19q^2+91q^3-179q^4+126q^5-q^6+344q^7-1459q^8+\cdots,
+    \label{eq:Psiexp}\\
+  \Theta(q)&=q-\tfrac{19}{8}q^2+\tfrac{91}{27}q^3-\tfrac{179}{64}q^4
+             +\tfrac{126}{125}q^5-\tfrac{1}{216}q^6+\cdots
+    \label{eq:Thetaexp}
+\end{align}
+(the second line is the first divided by $m^3$, term by term --- that is all
+$\tq^{-3}$ is). Multiplying by $F$ and re-expanding in $t$ via \eqref{eq:qt}:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}rlll@{}}
+\toprule
+$n$ & $[t^n]F\Theta$ & $B(n)$ from \eqref{eq:rec} & $b_n=6B(n)$\\
+\midrule
+0 & $0$ & $0$ & $0$\\
+1 & $1$ & $1$ & $6$\\
+2 & $117/8$ & $117/8$ & $351/4$\\
+3 & $62531/216$ & $62531/216$ & $62531/36$\\
+4 & $11424695/1728$ & $11424695/1728$ & $11424695/288$\\
+5 & $35441662103/216000$ & $35441662103/216000$ & $35441662103/36000$\\
+6 & $20637706271/4800$ & $20637706271/4800$ & $20637706271/800$\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Theorem~\ref{thm:companion} against the recurrence.  The two middle
+columns agree for all $n\le25$, exactly over $\Q$. \Ver{$n\le25$}}
+\label{tab:companion}
+\end{table}
+
+\noindent The last column of Table~\ref{tab:companion} is the last column of
+Table~\ref{tab:ab}: the modular route reproduces van der Poorten's $b_n$ on the
+nose. \Ver{$n\le25$, exact}
+
+\begin{remark}[reading the answer]
+The three ingredients of $\Psi$ each have a modular meaning: $t$ is the
+hauptmodul, $\sigma$ is the weight-$2$ Eisenstein series \eqref{eq:sigmaeis},
+$F$ is the weight-$2$ form of Theorem~\ref{thm:beukers}, and
+$P_3(t)=1-34t+t^2$ is a polynomial in the hauptmodul, i.e.\ again a modular
+function. Counting weights ($3\times2$ from $\sigma^3$, $-2$ from $F^{-1}$, $0$
+from $t$ and $P_3$), $\Psi$ transforms with weight $4$ on $\Gamma_0(6)$.
+
+Two honest caveats. First, $\sigma$ is quasimodular, not modular
+(\eqref{eq:sigmaeis} is a combination of $E_2$'s, and only the particular
+combination there --- whose $E_2$-anomalies cancel --- is genuinely weight $2$);
+we have checked that cancellation only through \eqref{eq:sigmaeis}'s coefficient
+identity. Second, and more to the point, ``weight $4$'' here means
+\emph{meromorphic} of weight $4$: dividing by $F$ and by $P_3(t)$ can and does
+introduce poles wherever those vanish, and establishing holomorphy would require
+checking the zeros of $F$ and the zeros of $P_3\circ t$ against the cusps of
+$\Gamma_0(6)$, which we have not done. Everything in
+Theorem~\ref{thm:companion} is a statement about formal $q$-series near $q=0$,
+where all the inverted quantities are units, and it is valid as such
+unconditionally. The global modular reading is a (correct-looking, unverified
+here) interpretation on top.
+
+With that said, Theorem~\ref{thm:companion} reads: \emph{the companion of the
+Ap\'ery numbers is $F$ times the Eichler integral of an explicit weight-$4$
+object.} The little coefficients of \eqref{eq:Psiexp} are
+the letters this alphabet writes with. (Amusing: $\Psi_6=-1$.)
+\end{remark}
+
+\begin{remark}[why the harmonic formula and this one are both right]
+Two formulas for the same sequence must be an identity. Comparing
+\eqref{eq:bn} and \eqref{eq:companion} coefficientwise gives, for each $n$, a
+nontrivial identity between a cell sum with harmonic weights and a
+$q$-expansion coefficient of a modular Eichler integral. The reader is invited
+to write out $n=2$ ($351/4$ both ways) by hand; it is a satisfying half page,
+and it explains why nobody guessed one formula from the other.
+\end{remark}
+
+\section{Why one would want the second route}\label{sec:why}
+
+If the harmonic formula \eqref{eq:bn} already exists, the modular derivation is
+a curiosity for Ap\'ery. The reason to learn it is that it survives where
+\eqref{eq:bn} does not.
+
+Ap\'ery's recurrence is one member of a now-classical zoo. Zagier's search
+\cite{Zagier09} over the two-parameter family of order-$2$ analogues turned up
+exactly six ``sporadic'' integral solutions; Almkvist--Zudilin
+\cite{ASZ} and Cooper \cite{Cooper} extended the census at the $\zeta(3)$ level
+to fifteen sporadic pairs in total. Every one of them has a second solution,
+defined by the same normalisation $B(0)=0$, $B(1)=1$, and every one of them has
+an Ap\'ery-type limit or an arithmetic reason not to. The natural first question
+is: what is $B(n)$?
+
+For most of the fifteen, a formula of harmonic type --- same cells, weighted by
+$H$-sums --- can be found, and the working papers of the surrounding programme
+\cite{RepoSporadics} give the current census of which. But for a definite
+subfamily the harmonic ansatz can be \emph{closed out}: one writes down the
+complete tame ansatz --- all products of harmonic sums of the right weight over
+the given cells --- and proves, by exact linear algebra over enough $n$, that
+the solution space is empty. For those families no formula of shape
+\eqref{eq:bn} exists at all, and this is a theorem about the ansatz, not a
+failure of ingenuity.
+
+Precisely there, the construction of \S\ref{sec:punchline} works. The
+programme's modular-anchor probe \cite{RepoAnchors} runs the pipeline of
+\S\S\ref{sec:op}--\ref{sec:factor} on each unreachable family: it finds
+that the mirror map $t(q)$ is again integral (so the family is modular), it
+identifies $F(q)$ where it can --- for one such family
+$F(q)=\bigl(9E_2(q^9)-E_2(q)\bigr)/8$, a weight-$2$ Eisenstein series on
+$\Gamma_0(9)$; for another, $F(q)=\eta(-q)^3/\eta(-q^3)$, a sign-twisted
+Borwein cubic theta --- and then applies Theorem~\ref{thm:companion} verbatim.
+Out comes a companion formula in modular letters for a family where the
+harmonic letters provably do not suffice. The Ap\'ery case of this paper is
+that programme's control experiment: same code, known answer,
+Table~\ref{tab:companion}. Related anchors and the variational route to the same
+data are in \cite{RepoVar}.
+
+The structural moral is worth a paragraph on its own. Why should a second
+solution of a recurrence be an \emph{Eichler integral}? Because that is what
+$\tq^{-3}$ is, and $\tq^{-3}$ is what a MUM operator becomes in its own
+canonical coordinate. Eichler integrals are the classical home for objects that
+are ``one integration away from modular'': $\sum a_mm^{1-k}q^m$ for $f=\sum
+a_mq^m$ of weight $k$; they are not modular themselves, but their failure to be
+modular is a period polynomial, and the periods are exactly the special values
+one is chasing. In our case $\zeta(3)=\sum m^{-3}$ appears as the value the
+Eichler integral of the trivial (Eisenstein) part contributes at the relevant
+cusp, and the Ap\'ery limit \eqref{eq:limit2} should be the statement that the
+$q\to$ cusp asymptotics of $F\Theta$ against $F$ is that period.
+Golyshev--Zagier's ``gamma conjecture'' framework \cite{Golyshev} and the theory
+of periods of the associated motive are the correct general setting; the
+elementary version, which is all this paper needs, is Theorem~\ref{thm:companion}.
+
+Let us be scrupulous about what has and has not been shown, since the previous
+paragraph is the one place where enthusiasm could outrun the argument.
+\emph{This paper constructs the companion modularly; it does not derive the
+limit $b_n/a_n\to\zeta(3)$ from modular transformation theory.} Doing that would
+mean evaluating the Eichler integral $\Theta$ at the relevant cusp and
+identifying the resulting period with $\zeta(3)$ --- a genuine computation in
+the theory of periods of Eichler integrals, and one we have not performed. The
+limit \eqref{eq:limit2} is used here exactly as Ap\'ery used it: as a classical
+fact about the recurrence. The modular story explains the \emph{shape} of the
+companion; the $\zeta(3)$ itself remains, in this account, an input.
+
+The practical upshot for a working reader: if you have an integral
+Ap\'ery-like recurrence and want the second solution, do not start by guessing
+harmonic weights. Compute $g$, compute $q$, look at whether $t(q)$ is integral.
+If it is, you are ten lines of code from the companion, and those ten lines are
+in the appendix.
+
+\section{The checks}\label{sec:checks}
+
+Nothing in this paper was asserted without computing it. All arithmetic is
+exact over $\Q$ (Python \texttt{Fraction}s); series are truncated at $q^{26}$,
+$t^{26}$. The script is \texttt{verify.py} alongside this file; its output is:
+
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=3.2em]
+\item $a_n$ from \eqref{eq:an} equals $a_n$ from \eqref{eq:rec}, $n\le25$. PASS
+\item $b_n$ from \eqref{eq:bn} satisfies \eqref{eq:rec} for $1\le n\le24$, and
+      $b_0=0$, $b_1=6$; the $n=0$ defect is $1^3b_1-5b_0=6$. PASS
+\item $b_{25}/a_{25}$ agrees with $\zeta(3)$ to $40$ decimal digits. PASS
+\item $t(q)=\bigl(\eta_1\eta_6/\eta_2\eta_3\bigr)^{12}$ to $q^{26}$. PASS
+\item $F(q)=(\eta_2\eta_3)^7/(\eta_1\eta_6)^5$ to $q^{26}$. PASS
+\item $B(n)=[t^n]F\,\tq^{-3}\Psi$ equals the recurrence's $B$, $n\le26$;
+      stated in the text as $n\le25$ because $q^{26}$ is the truncation edge of
+      the $\sigma$ construction. PASS
+\item $b_n=6B(n)$, $n\le25$. PASS
+\item $L(y_B)=t$ exactly: coefficient $1$ at $t^1$, zero at every other
+      $t^n$, $n\le26$. PASS
+\item $L(y_0)=0$ to $t^{26}$. PASS
+\item the eta prefactor bookkeeping of \eqref{eq:etaquots} (exponents
+      $q^1$ and $q^0$). PASS
+\item $\sigma=\tfrac12(E_2(q)+6E_2(q^6)-2E_2(q^2)-3E_2(q^3))$ to $q^{25}$. PASS
+\item[\textup{(C12a)}] the symmetric-square residual $A_0-(4pr+2r')$ of
+      Lemma~\ref{lem:sym2} is identically $0$ in $\Q(t)$ --- symbolic, not
+      truncated. PASS
+\item[\textup{(C12b)}] $u^2=y_0$ to $t^{26}$, where $u$ is the holomorphic
+      solution of $\widetilde D$. PASS
+\item[\textup{(C12c)}] $u\,w=g$ to $t^{26}$, where $w$ is $\widetilde D$'s
+      log-tail; hence $h=w^2/2$ and $2y_0h-g^2=0$. PASS
+\end{enumerate}
+
+Everything labelled \textup{\textsf{[verified: \dots]}} in the text refers to
+this list. Theorem~\ref{thm:beukers} is quoted from the literature; (C4)--(C5)
+are a check of it, not a proof. Propositions~\ref{prop:factor} and
+Theorem~\ref{thm:companion} are proved in the text, and (C6)--(C8) are their
+independent numerical confirmation. (C12a) is the only check that is a proof
+rather than evidence: it is an identity between rational functions, verified
+symbolically, and Lemma~\ref{lem:sym2} rests on it. (C12b--c) are consistency
+checks on Corollary~\ref{cor:sq}, which is itself proved.
+
+\appendix
+
+\section{Ten lines of code}
+
+The following is the skeleton; \texttt{smul}, \texttt{sinv}, \texttt{sexp},
+\texttt{srevert}, \texttt{compose} are the obvious truncated power-series
+operations on lists of \texttt{Fraction}s (product, reciprocal, exponential,
+compositional inverse, composition), each five lines.
+
+\begin{small}
+\begin{verbatim}
+from fractions import Fraction as F
+N = 26; a,b,c,d = 17,5,1,0
+
+# 1. the Apery numbers, from the recurrence
+A = [F(1), F(5)]
+for n in range(1, N+2):
+    A.append((F((2*n+1)*(a*n*n+a*n+b))*A[n] - F(n*(c*n*n+d))*A[n-1])
+             / F((n+1)**3))
+y0 = A[:N+1]
+
+# 2. the log-solution tail g:  L(g) = -sum_j t^j P_j'(theta) y0
+#    with P_0 = th^3, P_1 = -(2th+1)(a th^2 + a th + b),
+#         P_2 = (th+1)(c(th+1)^2 + d)          [solve coefficientwise]
+g = gseries(y0)
+
+# 3. the nome and the mirror map
+qt = smul([F(0),F(1)]+[F(0)]*(N-1), sexp(smul(g, sinv(y0))))  # q(t)
+tq = srevert(qt)                                              # t(q)
+Fq = compose(y0, tq)                                          # F(q)
+
+# 4. sigma = theta_q log t,  P3 = 1 - 2a t + c t^2
+T   = [tq[i+1] for i in range(N)] + [F(0)]                    # t/q
+sig = smul([F(i)*T[i] for i in range(N+1)], sinv(T)); sig[0] += F(1)
+t2  = smul(tq, tq)
+P3  = [F(-2*a)*tq[i] + F(c)*t2[i] for i in range(N+1)];  P3[0] = F(1)
+
+# 5. the companion
+Psi   = smul(smul(tq, smul(sig, smul(sig, sig))),
+             smul(sinv(P3), sinv(Fq)))
+Theta = [F(0)] + [Psi[m]/F(m)**3 for m in range(1, N+1)]
+Bn    = compose(smul(Fq, Theta), qt)     # Bn[n] = B(n);  b_n = 6*B(n)
+\end{verbatim}
+\end{small}
+
+\noindent Step 2 is the only one needing a word: writing $L=\sum_jt^jP_j(\ta)$,
+one solves \eqref{eq:geq} for $g$ by reading off $t^N$, using that $P_0(N)=N^3
+\ne0$ for $N\ge1$:
+\[
+  g_N=\frac{1}{N^3}\Bigl(R_N-\sum_{j\ge1}P_j(N-j)\,g_{N-j}\Bigr),
+  \qquad
+  R=-\sum_j t^jP_j'(\ta)y_0 .
+\]
+Substituting steps 1--5 for any other Ap\'ery-like $(a,b,c,d)$ is the whole
+generalisation.
+
+\begin{thebibliography}{99}
+\sloppy
+
+\bibitem{ASZ} G.~Almkvist, W.~Zudilin,
+\emph{Differential equations, mirror maps and zeta values},
+in: Mirror Symmetry V, AMS/IP Stud.\ Adv.\ Math.\ \textbf{38} (2006), 481--515.
+
+\bibitem{Beukers87} F.~Beukers,
+\emph{Irrationality proofs using modular forms},
+Ast\'erisque \textbf{147--148} (1987), 271--283.
+
+\bibitem{Beukers79} F.~Beukers,
+\emph{A note on the irrationality of $\zeta(2)$ and $\zeta(3)$},
+Bull.\ London Math.\ Soc.\ \textbf{11} (1979), 268--272.
+
+\bibitem{Cooper} S.~Cooper,
+\emph{Sporadic sequences, modular forms and new series for $1/\pi$},
+Ramanujan J.\ \textbf{29} (2012), 163--183.
+
+\bibitem{Golyshev} V.~Golyshev, D.~Zagier,
+\emph{Proof of the gamma conjecture for Fano 3-folds of Picard rank one},
+Izv.\ Math.\ \textbf{80} (2016), 24--49.
+
+\bibitem{vdP} A.~van der Poorten,
+\emph{A proof that Euler missed\dots{} Ap\'ery's proof of the irrationality of
+$\zeta(3)$}, Math.\ Intelligencer \textbf{1} (1979), 195--203.
+
+\bibitem{Zagier09} D.~Zagier,
+\emph{Integral solutions of Ap\'ery-like recurrence equations},
+in: Groups and Symmetries, CRM Proc.\ Lecture Notes \textbf{47} (2009), 349--366.
+
+\bibitem{RepoAnchors} \emph{Modular anchors for the deformation-unreachable
+sporadic families}, working paper of the present programme
+(\texttt{papers\_out/modular\_anchors}; probe notes
+\texttt{work/MODULAR\_COACTION\_PROBE.md}, scripts
+\texttt{work/z5eps/eps48\_modular\_nome.py},
+\texttt{eps49\_zeta\_companion.py}).
+
+\bibitem{RepoZ5} \emph{Modularity and Yukawa integrality of the $\zeta(5)$
+five-block}, working notes of the present programme
+(\texttt{work/Z5\_MODULARITY\_PROBE.md}).
+
+\bibitem{RepoVar} \emph{The variational anchor}, working paper of the present
+programme (\texttt{papers\_out/variational\_anchor}).
+
+\bibitem{RepoSporadics} \emph{The fifteen sporadic Ap\'ery-like pairs: second
+solutions, the $\chi$-twisted Lucas law, and the closed forms}, working paper of
+the present programme (\texttt{papers\_out/sporadics}).
+
+\end{thebibliography}
+
+\end{document}

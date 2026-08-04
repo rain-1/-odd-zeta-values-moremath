@@ -1,0 +1,331 @@
+% !TeX program = pdflatex
+%
+% "The half-Apery numbers" -- a small, delightful object found while
+% squaring roots in River's odd-zeta programme.
+%
+% Provenance: work/z5eps/eps56_half_apery.py + eps56.log (all data);
+% the Sym^2 lemma is papers_out/expository_apery Lemma 5.1.
+%
+% Evidence labels are load-bearing and are never silently upgraded.
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+\newcommand{\ut}{\tilde u}
+
+% evidence-class markers
+\newcommand{\Proved}{\textup{\textsf{[PROVED]}}}
+\newcommand{\VerifiedR}[1]{\textup{\textsf{[VERIFIED: #1]}}}
+\newcommand{\Open}{\textup{\textsf{[OPEN]}}}
+
+\begin{document}
+
+\title{The half-Ap\'ery numbers}
+
+\author{}
+\date{\today}
+
+\begin{abstract}
+Ap\'ery's $\zeta(3)$ numbers $a_n$ have a square root. Because their
+generating function is the square of a solution of a second-order operator
+(the symmetric-square structure underlying Beukers' modular
+parametrization), the series $u(t)=\sqrt{\sum a_nt^n}$ is a natural object;
+rescaling by $4^n$ makes it integral:
+\[
+\ut_n = 4^n[t^n]u \;=\; 1,\ 10,\ 534,\ 40900,\ 3672550,\ 360764460,\
+37546578300,\ \dots
+\]
+We give the three-term recurrence these numbers satisfy (a half-shifted
+shape outside the classical Ap\'ery-like boxes), prove their integrality by
+a two-line universal lemma --- and are honest that the integrality is
+therefore \emph{not} an arithmetic miracle --- and then locate the actual
+miracles: the $2$-adic valuation is exactly the binary digit sum,
+$v_2(\ut_n)=s_2(n)=v_2\bin{2n}{n}$; and the Lucas congruence
+$\ut_{ap+r}\equiv\ut_a\ut_r\pmod p$ holds \emph{precisely at the primes
+that split in $\Q(\sqrt{-6})$} (fourteen primes tested, perfect
+correlation), the field of discriminant $-24$ attached to the weight-one
+modular identity $u(t(q))=(\eta_2\eta_3)^{7/2}/(\eta_1\eta_6)^{5/2}$. The
+analogous root sequences of the Brown--Zudilin $\zeta(5)$ family share the
+$2$-adic law but have no Lucas law at any tested prime: the split-prime
+congruence is a fingerprint of the weight-one world, not of root-taking.
+Every claim carries its evidence label.
+\end{abstract}
+
+\maketitle
+
+%======================================================================
+\section{How the sequence was found}
+
+Ap\'ery's numbers $a_n=\sum_k\bin nk^2\bin{n+k}k^2$ satisfy his celebrated
+recurrence, and their generating function $y_0(t)=\sum a_nt^n$ satisfies a
+third-order differential operator $L$. In the course of repairing a proof
+(at a referee's insistence) it was established exactly that $L$ is the
+symmetric square of the second-order operator
+\[
+\widetilde D \;=\; \theta^2 - t\Bigl(34\theta^2+17\theta+\tfrac52\Bigr)
++ t^2\Bigl(\theta+\tfrac12\Bigr)^2,
+\qquad \theta=t\frac{d}{dt},
+\]
+so that $y_0=u^2$ for the normalized solution $u$ of $\widetilde D$
+\Proved\ (an identity of operators over $\Q(t)$; see the companion
+expository paper, Lemma~5.1). The series
+\[
+u(t)=\sqrt{y_0(t)}=1+\tfrac52t+\tfrac{267}8t^2+\tfrac{10225}{16}t^3+\cdots
+\]
+has denominators that are pure powers of $2$, and
+\[
+\ut_n := 4^n\,[t^n]\,u
+\]
+is an integer sequence: the \emph{half-Ap\'ery numbers}
+\[
+1,\ 10,\ 534,\ 40900,\ 3672550,\ 360764460,\ 37546578300,\
+4068324634440,\ \dots
+\]
+\VerifiedR{exact $\Q$, $n\le200$; \texttt{eps56\_half\_apery.py}}.
+We could not consult the OEIS from this environment; the sequence is
+displayed prominently so the reader can. A search of the surrounding
+repository finds no prior appearance.
+
+%======================================================================
+\section{The recurrence}
+
+Reading $\widetilde D$ coefficientwise and rescaling $t\mapsto t/4$:
+
+\begin{proposition}\label{prop:rec}
+\Proved\ (from $\widetilde D$; re-verified numerically to $n=200$)
+\[
+(n+1)^2\,\ut_{n+1} \;=\; \bigl(136n^2+68n+10\bigr)\,\ut_n
+\;-\;4\,(2n-1)^2\,\ut_{n-1},
+\qquad \ut_0=1,\ \ut_1=10 .
+\]
+\end{proposition}
+
+Two features are worth savouring. First, $136=4\cdot34$: Ap\'ery's famous
+$34$ survives, dressed by the rescaling. Second, the trailing coefficient
+$4(2n-1)^2=16\bigl(n-\tfrac12\bigr)^2$ is \emph{half-shifted}: the
+recurrence lies outside the Zagier and Almkvist--Zudilin normal forms
+(whose trailing terms are $cn^2$ or $n(cn^2+d)$), in a half-integer-shifted
+class of its own --- as befits the square root of a weight-two world.
+
+%======================================================================
+\section{Integrality is free (and we say so)}
+
+\begin{lemma}[universal root-integrality]\label{lem:univ}
+\Proved\
+Let $f\in1+t\,\Z[[t]]$. Then $\sqrt{f(4t)}\in\Z[[t]]$ and
+$f(8t)^{1/4}\in\Z[[t]]$.
+\end{lemma}
+
+\begin{proof}
+$f(4t)=1+4t\,g(t)$ with $g\in\Z[[t]]$, and
+$(1+x)^{1/2}=\sum_k\bin{1/2}{k}x^k$ with
+$4^k\bin{1/2}{k}=(-1)^{k-1}\,2\,C_{k-1}$ for $k\ge1$, where $C_{k-1}$ is a
+Catalan number; so every term of $\sum_k\bin{1/2}k(4tg)^k$ is integral.
+For the quarter root, $v_2\bin{1/4}{k}=-2k-v_2(k!)=-(3k-s_2(k))\ge-3k$,
+so $8^k\bin{1/4}k\in\Z$.
+\end{proof}
+
+\begin{remark}[an honest deflation]\label{rem:deflation}
+Lemma~\ref{lem:univ} applies to \emph{any} integral series (a random-series
+sanity check passes, $5/5$). In particular the integrality of $\ut_n$, and
+likewise the observations
+$Q(4t)^{1/2},\,Q(8t)^{1/4}\in\Z[[t]]$ for the Brown--Zudilin $\zeta(5)$
+row $Q_n$ made earlier in this programme, are \emph{universal}, not
+arithmetic fingerprints of symmetric-power structure as first advertised.
+The programme's earlier reading is hereby corrected. The genuine
+arithmetic lives one layer deeper, in \S\ref{sec:v2} and
+\S\ref{sec:lucas}; and the genuinely special fact about \emph{this}
+square root is not that it is integral but that it is \emph{modular}
+(\S\ref{sec:modular}) --- a random integral series' root is neither a
+solution of a nice operator nor a weight-one form.
+\end{remark}
+
+The rescaling $4^n$ is sharp: $u(2t)$ is not integral
+\VerifiedR{$c^\ast=2$}.
+
+%======================================================================
+\section{The $2$-adic profile: binary digit sums}\label{sec:v2}
+
+\begin{observation}\label{obs:v2}
+\VerifiedR{$1\le n\le200$}
+\[
+v_2(\ut_n)\;=\;s_2(n)\;=\;v_2\!\bin{2n}{n},
+\]
+the binary digit sum of $n$ (equivalently, by Kummer, the $2$-adic
+valuation of the central binomial coefficient).
+\end{observation}
+
+The mechanism is visible in the proof of Lemma~\ref{lem:univ}: the extreme
+term of the binomial series contributes $4^n\bin{1/2}n=\pm2C_{n-1}$, and
+the tidy identity $v_2(2C_{n-1})=s_2(n)$ \Proved\ (from
+$s_2(n)=s_2(n-1)-v_2(n)+1$) makes $s_2(n)$ the generic valuation whenever
+$a_1$ is odd; five out of five random odd-$a_1$ series show the same
+profile. So Observation~\ref{obs:v2} says the half-Ap\'ery numbers are
+$2$-adically \emph{as generic as possible} --- no hidden cancellation ---
+which is itself a statement with content, and it transfers verbatim
+upstairs: the half- and quarter-roots of the $\zeta(5)$ row obey
+$v_2=s_2(n)$ as well \VerifiedR{$n\le60$, resp.\ $n\le30$}. We note that
+central-binomial \emph{divisibility} $\bin{2n}n\mid\ut_n$ fails in general:
+the coincidence with $v_2\bin{2n}n$ is a $2$-adic statement only.
+
+%======================================================================
+\section{The jewel: a split-prime Lucas law}\label{sec:lucas}
+
+Ap\'ery's numbers satisfy the Lucas congruence
+$a_{ap+r}\equiv a_aa_r\pmod p$ for every prime. Their square root is
+choosier --- and its choice is a quadratic field.
+
+\begin{conjecture}[split-prime Lucas law]\label{conj:lucas}
+For an odd prime $p$,
+\[
+\ut_{ap+r}\equiv\ut_a\,\ut_r\pmod p\quad\text{for all }a,r
+\qquad\Longleftrightarrow\qquad
+\Bigl(\tfrac{-6}{p}\Bigr)=1\ \text{or}\ p\in\{2,3\}.
+\]
+\end{conjecture}
+
+\VerifiedR{fourteen primes $p\le47$, all $\approx2400$ cells with
+$n\le200$; perfect correlation} --- the law \emph{passes} at
+$p=3$ (ramified) and at the split primes $5,7,11,29,31$, and \emph{fails}
+(massively: over $70\%$ of cells) at the inert primes
+$13,17,19,23,37,41,43,47$. The prediction was made from the first four
+primes and confirmed at the next ten.
+
+$\Q(\sqrt{-6})$ has discriminant $-24$ --- exactly the quadratic datum
+$\prod d^{\,r_d}=6$ of the eta-quotient of \S\ref{sec:modular}. At inert
+primes no scalar-twisted law
+$\ut_{ap+r}\equiv c^a\ut_a\ut_r$ repairs the failure (probed directly);
+intriguingly, certain rows are constant (e.g.\ $p=13$: $a=2,5$; $p=23$:
+$a=3$), the shape one expects from a two-term dihedral recursion rather
+than a one-term twist \Open.
+
+The law is \emph{not} an artifact of root-taking: the half-root of the
+$\zeta(5)$ row satisfies no Lucas congruence at any tested prime
+($3,5,7,11,13$, all FAIL) despite having the same $2$-adic profile. The
+split-prime law is a fingerprint of the weight-one modular world to which
+this particular square root belongs.
+
+%======================================================================
+\section{The modular identity}\label{sec:modular}
+
+Let $t(q)=q\,(\eta_1\eta_6/\eta_2\eta_3)^{12}$ and
+$F(q)=(\eta_2\eta_3)^7/(\eta_1\eta_6)^5$ be Beukers' hauptmodul and
+weight-two form for the Ap\'ery family on $\Gamma_0(6)$
+($\eta_d=\eta(q^d)$).
+
+\begin{proposition}\label{prop:modular}
+\begin{enumerate}[leftmargin=2em]
+\item \VerifiedR{coefficientwise to $q^{45}$, exact}
+$u(t(q))=\sqrt{F(q)}
+=(\eta_2\eta_3)^{7/2}\bigl/(\eta_1\eta_6)^{5/2}$.
+\item \Proved\ $\eta$ is nonvanishing on the upper half-plane, so
+$\sqrt F$ is a single-valued holomorphic function there, and its square is
+a holomorphic weight-two form on $\Gamma_0(6)$: $u$ is a holomorphic
+weight-\emph{one} form on $\Gamma_0(6)$ with a multiplier system of order
+dividing two. The half-integral eta exponents have
+$\sum_d d\,r_d=\sum_d(6/d)\,r_d=0$, so no fractional power of $q$ appears,
+consistent with (1).
+\item \VerifiedR{$q^{24}$} The $q$-expansion of $u$ has \emph{unbounded}
+$2$-power denominators ($v_2$ of the $n$-th coefficient
+$=-(2n-s_2(n))$): the $4^n$-integrality of the half-Ap\'ery numbers is a
+property of the \emph{mirror coordinate} $t$, not of the nome. Relatedly,
+$u$ is not a $\Z$-linear combination of the discriminant-$-24$ theta
+series ($x^2+6y^2$, $2x^2+3y^2$): checked and false. The
+$\Q(\sqrt{-6})$-arithmetic of $u$ surfaces in the Lucas law of
+\S\ref{sec:lucas}, not in an integral theta identity.
+\end{enumerate}
+\end{proposition}
+
+So the half-Ap\'ery numbers are the mirror-coordinate avatar of a genuine
+weight-one form --- the ``square root of Beukers' parametrization'' ---
+and their special congruences see the class field of $\Q(\sqrt{-6})$.
+
+%======================================================================
+\section{Upstairs: the $\zeta(5)$ root sequences}
+
+For the Brown--Zudilin row $Q_n$ ($1,21,2989,\dots$), the same operations
+give integer sequences
+\[
+\text{half:}\quad 1,\ 42,\ 23030,\ 21898308,\ 26657064742,\ \dots
+\qquad
+\text{quarter:}\quad 1,\ 42,\ 45178,\ 85695756,\ \dots
+\]
+\VerifiedR{$n\le60$} with $v_2=s_2(n)$ in both cases, and with no Lucas
+law at any tested prime. By Lemma~\ref{lem:univ} their integrality is
+universal; by \S\ref{sec:lucas} their failure to Lucas is informative:
+whatever weight-one-like structure the $\zeta(5)$ five-block's roots
+carry, it is not (yet) visible in these coordinates. We record them for
+the day the five-block's own uniformization is understood.
+
+%======================================================================
+\section{Open problems}
+
+\begin{enumerate}[leftmargin=2em,label=\textbf{P\arabic*.}]
+\item Prove Conjecture~\ref{conj:lucas}. The natural route: express
+$\ut_n\bmod p$ through the weight-one form's Frobenius structure at $p$
+(split primes give two rational unit roots, inert primes a conjugate
+pair) --- the dihedral mechanism that also explains the constant inert
+rows.
+\item Prove $v_2(\ut_n)=s_2(n)$ for all $n$ (finish the genericity
+argument for this particular $f$: no cancellation beyond the extreme
+binomial term).
+\item Identify the inert-prime two-term law suggested by the constant
+rows.
+\item Find a combinatorial or lattice-path interpretation of $\ut_n$ (the
+sequence deserves one).
+\item Check the OEIS; if absent, the sequence, its recurrence, and the
+split-prime law would make a tidy submission.
+\end{enumerate}
+
+%======================================================================
+\section*{Provenance}
+
+All computations: \texttt{work/z5eps/eps56\_half\_apery.py} with log
+\texttt{eps56.log}; exact \texttt{Fraction} arithmetic throughout; the
+$\mathrm{Sym}^2$ input is Lemma~5.1 of the companion expository paper
+(\texttt{papers\_out/expository\_apery}), proved as an operator identity
+over $\Q(t)$. Evidence labels: \Proved\ = complete proof;
+\VerifiedR{range} = exact computation over the stated range; \Open\ =
+open. No finite computation is reported as a proof.
+
+\begin{thebibliography}{9}
+\bibitem{Ap79} R.~Ap\'ery, \emph{Irrationalit\'e de $\zeta(2)$ et
+$\zeta(3)$}, Ast\'erisque 61 (1979).
+\bibitem{Be87} F.~Beukers, \emph{Irrationality proofs using modular
+forms}, Ast\'erisque 147--148 (1987).
+\bibitem{Za09} D.~Zagier, \emph{Integral solutions of Ap\'ery-like
+recurrence equations}, CRM Proc.\ Lecture Notes 47 (2009).
+\bibitem{Expo} River's programme, \emph{The companion by the nome}
+(\texttt{papers\_out/expository\_apery}), 2026.
+\bibitem{MA} River's programme, \emph{Modular anchors for Ap\'ery-like
+companions} (\texttt{papers\_out/modular\_anchors}), 2026.
+\end{thebibliography}
+
+\end{document}

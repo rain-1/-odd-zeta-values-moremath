@@ -1,0 +1,64 @@
+zeta pure: cols 140 rank 125 kernel dim 15 (1s)
+--- kernel identity 0: 3 terms, exact n<=12: True
+    1 * H1[n]*H1[n]*H1[k]
+    -2 * H1[n]*H1[n]*H1[l]
+    1 * H1[n]*H1[n]*H1[n-l]
+--- kernel identity 1: 3 terms, exact n<=12: True
+    1 * H1[n]*H1[k]*H1[k]
+    -2 * H1[n]*H1[k]*H1[l]
+    1 * H1[n]*H1[k]*H1[n-l]
+--- kernel identity 2: 3 terms, exact n<=12: True
+    1 * H1[n]*H1[k]*H1[n-k]
+    -2 * H1[n]*H1[n-k]*H1[l]
+    1 * H1[n]*H1[n-k]*H1[n-l]
+--- kernel identity 3: 6 terms, exact n<=12: True
+    1 * H1[n]*H1[k]*H1[k]
+    -2 * H1[n]*H1[k]*H1[l]
+    2 * H1[n]*H1[l]*H1[n-l]
+    -1 * H1[n]*H1[n-l]*H1[n-l]
+    1 * H1[n]*H2[k]
+    -1 * H1[n]*H2[n-l]
+--- kernel identity 4: 3 terms, exact n<=12: True
+    1 * H1[k]*H1[k]*H1[k]
+    -2 * H1[k]*H1[k]*H1[l]
+    1 * H1[k]*H1[k]*H1[n-l]
+--- kernel identity 5: 3 terms, exact n<=12: True
+    1 * H1[k]*H1[k]*H1[n-k]
+    -2 * H1[k]*H1[n-k]*H1[l]
+    1 * H1[k]*H1[n-k]*H1[n-l]
+--- kernel identity 6: 6 terms, exact n<=12: True
+    1 * H1[k]*H1[k]*H1[k]
+    -2 * H1[k]*H1[k]*H1[l]
+    2 * H1[k]*H1[l]*H1[n-l]
+    -1 * H1[k]*H1[n-l]*H1[n-l]
+    1 * H1[k]*H2[k]
+    -1 * H1[k]*H2[n-l]
+--- kernel identity 7: 3 terms, exact n<=12: True
+    1 * H1[k]*H1[n-k]*H1[n-k]
+    -2 * H1[n-k]*H1[n-k]*H1[l]
+    1 * H1[n-k]*H1[n-k]*H1[n-l]
+--- kernel identity 8: 6 terms, exact n<=12: True
+    1 * H1[k]*H1[k]*H1[n-k]
+    -2 * H1[k]*H1[n-k]*H1[l]
+    2 * H1[n-k]*H1[l]*H1[n-l]
+    -1 * H1[n-k]*H1[n-l]*H1[n-l]
+    1 * H1[n-k]*H2[k]
+    -1 * H1[n-k]*H2[n-l]
+--- kernel identity 9: 3 terms, exact n<=12: True
+    1 * H1[k]*H2[n]
+    -2 * H1[l]*H2[n]
+    1 * H1[n-l]*H2[n]
+--- kernel identity 10: 3 terms, exact n<=12: True
+    1 * H1[k]*H2[k]
+    -2 * H1[l]*H2[k]
+    1 * H1[n-l]*H2[k]
+--- kernel identity 11: 3 terms, exact n<=12: True
+    1 * H1[k]*H2[n-k]
+    -2 * H1[l]*H2[n-k]
+    1 * H1[n-l]*H2[n-k]
+--- kernel identity 12: 11 terms, exact n<=12: True
+--- kernel identity 13: 10 terms, exact n<=12: True
+--- kernel identity 14: 11 terms, exact n<=12: True
+exact-verified kernel identities: 15 / 15
+per-(n,k) inner-sum identity  sum_l S*(H1_k - 2H1_l + H1_{n-l}) = 0, n<=25: PROVED-RANGE PASS
+per-(n,k) inner-sum identity  sum_l S*[(H1_k-H1_l)^2-(H1_{n-l}-H1_l)^2+H2_k-H2_{n-l}] = 0, n<=25: PROVED-RANGE PASS

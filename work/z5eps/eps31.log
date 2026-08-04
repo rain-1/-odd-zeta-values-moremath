@@ -1,0 +1,30 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+elementary endpoint generators: 118
+new endpoint-elementary monomials: 48
+eps27 new generators: 174
+generators: 1849
+distinct var-parts: 787
+  rows through n = 0
+  rows through n = 10
+  rows through n = 20
+  rows through n = 30
+  rows through n = 40
+p1 done (9s), residual support 231
+distinct var-parts: 787
+  rows through n = 0
+  rows through n = 10
+  rows through n = 20
+  rows through n = 30
+  rows through n = 40
+p2 done, residual support 231
+pivot patterns match: True  keeps match: True
+reconstructed 231 coefficients, 0 failures
+double sum T*r = 0 (n<=5): PASS
+saved eps31_residual.pkl; support 231
+degree profile: {(1, 1, 3): 72, (1, 1, 1, 2): 58, (1, 2, 2): 60, (1, 4): 22, (2, 3): 16, (5,): 3}

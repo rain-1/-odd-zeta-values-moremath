@@ -1,0 +1,86 @@
+=== VALIDATION: quadratic curve atom u1=(0,0,1), u2=(0,1,0), (n,k,l)=(3,1,2) ===
+  eps^0: bell=64800.0  mpmath=64800.0  AGREE
+  eps^1: bell=25920.0  mpmath=25920.0  AGREE
+  eps^2: bell=101618.544936469853833174994403  mpmath=101618.544936469853833174994403  AGREE
+  eps^3: bell=27343.6179745879415332699977611  mpmath=27343.6179745879415332699977611  AGREE
+  eps^4: bell=-12427.3411095138842346553260349  mpmath=-12427.3411095138842346553260349  AGREE
+VALIDATION (quadratic curve atom): PASS
+
+=== QUADRATIC SCAN: 3374 atoms (u1 in {-2..2}^3, u2 in {-1,0,1}^3), N=24, p=4194301 ===
+  atoms 500/3374  1s
+  atoms 1000/3374  1s
+  atoms 1500/3374  2s
+  atoms 2000/3374  3s
+  atoms 2500/3374  4s
+  atoms 3000/3374  4s
+rows built 9s
+[QUAD A: eps4 pinned] p=4194301: system (450, 3416) (18 blocks), rank=88, nullspace dim=3328, b (tau=1 P-coeff of eps^5) nonzero possible: False  (1s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+[QUAD B: eps4 unconstrained] p=4194301: system (325, 3401) (13 blocks), rank=59, nullspace dim=3342, b (tau=1 P-coeff of eps^5) nonzero possible: False  (0s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+
+=== CUBIC SCAN: 5102 atoms (u1,u2 in {-1,0,1}^3, u3 in {0,+-e_i}), N=24, p=4194301 ===
+  atoms 500/5102  1s
+  atoms 1000/5102  2s
+  atoms 1500/5102  2s
+  atoms 2000/5102  3s
+  atoms 2500/5102  4s
+  atoms 3000/5102  4s
+  atoms 3500/5102  5s
+  atoms 4000/5102  6s
+  atoms 4500/5102  7s
+  atoms 5000/5102  8s
+rows built 17s
+[CUBIC A: eps4 pinned] p=4194301: system (450, 5144) (18 blocks), rank=80, nullspace dim=5064, b (tau=1 P-coeff of eps^5) nonzero possible: False  (1s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+[CUBIC B: eps4 unconstrained] p=4194301: system (325, 5129) (13 blocks), rank=54, nullspace dim=5075, b (tau=1 P-coeff of eps^5) nonzero possible: False  (1s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+
+total 19s
+=== confirmation of NEGATIVES at second prime 4194247, N=24 ===
+  atoms 500/3374  1s
+  atoms 1000/3374  1s
+  atoms 1500/3374  2s
+  atoms 2000/3374  3s
+  atoms 2500/3374  4s
+  atoms 3000/3374  4s
+[QUAD A p2] p=4194247: system (450, 3416) (18 blocks), rank=88, nullspace dim=3328, b (tau=1 P-coeff of eps^5) nonzero possible: False  (0s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+[QUAD B p2] p=4194247: system (325, 3401) (13 blocks), rank=59, nullspace dim=3342, b (tau=1 P-coeff of eps^5) nonzero possible: False  (0s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+  atoms 500/5102  1s
+  atoms 1000/5102  2s
+  atoms 1500/5102  2s
+  atoms 2000/5102  3s
+  atoms 2500/5102  4s
+  atoms 3000/5102  4s
+  atoms 3500/5102  5s
+  atoms 4000/5102  6s
+  atoms 4500/5102  7s
+  atoms 5000/5102  8s
+[CUBIC A p2] p=4194247: system (450, 5144) (18 blocks), rank=80, nullspace dim=5064, b (tau=1 P-coeff of eps^5) nonzero possible: False  (1s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+[CUBIC B p2] p=4194247: system (325, 5129) (13 blocks), rank=54, nullspace dim=5075, b (tau=1 P-coeff of eps^5) nonzero possible: False  (0s)
+  zeta-component P-coeffs of eps^5 nonzero possible: {'r5.z2': False, 'r5.z2*z2': False, 'r5.z2*z3': False, 'r5.z3': False, 'r5.z4': False, 'r5.z5': False}
+confirmation total 15s
+=== diagnostic: free aux coefficients (p=4194301, N=24) ===
+  atoms 500/3374  1s
+  atoms 1000/3374  1s
+  atoms 1500/3374  2s
+  atoms 2000/3374  3s
+  atoms 2500/3374  4s
+  atoms 3000/3374  4s
+QUAD A free aux: ['r3:Ph', 'r3.z3:Q', 'r4:Ph', 'r4.z3:Q', 'r5:Ph', 'r5.z3:Q']
+QUAD B free aux: ['r3:Ph', 'r3.z3:Q', 'r5:Ph', 'r5.z3:Q']
+  atoms 500/5102  1s
+  atoms 1000/5102  2s
+  atoms 1500/5102  2s
+  atoms 2000/5102  3s
+  atoms 2500/5102  4s
+  atoms 3000/5102  4s
+  atoms 3500/5102  5s
+  atoms 4000/5102  6s
+  atoms 4500/5102  7s
+  atoms 5000/5102  8s
+CUBIC A free aux: ['r4:Ph', 'r4.z3:Q', 'r5:Ph', 'r5.z3:Q']
+CUBIC B free aux: ['r5:Ph', 'r5.z3:Q']

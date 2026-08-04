@@ -1,0 +1,25 @@
+admissible rho-monomials (incl. empty): 65
+phi counts: {0: 1, 1: 4, 2: 14, 3: 40, 4: 105}
+total generators: 822
+weight-5 monomials: 3753
+Delta5 expansion == direct, n<=4: PASS
+double sum T*Delta5 = 0, n<=5: PASS
+new generators (towers + V5): 735
+elementary endpoint generators: 118
+new endpoint-elementary monomials: 48
+eps27 new generators: 174
+weighted rho-monomials: 299
+z-weighted generators: 2030 (753s)
+extended monomials in play: 24624
+  distinct var-parts: 3659
+  rows through n = 0
+  rows through n = 10
+  rows through n = 20
+  rows through n = 30
+rows: (630, 24624)
+vectorised (1s)
+calibration failures: old 0, z-weighted 0 of 2030
+projection 0 computed
+projection 0: rank 1000, with target 1000 -> IN SPAN
+projection 1 computed
+projection 1: rank 1000, with target 1000 -> IN SPAN
