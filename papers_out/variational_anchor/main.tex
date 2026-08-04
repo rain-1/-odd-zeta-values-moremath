@@ -450,10 +450,15 @@ and a weight-two companion law
 the $15$ kernel dimensions. Under the inner sum the letters
 $\HH1l,\HH1{n-l}$ are not free --- every previous fit for $\zeta$ was
 conducted in a degenerate alphabet. Both laws are single-variable
-hypergeometric-weighted sums, hence candidates for Gosper/WZ certification;
-certificates would make them the first \Proved\ structural facts about the
-letters of a conjectural-seven family. \Open\ at the time of writing
-(certificate search in progress).
+hypergeometric-weighted sums. \emph{Update:} the first law
+\eqref{eq:ann} is now \Proved\ for all $0\le k\le n$, by an order-2
+Zeilberger certificate with symbolically verified certificate identities,
+endpoint vanishing, and unconditional upward induction
+(\texttt{work/z5eps/eps45\_zeta\_kernel.md}; stated as a Proposition in
+the companion paper \texttt{papers\_out/modular\_anchors}) --- the first
+proved structural fact about the letters of a conjectural-seven family.
+The second (weight-two) law remains \VerifiedR{exact $\Q$, $n\le25$} with
+a documented obstruction record \Open.
 
 \subsection{Modular anchors exactly where jets fail}\label{sec:app5}
 The dichotomy of §\ref{sec:app2} predicts that the unreachable families
@@ -488,7 +493,11 @@ an Eichler-type integral in the identified modular data
 Ap\'ery $\zeta(3)$ control}. Equation~\eqref{eq:zetacomp} is a companion
 formula for a family whose complete tame harmonic ansatz is provably empty
 (§\ref{sec:app3}) --- the first for any of the conjectural seven, in
-modular letters. Further, the $\chi_{-3}$-twisted Lucas law for $\zeta$
+modular letters. (\emph{Update:} subsequently proved for all $n$ --- for
+all fifteen sporadic families --- via the companion inversion and
+symmetric-square rectification theorems of
+\texttt{papers\_out/modular\_anchors}; the finite verification stands as
+an implementation check.) Further, the $\chi_{-3}$-twisted Lucas law for $\zeta$
 holds with twist exponent $e=1$ exactly (discriminating primes $5,11$),
 consistent with the mod-$p$ shadow of Atkin--Swinnerton-Dyer for the
 identified $\Gamma_0(9)$ parametrization; the descent problems of the
@@ -523,14 +532,19 @@ five-dimensional unipotent block (exponent $0$ with multiplicity five ---
 the $(1,1,1,1,1)$ Calabi--Yau-fourfold-type signature, matching weight
 five), and the \textbf{mirror map is integral with no rescaling}:
 $t(q)=q-94q^2-591q^3-454656q^4-\cdots$ and $F(q)=1+21q+1015q^2+\cdots$
-lie in $\Z[[q]]$ \VerifiedR{$q^{26}$}. Root-integrality
-$Q(4t)^{1/2},Q(8t)^{1/4}\in\Z[[t]]$ holds with pure $2$-power
-denominators (a Dwork-type $2$-adic signal); whether the block is
-operator-level $\mathrm{Sym}^4$ is \Open. Thus the $\zeta(5)$ family
-passes the Golyshev-style arithmeticity test outright --- it lives in the
-Calabi--Yau/mirror world rather than the elliptic-modular world of the
-weight-$2,3$ sporadics --- consonant with the measured Frobenius spike
-$\operatorname{diag}(1,p^3,p^5)$. We record the induced expectation as the
+lie in $\Z[[q]]$ \VerifiedR{$q^{26}$}. (\emph{Correction:} earlier drafts
+also cited the root-integrality $Q(4t)^{1/2},Q(8t)^{1/4}\in\Z[[t]]$ as a
+Dwork-type signal; this is \emph{universal} for integer series ---
+$\sqrt{f(4t)}\in\Z[[t]]$ for any $f\in1+t\Z[[t]]$, see
+\texttt{papers\_out/half\_apery}, Lemma --- and is withdrawn as evidence.
+Whether the block is operator-level $\mathrm{Sym}^4$ remains \Open; no
+global order-$5$ right factor of $t$-degree $\le20$ exists.) The integral
+mirror map, and the integral Yukawa-type datum computed subsequently, are
+the genuine arithmetic signatures: mirror-type signatures consonant with
+the measured Frobenius spike $\operatorname{diag}(1,p^3,p^5)$, one floor
+above the elliptic-modular sporadics; see the companion paper
+\texttt{papers\_out/modular\_anchors} (conjectural tier) for the
+precisely scoped statements. We record the induced expectation as the
 \emph{mirror form of the bridge}: in the block's $q$-coordinate the
 companion rows should be coefficient sequences of $q$-side Eichler-type
 objects (as \eqref{eq:zetacomp} realises for the sporadic $\zeta$), and

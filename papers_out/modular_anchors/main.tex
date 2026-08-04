@@ -152,9 +152,12 @@ programme for the $\zeta(5)$ family (\S\ref{sec:mirror}).
 Throughout, $r$ denotes the \emph{order of the generating differential
 operator} $=$ the order of the three-term recurrence's companion matrix
 $+1$ in the classical normalisation: $r=2$ for the nine ``weight-2''
-sporadic rows, $r=3$ for the six ``weight-3'' rows. For these families the
-modular weight of $F$ is $r-1$ and the congruence weight $w$ of the
-programme's tables equals $r$. We use $r$ exclusively in operator
+sporadic rows, $r=3$ for the six ``weight-3'' rows. For the families with
+\emph{identified} parametrizations the modular weight of $F$ is $r-1$, and
+the congruence weight $w$ of the programme's tables equals $r$; for the
+three unidentified Cooper rows ($r=3$) no modular weight is asserted, and
+statements grouping them by weight refer to the congruence weight $w=r$
+only. We use $r$ exclusively in operator
 statements; earlier drafts' floating ``$w$'' has been retired
 (referee report, \S2). $\theta_x=x\,d/dx$; $t$ is the recurrence variable,
 $q$ the nome; $\sigma:=\tht\log q\in1+t\Q[[t]]$.
@@ -556,7 +559,8 @@ $\eta$.
 \begin{proposition}[nebentypus compatibility; a uniform weight-one law]
 \label{prop:wt1}
 \VerifiedR{fitted on $p\le23$; \emph{passes all sixteen held-out primes}
-$29\le p\le97$ for each of the six families; \texttt{eps57\_heldout.py}}\quad
+$29\le p\le97$ for each of the six families below --- the five displayed
+plus $\mathbf D$ with its separate rule; \texttt{eps57\_heldout.py}}\quad
 For the weight-one families,
 \[
 A(p)\;\equiv\;b_p\;-\;b\cdot\chi_N(p)\pmod p

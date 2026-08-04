@@ -180,3 +180,69 @@ for integer series — for any `f ∈ 1 + tℤ[[t]]`, `√(f(4t)) ∈ ℤ[[t]]` 
 `4^k·binom(1/2,k) = ±2·Catalan_{k−1}`).  They are **not** arithmeticity
 evidence and are withdrawn from that list; the integral mirror map (§2) and
 the integral Yukawa datum (§7) remain the genuine signals.
+
+---
+
+# Part 3 — the coupled normal form and the row hunt (eps59)
+
+**Script:** `work/z5eps/eps59_rowhunt.py`.  Exact, series order 32
+(statements to order 25 after guard).
+
+## 10. The explicit coupled normal form of the 5-block `[VERIFIED exact, order 25]`
+
+With `a_j := ĝ_j/F` (mirror gauge, `ĝ₁ ≡ 0`) and the derived couplings
+
+> `K̂ = 1 + θ²a₂`,
+> `M̂ = 1 + θ((2θa₂ + θ²a₃)/K̂)`,
+> `R̂ = 1 + θ(( (2θa₂+θ²a₃)/K̂ + θ((a₂+2θa₃+θ²a₄)/K̂) ) / M̂)`,
+
+the operator `N = θ∘R̂⁻¹∘θ∘M̂⁻¹∘θ∘K̂⁻¹∘θ∘θ` annihilates the full rectified
+flag `u₀..u₄` (all five verified to order 25).  This is the referee-grade
+normal form the ε⁵ story lives in.  Facts:
+
+* `K̂ = 1 + K(q)` is **integral** (Part 2's Yukawa signal);
+* `M̂`, `R̂` are **not** integral in this gauge, and no low-height relation
+  among `K̂, M̂, R̂` (products/quotients, self-duality `R̂ = K̂`) holds —
+  the raw flag couplings are not the intrinsic pairing-normalized Yukawas,
+  and the naive self-duality test is negative in this gauge `[EXCLUDED in
+  this gauge]`.
+
+## 11. Boundary defects of the rows `[exact]`
+
+`L₉(Σ P̂_n tⁿ) = −(289971/2)·t` and
+`L₉(Σ P_n tⁿ) = −(249777/2)·t + 8479793·t²` — the exact inhomogeneities
+from the `n = 0,1,2` recurrence rows.
+
+## 12. The row hunt: calibrated negative, obstruction identified
+
+Control first: for Apéry ζ(3) the identical machinery degenerates
+(`K̂_γ ≡ 1`, i.e. the order-3 block's mirror normal form is exactly `θ³`)
+and `N(B/A-rectified)` equals the **integral** Beukers weight-4 form —
+the "simple signature" that a correct row representation produces.
+
+For the BZ 5-block, the inhomogeneities `h := N(φ_row)` for both rows
+begin `h₁ = row₁` exactly but have **unboundedly growing prime support**
+(denominator profiles through order 14 recorded in the log; no rescale in
+a broad set makes them integral) `[EXCLUDED: the rows are not
+block-sections with arithmetic inhomogeneity in the mirror flag gauge]`.
+
+**Obstruction, identified:** this is consistent with — and explained by —
+Part 2's no-splitting result.  The rows satisfy the *order-9* equation
+(inhomogeneously, §11); since the 5-block does not split off `L₉` at low
+degree, `φ_row` has no invariant meaning as a block-section, and `N(φ)`
+conflates the block structure with the un-split complement.  The ζ(3)
+mechanism works precisely because there the block *is* the whole
+operator.  The mirror form of the bridge therefore needs either (i) the
+high-degree/global splitting (or a proof that none exists — itself
+decisive), or (ii) the q-normal form of the full order-9 operator with
+its three-slope Frobenius structure, where the rows are honest sections.
+Both are well-posed; (ii) is heavier but unconditional.
+
+## 13. Status summary after Parts 1–3
+
+Arithmetic of the block: integral mirror map, integral `K̂` — robust.
+Modular-style row representations: excluded in bare and coupled gauges.
+Splitting: excluded to t-degree 20.  The ζ(5) family's mirror arithmetic
+is real but lives strictly deeper than the elliptic-modular mechanism of
+the ζ(3) column; the next well-posed objects are the order-9 q-normal
+form and the slope-refined Dwork structure.
