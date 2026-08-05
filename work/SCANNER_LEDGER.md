@@ -518,3 +518,11 @@ the obstruction ledger gains a fourth layer: interior branch —
 parity/Galois — CUSP PERIOD RIGIDITY — denominator exponent.
 Evidence: sign pattern exact; c-fits ±0.1; cusp-value ratios exact
 (3 digits shown, stable over two decades of y); all series exact.
+
+**Fifteenth-arc first measurement (`eps73.log`):** defect-coefficient
+ratios Λ^{(j)}/Λ^{(0)} across sources f*·tʲ (j ≤ 4, F = G₁) drift
+0.7%/30n at n = 240–300 (subleading 1/n corrections unconverged):
+tail-fitting cannot certify or refute ℚ-relations at reachable n.
+The rationality question requires the exact twisted period polynomial
+of f₆ at the 1/2-cusp (weight-4 modular symbols, next session's
+instrument) — not more series terms.  [ARC OPEN at exactly this point.]

@@ -1,0 +1,21 @@
+PARI stack size set to 4000000000 bytes, maximum size set to 4000002048
+=== source f*(t+1)^1, F = Fodd ===
+xi = 0.37178250990402198949914436381203183
+  n=100 decay base 1.009806  |Lambda|=0.109
+  n=200 decay base 1.004602  |Lambda|=0.0612
+  n=300 decay base 1.003020  |Lambda|=0.0433
+  n=400 decay base 0.331469  |Lambda|=8.8e+12
+d_n^3 B_n integral: True
+kappa profile: [(120, 2.8663186788191735), (240, 2.8989969388703503), (360, 2.98472523659936)]
+chi=+1: 37 primes, full-cost 36
+chi=-1: 41 primes, full-cost 41
+=== source f*(t+1)^2, F = Fodd ===
+xi = 0.37926663616783227185498685318313232
+  n=100 decay base 1.009854  |Lambda|=0.0995
+  n=200 decay base 1.004619  |Lambda|=0.0555
+  n=300 decay base 1.003030  |Lambda|=0.0392
+  n=400 decay base 0.330371  |Lambda|=8.8e+12
+d_n^3 B_n integral: True
+kappa profile: [(120, 2.8793032173028945), (240, 2.8976377668814606), (360, 2.969033641493357)]
+chi=+1: 37 primes, full-cost 37
+chi=-1: 41 primes, full-cost 41
