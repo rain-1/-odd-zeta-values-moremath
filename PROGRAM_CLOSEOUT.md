@@ -9,6 +9,21 @@ Labels (the program's own discipline):
 computation over a range, *never* treated as proof · **[EXCLUDED]** proved
 negative · **[OPEN]** open, with its sharpest known formulation.
 
+## Addendum — August 5, 2026 (Sol's Φ-source program, flagship steps 1–2, 4)
+
+* **All twelve identifiable sporadic companion sources Φ = tσ^r/(PF) are pure
+  weight-(r+1) Eisenstein series [VERIFIED q^60, held-out band q^27–60]** —
+  explicit divisor-sum coefficient laws per family, no cuspidal component
+  anywhere; γ and D recover Beukers's classical ζ(3)/ζ(2) pictures from the
+  recurrence alone; ζ's source is the primitive (χ₋₃,χ₋₃) weight-4 level-9
+  Eisenstein with coefficient 1.  Cooper's three remain coordinate-obstructed.
+* **All nine Apéry limits reproduced from the sources alone** via the fold
+  connection formula ξ = Θ(q_c) + FΘ′/F′ (γ to 6.6e−15).  The three
+  "no-limit" families are the complex-fold (CM-adjacent) cases; their
+  canonical complex Eichler limits are computed to 15–39 digits and are
+  apparently **new constants** (PSLQ-negative over natural L-value bases).
+  Ledger: `work/PHI_SOURCE_LEDGER.md`; scripts eps60–eps61b.
+
 ## Addendum — August 2, 2026
 
 * **Franel and s10 companion closed forms [LEAN].** The symmetric harmonic formulas for the

@@ -17,7 +17,8 @@ import sys
 from fractions import Fraction as F
 from math import comb
 
-N = 26   # series order
+import os
+N = int(os.environ.get("EPS48_N", 26))   # series order
 
 # ---------------- series helpers (lists of Fractions, index = power) ----------
 def smul(a, b, n=N):
