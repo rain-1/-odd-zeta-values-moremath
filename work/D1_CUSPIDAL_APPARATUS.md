@@ -137,3 +137,44 @@ instances require non-sporadic rectified families at genus-zero levels
 with bigger cusp spaces — the reverse factory's next search domain, now
 with a quantitative objective (maximize error-decay base over
 denominator-growth base).
+
+---
+
+## 8. Proof notes toward Sol's six-item package `[fifth arc]`
+
+Sol's newest review (share 6a730e52-…) restated D-2 as a mechanism
+theorem with three separated layers (integral structure → d_n³;
+fold-vanishing → regularization; odd parity → odd critical value),
+boxed the reverse-factory search domain, and mandated the six-item proof
+sequence.  Progress this session:
+
+**Item 4 (Fricke functional equation) — PROVED (route complete).**
+With ε₆ := ε(f₆, W₆) = +1 (from λ₂ = −a₂/2 = 1, λ₃ = −a₃/3 = 1):
+\[ (f_6|_4W_{12})(τ) = f_6(-1/(12τ))\,(\sqrt{12}\,τ)^{-4}
+   = ε_6\,(\sqrt6\cdot2τ)^4 f_6(2τ)\,(\sqrt{12}τ)^{-4} = 4f_6(2τ). \]
+Hence W₁₂ acts on the oldspace span{f₆(q), f₆(q²)} as the involution
+f₆(q) ↦ 4f₆(q²), f₆(q²) ↦ ¼f₆(q); eigenvectors f₆ ∓ 4f₆(q²) with
+eigenvalues ±1.  **Corollaries, both previously numeric-only:**
+(i) c = 4 (the vanishing relation is the eigenvector condition);
+(ii) f* is the −1-eigenvector, and since the weight-4 automorphy factor
+at the fixed point is (√12τ₁₂)⁴ = 1, f*(τ₁₂) = −f*(τ₁₂) = 0.
+Two items of §6's evidence ledger upgrade from [PSLQ] to [PROVED-sketch].
+
+**Item 5 (period parity) — structure verified, constants pending.**
+Elementary consequences of ε(f*) = −1, all numerically confirmed:
+Λ*(2) = 0 exactly (odd FE kills the even critical value — this IS the
+reason no L(f,2) appears); Λ*(1) = −12·Λ*(3) (FE at level 12);
+Λ*(3) = L(f₆,3)/(8π³) (embedding scaling; consistent to truncation).
+The fold split ξ* = Θ*(τ₁₂) + (2π/√12)Θ*₂(τ₁₂) is verified to 25
+digits, F_α|W₁₂ = −12τ²F_α (eta computation, so F′(τ₁₂) = 12τ₁₂F(τ₁₂)),
+and the ε = −1 value identity ρ*(τ₁₂) = 0 checks (it is equivalent to
+Λ*(1) + 12Λ*(3) = 0).  What remains for the exact ½: the derivative
+fixed-point identity's orientation/normalization constants (the hand
+computation produced an inconsistent constant; the route — differentiate
+the weight-(−2) cocycle at the fixed point, substitute
+Θ*′ = 2πiΘ*₂ and F′/F = 12τ₁₂ — is correct, the bookkeeping needs the
+careful write-up).  [ROUTE WRITTEN, CONSTANT OPEN]
+
+**Items 1–3, 6:** unchanged status (source identity exact to q^40 +
+Sturm-boundable; forced recurrence formal given item 1; fold-regularity
+lemma elementary given R* = t/√(1−4t); d_n³ theorem open beyond n≤40).
