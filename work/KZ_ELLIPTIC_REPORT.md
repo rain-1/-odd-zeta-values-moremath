@@ -60,3 +60,33 @@ first target.  The program's question, sharpened by Projects B and D:
 > z = 1/2 CM case rectifies modularly (CM might save it — level 32 is in
 > our CUSP dictionary as (η₂η₄)⁴'s home at weight 4, and 32.2.a.a is its
 > weight-2 sibling), that would be the first bridge between the two worlds.
+
+---
+
+## Project C EXECUTED (same day, third arc continuation) — verdict
+
+`work/z5eps/eps64_kz32.py`, series order 30.  The z = 1/2 (conductor-32
+CM) exterior-square recurrence, transcribed from the paper and cross-
+checked against the agent's exact table (A₃ = 2033916/5, A₄ =
+18919290512/675, B₃ = 380414354/525 — PASS):
+
+* **Universal layer holds**: L(y_B) = (924027/32)·t exactly (pure
+  boundary defect); L(y_A) = (243165/16)t + (18888309/2)t² (A is a minor
+  sequence, own defect).
+* **Modular rectification FAILS, maximally**: the canonical nome has
+  denominators 1352, 1.7e13, 1.9e25, … at n = 2,3,4 — no integralizing
+  rescale (exhaustive ±2^a3^b5^c, |a|≤10, |b|≤4, |c|≤3).  Indicial
+  polynomial factors as
+  θ·(θ+1)²·(2θ−1)²·(2θ+1)²·(apparent quartics):
+  the half-integer double pairs AND — stronger than the Catalan case —
+  exponent 0 is only SIMPLE, so no Frobenius log-partner exists at 0 and
+  the canonical coordinate is not even well-founded.
+
+**Sol's distinction is now a verified fact, including in the CM case:**
+"the limit is an L-value of a modular form" does NOT imply "the
+recurrence is modularly rectifiable."  The hoped-for CM bridge at level
+32 does not exist at the level of the canonical coordinate.  The
+taxonomy (universal / modular / hypergeometric / bridge?) stands with
+the bridge cell still empty — and our eps62 cuspidal companion remains
+the only known construction realizing modular-form L-values inside the
+modular class.
