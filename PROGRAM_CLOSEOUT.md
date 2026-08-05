@@ -9,6 +9,26 @@ Labels (the program's own discipline):
 computation over a range, *never* treated as proof · **[EXCLUDED]** proved
 negative · **[OPEN]** open, with its sharpest known formulation.
 
+## Addendum — August 5, 2026, third arc (Sol Projects B + C-prep)
+
+* **Project B (Catalan control): CLOSED NEGATIVE, the mechanism's first
+  exact boundary.**  Zudilin's Catalan recurrence (math/0201024, agent-
+  verified): the boundary defect L(y_v) = (13/2)t holds exactly, but the
+  canonical nome has NO integralizing rescale (exhaustive small-height
+  scan) and the fold connection value misses (2/13)G by 3.2e−2 — both
+  halves of the modular-anchor mechanism fail.  Cause: order-6 operator,
+  half-integer indicial pairs — the well-poised ₆F₅ world.  Same constant
+  G is reached modularly by sporadic family E: the source depends on the
+  REALIZATION, not the constant.  `work/CATALAN_CONTROL.md`, eps63.
+* **Project C literature (Opus agent, fetch-verified):** the unique
+  elliptic-L-value Apéry construction (Koutschan–Zudilin 2022) fully
+  extracted — recurrences, initial data, conductor-32/15 L-value limits
+  reproduced to 19 digits, plus two errata found in the published paper
+  (a factor-4 in ρ₁(1/16) = 2L(E,χ₋₄,1), and n≥1 in the A-integrality).
+  KZ integrands share the Catalan half-integer structure → prediction
+  recorded: hypergeometric-realized, outside the modular class.
+  `work/KZ_ELLIPTIC_REPORT.md`; execution next session.
+
 ## Addendum — August 5, 2026, second arc (Sol Project D: the cuspidal companion)
 
 * **First deliberately cuspidal companion, on Apéry's own curve.**  With
