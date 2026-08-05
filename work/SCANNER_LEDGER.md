@@ -207,3 +207,46 @@ lower-triangular slot) is invisible mod 5 at this normalization —
 [OPEN, next depth: the same measurement mod 25].  All [VERIFIED n≤60];
 proof route unchanged (forced recurrence for the descent; U₅ for
 source-invariance).
+
+---
+
+## 10. Sol's connection-kernel program (X-1) and the Fricke-forced branch obstruction (eleventh arc)
+
+Sol (share 6a733361-…) closed the remaining gcd loophole THEMSELVES by
+direct computation on our Domb apparatus (no exponential common divisor
+of d_n³A_n and d_n³B*_n: the gcd rate decays 0.57 → 0.12 by n = 150;
+effective denominator cost → e^{2.8+}, i.e. κ = 3 stands), and proposed
+the next-generation scanner: rank by Δ = log(decay) − κ; search for
+(1) higher-order/multi-point vanishing at ALL dominant singularities,
+(2) multi-companion rational combinations, (3) positive-density
+character-dependent deflation (the only kind that changes κ),
+(4) integral-coordinate optimization of 𝒥 = log|t_c'/t_c| − κ(t),
+(5) integral pullbacks.  Boxed:
+
+> **X-1: find a nonzero rational integral source in ker 𝒞_{1/4} within
+> a larger Fricke-odd source space** (weakly holomorphic, poles confined
+> to the t = ∞ cusp; or higher-level oldspaces), with the critical-
+> period functional nonvanishing.
+
+**Obstruction sketch (this session, to be made rigorous next):** on the
+Domb curve X-1 is EMPTY.  Every meromorphic Fricke-odd weight-4 source
+is f*·g(u) with g rational in the Fricke-EVEN hauptmodul u (odd/odd =
+even; the odd line is 1-dimensional over the even function field).  The
+conjugate singularity t' = 1/4 is itself an AL fixed point, so
+u − u(1/4) ~ (t − 1/4)²: g contributes only integer powers of
+(t − 1/4)² and can never cancel the half-integer branch of
+R = t·g/√(1−4t).  Killing the branch forces g ∝ √(1−4t)·(rational),
+i.e. the source into the Eisenstein line Φ_α·(rational) — which kills
+the cuspidal functional.  **The branch is Fricke-forced: on any family
+whose BOTH singular values are AL-elliptic points (all our winners and
+near-winners: levels 5, 6, 12), source-side cancellation at the
+conjugate singularity is impossible without killing the L-value.**
+
+**The escape this identifies (next campaign's charter):** families whose
+conjugate singularity is a CUSP value of t (not an elliptic point).
+There, vanishing conditions at the bad cusp are LINEAR conditions on
+q-expansions in a weakly-holomorphic space of unbounded dimension —
+higher-order cancellation is available, and the error can be pushed to
+the next singularity.  The scanner's next target list: rectified
+families with (real AL fold) × (conjugate singularity at a cusp) ×
+(odd cusp forms ≠ 0).  [OPEN X-2; nothing scanned yet.]
