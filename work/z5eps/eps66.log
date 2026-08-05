@@ -1,0 +1,92 @@
+========================================================================
+PART 1: alpha apparatus and the source identity
+  I_{f*} == t/sqrt(1-4t) (central binomials), exact to q^96: True
+========================================================================
+PART 2: Phi_alpha = f* * sqrt(1-4t); I_Phi; Eisenstein test
+  I_Phi == t exactly: True
+  Phi q-expansion: ['0', '1', '-8', '19', '-64', '126', '-152', '344', '-512', '505']
+  Phi = sum lam_d E4(q^d): {1: '1/240', 2: '-17/240', 3: '-3/80', 4: '1/15', 6: '51/80', 12: '-3/5'}
+  ... residual zero to q^96: True
+========================================================================
+PART 3: exact decomposition of every I_S over the (Z/2)^2 cover
+  ansatz: w(t)*I_S = a + b*s + c*s2 + d*s*s2,
+  s = sqrt(1-4t) [branch at 1/4], s2 = sqrt(1-16t) [branch at
+  the fold 1/16]; poly coefficients.  Kernel of C_{1/4} within
+  fold-regular sources  <=>  b = c = d = 0  <=>  I_S rational.
+  f6(q)  (deg 2, nullspace dim 1):
+      w = -128*t**2 + 40*t - 2
+      a = 0
+      b = 16*t**2 - t   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = 0   <- s2 (fold-singular if != 0)
+      d = -t   <- s*s2
+  f*  (deg 2, nullspace dim 2):
+      w = 4*t - 1
+      a = 0
+      b = -t   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = 0   <- s2 (fold-singular if != 0)
+      d = 0   <- s*s2
+  f6(q^2)  (deg 2, nullspace dim 1):
+      w = -512*t**2 + 160*t - 8
+      a = 0
+      b = -16*t**2 + t   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = 0   <- s2 (fold-singular if != 0)
+      d = -t   <- s*s2
+  f6(q^4) [level-24 oldspace probe]: NOT in Q(t)[s,s2] up to deg 14 -- outside the level-12 AL tower (record).
+  E4(q)-E4(q^2)  (deg 2, nullspace dim 1):
+      w = 4*t**2/15 - t/12 + 1/240
+      a = -8*t**2 + 5*t/2 - 1/8
+      b = -4*t**2 + 11*t/4 - 5/32   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = 2*t**2 - t + 1/8   <- s2 (fold-singular if != 0)
+      d = 5/32 - t   <- s*s2
+  E4(q)-E4(q^3)  (deg 2, nullspace dim 1):
+      w = -9*t**2/10 + 9*t/32 - 9/640
+      a = 8*t**3 + 63*t**2/2 - 21*t/2 + 17/32
+      b = 12*t**2 - 33*t/4 + 15/32   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = -15*t**2/2 + 15*t/4 - 15/32   <- s2 (fold-singular if != 0)
+      d = -t**2 + 7*t/2 - 17/32   <- s*s2
+  E4(q)-E4(q^4)  (deg 2, nullspace dim 1):
+      w = -64*t**2/75 + 4*t/15 - 1/75
+      a = 32*t**3/5 + 126*t**2/5 - 42*t/5 + 17/40
+      b = 68*t**2/5 - 187*t/20 + 17/32   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = -34*t**2/5 + 17*t/5 - 17/40   <- s2 (fold-singular if != 0)
+      d = -t**2 + 7*t/2 - 17/32   <- s*s2
+  E4(q)-E4(q^6)  (deg 2, nullspace dim 1):
+      w = -9*t**2/10 + 9*t/32 - 9/640
+      a = 8*t**3 + 57*t**2/2 - 153*t/16 + 31/64
+      b = 27*t**2/2 - 297*t/32 + 135/256   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = -27*t**2/4 + 27*t/8 - 27/64   <- s2 (fold-singular if != 0)
+      d = -t**2 + 31*t/8 - 151/256   <- s*s2
+  E4(q)-E4(q^12)  (deg 2, nullspace dim 1):
+      w = -576*t**2/715 + 36*t/143 - 9/715
+      a = 928*t**3/143 + 3654*t**2/143 - 1218*t/143 + 493/1144
+      b = 1740*t**2/143 - 435*t/52 + 2175/4576   <- s-branch (kills C_{1/4}-kernel if != 0)
+      c = -6*t**2 + 3*t - 3/8   <- s2 (fold-singular if != 0)
+      d = -t**2 + 7*t/2 - 17/32   <- s*s2
+========================================================================
+PART 4: kernel classification (pointwise inversion)
+  I_S is pointwise multiplication by P*F/sigma^3 = t/Phi, so
+  I_S rational in t  <=>  S = (I_S/t)*Phi  in  Phi*Q(t).
+  Check: S := Phi*t  =>  I = t^2, S = (t)*Phi trivially; and the
+  branch table above shows every cuspidal-bearing generator has
+  nonzero s-branch, so ker C_{1/4} (fold-regular) = Phi*Q(t).
+========================================================================
+PART 5: indicial exponents of L_alpha at t = 1/4 and 1/16
+  t0 = 1/4: exponents {0, 1, 1/2}
+  t0 = 1/16: exponents {0, 1, 1/2}
+========================================================================
+PART 6: numerics (mpmath): AL action, parity, u, PSLQ
+  t(-1/(12 tau)) == t(tau): max residual over 4 pts = 1.55e-28
+  => t is W12-INVARIANT: hauptmodul of the Fricke quotient;
+     the eleventh-arc sketch's "even hauptmodul u" IS t itself,
+     and s = sqrt(1-4t), s2 = sqrt(1-16t) generate the covers.
+  (f* |4 W12)/f* = (-1.0 + 0.0j)  (expect -1 if Fricke-odd)
+  (Phi |4 W12)/Phi = (-1.0 + 0.0j)  (expect -1 if Fricke-odd)
+  double-zero at t=1/4: exact via s = Phi/f* in Q(X_0(12)),
+  t - 1/4 = -s^2/4.  [sketch upgraded to identity]
+  L(f6,3) = 0.729113457566789259514571215945
+  control f*: xi = 0.364556728783394629757285607972
+    PSLQ [xi,1,zeta3,L(f6,3)] = [2, 0, 0, -1] (expect (-2,0,0,1))
+  kernel elt Phi*t: xi = 0.00628749563051343749426606023589
+    PSLQ [xi,1,zeta3] = [-384, -6, 7]
+    PSLQ [xi,1,zeta3,L(f6,3)] = [384, 6, -7, 0] (expect L-coeff 0)
+  Domb principal Phi: xi = 0.35059993008821499991, PSLQ [xi,1,z3] = [-24, 0, 7] (expect prop. 7 zeta(3)/24)
