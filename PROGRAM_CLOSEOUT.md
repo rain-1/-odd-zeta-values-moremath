@@ -9,6 +9,20 @@ Labels (the program's own discipline):
 computation over a range, *never* treated as proof · **[EXCLUDED]** proved
 negative · **[OPEN]** open, with its sharpest known formulation.
 
+## Addendum — August 5, 2026, second arc (Sol Project D: the cuspidal companion)
+
+* **First deliberately cuspidal companion, on Apéry's own curve.**  With
+  f = (η₁η₂η₃η₆)² ∈ S₄(Γ₀(6)): the identity f√(1−34t+t²) = Φ_γ [VERIFIED
+  q^60, Sturm bound 8], so B^f = F_γθ⁻³f satisfies Apéry's recurrence with
+  integral inhomogeneity w_n = [tⁿ](1−34t+t²)^{−1/2}, and **d_n³B^f_n ∈ ℤ**
+  (n≤40) — cuspidal at no denominator cost.  Limit: Θ(τ_c) = L(f,3) −
+  (π/√6)L(f,2) exactly (120 digits; period-polynomial proof route), plus a
+  second-kind term (2π/√6)Θ₂(τ_c) that PSLQ cannot reduce [OPEN D-1: kill
+  it by re-pairing and get a rational-approximation apparatus for a
+  cuspidal L-value].  Sturm arithmetic for all 12 Eisenstein
+  identifications recorded (bounds ≤ 18 ≪ q^60).  Ledger:
+  `work/CUSPIDAL_COMPANION.md`; scripts eps62*.
+
 ## Addendum — August 5, 2026 (Sol's Φ-source program, flagship steps 1–2, 4)
 
 * **All twelve identifiable sporadic companion sources Φ = tσ^r/(PF) are pure
