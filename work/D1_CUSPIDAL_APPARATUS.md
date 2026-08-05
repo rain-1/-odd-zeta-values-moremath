@@ -178,3 +178,51 @@ careful write-up).  [ROUTE WRITTEN, CONSTANT OPEN]
 **Items 1–3, 6:** unchanged status (source identity exact to q^40 +
 Sturm-boundable; forced recurrence formal given item 1; fold-regularity
 lemma elementary given R* = t/√(1−4t); d_n³ theorem open beyond n≤40).
+
+---
+
+## 9. The irrationality race (Sol's scanner, Route 1 executed; the Φ_γ(τ_c) = 0 discovery)
+
+**Sol's score** (share 6a730d0a-…): δ|β| < 1 with A_n ~ α^n, error ~ β^n,
+denominators ≪ δ^n; for our families β = t_c/t_c'-driven: |A_nξ−B_n| ~
+|t_c'|^{-n}, δ = e^r.  **Route-1 scan over all fifteen** (larger root
+t_c' of P, δ|β| = e^r/|t_c'|):
+
+| fam | r | |t_c'| | e^r/|t_c'| | verdict |
+|---|---|---|---|---|
+| D (ζ2) | 2 | 11.09 | 0.67 | **WIN — Apéry's ζ(2)** |
+| γ (ζ3) | 3 | 33.97 | 0.59 | **WIN — Apéry's ζ(3)** |
+| ε | 3 | 1.457 | 13.8 | fail (best of the rest) |
+| all others | | ≤ 1 | ≥ 7.4 | fail |
+
+Exactly the two classical Apéry wins, nothing near the boundary — Sol's
+expectation confirmed with the exact numbers.
+
+**Structural discovery `[VERIFIED to 1e-122]`:** Φ_γ(τ_c) = 0 — the
+classical Apéry ζ(3) source itself vanishes at the fold; it is the
+**W₆-odd Eisenstein** direction (any odd weight-4 form vanishes at the
+fixed point since the automorphy factor is +1).  So Apéry's miracle is
+*the same construction as our D-1 apparatus* — odd source vanishing at
+the AL-fixed fold — realized in the Eisenstein class at a level whose
+root ratio beats e³.  One mechanism, two classes:
+
+| | odd Eisenstein source | odd cusp source |
+|---|---|---|
+| level 6 (ratio 34 > e³) | **Apéry's ζ(3) proof** | S₄⁻(Γ₀(6)) = 0 — none exists |
+| level 12 (ratio 4 < e³) | (ζ(3)-type, loses race) | our L(f₆,3)/2 apparatus, loses race |
+
+**The precise open problem this leaves (the cuspidal-Apéry question):**
+
+> Find a genus-zero group Γ with a rectified family whose AL-fixed fold
+> has conjugate-root ratio |t_c'/t_c|·|t_c| … i.e. |t_c'| > e^r, and
+> with S_{r+1}^−(Γ) ≠ 0.  Then the odd-cusp companion would give a
+> d_n^r-race-winning apparatus for a cusp-form critical L-value —
+> an irrationality proof of a cuspidal period, provided the d_n^r
+> integrality (Eisenstein-proved, cuspidally only observed) survives.
+
+Failure modes to respect: cuspidal modular-symbol denominators may be
+worse than d_n^r (Sol's warning), and the mixed-source fix at level 6
+is impossible (Φ_γ vanishes at the fold, so no Eisenstein subtraction
+can force f₆ to vanish there — verified).  Sol's scanner (routes 2–5:
+auxiliary-form families, cusp cancellation, pullback acceleration) is
+the search instrument; the sporadic table itself is exhausted.
