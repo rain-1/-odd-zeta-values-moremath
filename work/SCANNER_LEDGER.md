@@ -151,3 +151,35 @@ structurally different mechanism.  Every experiment en route produced
 theorem-grade structure: the oldspace vanishing lemma (c = εp^{k/2}),
 the L(f₆,3)/2 apparatus, the parity mechanism, and the level-prime
 deflation laws.
+
+---
+
+## 8. S-3 data theorem: the exact 5-adic descent law (ninth arc)
+
+Sol's review confirmed both closures and set S-3 as a local Frobenius
+theorem with three proof routes.  The route-2/3 data probe (n ≤ 60,
+exact) found the law in its sharpest form:
+
+\[ \boxed{\;v_5(B_{5m}) \;=\; v_5(B_m)\;-\;2\;} \quad\text{for ALL
+tested } m \le 11 \text{ (uniformly, incl. } v_5(B_m) < 0), \]
+
+i.e. each 5-adic digit of n costs exactly TWO powers of 5 — the
+division by m³ loses three, the numerator of the forced recurrence
+recovers exactly one (Sol's route-3 mechanism, now measured).  The
+equality set of e₅ = 2h₅ (34 of 60 n) and its exception windows
+(5-adic digit patterns: 21₅–24₅, 41₅–44₅, 111₅–114₅, …) all follow
+from the descent law plus digit bookkeeping.  25·B_{5m} mod 5 is a
+unit whose value tracks the (A, B) pair — the digit-transition constant
+for the mixed Lucas congruence (route 2), one experiment from explicit.
+
+S-3 target statement, refined by data:
+
+> v₅(B_{5m}) = v₅(B_m) − 2 for all m (an exact 5-adic recursion, not
+> an inequality); prove via U₅ on θ⁻³f⁻ (source-side, explains
+> F-invariance) or the forced recurrence (route 3, shortest).
+
+Program state at close of ninth arc: cell empty (analytic + arithmetic,
+definitive for the scanned class per Sol); surviving: the
+integral-model extremal problem (N, t, F, f⁻) with |t_c′| > e³, S-3's
+proof, and the Project A paper (now carrying the oldspace lemma, parity
+mechanism, deflation laws, and this descent law).
