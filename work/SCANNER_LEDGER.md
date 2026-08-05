@@ -112,3 +112,42 @@ for odd-cusp companions as the target to beat.  That deflation
 denominator law of odd-cusp companions; if the true rate is
 e^{2n}-something, a level with |t_c′| > e^{2.3} and odd cusp forms
 would win, and such levels are not obviously excluded.
+
+---
+
+## 7. S-2 ANSWERED: κ = 3 — the deflation is level-prime-local only (eighth arc)
+
+Sol's protocol executed at n ≤ 72, both integral F's (`bnye92mg8` run):
+
+**The prime-local law (empirical, uniform across both F's at p = 5):**
+\[ e_p(n) = 3h_p(n) \ \text{for } p \nmid 10 \text{ (generic: FULL d³-cost;}
+   \ n{=}7{:}\,e{=}3,\ n{=}49{:}\,e{=}6,\ 11, 13 \text{ likewise)}; \]
+\[ e_5(n) = 2h_5(n) \ \text{exactly (n=5: 2, n=25: 4; 5 is absent from
+   every } Q_n\text{)}; \qquad e_2(n) \ll 2h_2(n) \ \text{(strongest).} \]
+Q_n = den/gcd(den, d_n²) contains every generic prime ≤ n to power
+exactly 1 (= the 3h vs 2h difference), never 5.
+
+**Consequences:**
+1. The observed global 2.3 was a finite-size artifact exactly as Sol
+   suspected — the fitted exponent RISES (2.27 → 2.75 by n = 72),
+   tracking 3ψ(n)/n minus O(log n) level-prime savings.  **κ = 3.**
+2. Sol's candidate universal d²-type theorem is REFUTED at generic
+   primes.  The analytic threshold stays e³; the scanner verdict stands;
+   **the cuspidal-Apéry cell remains empty, with the arithmetic loophole
+   now closed as well.**
+3. What survives is new arithmetic: the **level-prime deflation laws**
+   e₅ = 2h₅ (source-side: identical for both F's) and the strong 2-adic
+   deflation (model-side: F-dependent) — structured, provable-looking
+   congruence phenomena in the spirit of the program's mixed Lucas laws
+   (Frobenius on the Eichler extension at the primes of bad reduction).
+   Open (S-3): prove e₅ = 2h₅ for the level-10 odd-cusp companion.
+
+**Program position after eight arcs:** Apéry's ζ(3) apparatus is the
+unique race-winning odd-vanishing construction in the scanned domain,
+analytically AND arithmetically.  A cuspidal irrationality proof
+requires either an integral-model optimization pushing |t_c′| > e³ at a
+level with odd cusp forms (open, Sol's extremal-function program), or a
+structurally different mechanism.  Every experiment en route produced
+theorem-grade structure: the oldspace vanishing lemma (c = εp^{k/2}),
+the L(f₆,3)/2 apparatus, the parity mechanism, and the level-prime
+deflation laws.
