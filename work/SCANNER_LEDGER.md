@@ -397,3 +397,72 @@ matrix enumeration]; AL matrices exact [PARI]; fold values numeric
 t₁₂-family apparatus itself NOT yet constructed (no step-6 data).
 [X-2 STEP 1 CLOSED: cells found at 12, 18 (r=2); blocked by the
 odd-weight AL obstruction pending Sol's review of (1)–(3).]
+
+---
+
+## 13. X-2A/X-2B EXECUTED: the parity law, the norm route dead, the cusp-limited L(f₆,3)/2 apparatus (fourteenth arc)
+
+Sol's dual directive (share 6a734412: X-2A restriction-of-scalars norm
+criterion ρρ^σ > e^{2κ}; X-2B character-density denominator scan)
+executed: `work/z5eps/eps69_x2a.py`, `eps70_x2b.py` + inline runs
+(`eps69/70/70b/70c.log`).  All series exact to q^420 (PARI); numerics
+420–440 digits.
+
+**Preliminary (new exact facts).**  On the t₁₂ = (η₁η₁₂/η₃η₄)⁴ family:
+R = f₁/f₀ at the fold = 2−2√3 EXACTLY [PSLQ 45 digits]; at the
+conjugate AL point R' = 2+2√3 = σ(R) [43 digits] — Sol's Galois
+prediction verified.  Hence the ℚ-rational weakly-holomorphic source
+v = (t−3)f₀ − 2f₁ (pole order 1 at the t=∞ cusps) vanishes at BOTH
+AL-elliptic points (rational fold conditions are Galois-forced at the
+conjugate).
+
+**The parity law (the arc's discovery, measured three ways).**  Branch
+regularity of I at an AL-elliptic point is NOT a vanishing condition —
+it is a LOCAL PARITY condition: every factor of I = P·F·S/σ³ carries a
+definite parity under the local involution (t even, σ odd), and the
+branch dies iff parity(F)·parity(S) matches.  Local parity = global
+AL-eigencomponent; in odd weight the eigencomponents are irrational
+(±√Q pseudo-eigenvalues, §12) — for the SOURCE and for F alike:
+* rational v (vanishing at both AL points!): fold-stuck,
+  |Λ_n| ~ 13.93ⁿ·n^{-5/2} — value-vanishing regularizes nothing;
+* K-eigenvector s = f₀+((1+√3)/4)f₁, BOTH embeddings (Sol's table):
+  fold-stuck identically (ρ_id ≈ ρ^σ ≈ 1; the weight-1 F = θ₃² is
+  itself parity-impure, so no source choice can help);
+* r=3 with parity-matched F: see below — fold branch KILLED.
+**X-2A verdict: the norm criterion fails as measured
+(ρ_id·ρ^σ ≈ 1 ≪ e⁴ = 54.6), and the parity law explains why the
+odd-weight cells cannot be regularized by any ℚ- or K-rational source
+with a rational F.**  [Escape not yet excluded: a parity-pure K-valued
+F-pair (F, F^σ) realizing Sol's asymmetric table ρ_id = 13.93, ρ^σ = 1
+— product 13.93 < 54.6 still fails the κ=2 norm criterion, so the
+route is dead unless κ_norm < 1.32.]
+
+**The r=3 apparatus WORKS when parity is matched (even weight —
+rational).**  F_odd = 12E₂(q¹²)−E₂(q) (weight 2, W₁₂-odd), source f*:
+* fold branch DEAD: |Λ_n| local base → 1.00 from above — the error is
+  CUSP-LIMITED at t = −1: |Λ_n| ~ n^{-c}, exactly the predicted
+  step-2/3 geometry (Sol's Q3 answered: the cusp obstruction is real —
+  a period defect survives the vanishing source);
+* ξ = L(f₆,3)/2 EXACTLY (30+ digits) — same functional as the Domb
+  apparatus on a different curve: pipeline validation and a second
+  member of the D-2 family;
+* d_n³·B_n ∈ ℤ (n ≤ 414) — the integrality layer holds on the third
+  curve in a row;
+* **X-2B answered: NO character-split deflation.**  e_p(n) = 3h_p(n)
+  for 36/37 primes with χ₁₂(p) = +1 AND 40/41 with χ₁₂(p) = −1
+  (deflation only at level primes, as in §7).  κ → 3; Sol's needed
+  density-0.366 saving is absent.  The r=3 near-miss stays a miss.
+
+**Program state.**  What survives of X-2 at level 12:
+kill the t = −1 cusp period defect (finitely many linear period
+conditions, Sol's steps 3–4) → |Λ_n| ~ 13.93^{-n}, the strongest
+cuspidal apparatus yet (beats Domb's 4^{-n}) — but the race still
+needs κ < 2.634 vs measured κ → 3.  Both X-2 routes now reduce to the
+same single question that closed every previous arc: **a denominator
+mechanism below e³ for cuspidal companions.**  The geometric program
+(X-1, X-2 steps 1–5) is complete; the obstruction ledger is:
+interior branch (X-1, character-theoretic) — parity/Galois (odd
+weight, this arc) — denominator exponent (arithmetic, open).
+Evidence labels: R-values PSLQ 43–45 digits; parities/bases measured
+420 digits, 420 exact coefficients; e_p exact factorization at n=414;
+no proofs.

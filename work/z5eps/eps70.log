@@ -1,0 +1,23 @@
+PARI stack size set to 4000000000 bytes, maximum size set to 4000002048
+A: exact degeneracy (Lambda identically 0): True
+A: xi is EXACTLY B_n/A_n stationary = algebraic in K: 0.0
+A: => the connection value of the eigenvector source is
+   ALGEBRAIC -- the cuspidal period functional VANISHES on the
+   AL-eigenline.  Norm route dead at the source-selection level.
+norm criterion needed rho*rho_sigma > e^4 = 54.60
+
+B: A_n integral: True;  A_n: ['1', '8', '56', '464', '4376', '44696', '481328']
+B: B*_n: ['0', '1', '45/4', '953/9', '150763/144', '24658483/2250']
+B: xi = 0.264886951028336869934891450877
+  n=100 local error base 0.074190
+  n=200 local error base 0.073095
+  n=300 local error base 0.072996
+  n=404 local error base 0.075677
+  (0.0718 = fold-stuck; 13.93*t_c = 1 = cusp-limited; 0.0718*13.93^2=... elliptic-limited: local base -> t_next)
+B: d_n^3 * B*_n integral (n<=414): True
+B: kappa profile: [(60, 2.706205362967081), (120, 2.732545190202157), (180, 2.9346763439436274), (240, 2.913277415326183), (300, 2.917885304306517), (360, 2.957115162712827)]
+
+X-2B: prime-local exponents at n = 414 (v_p of den):
+  chi_12 = +1 primes: 37, full-cost e=3h: 36  -> [(11, 4, 6), (13, 6, 6), (23, 3, 3), (37, 3, 3), (47, 3, 3), (59, 3, 3), (61, 3, 3), (71, 3, 3), (73, 3, 3), (83, 3, 3), (97, 3, 3), (107, 3, 3)]
+  chi_12 = -1 primes: 41, full-cost e=3h: 40  -> [(5, 9, 9), (7, 9, 9), (17, 6, 6), (19, 4, 6), (29, 3, 3), (31, 3, 3), (41, 3, 3), (43, 3, 3), (53, 3, 3), (67, 3, 3), (79, 3, 3), (89, 3, 3)]
+  Sol needs a density-1/2 class with e <= 3h - 1 (effective kappa < 2.634)

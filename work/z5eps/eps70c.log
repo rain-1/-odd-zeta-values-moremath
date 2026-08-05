@@ -1,0 +1,13 @@
+PARI stack size set to 4000000000 bytes, maximum size set to 4000002048
+embedding id: xi = 0.169469700254502998583769214308
+  n=100 local base 0.074191  |Lambda|=2.29e+107
+  n=200 local base 0.073095  |Lambda|=6.76e+220
+  n=300 local base 0.072996  |Lambda|=3.2e+334
+  n=400 local base 0.075077  |Lambda|=4.7e+447
+embedding sigma: xi = 1.10813742083046635723786106758
+  n=100 local base 0.074192  |Lambda|=1.51e+108
+  n=200 local base 0.073096  |Lambda|=4.46e+221
+  n=300 local base 0.072997  |Lambda|=2.11e+335
+  n=400 local base 0.075077  |Lambda|=3.1e+448
+base b: |Lambda_n| ~ b^{-n}; A_n ~ 13.93^n; rho(Sol) = 13.93*b
+Norm criterion: rho_id*rho_sigma > e^4 = 54.6

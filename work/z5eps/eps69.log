@@ -1,0 +1,22 @@
+PARI stack size set to 2000000000 bytes, maximum size set to 2000003072
+exact series to n = 415
+A_n integral: True
+A_n: ['1', '4', '20', '152', '1380', '13788', '146360', '1619936']
+B_n: ['0', '-2', '-12', '-778/9', '-13817/18', '-340684/45', '-3586016/45', '-386671190/441']
+fold: t = 0.0717967697245;  v = 0.0  (expect 0)
+conjugate AL: t = (13.9282032303 - 1.85588668274e-31j);  v = 2.52e-31  (expect 0)
+xi = B/A at n=415 = -0.5235389870815289297743115343025480002908
+log|Lambda_n|/n (error base rho = e^{-slope}):
+  n= 50  |Lambda| = 2.776e+51   local base 0.076134
+  n=100  |Lambda| = 6.609e+107   local base 0.073947
+  n=150  |Lambda| = 3.156e+164   local base 0.073318
+  n=200  |Lambda| = 1.952e+221   local base 0.073055
+  n=250  |Lambda| = 1.342e+278   local base 0.072962
+  n=300  |Lambda| = 9.284e+334   local base 0.073014
+  n=350  |Lambda| = 5.588e+391   local base 0.073362
+  n=405  |Lambda| = 4.898e+453   local base 0.077433
+rho estimate (n~405): 0.07490836   (13.9282 = cusp-limited; bigger = free)
+d_n^2 * B_n integral for all n <= 415: True
+kappa profile (log den / n): [(30, 1.3637195186554878), (60, 1.754545793553725), (90, 1.8722020361919727), (120, 1.8176234232177175), (150, 1.882027773683698), (180, 1.9560397570032804), (210, 1.9025863365930802), (240, 1.9544348139430343), (270, 1.9241996029183563), (300, 1.9671563490587116), (330, 1.9117355954621231), (360, 1.948713002577754), (390, 1.9796928612158482)]
+MARGIN  M = log rho - kappa = -2.5915 - 1.9121 = -4.5036  (loses)
+xi saved to eps69_xi.txt (350 digits) for the L-value PSLQ pass
