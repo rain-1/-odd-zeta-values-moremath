@@ -9,6 +9,21 @@ Labels (the program's own discipline):
 computation over a range, *never* treated as proof · **[EXCLUDED]** proved
 negative · **[OPEN]** open, with its sharpest known formulation.
 
+## Addendum — August 5, 2026, fourth arc (D-1 SOLVED: the cuspidal apparatus)
+
+* **An Apéry-quality apparatus for a cusp-form L-value.**  On Domb's curve
+  (level 12, dim S₄ = 2): the Fricke-odd vanishing combination
+  f* = f₆(q) − 4f₆(q²) (f₆(τ₁₂) = 4f₆(2τ₁₂), PSLQ-exact) has
+  f*·√(1−4t) = Φ_α, so B* obeys the Domb recurrence with central-binomial
+  forcing C(2m−2,m−1); **d_n³B*_n ∈ ℤ, error ~ 4⁻ⁿ, and
+  B*_n/A_n → L(f₆,3)/2 exactly** (61-digit PSLQ) — no quasiperiod, no
+  πL(f,2).  Mechanism: ε = −1 sources kill the second-kind term at the
+  fixed point AND regularize the fold (two effects, one parity).  The
+  κ-cancellation route is excluded (κ irrational).  No irrationality
+  (4ⁿ vs e^{3n} loses) — but cuspidal critical L-values are now inside
+  the factory, and D-2 conjectures the general law.
+  `work/D1_CUSPIDAL_APPARATUS.md`.
+
 ## Addendum — August 5, 2026, third arc (Sol Projects B + C-prep)
 
 * **Project B (Catalan control): CLOSED NEGATIVE, the mechanism's first

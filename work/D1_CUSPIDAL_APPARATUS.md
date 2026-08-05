@@ -1,0 +1,104 @@
+# D1_CUSPIDAL_APPARATUS — an Apéry-quality apparatus for a cusp-form L-value (D-1 solved)
+
+**Session 2026-08-05 (fourth arc).**  Solves open problem (D-1) of
+`CUSPIDAL_COMPANION.md` — and strictly more: the second-kind term is not
+merely cancelled between two companions; a *vanishing-source* construction
+eliminates it structurally and yields exponentially convergent,
+d_n³-integral rational approximations to a cuspidal L-value.
+Scripts: session logs + `work/z5eps/eps62*`, constructions rerun exactly;
+all claims labeled.
+
+## 1. The negative results that forced the right construction
+
+* **κ-cancellation fails**: κ = Θ_{f,2}(τ_c)/Θ_{Φ,2}(τ_c) =
+  1.39173177734068830824… is neither rational nor quadratic
+  `[PSLQ-excluded, 40 digits]` — no ℚ-combination of the level-6 cuspidal
+  and Eisenstein companions kills the quasiperiod.
+* **Diagnosis of slow convergence**: B^f_n − ξ_fA_n grows like
+  α^n n^{-7/2} because R = t/√P is singular AT the fold — equivalently
+  f(τ_c) ≠ 0.  Apéry-quality error requires the source to VANISH at the
+  Fricke point.  Impossible at level 6 (dim S₄ = 1).
+
+## 2. The construction (Domb's curve, level 12)
+
+dim S₄(Γ₀(12)) = 2, spanned by the embeddings f₆(q), f₆(q²) of the
+level-6 newform f₆ = (η₁η₂η₃η₆)².  Facts established:
+
+* Family α's fold nome is the level-12 Fricke point:
+  q_c = e^{−2π/√12} `[matches to series precision]`.
+* **f₆(τ₁₂) = 4·f₆(2τ₁₂) exactly** (`[PSLQ, 35+ digits]`; provable via the
+  W₁₂-swap of the embeddings).  Hence the integral vanishing combination
+  \[ f^* = f_6(q) - 4f_6(q^2) = q - 6q^2 - 3q^3 + 12q^4 + 6q^5 + \dots
+     \in S_4(Γ_0(12)),\qquad f^*(τ_{12}) = 0, \]
+  and f* is **Fricke-odd**: f*|W₁₂ = −f*.
+* **The source identity**: with P_α = 1−20t+64t² = (1−4t)(1−16t),
+  \[ L_α\big(F_α\,θ_q^{-3}f^*\big) \;=\; \frac{t}{\sqrt{1-4t}}, \]
+  i.e. f*·√(1−4t) = Φ_α — the vanishing combination extracts the
+  CONJUGATE root factor only `[exact rational reconstruction: the
+  inhomogeneity coefficients are the central binomials C(2n,n)]`.
+
+## 3. The apparatus `[VERIFIED n≤200 numeric / n≤40 exact]`
+
+Define B*₀ = 0, B*₁ = 1 and
+\[ m^3B^*_m = (2m{-}1)(10(m{-}1)^2{+}10(m{-}1){+}4)B^*_{m-1}
+   - 64(m{-}1)^3B^*_{m-2} + \binom{2m-2}{m-1}, \]
+(the Domb recurrence with central-binomial forcing; B* = 0, 1, 37/4,
+818/9, 141587/144, …).  Then with A_n the Domb numbers:
+
+* **d_n³·B*_n ∈ ℤ** (exact, n ≤ 40);
+* the error is exponentially small: B*_n/A_n stabilizes at rate ≈ 4^{-n}
+  (Δ ≈ 10⁻¹²¹ at n = 200);
+* \[ \boxed{\;\lim_{n\to\infty} \frac{B^*_n}{A_n} \;=\; \frac{L(f_6,3)}{2}\;}
+  \qquad `[PSLQ: -2ξ^* + L(f_6,3) = 0, \text{ residual } 2\times10^{-61}]` \]
+  — **pure critical L-value: no quasiperiod, no πL(f,2), no ζ(3).**
+
+This is, to our knowledge, the first Apéry-style apparatus (integral
+d_n³-denominators, exponential convergence, 3-term-plus-forcing
+recurrence over ℤ) whose limit is a critical L-value of a cusp form —
+manufactured, not found: level chosen for dim S₄ = 2, source chosen in
+the Fricke-odd line, vanishing at the fold by construction.
+
+## 4. The mechanism (to prove in the Project A paper)
+
+Two independent effects, both from Fricke-oddness at the fixed point:
+
+1. **Exponential convergence**: f*(τ₁₂) = 0 ⇒ the inhomogeneity
+   t·f*/Φ_α is regular at the fold ⇒ the particular solution's
+   singularity sits at the conjugate root (radius 1/4 vs 1/16) ⇒ error
+   ratio (t_c/t_c')ⁿ = 4^{-n}.
+2. **Clean limit**: for an ε = −1 source the fixed-point Eichler
+   equation determines precisely the combination the fold connection
+   extracts (value + quasi-derivative), leaving period-polynomial data
+   only; the parity of the odd period polynomial then selects the single
+   critical value L(f,3).  (At ε = +1 — the level-6 experiment — the
+   value is contaminated by the second-kind term, exactly as observed.)
+
+Conjecture (D-2): for every genus-zero level N with dim S_{r+1} ≥ 2 and a
+rectified sporadic family, the Fricke-odd vanishing combination yields a
+d_n^r-integral exponentially-convergent apparatus with limit a rational
+multiple of an odd-period critical L-value.  Candidates to test next:
+level 8 (ε-family? dim S₄(Γ₀(8)) = 1 — no), level 9 (ζ-family, η₃⁸,
+dim 1 — no), level 20 (η-family: dim S₄(Γ₀(20)) ≥ 2 via level-5 and
+level-10 oldforms — yes, targets L-values of 5.4.a.a-type forms), and
+δ (level 12: same f* on a different curve — immediate).
+
+## 5. Irrationality bookkeeping (honest)
+
+|d_n³(A_nL(f,3)/2 − 2·? B*_n)| ~ e^{3n}·4ⁿ·(subexp) → ∞: the apparatus
+does NOT prove irrationality of L(f₆,3) (need error < e^{-3n}·A_n^{-1}-
+scale; here the ratio of decay 4ⁿ to d_n³ = e^{3n} loses).  Its value is
+structural: cuspidal critical L-values are now inside the
+modular-anchor factory with Apéry-quality arithmetic, and the
+convergence/denominator tradeoff becomes an optimization problem over
+(level, family, source) — the same problem Apéry's ζ(3) wins for the
+Eisenstein class.
+
+## 6. Evidence labels
+
+f₆(τ₁₂) = 4f₆(2τ₁₂): numeric PSLQ, proof route via W₁₂ eta
+transformations (routine, not written).  Source identity
+f*√(1−4t) = Φ_α: exact coefficientwise to q^40 via the central-binomial
+reconstruction of R*; Sturm-boundable like the level-6 case (weight 8,
+level 12, bound 16).  Limit: 61-digit PSLQ, plus 121-digit stability of
+the ratio.  d_n³-integrality: exact to n = 40.  Mechanism §4: observed +
+argued, not proved.  Conjecture D-2: two data points (levels 6, 12).
