@@ -102,3 +102,38 @@ reconstruction of R*; Sturm-boundable like the level-6 case (weight 8,
 level 12, bound 16).  Limit: 61-digit PSLQ, plus 121-digit stability of
 the ratio.  d_n³-integrality: exact to n = 40.  Mechanism §4: observed +
 argued, not proved.  Conjecture D-2: two data points (levels 6, 12).
+
+---
+
+## 7. Sol's review (share 6a730c40-…) and the δ control `[same session, executed]`
+
+Sol passed the result on with a six-item theorem package (source identity /
+forced recurrence / fold-regularity / Fricke functional equation /
+period-parity / denominator theorem — adopted as the Project A paper's
+spine for this section) and restated D-2 with full hypotheses:
+
+> For a modular Picard–Fuchs family with a fold fixed by an Atkin–Lehner
+> involution, a rational integral source in the (−1)-eigenspace that
+> vanishes to the required order at the fold yields a regularized
+> companion whose connection value lies in the odd critical-period line.
+
+**δ control (Sol's directed test — same f*, δ's curve):**
+* d_n³B^{f*,δ}_n ∈ ℤ still holds (n ≤ 40) — the integrality layer is a
+  property of (level, weight, d_n-structure), independent of the curve.
+* But δ's fold is complex (q_c ≈ 0.1137 − 0.1970i ≠ the Fricke point),
+  f*(q_c^δ) ≈ 0.292 + 0.103i ≠ 0: no regularization; R_δ's coefficients
+  oscillate with |ratio| → 9 (both conjugate folds singular).  The
+  vanishing-at-THE-FOLD hypothesis is necessary, exactly as the refined
+  D-2 states.
+
+**Classification corollary (new):** a rational vanishing source needs
+(i) a real fold at an AL fixed point and (ii) dim S_{r+1} ≥ 2.  Among the
+nine order-3 sporadics: real folds only at α, γ, ε, ζ (levels 12, 6, 8,
+9); cusp dimensions 2, 1, 1, 1.  **α is the unique sporadic family
+admitting the D-1 construction.**  The complex-fold families (B, δ, η)
+are excluded over ℝ outright — Sol's suggested η test at level 20 is
+answered by this clause without computation (η's disc is −16).  Further
+instances require non-sporadic rectified families at genus-zero levels
+with bigger cusp spaces — the reverse factory's next search domain, now
+with a quantitative objective (maximize error-decay base over
+denominator-growth base).
