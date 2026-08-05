@@ -183,3 +183,27 @@ definitive for the scanned class per Sol); surviving: the
 integral-model extremal problem (N, t, F, f⁻) with |t_c′| > e³, S-3's
 proof, and the Project A paper (now carrying the oldspace lemma, parity
 mechanism, deflation laws, and this descent law).
+
+---
+
+## 9. The digit-transition law extracted (tenth arc, Sol's directive)
+
+With B̃_m := 5^{2⌊log₅m⌋}B_m (5-integral by §8), the transition
+(A_n, B̃_n) → (A_{5n+r}, B̃_{5n+r}) mod 5 was measured for all r and
+n ≤ 11 (45+ data points, level-10 odd-cusp companion, F = 2E₂(q²)−E₂):
+
+\[ (A,\tilde B)_{5n} \equiv (A_n,\, -\tilde B_n); \qquad
+   r \in \{1..4\}:\ A_{5n+r} \equiv -r\,A_n\,[n \text{ even}],\quad
+   \tilde B_{5n+r} \equiv r\,\tilde B_n\,[n \text{ odd}] \pmod 5. \]
+
+**The law is diagonal with a parity character** — a mod-10 automaton
+(base-5 digits × the mod-2 part of the level), not five constant
+matrices: the level's factor 2 twists the Frobenius at 5.  Every
+"exception window" of §8 is a state where a unit is killed (e.g.
+n = 11 = 21₅: r=1 from even n=2 kills B̃'s unit — matching the observed
+e₅ deficiency exactly).  Sol's prediction that the windows are the
+automaton is confirmed; the extension entry (the η₅ Sol expects in the
+lower-triangular slot) is invisible mod 5 at this normalization —
+[OPEN, next depth: the same measurement mod 25].  All [VERIFIED n≤60];
+proof route unchanged (forced recurrence for the descent; U₅ for
+source-invariance).
