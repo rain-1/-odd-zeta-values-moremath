@@ -77,3 +77,38 @@ taken from known operators / scale estimates, not fresh zeros); odd-part
 dimensions of S₄ not split (only needed at 10, 14 — open S-1); r = 2
 weight-3-with-character spaces not scanned; d_n^r-cost assumed
 (cuspidal denominators only observed, never proved).
+
+---
+
+## 6. S-1 ANSWERED: NO (seventh arc, same day)
+
+The level-10 computation, exact (`eps` inline, series to q^36):
+
+* The odd cusp vector exists as predicted: ε₅ = +1 (a₅ = −5 for
+  f₅ = η₁⁴η₅⁴), so (f₅|₄W₁₀) = 4f₅(q²) and
+  **f⁻ = f₅(q) − 4f₅(q²)** is the W₁₀-odd eigenvector — the exact
+  analogue of level 12's f*.  It vanishes at the fold automatically.
+* Two integral principal solutions exist (A_n ∈ ℤ for
+  F = 2E₂(q²)−E₂(q): 1, 24, 168, 1752, … and for (5E₂(q⁵)−E₂(q))/4:
+  1, 6, 54, 582, …) — level 10 supports rectified families fine.
+* The odd-cusp companion B_n = [tⁿ]Fθ⁻³f⁻: **d_n³B_n ∈ ℤ (n ≤ 36)** —
+  the integrality layer holds yet again — but the denominators GROW:
+  log(den B_n)/n ≈ 2.27–2.43 at n = 20–36 (slightly deflated below the
+  d_n³-rate 3, nowhere near bounded).
+
+**Verdict, with the S-1 framing corrected:** at |t_c′| = 1.000 the race
+win requires BOTH bounded denominators AND strictly decaying linear
+forms; level 10 has neither (denominators ~ e^{2.3n}, forms O(1)).  The
+same argument covers level 14 (its correct hauptmodul (η₂η₁₄/η₁η₇)³ was
+mis-specified in the first scan; its conjugate class sits at the same
+unit-circle scale).  **The cuspidal-Apéry cell is empty in the full
+scanned domain, now including the boundary levels.**  What survives of
+S-1 is only the normalization-optimization question (§4): whether some
+integral Möbius change of coordinate at ANY level can simultaneously
+push |t_c′| above e^{(observed denominator rate)} — the extremal-
+function problem, now with the empirical rate ≈ e^{2.3n} (not e^{3n})
+for odd-cusp companions as the target to beat.  That deflation
+(2.3 < 3) is real and unexplained: **open (S-2)** — determine the exact
+denominator law of odd-cusp companions; if the true rate is
+e^{2n}-something, a level with |t_c′| > e^{2.3} and odd cusp forms
+would win, and such levels are not obviously excluded.
