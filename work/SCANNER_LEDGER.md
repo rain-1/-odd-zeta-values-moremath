@@ -321,3 +321,79 @@ parities/invariance numeric 1e-28; ξ-classes PSLQ 60 digits; the
 Q(X₀(12)) = Q(t, s, s₂-side), verified generator-by-generator at deg 2
 but not abstractly proved.  [X-1 CLOSED; X-2 (conjugate singularity at
 a cusp) is the surviving charter, unchanged.]
+
+---
+
+## 12. X-2 STEP 1 EXECUTED: the cells exist — and a NEW obstruction (thirteenth arc)
+
+Sol's X-2 algorithm (share 6a733a57) step 1 executed exactly:
+`work/z5eps/eps67_x2_scan.py` (grid pass) + `eps68_x2_exact.py`
+(exact AL-fixed-point enumeration by matrices, PSLQ algebraic
+identification, PARI dimensions/AL matrices), logs `eps67/68.log`.
+New instrument: cusp VALUES of t computed for every level
+(multiplier-tracked eta reduction), separating cusp obstructions
+(killable: linear conditions in weakly-holo spaces) from elliptic
+obstructions (X-1's Fricke-forced branch, unkillable).
+
+**Method validation:** level 6 reproduces Apéry exactly (fold and
+barrier = roots of 1−34t+t², the γ operator's own P). Level 10's
+"boundary curiosity" RESOLVED: the unit-circle conjugate class is
+t' = 1 EXACTLY and ELLIPTIC — the sixth-arc boundary score of
+precisely e³ is an algebraic identity, and the obstruction is
+Fricke-forced: level 10 closed for good.  (Its true W₁₀ pair is
+9∓4√5 with a critical value at t=1 in between.)
+
+**THE X-2 CELLS EXIST.**  In the standard eta normalizations,
+exactly two levels have (AL fold) < (cusp obstruction) < (elliptic
+barrier) with the barrier beating a race threshold:
+
+| N | fold | cusp obstruction | elliptic barrier | score₃ | score₂ | S₄⁻ | S₃(N,χ) |
+|---|---|---|---|---|---|---|---|
+| 12 | 7−4√3 (t²−14t+1) | t = −1 (cusps 1/2, 1/6) | 7+4√3 = 13.93 | 1.44 NEAR-MISS | **0.53 WIN** | 1 (f*) | dim 1 (χ₋₃), dim 2 (χ₋₄) |
+| 18 | 5−2√6 (t²−10t+1) | t = e^{±iπ/3} (4 cusps) | 5+2√6 = 9.90 | 2.03 | **0.75 WIN** | 2 | dim 2 (χ₋₃) |
+
+Levels 5, 6, 8, 9, 14, 15, 16, 20, 21, 24: no cell (elliptic barrier
+first, or barrier below both thresholds).  Level 16 checked
+separately: barrier (1+√2)/2, no intermediate cusp value.
+
+**The new obstruction (odd-weight AL irrationality).**  The r=2 wins
+need a weight-3 source with character vanishing at the AL fold over ℚ.
+Exact AL matrices (PARI): on S₃(12,χ₋₄): W₁₂ = [1,−4;−1/2,−1] with
+M² = 3·Id — eigenvalues ±√3; on S₃(18,χ₋₃): W₁₈² = 6·Id (±√6), and
+every partial AL likewise irrational (±i√2, ±√3).  Measured fold
+values: f₁/f₀(τ₁₂) = −2(√3−1) exactly — the vanishing combination
+lives in ℚ(√3), not ℚ.  The D-1 oldspace escape is closed here:
+S₃ = 0 at every proper level below 12 and 18 (all-new spaces, no
+rational AL-swap pairs).  The dim-1 space S₃(12,χ₋₃) has pseudo-
+eigenvalue i and does NOT vanish at the fold (0.1500, tautological
+fixed-point identity).  **Odd weight makes AL pseudo-eigenvalues
+±√Q ∉ ℚ: rational fold-vanishing fails in both cells.**  This is
+structurally new — X-1's obstruction was character-theoretic
+(branch ⇔ cuspidal projection); this one is Galois-theoretic.
+
+**What survives (for Sol):**
+1. **The ℚ(√Q)-descent question:** the vanishing combination exists
+   over ℚ(√3) (level 12) / ℚ(√6) (level 18); both Galois-conjugate
+   apparatuses exist simultaneously.  Does a trace/norm construction
+   (companion pair over the real quadratic field, d_n²-integrality in
+   O_K) yield ℚ-irrationality of the CM L-value?  Nothing in the X-1
+   obstruction forbids it.
+2. **The r=3 near-miss at level 12:** the SAME f* on the t₁₂ =
+   (η₁η₁₂/η₃η₄)⁴ family (weight-4, trivial character: AL rational,
+   fold-vanishing works!) has barrier 13.93: score 20.09/13.93 = 1.44.
+   Needs denominator exponent κ < ln 13.93 = 2.634 to win; measured
+   asymptotic κ = 3 (§7) — loses by exactly the generic-prime cost.
+   Sol's step 6 on this apparatus would quantify the margin; any
+   mechanism shaving 0.37 off κ (character-dependent deflation, the
+   only kind that changes κ, §10) flips it.
+3. Whether the cusp obstruction at t = −1 vanishes automatically for
+   cusp-form sources (Eichler integrals regular at cusps) — if yes,
+   steps 2–4 of the algorithm are free at level 12 and the whole
+   question is (1)/(2)'s arithmetic.  [UNTESTED]
+
+Evidence labels: obstruction values exact-algebraic [PSLQ 30 digits +
+matrix enumeration]; AL matrices exact [PARI]; fold values numeric
+40 digits; cusp values numeric, cross-checked at two offsets; the
+t₁₂-family apparatus itself NOT yet constructed (no step-6 data).
+[X-2 STEP 1 CLOSED: cells found at 12, 18 (r=2); blocked by the
+odd-weight AL obstruction pending Sol's review of (1)–(3).]

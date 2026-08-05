@@ -1,0 +1,92 @@
+X-2 STEP-1 SCAN: obstruction geometry per level
+thresholds: e^3 = 20.09 (r=3), e^2 = 7.39 (r=2)
+
+N=5  dimS4=1  odd=0  fold t_c=(-11.0 - 2.0j) (|.|=11.1803)  fiterr=2e-49
+    |t|=11.18034     ELL          t=(-11.0 + 2.0j)  <-- ELLIPTIC BARRIER: score3=1.80 score2=0.66
+    cusps at t=inf: []
+    VERDICT: first elliptic barrier 11.180; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: False
+
+N=6  dimS4=1  odd=0  fold t_c=(0.0294373 - 5.90291e-72j) (|.|=0.0294)  fiterr=5e-51
+    |t|=33.97056     ELL          t=(33.9706 + 6.41816e-49j)  <-- ELLIPTIC BARRIER: score3=0.59 score2=0.22
+    cusps at t=inf: [(1, 2), (1, 3)]
+    VERDICT: first elliptic barrier 33.971; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: False
+
+N=8  dimS4=1  odd=0  fold t_c=(0.0428932 + 2.12718e-51j) (|.|=0.0429)  fiterr=4e-51
+    |t|=1.45711      ELL          t=(1.45711 + 5.68388e-51j)  <-- ELLIPTIC BARRIER: score3=13.78 score2=5.07
+    cusps at t=inf: [(1, 2), (1, 4)]
+    VERDICT: first elliptic barrier 1.457; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: False
+
+N=9  dimS4=1  odd=0  fold t_c=(5.19615 + 0.0j) (|.|=5.1962)  fiterr=2e-50
+    |t|=5.19615      CUSP 1/3     t=(-4.5 - 2.59808j)
+    |t|=5.19615      CUSP 2/3     t=(-4.5 + 2.59808j)
+    cusps at t=inf: []
+    VERDICT: first elliptic barrier inf; cusp obstructions before it: 2;  X-2 cell (r=3): no  (r=2): no  odd>0: False
+
+N=10  dimS4=3  odd=1  fold t_c=(0.0557281 - 1.31055e-71j) (|.|=0.0557)  fiterr=3e-51
+    |t|=1.00000      ELL          t=(1.0 + 7.12042e-51j)  <-- ELLIPTIC BARRIER: score3=20.09 score2=7.39
+    cusps at t=inf: [(1, 2), (1, 5)]
+    VERDICT: first elliptic barrier 1.000; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+N=12  dimS4=3  odd=1  fold t_c=(0.0717968 - 2.38088e-72j) (|.|=0.0718)  fiterr=2e-51
+    |t|=1.00000      CUSP 1/2     t=(-1.0 + 7.31862e-41j)
+    |t|=1.00000      CUSP 1/6     t=(-1.0 - 8.61166e-42j)
+    cusps at t=inf: [(1, 3), (1, 4)]
+    VERDICT: first elliptic barrier inf; cusp obstructions before it: 2;  X-2 cell (r=3): YES  (r=2): YES  odd>0: True
+
+N=14  dimS4=4  odd=1  fold t_c=(-0.125 - 6.60206e-52j) (|.|=0.1250)  fiterr=3e-49
+    |t|=0.35355      ELL          t=(-0.3125 - 0.165359j)  <-- ELLIPTIC BARRIER: score3=56.81 score2=20.90
+    |t|=0.35355      ELL          t=(-0.3125 + 0.165359j)  <-- ELLIPTIC BARRIER: score3=56.81 score2=20.90
+    |t|=1.00000      ELL          t=(-1.0 - 1.10957e-50j)  <-- ELLIPTIC BARRIER: score3=20.09 score2=7.39
+    cusps at t=inf: [(1, 1), (1, 7)]
+    VERDICT: first elliptic barrier 0.354; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+N=15  dimS4=4  odd=1  fold t_c=(0.0901699 - 3.67394e-72j) (|.|=0.0902)  fiterr=2e-51
+    |t|=0.61803      ELL          t=(-0.618034 - 9.43454e-52j)  <-- ELLIPTIC BARRIER: score3=32.50 score2=11.96
+    cusps at t=inf: [(1, 3), (1, 5)]
+    VERDICT: first elliptic barrier 0.618; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+N=18  dimS4=5  odd=2  fold t_c=(0.101021 - 1.5701e-72j) (|.|=0.1010)  fiterr=9e-52
+    |t|=1.00000      CUSP 1/3     t=(0.5 + 0.866025j)
+    |t|=1.00000      CUSP 2/3     t=(0.5 - 0.866025j)
+    |t|=1.00000      CUSP 1/6     t=(0.5 - 0.866025j)
+    |t|=1.00000      CUSP 5/6     t=(0.5 + 0.866025j)
+    cusps at t=inf: [(1, 2), (1, 9)]
+    VERDICT: first elliptic barrier inf; cusp obstructions before it: 4;  X-2 cell (r=3): YES  (r=2): YES  odd>0: True
+
+N=20  dimS4=6  odd=2  fold t_c=(7.81178e-52 - 0.309017j) (|.|=0.3090)  fiterr=9e-02
+    |t|=0.30902      ELL          t=(8.03056e-53 + 0.309017j)  <-- ELLIPTIC BARRIER: score3=65.00 score2=23.91
+    cusps at t=inf: [(1, 1), (1, 2), (1, 5), (1, 10)]
+    VERDICT: first elliptic barrier 0.309; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+N=21  dimS4=6  odd=2  fold t_c=(0.122413 + 6.90874e-74j) (|.|=0.1224)  fiterr=6e-52
+    |t|=0.58651      ELL          t=(-0.586514 + 2.21552e-51j)  <-- ELLIPTIC BARRIER: score3=34.25 score2=12.60
+    |t|=1.70499      ELL          t=(-1.70499 + 1.60985e-51j)  <-- ELLIPTIC BARRIER: score3=11.78 score2=4.33
+    cusps at t=inf: [(1, 3), (1, 7)]
+    VERDICT: first elliptic barrier 0.587; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+N=24  dimS4=8  odd=3  fold t_c=(0.31327 - 4.19397e-72j) (|.|=0.3133)  fiterr=2e-52
+    |t|=0.73831      ELL          t=(-0.191088 - 0.71315j)  <-- ELLIPTIC BARRIER: score3=27.20 score2=10.01
+    |t|=0.73831      ELL          t=(-0.191088 + 0.71315j)  <-- ELLIPTIC BARRIER: score3=27.20 score2=10.01
+    |t|=0.98563      ELL          t=(3.22194e-51 - 0.98563j)  <-- ELLIPTIC BARRIER: score3=20.38 score2=7.50
+    |t|=0.98563      ELL          t=(3.22194e-51 + 0.98563j)  <-- ELLIPTIC BARRIER: score3=20.38 score2=7.50
+    |t|=1.01458      ELL          t=(1.01458 + 4.07415e-52j)  <-- ELLIPTIC BARRIER: score3=19.80 score2=7.28
+    |t|=1.35445      ELL          t=(1.3083 - 0.350558j)  <-- ELLIPTIC BARRIER: score3=14.83 score2=5.46
+    cusps at t=inf: [(1, 3), (1, 4), (1, 6), (1, 8)]
+    VERDICT: first elliptic barrier 0.738; cusp obstructions before it: 0;  X-2 cell (r=3): no  (r=2): no  odd>0: True
+
+
+r=2 branch: dim S_3(N, chi) for chi real odd (PARI wildcard):
+  N=7: [[2, Mod(6, 7), 1, 0]]
+  N=8: [[2, Mod(3, 8), 1, 0]]
+  N=11: [[2, Mod(10, 11), 1, 0]]
+  N=12: [[2, Mod(5, 12), 1, 0], [2, Mod(7, 12), 2, 0]]
+  N=14: [[2, Mod(13, 14), 2, 0]]
+  N=15: [[2, Mod(11, 15), 2, 0], [2, Mod(14, 15), 2, 0]]
+  N=16: [[2, Mod(15, 16), 1, 0], [2, Mod(7, 16), 2, 0]]
+  N=18: [[2, Mod(17, 18), 2, 0]]
+  N=19: [[2, Mod(18, 19), 3, 0]]
+  N=20: [[2, Mod(11, 20), 4, 0], [2, Mod(19, 20), 4, 0]]
+  N=21: [[2, Mod(8, 21), 4, 0], [2, Mod(13, 21), 4, 0]]
+  N=22: [[2, Mod(21, 22), 4, 0]]
+  N=23: [[2, Mod(22, 23), 3, 0]]
+  N=24: [[2, Mod(17, 24), 4, 0], [2, Mod(5, 24), 6, 0], [2, Mod(7, 24), 4, 0], [2, Mod(19, 24), 6, 0]]
